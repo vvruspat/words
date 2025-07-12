@@ -11,12 +11,13 @@
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "turbo run format",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
+    "@biomejs/biome": "2.0.6",
     "@repo/typescript-config": "*",
-    "prettier": "^3.2.5",
+    "husky": "^9.1.7",
     "turbo": "^2.5.4"
   },
   "engines": {

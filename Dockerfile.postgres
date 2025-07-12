@@ -1,0 +1,13 @@
+# Use the official Postgres image from Docker Hub
+FROM postgres:16
+
+# Set environment variables for the default database and user
+ENV POSTGRES_DB=words_db
+ENV POSTGRES_USER=words_user
+ENV POSTGRES_PASSWORD=words_password
+
+# Expose the default Postgres port
+EXPOSE 5432
+
+# Optionally, you can add an init script by uncommenting below:
+# COPY ./init.sql /docker-entrypoint-initdb.d/

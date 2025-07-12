@@ -1,0 +1,24 @@
+{
+  "name": "@repo/types",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --project tsconfig.json --watch",
+    "lint": "biome lint src",
+    "format": "biome check src --write --unsafe"
+  },
+  "main": "dist/index.js",
+  "dependencies": {
+    "@nestjs/mapped-types": "*",
+    "@nestjs/swagger": "^11.2.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/node": "^20.3.1",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.2",
+    "typescript": "5.5.4"
+  }
+}
