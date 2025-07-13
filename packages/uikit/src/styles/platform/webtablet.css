@@ -1,0 +1,3 @@
+:root[data-platform="web-tablet"] {
+	--layout-screen-padding-horizontal: var(--whiteSpace-general-4x);
+}

@@ -1,0 +1,4 @@
+:root[data-theme="light"] {
+	--tabs-border-bottom-color: var(--palette-base-200);
+	--tabs-background-color: var(--palette-base-0);
+}

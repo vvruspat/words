@@ -1,0 +1,24 @@
+.filterWrapper {
+	max-width: 100%;
+}
+
+.sort {
+	transition: transform 0.1s linear;
+	color: var(--sort-button-non-active-color);
+}
+
+.sort-asc {
+	transform: rotate(180deg);
+}
+
+.sort-desc {
+	transform: rotate(0deg);
+}
+
+.sorting {
+	color: var(--sort-button-active-color);
+}
+
+.headerTitle {
+	font-weight: 500;
+}

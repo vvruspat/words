@@ -1,0 +1,35 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+
+import * as InputStories from './MInput.stories';
+
+<Meta of={InputStories} />
+
+# Definition
+
+Input is a clickable interactive element that triggers a response.
+
+You can place text and icons inside of a Input.
+
+Inputs are often used for form submissions and to toggle elements into view.
+
+## Usage
+
+## Inputs
+
+Input has the following properties:
+
+### Regular
+
+<Canvas of={InputStories.Regular} />
+
+#### Available parameters
+
+<Controls />
+
+### Valid
+
+<Canvas of={InputStories.Valid} />
+### Invalid
+<Canvas of={InputStories.Invalid} />
+### Disabled
+<Canvas of={InputStories.Disabled} />

@@ -1,0 +1,22 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+
+import * as BadgeStories from './MBadge.stories';
+
+<Meta of={BadgeStories} />
+
+# Definition
+
+You can place icons and text inside of a badge.
+
+## Usage
+
+The component comes in two variants: `primary`, `transparent`.
+
+## Inputs
+
+Badge has the following properties:
+
+<Canvas of={BadgeStories.Primary} />
+<Canvas of={BadgeStories.Transparent} />
+
+<Controls />

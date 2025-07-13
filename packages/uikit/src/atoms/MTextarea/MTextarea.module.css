@@ -1,0 +1,136 @@
+.textareaWrapper * {
+	box-sizing: border-box;
+}
+
+.textareaWrapper {
+	width: 100%;
+}
+
+.textareaLabel {
+	width: 100%;
+}
+
+.textareaContainer {
+	position: relative;
+	width: 100%;
+	padding: var(--input-field-whiteSpace-field-padding-vertical, 12px)
+		var(--input-field-whiteSpace-field-padding-horizontal, 16px);
+	border-radius: var(--input-field-borderRadius-default, 16px);
+	transition-property: background, border, color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+}
+
+.textareaContainer.hasCounter {
+	padding-bottom: var(--textarea-container-has-counter-paddingBottom, 32px);
+}
+
+.textarea {
+	box-sizing: border-box;
+	width: 100%;
+	border: none;
+	font-family: var(--font-family-secondary, Roboto);
+	font-size: var(--textarea-font-size, 16px);
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	resize: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.textarea:focus,
+.textarea:active,
+.textarea:focus-visible {
+	border: none;
+	outline: none;
+}
+
+.textarea {
+	scrollbar-width: thin;
+	scrollbar-color: var(--textarea-scrollbar-color, #babecb) transparent;
+}
+
+.textarea::placeholder {
+	transition: color 0.2s ease-in-out;
+}
+
+.counter {
+	position: absolute;
+	right: var(--input-field-whiteSpace-field-padding-horizontal, 16px);
+	bottom: var(--input-field-whiteSpace-field-padding-vertical, 12px);
+	text-align: right;
+	font-family: var(--font-family-secondary);
+	font-size: var(--textarea-counter-font-size, 12px);
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	transition: color 0.2s ease-in-out;
+}
+
+/** STATES */
+
+/* enabled = regular */
+
+.textareaWrapper.regular .textareaContainer {
+	border: 1px solid var(--input-field-enabled-border-color, rgba(0, 0, 0, 0.12));
+}
+
+.textareaWrapper.regular .textarea::placeholder {
+	color: var(--input-field-enabled-placeholder, #babecb);
+}
+
+.textareaWrapper.regular .counter {
+	color: var(--input-field-enabled-placeholder, #babecb);
+}
+
+/* valid */
+.textareaWrapper.valid .textareaContainer {
+	border: 1px solid var(--input-field-valid-border-color, #479900);
+}
+
+/* invalid */
+
+.textareaWrapper.invalid .textareaContainer {
+	border: 1px solid var(--input-field-invalid-border-color, #dc2020);
+}
+
+.textareaWrapper.invalid .textarea,
+.textareaWrapper.invalid .textarea::placeholder {
+	color: var(--input-field-invalid-border-color, #dc2020);
+}
+
+.textareaWrapper.invalid .textarea:disabled::placeholder {
+	color: var(--input-field-enabled-placeholder, #babecb);
+}
+
+.textareaWrapper.invalid .textarea:focus,
+.textareaWrapper.invalid .textarea:focus-visible {
+	color: var(--input-field-focus-font-color, #000);
+}
+
+.textareaWrapper.invalid .counter {
+	color: var(--input-field-invalid-border-color, #dc2020);
+}
+
+/* disabled */
+
+.textareaContainer:has(.textarea:disabled) {
+	background: var(--input-field-disabled-background-color, #f4f5f7);
+}
+.textarea:disabled {
+	background: var(--input-field-disabled-background-color, #f4f5f7);
+}
+
+.textareaContainer:has(.textarea:disabled) .counter {
+	color: var(--input-field-enabled-placeholder, #babecb);
+}
+
+/* Input pseudo classes */
+
+.textareaWrapper.regular .textareaContainer:hover .textarea::placeholder {
+	color: var(--input-field-hover-placeholder, #747e97);
+}
+
+.textareaContainer:has(.textarea:disabled):hover .textarea::placeholder {
+	color: var(--input-field-enabled-placeholder, #babecb);
+}

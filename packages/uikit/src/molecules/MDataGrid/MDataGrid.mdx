@@ -1,0 +1,25 @@
+import { Canvas, Meta, Controls } from "@storybook/blocks";
+
+import * as DataGridStories from "./MDataGrid.stories";
+
+<Meta of={DataGridStories} />
+
+# MDataGrid Component
+
+The `MDataGrid` component is an interactive data table that supports sorting, selection, and infinite scrolling.
+
+## Features
+
+- Column sorting
+- Rows selection
+- Rows filtering
+- Infinite scrolling for large datasets
+- Custom renderers for data display
+
+## Usage
+
+### Default Example
+
+<Canvas of={DataGridStories.Default} />
+
+<Controls />

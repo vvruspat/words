@@ -1,0 +1,11 @@
+:root {
+	--avatar-size: var(--whiteSpace-general-_5x, 8px);
+	--avatar-size-xs: var(--whiteSpace-general-_5x, 4px);
+	--avatar-size-s: var(--whiteSpace-general-1x, 8px);
+	--avatar-size-m: var(--whiteSpace-general-1_5x, 12px);
+	--avatar-size-l: var(--whiteSpace-general-2x, 16px);
+	--avatar-size-xl: var(--whiteSpace-general-2_5x, 20px);
+	--avatar-size-2xl: var(--whiteSpace-general-3x, 24px);
+	--avatar-size-3xl: var(--whiteSpace-general-3_5x, 28px);
+	--avatar-size-4xl: var(---whiteSpace-general-4x, 32px);
+}

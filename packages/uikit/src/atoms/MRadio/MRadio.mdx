@@ -1,0 +1,37 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks';
+
+import * as RadioStories from './MRadio.stories';
+
+<Meta of={RadioStories} />
+
+# Definition
+
+Radio button allow a user to select a single option from a set.
+
+Making them ideal for choices where only one option is applicable.
+
+## Usage
+
+## Inputs
+
+Radio button has the following properties:
+
+### Regular
+
+<Canvas of={RadioStories.Regular} />
+
+#### Available parameters
+
+<Controls />
+
+### Active
+
+<Canvas of={RadioStories.Active} />
+
+### Invalid
+
+<Canvas of={RadioStories.Invalid} />
+
+### Disabled
+
+<Canvas of={RadioStories.Disabled} />

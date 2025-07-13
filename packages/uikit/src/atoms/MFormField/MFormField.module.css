@@ -1,0 +1,49 @@
+.formField {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	column-gap: var(--whiteSpace-general-2x);
+	width: 100%;
+}
+
+.size-auto {
+	grid-template-columns: auto 1fr;
+}
+
+.size-s {
+	grid-template-columns: 1fr 2fr;
+}
+
+.size-m {
+	grid-template-columns: 1fr 1fr;
+}
+
+.size-l {
+	grid-template-columns: 2fr 1fr;
+}
+
+.row {
+	grid-template-areas:
+		"label control"
+		".     description";
+}
+
+.column {
+	grid-template-areas:
+		"label"
+		"control"
+		"description";
+}
+
+.label {
+	grid-area: label;
+}
+
+.control {
+	grid-area: control;
+	align-items: start;
+}
+
+.description {
+	grid-area: description;
+}

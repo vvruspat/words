@@ -1,0 +1,19 @@
+:root {
+	--calendar-day-button-width: var(--size-general-5x);
+	--calendar-day-button-height: var(--size-general-5x);
+	--calendar-day-button-font-weight: 500;
+}
+
+:root[data-theme="light"] {
+	--calendar-day-button-today-background-color: var(
+		--palette-semantic-success-700
+	);
+	--calendar-day-button-today-hover-background-color: var(
+		--palette-semantic-success-600
+	);
+	--calendar-day-button-today-color: var(--palette-base-0);
+
+	--calendar-day-button-selected-background-color: var(--palette-base-1000);
+	--calendar-day-button-selected-hover-background-color: var(--palette-base-900);
+	--calendar-day-button-selected-color: var(--palette-base-0);
+}

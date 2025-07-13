@@ -1,0 +1,18 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "./dist/out-tsc",
+		"allowJs": true,
+		"baseUrl": "./src",
+		"rootDir": ".",
+		"declaration": true,
+		"types": ["jest", "node"]
+	},
+	"include": [
+		"jest.config.ts",
+		"src/*.test.ts",
+		"src/*.test.tsx",
+		"src/*.spec.ts",
+		"src/*.d.ts"
+	]
+}

@@ -1,0 +1,9 @@
+:root {
+	--textarea-font-size: var(--font-size-l);
+	--textarea-counter-font-size: var(--font-size-s);
+	--textarea-container-has-counter-padding-bottom: var(--size-general-4x);
+}
+
+:root[data-theme="light"] {
+	--textarea-scrollbar-color: var(--palette-base-300);
+}

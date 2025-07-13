@@ -1,0 +1,26 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+import * as MCardStories from './MCard.stories.tsx';
+
+<Meta of={MCardStories} />
+
+# Definition
+
+The Card component is designed to present information pertaining to a single specific topic. This flexible component can accommodate a variety of content types and layouts.
+
+## Usage
+
+This customizable component features adjustable elements:
+
+- `Header:` Can be stylized or omitted based on requirements.
+- `Footer:` Optionally included with customization features.
+- Functionality to `collapse` the card to save space.
+- Ability to add `shadow` effects for visual depth.
+- Toggle visibility of dividers with `showHeaderDivider` and `showFooterDivider` settings.
+
+## Inputs
+
+The Card component comes with the following configurable properties:
+
+<Canvas of={MCardStories.Basic} />
+
+<Controls />

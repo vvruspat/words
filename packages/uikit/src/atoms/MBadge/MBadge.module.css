@@ -1,0 +1,24 @@
+.badge {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--badge-whiteSpace-gap, 4px);
+	color: var(--badge-primary-font-color, #1e222a);
+	font-family: var(--font-family, Poppins);
+	font-size: var(--badge-font-size, 16px);
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	cursor: default;
+}
+
+.badge.primary {
+	padding: var(--badge-primary-padding, 6px);
+	border-radius: var(--badge-primary-border-radius, 8px);
+	background: var(--badge-primary-background-color, #f4f5f7);
+}
+
+.badge.transparent {
+	background: transparent;
+	line-height: 1.25;
+}

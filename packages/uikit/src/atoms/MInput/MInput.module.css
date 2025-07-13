@@ -1,0 +1,184 @@
+.inputWrapper {
+	max-width: 100%;
+}
+
+.inputHeading {
+	width: 100%;
+}
+
+.inputContainer:focus-within {
+	outline: var(--focus-outline);
+	outline-offset: var(--focus-outline-offset);
+}
+
+.inputContainer {
+	transition: border 0.2s ease-in-out;
+}
+
+.inputContainer > div,
+.inputContainer > input {
+	transition: color 0.2s ease-in-out;
+}
+
+.inputContainer {
+	width: 100%;
+	box-sizing: border-box;
+	padding: var(--input-field-whiteSpace-field-padding-vertical, 12px)
+		var(--input-field-whiteSpace-field-padding-horizontal, 16px);
+	border-radius: var(--input-field-borderRadius-default, 16px);
+}
+
+.inputContainer.size-s {
+	width: 30%;
+}
+
+.inputContainer.size-m {
+	width: 50%;
+}
+
+.inputContainer.size-l {
+	width: 70%;
+}
+
+.inputContainer.size-auto {
+	width: 100%;
+}
+
+.inputField {
+	flex: 1;
+	flex-shrink: 1;
+	flex-grow: 1;
+	overflow: hidden;
+}
+
+.input {
+	border: none;
+	flex: 1;
+	max-width: 100%;
+	flex-shrink: 1;
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: var(--font-family-secondary, Roboto);
+	font-size: var(--font-size-l, 16px);
+	font-style: normal;
+	font-weight: 400;
+	line-height: var(--font-size-xl);
+}
+
+/** States */
+
+/* enabled */
+.inputWrapper.regular .inputContainer {
+	border: 1px solid var(--input-field-enabled-border-color, #0000001e);
+	background: var(--input-field-enabled-background-color, #fff);
+	color: var(--input-field-enabled-font-before-after, #babecb);
+}
+
+.inputWrapper.regular .inputContainer input {
+	color: var(--input-field-enabled-font-color, #747e97);
+}
+
+/* valid */
+.inputWrapper.valid .inputContainer {
+	border: 1px solid var(--input-field-valid-border-color, #479900);
+	background: var(--input-field-valid-background-color, transparent);
+	color: var(--input-field-valid-font-before-after, #babecb);
+}
+
+.inputWrapper.valid .inputContainer input {
+	color: var(--input-field-valid-font-color, #747e97);
+}
+
+/* invalid */
+.inputWrapper.invalid .inputContainer {
+	border: 1px solid var(--input-field-invalid-border-color, #dc2020);
+	background: var(--input-field-invalid-background-color, transparent);
+	color: var(--input-field-invalid-font-before-after, #dc2020);
+}
+
+.inputWrapper.invalid .inputContainer input {
+	color: var(--input-field-invalid-font-color, #dc2020);
+}
+
+/* hover */
+.inputWrapper:not(.invalid):hover .inputContainer {
+	background: var(
+		--input-field-hover-background-color,
+		rgba(255, 255, 255, 0.05)
+	); /* this property was here initially, but I can't see any visual effect */
+	color: var(--input-field-hover-font-color, #747e97);
+}
+
+.inputWrapper:not(.invalid):hover .inputContainer input {
+	color: var(--input-field-hover-font-color, #747e97);
+}
+
+/* focus */
+.inputWrapper:not(.invalid):has(.input:focus) .inputContainer {
+	background: var(--input-field-focus-background-color, transparent); /* this property was here initially, but I can't see any visual effect */
+	color: var(--input-field-focus-font-color-before-after, #747e97);
+}
+
+.inputWrapper:has(.input:focus) .inputContainer input {
+	color: var(--input-field-focus-font-color, #000);
+}
+
+/* active */
+.inputWrapper:not(.invalid):has(.input:active) .inputContainer {
+	color: var(--input-field-active-font-color, #747e97);
+	background: var(--input-field-active-background-color, rgba(255, 255, 255, 0)); /* this property was here initially, but I can't see any visual effect */
+}
+
+.inputWrapper:has(.input:active) .inputContainer input {
+	color: var(--input-field-active-font-color, #747e97);
+}
+
+/* disabled */
+.inputWrapper:has(.input:disabled) .inputContainer {
+	color: var(--input-field-disabled-font-color, #babecb);
+	border: 1px solid var(--input-field-disabled-border-color, #0000001e);
+	background: var(--input-field-disabled-background-color, #f4f5f7);
+}
+
+.inputWrapper:has(.input:disabled) .inputContainer input {
+	color: var(--input-field-disabled-font-color, #babecb);
+	background: var(--input-field-disabled-background-color, #f4f5f7);
+}
+
+.inputWrapper:has(.input:disabled):hover .inputContainer,
+.inputWrapper:has(.input:disabled):focus .inputContainer,
+.inputWrapper:has(.input:disabled):active .inputContainer {
+	color: var(--input-field-disabled-font-color, #babecb);
+	background: var(--input-field-disabled-background-color, #f4f5f7);
+}
+
+.inputWrapper.invalid:has(.input:disabled) .inputContainer {
+	border: 1px solid var(--input-field-invalid-font-color, #dc2020);
+	color: var(--input-field-invalid-font-color, #dc2020);
+}
+
+.input:focus-visible {
+	outline: none;
+}
+
+.input::placeholder {
+	color: var(--input-field-enabled-placeholder, #babecb);
+	transition: all 0.2s ease-in-out; /* color|opacity transitions for placeholders are not supported in Firefox */
+}
+
+.inputWrapper.invalid .inputContainer input::placeholder {
+	color: var(--input-field-invalid-font-color, #dc2020);
+}
+
+.inputWrapper:not(.invalid):not(:has(input:disabled)):hover
+	.inputContainer
+	input::placeholder {
+	color: var(--input-field-hover-placeholder, #747e97);
+}
+
+.inputWrapper:not(.invalid):not(:has(input:disabled)):has(.input:focus)
+	.inputContainer
+	input::placeholder {
+	color: var(--input-field-hover-placeholder, #747e97);
+}

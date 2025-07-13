@@ -1,0 +1,53 @@
+.descriptionList {
+	padding: var(--description-list-padding-vertical)
+		var(--description-list-padding-horizontal);
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(12, 1fr);
+	row-gap: var(--description-list-row-gap);
+	column-gap: var(--description-list-column-gap);
+	font-size: var(--font-size-m);
+	box-sizing: border-box;
+}
+
+.descriptionList dt {
+	grid-area: auto / 1 / auto / 3;
+	padding: var(--description-list-title-padding);
+	margin: 0;
+	color: var(--description-list-title-font-color);
+	background-color: var(--description-list-title-background-color);
+}
+
+.descriptionList dd {
+	grid-area: auto / 4 / auto / 12;
+	padding: var(--description-list-description-padding);
+	margin: 0;
+	color: var(--description-list-description-font-color);
+	background-color: var(--description-list-description-background-color);
+	font-size: var(--font-size-l);
+	font-weight: 500;
+}
+
+.descriptionList.size-s dt {
+	grid-area: auto / 1 / auto / 3;
+}
+
+.descriptionList.size-s dd {
+	grid-area: auto / 3 / auto / 13;
+}
+
+.descriptionList.size-m dt {
+	grid-area: auto / 1 / auto / 4;
+}
+
+.descriptionList.size-m dd {
+	grid-area: auto / 4 / auto / 13;
+}
+
+.descriptionList.size-l dt {
+	grid-area: auto / 1 / auto / 6;
+}
+
+.descriptionList.size-l dd {
+	grid-area: auto / 6 / auto / 13;
+}

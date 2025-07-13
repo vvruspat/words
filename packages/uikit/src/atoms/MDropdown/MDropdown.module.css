@@ -1,0 +1,39 @@
+.dropdownContainer {
+	position: relative;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	z-index: 1000;
+	box-sizing: border-box;
+}
+
+.dropdown.bottom {
+	bottom: auto;
+	top: 100%;
+}
+
+.dropdown.top {
+	bottom: 100%;
+	top: auto;
+}
+
+.dropdown.left {
+	left: 0;
+	right: auto;
+}
+
+.dropdown.right {
+	left: auto;
+	right: 0;
+}
+
+.dropdown.stretch {
+	width: 100%;
+}
+
+.dropdown.open {
+	display: block;
+}

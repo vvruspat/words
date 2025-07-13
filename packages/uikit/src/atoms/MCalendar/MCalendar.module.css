@@ -1,0 +1,13 @@
+.calendar {
+	font-family: var(--font-family);
+}
+
+.calendarHeader {
+	padding: var(--calendar-header-padding-vertical)
+		var(--calendar-header-padding-horizontal);
+}
+
+.calendarDaySelector {
+	padding: var(--calendar-day-selector-padding-vertical)
+		var(--calendar-day-selector-padding-horizontal);
+}

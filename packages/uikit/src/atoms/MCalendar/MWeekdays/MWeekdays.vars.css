@@ -1,0 +1,3 @@
+:root[data-theme="light"] {
+	--weekday-color: var(--text-tertiary);
+}

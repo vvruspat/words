@@ -1,0 +1,16 @@
+:root {
+	--spinner-size: var(--whiteSpace-general-_5x, 8px);
+	--spinner-size-xs: var(--whiteSpace-general-_5x, 4px);
+	--spinner-size-s: var(--whiteSpace-general-1x, 8px);
+	--spinner-size-m: var(--whiteSpace-general-1_5x, 12px);
+	--spinner-size-l: var(--whiteSpace-general-2x, 16px);
+	--spinner-size-xl: var(--whiteSpace-general-2_5x, 20px);
+	--spinner-size-2xl: var(--whiteSpace-general-3x, 24px);
+	--spinner-size-3xl: var(--whiteSpace-general-3_5x, 28px);
+	--spinner-size-4xl: var(---whiteSpace-general-4x, 32px);
+
+	--spinner-mode-base-border-color: var(--palette-base-600);
+	--spinner-mode-primary-border-color: var(--palette-primary-600);
+	--spinner-mode-secondary-border-color: var(--palette-secondary-600);
+	--spinner-mode-tertiary-border-colorr: var(--palette-tertiary-600);
+}

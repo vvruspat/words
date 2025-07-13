@@ -1,0 +1,16 @@
+.tabHeaders {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--flex-gap-4xl);
+	list-style-type: none;
+	padding: 0 var(--whiteSpace-general-2x);
+	box-sizing: border-box;
+	margin: 0;
+	border-bottom: 1px solid var(--tabs-border-bottom-color);
+	width: 100%;
+}
+
+.tabContent {
+	border-radius: var(--borderRadius-general-1x);
+	background-color: var(--tabs-background-color);
+}

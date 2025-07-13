@@ -1,0 +1,15 @@
+{
+	"name": "iOS",
+	"variables": [
+		{
+			"name": "layout/screen/padding/horizontal",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:221:273"
+			},
+			"cssVar": "--layout-screen-padding-horizontal",
+			"cssValue": "var(--whiteSpace-general-2x)",
+			"resolvedType": "FLOAT"
+		}
+	]
+}

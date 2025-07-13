@@ -12,7 +12,8 @@
     "test:e2e": "turbo run test:e2e",
     "lint": "turbo run lint",
     "format": "turbo run format",
-    "prepare": "husky"
+    "prepare": "husky",
+    "kill": "lsof -ti :3000,3001 | xargs kill -9"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",

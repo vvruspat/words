@@ -1,0 +1,50 @@
+.catalog {
+	margin: 40px 0;
+	padding: 16px;
+	border-radius: 12px;
+	border: 1px solid #e5e5e5;
+}
+
+.list-of-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.name {
+	margin: 20px 0;
+	text-align: center;
+}
+
+.mode {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	position: relative;
+}
+
+.mode h5 {
+	color: #aaaaaa;
+	cursor: pointer;
+}
+
+.mode .copy {
+	display: none;
+	color: #aaaaaa;
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	margin-top: -8px;
+}
+
+.mode:hover {
+	background-color: white;
+	border: 1px solid #e5e5e5;
+	border-radius: 8px;
+}
+
+.mode:hover .copy {
+	display: block;
+}

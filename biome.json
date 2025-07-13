@@ -30,7 +30,8 @@
         "noSvgWithoutTitle": "off"
       },
       "style": {
-        "useImportType": "off"
+        "useImportType": "off",
+        "noDescendingSpecificity": "off"
       }
     }
   },

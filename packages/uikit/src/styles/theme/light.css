@@ -1,0 +1,250 @@
+:root[data-theme="light"] {
+	/* common */
+	--focus-outline: var(--whiteSpace-general-_25x) solid
+		var(--palette-primary-700);
+	--focus-outline-offset: var(--whiteSpace-general-_25x);
+
+	--text-primary: var(--palette-base-800);
+	--text-secondary: var(--palette-base-600);
+	--text-tertiary: var(--palette-base-400);
+	--background: var(--palette-base-0);
+	--background-secondary: var(--palette-base-200);
+	--background-tertiary: var(--palette-base-300);
+
+	/* background, divider */
+	--background-subtle-background-color: var(--palette-base-0);
+	--divider-subtle-background-color: var(--palette-base-400);
+	--divider-strong-background-color: var(--palette-base-600);
+	--background-strong-background-color: var(--palette-base-0);
+	/* button primary */
+	--button-primary-enabled-background-color: var(--palette-primary-700);
+	--button-primary-enabled-font-color: var(--palette-base-0);
+	--button-primary-hover-background-color: var(--palette-primary-600);
+	--button-primary-hover-font-color: var(--palette-base-0);
+	--button-primary-active-background-color: var(--palette-primary-800);
+	--button-primary-active-font-color: var(--palette-base-0);
+	--button-primary-disabled-background-color: var(--palette-base-300);
+	--button-primary-disabled-font-color: var(--palette-base-400);
+	/* button secondary */
+	--button-secondary-enabled-background-color: var(--palette-secondary-600);
+	--button-secondary-hover-background-color: var(--palette-secondary-700);
+	--button-secondary-enabled-font-color: var(--palette-base-100);
+	--button-secondary-hover-font-color: var(--palette-base-1000);
+	--button-secondary-active-background-color: var(--palette-secondary-800);
+	--button-secondary-active-font-color: var(--palette-base-1000);
+	--button-secondary-disabled-background-color: var(--palette-base-300);
+	--button-secondary-disabled-font-color: var(--palette-base-400);
+	/* button tertiary */
+	--button-tertiary-enabled-background-color: var(--palette-base-400);
+	--button-tertiary-disabled-background-color: var(--palette-base-400);
+	--button-tertiary-hover-background-color: var(--palette-base-400);
+	--button-tertiary-active-background-color: var(--palette-base-400);
+	--button-tertiary-enabled-font-color: var(--palette-base-100);
+	--button-tertiary-disabled-font-color: var(--palette-base-200);
+	--button-tertiary-hover-font-color: var(--palette-base-100);
+	--button-tertiary-border-default-color: var(--palette-base-400);
+	--button-tertiary-border-disabled-color: var(--palette-base-400);
+	--button-tertiary-border-hover-color: var(--palette-base-300);
+	--button-tertiary-border-focus-color: var(--palette-base-300);
+	--button-tertiary-border-active-color: var(--palette-base-200);
+	/* button round */
+	--button-round-enabled-background-color: var(--background-tertiary);
+	--button-round-disabled-background-color: var(--palette-base-100);
+	--button-round-hover-background-color: var(--palette-base-200);
+	--button-round-active-background-color: var(--palette-base-400);
+	--button-round-enabled-font-color: var(--palette-base-800);
+	--button-round-disabled-font-color: var(--palette-base-400);
+	--button-round-hover-font-color: var(--palette-base-900);
+	--button-round-border-default-color: transparent;
+	--button-round-border-disabled-color: transparent;
+	--button-round-border-hover-color: transparent;
+	--button-round-border-focus-color: transparent;
+	--button-round-border-active-color: transparent;
+	/* button outlined */
+	--button-outlined-enabled-background-color: var(--palette-base-0);
+	--button-outlined-enabled-border-color: var(--palette-base-300);
+	--button-outlined-enabled-font-color: var(--palette-base-900);
+	--button-outlined-hover-background-color: var(--palette-base-100);
+	--button-outlined-hover-border-color: var(--palette-base-300);
+	--button-outlined-hover-font-color: var(--palette-base-1000);
+	--button-outlined-active-background-color: var(--palette-base-0);
+	--button-outlined-active-border-color: var(--palette-base-300);
+	--button-outlined-active-font-color: var(--palette-base-800);
+	--button-outlined-disabled-background-color: var(--palette-base-100);
+	--button-outlined-disabled-border-color: var(--palette-base-300);
+	--button-outlined-disabled-font-color: var(--palette-base-400);
+	/* button transparent */
+	--button-transparent-enabled-font-color: var(--palette-base-1000);
+	--button-transparent-hover-font-color: var(--palette-base-800);
+	--button-transparent-active-font-color: var(--palette-base-1000);
+	--button-transparent-disabled-font-color: var(--palette-base-500);
+	/* input regular */
+	--input-field-enabled-label-font-color: var(--palette-base-1000);
+	--input-field-enabled-assistive-font-color: var(--palette-base-1000);
+	--input-field-enabled-font-color: var(--text-tertiary);
+	--input-field-enabled-font-before-after: var(--palette-base-300);
+	--input-field-enabled-placeholder: var(--palette-base-300);
+	--input-field-hover-font-color: var(--palette-base-800);
+	--input-field-hover-placeholder: var(--palette-base-400);
+	--input-field-active-font-color: var(--text-tertiary);
+	--input-field-focus-font-color-before-after: var(
+		--input-field-enabled-font-color
+	);
+	--input-field-focus-font-color: var(--text-tertiary);
+	--input-field-enabled-border-color: var(--input-regular-border);
+	--input-field-enabled-background-color: var(--palette-base-0);
+	--input-field-hover-border-color: var(--palette-base-200);
+	--input-field-hover-background-color: var(--palette-base-0);
+	--input-field-active-border-color: var(--palette-base-200);
+	--input-field-active-background-color: var(--palette-base-0);
+	--input-field-focus-border-color: var(--palette-active-500);
+	--input-field-focus-background-color: var(--palette-base-0);
+	--input-field-active-label-font-color: var(--palette-base-1000);
+	--input-field-active-assistive-font-color: var(--palette-base-1000);
+	--input-field-hover-label-font-color: var(--palette-base-1000);
+	--input-field-hover-assistive-font-color: var(--palette-base-1000);
+	--input-field-focus-label-font-color: var(--palette-base-1000);
+	--input-field-focus-assistive-font-color: var(--palette-base-1000);
+
+	/* input valid */
+	--input-field-valid-font-before-after: var(--palette-base-300);
+	--input-field-valid-font-color: var(--palette-base-200);
+	--input-field-valid-border-color: var(--palette-semantic-success-700);
+	--input-field-valid-background-color: var(--palette-base-0);
+	--input-field-valid-label-font-color: var(--palette-base-1000);
+	--input-field-valid-assistive-font-color: var(--palette-base-1000);
+
+	/* input invalid */
+	--input-field-invalid-font-color: var(--palette-semantic-error-600);
+	--input-field-invalid-font-before-after: var(--palette-semantic-error-600);
+	--input-field-invalid-border-color: var(--palette-semantic-error-600);
+	--input-field-invalid-background-color: var(--palette-base-0);
+	--input-field-invalid-label-font-color: var(--palette-base-1000);
+	--input-field-invalid-assistive-font-color: var(--palette-semantic-error-600);
+	/* input disabled */
+	--input-field-disabled-font-color: var(--palette-base-300);
+	--input-field-disabled-border-color: var(--input-regular-border);
+	--input-field-disabled-background-color: var(--palette-base-100);
+	--input-field-disabled-label-font-color: var(--palette-base-1000);
+	--input-field-disabled-assistive-font-color: var(--palette-base-1000);
+	/* typo */
+	--typography-h1-font-color: var(--palette-base-1000);
+	--typography-h2-font-color: var(--palette-base-1000);
+	--typography-h3-font-color: var(--palette-base-1000);
+	--typography-h4-font-color: var(--palette-base-1000);
+	--typography-h5-font-color: var(--palette-base-1000);
+	--typography-h6-font-color: var(--palette-base-1000);
+	--typography-title-font-color: var(--palette-base-1000);
+	--typography-subtitle-font-color: var(--palette-base-1000);
+	--typography-body-font-color: var(--palette-base-1000);
+	--typography-caption-font-color: var(--palette-base-1000);
+	--typography-link-enabled-font-color: var(--palette-active-600);
+	--typography-link-hover-font-color: var(--palette-active-800);
+	--typography-link-active-font-color: var(--palette-active-1000);
+	--typography-link-visited-font-color: var(--palette-active-1000);
+	/* checkbox */
+	--input-checkbox-assistive-default: var(--typography-body-font-color);
+	--input-checkbox-assistive-invalid: var(--palette-semantic-error-600);
+
+	--input-checkbox-unchecked-background-enabled: var(--palette-base-200);
+	--input-checkbox-unchecked-background-hover: var(--palette-primary-500);
+	--input-checkbox-unchecked-background-active: var(--palette-primary-700);
+	--input-checkbox-unchecked-background-invalid: var(--palette-primary-700);
+	--input-checkbox-unchecked-background-disabled: var(--palette-base-200);
+
+	--input-checkbox-unchecked-label-default: var(--typography-body-font-color);
+	--input-checkbox-unchecked-outline-enabled: var(--palette-base-600);
+	--input-checkbox-unchecked-outline-hover: var(--palette-base-700);
+	--input-checkbox-unchecked-outline-active: var(--palette-active-600);
+	--input-checkbox-unchecked-outline-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-unchecked-outline-disabled: var(--palette-base-400);
+
+	--input-checkbox-unchecked-icon-enabled: var(--palette-base-0);
+	--input-checkbox-unchecked-icon-hover: var(--palette-base-0);
+	--input-checkbox-unchecked-icon-active: var(--palette-base-0);
+	--input-checkbox-unchecked-icon-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-unchecked-icon-disabled: var(--palette-base-0);
+
+	--input-checkbox-checked-background-enabled: var(--palette-active-600);
+	--input-checkbox-checked-background-hover: var(--palette-active-500);
+	--input-checkbox-checked-background-active: var(--palette-active-600);
+	--input-checkbox-checked-background-invalid: var(--palette-active-600);
+	--input-checkbox-checked-background-disabled: var(--palette-base-200);
+
+	--input-checkbox-checked-icon-enabled: var(--palette-base-0);
+	--input-checkbox-checked-icon-hover: var(--palette-base-0);
+	--input-checkbox-checked-icon-active: var(--palette-base-0);
+	--input-checkbox-checked-icon-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-checked-icon-disabled: var(--palette-base-0);
+
+	--input-checkbox-checked-label-default: var(--typography-body-font-color);
+	--input-checkbox-checked-outline-enabled: var(--palette-active-800);
+	--input-checkbox-checked-outline-hover: var(--palette-active-800);
+	--input-checkbox-checked-outline-active: var(--palette-active-800);
+	--input-checkbox-checked-outline-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-checked-outline-disabled: var(--palette-base-600);
+
+	--input-checkbox-indeterminate-background-enabled: var(--palette-active-600);
+	--input-checkbox-indeterminate-background-hover: var(--palette-active-800);
+	--input-checkbox-indeterminate-background-active: var(--palette-active-800);
+	--input-checkbox-indeterminate-background-invalid: rgba(255, 255, 255, 0);
+	--input-checkbox-indeterminate-background-disabled: var(--palette-base-600);
+	--input-checkbox-indeterminate-icon-enabled: var(--palette-base-0);
+	--input-checkbox-indeterminate-icon-hover: var(--palette-base-0);
+	--input-checkbox-indeterminate-icon-active: var(--palette-base-0);
+	--input-checkbox-indeterminate-icon-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-indeterminate-icon-disabled: var(--palette-base-0);
+	--input-checkbox-indeterminate-label-default: var(
+		--typography-body-font-color
+	);
+	--input-checkbox-indeterminate-outline-enabled: var(--palette-active-800);
+	--input-checkbox-indeterminate-outline-hover: var(--palette-active-900);
+	--input-checkbox-indeterminate-outline-active: var(--palette-active-900);
+	--input-checkbox-indeterminate-outline-invalid: var(
+		--palette-semantic-error-60
+	);
+	--input-checkbox-indeterminate-outline-disabled: var(--palette-base-600);
+	/* input radio */
+	--input-radio-assistive-default: var(--typography-body-font-color);
+	--input-radio-assistive-invalid: var(--palette-semantic-error-600);
+	--input-radio-unchecked-background-enabled: var(--palette-base-1000);
+	--input-radio-unchecked-background-hover: var(--palette-base-100);
+	--input-radio-unchecked-background-active: var(--palette-base-100);
+	--input-radio-unchecked-background-invalid: var(--palette-base-0);
+	--input-radio-unchecked-background-disabled: var(--palette-base-100);
+	--input-radio-unchecked-label-default: var(--typography-body-font-color);
+	--input-radio-unchecked-outline-enabled: var(--palette-base-600);
+	--input-radio-unchecked-outline-hover: var(--palette-base-700);
+	--input-radio-unchecked-outline-active: var(--palette-active-600);
+	--input-radio-unchecked-outline-invalid: var(--palette-semantic-error-600);
+	--input-radio-unchecked-outline-disabled: var(--palette-base-600);
+	--input-radio-checked-background-enabled: var(--palette-active-600);
+	--input-radio-checked-background-hover: var(--palette-active-800);
+	--input-radio-checked-background-active: var(--palette-active-800);
+	--input-radio-checked-background-disabled: var(--palette-base-600);
+	--input-radio-checked-icon-enabled: var(--palette-base-0);
+	--input-radio-checked-icon-hover: var(--palette-base-0);
+	--input-radio-checked-icon-active: var(--palette-base-0);
+	--input-radio-checked-icon-disabled: var(--palette-base-0);
+	--input-radio-checked-label-default: var(--typography-body-font-color);
+	--input-radio-checked-outline-enabled: var(--palette-active-800);
+	--input-radio-checked-outline-hover: var(--palette-active-800);
+	--input-radio-checked-outline-active: var(--palette-active-800);
+	--input-radio-checked-outline-disabled: var(--palette-base-600);
+	/* badge */
+	--badge-primary-font-color: var(--palette-base-100);
+	--badge-primary-background-color: var(--palette-base-400);
+	/* textarea */
+	--textarea-scrollbar-color: var(--palette-base-300);
+	/* expandable-text */
+	--expandable-text-overlay-background: var(--palette-base-0);
+	--expandable-text-default-button-color: var(--palette-base-200);
+
+	/* card */
+	--card-shadow:
+		0px 0px 1px rgba(68, 80, 95, 0.08), 0px 1px 4px rgba(68, 80, 95, 0.2);
+	--card-background: var(--palette-base-0);
+	--card-padding-vertical: var(--whiteSpace-general-2x);
+	--card-padding-horizontal: var(--whiteSpace-general-2x);
+	--card-border-color: var(--palette-base-400);
+}

@@ -1,0 +1,21 @@
+/** TODO: use variables */
+.label {
+	color: var(--label-font-color);
+	font-family: var(--font-family);
+	font-size: var(--font-size-l);
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.label.regular {
+	color: var(--label-font-color);
+}
+
+.label.valid {
+	color: var(--label-valid-font-color);
+}
+
+.label.invalid {
+	color: var(--label-invalid-font-color);
+}

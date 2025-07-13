@@ -1,0 +1,35 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+
+import * as TextareaStories from './MTextarea.stories';
+
+<Meta of={TextareaStories} />
+
+# Definition
+
+Textarea is a clickable interactive element that triggers a response.
+
+Textareas are often used for form submissions and to toggle elements into view.
+
+## Usage
+
+## Textarea
+
+Textarea has the following properties:
+
+### Regular
+
+<Canvas of={TextareaStories.Regular} />
+
+#### Available parameters
+
+<Controls />
+
+### Regular
+
+<Canvas of={TextareaStories.Regular} />
+### Valid
+<Canvas of={TextareaStories.Valid} />
+### Invalid
+<Canvas of={TextareaStories.Invalid} />
+### Disabled
+<Canvas of={TextareaStories.Disabled} />

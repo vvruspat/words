@@ -1,0 +1,11 @@
+:root {
+	--grid-gap: var(--whiteSpace-general-_5x, 8px);
+	--grid-gap-xs: var(--whiteSpace-general-_5x, 4px);
+	--grid-gap-s: var(--whiteSpace-general-1x, 8px);
+	--grid-gap-m: var(--whiteSpace-general-1_5x, 12px);
+	--grid-gap-l: var(--whiteSpace-general-2x, 16px);
+	--grid-gap-xl: var(--whiteSpace-general-2_5x, 20px);
+	--grid-gap-2xl: var(--whiteSpace-general-3x, 24px);
+	--grid-gap-3xl: var(--whiteSpace-general-3_5x, 28px);
+	--grid-gap-4xl: var(---whiteSpace-general-4x, 32px);
+}

@@ -1,0 +1,9 @@
+:root {
+	--calendar-wrapper-padding-vertical: var(--whiteSpace-general-1x);
+
+	--calendar-header-padding-vertical: var(--whiteSpace-general-1_5x);
+	--calendar-header-padding-horizontal: var(--whiteSpace-general-2x);
+
+	--calendar-day-selector-padding-vertical: var(--whiteSpace-general-1_5x);
+	--calendar-day-selector-padding-horizontal: var(--whiteSpace-general-2x);
+}

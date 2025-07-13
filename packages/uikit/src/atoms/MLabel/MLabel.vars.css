@@ -1,0 +1,5 @@
+:root[data-theme="light"] {
+	--label-font-color: var(--text-secondary);
+	--label-valid-font-color: var(--palette-semantic-success-700);
+	--label-invalid-font-color: var(--palette-semantic-error-600);
+}

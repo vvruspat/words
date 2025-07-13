@@ -1,0 +1,30 @@
+.item {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.itemHeader {
+	cursor: pointer;
+	width: 100%;
+}
+
+.itemHeader svg,
+.collapsedIcon svg {
+	animation-duration: 1s;
+	animation-name: rotate;
+}
+
+.container {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+@keyframes rotate {
+	from {
+		opacity: 0.5;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

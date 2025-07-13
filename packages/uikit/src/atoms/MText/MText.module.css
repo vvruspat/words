@@ -1,0 +1,35 @@
+.size-inherit {
+	font-size: inherit;
+}
+
+.size-xs {
+	font-size: var(--typography-font-size-xs, 10px);
+}
+
+.size-s {
+	font-size: var(--typography-font-size-s, 12px);
+}
+
+.size-m {
+	font-size: var(--typography-font-size-m, 14px);
+}
+
+.size-l {
+	font-size: var(--typography-font-size-l, 16px);
+}
+
+.size-xl {
+	font-size: var(--typography-font-size-xl, 18px);
+}
+
+.size-2xl {
+	font-size: var(--typography-font-size-2xl, 20px);
+}
+
+.size-3xl {
+	font-size: var(--typography-font-size-3xl, 22px);
+}
+
+.size-4xl {
+	font-size: var(--typography-font-size-4xl, 24px);
+}

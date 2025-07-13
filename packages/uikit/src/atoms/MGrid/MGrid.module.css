@@ -1,0 +1,71 @@
+.grid-row-gap-none {
+	row-gap: 0;
+}
+
+.grid-col-gap-none {
+	column-gap: 0;
+}
+
+.grid-row-gap-xs {
+	row-gap: var(--grid-gap-xs, 4px);
+}
+
+.grid-col-gap-xs {
+	column-gap: var(--grid-gap-xs, 4px);
+}
+
+.grid-row-gap-s {
+	row-gap: var(--grid-gap-s, 8px);
+}
+
+.grid-col-gap-s {
+	column-gap: var(--grid-gap-s, 8px);
+}
+
+.grid-row-gap-m {
+	row-gap: var(--grid-gap-m, 12px);
+}
+
+.grid-col-gap-m {
+	column-gap: var(--grid-gap-m, 12px);
+}
+
+.grid-row-gap-l {
+	row-gap: var(--grid-gap-l, 16px);
+}
+
+.grid-col-gap-l {
+	column-gap: var(--grid-gap-l, 16px);
+}
+
+.grid-row-gap-xl {
+	row-gap: var(--grid-gap-xl, 20px);
+}
+
+.grid-col-gap-xl {
+	column-gap: var(--grid-gap-xl, 20px);
+}
+
+.grid-row-gap-2xl {
+	row-gap: var(--grid-gap-2xl, 24px);
+}
+
+.grid-col-gap-2xl {
+	column-gap: var(--grid-gap-2xl, 24px);
+}
+
+.grid-row-gap-3xl {
+	row-gap: var(--grid-gap-3xl, 28px);
+}
+
+.grid-col-gap-3xl {
+	column-gap: var(--grid-gap-3xl, 28px);
+}
+
+.grid-row-gap-4xl {
+	row-gap: var(--grid-gap-4xl, 32px);
+}
+
+.grid-col-gap-4xl {
+	column-gap: var(--grid-gap-4xl, 32px);
+}

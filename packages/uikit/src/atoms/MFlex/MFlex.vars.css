@@ -1,0 +1,11 @@
+:root {
+	--flex-gap-default: var(--whiteSpace-general-1x);
+	--flex-gap-xs: var(--whiteSpace-general-_5x);
+	--flex-gap-s: var(--whiteSpace-general-1x);
+	--flex-gap-m: var(--whiteSpace-general-1_5x);
+	--flex-gap-l: var(--whiteSpace-general-2x);
+	--flex-gap-xl: var(--whiteSpace-general-2_5x);
+	--flex-gap-2xl: var(--whiteSpace-general-3x);
+	--flex-gap-3xl: var(--whiteSpace-general-3_5x);
+	--flex-gap-4xl: var(--whiteSpace-general-4x);
+}

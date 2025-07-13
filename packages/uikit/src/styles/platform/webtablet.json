@@ -1,0 +1,15 @@
+{
+	"name": "webTablet",
+	"variables": [
+		{
+			"name": "layout/screen/padding/horizontal",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:221:275"
+			},
+			"cssVar": "--layout-screen-padding-horizontal",
+			"cssValue": "var(--whiteSpace-general-4x)",
+			"resolvedType": "FLOAT"
+		}
+	]
+}

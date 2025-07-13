@@ -1,0 +1,24 @@
+.day {
+	width: var(--calendar-day-button-width);
+	height: var(--calendar-day-button-height);
+	border-radius: 50%;
+	font-weight: var(--calendar-day-button-font-weight);
+}
+
+.selected {
+	background-color: var(--calendar-day-button-selected-background-color);
+	color: var(--calendar-day-button-selected-color);
+}
+
+.day.selected:hover {
+	background-color: var(--calendar-day-button-selected-hover-background-color);
+}
+
+.today {
+	background-color: var(--calendar-day-button-today-background-color);
+	color: var(--calendar-day-button-today-color);
+}
+
+.day.today:hover {
+	background-color: var(--calendar-day-button-today-hover-background-color);
+}

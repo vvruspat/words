@@ -1,0 +1,11 @@
+:root {
+	--badge-font-size: var(--font-size-l);
+	--badge-whiteSpace-gap: var(--whiteSpace-general-_5x);
+	--badge-primary-padding: var(--size-general-_75x);
+	--badge-primary-border-radius: var(--borderRadius-general-2x);
+}
+
+:root[data-theme="light"] {
+	--badge-primary-font-color: var(--palette-base-100);
+	--badge-primary-background-color: var(--palette-base-400);
+}

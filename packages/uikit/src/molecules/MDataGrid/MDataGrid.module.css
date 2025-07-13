@@ -1,0 +1,50 @@
+.dataGridContainer {
+	width: 100%;
+	min-height: 100%;
+	font-family: var(--font-family);
+}
+
+.dataGridTable table {
+	border-collapse: collapse;
+	width: 100%;
+	word-wrap: break-word;
+	table-layout: fixed;
+}
+
+.dataGridTable thead th {
+	vertical-align: top;
+	background: var(--table-head-background-color);
+	padding: var(--table-head-padding-vertical)
+		var(--table-head-padding-horizontal);
+}
+
+.dataGridTable thead th:nth-child(1) {
+	border-top-left-radius: var(--border-radius-2xl);
+	border-bottom-left-radius: var(--border-radius-2xl);
+}
+
+.dataGridTable thead th:nth-last-child(1) {
+	border-top-right-radius: var(--border-radius-2xl);
+	border-bottom-right-radius: var(--border-radius-2xl);
+}
+
+.dataGridTable tbody tr {
+	transition: background-color 0.2s linear;
+}
+
+.dataGridTable tbody tr:hover {
+	background-color: var(--table-body-row-hover-background-color);
+}
+
+.dataGridTable tbody td {
+	color: var(--text-secondary);
+	padding: var(--whiteSpace-general-1x) var(--whiteSpace-general-1x);
+}
+
+.loadMoreTrigger {
+	display: block;
+}
+
+.loadingSpinner {
+	padding: var(--whiteSpace-general-1x);
+}

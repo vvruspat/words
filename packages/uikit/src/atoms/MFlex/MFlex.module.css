@@ -1,0 +1,44 @@
+/** TODO: use variables */
+.flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	gap: var(--flex-gap, 8px);
+}
+
+.flex-gap-none {
+	gap: 0;
+}
+
+.flex-gap-xs {
+	gap: var(--flex-gap-xs, 4px);
+}
+
+.flex-gap-s {
+	gap: var(--flex-gap-s, 8px);
+}
+
+.flex-gap-m {
+	gap: var(--flex-gap-m, 12px);
+}
+
+.flex-gap-l {
+	gap: var(--flex-gap-l, 16px);
+}
+
+.flex-gap-xl {
+	gap: var(--flex-gap-xl, 20px);
+}
+
+.flex-gap-2xl {
+	gap: var(--flex-gap-2xl, 24px);
+}
+
+.flex-gap-3xl {
+	gap: var(--flex-gap-3xl, 28px);
+}
+
+.flex-gap-4xl {
+	gap: var(--flex-gap-4xl, 32px);
+}

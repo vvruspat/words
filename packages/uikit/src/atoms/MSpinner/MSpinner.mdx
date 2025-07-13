@@ -1,0 +1,30 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as SpinnerStories from './MSpinner.stories';
+
+<Meta of={SpinnerStories} />
+
+# MSpinner
+
+`MSpinner` is a lightweight loading spinner component that supports different sizes and modes.
+
+## Usage
+
+Use `MSpinner` to indicate loading states in your UI.
+
+## Props
+
+### `size`
+- Type: `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+- Default: `'xl'`
+- Description: Sets the spinner size.
+
+### `mode`
+- Type: `'base' | 'primary' | 'secondary' | 'tertiary'`
+- Default: `'primary'`
+- Description: Defines the spinner appearance.
+
+## Playground
+
+<Canvas of={SpinnerStories.Regular} />
+
+<Controls />

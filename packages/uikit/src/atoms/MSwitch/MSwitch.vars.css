@@ -1,0 +1,5 @@
+:root[data-platform="web-desktop"] {
+	--input-checkbox-round-border-radius: var(--border-radius-2xl);
+	--input-checkbox-rectangular-border-radius: var(--border-radius-s);
+	--input-checkbox-marker-round-border-radius: var(--border-radius-s);
+}

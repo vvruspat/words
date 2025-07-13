@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic",
+        "useBuiltIns": "usage"
+      }
+    ],
+    ["@babel/preset-typescript"]
+  ],
+  "plugins": []
+}

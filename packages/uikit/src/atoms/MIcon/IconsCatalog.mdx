@@ -1,0 +1,52 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+
+import IconsCatalog from '../../icons/Icons.json';
+import { IconModeIndex } from './types';
+import { MIconLoader } from './MIconLoader';
+import { MIconCopy } from './icons/MIconCopy';
+import './IconsCatalog.css';
+
+<Meta title="Design System/Icons" />
+
+# Definition
+
+Full catalog of Mobiquity UI Kit icons available for developers
+
+## Usage
+
+Just press on the Icon you need and valid code will be in your clipboard.
+
+## Icons
+
+{
+Object.keys(IconsCatalog).map((catalog, i) => {
+return <div className="catalog" key={catalog}>
+
+<h3>{catalog}</h3>
+<div className="list-of-items">
+{
+IconsCatalog[catalog].map((name) => {
+return <div className="name" key={name}>
+<h4>{name}</h4>
+<div>
+{
+Array.from(IconModeIndex.keys()).map((mode) => {
+const iconComponent = `MIcon${name}`;
+return <div className="mode" key={iconComponent + mode} onClick={() => navigator.clipboard.writeText(`<${iconComponent} mode="${mode}" width={32} />`)}>
+<MIconLoader name={iconComponent} mode={mode} width={32} />
+<h5>{mode}</h5>
+<div className="copy">
+<MIconCopy mode="regular" width={16} />
+</div>
+</div>
+})
+}
+</div>
+</div>
+})
+}
+</div>
+</div>
+})
+
+}

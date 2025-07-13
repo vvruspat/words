@@ -1,0 +1,1607 @@
+{
+	"name": "light",
+	"variables": [
+		{
+			"name": "background/subtle/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--background-subtle-background-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "divider/subtle/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--divider-subtle-background-color",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "divider/strong/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--divider-strong-background-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "background/strong/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--background-strong-background-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/enabled/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1438"
+			},
+			"cssVar": "--button-primary-enabled-background-color",
+			"cssValue": "var(--palette-primary-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-primary-enabled-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/hover/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1439"
+			},
+			"cssVar": "--button-primary-hover-background-color",
+			"cssValue": "var(--palette-primary-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-primary-hover-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/active/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1440"
+			},
+			"cssVar": "--button-primary-active-background-color",
+			"cssValue": "var(--palette-primary-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-primary-active-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/disabled/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--button-primary-disabled-background-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/primary/disabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--button-primary-disabled-font-color",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/enabled/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1446"
+			},
+			"cssVar": "--button-secondary-enabled-background-color",
+			"cssValue": "var(--palette-secondary-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/hover/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1447"
+			},
+			"cssVar": "--button-secondary-hover-background-color",
+			"cssValue": "var(--palette-secondary-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--button-secondary-enabled-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--button-secondary-hover-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/active/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1448"
+			},
+			"cssVar": "--button-secondary-active-background-color",
+			"cssValue": "var(--palette-secondary-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--button-secondary-active-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/disabled/background-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--button-secondary-disabled-background-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/secondary/disabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--button-secondary-disabled-font-color",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/enabled/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--button-outlined-enabled-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/enabled/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1468"
+			},
+			"cssVar": "--button-outlined-enabled-border-color",
+			"cssValue": "var(--palette-base-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1468"
+			},
+			"cssVar": "--button-outlined-enabled-font-color",
+			"cssValue": "var(--palette-base-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/hover/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--button-outlined-hover-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/hover/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--button-outlined-hover-border-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1468"
+			},
+			"cssVar": "--button-outlined-hover-font-color",
+			"cssValue": "var(--palette-base-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/active/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--button-outlined-active-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/active/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1468"
+			},
+			"cssVar": "--button-outlined-active-border-color",
+			"cssValue": "var(--palette-base-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1468"
+			},
+			"cssVar": "--button-outlined-active-font-color",
+			"cssValue": "var(--palette-base-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/disabled/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--button-outlined-disabled-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/disabled/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--button-outlined-disabled-border-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/outlined/disabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--button-outlined-disabled-font-color",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/transparent/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-transparent-enabled-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/transparent/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-transparent-hover-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/transparent/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--button-transparent-active-font-color",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "button/transparent/disabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--button-transparent-disabled-font-color",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/enabled/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-enabled-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/enabled/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-enabled-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-field-enabled-font-color",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-field-hover-font-color",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-field-active-font-color",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/focus/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-focus-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/valid/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-valid-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/invalid/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-field-invalid-font-color",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/disabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-field-disabled-font-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/enabled/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1465"
+			},
+			"cssVar": "--input-field-enabled-border-color",
+			"cssValue": "var(--palette-base-500)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/enabled/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-field-enabled-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/hover/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1465"
+			},
+			"cssVar": "--input-field-hover-border-color",
+			"cssValue": "var(--palette-base-500)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/hover/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0.05000000074505806
+			},
+			"cssVar": "--input-field-hover-background-color",
+			"cssValue": "rgba(255, 255, 255, 0.05000000074505806)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/active/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-field-active-border-color",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/active/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-field-active-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/focus/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1478"
+			},
+			"cssVar": "--input-field-focus-border-color",
+			"cssValue": "var(--palette-active-500)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/focus/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-field-focus-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/valid/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1488"
+			},
+			"cssVar": "--input-field-valid-border-color",
+			"cssValue": "var(--palette-semantic-success-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/valid/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-field-valid-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/invalid/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-field-invalid-border-color",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/invalid/background-color",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-field-invalid-background-color",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/disabled/border-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-field-disabled-border-color",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/disabled/background-color",
+			"value": {
+				"r": 0.0013025919906795025,
+				"g": 0.0013025919906795025,
+				"b": 0.0013025919906795025,
+				"a": 0.10000000149011612
+			},
+			"cssVar": "--input-field-disabled-background-color",
+			"cssValue": "rgba(0.33216095762327313, 0.33216095762327313, 0.33216095762327313, 0.10000000149011612)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h1/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h1-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h2/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h2-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h3/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h3-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h4/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h4-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h5/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h5-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/h6/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-h6-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/title/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-title-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/subtitle/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-subtitle-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/body/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-body-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/caption/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--typography-caption-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/link/enabled/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--typography-link-enabled-font-color",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/link/hover/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--typography-link-hover-font-color",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/link/active/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1482"
+			},
+			"cssVar": "--typography-link-active-font-color",
+			"cssValue": "var(--palette-active-1000)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "typography/link/visited/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1482"
+			},
+			"cssVar": "--typography-link-visited-font-color",
+			"cssValue": "var(--palette-active-1000)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/assistive/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-checkbox-assistive-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/assistive/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-assistive-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/background/enabled",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-unchecked-background-enabled",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/background/hover",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-unchecked-background-hover",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/background/active",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-unchecked-background-active",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/background/invalid",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-unchecked-background-invalid",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/background/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1462"
+			},
+			"cssVar": "--input-checkbox-unchecked-background-disabled",
+			"cssValue": "var(--palette-base-200)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/label/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-checkbox-unchecked-label-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/outline/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-checkbox-unchecked-outline-enabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/outline/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-checkbox-unchecked-outline-hover",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/outline/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--input-checkbox-unchecked-outline-active",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/outline/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-unchecked-outline-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/unchecked/outline/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1464"
+			},
+			"cssVar": "--input-checkbox-unchecked-outline-disabled",
+			"cssValue": "var(--palette-base-400)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/background/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--input-checkbox-checked-background-enabled",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/background/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-checked-background-hover",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/background/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-checked-background-active",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/background/invalid",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-checked-background-invalid",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/background/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-checkbox-checked-background-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/icon/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-checked-icon-enabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/icon/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-checked-icon-hover",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/icon/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-checked-icon-active",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/icon/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-checked-icon-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/icon/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-checked-icon-disabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/label/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-checkbox-checked-label-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/outline/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-checked-outline-enabled",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/outline/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-checked-outline-hover",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/outline/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-checked-outline-active",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/outline/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-checked-outline-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/checked/outline/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-checkbox-checked-outline-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/background/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--input-checkbox-indeterminate-background-enabled",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/background/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-indeterminate-background-hover",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/background/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-indeterminate-background-active",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/background/invalid",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-checkbox-indeterminate-background-invalid",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/background/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-checkbox-indeterminate-background-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/icon/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-indeterminate-icon-enabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/icon/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-indeterminate-icon-hover",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/icon/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-indeterminate-icon-active",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/icon/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-indeterminate-icon-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/icon/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-checkbox-indeterminate-icon-disabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/label/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-checkbox-indeterminate-label-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/outline/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-checkbox-indeterminate-outline-enabled",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/outline/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1481"
+			},
+			"cssVar": "--input-checkbox-indeterminate-outline-hover",
+			"cssValue": "var(--palette-active-900)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/outline/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1481"
+			},
+			"cssVar": "--input-checkbox-indeterminate-outline-active",
+			"cssValue": "var(--palette-active-900)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/outline/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-checkbox-indeterminate-outline-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/checkbox/indeterminate/outline/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-checkbox-indeterminate-outline-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/assistive/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-radio-assistive-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/assistive/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-radio-assistive-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/background/enabled",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-radio-unchecked-background-enabled",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/background/hover",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-radio-unchecked-background-hover",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/background/active",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-radio-unchecked-background-active",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/background/invalid",
+			"value": {
+				"r": 1,
+				"g": 1,
+				"b": 1,
+				"a": 0
+			},
+			"cssVar": "--input-radio-unchecked-background-invalid",
+			"cssValue": "rgba(255, 255, 255, 0)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/background/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-radio-unchecked-background-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/label/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-radio-unchecked-label-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/outline/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-radio-unchecked-outline-enabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/outline/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1467"
+			},
+			"cssVar": "--input-radio-unchecked-outline-hover",
+			"cssValue": "var(--palette-base-700)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/outline/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--input-radio-unchecked-outline-active",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/outline/invalid",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-radio-unchecked-outline-invalid",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/unchecked/outline/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-radio-unchecked-outline-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/background/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:596:6086"
+			},
+			"cssVar": "--input-radio-checked-background-enabled",
+			"cssValue": "var(--palette-active-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/background/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-radio-checked-background-hover",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/background/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-radio-checked-background-active",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/background/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-radio-checked-background-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/icon/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-radio-checked-icon-enabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/icon/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-radio-checked-icon-hover",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/icon/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-radio-checked-icon-active",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/icon/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1461"
+			},
+			"cssVar": "--input-radio-checked-icon-disabled",
+			"cssValue": "var(--palette-base-10-white)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/label/default",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:661:771"
+			},
+			"cssVar": "--input-radio-checked-label-default",
+			"cssValue": "var(--typography-body-font-color)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/outline/enabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-radio-checked-outline-enabled",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/outline/hover",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-radio-checked-outline-hover",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/outline/active",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1480"
+			},
+			"cssVar": "--input-radio-checked-outline-active",
+			"cssValue": "var(--palette-active-800)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/radio/checked/outline/disabled",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:253:2627"
+			},
+			"cssVar": "--input-radio-checked-outline-disabled",
+			"cssValue": "var(--palette-base-600)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/active/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-active-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/active/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-active-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/hover/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-hover-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/hover/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-hover-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/focus/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-focus-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/focus/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-focus-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/valid/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-valid-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/valid/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-valid-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/disabled/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-disabled-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/disabled/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-disabled-assistive-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/invalid/label/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:614:1473"
+			},
+			"cssVar": "--input-field-invalid-label-font-color",
+			"cssValue": "var(--palette-base-130-black)",
+			"resolvedType": "COLOR"
+		},
+		{
+			"name": "input/field/invalid/assistive/font-color",
+			"value": {
+				"type": "VARIABLE_ALIAS",
+				"id": "VariableID:330:434"
+			},
+			"cssVar": "--input-field-invalid-assistive-font-color",
+			"cssValue": "var(--palette-semantic-error-600)",
+			"resolvedType": "COLOR"
+		}
+	]
+}

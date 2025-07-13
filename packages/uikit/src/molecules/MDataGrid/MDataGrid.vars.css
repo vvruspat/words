@@ -1,0 +1,13 @@
+:root {
+	--table-head-background-color: var(--palette-base-100);
+	--table-body-row-hover-background-color: var(--palette-base-100);
+
+	--table-head-border-radius: var(--border-radius-2xl);
+	--table-head-padding-vertical: var(--whiteSpace-general-2x);
+	--table-head-padding-horizontal: var(--whiteSpace-general-1x);
+
+	--sort-button-non-active-color: var(--palette-base-400);
+	--sort-button-active-color: var(--palette-base-1000);
+
+	--table-body-row-selected-background-color: var(--palette-base-100);
+}

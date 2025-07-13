@@ -1,0 +1,33 @@
+import { Canvas, Meta, Controls } from '@storybook/blocks';
+
+import * as CheckboxStories from './MCheckbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Definition
+
+Checkbox is a clickable interactive element that users can select multiple options.
+
+Checkboxs are often used when user needs to pick multiple options.
+
+checkbox has the following properties:
+
+### Regular
+
+<Canvas of={CheckboxStories.Regular} />
+
+#### Available parameters
+
+<Controls />
+
+### Valid
+
+<Canvas of={CheckboxStories.Valid} />
+
+### Invalid
+
+<Canvas of={CheckboxStories.Invalid} />
+
+### Disabled
+
+<Canvas of={CheckboxStories.Disabled} />

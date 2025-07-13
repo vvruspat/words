@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"allowJs": false,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"types": ["vite/client", "jest", "node", "@types/jest"]
+	},
+	"files": [],
+	"include": [],
+	"references": [
+		{
+			"path": "./tsconfig.storybook.json"
+		},
+		{
+			"path": "./tsconfig.spec.json"
+		}
+	],
+	"extends": "@repo/typescript-config/react-library.json"
+}

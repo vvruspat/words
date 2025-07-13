@@ -1,0 +1,3 @@
+:root[data-platform="i-os"] {
+	--layout-screen-padding-horizontal: var(--whiteSpace-general-2x);
+}

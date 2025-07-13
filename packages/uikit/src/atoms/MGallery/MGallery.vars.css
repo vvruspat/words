@@ -1,0 +1,5 @@
+:root {
+	--gallery-container-border-radius: var(--borderRadius-general-5x);
+	--gallery-slider-button-margin: var(--size-general-1_5x);
+	--gallery-tool-margin: var(--size-general-1_5x);
+}

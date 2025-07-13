@@ -1,0 +1,20 @@
+.fieldDescription {
+	color: var(--input-field-enabled-font-color, #747e97);
+	font-family: var(--font-family-secondary, Roboto);
+	font-size: var(--font-size-m, 14px);
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.fieldDescription.regular {
+	color: var(--input-field-enabled-font-color, #747e97);
+}
+
+.fieldDescription.valid {
+	color: var(--input-field-valid-font-color, #747e97);
+}
+
+.fieldDescription.invalid {
+	color: var(--input-field-invalid-assistive-font-color, #dc2020);
+}

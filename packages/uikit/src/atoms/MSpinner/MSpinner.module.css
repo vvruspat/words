@@ -1,0 +1,87 @@
+.spinner {
+	width: 48px;
+	height: 48px;
+	border-style: solid;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner-size-xs {
+	border-width: calc(var(--spinner-size-xs, 4px) * 0.15);
+	width: calc(var(--spinner-size-xs, 4px) * 2);
+	height: calc(var(--spinner-size-xs, 4px) * 2);
+}
+
+.spinner-size-s {
+	border-width: calc(var(--spinner-size-s, 8px) * 0.15);
+	width: calc(var(--spinner-size-s, 8px) * 2);
+	height: calc(var(--spinner-size-s, 8px) * 2);
+}
+
+.spinner-size-m {
+	border-width: calc(var(--spinner-size-m, 12px) * 0.15);
+	width: calc(var(--spinner-size-m, 12px) * 2);
+	height: calc(var(--spinner-size-m, 12px) * 2);
+}
+
+.spinner-size-l {
+	border-width: calc(var(--spinner-size-l, 16px) * 0.15);
+	width: calc(var(--spinner-size-l, 16px) * 2);
+	height: calc(var(--spinner-size-l, 16px) * 2);
+}
+
+.spinner-size-xl {
+	border-width: calc(var(--spinner-size-xl, 20px) * 0.15);
+	width: calc(var(--spinner-size-xl, 20px) * 2);
+	height: calc(var(--spinner-size-xl, 20px) * 2);
+}
+
+.spinner-size-2xl {
+	border-width: calc(var(--spinner-size-2xl, 24px) * 0.15);
+	width: calc(var(--spinner-size-2xl, 24px) * 2);
+	height: calc(var(--spinner-size-2xl, 24px) * 2);
+}
+
+.spinner-size-3xl {
+	border-width: calc(var(--spinner-size-3xl, 28px) * 0.15);
+	width: calc(var(--spinner-size-3xl, 28px) * 2);
+	height: calc(var(--spinner-size-3xl, 28px) * 2);
+}
+
+.spinner-size-4xl {
+	border-width: calc(var(--spinner-size-4xl, 32px) * 0.15);
+	width: calc(var(--spinner-size-4xl, 32px) * 2);
+	height: calc(var(--spinner-size-4xl, 32px) * 2);
+}
+
+.spinner-mode-base {
+	border-color: var(--spinner-mode-base-border-color);
+	border-bottom-color: transparent;
+}
+
+.spinner-mode-primary {
+	border-color: var(--spinner-mode-primary-border-color);
+	border-bottom-color: transparent;
+}
+
+.spinner-mode-secondary {
+	border-color: var(--spinner-mode-secondary-border-color);
+	border-bottom-color: transparent;
+}
+
+.spinner-mode-tertiary {
+	border-color: var(--spinner-mode-tertiary-border-color);
+	border-bottom-color: transparent;
+}

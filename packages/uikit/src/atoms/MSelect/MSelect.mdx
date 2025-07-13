@@ -1,0 +1,23 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks';
+
+import * as SelectStories from './MSelect.stories';
+
+<Meta of={SelectStories} />
+
+# Definition
+
+A dropdown menu for displaying choices - an elegant alternative to the native `<select>` element.
+
+Utilizing Radio is recommended when there are fewer total options (less than 5).
+
+You probably need AutoComplete if you're looking for an input box that can be typed or selected.
+
+## Usage
+
+## Captions
+
+Select has the following properties:
+
+<Canvas of={SelectStories.Basic} />
+
+<Controls />

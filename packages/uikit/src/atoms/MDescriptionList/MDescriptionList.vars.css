@@ -1,0 +1,15 @@
+:root {
+	--description-list-padding-vertical: 0;
+	--description-list-padding-horizontal: var(--whiteSpace-general-2x);
+	--description-list-title-padding: var(--whiteSpace-general-_5x) 0;
+	--description-list-description-padding: var(--whiteSpace-general-_5x) 0;
+	--description-list-row-gap: var(--whiteSpace-general-1x);
+	--description-list-column-gap: var(--whiteSpace-general-2x);
+}
+
+:root[data-theme="light"] {
+	--description-list-title-font-color: var(--text-secondary);
+	--description-list-title-background-color: var(--background-primary);
+	--description-list-description-font-color: var(--text-primary);
+	--description-list-description-background-color: var(--background-primary);
+}

@@ -1,0 +1,30 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": true,
+		"moduleResolution": "node",
+		"jsx": "react-jsx",
+		"resolveJsonModule": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "ESNext",
+		"lib": ["es2020", "dom"],
+		"types": ["node", "jest"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"atoms/*": ["src/atoms/*"],
+			"molecules/*": ["src/molecules/*"],
+			"icons/*": ["src/icons/*"],
+			"types/*": ["src/types/*"],
+			"styles/*": ["src/styles/*"]
+		}
+	},
+	"exclude": ["node_modules", "tmp", "dist"],
+	"files": ["node_modules/@types/css-modules/index.d.ts"]
+}
