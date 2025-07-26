@@ -16,5 +16,5 @@
 			"path": "./tsconfig.spec.json"
 		}
 	],
-	"extends": "@repo/typescript-config/react-library.json"
+	"extends": "@repo/typescript-config/uikit.json"
 }

@@ -14,6 +14,9 @@ export class UserEntity implements User {
 
 	@Column({ nullable: true })
 	name: string;
+
+	@Column({ nullable: true })
+	password?: string;
 }
 
 export { UserEntity as User };

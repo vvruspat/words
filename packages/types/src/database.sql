@@ -37,6 +37,7 @@ CREATE TABLE public.users (
   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   email text NOT NULL UNIQUE,
+  password text NOT NULL,
   name text NOT NULL,
   CONSTRAINT users_pkey PRIMARY KEY (id)
 );

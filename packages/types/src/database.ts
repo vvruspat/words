@@ -39,6 +39,7 @@ export interface User {
 	created_at: string;
 	email: string;
 	name: string;
+	password?: string;
 }
 
 export interface VocabCatalog {

@@ -12,6 +12,8 @@ export class PutUserRequestDto implements PutUserRequest {
 	email!: User["email"];
 	@ApiProperty({ type: String })
 	name!: User["name"];
+	@ApiProperty({ type: String, required: false })
+	password?: string;
 }
 
 export class PutUserResponseDto implements PutUserResponse {

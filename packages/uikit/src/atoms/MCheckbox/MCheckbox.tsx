@@ -3,10 +3,10 @@
 import clsx from "clsx";
 import { type MouseEvent, type ReactNode, useId, useMemo, useRef } from "react";
 import type { BasicInputProps } from "../../types/BasicInputProps";
-import MButton from "../MButton";
-import MFieldDescription from "../MFieldDescription";
-import MFlex from "../MFlex";
-import MLabel from "../MLabel";
+import { MButton } from "../MButton";
+import { MFieldDescription } from "../MFieldDescription";
+import { MFlex } from "../MFlex";
+import { MLabel } from "../MLabel";
 
 import styles from "./MCheckbox.module.css";
 import "./MCheckbox.vars.css";
@@ -37,7 +37,7 @@ export const MCheckbox = ({
 	const fieldId = useMemo(() => id ?? uuid, [uuid, id]);
 	const checkboxRef = useRef<HTMLInputElement>(null);
 
-	const onCheckboxClick = (_e: MouseEvent<HTMLDivElement>) => {
+	const onCheckboxClick = (_e: MouseEvent<HTMLButtonElement>) => {
 		if (checkboxRef.current) {
 			checkboxRef.current.focus();
 		}

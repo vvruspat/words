@@ -1,13 +1,13 @@
 {
-  "extends": ["../../biome.json"],
-  "files": {
-    "includes": [
-      "app/**/*",
-      "assets/**/*",
-      "app.json",
-      "package.json",
-      "tsconfig.json"
-    ],
-    "ignoreUnknown": true
-  }
+	"extends": ["../../biome.json"],
+	"files": {
+		"includes": [
+			"app/**/*",
+			"assets/**/*",
+			"app.json",
+			"package.json",
+			"tsconfig.json"
+		],
+		"ignoreUnknown": true
+	}
 }

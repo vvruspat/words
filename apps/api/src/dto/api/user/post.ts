@@ -10,6 +10,8 @@ export class PostUserRequestDto implements PostUserRequest {
 	email!: User["email"];
 	@ApiProperty({ type: String })
 	name!: User["name"];
+	@ApiProperty({ type: String, required: true })
+	password!: string;
 }
 
 export class PostUserResponseDto implements PostUserResponse {

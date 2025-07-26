@@ -28,8 +28,8 @@ export const MTab: React.FC<MTabProps> = ({
 			aria-disabled={disabled}
 			className={clsx(
 				styles.tab,
-				styles.activeTab && active,
-				styles.disabledTab && disabled,
+				active && styles.activeTab,
+				disabled && styles.disabledTab,
 			)}
 			onClick={() => !disabled && onClick?.()}
 			onKeyDown={(e) => {

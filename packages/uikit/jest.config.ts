@@ -1,7 +1,10 @@
-/* eslint-disable */
-export default {
+import type { Config } from "jest";
+
+const config: Config = {
 	displayName: "@repo/uikit",
 	coverageDirectory: "./coverage",
+	coverageReporters: ["cobertura"],
+	reporters: ["default", ["jest-junit", { outputDirectory: "./junit" }]],
 	rootDir: ".",
 	testMatch: ["<rootDir>/src/**/*.test.ts?(x)"],
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "html"],
@@ -39,4 +42,7 @@ export default {
 	testEnvironmentOptions: {
 		customExportConditions: ["node", "require", "default"],
 	},
+	setupFiles: ["./__mocks__/matchMedia.js"],
 };
+
+export default config;

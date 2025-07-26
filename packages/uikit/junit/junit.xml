@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="44" failures="0" errors="0" time="0.933">
+  <testsuite name="MTab Component" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:18" time="0.137" tests="3">
+    <testcase classname="MTab Component renders the label passed to it" name="MTab Component renders the label passed to it" time="0.011">
+    </testcase>
+    <testcase classname="MTab Component applies the active class when active prop is true" name="MTab Component applies the active class when active prop is true" time="0.001">
+    </testcase>
+    <testcase classname="MTab Component calls onClick prop when clicked" name="MTab Component calls onClick prop when clicked" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="MLinkButton" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.076" tests="2">
+    <testcase classname="MLinkButton render link button" name="MLinkButton render link button" time="0.028">
+    </testcase>
+    <testcase classname="MLinkButton disabled link button" name="MLinkButton disabled link button" time="0.011">
+    </testcase>
+  </testsuite>
+  <testsuite name="MCheckbox" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.046" tests="3">
+    <testcase classname="MCheckbox should render checkbox with label" name="MCheckbox should render checkbox with label" time="0.004">
+    </testcase>
+    <testcase classname="MCheckbox should be disabled when disabled is true" name="MCheckbox should be disabled when disabled is true" time="0.01">
+    </testcase>
+    <testcase classname="MCheckbox should change checked state from false to true on click" name="MCheckbox should change checked state from false to true on click" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="MButton" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.048" tests="2">
+    <testcase classname="MButton render button" name="MButton render button" time="0.012">
+    </testcase>
+    <testcase classname="MButton disabled button" name="MButton disabled button" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="MRadio" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.037" tests="5">
+    <testcase classname="MRadio renders without crashing" name="MRadio renders without crashing" time="0.004">
+    </testcase>
+    <testcase classname="MRadio renders with a label" name="MRadio renders with a label" time="0.003">
+    </testcase>
+    <testcase classname="MRadio renders with a description" name="MRadio renders with a description" time="0">
+    </testcase>
+    <testcase classname="MRadio renders as disabled when the disabled prop is true" name="MRadio renders as disabled when the disabled prop is true" time="0.002">
+    </testcase>
+    <testcase classname="MRadio should change checked state from false to true on click" name="MRadio should change checked state from false to true on click" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="MSelect Component" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.035" tests="1">
+    <testcase classname="MSelect Component renders with given options" name="MSelect Component renders with given options" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="MInput" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.033" tests="5">
+    <testcase classname="MInput renders" name="MInput renders" time="0.002">
+    </testcase>
+    <testcase classname="MInput removes error message when required field is filled" name="MInput removes error message when required field is filled" time="0.001">
+    </testcase>
+    <testcase classname="MInput renders email input type when specified" name="MInput renders email input type when specified" time="0.003">
+    </testcase>
+    <testcase classname="MInput renders password input type and hides characters" name="MInput renders password input type and hides characters" time="0">
+    </testcase>
+    <testcase classname="MInput triggers onChange event on value change" name="MInput triggers onChange event on value change" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="MTabs Component" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.03" tests="3">
+    <testcase classname="MTabs Component renders correctly with initial props" name="MTabs Component renders correctly with initial props" time="0.002">
+    </testcase>
+    <testcase classname="MTabs Component displays the correct tab content based on defaultActiveKey" name="MTabs Component displays the correct tab content based on defaultActiveKey" time="0.001">
+    </testcase>
+    <testcase classname="MTabs Component changes the active tab and displays corresponding content when a tab is clicked" name="MTabs Component changes the active tab and displays corresponding content when a tab is clicked" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="MSwitch" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.035" tests="3">
+    <testcase classname="MSwitch should render switch" name="MSwitch should render switch" time="0.004">
+    </testcase>
+    <testcase classname="MSwitch should be disabled when disabled is true" name="MSwitch should be disabled when disabled is true" time="0.002">
+    </testcase>
+    <testcase classname="MSwitch should change checked state from false to true on click" name="MSwitch should change checked state from false to true on click" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="MAccordion" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.034" tests="2">
+    <testcase classname="MAccordion renders titles of accordion items" name="MAccordion renders titles of accordion items" time="0.004">
+    </testcase>
+    <testcase classname="MAccordion opens and closes accordion items on click" name="MAccordion opens and closes accordion items on click" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="MAlert" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.031" tests="7">
+    <testcase classname="MAlert renders with default &quot;info&quot; mode and displays children" name="MAlert renders with default &quot;info&quot; mode and displays children" time="0.001">
+    </testcase>
+    <testcase classname="MAlert applies the correct mode class for mode=&quot;info&quot;" name="MAlert applies the correct mode class for mode=&quot;info&quot;" time="0.001">
+    </testcase>
+    <testcase classname="MAlert applies the correct mode class for mode=&quot;success&quot;" name="MAlert applies the correct mode class for mode=&quot;success&quot;" time="0">
+    </testcase>
+    <testcase classname="MAlert applies the correct mode class for mode=&quot;warning&quot;" name="MAlert applies the correct mode class for mode=&quot;warning&quot;" time="0.001">
+    </testcase>
+    <testcase classname="MAlert applies the correct mode class for mode=&quot;error&quot;" name="MAlert applies the correct mode class for mode=&quot;error&quot;" time="0">
+    </testcase>
+    <testcase classname="MAlert merges additional className prop" name="MAlert merges additional className prop" time="0.001">
+    </testcase>
+    <testcase classname="MAlert passes additional props to MFlex (e.g., id)" name="MAlert passes additional props to MFlex (e.g., id)" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="MListItem Component" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.026" tests="3">
+    <testcase classname="MListItem Component renders children correctly" name="MListItem Component renders children correctly" time="0.001">
+    </testcase>
+    <testcase classname="MListItem Component adds itemBorder class when showDivider is true" name="MListItem Component adds itemBorder class when showDivider is true" time="0.001">
+    </testcase>
+    <testcase classname="MListItem Component does not add itemBorder class when showDivider is false" name="MListItem Component does not add itemBorder class when showDivider is false" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="MDropdown" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.029" tests="2">
+    <testcase classname="MDropdown render opened dropdown" name="MDropdown render opened dropdown" time="0.003">
+    </testcase>
+    <testcase classname="MDropdown render closed dropdown" name="MDropdown render closed dropdown" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="MCard" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.027" tests="1">
+    <testcase classname="MCard render card" name="MCard render card" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="MList Component" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.026" tests="1">
+    <testcase classname="MList Component renders list items from options" name="MList Component renders list items from options" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="MDivider" errors="0" failures="0" skipped="0" timestamp="2025-07-24T22:29:19" time="0.026" tests="1">
+    <testcase classname="MDivider render card" name="MDivider render card" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>
