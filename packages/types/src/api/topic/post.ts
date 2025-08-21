@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { Topic } from "../../database";
+import { paths } from "../../api";
 
-export interface PostTopicRequest extends Omit<Topic, "id"> {}
-
-export interface PostTopicResponse extends ApiResponse<Topic> {}
+export type PostTopicResponse = paths["/topic"]["post"]["responses"]["201"]["content"]["application/json"];
+export type PostTopicRequest = paths["/topic"]["post"]["requestBody"]["content"]["application/json"];

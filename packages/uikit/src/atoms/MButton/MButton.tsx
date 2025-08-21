@@ -34,7 +34,6 @@ export const MButton = ({
 			{...restProps}
 		>
 			<MFlex
-				id="test"
 				justify={justify}
 				wrap="nowrap"
 				className={clsx(styles.buttonContentWrapper)}

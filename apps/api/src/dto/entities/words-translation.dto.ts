@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { WordsTranslation } from "@repo/types";
+import type { WordTranslation } from "@repo/types";
 
-export class WordsTranslationDto implements WordsTranslation {
-	@ApiProperty({ type: "string", format: "int64" })
+export class WordTranslationDto implements WordTranslation {
+	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })

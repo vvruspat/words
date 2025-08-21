@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { GetTrainingRequest } from "@repo/types";
 import { Repository } from "typeorm";
+import { GetTrainingRequestDto } from "~/dto";
 import { TRAINING_REPOSITORY } from "../constants/database.constants";
 import { TrainingEntity } from "./training.entity";
 
@@ -15,7 +15,7 @@ export class TrainingService {
 		limit,
 		offset,
 		...query
-	}: GetTrainingRequest): Promise<TrainingEntity[]> {
+	}: GetTrainingRequestDto): Promise<TrainingEntity[]> {
 		return this.trainingRepository.find({
 			where: {
 				...query,

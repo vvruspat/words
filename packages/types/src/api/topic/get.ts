@@ -1,9 +1,3 @@
-import type { PaginatedResponse } from "../../common/api-response";
-import type { Topic } from "../../database";
+import { paths } from "../../api";
 
-export interface GetTopicRequest extends Partial<Topic> {
-	limit?: number;
-	offset?: number;
-}
-
-export interface GetTopicResponse extends PaginatedResponse<Topic> {}
+export type GetTopicResponse = paths["/topic"]["get"]["responses"]["200"]["content"]["application/json"];

@@ -1,8 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { User } from "../../database";
+import { paths } from "../../api";
 
-export interface PostUserRequest extends Omit<User, "id"> {
-	password: string;
-}
-
-export interface PostUserResponse extends ApiResponse<User> {}
+export type PostUserResponse = paths["/user"]["post"]["responses"]["201"]["content"]["application/json"];
+export type PostUserRequest = paths["/user"]["post"]["requestBody"]["content"]["application/json"];

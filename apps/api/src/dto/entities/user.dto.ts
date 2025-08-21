@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import type { User } from "@repo/types";
 
 export class UserDto implements User {
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })

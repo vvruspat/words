@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { GetUserRequest } from "@repo/types";
 import { USER_REPOSITORY } from "src/constants/database.constants";
 import { Repository } from "typeorm";
+import { GetUserRequestDto } from "~/dto";
 import { UserEntity } from "./user.entity";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class UserService {
 		offset,
 		limit,
 		...query
-	}: GetUserRequest): Promise<UserEntity[]> {
+	}: GetUserRequestDto): Promise<UserEntity[]> {
 		return this.userRepository.find({
 			where: {
 				...query,

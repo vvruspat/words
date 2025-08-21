@@ -1,15 +1,15 @@
-import { VocabCatalog } from "@repo/types";
+import type { VocabCatalog } from "@repo/types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: "vocab_catalog" })
+@Entity({ name: "vocab_catalogs" })
 export class VocabCatalogEntity implements VocabCatalog {
-	@PrimaryGeneratedColumn({ type: "number" })
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamptz" })
 	created_at: string;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	owner: number;
 
 	@Column()

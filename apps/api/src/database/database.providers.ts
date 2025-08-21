@@ -12,8 +12,10 @@ export const databaseProviders = [
 				username: process.env.PG_USER || "postgres",
 				password: process.env.PG_PASSWORD || "postgres",
 				database: process.env.PG_DATABASE || "words",
-				entities: [`${__dirname}/entities/**/*.entity.ts`],
+				entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
 				synchronize: true,
+				logging: true,
+				logger: "advanced-console",
 			});
 
 			return dataSource.initialize();

@@ -11,14 +11,8 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus, GetTopicResponse } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+
 import {
 	DeleteTopicRequestDto,
 	DeleteTopicResponseDto,
@@ -38,19 +32,19 @@ export class TopicController {
 
 	@Get()
 	@ApiOperation({ summary: "Get all topics" })
-	@ApiQuery({ type: GetTopicRequestDto })
 	@ApiResponse({ status: 200, type: GetTopicResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
-	async getAll(@Query() query: GetTopicRequestDto): Promise<GetTopicResponse> {
+	async getAll(
+		@Query() query: GetTopicRequestDto,
+	): Promise<GetTopicResponseDto> {
 		const entities = await this.topicService.findAll(query);
 
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -65,8 +59,7 @@ export class TopicController {
 	): Promise<GetTopicResponseDto> {
 		const entity = await this.topicService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -80,11 +73,7 @@ export class TopicController {
 	async create(
 		@Body() dto: PostTopicRequestDto,
 	): Promise<PostTopicResponseDto> {
-		const entity = await this.topicService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.topicService.create(dto);
 	}
 
 	@Put()
@@ -95,11 +84,7 @@ export class TopicController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async update(@Body() dto: PutTopicRequestDto): Promise<PutTopicResponseDto> {
-		const entity = await this.topicService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.topicService.update(dto);
 	}
 
 	@Delete(":id")
@@ -110,7 +95,7 @@ export class TopicController {
 	): Promise<DeleteTopicResponseDto> {
 		await this.topicService.remove(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
+			id,
 		};
 	}
 }

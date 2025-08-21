@@ -38,11 +38,7 @@ export const MLinkButton = ({
 			)}
 			{...restProps}
 		>
-			<MFlex
-				id="test"
-				justify={justify}
-				className={clsx(styles.buttonContentWrapper)}
-			>
+			<MFlex justify={justify} className={clsx(styles.buttonContentWrapper)}>
 				{before && <span className={styles.before}>{before}</span>}
 				<span className={styles.buttonContent}>{children}</span>
 				{after && <span className={styles.after}>{after}</span>}

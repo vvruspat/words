@@ -11,14 +11,8 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+
 import {
 	DeleteVocabCatalogRequestDto,
 	DeleteVocabCatalogResponseDto,
@@ -37,14 +31,13 @@ import {
 } from "~/dto/api/vocabcatalog/put";
 import { VocabCatalogService } from "./vocabcatalog.service";
 
-@ApiTags("vocab-catalog")
-@Controller("vocab-catalog")
+@ApiTags("vocabcatalog")
+@Controller("vocabcatalog")
 export class VocabCatalogController {
 	constructor(private readonly vocabCatalogService: VocabCatalogService) {}
 
 	@Get()
 	@ApiOperation({ summary: "Get all vocab catalogs" })
-	@ApiQuery({ type: GetVocabCatalogRequestDto })
 	@ApiResponse({ status: 200, type: GetVocabCatalogResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
@@ -52,12 +45,12 @@ export class VocabCatalogController {
 		@Query() query: GetVocabCatalogRequestDto,
 	): Promise<GetVocabCatalogResponseDto> {
 		const entities = await this.vocabCatalogService.findAll(query);
+
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -72,8 +65,7 @@ export class VocabCatalogController {
 	): Promise<GetVocabCatalogResponseDto> {
 		const entity = await this.vocabCatalogService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -87,11 +79,7 @@ export class VocabCatalogController {
 	async create(
 		@Body() dto: PostVocabCatalogRequestDto,
 	): Promise<PostVocabCatalogResponseDto> {
-		const entity = await this.vocabCatalogService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.vocabCatalogService.create(dto);
 	}
 
 	@Put()
@@ -104,11 +92,7 @@ export class VocabCatalogController {
 	async update(
 		@Body() dto: PutVocabCatalogRequestDto,
 	): Promise<PutVocabCatalogResponseDto> {
-		const entity = await this.vocabCatalogService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.vocabCatalogService.update(dto);
 	}
 
 	@Delete(":id")
@@ -118,8 +102,6 @@ export class VocabCatalogController {
 		@Param("id", ParseIntPipe) id: DeleteVocabCatalogRequestDto["id"],
 	): Promise<DeleteVocabCatalogResponseDto> {
 		await this.vocabCatalogService.remove(id);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-		};
+		return { id };
 	}
 }

@@ -6,6 +6,8 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "dev": "tsc --project tsconfig.json --watch",
+    "generate": "openapi-typescript ../../apps/api/openapi.yaml --output src/api.ts && npm run split",
+    "split": "ts-node src/scripts/generate-aliases.ts",
     "lint": "biome lint src",
     "format": "biome check src --write --unsafe"
   },
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@repo/typescript-config": "*",
     "@types/node": "^20.3.1",
+    "openapi-typescript": "^7.9.1",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.2",
     "typescript": "5.5.4"

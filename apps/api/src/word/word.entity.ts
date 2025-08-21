@@ -5,16 +5,16 @@ import { VocabCatalogEntity } from "../vocabcatalog/vocabcatalog.entity";
 
 @Entity({ name: "word" })
 export class WordEntity implements Word {
-	@PrimaryGeneratedColumn({ type: "number" })
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamptz" })
 	created_at: string;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	topic: number;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	catalog: number;
 
 	@Column()

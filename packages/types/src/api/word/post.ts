@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { Word } from "../../database";
+import { paths } from "../../api";
 
-export interface PostWordRequest extends Omit<Word, "id"> {}
-
-export interface PostWordResponse extends ApiResponse<Word> {}
+export type PostWordResponse = paths["/word"]["post"]["responses"]["201"]["content"]["application/json"];
+export type PostWordRequest = paths["/word"]["post"]["requestBody"]["content"]["application/json"];

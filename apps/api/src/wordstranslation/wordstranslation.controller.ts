@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Get,
+	NotFoundException,
 	Param,
 	ParseIntPipe,
 	Post,
@@ -9,32 +10,54 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { WordsTranslationDto } from "~/dto";
-import { WordsTranslationService } from "./wordstranslation.service";
+import {
+	GetWordTranslationResponseDto,
+	PostWordTranslationRequestDto,
+	PostWordTranslationResponseDto,
+} from "~/dto";
+import { WordTranslationService } from "./wordstranslation.service";
 
 @ApiTags("words-translation")
 @Controller("words-translation")
-export class WordsTranslationController {
+export class WordTranslationController {
 	constructor(
-		private readonly wordsTranslationService: WordsTranslationService,
+		private readonly wordsTranslationService: WordTranslationService,
 	) {}
 
 	@Get(":id")
 	@ApiOperation({ summary: "Get words translation by id" })
-	@ApiResponse({ status: 200, type: WordsTranslationDto })
+	@ApiResponse({ status: 200, type: GetWordTranslationResponseDto })
+	@ApiResponse({ status: 404, description: "Words translation not found" })
+	@ApiResponse({ status: 500, description: "Server error" })
 	async getById(
 		@Param("id", ParseIntPipe) id: number,
-	): Promise<WordsTranslationDto> {
+	): Promise<GetWordTranslationResponseDto> {
 		const entity = await this.wordsTranslationService.findOne(id);
-		return entity as WordsTranslationDto;
+
+		if (!entity) {
+			throw new NotFoundException({
+				message: "Words translation not found",
+				status: 404,
+				details: {},
+			});
+		}
+
+		return {
+			total: 1,
+			offset: 0,
+			limit: 1,
+			items: [entity],
+		};
 	}
 
 	@Post()
 	@ApiOperation({ summary: "Create words translation" })
-	@ApiResponse({ status: 201, type: WordsTranslationDto })
+	@ApiResponse({ status: 201, type: PostWordTranslationResponseDto })
+
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
-	async create(@Body() dto: WordsTranslationDto): Promise<WordsTranslationDto> {
-		const entity = await this.wordsTranslationService.create(dto);
-		return entity as WordsTranslationDto;
+	async create(
+		@Body() dto: PostWordTranslationRequestDto,
+	): Promise<PostWordTranslationResponseDto> {
+		return await this.wordsTranslationService.create(dto);
 	}
 }

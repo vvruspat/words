@@ -1,36 +1,7 @@
-import { ApiProperty } from "@nestjs/swagger";
-import type {
-	PutVocabCatalogRequest,
-	PutVocabCatalogResponse,
-	VocabCatalog,
-} from "@repo/types";
-import { ApiResponseStatus } from "@repo/types";
+import { PartialType } from "@nestjs/swagger";
 import { VocabCatalogDto } from "../../entities/vocab-catalog.dto";
 
-export class PutVocabCatalogRequestDto implements PutVocabCatalogRequest {
-	@ApiProperty({ type: String, format: "int64" })
-	id!: VocabCatalog["id"];
-	@ApiProperty({ type: String, format: "date-time" })
-	created_at!: VocabCatalog["created_at"];
-	@ApiProperty({ type: String, format: "int64" })
-	owner!: VocabCatalog["owner"];
-	@ApiProperty({ type: String })
-	title!: VocabCatalog["title"];
-	@ApiProperty({ type: String, required: false })
-	description?: VocabCatalog["description"];
-	@ApiProperty({ type: String })
-	language!: VocabCatalog["language"];
-	@ApiProperty({ type: String, required: false })
-	image?: VocabCatalog["image"];
+export class PutVocabCatalogRequestDto extends PartialType(VocabCatalogDto) {
+	id!: number;
 }
-
-export class PutVocabCatalogResponseDto implements PutVocabCatalogResponse {
-	@ApiProperty({ enum: ApiResponseStatus })
-	status!: ApiResponseStatus;
-	@ApiProperty({ type: String, required: false })
-	message?: string;
-	@ApiProperty({ type: VocabCatalogDto, required: false })
-	data?: VocabCatalog;
-	@ApiProperty({ required: false })
-	error?: unknown;
-}
+export class PutVocabCatalogResponseDto extends VocabCatalogDto {}

@@ -4,7 +4,7 @@ import { TopicDto } from "./topic.dto";
 import { VocabCatalogDto } from "./vocab-catalog.dto";
 
 export class WordDto implements Word {
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })

@@ -11,14 +11,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	DeleteWordRequestDto,
 	DeleteWordResponseDto,
@@ -38,18 +31,16 @@ export class WordController {
 
 	@Get()
 	@ApiOperation({ summary: "Get all words" })
-	@ApiQuery({ type: GetWordRequestDto })
 	@ApiResponse({ status: 200, type: GetWordResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(@Query() query: GetWordRequestDto): Promise<GetWordResponseDto> {
 		const entities = await this.wordService.findAll(query);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -64,8 +55,7 @@ export class WordController {
 	): Promise<GetWordResponseDto> {
 		const entity = await this.wordService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -77,11 +67,7 @@ export class WordController {
 	@ApiResponse({ status: 201, type: PostWordResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(@Body() dto: PostWordRequestDto): Promise<PostWordResponseDto> {
-		const entity = await this.wordService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.wordService.create(dto);
 	}
 
 	@Put()
@@ -92,11 +78,7 @@ export class WordController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async update(@Body() dto: PutWordRequestDto): Promise<PutWordResponseDto> {
-		const entity = await this.wordService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.wordService.update(dto);
 	}
 
 	@Delete(":id")
@@ -106,8 +88,6 @@ export class WordController {
 		@Param("id", ParseIntPipe) id: DeleteWordRequestDto["id"],
 	): Promise<DeleteWordResponseDto> {
 		await this.wordService.remove(id);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-		};
+		return { id };
 	}
 }

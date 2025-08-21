@@ -1,8 +1,3 @@
-import { ApiPaginationRequest } from "../../common/api-list-request";
+import { paths } from "../../api";
 
-import type { PaginatedResponse } from "../../common/api-response";
-import type { Word, WordData } from "../../database";
-
-export interface GetWordRequest extends ApiPaginationRequest, Partial<Word> {}
-
-export interface GetWordResponse extends PaginatedResponse<WordData> {}
+export type GetWordResponse = paths["/word"]["get"]["responses"]["200"]["content"]["application/json"];

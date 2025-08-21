@@ -1,11 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import {
-	GetLearningRequest,
-	Learning,
-	LearningData,
-	PutLearningRequest,
-} from "@repo/types";
+import { Learning, LearningData } from "@repo/types";
 import { Repository } from "typeorm";
+import { GetLearningRequestDto } from "~/dto";
 import {
 	LEARNING_DATA_REPOSITORY,
 	LEARNING_REPOSITORY,
@@ -21,7 +17,7 @@ export class LearningService {
 		private learningDataRepository: Repository<LearningDataEntity>,
 	) {}
 
-	async findAll(query: GetLearningRequest): Promise<LearningData[]> {
+	async findAll(query: GetLearningRequestDto): Promise<LearningData[]> {
 		const { limit, offset, ...rest } = query;
 
 		return this.learningDataRepository.find({
@@ -40,7 +36,9 @@ export class LearningService {
 		return this.learningRepository.save(newLearning);
 	}
 
-	async update(learning: PutLearningRequest): Promise<Learning | null> {
+	async update(
+		learning: Omit<Partial<Learning>, "created_at">,
+	): Promise<Learning | null> {
 		await this.learningRepository.update({ id: learning.id }, learning);
 		return this.findOne(learning.id);
 	}

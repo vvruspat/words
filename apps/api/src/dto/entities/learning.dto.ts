@@ -3,14 +3,14 @@ import type {
 	Learning,
 	Training,
 	WordData,
-	WordsTranslation,
+	WordTranslation,
 } from "@repo/types";
 import { TrainingDto } from "./training.dto";
 import { WordDataDto } from "./word.dto";
-import { WordsTranslationDto } from "./words-translation.dto";
+import { WordTranslationDto } from "./words-translation.dto";
 
 export class LearningDto implements Learning {
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({
@@ -50,6 +50,6 @@ export class LearningDataDto extends LearningDto {
 	@ApiProperty({ type: TrainingDto })
 	trainingData!: Training;
 
-	@ApiProperty({ type: WordsTranslationDto })
-	translationData!: WordsTranslation;
+	@ApiProperty({ type: WordTranslationDto })
+	translationData!: WordTranslation;
 }

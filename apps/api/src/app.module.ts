@@ -9,7 +9,7 @@ import { TrainingModule } from "./training/training.module";
 import { UserModule } from "./user/user.module";
 import { VocabCatalogModule } from "./vocabcatalog/vocabcatalog.module";
 import { WordModule } from "./word/word.module";
-import { WordsTranslationModule } from "./wordstranslation/wordstranslation.module";
+import { WordTranslationModule } from "./wordstranslation/wordstranslation.module";
 
 @Module({
 	imports: [
@@ -21,7 +21,7 @@ import { WordsTranslationModule } from "./wordstranslation/wordstranslation.modu
 		UserModule,
 		VocabCatalogModule,
 		WordModule,
-		WordsTranslationModule,
+		WordTranslationModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

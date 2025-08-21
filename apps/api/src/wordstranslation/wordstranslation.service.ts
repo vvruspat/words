@@ -1,42 +1,42 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
+import type { Repository } from "typeorm";
 import { WORDS_TRANSLATION_REPOSITORY } from "../constants/database.constants";
-import { WordsTranslationEntity } from "./wordstranslation.entity";
+import type { WordTranslationEntity } from "./wordstranslation.entity";
 
 @Injectable()
-export class WordsTranslationService {
+export class WordTranslationService {
 	constructor(
 		@Inject(WORDS_TRANSLATION_REPOSITORY)
-		private wordsTranslationRepository: Repository<WordsTranslationEntity>,
+		private wordsTranslationRepository: Repository<WordTranslationEntity>,
 	) {}
 
-	async findAll(): Promise<WordsTranslationEntity[]> {
+	async findAll(): Promise<WordTranslationEntity[]> {
 		return this.wordsTranslationRepository.find();
 	}
 
 	async findOne(
-		id: WordsTranslationEntity["id"],
-	): Promise<WordsTranslationEntity | null> {
+		id: WordTranslationEntity["id"],
+	): Promise<WordTranslationEntity | null> {
 		return this.wordsTranslationRepository.findOneBy({ id });
 	}
 
 	async create(
-		wordsTranslation: Omit<WordsTranslationEntity, "id">,
-	): Promise<WordsTranslationEntity> {
-		const newWordsTranslation =
+		wordsTranslation: Omit<WordTranslationEntity, "id">,
+	): Promise<WordTranslationEntity> {
+		const newWordTranslation =
 			this.wordsTranslationRepository.create(wordsTranslation);
-		return this.wordsTranslationRepository.save(newWordsTranslation);
+		return this.wordsTranslationRepository.save(newWordTranslation);
 	}
 
 	async update(
-		id: WordsTranslationEntity["id"],
-		wordsTranslation: Partial<WordsTranslationEntity>,
-	): Promise<WordsTranslationEntity | null> {
+		id: WordTranslationEntity["id"],
+		wordsTranslation: Partial<WordTranslationEntity>,
+	): Promise<WordTranslationEntity | null> {
 		await this.wordsTranslationRepository.update({ id }, wordsTranslation);
 		return this.findOne(id);
 	}
 
-	async remove(id: WordsTranslationEntity["id"]): Promise<void> {
+	async remove(id: WordTranslationEntity["id"]): Promise<void> {
 		await this.wordsTranslationRepository.delete({ id });
 	}
 }

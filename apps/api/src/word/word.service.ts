@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { GetWordRequest } from "@repo/types";
 import type { Repository } from "typeorm";
+import { GetWordRequestDto } from "~/dto";
 import {
 	WORD_DATA_REPOSITORY,
 	WORD_REPOSITORY,
@@ -16,7 +16,7 @@ export class WordService {
 		private wordDataRepository: Repository<WordDataEntity>,
 	) {}
 
-	async findAll(query: GetWordRequest): Promise<WordDataEntity[]> {
+	async findAll(query: GetWordRequestDto): Promise<WordDataEntity[]> {
 		const { limit, offset, ...restQuery } = query;
 
 		return this.wordDataRepository.find({

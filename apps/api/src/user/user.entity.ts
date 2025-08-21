@@ -1,9 +1,9 @@
-import { User } from "@repo/types";
+import type { User } from "@repo/types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class UserEntity implements User {
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

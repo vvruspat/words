@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "topic" })
 export class TopicEntity implements Topic {
-	@PrimaryGeneratedColumn({ type: "number" })
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamptz" })
@@ -15,7 +15,7 @@ export class TopicEntity implements Topic {
 	@Column()
 	description: string;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	catalog: number;
 
 	@Column({ nullable: true })

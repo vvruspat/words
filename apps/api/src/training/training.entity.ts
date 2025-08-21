@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "training" })
 export class TrainingEntity implements Training {
-	@PrimaryGeneratedColumn({ type: "number" })
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamptz" })

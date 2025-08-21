@@ -11,14 +11,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	DeleteLearningRequestDto,
 	DeleteLearningResponseDto,
@@ -44,7 +37,6 @@ export class LearningController {
 
 	@Get()
 	@ApiOperation({ summary: "Get all learning records" })
-	@ApiQuery({ type: GetLearningRequestDto })
 	@ApiResponse({ status: 200, type: GetLearningResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
@@ -53,11 +45,10 @@ export class LearningController {
 	): Promise<GetLearningResponseDto> {
 		const entities = await this.learningService.findAll(query);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -72,8 +63,7 @@ export class LearningController {
 	): Promise<GetLearningResponseDto> {
 		const entity = await this.learningService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -87,11 +77,7 @@ export class LearningController {
 	async create(
 		@Body() dto: PostLearningRequestDto,
 	): Promise<PostLearningResponseDto> {
-		const entity = await this.learningService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.learningService.create(dto);
 	}
 
 	@Put()
@@ -104,11 +90,7 @@ export class LearningController {
 	async update(
 		@Body() dto: PutLearningRequestDto,
 	): Promise<PutLearningResponseDto> {
-		const entity = await this.learningService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.learningService.update(dto);
 	}
 
 	@Delete(":id")
@@ -118,8 +100,6 @@ export class LearningController {
 		@Param("id", ParseIntPipe) id: DeleteLearningRequestDto["id"],
 	): Promise<DeleteLearningResponseDto> {
 		await this.learningService.remove(id);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-		};
+		return { id };
 	}
 }

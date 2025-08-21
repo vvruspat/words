@@ -1,9 +1,3 @@
-import type { PaginatedResponse } from "../../common/api-response";
-import type { Training } from "../../database";
+import { paths } from "../../api";
 
-export interface GetTrainingRequest extends Partial<Training> {
-	limit?: number;
-	offset?: number;
-}
-
-export interface GetTrainingResponse extends PaginatedResponse<Training> {}
+export type GetTrainingResponse = paths["/training"]["get"]["responses"]["200"]["content"]["application/json"];

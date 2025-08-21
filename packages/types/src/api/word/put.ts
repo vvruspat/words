@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { Word } from "../../database";
+import { paths } from "../../api";
 
-export interface PutWordRequest extends Word {}
-
-export interface PutWordResponse extends ApiResponse<Word> {}
+export type PutWordResponse = paths["/word"]["put"]["responses"]["200"]["content"]["application/json"];
+export type PutWordRequest = paths["/word"]["put"]["requestBody"]["content"]["application/json"];

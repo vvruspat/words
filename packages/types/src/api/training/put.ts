@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { Training } from "../../database";
+import { paths } from "../../api";
 
-export interface PutTrainingRequest extends Training {}
-
-export interface PutTrainingResponse extends ApiResponse<Training> {}
+export type PutTrainingResponse = paths["/training"]["put"]["responses"]["200"]["content"]["application/json"];
+export type PutTrainingRequest = paths["/training"]["put"]["requestBody"]["content"]["application/json"];

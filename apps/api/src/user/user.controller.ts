@@ -11,14 +11,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	DeleteUserRequestDto,
 	DeleteUserResponseDto,
@@ -35,18 +28,16 @@ export class UserController {
 
 	@Get()
 	@ApiOperation({ summary: "Get all users" })
-	@ApiQuery({ type: GetUserRequestDto })
 	@ApiResponse({ status: 200, type: GetUserResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(@Query() query: GetUserRequestDto): Promise<GetUserResponseDto> {
 		const entities = await this.userService.findAll(query);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -61,8 +52,7 @@ export class UserController {
 	): Promise<GetUserResponseDto> {
 		const entity = await this.userService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -74,11 +64,7 @@ export class UserController {
 	@ApiResponse({ status: 201, type: PostUserResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(@Body() dto: PostUserRequestDto): Promise<PostUserResponseDto> {
-		const entity = await this.userService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.userService.create(dto);
 	}
 
 	@Put()
@@ -89,11 +75,7 @@ export class UserController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async update(@Body() dto: PutUserRequestDto): Promise<PutUserResponseDto> {
-		const entity = await this.userService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.userService.update(dto);
 	}
 
 	@Delete(":id")
@@ -104,7 +86,7 @@ export class UserController {
 	): Promise<DeleteUserResponseDto> {
 		await this.userService.remove(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
+			id,
 		};
 	}
 }

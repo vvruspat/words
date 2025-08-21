@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import type { Training } from "@repo/types";
 
 export class TrainingDto implements Training {
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })

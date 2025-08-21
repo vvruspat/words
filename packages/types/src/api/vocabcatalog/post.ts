@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { VocabCatalog } from "../../database";
+import { paths } from "../../api";
 
-export interface PostVocabCatalogRequest extends Omit<VocabCatalog, "id"> {}
-
-export interface PostVocabCatalogResponse extends ApiResponse<VocabCatalog> {}
+export type PostVocabcatalogResponse = paths["/vocabcatalog"]["post"]["responses"]["201"]["content"]["application/json"];
+export type PostVocabcatalogRequest = paths["/vocabcatalog"]["post"]["requestBody"]["content"]["application/json"];

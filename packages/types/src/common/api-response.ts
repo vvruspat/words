@@ -3,15 +3,14 @@ export enum ApiResponseStatus {
 	ERROR = "error",
 }
 
-export interface ApiResponse<T> {
-	status: ApiResponseStatus;
-	message?: string;
-	data?: T;
-	error?: unknown;
+export interface ApiResponseError {
+	message: string;
+	details?: Record<string, string>;
 }
 
-export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+export interface ApiPaginatedResponse<T> {
 	total: number;
 	limit: number;
 	offset: number;
+	items?: T[];
 }

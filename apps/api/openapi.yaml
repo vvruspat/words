@@ -1,0 +1,1915 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - App
+  /learning:
+    get:
+      operationId: LearningController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          description: timestamp with time zone
+          schema:
+            format: date-time
+            type: string
+        - name: user
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: word
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: score
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: last_review
+          required: false
+          in: query
+          description: timestamp without time zone
+          schema:
+            format: date-time
+            type: string
+        - name: training
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: translation
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLearningResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all learning records
+      tags: &ref_0
+        - learning
+    post:
+      operationId: LearningController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostLearningRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostLearningResponseDto'
+      summary: Create learning
+      tags: *ref_0
+    put:
+      operationId: LearningController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutLearningRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutLearningResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: Learning not found
+        '500':
+          description: Server error
+      summary: Update learning
+      tags: *ref_0
+  /learning/{id}:
+    get:
+      operationId: LearningController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLearningResponseDto'
+        '404':
+          description: Learning not found
+        '500':
+          description: Server error
+      summary: Get learning by id
+      tags: *ref_0
+    delete:
+      operationId: LearningController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLearningResponseDto'
+      summary: Delete learning
+      tags: *ref_0
+  /topic:
+    get:
+      operationId: TopicController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: title
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: description
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: catalog
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: image
+          required: false
+          in: query
+          schema:
+            nullable: true
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTopicResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all topics
+      tags: &ref_1
+        - topic
+    post:
+      operationId: TopicController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTopicRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostTopicResponseDto'
+      summary: Create topic
+      tags: *ref_1
+    put:
+      operationId: TopicController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTopicRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTopicResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: Topic not found
+        '500':
+          description: Server error
+      summary: Update topic
+      tags: *ref_1
+  /topic/{id}:
+    get:
+      operationId: TopicController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTopicResponseDto'
+        '404':
+          description: Topic not found
+        '500':
+          description: Server error
+      summary: Get topic by id
+      tags: *ref_1
+    delete:
+      operationId: TopicController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTopicResponseDto'
+      summary: Delete topic
+      tags: *ref_1
+  /training:
+    get:
+      operationId: TrainingController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: name
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: title
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: description
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: image
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: score
+          required: false
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTrainingResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all training records
+      tags: &ref_2
+        - training
+    post:
+      operationId: TrainingController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTrainingRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostTrainingResponseDto'
+      summary: Create training
+      tags: *ref_2
+    put:
+      operationId: TrainingController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTrainingRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTrainingResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: Training not found
+        '500':
+          description: Server error
+      summary: Update training
+      tags: *ref_2
+  /training/{id}:
+    get:
+      operationId: TrainingController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTrainingResponseDto'
+        '404':
+          description: Training not found
+        '500':
+          description: Server error
+      summary: Get training by id
+      tags: *ref_2
+    delete:
+      operationId: TrainingController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTrainingResponseDto'
+      summary: Delete training
+      tags: *ref_2
+  /user:
+    get:
+      operationId: UserController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: email
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: name
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all users
+      tags: &ref_3
+        - user
+    post:
+      operationId: UserController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostUserRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostUserResponseDto'
+      summary: Create user
+      tags: *ref_3
+    put:
+      operationId: UserController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutUserRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutUserResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      summary: Update user
+      tags: *ref_3
+  /user/{id}:
+    get:
+      operationId: UserController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserResponseDto'
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+      summary: Get user by id
+      tags: *ref_3
+    delete:
+      operationId: UserController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponseDto'
+      summary: Delete user
+      tags: *ref_3
+  /vocabcatalog:
+    get:
+      operationId: VocabCatalogController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: owner
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: title
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: description
+          required: false
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: image
+          required: false
+          in: query
+          schema:
+            nullable: true
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVocabCatalogResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all vocab catalogs
+      tags: &ref_4
+        - vocabcatalog
+    post:
+      operationId: VocabCatalogController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostVocabCatalogRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostVocabCatalogResponseDto'
+      summary: Create vocab catalog
+      tags: *ref_4
+    put:
+      operationId: VocabCatalogController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutVocabCatalogRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutVocabCatalogResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: VocabCatalog not found
+        '500':
+          description: Server error
+      summary: Update vocab catalog
+      tags: *ref_4
+  /vocabcatalog/{id}:
+    get:
+      operationId: VocabCatalogController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVocabCatalogResponseDto'
+        '404':
+          description: VocabCatalog not found
+        '500':
+          description: Server error
+      summary: Get vocab catalog by id
+      tags: *ref_4
+    delete:
+      operationId: VocabCatalogController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVocabCatalogResponseDto'
+      summary: Delete vocab catalog
+      tags: *ref_4
+  /word:
+    get:
+      operationId: WordController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: topic
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: catalog
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: string
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: topicData
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/TopicDto'
+        - name: catalogData
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/VocabCatalogDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWordResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all words
+      tags: &ref_5
+        - word
+    post:
+      operationId: WordController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostWordRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostWordResponseDto'
+      summary: Create word
+      tags: *ref_5
+    put:
+      operationId: WordController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutWordRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutWordResponseDto'
+        '400':
+          description: Invalid data
+        '404':
+          description: Word not found
+        '500':
+          description: Server error
+      summary: Update word
+      tags: *ref_5
+  /word/{id}:
+    get:
+      operationId: WordController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWordResponseDto'
+        '404':
+          description: Word not found
+        '500':
+          description: Server error
+      summary: Get word by id
+      tags: *ref_5
+    delete:
+      operationId: WordController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWordResponseDto'
+      summary: Delete word
+      tags: *ref_5
+  /words-translation/{id}:
+    get:
+      operationId: WordTranslationController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWordTranslationResponseDto'
+        '404':
+          description: Words translation not found
+        '500':
+          description: Server error
+      summary: Get words translation by id
+      tags: &ref_6
+        - words-translation
+  /words-translation:
+    post:
+      operationId: WordTranslationController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostWordTranslationRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostWordTranslationResponseDto'
+      summary: Create words translation
+      tags: *ref_6
+info:
+  title: My API
+  description: API description
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    LearningDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+          description: timestamp with time zone
+        user:
+          type: string
+          format: int64
+        word:
+          type: string
+          format: int64
+        score:
+          type: number
+        last_review:
+          type: string
+          format: date-time
+          description: timestamp without time zone
+        training:
+          type: string
+          format: int64
+        translation:
+          type: string
+          format: int64
+      required:
+        - id
+        - created_at
+        - user
+        - word
+        - score
+        - last_review
+        - training
+        - translation
+    GetLearningResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of learning items
+          type: array
+          items:
+            $ref: '#/components/schemas/LearningDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostLearningRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: timestamp with time zone
+        user:
+          type: string
+          format: int64
+        word:
+          type: string
+          format: int64
+        score:
+          type: number
+        last_review:
+          type: string
+          format: date-time
+          description: timestamp without time zone
+        training:
+          type: string
+          format: int64
+        translation:
+          type: string
+          format: int64
+      required:
+        - created_at
+        - user
+        - word
+        - score
+        - last_review
+        - training
+        - translation
+    PostLearningResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+          description: timestamp with time zone
+        user:
+          type: string
+          format: int64
+        word:
+          type: string
+          format: int64
+        score:
+          type: number
+        last_review:
+          type: string
+          format: date-time
+          description: timestamp without time zone
+        training:
+          type: string
+          format: int64
+        translation:
+          type: string
+          format: int64
+      required:
+        - id
+        - created_at
+        - user
+        - word
+        - score
+        - last_review
+        - training
+        - translation
+    PutLearningRequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+          description: timestamp with time zone
+        user:
+          type: string
+          format: int64
+        word:
+          type: string
+          format: int64
+        score:
+          type: number
+        last_review:
+          type: string
+          format: date-time
+          description: timestamp without time zone
+        training:
+          type: string
+          format: int64
+        translation:
+          type: string
+          format: int64
+    PutLearningResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+          description: timestamp with time zone
+        user:
+          type: string
+          format: int64
+        word:
+          type: string
+          format: int64
+        score:
+          type: number
+        last_review:
+          type: string
+          format: date-time
+          description: timestamp without time zone
+        training:
+          type: string
+          format: int64
+        translation:
+          type: string
+          format: int64
+      required:
+        - id
+        - created_at
+        - user
+        - word
+        - score
+        - last_review
+        - training
+        - translation
+    DeleteLearningResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    TopicDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        catalog:
+          type: string
+          format: int64
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - title
+        - description
+        - catalog
+    GetTopicResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of topics
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostTopicRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        catalog:
+          type: string
+          format: int64
+        image:
+          type: string
+          nullable: true
+      required:
+        - created_at
+        - title
+        - description
+        - catalog
+    PostTopicResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        catalog:
+          type: string
+          format: int64
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - title
+        - description
+        - catalog
+    PutTopicRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        catalog:
+          type: string
+          format: int64
+        image:
+          type: string
+          nullable: true
+    PutTopicResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        description:
+          type: string
+        catalog:
+          type: string
+          format: int64
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - title
+        - description
+        - catalog
+    DeleteTopicResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    TrainingDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        score:
+          type: number
+      required:
+        - id
+        - created_at
+        - name
+        - title
+        - description
+        - image
+        - score
+    GetTrainingResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of training items
+          type: array
+          items:
+            $ref: '#/components/schemas/TrainingDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostTrainingRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        score:
+          type: number
+      required:
+        - created_at
+        - name
+        - title
+        - description
+        - image
+        - score
+    PostTrainingResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        score:
+          type: number
+      required:
+        - id
+        - created_at
+        - name
+        - title
+        - description
+        - image
+        - score
+    PutTrainingRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        score:
+          type: number
+    PutTrainingResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        score:
+          type: number
+      required:
+        - id
+        - created_at
+        - name
+        - title
+        - description
+        - image
+        - score
+    DeleteTrainingResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - created_at
+        - email
+        - name
+    GetUserResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of users
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostUserRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        name:
+          type: string
+      required:
+        - created_at
+        - email
+        - name
+    PostUserResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - created_at
+        - email
+        - name
+    PutUserRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        name:
+          type: string
+    PutUserResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - created_at
+        - email
+        - name
+    DeleteUserResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    VocabCatalogDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        language:
+          type: string
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - owner
+        - title
+        - language
+    GetVocabCatalogResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of vocabulary catalogs
+          type: array
+          items:
+            $ref: '#/components/schemas/VocabCatalogDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostVocabCatalogRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        language:
+          type: string
+        image:
+          type: string
+          nullable: true
+      required:
+        - created_at
+        - owner
+        - title
+        - language
+    PostVocabCatalogResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        language:
+          type: string
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - owner
+        - title
+        - language
+    PutVocabCatalogRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        language:
+          type: string
+        image:
+          type: string
+          nullable: true
+    PutVocabCatalogResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        language:
+          type: string
+        image:
+          type: string
+          nullable: true
+      required:
+        - id
+        - created_at
+        - owner
+        - title
+        - language
+    DeleteVocabCatalogResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    WordDataDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: string
+          format: int64
+        catalog:
+          type: string
+          format: int64
+        language:
+          type: string
+        topicData:
+          $ref: '#/components/schemas/TopicDto'
+        catalogData:
+          $ref: '#/components/schemas/VocabCatalogDto'
+      required:
+        - id
+        - created_at
+        - topic
+        - catalog
+        - language
+        - topicData
+        - catalogData
+    GetWordResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of words
+          type: array
+          items:
+            $ref: '#/components/schemas/WordDataDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostWordRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: string
+          format: int64
+        catalog:
+          type: string
+          format: int64
+        language:
+          type: string
+      required:
+        - created_at
+        - topic
+        - catalog
+        - language
+    PostWordResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: string
+          format: int64
+        catalog:
+          type: string
+          format: int64
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - topic
+        - catalog
+        - language
+    PutWordRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: string
+          format: int64
+        catalog:
+          type: string
+          format: int64
+        language:
+          type: string
+    PutWordResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: string
+          format: int64
+        catalog:
+          type: string
+          format: int64
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - topic
+        - catalog
+        - language
+    DeleteWordResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+      required:
+        - id
+    WordTranslationDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        word:
+          type: string
+          format: int64
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - word
+        - translation
+        - language
+    GetWordTranslationResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of word translations
+          type: array
+          items:
+            $ref: '#/components/schemas/WordTranslationDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostWordTranslationRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        word:
+          type: string
+          format: int64
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - created_at
+        - word
+        - translation
+        - language
+    PostWordTranslationResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        word:
+          type: string
+          format: int64
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - word
+        - translation
+        - language

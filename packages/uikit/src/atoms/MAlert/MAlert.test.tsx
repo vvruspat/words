@@ -28,6 +28,7 @@ describe("MAlert", () => {
 	});
 
 	it("passes additional props to MFlex (e.g., id)", () => {
+		// biome-ignore lint/correctness/useUniqueElementIds: test case for id prop
 		render(<MAlert id="test-alert">With ID</MAlert>);
 		const alert = screen.getByText("With ID");
 		expect(alert).toHaveAttribute("id", "test-alert");

@@ -1,8 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { User } from "../../database";
+import { paths } from "../../api";
 
-export interface PutUserRequest extends User {
-	password?: string;
-}
-
-export interface PutUserResponse extends ApiResponse<User> {}
+export type PutUserResponse = paths["/user"]["put"]["responses"]["200"]["content"]["application/json"];
+export type PutUserRequest = paths["/user"]["put"]["requestBody"]["content"]["application/json"];

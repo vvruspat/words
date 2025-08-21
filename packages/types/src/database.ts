@@ -12,7 +12,7 @@ export interface Learning {
 export interface LearningData extends Learning {
 	wordData: WordData;
 	trainingData: Training;
-	translationData: WordsTranslation;
+	translationData: WordTranslation;
 }
 
 export interface Topic {
@@ -65,7 +65,7 @@ export interface WordData extends Word {
 	catalogData: VocabCatalog;
 }
 
-export interface WordsTranslation {
+export interface WordTranslation {
 	id: number;
 	created_at: string;
 	word: number;

@@ -3,7 +3,7 @@ import {
 	LearningData,
 	Training,
 	WordData,
-	WordsTranslation,
+	WordTranslation,
 } from "@repo/types";
 import {
 	Column,
@@ -14,20 +14,20 @@ import {
 } from "typeorm";
 import { TrainingEntity } from "../training/training.entity";
 import { WordDataEntity } from "../word/word.entity";
-import { WordsTranslationEntity } from "../wordstranslation/wordstranslation.entity";
+import { WordTranslationEntity } from "../wordstranslation/wordstranslation.entity";
 
 @Entity({ name: "learning" })
 export class LearningEntity implements Learning {
-	@PrimaryGeneratedColumn({ type: "number" })
+	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
 	@Column({ type: "timestamptz" })
 	created_at: string;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	user: number;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	word: number;
 
 	@Column({ type: "int" })
@@ -36,10 +36,10 @@ export class LearningEntity implements Learning {
 	@Column({ type: "timestamp" })
 	last_review: string;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	training: number;
 
-	@Column({ type: "number" })
+	@Column({ type: "bigint" })
 	translation: number;
 }
 
@@ -53,7 +53,7 @@ export class LearningDataEntity extends LearningEntity implements LearningData {
 	@JoinColumn()
 	trainingData: Training;
 
-	@OneToOne(() => WordsTranslationEntity)
+	@OneToOne(() => WordTranslationEntity)
 	@JoinColumn()
-	translationData: WordsTranslation;
+	translationData: WordTranslation;
 }

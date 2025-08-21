@@ -1,11 +1,3 @@
-import type { PaginatedResponse } from "../../common/api-response";
-import type { VocabCatalog } from "../../database";
+import { paths } from "../../api";
 
-export interface GetVocabCatalogRequest
-	extends Partial<Omit<VocabCatalog, "description">> {
-	limit?: number;
-	offset?: number;
-}
-
-export interface GetVocabCatalogResponse
-	extends PaginatedResponse<VocabCatalog> {}
+export type GetVocabcatalogResponse = paths["/vocabcatalog"]["get"]["responses"]["200"]["content"]["application/json"];

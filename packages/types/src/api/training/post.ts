@@ -1,6 +1,4 @@
-import type { ApiResponse } from "../../common/api-response";
-import type { Training } from "../../database";
+import { paths } from "../../api";
 
-export interface PostTrainingRequest extends Omit<Training, "id"> {}
-
-export interface PostTrainingResponse extends ApiResponse<Training> {}
+export type PostTrainingResponse = paths["/training"]["post"]["responses"]["201"]["content"]["application/json"];
+export type PostTrainingRequest = paths["/training"]["post"]["requestBody"]["content"]["application/json"];

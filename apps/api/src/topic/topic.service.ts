@@ -1,9 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import {
-	GetTopicRequest,
-	PostTopicRequest,
-	PutTopicRequest,
-} from "@repo/types";
+import { ApiPaginationRequest, Topic } from "@repo/types";
 import { Repository } from "typeorm";
 import { TOPIC_REPOSITORY } from "../constants/database.constants";
 import { TopicEntity } from "./topic.entity";
@@ -15,7 +11,9 @@ export class TopicService {
 		private topicRepository: Repository<TopicEntity>,
 	) {}
 
-	async findAll(query: GetTopicRequest): Promise<TopicEntity[]> {
+	async findAll(
+		query: Partial<Topic> & ApiPaginationRequest,
+	): Promise<TopicEntity[]> {
 		const { limit, offset, ...rest } = query;
 
 		return this.topicRepository.find({
@@ -31,14 +29,17 @@ export class TopicService {
 		return this.topicRepository.findOneBy({ id });
 	}
 
-	async create(topic: PostTopicRequest): Promise<TopicEntity> {
+	async create(topic: Omit<Topic, "id">): Promise<TopicEntity> {
 		const newTopic = this.topicRepository.create(topic);
 		return this.topicRepository.save(newTopic);
 	}
 
-	async update(topic: PutTopicRequest): Promise<TopicEntity | null> {
-		await this.topicRepository.update({ id: topic.id }, topic);
-		return this.findOne(topic.id);
+	async update({
+		id,
+		...topic
+	}: Omit<Partial<Topic>, "created_at">): Promise<TopicEntity | null> {
+		await this.topicRepository.update({ id }, topic);
+		return this.findOne(id);
 	}
 
 	async remove(id: TopicEntity["id"]): Promise<void> {

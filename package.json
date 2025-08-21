@@ -7,7 +7,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "turbo run dev",
+    "storybook": "turbo run storybook",
+    "generate": "turbo run generate --filter=api && turbo run generate --filter=@repo/types",
     "build": "turbo run build",
+    "split": "turbo run split",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
     "lint": "turbo run lint",
@@ -16,7 +19,7 @@
     "kill": "lsof -ti :3000,3001 | xargs kill -9"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.6",
+    "@biomejs/biome": "2.2.0",
     "@repo/typescript-config": "*",
     "husky": "^9.1.7",
     "ts-jest": "^29.4.0",

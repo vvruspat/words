@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { GetVocabCatalogRequest } from "@repo/types";
 import { Repository } from "typeorm";
+import { GetVocabCatalogRequestDto } from "~/dto";
 import { VOCABCATALOG_REPOSITORY } from "../constants/database.constants";
 import { VocabCatalogEntity } from "./vocabcatalog.entity";
 
@@ -15,13 +15,20 @@ export class VocabCatalogService {
 		limit,
 		offset,
 		...query
-	}: GetVocabCatalogRequest): Promise<VocabCatalogEntity[]> {
+	}: GetVocabCatalogRequestDto): Promise<VocabCatalogEntity[]> {
+		console.log("Finding all vocab catalogs with query:", {
+			where: {
+				...query,
+			},
+			skip: Number(offset ?? 0),
+			take: Number(limit ?? 10),
+		});
 		return this.vocabCatalogRepository.find({
 			where: {
 				...query,
 			},
-			skip: offset,
-			take: limit,
+			skip: Number(offset ?? 0),
+			take: Number(limit ?? 10),
 		});
 	}
 

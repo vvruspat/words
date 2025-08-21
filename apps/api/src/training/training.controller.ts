@@ -11,14 +11,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import {
-	ApiOperation,
-	ApiParam,
-	ApiQuery,
-	ApiResponse,
-	ApiTags,
-} from "@nestjs/swagger";
-import { ApiResponseStatus } from "@repo/types";
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	DeleteTrainingRequestDto,
 	DeleteTrainingResponseDto,
@@ -44,7 +37,6 @@ export class TrainingController {
 
 	@Get()
 	@ApiOperation({ summary: "Get all training records" })
-	@ApiQuery({ type: GetTrainingRequestDto })
 	@ApiResponse({ status: 200, type: GetTrainingResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
@@ -53,11 +45,10 @@ export class TrainingController {
 	): Promise<GetTrainingResponseDto> {
 		const entities = await this.trainingService.findAll(query);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entities,
+			items: entities,
 			total: entities.length,
-			limit: entities.length,
-			offset: 0,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
 		};
 	}
 
@@ -72,8 +63,7 @@ export class TrainingController {
 	): Promise<GetTrainingResponseDto> {
 		const entity = await this.trainingService.findOne(id);
 		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity ? [entity] : [],
+			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,
@@ -87,11 +77,7 @@ export class TrainingController {
 	async create(
 		@Body() dto: PostTrainingRequestDto,
 	): Promise<PostTrainingResponseDto> {
-		const entity = await this.trainingService.create(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.trainingService.create(dto);
 	}
 
 	@Put()
@@ -104,11 +90,7 @@ export class TrainingController {
 	async update(
 		@Body() dto: PutTrainingRequestDto,
 	): Promise<PutTrainingResponseDto> {
-		const entity = await this.trainingService.update(dto);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-			data: entity,
-		};
+		return await this.trainingService.update(dto);
 	}
 
 	@Delete(":id")
@@ -118,8 +100,6 @@ export class TrainingController {
 		@Param("id", ParseIntPipe) id: DeleteTrainingRequestDto["id"],
 	): Promise<DeleteTrainingResponseDto> {
 		await this.trainingService.remove(id);
-		return {
-			status: ApiResponseStatus.SUCCESS,
-		};
+		return { id };
 	}
 }
