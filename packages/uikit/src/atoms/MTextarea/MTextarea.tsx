@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import {
 	type ComponentProps,
@@ -16,7 +18,7 @@ import MLabel from "../MLabel/MLabel";
 
 import styles from "./MTextarea.module.css";
 import "./MTextarea.vars.css";
-import type { BasicInputProps } from "types/BasicInputProps";
+import type { BasicInputProps } from "../../types/BasicInputProps";
 
 type TextareaProps = ComponentProps<"textarea"> &
 	BasicInputProps & {
@@ -46,6 +48,7 @@ export const MTextarea = ({
 	textareaClassName,
 	descriptionClassName,
 	maxLength = 200,
+	value,
 	id,
 	rows = 3,
 	...restProps
@@ -100,7 +103,9 @@ export const MTextarea = ({
 					className={clsx(styles.textarea, textareaClassName)}
 					maxLength={maxLength}
 					{...restProps}
-				/>
+				>
+					{value}
+				</textarea>
 				{counter && (
 					<span ref={charCounter} className={clsx(styles.counter)}>
 						{count}/{maxLength}

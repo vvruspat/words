@@ -3,6 +3,7 @@
 	grid-template-columns: auto 1fr;
 	align-items: center;
 	column-gap: var(--whiteSpace-general-2x);
+	row-gap: var(--whiteSpace-general-1x);
 	width: 100%;
 }
 
@@ -20,6 +21,10 @@
 
 .size-l {
 	grid-template-columns: 2fr 1fr;
+}
+
+.size-full {
+	grid-template-columns: 3fr;
 }
 
 .row {

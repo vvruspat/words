@@ -33,6 +33,7 @@
 	display: inline-block;
 	position: absolute;
 	left: 3px;
+	color: var(--input-checkbox-checked-icon-active);
 }
 
 .checkboxWrapper input[type="checkbox"] + label:before {
@@ -62,8 +63,8 @@
 }
 
 .checkboxWrapper.regular .Checkbox:checked + label:before {
-	background-color: var(--input-checkbox-checked-background-enabled, #0075ff);
-	border: 1px solid var(--input-checkbox-checked-background-active, #0047b3);
+	background-color: var(--input-checkbox-checked-background-enabled);
+	border: 1px solid var(--input-checkbox-checked-background-active);
 }
 
 .checkboxWrapper.regular .Checkbox:checked:hover + label:before {
@@ -87,6 +88,10 @@
 	background-color: var(--checkbox-disabled-background-color, #f0f0f0);
 }
 
+.checkboxWrapper.valid .customCheckboxIcon {
+	color: var(--input-checkbox-checked-icon-valid);
+}
+
 /* invalid */
 
 .checkboxWrapper.invalid .Checkbox + label:before {
@@ -96,6 +101,10 @@
 
 .checkboxWrapper.invalid .Checkbox:checked + label:before {
 	background-color: transparent;
+}
+
+.checkboxWrapper.invalid .customCheckboxIcon {
+	color: var(--input-checkbox-checked-icon-invalid);
 }
 
 /* disabled */

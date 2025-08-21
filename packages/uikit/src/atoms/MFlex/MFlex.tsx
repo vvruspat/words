@@ -1,8 +1,10 @@
 import clsx from "clsx";
-import { type ComponentProps } from "react";
 import styles from "./MFlex.module.css";
+import "./MFlex.vars.css";
+import type React from "react";
 
-export type MFlexProps = ComponentProps<"div"> & {
+export type MFlexProps<T extends React.ElementType = "div"> = {
+	as?: T;
 	gap?: "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "none";
 	direction?: "row" | "column" | "row-reverse" | "column-reverse";
 	align?: "start" | "center" | "end" | "stretch";
@@ -14,33 +16,36 @@ export type MFlexProps = ComponentProps<"div"> & {
 		| "space-around"
 		| "stretch";
 	wrap?: "wrap" | "nowrap";
-};
+} & Omit<React.ComponentPropsWithoutRef<T>, "as">;
 
-export const MFlex = ({
+export const MFlex = <T extends React.ElementType = "div">({
+	as,
 	children,
 	className,
-	style = {},
+	style,
 	gap = "s",
 	direction = "row",
 	align = "center",
 	justify = "start",
 	wrap = "wrap",
 	...restProps
-}: MFlexProps) => {
+}: MFlexProps<T>) => {
+	const Element = as ?? "div";
+
 	return (
-		<div
+		<Element
 			className={clsx(styles.flex, styles[`flex-gap-${gap}`], className)}
 			style={{
 				flexDirection: direction,
 				alignItems: align,
 				justifyContent: justify,
 				flexWrap: wrap,
-				...style,
+				...(style ?? {}),
 			}}
 			{...restProps}
 		>
 			{children}
-		</div>
+		</Element>
 	);
 };
 

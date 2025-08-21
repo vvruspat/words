@@ -39,34 +39,49 @@
 /* Enabled */
 
 .primary {
-	color: var(--button-primary-enabled-font-color, #fff);
-	border-radius: var(--button-primary-medium-borderRadius-small, 16px);
-	background: var(--button-primary-enabled-background-color, #085cff);
-	gap: var(--button-secondary-medium-whiteSpace-gap, 8px);
+	color: var(--button-primary-enabled-font-color);
+	border-radius: var(--button-primary-medium-borderRadius);
+	background: var(--button-primary-enabled-background-color);
+	gap: var(--button-secondary-medium-whiteSpace-gap);
 }
 
 .secondary {
-	color: var(--button-secondary-enabled-font-color, #1e222a);
-	border-radius: var(--button-secondary-medium-borderRadius-small, 16px);
-	background: var(--button-secondary-enabled-background-color, #dbdfeb);
-	gap: var(--button-secondary-medium-whiteSpace-gap, 8px);
+	color: var(--button-secondary-enabled-font-color);
+	border-radius: var(--button-secondary-medium-borderRadius);
+	background: var(--button-secondary-enabled-background-color);
+	gap: var(--button-secondary-medium-whiteSpace-gap);
 }
 
 .tertiary {
-	border-radius: var(--button-tertiary-borderRadius-small, 8px);
-	color: var(--button-tertiary-enabled-font-color, #1e222a);
-	background: var(--button-tertiary-enabled-background-color, #f4f5f7);
-	gap: var(--button-tertiary-medium-whiteSpace-gap, 4px);
-	border: 1px solid var(--button-tertiary-border-default-color, #f4f5f7);
+	border-radius: var(--button-tertiary-medium-borderRadius);
+	color: var(--button-tertiary-enabled-font-color);
+	background: var(--button-tertiary-enabled-background-color);
+	gap: var(--button-tertiary-medium-whiteSpace-gap);
+	border: 1px solid var(--button-tertiary-border-default-color);
 	transition: border 0.2s ease-in-out;
 }
 
 .round {
 	border-radius: 50%;
-	color: var(--button-round-enabled-font-color, #1e222a);
-	background: var(--button-round-enabled-background-color, #f4f5f7);
-	border: 1px solid var(--button-round-border-default-color, #f4f5f7);
+	color: var(--button-round-enabled-font-color);
+	background: var(--button-round-enabled-background-color);
+	border: 1px solid var(--button-round-border-default-color);
 	transition: background-color 0.2s ease-in-out;
+}
+
+.outlined {
+	color: var(--button-outlined-enabled-font-color);
+	background: var(--button-outlined-enabled-background-color);
+	gap: var(--button-outlined-medium-whiteSpace-gap);
+	border-radius: var(--button-outlined-medium-borderRadius);
+	border: 1px solid var(--button-outlined-enabled-border-color);
+}
+
+.transparent {
+	color: var(--button-transparent-enabled-font-color);
+	border-radius: var(--button-transparent-medium-borderRadius);
+	background: transparent;
+	gap: var(--button-transparent-medium-whiteSpace-gap);
 }
 
 .primary:focus,
@@ -79,21 +94,6 @@
 
 .round span {
 	overflow: hidden;
-}
-
-.outlined {
-	color: var(--button-outlined-enabled-font-color, #1e222a);
-	background: var(--button-outlined-enabled-background-color, #fff);
-	gap: var(--button-outlined-medium-whiteSpace-gap, 8px);
-	border-radius: var(--button-outlined-medium-borderRadius-default, 16px);
-	border: 1px solid var(--button-outlined-enabled-border-color, #747e97);
-}
-
-.transparent {
-	color: var(--button-transparent-enabled-font-color, #ffffff);
-	border-radius: var(--button-transparent-medium-borderRadius-default, 16px);
-	background: transparent;
-	gap: var(--button-transparent-medium-whiteSpace-gap, 8px);
 }
 
 /* Disabled */
@@ -255,7 +255,8 @@
 
 .primary.s,
 .secondary.s,
-.outlined.s {
+.outlined.s,
+.tertiary.s {
 	padding: var(--button-padding-vertical-s, 6px)
 		var(--button-padding-horizontal-s, 12px);
 	font-size: var(--button-font-size-small, 14px);
@@ -263,11 +264,13 @@
 
 .transparent.s {
 	font-size: var(--button-font-size-small, 14px);
+	padding: var(--button-padding-vertical-s, 6px) 0;
 }
 
 .primary.m,
 .secondary.m,
-.outlined.m {
+.outlined.m,
+.tertiary.m {
 	padding: var(--button-padding-vertical-m, 8px)
 		var(--button-padding-horizontal-m, 16px);
 	font-size: var(--button-font-size-medium, 14px);
@@ -275,11 +278,13 @@
 
 .transparent.m {
 	font-size: var(--button-font-size-medium, 14px);
+	padding: var(--button-padding-vertical-m, 8px) 0;
 }
 
 .primary.l,
 .secondary.l,
-.outlined.l {
+.outlined.l,
+.tertiary.l {
 	padding: var(--button-padding-vertical-l, 10px)
 		var(--button-padding-horizontal-l, 16px);
 	font-size: var(--button-font-size-default, 16px);
@@ -287,27 +292,21 @@
 
 .transparent.l {
 	font-size: var(--button-font-size-default, 16px);
+	padding: var(--button-padding-vertical-l, 10px) 0;
 }
 
-.tertiary.s,
 .round.s {
 	padding: var(--button-padding-tertiary-s, 4px);
 	font-size: var(--button-font-size-medium, 14px);
 }
 
-.tertiary.m,
 .round.m {
 	padding: var(--button-padding-tertiary-m, 6px);
 	font-size: var(--button-font-size-default, 16px);
 }
 
-.tertiary.l,
 .round.l {
 	padding: var(--button-padding-tertiary-l, 8px);
-}
-
-.tertiary.l {
-	font-size: var(--button-font-size-xl, 20px);
 }
 
 .round.s {
@@ -324,4 +323,8 @@
 	width: var(--button-round-size-large, 48px);
 	height: var(--button-round-size-large, 48px);
 	font-size: var(--button-font-size-xl, 20px);
+}
+
+.button.noPadding {
+	padding: 0;
 }

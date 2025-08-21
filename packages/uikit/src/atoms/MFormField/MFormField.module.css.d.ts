@@ -6,6 +6,7 @@ declare const styles: {
 	readonly label: string;
 	readonly row: string;
 	readonly "size-auto": string;
+	readonly "size-full": string;
 	readonly "size-l": string;
 	readonly "size-m": string;
 	readonly "size-s": string;

@@ -1,0 +1,13 @@
+:root[data-theme="light"] {
+	--avatar-fallback-background-color: var(--palette-secondary-400);
+	--avatar-fallback-font-color: var(--palette-base-0);
+}
+
+:root[data-theme="dark"] {
+	--avatar-fallback-background-color: var(--palette-secondary-400);
+	--avatar-fallback-font-color: var(--palette-base-0);
+}
+
+:root[data-platform="desktop"] {
+	--avatar-fallback-font-size: var(--font-size-xl);
+}

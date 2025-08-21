@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import { type FC, useState } from "react";
 import MFlex from "../MFlex/MFlex";
 import MTab, { type MTabProps } from "../MTab/MTab";
 import styles from "./MTabs.module.css";
@@ -12,7 +11,7 @@ interface MTabsProps {
 	defaultActiveKey: string;
 }
 
-export const MTabs: React.FC<MTabsProps> = ({
+export const MTabs: FC<MTabsProps> = ({
 	items = [],
 	defaultActiveKey,
 	...restProps
@@ -25,7 +24,7 @@ export const MTabs: React.FC<MTabsProps> = ({
 
 	return (
 		<MFlex direction="column" align="start">
-			<ul className={styles.tabHeaders}>
+			<div className={styles.tabHeaders} role="tablist">
 				{items.map((item) => (
 					<MTab
 						key={item.key}
@@ -38,7 +37,7 @@ export const MTabs: React.FC<MTabsProps> = ({
 						{...restProps}
 					/>
 				))}
-			</ul>
+			</div>
 
 			<MFlex className={styles.tabContent}>
 				{items.find((item) => item.key === activeKey)?.content}

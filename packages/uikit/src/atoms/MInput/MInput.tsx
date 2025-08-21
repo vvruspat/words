@@ -1,11 +1,14 @@
+"use client";
 import clsx from "clsx";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import MFlex from "../MFlex/MFlex";
 import "./MInput.vars.css";
 
 import type { BasicInputProps } from "../../types/BasicInputProps";
 import type { TComponentSize } from "../../types/TComponentSize";
+
 import styles from "./MInput.module.css";
+import { useClearable } from "./useClearable";
 
 export type InputProps = BasicInputProps & {
 	after?: ReactNode;
@@ -31,6 +34,10 @@ export const MInput = ({
 	footerClassName,
 	...restProps
 }: InputProps) => {
+	const { ClearButton, ...restClearableProps } = useClearable({
+		...restProps,
+	});
+
 	return (
 		<MFlex
 			direction="column"
@@ -49,9 +56,13 @@ export const MInput = ({
 			>
 				{before && <MFlex align="center">{before}</MFlex>}
 				<MFlex justify="stretch" direction="row" className={styles.inputField}>
-					<input className={clsx(styles.input, className)} {...restProps} />
+					<input
+						className={clsx(styles.input, className)}
+						{...restClearableProps}
+					/>
 				</MFlex>
 				{after && <MFlex align="center">{after}</MFlex>}
+				{ClearButton}
 			</MFlex>
 		</MFlex>
 	);

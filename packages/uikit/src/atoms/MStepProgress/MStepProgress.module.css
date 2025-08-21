@@ -1,0 +1,65 @@
+.step-progress-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.step-progress-item {
+	margin: 0;
+	padding: var(--step-progress-padding-vertical)
+		var(--step-progress-padding-horizontal);
+	border-style: solid;
+	border-width: var(--step-progress-border-width);
+	border-radius: var(--step-progress-border-radius);
+}
+
+.step-progress-mode-pending {
+	border-color: var(--step-progress-border-color);
+	background-color: var(--step-progress-background-color);
+	color: var(--step-progress-color);
+}
+
+.step-progress-label {
+	color: var(--step-progress-color);
+	font-weight: 500;
+}
+
+.step-progress-mode-info {
+	border-color: var(--step-progress-border-color-info);
+	background-color: var(--step-progress-background-color-info);
+	color: var(--step-progress-color-info);
+}
+
+.step-progress-label-mode-info {
+	color: var(--step-progress-label-color-info);
+}
+
+.step-progress-mode-warning {
+	border-color: var(--step-progress-border-color-warning);
+	background-color: var(--step-progress-background-color-warning);
+	color: var(--step-progress-color-warning);
+}
+
+.step-progress-label-mode-warning {
+	color: var(--step-progress-label-color-warning);
+}
+
+.step-progress-mode-error {
+	border-color: var(--step-progress-border-color-error);
+	background-color: var(--step-progress-background-color-error);
+	color: var(--step-progress-color-error);
+}
+
+.step-progress-label-mode-error {
+	color: var(--step-progress-label-color-error);
+}
+
+.step-progress-mode-success {
+	border-color: var(--step-progress-border-color-success);
+	background-color: var(--step-progress-background-color-success);
+	color: var(--step-progress-color-success);
+}
+
+.step-progress-label-mode-success {
+	color: var(--step-progress-label-color-success);
+}

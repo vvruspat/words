@@ -3,9 +3,30 @@
 	--badge-whiteSpace-gap: var(--whiteSpace-general-_5x);
 	--badge-primary-padding: var(--size-general-_75x);
 	--badge-primary-border-radius: var(--borderRadius-general-2x);
+
+	--badge-info-background-color: var(--alert-background-color-info);
+	--badge-info-border-color: var(--alert-border-color-info);
+	--badge-info-font-color: var(--alert-color-info);
+
+	--badge-success-background-color: var(--alert-background-color-success);
+	--badge-success-border-color: var(--alert-border-color-success);
+	--badge-success-font-color: var(--alert-color-success);
+
+	--badge-warning-background-color: var(--alert-background-color-warning);
+	--badge-warning-border-color: var(--alert-border-color-warning);
+	--badge-warning-font-color: var(--alert-color-warning);
+
+	--badge-error-background-color: var(--alert-background-color-error);
+	--badge-error-border-color: var(--alert-border-color-error);
+	--badge-error-font-color: var(--alert-color-error);
 }
 
 :root[data-theme="light"] {
+	--badge-primary-font-color: var(--palette-base-100);
+	--badge-primary-background-color: var(--palette-base-400);
+}
+
+:root[data-theme="dark"] {
 	--badge-primary-font-color: var(--palette-base-100);
 	--badge-primary-background-color: var(--palette-base-400);
 }

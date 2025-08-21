@@ -12,7 +12,7 @@ describe("MInput", () => {
 	});
 
 	test("removes error message when required field is filled", () => {
-		render(<MInput required defaultValue="test@example.com" />);
+		render(<MInput required />);
 
 		const errorElement = screen.queryByText(/this field is required/i);
 
@@ -32,7 +32,7 @@ describe("MInput", () => {
 			<MInput
 				type="password"
 				placeholder="enter your password"
-				defaultValue="secret"
+				value="secret"
 			/>,
 		);
 

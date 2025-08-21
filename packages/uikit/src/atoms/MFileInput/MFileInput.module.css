@@ -1,0 +1,22 @@
+.inputWrapper {
+	max-width: 100%;
+}
+
+.inputWrapper.regular {
+	color: var(--input-field-font-color);
+}
+
+.inputWrapper.invalid {
+	color: var(--input-field-invalid-font-color);
+}
+
+.inputWrapper.valid {
+	color: var(--input-field-valid-color);
+}
+
+.filesList {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 50%;
+}

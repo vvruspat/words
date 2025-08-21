@@ -1,4 +1,6 @@
-export type MIconProps = React.SVGProps<SVGSVGElement> & {
+import type { SVGProps } from "react";
+
+export type MIconProps = SVGProps<SVGSVGElement> & {
 	title?: string;
 	titleId?: string;
 	desc?: string;

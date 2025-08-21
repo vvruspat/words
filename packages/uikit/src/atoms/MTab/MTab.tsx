@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import type React from "react";
-import type { ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import styles from "./MTab.module.css";
 import "./MTab.vars.css";
 
@@ -15,7 +14,7 @@ export interface MTabProps {
 	after?: ReactNode;
 }
 
-export const MTab: React.FC<MTabProps> = ({
+export const MTab: FC<MTabProps> = ({
 	label,
 	active,
 	onClick,
@@ -24,25 +23,22 @@ export const MTab: React.FC<MTabProps> = ({
 	after,
 }) => {
 	return (
-		<li
+		<button
+			type="button"
+			aria-selected={active}
 			aria-disabled={disabled}
-			className={clsx(
-				styles.tab,
-				active && styles.activeTab,
-				disabled && styles.disabledTab,
-			)}
-			onClick={() => !disabled && onClick?.()}
-			onKeyDown={(e) => {
-				if (!disabled && (e.key === "Enter" || e.key === " ")) {
-					onClick?.();
-				}
-			}}
+			role="tab"
 			tabIndex={disabled ? -1 : 0}
+			className={clsx(styles.tab, {
+				[styles.activeTab]: active,
+				[styles.disabledTab]: disabled,
+			})}
+			onClick={() => !disabled && onClick && onClick()}
 		>
 			{before && <span>{before}</span>}
 			{label}
 			{after && <span>{after}</span>}
-		</li>
+		</button>
 	);
 };
 

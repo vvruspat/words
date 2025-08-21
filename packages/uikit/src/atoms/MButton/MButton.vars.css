@@ -3,6 +3,7 @@
 	--button-font-size-medium: var(--font-size-m);
 	--button-font-size-small: var(--font-size-s);
 	--button-font-size-xl: var(--font-size-xl);
+
 	--button-primary-medium-whiteSpace-padding-horizontal: var(
 		--whiteSpace-general-2x
 	);
@@ -10,7 +11,8 @@
 		--whiteSpace-general-1_5x
 	);
 	--button-primary-medium-whiteSpace-gap: var(--whiteSpace-general-1x);
-	--button-primary-medium-borderRadius-default: var(--borderRadius-general-4x);
+	--button-primary-medium-borderRadius: var(--borderRadius-general-4x);
+
 	--button-secondary-medium-whiteSpace-padding-horizontal: var(
 		--whiteSpace-general-2x
 	);
@@ -18,11 +20,15 @@
 		--whiteSpace-general-1_5x
 	);
 	--button-secondary-medium-whiteSpace-gap: var(--whiteSpace-general-1x);
-	--button-secondary-medium-borderRadius-default: var(--borderRadius-general-4x);
-	--button-tertiary-borderRadius-default: var(--borderRadius-general-2x);
-	--button-tertiary-medium-whiteSpace-gap: var(--whiteSpace-general-_5x);
+	--button-secondary-medium-borderRadius: var(--borderRadius-general-4x);
+
+	--button-tertiary-medium-borderRadius: var(--borderRadius-general-4x);
+	--button-tertiary-medium-whiteSpace-gap: var(--whiteSpace-general-1x);
+
 	--button-round-size-default: var(--size-general-4x);
 	--button-round-size-large: var(--size-general-6x);
+
+	--button-outlined-medium-borderRadius: var(--borderRadius-general-2x);
 	--button-outlined-medium-whiteSpace-padding-horizontal: var(
 		--whiteSpace-general-2x
 	);
@@ -30,11 +36,11 @@
 		--whiteSpace-general-1_5x
 	);
 	--button-outlined-medium-whiteSpace-gap: var(--whiteSpace-general-1x);
-	--button-transparent-medium-borderRadius-default: var(
-		--borderRadius-general-4x
-	);
+
+	--button-transparent-medium-borderRadius: var(--borderRadius-general-4x);
 	--button-transparent-medium-whiteSpace-gap: var(--whiteSpace-general-1x);
 }
+
 :root[data-theme="light"] {
 	/* button primary */
 	--button-primary-enabled-background-color: var(--palette-primary-700);
@@ -57,13 +63,13 @@
 	--button-secondary-disabled-font-color: var(--palette-base-400);
 
 	/* button tertiary */
-	--button-tertiary-enabled-background-color: var(--palette-base-400);
-	--button-tertiary-disabled-background-color: var(--palette-base-400);
-	--button-tertiary-hover-background-color: var(--palette-base-400);
-	--button-tertiary-active-background-color: var(--palette-base-400);
-	--button-tertiary-enabled-font-color: var(--palette-base-100);
-	--button-tertiary-disabled-font-color: var(--palette-base-200);
-	--button-tertiary-hover-font-color: var(--palette-base-100);
+	--button-tertiary-enabled-background-color: var(--palette-base-200);
+	--button-tertiary-disabled-background-color: var(--palette-base-100);
+	--button-tertiary-hover-background-color: var(--palette-base-200);
+	--button-tertiary-active-background-color: var(--palette-base-300);
+	--button-tertiary-enabled-font-color: var(--palette-base-500);
+	--button-tertiary-disabled-font-color: var(--palette-base-300);
+	--button-tertiary-hover-font-color: var(--palette-base-500);
 	--button-tertiary-border-default-color: var(--palette-base-400);
 	--button-tertiary-border-disabled-color: var(--palette-base-400);
 	--button-tertiary-border-hover-color: var(--palette-base-300);
@@ -105,25 +111,72 @@
 	--button-transparent-disabled-font-color: var(--palette-base-500);
 }
 
-:root[data-platform="android"] {
-	--button-outlined-medium-borderRadius-default: var(--borderRadius-general-4x);
-}
+:root[data-theme="dark"] {
+	/* button primary */
+	--button-primary-enabled-background-color: var(--palette-primary-100);
+	--button-primary-enabled-font-color: var(--palette-base-800);
+	--button-primary-hover-background-color: var(--palette-primary-200);
+	--button-primary-hover-font-color: var(--palette-base-800);
+	--button-primary-active-background-color: var(--palette-primary-100);
+	--button-primary-active-font-color: var(--palette-base-800);
+	--button-primary-disabled-background-color: var(--palette-base-300);
+	--button-primary-disabled-font-color: var(--palette-base-600);
 
-:root[data-platform="i-os"] {
-	--button-outlined-medium-borderRadius-default: var(--borderRadius-general-4x);
-}
+	/* button secondary */
+	--button-secondary-enabled-background-color: var(--palette-primary-600);
+	--button-secondary-hover-background-color: var(--palette-primary-700);
+	--button-secondary-enabled-font-color: var(--palette-base-100);
+	--button-secondary-hover-font-color: var(--palette-base-800);
+	--button-secondary-active-background-color: var(--palette-secondary-800);
+	--button-secondary-active-font-color: var(--palette-base-1000);
+	--button-secondary-disabled-background-color: var(--palette-base-300);
+	--button-secondary-disabled-font-color: var(--palette-base-400);
 
-:root[data-platform="web-desktop"] {
-	--button-primary-medium-borderRadius-small: var(--borderRadius-general-2x);
-	--button-outlined-medium-borderRadius-default: var(--borderRadius-general-2x);
-	--button-outlined-medium-borderRadius-small: var(--borderRadius-general-1x);
-	--button-secondary-medium-borderRadius-small: var(--borderRadius-general-2x);
-}
+	/* button tertiary */
+	--button-tertiary-enabled-background-color: var(--palette-base-200);
+	--button-tertiary-disabled-background-color: var(--palette-base-100);
+	--button-tertiary-hover-background-color: var(--palette-base-200);
+	--button-tertiary-active-background-color: var(--palette-base-300);
+	--button-tertiary-enabled-font-color: var(--palette-base-500);
+	--button-tertiary-disabled-font-color: var(--palette-base-300);
+	--button-tertiary-hover-font-color: var(--palette-base-500);
+	--button-tertiary-border-default-color: var(--palette-base-400);
+	--button-tertiary-border-disabled-color: var(--palette-base-400);
+	--button-tertiary-border-hover-color: var(--palette-base-300);
+	--button-tertiary-border-focus-color: var(--palette-base-300);
+	--button-tertiary-border-active-color: var(--palette-base-200);
 
-:root[data-platform="web-mobile"] {
-	--button-outlined-medium-borderRadius-default: var(--borderRadius-general-4x);
-}
+	/* button round */
+	--button-round-enabled-background-color: var(--background-tertiary);
+	--button-round-disabled-background-color: var(--palette-base-100);
+	--button-round-hover-background-color: var(--palette-base-200);
+	--button-round-active-background-color: var(--palette-base-400);
+	--button-round-enabled-font-color: var(--text-primary);
+	--button-round-disabled-font-color: var(--palette-base-700);
+	--button-round-hover-font-color: var(--palette-base-900);
+	--button-round-border-default-color: transparent;
+	--button-round-border-disabled-color: transparent;
+	--button-round-border-hover-color: transparent;
+	--button-round-border-focus-color: transparent;
+	--button-round-border-active-color: transparent;
 
-:root[data-platform="web-tablet"] {
-	--button-outlined-medium-borderRadius-default: var(--borderRadius-general-4x);
+	/* button outlined */
+	--button-outlined-enabled-background-color: var(--background);
+	--button-outlined-enabled-border-color: var(--palette-base-100);
+	--button-outlined-enabled-font-color: var(--text-primary);
+	--button-outlined-hover-background-color: var(--palette-base-100);
+	--button-outlined-hover-border-color: var(--palette-base-300);
+	--button-outlined-hover-font-color: var(--palette-base-100);
+	--button-outlined-active-background-color: var(--background-secondary);
+	--button-outlined-active-border-color: var(--palette-base-200);
+	--button-outlined-active-font-color: var(--text-secondary);
+	--button-outlined-disabled-background-color: var(--palette-base-100);
+	--button-outlined-disabled-border-color: var(--palette-base-300);
+	--button-outlined-disabled-font-color: var(--palette-base-400);
+
+	/* button transparent */
+	--button-transparent-enabled-font-color: var(--text-primary);
+	--button-transparent-hover-font-color: var(--text-secondary);
+	--button-transparent-active-font-color: var(--text-primary);
+	--button-transparent-disabled-font-color: var(--text-tertiary);
 }

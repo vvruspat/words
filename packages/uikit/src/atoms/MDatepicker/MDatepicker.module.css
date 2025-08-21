@@ -1,3 +1,7 @@
+.datepicker {
+	box-sizing: content-box;
+}
+
 .datepickerInput::-webkit-calendar-picker-indicator {
 	display: none;
 }

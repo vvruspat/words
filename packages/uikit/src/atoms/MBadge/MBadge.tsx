@@ -1,9 +1,5 @@
 import clsx from "clsx";
-import {
-	type DetailedHTMLProps,
-	type HTMLAttributes,
-	type ReactNode,
-} from "react";
+import type { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 import styles from "./MBadge.module.css";
 import "./MBadge.vars.css";
 
@@ -11,7 +7,7 @@ type BadgeProps = DetailedHTMLProps<
 	HTMLAttributes<HTMLDivElement>,
 	HTMLDivElement
 > & {
-	mode: "primary" | "transparent";
+	mode: "primary" | "transparent" | "info" | "success" | "warning" | "error";
 	before?: ReactNode;
 };
 

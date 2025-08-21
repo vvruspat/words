@@ -1,17 +1,23 @@
 "use client";
 
 import clsx from "clsx";
-import { type ReactNode, useMemo, useState } from "react";
+import {
+	type ChangeEvent,
+	type ReactNode,
+	useCallback,
+	useMemo,
+	useState,
+} from "react";
 import ReactDOMServer from "react-dom/server";
-import type { BasicInputProps } from "types/BasicInputProps";
-import { MButton } from "../MButton/MButton";
+import type { BasicInputProps } from "../../types/BasicInputProps";
 import MDropdown from "../MDropdown/MDropdown";
 import { MIconCaretDown } from "../MIcon/icons/MIconCaretDown";
+import { MInput } from "../MInput";
 import MList, { type SelectOption } from "../MList/MList";
 import type { ListItemProps } from "../MListItem/MListItem";
 import styles from "./MSelect.module.css";
 
-type MSelectOption = ListItemProps & SelectOption;
+export type MSelectOption = ListItemProps & SelectOption;
 
 type SelectComponentProps = BasicInputProps & {
 	options: MSelectOption[];
@@ -34,20 +40,68 @@ const extractTextFromReactNode = (reactNode: ReactNode) => {
 export const MSelect = ({
 	options,
 	justify,
+	defaultValue,
+	value,
+	name,
 	...inputProps
 }: SelectComponentProps) => {
 	const [open, setOpen] = useState(false);
-	const [inputValue, setInputValue] = useState("default value");
+	const getInitialVisibleValue = (): string => {
+		if (value) {
+			const option = options.find((opt) => opt.key === defaultValue);
+			return extractTextFromReactNode(option?.value ?? "");
+		}
+		if (defaultValue) {
+			const option = options.find((opt) => opt.key === defaultValue);
+			return extractTextFromReactNode(option?.value ?? "");
+		}
+		return "";
+	};
+
+	const [visibleValue, setVisibleValue] = useState<string>(
+		getInitialVisibleValue(),
+	);
+	const [hiddenValue, setHiddenlValue] = useState(value || defaultValue || "");
+
 	const handleClick = () => {
 		setOpen(!open);
 	};
-	const onChoose = (option: MSelectOption) => {
-		setInputValue(extractTextFromReactNode(option.value));
-	};
+
+	const onChoose = useCallback(
+		(option: MSelectOption) => {
+			if (inputProps.onChange) {
+				const inputEvent = {
+					target: {
+						name: name || "",
+						value: option.key,
+					},
+				} as ChangeEvent<HTMLInputElement>;
+
+				inputProps.onChange(inputEvent);
+			}
+
+			setOpen(false);
+
+			setHiddenlValue(option.key);
+			setVisibleValue(extractTextFromReactNode(option.value) ?? "");
+		},
+		[name, inputProps.onChange],
+	);
 
 	const mappedOptions = useMemo(
 		() => options.map((option) => ({ ...option, role: "option" })),
 		[options],
+	);
+
+	const onVisibleInputChange = useCallback(
+		(event: ChangeEvent<HTMLInputElement>) => {
+			// React on change event only if it is data clearing
+			if (event.target.value === "") {
+				setVisibleValue("");
+				setHiddenlValue("");
+			}
+		},
+		[],
 	);
 
 	return (
@@ -60,17 +114,16 @@ export const MSelect = ({
 				<MList showDivider options={mappedOptions} onChoose={onChoose} />
 			}
 		>
-			<input type="hidden" value={inputValue} {...inputProps} />
-			<MButton
-				stretch
-				justify={justify}
-				mode="outlined"
+			<input type="hidden" name={name} value={hiddenValue} />
+			<MInput
+				readOnly
 				className={clsx(styles.selectButton)}
 				onClick={handleClick}
+				value={visibleValue}
 				after={<MIconCaretDown mode="regular" width={20} />}
-			>
-				{inputValue}
-			</MButton>
+				{...inputProps}
+				onChange={onVisibleInputChange}
+			/>
 		</MDropdown>
 	);
 };

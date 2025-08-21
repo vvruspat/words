@@ -3,6 +3,8 @@
 	padding: 8px 16px;
 	list-style-type: none;
 	cursor: pointer;
+	font-weight: normal;
+	font-style: normal;
 }
 
 .item.noPadding {
@@ -24,7 +26,7 @@
 }
 
 .itemBorder {
-	border-bottom: 1px solid var(--divider-color, #eeeeee);
+	border-bottom: 1px solid var(--list-item-border-color);
 }
 
 .itemBorder:last-of-type {
@@ -33,12 +35,10 @@
 
 /*hover*/
 .item:hover {
-	/* border-radius: var(--button-outlined-medium-borderRadius-default, 10px); */
-	background: var(--divider-hover, #eeeeee);
+	background: var(--list-item-hover-background-color);
 }
 
 /*active*/
 .item:active {
-	/* border-radius: var(--button-outlined-medium-borderRadius-default, 10px); */
-	background: var(--divider-active, #cccccc);
+	background: var(--list-item-active-background-color);
 }

@@ -1,0 +1,25 @@
+:root {
+	--drop-area-border-width: 2px;
+	--drop-area-border-radius: var(--border-radius-2xl);
+	--drop-area-padding: var(--whiteSpace-general-4x);
+}
+
+:root[data-theme="light"] {
+	--modal-overlay-background-color: rgba(0, 0, 0, 0.5);
+
+	--drop-area-border-color: var(--palette-primary-400);
+	--drop-area-over-border-color: var(--palette-primary-500);
+
+	--drop-area-background-color: transparent;
+	--drop-area-over-background-color: var(--palette-primary-50);
+}
+
+:root[data-theme="dark"] {
+	--modal-overlay-background-color: rgba(255, 255, 255, 0.3);
+
+	--drop-area-border-color: var(--palette-primary-50);
+	--drop-area-over-border-color: var(--palette-primary-100);
+
+	--drop-area-background-color: transparent;
+	--drop-area-over-background-color: var(--palette-primary-50);
+}

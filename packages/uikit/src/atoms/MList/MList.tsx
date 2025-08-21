@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import MListItem, { type ListItemProps } from "../MListItem/MListItem";
 import styles from "./MList.module.css";
 

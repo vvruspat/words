@@ -1,0 +1,45 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	visibility: hidden;
+	pointer-events: none;
+	background-color: transparent;
+	transition: all 0.3s linear;
+}
+
+.open {
+	visibility: visible;
+	pointer-events: auto;
+	background-color: var(--modal-overlay-background-color);
+}
+
+.dropArea {
+	border: var(--drop-area-border-width) dashed var(--drop-area-border-color);
+	padding: var(--drop-area-padding);
+	cursor: pointer;
+	border-radius: var(--drop-area-border-radius);
+	background-color: var(--drop-area-background-color);
+	transition: ease-in-out 0.3s;
+}
+
+.dragOver {
+	border-color: var(--drop-area-over-border-color);
+	background-color: var(--drop-area-over-background-color);
+}
+
+.modal {
+	transform: translateY(-60vh);
+	opacity: 0;
+	transition:
+		transform 0.5s cubic-bezier(0.4, 2, 0.6, 1),
+		opacity 0.3s;
+}
+
+.open .modal {
+	transform: translateY(0);
+	opacity: 1;
+}

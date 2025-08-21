@@ -1,0 +1,5 @@
+:root {
+	--list-item-active-background-color: var(--background-secondary);
+	--list-item-hover-background-color: var(--background-primary);
+	--list-item-border-color: var(--background-secondary);
+}

@@ -5,6 +5,34 @@
 	--input-field-whiteSpace-assistive-gap: var(--whiteSpace-general-1x);
 }
 
+:root[data-platform="desktop"] {
+	--input-field-whiteSpace-field-padding-horizontal: var(
+		--whiteSpace-general-1_5x
+	);
+	--input-field-whiteSpace-field-padding-vertical: var(--whiteSpace-general-1x);
+	--input-field-borderRadius-default: var(--borderRadius-general-2x);
+}
+
+:root[data-platform="mobile"] {
+	--input-field-whiteSpace-field-padding-horizontal: var(
+		--whiteSpace-general-2x
+	);
+	--input-field-whiteSpace-field-padding-vertical: var(
+		--whiteSpace-general-1_5x
+	);
+	--input-field-borderRadius-default: var(--borderRadius-general-4x);
+}
+
+:root[data-platform="tablet"] {
+	--input-field-whiteSpace-field-padding-horizontal: var(
+		--whiteSpace-general-2x
+	);
+	--input-field-whiteSpace-field-padding-vertical: var(
+		--whiteSpace-general-1_5x
+	);
+	--input-field-borderRadius-default: var(--borderRadius-general-4x);
+}
+
 :root[data-theme="light"] {
 	/* input regular */
 	--input-field-enabled-label-font-color: var(--palette-base-1000);
@@ -57,50 +85,54 @@
 	--input-field-disabled-assistive-font-color: var(--palette-base-1000);
 }
 
-:root[data-platform="android"] {
-	--input-field-whiteSpace-field-padding-horizontal: var(
-		--whiteSpace-general-2x
+:root[data-theme="dark"] {
+	/* input regular */
+	--input-field-enabled-label-font-color: var(--text-secondary);
+	--input-field-enabled-assistive-font-color: var(--text-primary);
+	--input-field-enabled-font-color: var(--text-secondary);
+	--input-field-enabled-font-before-after: var(--palette-base-300);
+	--input-field-enabled-placeholder: var(--text-tertiary);
+	--input-field-hover-font-color: var(--text-primary);
+	--input-field-hover-placeholder: var(--text-secondary);
+	--input-field-active-font-color: var(--text-primary);
+	--input-field-focus-font-color-before-after: var(
+		--input-field-enabled-font-color
 	);
-	--input-field-whiteSpace-field-padding-vertical: var(
-		--whiteSpace-general-1_5x
-	);
-	--input-field-borderRadius-default: var(--borderRadius-general-4x);
-}
+	--input-field-focus-font-color: var(--text-secondary);
+	--input-field-enabled-border-color: var(--palette-base-500);
+	--input-field-enabled-background-color: var(--palette-base-800);
+	--input-field-hover-border-color: var(--palette-base-400);
+	--input-field-hover-background-color: var(--palette-base-700);
+	--input-field-active-border-color: var(--palette-base-300);
+	--input-field-active-background-color: var(--palette-base-800);
+	--input-field-focus-border-color: var(--palette-active-500);
+	--input-field-focus-background-color: var(--palette-base-800);
+	--input-field-active-label-font-color: var(--text-tertiary);
+	--input-field-active-assistive-font-color: var(--palette-base-1000);
+	--input-field-hover-label-font-color: var(--palette-base-1000);
+	--input-field-hover-assistive-font-color: var(--palette-base-1000);
+	--input-field-focus-label-font-color: var(--palette-base-1000);
+	--input-field-focus-assistive-font-color: var(--palette-base-1000);
 
-:root[data-platform="i-os"] {
-	--input-field-whiteSpace-field-padding-horizontal: var(
-		--whiteSpace-general-2x
-	);
-	--input-field-whiteSpace-field-padding-vertical: var(
-		--whiteSpace-general-1_5x
-	);
-	--input-field-borderRadius-default: var(--borderRadius-general-4x);
-}
+	/* input valid */
+	--input-field-valid-font-before-after: var(--palette-base-300);
+	--input-field-valid-font-color: var(--text-secondary);
+	--input-field-valid-border-color: var(--palette-semantic-success-700);
+	--input-field-valid-background-color: var(--palette-base-800);
+	--input-field-valid-label-font-color: var(--text-secondary);
+	--input-field-valid-assistive-font-color: var(--text-primary);
 
-:root[data-platform="web-desktop"] {
-	--input-field-whiteSpace-field-padding-horizontal: var(
-		--whiteSpace-general-1_5x
-	);
-	--input-field-whiteSpace-field-padding-vertical: var(--whiteSpace-general-1x);
-	--input-field-borderRadius-default: var(--borderRadius-general-2x);
-}
-
-:root[data-platform="web-mobile"] {
-	--input-field-whiteSpace-field-padding-horizontal: var(
-		--whiteSpace-general-2x
-	);
-	--input-field-whiteSpace-field-padding-vertical: var(
-		--whiteSpace-general-1_5x
-	);
-	--input-field-borderRadius-default: var(--borderRadius-general-4x);
-}
-
-:root[data-platform="web-tablet"] {
-	--input-field-whiteSpace-field-padding-horizontal: var(
-		--whiteSpace-general-2x
-	);
-	--input-field-whiteSpace-field-padding-vertical: var(
-		--whiteSpace-general-1_5x
-	);
-	--input-field-borderRadius-default: var(--borderRadius-general-4x);
+	/* input invalid */
+	--input-field-invalid-font-color: var(--palette-semantic-error-400);
+	--input-field-invalid-font-before-after: var(--palette-semantic-error-400);
+	--input-field-invalid-border-color: var(--palette-semantic-error-400);
+	--input-field-invalid-background-color: var(--palette-base-800);
+	--input-field-invalid-label-font-color: var(--text-primary);
+	--input-field-invalid-assistive-font-color: var(--palette-semantic-error-400);
+	/* input disabled */
+	--input-field-disabled-font-color: var(--palette-base-300);
+	--input-field-disabled-border-color: var(--input-regular-border);
+	--input-field-disabled-background-color: var(--palette-base-100);
+	--input-field-disabled-label-font-color: var(--palette-base-1000);
+	--input-field-disabled-assistive-font-color: var(--palette-base-1000);
 }

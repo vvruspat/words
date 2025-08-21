@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import React, { type ComponentProps } from "react";
+import { type ComponentProps, createElement } from "react";
 import type { TComponentSize } from "../../types/TComponentSize";
 import styles from "./MText.module.css";
 
 export type TextProps = ComponentProps<"span"> &
 	Partial<TComponentSize> & {
 		as?: "span" | "p" | "div";
+		mode?: "primary" | "secondary" | "tertiary" | "inherit";
 	};
 
 export const MText = ({
@@ -13,12 +14,17 @@ export const MText = ({
 	className,
 	size = "inherit",
 	as = "span",
+	mode = "inherit",
 	...restProps
 }: TextProps) => {
-	return React.createElement(
+	return createElement(
 		as,
 		{
-			className: clsx(styles[`size-${size}`], className),
+			className: clsx(
+				styles[`size-${size}`],
+				styles[`mode-${mode}`],
+				className,
+			),
 			...restProps,
 		},
 		children,

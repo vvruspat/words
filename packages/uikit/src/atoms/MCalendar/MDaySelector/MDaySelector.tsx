@@ -72,13 +72,13 @@ export const MDaySelector = ({
 						<MButton
 							type="button"
 							mode="transparent"
-							key={`${currentMonth}_${currentDay}`}
+							// biome-ignore lint/suspicious/noArrayIndexKey: index is the only unique identifier here
+							key={index}
 							disabled={!isCurrentMonth}
-							className={clsx(
-								styles.day,
-								isCurrentDay && styles.selected,
-								isToday && styles.today,
-							)}
+							className={clsx(styles.day, {
+								[styles.selected]: isCurrentDay,
+								[styles.today]: isToday,
+							})}
 							onClick={() => {
 								onChange(currentDay);
 							}}

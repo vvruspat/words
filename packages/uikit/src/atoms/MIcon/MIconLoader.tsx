@@ -7,7 +7,6 @@ type MIconLoaderProps = MIconProps & {
 };
 
 export const MIconLoader = ({ name, ...restProps }: MIconLoaderProps) => {
-	// biome-ignore lint/performance/noDynamicNamespaceImportAccess: dynamic import for icon loading
 	const LazyComponent = Icons[name];
 
 	return (

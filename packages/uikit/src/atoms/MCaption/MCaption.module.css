@@ -1,20 +1,14 @@
-/** TODO: use variables */
 .caption {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
-	gap: var(--input-field-whiteSpace-label-gap, 8px);
-	color: var(--input-field-enabled-font-color, #747e97);
+	gap: var(--input-field-whiteSpace-label-gap);
 	font-family: var(--font-family);
 	font-size: var(--font-size-m);
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-}
-
-.caption.regular {
-	color: var(--text-secondary);
 }
 
 .caption.valid {

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { MIconStar } from "../MIcon/icons/MIconStar";
 import MBadge from "./MBadge";
 

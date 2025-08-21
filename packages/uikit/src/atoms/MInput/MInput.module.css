@@ -2,6 +2,10 @@
 	max-width: 100%;
 }
 
+.inputWrapper input {
+	background: inherit;
+}
+
 .inputHeading {
 	width: 100%;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { type ChangeEvent, useRef, useState } from "react";
 import { MButton } from "../MButton";
 import { type InputProps, MInput } from "../MInput";
 import styles from "./MTimepicker.module.css";
@@ -14,18 +14,22 @@ type MTimepickerProps = InputProps & {
 export const MTimepicker = ({
 	type = "time",
 	className,
+	onChange,
 	defaultValue,
 	...inputProps
 }: MTimepickerProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [dateValue, setDateValue] = useState(defaultValue);
 
-	const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		try {
 			const d = new Date(event.target.value);
 
 			setDateValue(d.toISOString().split("T")[0]);
-		} catch (_e) {}
+			onChange?.(event);
+		} catch (e) {
+			console.error("Invalid date format", e);
+		}
 	};
 
 	return (
@@ -40,6 +44,7 @@ export const MTimepicker = ({
 			after={
 				<MButton
 					mode="transparent"
+					noPadding
 					onClick={() => {
 						inputRef.current?.showPicker();
 					}}

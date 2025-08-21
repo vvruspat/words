@@ -14,7 +14,13 @@ describe("MAlert", () => {
 	it.each([["info"], ["success"], ["warning"], ["error"]])(
 		'applies the correct mode class for mode="%s"',
 		(mode) => {
-			render(<MAlert mode={mode}>Alert content</MAlert>);
+			render(
+				<MAlert
+					mode={mode as "error" | "warning" | "success" | "info" | undefined}
+				>
+					Alert content
+				</MAlert>,
+			);
 			const alert = screen.getByText("Alert content");
 			expect(alert).toHaveClass(`alert-mode-${mode}`);
 		},
@@ -28,7 +34,7 @@ describe("MAlert", () => {
 	});
 
 	it("passes additional props to MFlex (e.g., id)", () => {
-		// biome-ignore lint/correctness/useUniqueElementIds: test case for id prop
+		// biome-ignore lint/correctness/useUniqueElementIds: id is used for testing
 		render(<MAlert id="test-alert">With ID</MAlert>);
 		const alert = screen.getByText("With ID");
 		expect(alert).toHaveAttribute("id", "test-alert");

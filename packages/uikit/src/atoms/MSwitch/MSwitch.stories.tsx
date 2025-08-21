@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { MIconCheck } from "../MIcon/icons/MIconCheck";
 import MSwitch from "./MSwitch";
 

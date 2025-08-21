@@ -10,15 +10,40 @@
 	font-weight: 500;
 	line-height: normal;
 	cursor: default;
+
+	padding: var(--badge-primary-padding, 6px);
+	border-radius: var(--badge-primary-border-radius, 8px);
 }
 
 .badge.primary {
-	padding: var(--badge-primary-padding, 6px);
-	border-radius: var(--badge-primary-border-radius, 8px);
 	background: var(--badge-primary-background-color, #f4f5f7);
 }
 
 .badge.transparent {
 	background: transparent;
 	line-height: 1.25;
+}
+
+.badge.info {
+	background: var(--badge-info-background-color);
+	border: 1px solid var(--badge-info-border-color);
+	color: var(--badge-info-font-color);
+}
+
+.badge.success {
+	background: var(--badge-success-background-color);
+	border: 1px solid var(--badge-success-border-color);
+	color: var(--badge-success-font-color);
+}
+
+.badge.warning {
+	background: var(--badge-warning-background-color);
+	border: 1px solid var(--badge-warning-border-color);
+	color: var(--badge-warning-font-color);
+}
+
+.badge.error {
+	background: var(--badge-error-background-color);
+	border: 1px solid var(--badge-error-border-color);
+	color: var(--badge-error-font-color);
 }

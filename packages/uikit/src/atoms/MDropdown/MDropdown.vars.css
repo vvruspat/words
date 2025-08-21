@@ -1,0 +1,16 @@
+:root[data-platform="desktop"],
+:root[data-platform="tablet"] {
+	--dropdown-position: absolute;
+}
+
+:root[data-platform="mobile"] {
+	--dropdown-position: fixed;
+}
+
+:root[data-theme="light"] {
+	--dropdown-overlay-background-color: rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme="dark"] {
+	--dropdown-overlay-background-color: rgba(255, 255, 255, 0.3);
+}

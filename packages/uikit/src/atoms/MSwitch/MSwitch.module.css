@@ -20,8 +20,8 @@
 }
 
 .switch:focus-within .slider {
-	outline: 2px solid var(--input-checkbox-checked-background-active);
-	outline-offset: var(--input-checkbox-switch-offset);
+	outline: var(--focus-outline);
+	outline-offset: var(--focus-outline-offset);
 }
 
 .switch {
@@ -31,6 +31,10 @@
 	height: var(--input-checkbox-switch-height);
 }
 
+/* .switch input {
+  display: none;
+} */
+
 .slider {
 	position: absolute;
 	cursor: pointer;
@@ -38,7 +42,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: var(--input-checkbox-unchecked-outline-hover);
+	background-color: var(--input-checkbox-unchecked-background-enabled);
 	width: var(--input-checkbox-switch-width);
 	height: var(--input-checkbox-switch-height);
 }
@@ -48,7 +52,7 @@ input:disabled + .slider {
 }
 
 input:disabled + .slider:before {
-	background-color: var(--input-checkbox-unchecked-outline-hover);
+	background-color: var(--input-checkbox-unchecked-background-disabled);
 	cursor: not-allowed;
 }
 
@@ -98,21 +102,25 @@ input:checked + .slider {
 }
 
 input[type="checkbox"] + .slider > .control > .customSwitchIconLeft {
-	opacity: 1;
+	opacity: 0;
 }
 
 input[type="checkbox"]:checked + .slider > .control > .customSwitchIconLeft {
-	opacity: 0;
-}
-
-input:checked + .slider > .control > .customSwitchIconRight {
 	opacity: 1;
 }
 
-input + .slider > .control > .customSwitchIconRight {
+input:checked + .slider > .control > .customSwitchIconRight {
 	opacity: 0;
 }
 
+input + .slider > .control > .customSwitchIconRight {
+	opacity: 1;
+}
+
 input:checked + .slider > .control {
+	transform: translateX(100%);
+}
+
+input + .slider > .control {
 	transform: translateX(var(--input-checkbox-switch-offset));
 }

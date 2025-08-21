@@ -8,6 +8,7 @@ declare const styles: {
 	readonly l: string;
 	readonly linkButton: string;
 	readonly m: string;
+	readonly noPadding: string;
 	readonly outlined: string;
 	readonly primary: string;
 	readonly round: string;

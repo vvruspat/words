@@ -36,5 +36,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "pino": "^9.9.0"
+  }
 }

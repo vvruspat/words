@@ -1,4 +1,8 @@
 declare const styles: {
+	readonly "mode-inherit": string;
+	readonly "mode-primary": string;
+	readonly "mode-secondary": string;
+	readonly "mode-tertiary": string;
 	readonly "size-2xl": string;
 	readonly "size-3xl": string;
 	readonly "size-4xl": string;

@@ -9,8 +9,13 @@ import {
 	useCallback,
 	useEffect,
 } from "react";
-import MCard from "../MCard/MCard";
 import styles from "./MDropdown.module.css";
+import "./MDropdown.vars.css";
+import { usePlatform } from "../../hooks";
+import { MButton } from "../MButton";
+import { MCard } from "../MCard";
+import { MFlex } from "../MFlex";
+import { MIconX } from "../MIcon";
 
 export type MDropdownProps = DetailedHTMLProps<
 	HTMLAttributes<HTMLDivElement>,
@@ -39,6 +44,8 @@ export const MDropdown = ({
 	dropdownContentClassName,
 	...props
 }: MDropdownProps) => {
+	const platform = usePlatform();
+
 	const handleClickOutside = useCallback(
 		(event: MouseEvent) => {
 			if (open) {
@@ -56,7 +63,7 @@ export const MDropdown = ({
 	}, []);
 
 	useEffect(() => {
-		if (open) {
+		if (open && platform !== "mobile") {
 			document.addEventListener("click", handleClickOutside);
 		} else {
 			document.removeEventListener("click", handleClickOutside);
@@ -64,30 +71,62 @@ export const MDropdown = ({
 		return () => {
 			document.removeEventListener("click", handleClickOutside);
 		};
-	}, [open, handleClickOutside]);
+	}, [open, handleClickOutside, platform]);
 
 	return (
-		// biome-ignore lint/a11y/noStaticElementInteractions: need only to prevent hiding dropdown on click
-		// biome-ignore lint/a11y/useKeyWithClickEvents: need only to prevent hiding dropdown on click
+		// biome-ignore lint/a11y/useKeyWithClickEvents: TODO: add keyboard support
+		// biome-ignore lint/a11y/useSemanticElements: no way to use semantic elements here
 		<div
-			className={clsx(styles.dropdownContainer)}
+			className={clsx(styles.dropdownContainer, className)}
 			{...props}
 			onClick={handleClickInside}
+			role="button"
+			tabIndex={0}
 		>
 			{children}
-			<div
-				className={clsx(styles.dropdown, styles.open && open, [
-					styles[position],
-					styles[align],
-				])}
-			>
-				<MCard
-					noPadding={noPadding}
-					className={clsx(styles.stretch && stretch, dropdownContentClassName)}
+
+			{platform === "mobile" ? (
+				<MFlex
+					direction="column"
+					align="stretch"
+					justify="center"
+					className={clsx(styles.dropdownMobile, { [styles.open]: open })}
 				>
-					{dropdownContent}
-				</MCard>
-			</div>
+					<MCard
+						header={
+							<MFlex justify="end" className={styles.dropdownHeader}>
+								<MButton mode="round" onClick={() => onClose?.()}>
+									<MIconX mode="regular" />
+								</MButton>
+							</MFlex>
+						}
+						noPadding={noPadding}
+						className={clsx(
+							{ [styles.stretch]: stretch },
+							dropdownContentClassName,
+						)}
+					>
+						{dropdownContent}
+					</MCard>
+				</MFlex>
+			) : (
+				<div
+					className={clsx(styles.dropdown, { [styles.open]: open }, [
+						styles[position],
+						styles[align],
+					])}
+				>
+					<MCard
+						noPadding={noPadding}
+						className={clsx(
+							{ [styles.stretch]: stretch },
+							dropdownContentClassName,
+						)}
+					>
+						{dropdownContent}
+					</MCard>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -31,7 +31,7 @@ export const MDescriptionList = ({
 			)}
 		>
 			{options.map((option, index) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: no unique key provided
+				// biome-ignore lint/suspicious/noArrayIndexKey: no id provided
 				<Fragment key={index}>
 					<dt {...option.titleProps}>{option.title}</dt>
 					<dd {...option.descriptionProps}>{option.description}</dd>

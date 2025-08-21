@@ -15,6 +15,7 @@ type Story = StoryObj<typeof MGrid>;
 
 export const Basic: Story = {
 	args: {
+		tag: "div",
 		rowGap: "s",
 		columnGap: "s",
 		alignItems: "center",
@@ -41,6 +42,12 @@ export const Basic: Story = {
 	},
 
 	argTypes: {
+		tag: {
+			control: { type: "select" },
+			options: ["div", "section", "article", "aside", "nav"],
+			description: "HTML tag to use for the grid container",
+			defaultValue: "div",
+		},
 		rowGap: {
 			control: { type: "select" },
 			options: ["xs", "s", "m", "l", "xl", "3xl", "4xl"],

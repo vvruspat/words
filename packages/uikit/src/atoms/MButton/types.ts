@@ -14,4 +14,5 @@ export type CommonButtonProps = {
 	stretch?: boolean;
 	justify?: "center" | "end" | "start" | "space-between";
 	size?: Extract<TComponentSize["size"], "l" | "m" | "s">;
+	noPadding?: boolean;
 };

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { MFlex } from "../../atoms/MFlex";
 import styles from "./MButton.module.css";
 import type { CommonButtonProps } from "./types";
@@ -19,6 +19,7 @@ export const MLinkButton = ({
 	disabled,
 	after,
 	before,
+	noPadding = false,
 	...restProps
 }: LinkButtonProps) => {
 	return (
@@ -32,6 +33,7 @@ export const MLinkButton = ({
 				{
 					[styles.stretch]: stretch,
 					[styles.disabled]: disabled,
+					[styles.noPadding]: noPadding,
 				},
 				styles[size],
 				className,

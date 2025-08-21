@@ -21,8 +21,8 @@ export const MLabel = ({
 	...restProps
 }: LabelProps) => {
 	return (
-		// biome-ignore lint/a11y/noLabelWithoutControl: input in children
 		<label
+			htmlFor={restProps.htmlFor}
 			className={clsx(styles.label, styles[status], className)}
 			{...restProps}
 		>

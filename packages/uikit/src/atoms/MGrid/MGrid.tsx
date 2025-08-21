@@ -1,8 +1,14 @@
 import clsx from "clsx";
-import type { ComponentProps } from "react";
+import type {
+	ComponentPropsWithoutRef,
+	CSSProperties,
+	ElementType,
+	ReactNode,
+} from "react";
 import styles from "./MGrid.module.css";
 
-export type MGridProps = ComponentProps<"div"> & {
+export type MGridProps<T extends ElementType = "div"> = {
+	tag?: T;
 	display?: "grid" | "inline-grid";
 	columnTemplate?: string;
 	rowTemplate?: string;
@@ -16,11 +22,15 @@ export type MGridProps = ComponentProps<"div"> & {
 		| "space-between"
 		| "space-around"
 		| "stretch";
-};
+	className?: string;
+	style?: CSSProperties;
+	children?: ReactNode;
+} & ComponentPropsWithoutRef<T>;
 
-export const MGrid = ({
+export const MGrid = <T extends ElementType = "div">({
 	children,
 	className,
+	tag,
 	style = {},
 	display = "grid",
 	rowTemplate,
@@ -30,9 +40,10 @@ export const MGrid = ({
 	alignItems,
 	justifyItems,
 	...restProps
-}: MGridProps) => {
+}: MGridProps<T>) => {
+	const Element = tag ?? "div";
 	return (
-		<div
+		<Element
 			className={clsx(
 				styles[`grid-row-gap-${rowGap}`],
 				styles[`grid-col-gap-${columnGap}`],
@@ -49,7 +60,7 @@ export const MGrid = ({
 			{...restProps}
 		>
 			{children}
-		</div>
+		</Element>
 	);
 };
 

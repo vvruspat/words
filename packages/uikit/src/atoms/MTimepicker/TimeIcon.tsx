@@ -6,6 +6,7 @@ export const TimeIcon = () => (
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 	>
+		<title>Time Icon</title>
 		<path
 			d="M10 6.44434V10.611L12.5 12.2777"
 			stroke="#7B8484"

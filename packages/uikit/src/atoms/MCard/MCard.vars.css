@@ -11,20 +11,15 @@
 	--card-border-color: var(--palette-base-400);
 }
 
-:root[data-platform="android"] {
-	--border-radius-none: 0;
-	--border-radius-default: var(--whiteSpace-general-1x);
-	--border-radius-xs: var(--whiteSpace-general-_5x);
-	--border-radius-s: var(--whiteSpace-general-1x);
-	--border-radius-m: var(--whiteSpace-general-1_5x);
-	--border-radius-l: var(--whiteSpace-general-2x);
-	--border-radius-xl: var(--whiteSpace-general-2_5x);
-	--border-radius-2xl: var(--whiteSpace-general-3x);
-	--border-radius-3xl: var(--whiteSpace-general-3_5x);
-	--border-radius-4xl: var(--whiteSpace-general-4x);
+:root[data-theme="dark"] {
+	/* card */
+	--card-shadow:
+		0px 0px 1px rgba(98, 101, 104, 0.08), 0px 1px 4px rgba(87, 87, 88, 0.2);
+	--card-background: var(--palette-base-800);
+	--card-border-color: var(--palette-base-400);
 }
 
-:root[data-platform="web-desktop"] {
+:root[data-platform="desktop"] {
 	--border-radius-none: 0;
 	--border-radius-default: var(--borderRadius-general-1x);
 	--border-radius-xs: var(--borderRadius-general-_5x);
@@ -37,7 +32,7 @@
 	--border-radius-4xl: var(--borderRadius-general-4x);
 }
 
-:root[data-platform="web-mobile"] {
+:root[data-platform="mobile"] {
 	--border-radius-none: 0;
 	--border-radius-default: var(--borderRadius-general-1x);
 	--border-radius-xs: var(--borderRadius-general-_5x);
@@ -50,20 +45,7 @@
 	--border-radius-4xl: var(--borderRadius-general-4x);
 }
 
-:root[data-platform="i-os"] {
-	--border-radius-none: 0;
-	--border-radius-default: var(--whiteSpace-general-1x);
-	--border-radius-xs: var(--whiteSpace-general-_5x);
-	--border-radius-s: var(--whiteSpace-general-1x);
-	--border-radius-m: var(--whiteSpace-general-1_5x);
-	--border-radius-l: var(--whiteSpace-general-2x);
-	--border-radius-xl: var(--whiteSpace-general-2_5x);
-	--border-radius-2xl: var(--whiteSpace-general-3x);
-	--border-radius-3xl: var(--whiteSpace-general-3_5x);
-	--border-radius-4xl: var(--whiteSpace-general-4x);
-}
-
-:root[data-platform="web-tablet"] {
+:root[data-platform="tablet"] {
 	--border-radius-none: 0;
 	--border-radius-default: var(--whiteSpace-general-1x);
 	--border-radius-xs: var(--whiteSpace-general-_5x);

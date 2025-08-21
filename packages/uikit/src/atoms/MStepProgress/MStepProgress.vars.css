@@ -1,0 +1,34 @@
+:root {
+	--step-progress-padding-vertical: var(--whiteSpace-general-_5x);
+	--step-progress-padding-horizontal: var(--whiteSpace-general-1x);
+	--step-progress-border-radius: var(--borderRadius-general-1x);
+	--step-progress-border-width: 0;
+}
+
+:root[data-theme="light"],
+:root[data-theme="dark"] {
+	--step-progress-border-color: var(--palette-primary-100);
+	--step-progress-label-color: var(--palette-primary-100);
+	--step-progress-background-color: var(--palette-primary-100);
+	--step-progress-color: var(--palette-primary-100);
+
+	--step-progress-border-color-info: transparent;
+	--step-progress-label-color-info: var(--palette-semantic-information-400);
+	--step-progress-background-color-info: var(--palette-semantic-information-100);
+	--step-progress-color-info: var(--palette-semantic-information-800);
+
+	--step-progress-border-color-warning: transparent;
+	--step-progress-label-color-warning: var(--palette-semantic-warning-400);
+	--step-progress-background-color-warning: var(--palette-semantic-warning-100);
+	--step-progress-color-warning: var(--palette-semantic-warning-800);
+
+	--step-progress-border-color-error: transparent;
+	--step-progress-label-color-error: var(--palette-semantic-error-400);
+	--step-progress-background-color-error: var(--palette-semantic-error-100);
+	--step-progress-color-error: var(--palette-semantic-error-800);
+
+	--step-progress-border-color-success: transparent;
+	--step-progress-label-color-success: var(--palette-semantic-success-600);
+	--step-progress-background-color-success: var(--palette-semantic-success-600);
+	--step-progress-color-success: var(--palette-semantic-success-100);
+}

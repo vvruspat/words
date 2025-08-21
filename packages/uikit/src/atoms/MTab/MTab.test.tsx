@@ -12,7 +12,7 @@ describe("MTab Component", () => {
 	test("applies the active class when active prop is true", () => {
 		const label = "Active Tab";
 		const { container } = render(<MTab label={label} active key={""} />);
-		expect(container.querySelector("li")).toHaveClass("activeTab");
+		expect(container.querySelector("button")).toHaveClass("activeTab");
 	});
 
 	test("calls onClick prop when clicked", () => {

@@ -115,7 +115,7 @@ export const MGallery = ({
 					style={{ transform: `translateX(calc(-1 * ${currentIndex} * 100%))` }}
 				>
 					{slides.map((slide, index) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: no unique key provided
+						// biome-ignore lint/suspicious/noArrayIndexKey: index is the only unique identifier here
 						<div key={index} className={clsx(styles.slider__slide)}>
 							{slide}
 						</div>

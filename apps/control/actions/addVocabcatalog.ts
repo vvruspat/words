@@ -1,5 +1,5 @@
 import { PostVocabCatalogRequest, PostVocabCatalogResponse } from "@repo/types";
-import { $fetch } from "@/utils/fetch";
+import { $fetch } from "@/lib/fetch";
 
 export const addVocabCatalogAction = async (
 	_prevState: PostVocabCatalogResponse,

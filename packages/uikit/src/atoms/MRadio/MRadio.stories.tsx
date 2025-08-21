@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import MFlex from "../MFlex/MFlex";
 import { MIconBracketsSquare } from "../MIcon/icons/MIconBracketsSquare";
 import MText from "../MText/MText";

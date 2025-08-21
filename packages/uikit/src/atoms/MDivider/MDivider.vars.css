@@ -1,6 +1,7 @@
 :root[data-theme="light"] {
-	--background-subtle-background-color: var(--palette-base-0);
-	--divider-subtle-background-color: var(--palette-base-400);
-	--divider-strong-background-color: var(--palette-base-600);
-	--background-strong-background-color: var(--palette-base-0);
+	--divider-color: var(--background-secondary);
+}
+
+:root[data-theme="dark"] {
+	--divider-color: var(--background-secondary);
 }

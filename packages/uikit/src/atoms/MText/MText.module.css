@@ -33,3 +33,19 @@
 .size-4xl {
 	font-size: var(--typography-font-size-4xl, 24px);
 }
+
+.mode-primary {
+	color: var(--text-primary);
+}
+
+.mode-secondary {
+	color: var(--text-secondary);
+}
+
+.mode-tertiary {
+	color: var(--text-tertiary);
+}
+
+.mode-inherit {
+	color: inherit;
+}
