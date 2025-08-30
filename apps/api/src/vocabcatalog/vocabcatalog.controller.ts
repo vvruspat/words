@@ -12,11 +12,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
-
-import {
-	DeleteVocabCatalogRequestDto,
-	DeleteVocabCatalogResponseDto,
-} from "~/dto/api/vocabcatalog/delete";
+import { DeleteVocabCatalogResponseDto } from "~/dto/api/vocabcatalog/delete";
 import {
 	GetVocabCatalogRequestDto,
 	GetVocabCatalogResponseDto,
@@ -99,7 +95,7 @@ export class VocabCatalogController {
 	@ApiOperation({ summary: "Delete vocab catalog" })
 	@ApiResponse({ status: 200, type: DeleteVocabCatalogResponseDto })
 	async remove(
-		@Param("id", ParseIntPipe) id: DeleteVocabCatalogRequestDto["id"],
+		@Param("id", ParseIntPipe) id: number,
 	): Promise<DeleteVocabCatalogResponseDto> {
 		await this.vocabCatalogService.remove(id);
 		return { id };

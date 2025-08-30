@@ -608,7 +608,7 @@ paths:
           in: query
           schema:
             format: int64
-            type: string
+            type: number
         - name: title
           required: false
           in: query
@@ -711,7 +711,12 @@ paths:
       tags: *ref_4
     delete:
       operationId: VocabCatalogController_remove
-      parameters: []
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -1538,7 +1543,7 @@ components:
           type: string
           format: date-time
         owner:
-          type: string
+          type: number
           format: int64
         title:
           type: string
@@ -1581,11 +1586,8 @@ components:
     PostVocabCatalogRequestDto:
       type: object
       properties:
-        created_at:
-          type: string
-          format: date-time
         owner:
-          type: string
+          type: number
           format: int64
         title:
           type: string
@@ -1598,7 +1600,6 @@ components:
           type: string
           nullable: true
       required:
-        - created_at
         - owner
         - title
         - language
@@ -1612,7 +1613,7 @@ components:
           type: string
           format: date-time
         owner:
-          type: string
+          type: number
           format: int64
         title:
           type: string
@@ -1640,7 +1641,7 @@ components:
           type: string
           format: date-time
         owner:
-          type: string
+          type: number
           format: int64
         title:
           type: string
@@ -1662,7 +1663,7 @@ components:
           type: string
           format: date-time
         owner:
-          type: string
+          type: number
           format: int64
         title:
           type: string

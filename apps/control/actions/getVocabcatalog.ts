@@ -1,13 +1,11 @@
-import { GetVocabCatalogRequest, GetVocabCatalogResponse } from "@repo/types";
+import { GetVocabcatalogRequest, GetVocabcatalogResponse } from "@repo/types";
 import { $fetch } from "@/lib/fetch";
 
 export const getVocabCatalogAction = async (
-	request: GetVocabCatalogRequest = {},
-): Promise<GetVocabCatalogResponse> => {
-	return $fetch<GetVocabCatalogRequest, GetVocabCatalogResponse>(
-		"/vocabcatalog",
-		"GET",
-		{
+	request: GetVocabcatalogRequest,
+): Promise<GetVocabcatalogResponse> => {
+	return $fetch("/vocabcatalog", "get", {
+		query: {
 			limit: request.limit ?? 10,
 			offset: request.offset ?? 0,
 			...Object.fromEntries(
@@ -16,5 +14,5 @@ export const getVocabCatalogAction = async (
 				),
 			),
 		},
-	);
+	});
 };

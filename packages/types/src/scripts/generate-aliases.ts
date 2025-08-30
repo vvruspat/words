@@ -71,12 +71,38 @@ for (const [route, methods] of Object.entries(spec.paths)) {
 			content += `export type ${typeNameBase}Response = paths["${route}"]["${method}"]["responses"]["204"]["content"]["application/json"];\n`;
 		}
 
+		console.log(
+			"Body: ",
+			methods[method].requestBody,
+			"Query:",
+			methods[method].parameters,
+		);
+
+		let requestContent = "";
+		let requestContentType = "";
+
 		if (methods[method].requestBody) {
-			content += `export type ${typeNameBase}Request = paths["${route}"]["${method}"]["requestBody"]["content"]["application/json"];\n`;
+			requestContent += `export type ${typeNameBase}Request = paths["${route}"]["${method}"]["requestBody"]["content"]["application/json"];\n`;
+		} else if (methods[method].parameters) {
+			requestContent += `export type ${typeNameBase}Request = `;
+
+			if (methods[method].parameters.findIndex((p) => p.in === "path") > -1) {
+				requestContentType += `paths["${route}"]["${method}"]["parameters"]["path"]`;
+			}
+
+			if (methods[method].parameters.findIndex((p) => p.in === "query") > -1) {
+				if (
+					methods[method].parameters.findIndex((p1) => p1.in === "path") > -1
+				) {
+					requestContentType += " & ";
+				}
+				requestContentType += `paths["${route}"]["${method}"]["parameters"]["query"]`;
+			}
+			requestContent += `${requestContentType};\n`;
 		}
 
-		if (methods[method].query) {
-			content += `export type ${typeNameBase}Request = paths["${route}"]["${method}"]["query"]["content"]["application/json"];\n`;
+		if (requestContentType) {
+			content += requestContent;
 		}
 
 		writeFileSafely(filePath, content);

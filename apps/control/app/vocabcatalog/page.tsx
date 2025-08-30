@@ -2,23 +2,22 @@ import { MAlert, MDescriptionList, MFlex } from "@repo/uikit";
 import { getVocabCatalogAction } from "@/actions/getVocabcatalog";
 
 export default async function Vocabcatalog() {
-	const resp = await getVocabCatalogAction();
+	const data = await getVocabCatalogAction({
+		limit: 10,
+		offset: 0,
+	});
 
-	console.log("Response from getVocabCatalogAction:", resp);
+	console.log("Response from getVocabCatalogAction:", data);
 
-	const { data, error } = resp;
+	// if (error instanceof Error) {
+	// 	return (
+	// 		<MAlert mode="error">
+	// 			Error loading vocabulary catalog: {error.message}
+	// 		</MAlert>
+	// 	);
+	// }
 
-	if (error instanceof Error) {
-		return (
-			<MAlert mode="error">
-				Error loading vocabulary catalog: {error.message}
-			</MAlert>
-		);
-	}
-
-	console.log("Vocabulary catalog data:", data);
-
-	if (!data || !data.items || data.items.length === 0) {
+	if (data.items.length === 0) {
 		return <MAlert mode="warning">No vocabulary catalog found.</MAlert>;
 	}
 

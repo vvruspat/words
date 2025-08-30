@@ -1,10 +1,6 @@
 "use client";
-import {
-	ApiResponseStatus,
-	PutVocabCatalogResponse,
-	VocabCatalog,
-} from "@repo/types";
-import { MAlert, MButton, MFlex, MHeading, MSpinner } from "@repo/uikit";
+import { PutVocabcatalogResponse, PutVocabcatalogRequest, VocabCatalog } from "@repo/types";
+import { MAlert, MButton, MFlex, MFormField, MHeading, MInput, MSpinner } from "@repo/uikit";
 import { useActionState } from "react";
 import { addVocabCatalogAction } from "@/actions/addVocabcatalog";
 import { updateVocabCatalogAction } from "@/actions/updateVocabcatalog";
@@ -13,7 +9,7 @@ type VocabCatalogFormProps = {
 	vocabCatalog?: VocabCatalog;
 };
 
-type VocabCatalogFormState = PutVocabCatalogResponse;
+type VocabCatalogFormState = PutVocabcatalogResponse;
 
 export const VocabCatalogForm = ({ vocabCatalog }: VocabCatalogFormProps) => {
 	const title = vocabCatalog
@@ -21,12 +17,19 @@ export const VocabCatalogForm = ({ vocabCatalog }: VocabCatalogFormProps) => {
 		: "Add Vocabulary Catalog";
 	const buttonText = vocabCatalog ? "Update" : "Add";
 
-	const initialState: VocabCatalogFormState = {
-		status: ApiResponseStatus.SUCCESS,
-		data: vocabCatalog,
-	};
+	const initialState: VocabCatalogFormState = vocabCatalog
+		? {
+				...vocabCatalog,
+			}
+		: {
+				id: 0,
+				title: "New Vocabulary",
+				created_at: new Date().toISOString(),
+				owner: 0,
+				language: "en",
+			};
 
-	const [state, formAction, isPending] = useActionState(
+	const [state, formAction, isPending] = useActionState<VocabCatalogFormState, PutVocabcatalogRequest>(
 		vocabCatalog ? addVocabCatalogAction : updateVocabCatalogAction,
 		initialState,
 	);
@@ -43,6 +46,8 @@ export const VocabCatalogForm = ({ vocabCatalog }: VocabCatalogFormProps) => {
 				{state.data?.id && (
 					<input type="hidden" name="id" value={state.data.id} />
 				)}
+
+				<MFormField label={"Title"} name="title" required control={<MInput name="title" defaultValue={state.} />} />
 
 				<MFlex direction="column" gap="2xl">
 					<MButton

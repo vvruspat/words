@@ -6,7 +6,11 @@ export class VocabCatalogEntity implements VocabCatalog {
 	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
-	@Column({ type: "timestamptz" })
+	@Column({
+		type: "timestamptz",
+		nullable: true,
+		default: () => "CURRENT_TIMESTAMP",
+	})
 	created_at: string;
 
 	@Column({ type: "bigint" })

@@ -1,4 +1,4 @@
-import type { ApiResponseError, paths as Paths } from "@repo/types";
+import type { paths as Paths } from "@repo/types";
 import { genericErrorMessage } from "./genericErrorMessage";
 // import { auth } from "~/auth";
 import logger from "./logger";
@@ -68,7 +68,7 @@ export const $fetch = async <U extends ValidUrl, M extends ValidMethod<U>>(
 		query?: QueryParams<U, M>;
 		noAuth?: boolean;
 	},
-): Promise<SuccessJsonResponse<U, M> | ApiResponseError> => {
+): Promise<SuccessJsonResponse<U, M>> => {
 	try {
 		const { body, query, headers } = options;
 
@@ -147,17 +147,7 @@ export const $fetch = async <U extends ValidUrl, M extends ValidMethod<U>>(
 
 		if (!res.ok) {
 			// Fail response
-			try {
-				return {
-					message: res.statusText || genericErrorMessage(res.status),
-				};
-			} catch (error) {
-				return {
-					message:
-						(error as Error).message ??
-						(res.statusText || genericErrorMessage(res.status)),
-				};
-			}
+			throw new Error(res.statusText || genericErrorMessage(res.status));
 		}
 
 		// Success response
@@ -167,8 +157,6 @@ export const $fetch = async <U extends ValidUrl, M extends ValidMethod<U>>(
 				: undefined
 		) as SuccessJsonResponse<U, M>;
 	} catch (error) {
-		return {
-			message: (error as Error).message ?? "Internal Server Error",
-		};
+		throw Error((error as Error).message ?? "Internal Server Error");
 	}
 };

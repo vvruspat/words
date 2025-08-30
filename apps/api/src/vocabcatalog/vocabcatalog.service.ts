@@ -16,13 +16,6 @@ export class VocabCatalogService {
 		offset,
 		...query
 	}: GetVocabCatalogRequestDto): Promise<VocabCatalogEntity[]> {
-		console.log("Finding all vocab catalogs with query:", {
-			where: {
-				...query,
-			},
-			skip: Number(offset ?? 0),
-			take: Number(limit ?? 10),
-		});
 		return this.vocabCatalogRepository.find({
 			where: {
 				...query,
@@ -39,17 +32,18 @@ export class VocabCatalogService {
 	}
 
 	async create(
-		catalog: Omit<VocabCatalogEntity, "id">,
+		catalog: Omit<VocabCatalogEntity, "id" | "created_at">,
 	): Promise<VocabCatalogEntity> {
 		const newCatalog = this.vocabCatalogRepository.create(catalog);
 		return this.vocabCatalogRepository.save(newCatalog);
 	}
 
-	async update(
-		catalog: Partial<VocabCatalogEntity>,
-	): Promise<VocabCatalogEntity | null> {
-		await this.vocabCatalogRepository.update({ id: catalog.id }, catalog);
-		return this.findOne(catalog.id);
+	async update({
+		id,
+		...restFields
+	}: Partial<VocabCatalogEntity>): Promise<VocabCatalogEntity | null> {
+		await this.vocabCatalogRepository.update({ id }, restFields);
+		return this.findOne(id);
 	}
 
 	async remove(id: VocabCatalogEntity["id"]): Promise<void> {

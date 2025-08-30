@@ -970,7 +970,7 @@
             "in": "query",
             "schema": {
               "format": "int64",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -1139,7 +1139,16 @@
       },
       "delete": {
         "operationId": "VocabCatalogController_remove",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -2319,7 +2328,7 @@
             "format": "date-time"
           },
           "owner": {
-            "type": "string",
+            "type": "number",
             "format": "int64"
           },
           "title": {
@@ -2378,12 +2387,8 @@
       "PostVocabCatalogRequestDto": {
         "type": "object",
         "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
           "owner": {
-            "type": "string",
+            "type": "number",
             "format": "int64"
           },
           "title": {
@@ -2402,7 +2407,6 @@
           }
         },
         "required": [
-          "created_at",
           "owner",
           "title",
           "language"
@@ -2420,7 +2424,7 @@
             "format": "date-time"
           },
           "owner": {
-            "type": "string",
+            "type": "number",
             "format": "int64"
           },
           "title": {
@@ -2458,7 +2462,7 @@
             "format": "date-time"
           },
           "owner": {
-            "type": "string",
+            "type": "number",
             "format": "int64"
           },
           "title": {
@@ -2489,7 +2493,7 @@
             "format": "date-time"
           },
           "owner": {
-            "type": "string",
+            "type": "number",
             "format": "int64"
           },
           "title": {
