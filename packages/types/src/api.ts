@@ -276,6 +276,86 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/auth/signin": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["AuthController_signin"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/signup": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["AuthController_signup"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/reset-password": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get: operations["AuthController_sendResetPasswordEmail"];
+		put: operations["AuthController_resetPassword"];
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/verify-email": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get: operations["AuthController_sendVerificationEmail"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/refresh-token": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["AuthController_refreshToken"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -769,6 +849,36 @@ export interface components {
 			word: string;
 			translation: string;
 			language: string;
+		};
+		PostSignInRequestDto: {
+			email: string;
+			/**
+			 * @description User password
+			 * @example Strong#Password123
+			 */
+			password: string;
+		};
+		PostSignUpRequestDto: {
+			email: string;
+			name: string;
+			/**
+			 * @description User password
+			 * @example Strong#Password123
+			 */
+			password: string;
+		};
+		PutResetPasswordRequestDto: {
+			/**
+			 * @description User password
+			 * @example Strong#Password123
+			 */
+			new_password: string;
+			/** @description Password reset token */
+			token: string;
+		};
+		PostRefreshTokenRequestDto: {
+			/** @description Refresh token */
+			refresh_token: string;
 		};
 	};
 	responses: never;
@@ -1836,6 +1946,129 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["PostWordTranslationResponseDto"];
 				};
+			};
+		};
+	};
+	AuthController_signin: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostSignInRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_signup: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostSignUpRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_sendResetPasswordEmail: {
+		parameters: {
+			query: {
+				email: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_resetPassword: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutResetPasswordRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_sendVerificationEmail: {
+		parameters: {
+			query: {
+				/** @description Email verification token */
+				token: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_refreshToken: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostRefreshTokenRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};

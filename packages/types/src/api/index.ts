@@ -1,3 +1,4 @@
+export * from "./auth";
 export * from "./learning";
 export * from "./root";
 export * from "./topic";

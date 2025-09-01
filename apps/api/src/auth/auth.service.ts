@@ -91,7 +91,17 @@ export class AuthService {
 			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
 		});
 
-		const user = await this.userService.findOne(decoded.sub);
+		const { exp, sub } = decoded;
+
+		if (Date.now() >= exp * 1000) {
+			throw new UnauthorizedException("Token expired");
+		}
+
+		if (!sub) {
+			throw new UnauthorizedException();
+		}
+
+		const user = await this.userService.findOne(sub);
 
 		if (!user) {
 			throw new UnauthorizedException();
@@ -105,7 +115,7 @@ export class AuthService {
 		return this.signIn(user.email, user.password);
 	}
 
-	async confirmEmail(token: string) {
+	async verifyEmail(token: string) {
 		const decoded = this.jwtService.verify(token, {
 			secret: this.configService.get<string>("JWT_SECRET"),
 		});

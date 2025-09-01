@@ -913,6 +913,89 @@ paths:
                 $ref: '#/components/schemas/PostWordTranslationResponseDto'
       summary: Create words translation
       tags: *ref_6
+  /auth/signin:
+    post:
+      operationId: AuthController_signin
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostSignInRequestDto'
+      responses:
+        '200':
+          description: ''
+      tags: &ref_7
+        - auth
+  /auth/signup:
+    post:
+      operationId: AuthController_signup
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostSignUpRequestDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_7
+  /auth/reset-password:
+    put:
+      operationId: AuthController_resetPassword
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutResetPasswordRequestDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_7
+    get:
+      operationId: AuthController_sendResetPasswordEmail
+      parameters:
+        - name: email
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_7
+  /auth/verify-email:
+    get:
+      operationId: AuthController_sendVerificationEmail
+      parameters:
+        - name: token
+          required: true
+          in: query
+          description: Email verification token
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_7
+  /auth/refresh-token:
+    post:
+      operationId: AuthController_refreshToken
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRefreshTokenRequestDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_7
 info:
   title: My API
   description: API description
@@ -1914,3 +1997,51 @@ components:
         - word
         - translation
         - language
+    PostSignInRequestDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+          description: User password
+          example: Strong#Password123
+      required:
+        - email
+        - password
+    PostSignUpRequestDto:
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        password:
+          type: string
+          description: User password
+          example: Strong#Password123
+      required:
+        - email
+        - name
+        - password
+    PutResetPasswordRequestDto:
+      type: object
+      properties:
+        new_password:
+          type: string
+          description: User password
+          example: Strong#Password123
+        token:
+          type: string
+          description: Password reset token
+      required:
+        - new_password
+        - token
+    PostRefreshTokenRequestDto:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+          description: Refresh token
+      required:
+        - refresh_token
