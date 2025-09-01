@@ -32,7 +32,13 @@ export class UserService {
 		return this.userRepository.findOneBy({ id });
 	}
 
-	async create(user: Omit<UserEntity, "id">): Promise<UserEntity> {
+	async findOneByEmail(email: UserEntity["email"]): Promise<UserEntity> {
+		return this.userRepository.findOneBy({ email });
+	}
+
+	async create(
+		user: Omit<UserEntity, "id" | "created_at">,
+	): Promise<UserEntity> {
 		const newUser = this.userRepository.create(user);
 		return this.userRepository.save(newUser);
 	}
@@ -44,5 +50,9 @@ export class UserService {
 
 	async remove(id: UserEntity["id"]): Promise<void> {
 		await this.userRepository.delete(id);
+	}
+
+	async setEmailVerified(id: UserEntity["id"]): Promise<void> {
+		await this.userRepository.update(id, { email_verified: true });
 	}
 }

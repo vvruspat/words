@@ -1,27 +1,176 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
+import {
+	PostSignInResponseDto,
+	PostSignUpRequestDto,
+	PostSignUpResponseDto,
+} from "~/dto";
+import { MailerService, MailTemplate } from "~/mailer/mailer.service";
 import { UserService } from "../user/user.service";
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly userService: UserService) {}
+	constructor(
+		private readonly userService: UserService,
+		private readonly configService: ConfigService,
+		private readonly jwtService: JwtService,
+		private readonly mailerService: MailerService,
+	) {}
 
 	async validateUser(email: string, password: string) {
-		const users = await this.userService.findAll({
-			limit: 1,
-			offset: 0,
-			email,
-		});
-		if (!users[0]) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
 			throw new UnauthorizedException("Invalid login or password");
 		}
-		const isMatch = await bcrypt.compare(password, users[0].password);
+		const isMatch = await bcrypt.compare(password, user.password);
 		if (!isMatch) {
 			throw new UnauthorizedException("Invalid login or password");
 		}
 
-		delete users[0].password; // Remove password from the response for security
+		delete user.password;
 
-		return users[0];
+		return user;
+	}
+
+	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
+		const user = await this.userService.findOneByEmail(email);
+		if (user?.password !== bcrypt(pass)) {
+			throw new UnauthorizedException();
+		}
+
+		const payload = { sub: user.id, email: user.email };
+		const accessToken = this.jwtService.sign(payload, {
+			expiresIn:
+				this.configService.get<string | number>("JWT_EXPIRES_IN") || "1h",
+			secret: this.configService.get<string>("JWT_SECRET"),
+		});
+		const refreshToken = this.jwtService.sign(payload, {
+			expiresIn:
+				this.configService.get<string | number>("JWT_REFRESH_EXPIRES_IN") ||
+				"7d",
+			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
+		});
+
+		delete user.password;
+
+		const result = {
+			user,
+			access_token: accessToken,
+			refresh_token: refreshToken,
+		};
+
+		return result;
+	}
+
+	async signUp(
+		name: PostSignUpRequestDto["name"],
+		email: PostSignUpRequestDto["email"],
+		password: PostSignUpRequestDto["password"],
+	): Promise<PostSignUpResponseDto> {
+		const hashedPassword = await bcrypt.hash(password, 10);
+
+		await this.userService.create({
+			email,
+			name,
+			password: hashedPassword,
+		});
+
+		this.mailerService.sendMail({
+			to: [{ email }],
+			templateId: MailTemplate.CONFIRM_EMAIL,
+		});
+
+		return this.signIn(email, password);
+	}
+
+	async refreshToken(token: string): Promise<PostSignInResponseDto> {
+		const decoded = this.jwtService.verify(token, {
+			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
+		});
+
+		const user = await this.userService.findOne(decoded.sub);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.CONFIRM_EMAIL,
+		});
+
+		return this.signIn(user.email, user.password);
+	}
+
+	async confirmEmail(token: string) {
+		const decoded = this.jwtService.verify(token, {
+			secret: this.configService.get<string>("JWT_SECRET"),
+		});
+		const { email, exp } = decoded;
+		if (Date.now() >= exp * 1000) {
+			throw new UnauthorizedException("Token expired");
+		}
+		const user = await this.userService.findOneByEmail(email);
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		await this.userService.setEmailVerified(user.id);
+	}
+
+	async sendResetPasswordEmail(email: string) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const token = this.jwtService.sign(
+			{ sub: user.id, email: user.email },
+			{
+				expiresIn:
+					this.configService.get<string | number>(
+						"RESET_PASSWORD_EXPIRES_IN",
+					) || "1h",
+				secret: this.configService.get<string>("JWT_SECRET"),
+			},
+		);
+
+		this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.RESET_PASSWORD,
+			params: {
+				name: user.name,
+				link: `${this.configService.get("DOMAIN")}/reset-password?token=${token}`,
+			},
+		});
+	}
+
+	async resetPassword(newPassword: string, token: string) {
+		const decoded = this.jwtService.verify(token, {
+			secret: this.configService.get<string>("JWT_SECRET"),
+		});
+
+		const { email, exp } = decoded;
+
+		if (Date.now() >= exp * 1000) {
+			throw new UnauthorizedException("Token expired");
+		}
+
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+		await this.userService.update({
+			id: user.id,
+			password: hashedPassword,
+		});
 	}
 }

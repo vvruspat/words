@@ -17,6 +17,9 @@ export class UserEntity implements User {
 
 	@Column({ nullable: true })
 	password?: string;
+
+	@Column({ nullable: true, default: false })
+	email_verified?: boolean;
 }
 
 export { UserEntity as User };
