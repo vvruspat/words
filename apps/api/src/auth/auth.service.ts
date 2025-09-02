@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+	BadRequestException,
+	Injectable,
+	UnauthorizedException,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
@@ -19,26 +23,13 @@ export class AuthService {
 		private readonly mailerService: MailerService,
 	) {}
 
-	async validateUser(email: string, password: string) {
-		const user = await this.userService.findOneByEmail(email);
-
-		if (!user) {
-			throw new UnauthorizedException("Invalid login or password");
-		}
-		const isMatch = await bcrypt.compare(password, user.password);
-		if (!isMatch) {
-			throw new UnauthorizedException("Invalid login or password");
-		}
-
-		delete user.password;
-
-		return user;
-	}
-
 	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
 		const user = await this.userService.findOneByEmail(email);
-		if (user?.password !== bcrypt(pass)) {
-			throw new UnauthorizedException();
+
+		const isMatch = await bcrypt.compare(pass, user?.password);
+
+		if (!isMatch) {
+			throw new UnauthorizedException("Invalid credentials");
 		}
 
 		const payload = { sub: user.id, email: user.email };
@@ -70,7 +61,15 @@ export class AuthService {
 		email: PostSignUpRequestDto["email"],
 		password: PostSignUpRequestDto["password"],
 	): Promise<PostSignUpResponseDto> {
-		const hashedPassword = await bcrypt.hash(password, 10);
+		const salt = Number(this.configService.get<string>("BCRYPT_SALT_ROUNDS"));
+
+		const hashedPassword = await bcrypt.hash(password, salt);
+
+		const existingUser = await this.userService.findOneByEmail(email);
+
+		if (existingUser) {
+			throw new BadRequestException("User already exists");
+		}
 
 		await this.userService.create({
 			email,
@@ -78,9 +77,23 @@ export class AuthService {
 			password: hashedPassword,
 		});
 
+		const verifyEmailToken = this.jwtService.sign(
+			{ email },
+			{
+				expiresIn:
+					this.configService.get<string | number>("VERIFY_EMAIL_EXPIRES_IN") ||
+					"1h",
+				secret: this.configService.get<string>("JWT_SECRET"),
+			},
+		);
+
 		this.mailerService.sendMail({
 			to: [{ email }],
 			templateId: MailTemplate.CONFIRM_EMAIL,
+			params: {
+				name,
+				link: `${this.configService.get("DOMAIN")}/verify-email?token=${verifyEmailToken}`,
+			},
 		});
 
 		return this.signIn(email, password);
@@ -106,11 +119,6 @@ export class AuthService {
 		if (!user) {
 			throw new UnauthorizedException();
 		}
-
-		this.mailerService.sendMail({
-			to: [{ email: user.email }],
-			templateId: MailTemplate.CONFIRM_EMAIL,
-		});
 
 		return this.signIn(user.email, user.password);
 	}

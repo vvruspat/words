@@ -1,4 +1,9 @@
-import Brevo from "@getbrevo/brevo";
+import {
+	SendSmtpEmailAttachmentInner,
+	SendSmtpEmailSender,
+	SendSmtpEmailToInner,
+	TransactionalEmailsApi,
+} from "@getbrevo/brevo";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
@@ -9,27 +14,29 @@ export enum MailTemplate {
 }
 
 type MailOptions = {
-	to: Brevo.SendSmtpEmailToInner[];
-	sender?: Brevo.SendSmtpEmailSender;
+	to: SendSmtpEmailToInner[];
+	sender?: SendSmtpEmailSender;
 	subject?: string;
-	attachment?: Brevo.SendSmtpEmailAttachmentInner[];
+	attachment?: SendSmtpEmailAttachmentInner[];
 } & (
 	| {
 			templateId: MailTemplate.CONFIRM_EMAIL;
-			params?: never;
+			params: {
+				name: string;
+				link: string;
+			};
 	  }
 	| {
 			templateId: MailTemplate.RESET_PASSWORD;
-			params?: {
+			params: {
 				name?: string;
 				link: string;
 			};
 	  }
 	| {
 			templateId: MailTemplate.WELCOME;
-			params?: {
-				name?: string;
-				link: string;
+			params: {
+				name: string;
 			};
 	  }
 );
@@ -48,7 +55,7 @@ export class MailerService {
 	}: MailOptions): Promise<void> {
 		const apiKey = this.config.get("BREVO_API_KEY");
 
-		const apiInstance = new Brevo.TransactionalEmailsApi();
+		const apiInstance = new TransactionalEmailsApi();
 		apiInstance.setApiKey(0, apiKey);
 
 		await apiInstance.sendTransacEmail({
