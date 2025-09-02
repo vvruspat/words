@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { MIconCaretDown } from "../../atoms/MIcon/icons/MIconCaretDown";
 import { MIconCaretRight } from "../../atoms/MIcon/icons/MIconCaretRight";
 import MAccordion from "./MAccordion";

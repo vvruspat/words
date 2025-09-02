@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { MIconStar } from "../MIcon/icons/MIconStar";
 import MBadge from "./MBadge";

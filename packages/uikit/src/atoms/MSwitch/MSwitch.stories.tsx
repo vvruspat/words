@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { MIconCheck } from "../MIcon/icons/MIconCheck";
 import MSwitch from "./MSwitch";

@@ -1,4 +1,4 @@
-import type { StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react-vite";
 
 import { MIconBracketsSquare } from "../MIcon/icons/MIconBracketsSquare";
 import MFileInput from "./MFileInput";

@@ -1,4 +1,4 @@
-import type { ArgTypes, Meta, StoryObj } from "@storybook/react";
+import type { ArgTypes, Meta, StoryObj } from "@storybook/react-vite";
 
 import { MIconBracketsSquare } from "../MIcon/icons/MIconBracketsSquare";
 import MInput from "./MInput";

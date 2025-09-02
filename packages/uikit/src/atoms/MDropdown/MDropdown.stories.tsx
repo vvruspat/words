@@ -1,5 +1,5 @@
-import { useArgs } from "@storybook/preview-api";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useArgs } from "storybook/preview-api";
 import MButton from "../MButton/MButton";
 import MFlex from "../MFlex/MFlex";
 import MText from "../MText/MText";

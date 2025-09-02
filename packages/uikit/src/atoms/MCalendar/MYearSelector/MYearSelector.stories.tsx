@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import MYearSelector from "./MYearSelector";
 
 const meta: Meta<typeof MYearSelector> = {

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import MButton from "../MButton/MButton";
 import MFlex from "../MFlex/MFlex";

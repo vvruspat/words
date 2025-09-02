@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import MCalendar from "./MCalendar";
 
 const meta: Meta<typeof MCalendar> = {

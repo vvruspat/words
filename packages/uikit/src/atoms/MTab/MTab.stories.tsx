@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { MIconBracketsSquare } from "../MIcon/icons/MIconBracketsSquare";
 import MTab from "./MTab";

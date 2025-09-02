@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import MFlex from "../MFlex/MFlex";
 import { MIconArrowFatLinesRight } from "../MIcon/icons/MIconArrowFatLinesRight";
