@@ -12,15 +12,13 @@ export const MHeading = ({
 	className,
 	...restProps
 }: HeadingProps) => {
-	const Component = mode ? (
-		createElement(
-			mode,
-			{ className: clsx(styles.heading, className), ...restProps },
-			children,
-		)
-	) : (
-		<></>
-	);
+	const Component = mode
+		? createElement(
+				mode,
+				{ className: clsx(styles.heading, className), ...restProps },
+				children,
+			)
+		: null;
 
 	return Component;
 };

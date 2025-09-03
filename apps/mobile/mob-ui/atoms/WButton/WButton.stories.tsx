@@ -1,11 +1,13 @@
 import { type Meta, type StoryObj } from "@storybook/react-native";
-
 import { Text, View } from "react-native";
-import { fn } from "storybook/test";
+import { expect, fn } from "storybook/test";
 
 import { WButton } from "./WButton";
 
+const mockPress = fn();
+
 const meta = {
+	title: "Atoms/WButton",
 	component: WButton,
 	decorators: [
 		(Story) => (
@@ -14,8 +16,22 @@ const meta = {
 			</View>
 		),
 	],
+	args: {
+		onPress: mockPress,
+	},
+	play: async ({ canvas, userEvent }) => {
+		const text = await canvas.getByText(/.*Button/);
+
+		expect(text).toBeInTheDocument();
+
+		const button = await canvas.getByTestId(/.*-button/);
+
+		await userEvent.click(button);
+
+		expect(mockPress).toBeCalledTimes(1);
+	},
+
 	tags: ["autodocs"],
-	args: { onPress: fn() },
 } satisfies Meta<typeof WButton>;
 
 export default meta;
@@ -24,6 +40,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
+		testID: "primary-button",
 		mode: "primary",
 		children: <Text>Primary Button</Text>,
 	},
@@ -31,6 +48,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
 	args: {
+		testID: "secondary-button",
 		mode: "secondary",
 		children: <Text>Secondary Button</Text>,
 	},
@@ -38,6 +56,7 @@ export const Secondary: Story = {
 
 export const Tertiary: Story = {
 	args: {
+		testID: "tertiary-button",
 		mode: "tertiary",
 		children: <Text>Tertiary Button</Text>,
 	},
@@ -45,6 +64,7 @@ export const Tertiary: Story = {
 
 export const Red: Story = {
 	args: {
+		testID: "red-button",
 		mode: "red",
 		children: <Text>Red Button</Text>,
 	},
@@ -52,6 +72,7 @@ export const Red: Story = {
 
 export const Green: Story = {
 	args: {
+		testID: "green-button",
 		mode: "green",
 		children: <Text>Green Button</Text>,
 	},
@@ -59,6 +80,7 @@ export const Green: Story = {
 
 export const Purple: Story = {
 	args: {
+		testID: "purple-button",
 		mode: "purple",
 		children: <Text>Purple Button</Text>,
 	},
@@ -66,6 +88,7 @@ export const Purple: Story = {
 
 export const Dark: Story = {
 	args: {
+		testID: "dark-button",
 		mode: "dark",
 		children: <Text>Dark Button</Text>,
 	},
