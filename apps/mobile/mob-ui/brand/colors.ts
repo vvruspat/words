@@ -5,10 +5,16 @@ export const Colors = {
 		disabled: "#637A19",
 	},
 	greys: {
+		whiteAlpha60: "rgba(255, 255, 255, 0.6)",
 		white: "#FFFFFF",
 		grey1: "#F1F2F4",
 		grey2: "#E0E2E6",
 		grey3: "#D2D5DA",
+		grey4: "#30343B",
+		grey5: "#A0A5B1",
+		grey6: "#7E8695",
+		grey7: "#636A79",
+		grey8: "#494F5A",
 	},
 	accents: {
 		pink: "#F9A1FF",

@@ -133,18 +133,39 @@ for (const [dir, filesSet] of entries) {
 	writeFileSafely(path.join(dir, "index.ts"), indexContent);
 }
 
-// Generate a top-level index.ts that re-exports each top-level folder under the api output
-const topLevelDirs = new Set<string>();
-
+// Generate index.ts for every subfolder (including intermediate parents)
+const allDirs = new Set<string>();
 for (const dir of exportsByDir.keys()) {
-	const rel = path.relative(outDir, dir);
-	const first = rel.split(path.sep)[0];
-	if (first) topLevelDirs.add(first);
+	let cur = dir;
+	while (true) {
+		if (!cur.startsWith(outDir)) break;
+		allDirs.add(cur);
+		if (cur === outDir) break;
+		cur = path.dirname(cur);
+	}
 }
+allDirs.add(outDir); // ensure root is present
 
-let rootIndexContent = "";
-for (const d of Array.from(topLevelDirs).sort()) {
-	rootIndexContent += `export * from "./${d}";\n`;
+const dirsArray = Array.from(allDirs).sort();
+
+for (const dir of dirsArray) {
+	const filesSet = exportsByDir.get(dir) ?? new Set<string>();
+	const files = Array.from(filesSet).sort();
+
+	let indexContent = "";
+	for (const f of files) {
+		indexContent += `export * from "./${f}";\n`;
+	}
+
+	// immediate child directories
+	const childDirs = dirsArray.filter(
+		(d) => d !== dir && path.dirname(d) === dir,
+	);
+	for (const child of childDirs) {
+		const rel = path.relative(dir, child).replace(/\\/g, "/");
+		if (!rel) continue;
+		indexContent += `export * from "./${rel}";\n`;
+	}
+
+	writeFileSafely(path.join(dir, "index.ts"), indexContent);
 }
-
-writeFileSafely(path.join(outDir, "index.ts"), rootIndexContent);
