@@ -7,8 +7,8 @@ export const ClearIcon = (props: SvgProps) => (
 			fill="currentColor"
 		/>
 		<Path
-			fill-rule="evenodd"
-			clip-rule="evenodd"
+			fillRule="evenodd"
+			clipRule="evenodd"
 			d="M22.002 12C22.002 17.5228 17.5248 22 12.002 22C6.47911 22 2.00195 17.5228 2.00195 12C2.00195 6.47715 6.47911 2 12.002 2C17.5248 2 22.002 6.47715 22.002 12ZM20.002 12C20.002 16.4183 16.4202 20 12.002 20C7.58368 20 4.00195 16.4183 4.00195 12C4.00195 7.58172 7.58368 4 12.002 4C16.4202 4 20.002 7.58172 20.002 12Z"
 			fill="currentColor"
 		/>

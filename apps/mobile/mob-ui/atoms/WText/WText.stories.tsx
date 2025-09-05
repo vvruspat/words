@@ -1,10 +1,8 @@
 import { type Meta, type StoryObj } from "@storybook/react-native";
 import { View } from "react-native";
-import { expect, fn } from "storybook/test";
+import { expect } from "storybook/test";
 
 import { WText } from "./WText";
-
-const onChangeTextMock = fn();
 
 const meta = {
 	title: "Atoms/WText",
