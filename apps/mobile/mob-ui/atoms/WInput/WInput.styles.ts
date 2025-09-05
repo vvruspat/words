@@ -21,19 +21,7 @@ export const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderRadius: 16,
 		padding: 18,
-		transitionProperty: "box-shadow, border-color",
-		transitionDuration: "0.2s",
-		transitionTimingFunction: "ease-in-out",
-	},
-
-	inputRowDefaultFocused: {
-		boxShadow: `0 0 8px 0  ${Colors.greys.grey3}`,
-	},
-	inputRowErrorFocused: {
-		boxShadow: `0 0 8px 0  ${Colors.accents.red}`,
-	},
-	inputRowSuccessFocused: {
-		boxShadow: `0 0 8px 0  ${Colors.primary.base}`,
+		shadowOffset: { width: 0, height: 0 },
 	},
 
 	inputRowPlaceholder: {
@@ -42,12 +30,15 @@ export const styles = StyleSheet.create({
 
 	inputRowDefault: {
 		borderColor: Colors.greys.grey3,
+		shadowColor: Colors.greys.grey3,
 	},
 	inputRowError: {
 		borderColor: Colors.accents.red,
+		shadowColor: Colors.accents.red,
 	},
 	inputRowSuccess: {
 		borderColor: Colors.primary.base,
+		shadowColor: Colors.primary.base,
 	},
 
 	left: {
@@ -59,30 +50,32 @@ export const styles = StyleSheet.create({
 	input: {
 		flex: 1,
 		fontSize: typography.fontSize.md,
-		lineHeight: typography.lineHeight.md,
+		height: typography.lineHeight.md,
 		color: Colors.greys.grey3,
+		alignContent: "center",
+		textAlignVertical: "center",
 		padding: 0,
+		/** web only */
 		outlineWidth: 0,
 	},
+
 	actionButton: {
 		paddingHorizontal: 8,
 		paddingVertical: 0,
 		justifyContent: "center",
 		alignItems: "center",
 	},
+
 	description: {
-		fontSize: typography.fontSize.xs,
+		marginTop: 6,
 	},
 	descriptionDefault: {
-		marginTop: 6,
 		color: Colors.greys.grey5,
 	},
 	descriptionError: {
-		marginTop: 6,
 		color: Colors.accents.red,
 	},
 	descriptionSuccess: {
-		marginTop: 6,
 		color: Colors.primary.base,
 	},
 });

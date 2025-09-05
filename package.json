@@ -7,7 +7,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "turbo run dev",
+    "ios": "turbo run ios",
     "storybook": "turbo run storybook",
+    "storybook:expo:ios": "turbo run storybook:expo:ios",
+    "storybook:expo:android": "turbo run storybook:expo:android",
     "generate": "turbo run generate --filter=api && turbo run generate --filter=@repo/types",
     "build": "turbo run build",
     "split": "turbo run split",
@@ -28,17 +31,17 @@
   "engines": {
     "node": ">=18"
   },
-  "overrides": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
-  },
   "packageManager": "npm@10.9.1",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "dependencies": {
-    "pino": "^9.9.0",
-    "react": "^19.1.1"
+    "cross-env": "^10.0.0",
+    "pino": "^9.9.0"
+  },
+  "overrides": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   }
 }

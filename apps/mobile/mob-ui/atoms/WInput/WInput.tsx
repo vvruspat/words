@@ -5,14 +5,18 @@ import React, {
 	useState,
 } from "react";
 import {
-	Text,
+	Animated,
+	Easing,
+	NativeSyntheticEvent,
 	TextInput,
+	TextInputFocusEventData,
 	TextInputProps,
 	TextStyle,
 	TouchableOpacity,
 	View,
 	ViewStyle,
 } from "react-native";
+import { WText } from "../WText";
 import { ClearIcon } from "./icons/ClearIcon";
 import { EyeCloseIcon } from "./icons/EyeCloseIcon";
 import { EyeOpenIcon } from "./icons/EyeOpenIcon";
@@ -49,11 +53,53 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 	useImperativeHandle(ref, () => internalRef.current as TextInput);
 
 	const [isSecure, setIsSecure] = useState<boolean>(!!secureTextEntry);
-	const [isFocused, setIsFocused] = useState<boolean>(false);
+
+	const anim = useRef(new Animated.Value(0)).current; // 0 = unfocused, 1 = focused
+
+	const shadowOpacity = anim.interpolate({
+		inputRange: [0, 1],
+		outputRange: [0, 1],
+	});
+
+	const shadowRadius = anim.interpolate({
+		inputRange: [0, 1],
+		outputRange: [0, 4],
+	});
+
+	const elevation = anim.interpolate({
+		inputRange: [0, 1],
+		outputRange: [0, 4],
+	});
 
 	const handleClear = () => {
 		onChangeText?.("");
 		internalRef.current?.focus();
+	};
+
+	const handleInputFocus = (
+		e: NativeSyntheticEvent<TextInputFocusEventData>,
+	) => {
+		Animated.timing(anim, {
+			toValue: 1,
+			duration: 200,
+			easing: Easing.inOut(Easing.ease),
+			// borderColor + shadow need useNativeDriver to be false
+			useNativeDriver: false,
+		}).start();
+		rest.onFocus?.(e);
+	};
+
+	const handleInputBlur = (
+		e: NativeSyntheticEvent<TextInputFocusEventData>,
+	) => {
+		Animated.timing(anim, {
+			toValue: 0,
+			duration: 200,
+			easing: Easing.inOut(Easing.ease),
+			// borderColor + shadow need useNativeDriver to be false
+			useNativeDriver: false,
+		}).start();
+		rest.onBlur?.(e);
 	};
 
 	const styleMode = (status.charAt(0).toUpperCase() + status.slice(1)) as
@@ -63,15 +109,24 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 
 	return (
 		<View style={[styles.wrapper, containerStyle]}>
-			{label ? <Text style={styles.label}>{label}</Text> : null}
-			<View
+			{label ? (
+				<WText mode="primary" size="sm" style={styles.label}>
+					{label}
+				</WText>
+			) : null}
+			<Animated.View
 				style={[
 					styles.inputRow,
 					styles[`inputRow${styleMode}`],
-					isFocused && styles[`inputRow${styleMode}Focused`],
+					{
+						shadowOpacity,
+						shadowRadius,
+						elevation,
+					},
 				]}
 			>
 				{before ? <View style={styles.left}>{before}</View> : null}
+
 				<TextInput
 					ref={internalRef}
 					style={[styles.input, inputStyle]}
@@ -79,8 +134,8 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 					secureTextEntry={isSecure}
 					value={value}
 					onChangeText={onChangeText}
-					onFocus={() => setIsFocused(true)}
-					onBlur={() => setIsFocused(false)}
+					onFocus={handleInputFocus}
+					onBlur={handleInputBlur}
 					underlineColorAndroid="transparent"
 					{...rest}
 				/>
@@ -110,11 +165,15 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 				)}
 
 				{after ? <View style={styles.right}>{after}</View> : null}
-			</View>
+			</Animated.View>
 			{description ? (
-				<Text style={[styles.description, styles[`description${styleMode}`]]}>
+				<WText
+					size="xs"
+					mode="tertiary"
+					style={[styles.description, styles[`description${styleMode}`]]}
+				>
 					{description}
-				</Text>
+				</WText>
 			) : null}
 		</View>
 	);
