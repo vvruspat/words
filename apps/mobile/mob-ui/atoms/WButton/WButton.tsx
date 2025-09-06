@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { wButtonStyles } from "./WButton.styles";
 
-type WButtonProps = PressableProps & {
+export interface WButtonProps extends PressableProps {
 	mode:
 		| "primary"
 		| "secondary"
@@ -16,7 +16,7 @@ type WButtonProps = PressableProps & {
 		| "green"
 		| "purple"
 		| "dark";
-};
+}
 
 export const WButton = ({ mode, children, ...props }: WButtonProps) => {
 	const mapChildren = (node: React.ReactNode) =>

@@ -1,5 +1,6 @@
 import React, {
 	forwardRef,
+	useEffect,
 	useImperativeHandle,
 	useRef,
 	useState,
@@ -16,21 +17,27 @@ import {
 	View,
 	ViewStyle,
 } from "react-native";
-import { WText } from "../WText";
+import { typography } from "@/mob-ui/brand/typography";
+import { WText, WTextProps } from "../WText";
 import { ClearIcon } from "./icons/ClearIcon";
 import { EyeCloseIcon } from "./icons/EyeCloseIcon";
 import { EyeOpenIcon } from "./icons/EyeOpenIcon";
 import { styles } from "./WInput.styles";
 
-interface WInputProps extends TextInputProps {
+export interface WInputProps extends TextInputProps {
 	label?: string;
 	status?: "default" | "error" | "success";
 	description?: string;
 	containerStyle?: ViewStyle;
+	inputRowStyle?: ViewStyle;
 	inputStyle?: TextStyle;
 	before?: React.ReactNode;
 	after?: React.ReactNode;
 	showClear?: boolean;
+	focused?: boolean;
+	secureTextEntrySwitchable?: boolean;
+	fullWidth?: boolean;
+	textProps?: WTextProps;
 }
 
 export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
@@ -38,14 +45,20 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 		label,
 		status = "default",
 		containerStyle,
+		inputRowStyle,
 		inputStyle,
 		before,
 		after,
 		showClear = true,
 		secureTextEntry,
+		secureTextEntrySwitchable = true,
 		description,
 		value,
+		defaultValue,
+		fullWidth = true,
+		focused = false,
 		onChangeText,
+		textProps,
 		...rest
 	} = props;
 
@@ -53,6 +66,15 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 	useImperativeHandle(ref, () => internalRef.current as TextInput);
 
 	const [isSecure, setIsSecure] = useState<boolean>(!!secureTextEntry);
+	const [internalValue, setInternalValue] = useState(
+		defaultValue ?? value ?? "",
+	);
+
+	useEffect(() => {
+		if (value !== undefined) {
+			setInternalValue(value);
+		}
+	}, [value]);
 
 	const anim = useRef(new Animated.Value(0)).current; // 0 = unfocused, 1 = focused
 
@@ -71,9 +93,25 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 		outputRange: [0, 4],
 	});
 
+	const styleMode = (status.charAt(0).toUpperCase() + status.slice(1)) as
+		| "Default"
+		| "Error"
+		| "Success";
+
+	const fontSize = textProps?.size
+		? typography.fontSize[textProps.size]
+		: typography.fontSize.md;
+
 	const handleClear = () => {
-		onChangeText?.("");
+		handleTextChange("");
 		internalRef.current?.focus();
+	};
+
+	const handleTextChange = (text: string) => {
+		onChangeText?.(text);
+		if (value === undefined) {
+			setInternalValue(text);
+		}
 	};
 
 	const handleInputFocus = (
@@ -83,7 +121,6 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 			toValue: 1,
 			duration: 200,
 			easing: Easing.inOut(Easing.ease),
-			// borderColor + shadow need useNativeDriver to be false
 			useNativeDriver: false,
 		}).start();
 		rest.onFocus?.(e);
@@ -96,24 +133,35 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 			toValue: 0,
 			duration: 200,
 			easing: Easing.inOut(Easing.ease),
-			// borderColor + shadow need useNativeDriver to be false
 			useNativeDriver: false,
 		}).start();
 		rest.onBlur?.(e);
 	};
 
-	const styleMode = (status.charAt(0).toUpperCase() + status.slice(1)) as
-		| "Default"
-		| "Error"
-		| "Success";
+	useEffect(() => {
+		if (focused) {
+			internalRef.current?.focus();
+		} else {
+			internalRef.current?.blur();
+		}
+	}, [focused]);
+
+	useEffect(() => {
+		if (!secureTextEntrySwitchable) {
+			setIsSecure(!!secureTextEntry);
+		}
+	}, [secureTextEntry, secureTextEntrySwitchable]);
 
 	return (
-		<View style={[styles.wrapper, containerStyle]}>
+		<View
+			style={[styles.wrapper, fullWidth && styles.fullWidth, containerStyle]}
+		>
 			{label ? (
 				<WText mode="primary" size="sm" style={styles.label}>
 					{label}
 				</WText>
 			) : null}
+
 			<Animated.View
 				style={[
 					styles.inputRow,
@@ -123,24 +171,35 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 						shadowRadius,
 						elevation,
 					},
+					inputRowStyle,
 				]}
 			>
 				{before ? <View style={styles.left}>{before}</View> : null}
 
 				<TextInput
 					ref={internalRef}
-					style={[styles.input, inputStyle]}
+					allowFontScaling={false}
+					style={[
+						styles.input,
+						styles[`${textProps?.mode ?? "primary"}`],
+						styles[`${textProps?.weight ?? "regular"}`],
+						{
+							fontSize,
+						},
+						inputStyle,
+					]}
 					placeholderTextColor={styles.inputRowPlaceholder.color}
 					secureTextEntry={isSecure}
 					value={value}
-					onChangeText={onChangeText}
+					defaultValue={defaultValue}
+					onChangeText={handleTextChange}
 					onFocus={handleInputFocus}
 					onBlur={handleInputBlur}
 					underlineColorAndroid="transparent"
 					{...rest}
 				/>
 
-				{showClear && value && (
+				{showClear && internalValue && (
 					<TouchableOpacity
 						onPress={handleClear}
 						style={styles.actionButton}
@@ -150,7 +209,7 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 					</TouchableOpacity>
 				)}
 
-				{secureTextEntry && (
+				{secureTextEntry && secureTextEntrySwitchable && (
 					<TouchableOpacity
 						onPress={() => setIsSecure((s) => !s)}
 						style={styles.actionButton}
@@ -166,6 +225,7 @@ export const WInput = forwardRef<TextInput, WInputProps>((props, ref) => {
 
 				{after ? <View style={styles.right}>{after}</View> : null}
 			</Animated.View>
+
 			{description ? (
 				<WText
 					size="xs"

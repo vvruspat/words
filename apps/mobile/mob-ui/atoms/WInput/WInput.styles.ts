@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "@/mob-ui/brand/colors";
 import { typography } from "@/mob-ui/brand/typography";
+import { styles as wTextStyles } from "../WText/WText.styles";
 
 export const styles = StyleSheet.create({
 	wrapper: {
-		width: "100%",
 		marginVertical: 6,
+	},
+	fullWidth: {
+		width: "100%",
 	},
 	label: {
 		marginBottom: 6,
@@ -20,8 +23,10 @@ export const styles = StyleSheet.create({
 		borderColor: Colors.greys.grey8,
 		borderWidth: 1,
 		borderRadius: 16,
-		padding: 18,
+		paddingHorizontal: 18,
+		paddingVertical: 0,
 		shadowOffset: { width: 0, height: 0 },
+		height: 56,
 	},
 
 	inputRowPlaceholder: {
@@ -50,7 +55,6 @@ export const styles = StyleSheet.create({
 	input: {
 		flex: 1,
 		fontSize: typography.fontSize.md,
-		height: typography.lineHeight.md,
 		color: Colors.greys.grey3,
 		alignContent: "center",
 		textAlignVertical: "center",
@@ -78,4 +82,6 @@ export const styles = StyleSheet.create({
 	descriptionSuccess: {
 		color: Colors.primary.base,
 	},
+
+	...wTextStyles,
 });
