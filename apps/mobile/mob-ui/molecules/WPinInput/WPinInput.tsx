@@ -30,7 +30,7 @@ export const WPinInput = ({
 
 	useEffect(() => {
 		onChange(val.join(""));
-	}, [val]);
+	}, [val, onChange]);
 
 	const handleKeyPress = (
 		e: NativeSyntheticEvent<TextInputKeyPressEventData>,
