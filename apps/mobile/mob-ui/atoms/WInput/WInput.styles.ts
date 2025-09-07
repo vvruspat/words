@@ -4,9 +4,7 @@ import { typography } from "@/mob-ui/brand/typography";
 import { styles as wTextStyles } from "../WText/WText.styles";
 
 export const styles = StyleSheet.create({
-	wrapper: {
-		marginVertical: 6,
-	},
+	wrapper: {},
 	fullWidth: {
 		width: "100%",
 	},

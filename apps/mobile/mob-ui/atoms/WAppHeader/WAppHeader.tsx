@@ -2,7 +2,7 @@ import { SafeAreaView, View } from "react-native";
 import { Colors } from "@/mob-ui/brand/colors";
 import { WText } from "../WText";
 
-export const WAppHeader = () => {
+export const WAppHeader = ({ route }: { route: string }) => {
 	return (
 		<SafeAreaView
 			style={{
@@ -21,7 +21,7 @@ export const WAppHeader = () => {
 				}}
 			>
 				<WText size="lg" weight="bold" mode="primary">
-					My Custom Header
+					{route}
 				</WText>
 			</View>
 		</SafeAreaView>
