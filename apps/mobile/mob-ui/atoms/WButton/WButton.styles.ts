@@ -4,10 +4,9 @@ import { typography } from "@/mob-ui/brand/typography";
 
 export const wButtonStyles = StyleSheet.create({
 	container: {
-		flex: 1,
 		justifyContent: "center",
-		paddingVertical: 18,
 		paddingHorizontal: 36,
+		paddingVertical: 18,
 		width: "100%",
 		borderRadius: 16,
 		borderStyle: "solid",

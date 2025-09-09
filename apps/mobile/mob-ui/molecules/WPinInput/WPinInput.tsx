@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-	type NativeSyntheticEvent,
-	type TextInputKeyPressEventData,
-	View,
-} from "react-native";
+import { View } from "react-native";
 import { WInput, WInputProps } from "@/mob-ui/atoms";
 import { styles } from "./WPinInput.styles";
 
@@ -25,52 +21,15 @@ export const WPinInput = ({
 	const [digitStatus, setDigitStatus] = useState<WInputProps["status"][]>(
 		Array(length).fill(status),
 	);
-	const [focusedIndex, setFocusedIndex] = useState(-1);
+	const [focusedIndex, setFocusedIndex] = useState(0);
 	const [val, setValue] = useState(value?.split("") ?? Array(length).fill(""));
 
 	useEffect(() => {
 		onChange(val.join(""));
 	}, [val, onChange]);
 
-	const handleKeyPress = (
-		e: NativeSyntheticEvent<TextInputKeyPressEventData>,
-		index: number,
-	) => {
-		if (e.nativeEvent.key === "Backspace") {
-			setValue((prev) => {
-				const newValue = [...prev];
-				newValue[index] = "";
-				return newValue;
-			});
-			setDigitStatus((prev) => {
-				const newStatus = [...prev];
-				newStatus[index] = "default";
-				return newStatus;
-			});
-			setFocusedIndex(Math.max(0, index - 1));
-		} else if (e.nativeEvent.key.match(/^[0-9]$/) && index < length) {
-			setDigitStatus((prev) => {
-				const newStatus = [...prev];
-				newStatus[index] = "success";
-				return newStatus;
-			});
-			setValue((prev) => {
-				const newValue = [...prev];
-				newValue[index] = e.nativeEvent.key;
-				return newValue;
-			});
-			setFocusedIndex(Math.min(index + 1, length - 1));
-		} else {
-			if (e.nativeEvent.key === "ArrowLeft") {
-				setFocusedIndex(Math.max(0, index - 1));
-			} else if (e.nativeEvent.key === "ArrowRight") {
-				setFocusedIndex(Math.min(index + 1, length - 1));
-			}
-		}
-	};
-
 	const handleTextChange = (text: string, index: number) => {
-		if (text.length > 1) {
+		if (text.length >= 1) {
 			text.split("").forEach((char, i) => {
 				if (i + index < length && char.match(/^[0-9]$/)) {
 					setValue((prev) => {
@@ -87,6 +46,20 @@ export const WPinInput = ({
 			});
 			const nextIndex = Math.min(index + text.length, length - 1);
 			setFocusedIndex(nextIndex);
+		}
+
+		if (text.length === 0) {
+			setValue((prev) => {
+				const newValue = [...prev];
+				newValue[index] = "";
+				return newValue;
+			});
+			setDigitStatus((prev) => {
+				const newStatus = [...prev];
+				newStatus[index] = "default";
+				return newStatus;
+			});
+			setFocusedIndex(Math.max(0, index - 1));
 		}
 	};
 
@@ -106,7 +79,6 @@ export const WPinInput = ({
 					onBlur={() => setFocusedIndex(-1)}
 					autoComplete="off"
 					autoFocus={index === 0}
-					onKeyPress={(e) => handleKeyPress(e, index)}
 					onChangeText={(text) => handleTextChange(text, index)}
 					textProps={{ size: "4xl", weight: "bold", mode: "primary" }}
 					fullWidth={false}
