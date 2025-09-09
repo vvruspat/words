@@ -17,10 +17,10 @@ export default function Index() {
 					justifyContent: "center",
 				}}
 			>
-				<WButton mode="primary" onTouchEnd={() => router.push("/signin")}>
+				<WButton mode="primary" onPress={() => router.push("/signin")}>
 					<Text>Sign in</Text>
 				</WButton>
-				<WButton mode="secondary" onTouchEnd={() => router.push("/signup")}>
+				<WButton mode="secondary" onPress={() => router.push("/signup")}>
 					<Text>Sign up</Text>
 				</WButton>
 			</View>
