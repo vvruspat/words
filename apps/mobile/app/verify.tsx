@@ -1,9 +1,11 @@
 import { useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { WButton, WText } from "@/mob-ui";
+import { WText } from "@/mob-ui";
 import { WPinInput } from "@/mob-ui/molecules/WPinInput";
-import { styles } from "./general.styles";
+import { styles } from "../general.styles";
+
+const PIN_LENGTH = 4;
 
 export default function Verify() {
 	const router = useRouter();
@@ -18,10 +20,15 @@ export default function Verify() {
 					to your email
 				</WText>
 
-				<WPinInput length={4} secureTextEntry={false} onChange={() => {}} />
-				<WButton mode="primary" onPress={() => router.push("/catalog")}>
-					<Text>Verify</Text>
-				</WButton>
+				<WPinInput
+					length={PIN_LENGTH}
+					secureTextEntry={false}
+					onChange={(text) => {
+						if (text.length === PIN_LENGTH) {
+							router.push("/catalog");
+						}
+					}}
+				/>
 			</View>
 		</SafeAreaView>
 	);

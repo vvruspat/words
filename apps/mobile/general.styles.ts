@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 import { Colors } from "@/mob-ui/brand/colors";
 
 export const styles = StyleSheet.create({
+	screen: {
+		backgroundColor: Colors.dark.primaryBackground,
+	},
 	page: {
 		flex: 1,
-		justifyContent: "center",
+		justifyContent: "flex-start",
 		paddingHorizontal: 16,
-		alignItems: "center",
-		backgroundColor: Colors.dark.darkBackground,
+		alignItems: "flex-start",
+		// backgroundColor: Colors.dark.primaryBackground,
 	},
 
 	formWrapper: {

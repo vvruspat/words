@@ -26,7 +26,8 @@ export const Colors = {
 	},
 	dark: {
 		black: "#000000",
-		darkBackground: "#101114",
+		primaryBackground: "#101114",
+		secondaryBackground: "#3F4040",
 		dark1: "#1C1E22",
 		dark2: "#25272D",
 		dark3: "#30343B",

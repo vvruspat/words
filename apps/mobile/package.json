@@ -60,7 +60,8 @@
 		"react-native-svg": "^15.12.1",
 		"storybook": "^9.1.4",
 		"typescript": "~5.8.3",
-		"vite": "^7.1.4"
+		"vite": "^7.1.4",
+		"@repo/types": "*"
 	},
 	"private": true
 }

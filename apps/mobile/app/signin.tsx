@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WButton, WInput, WText } from "@/mob-ui";
-import { styles } from "./general.styles";
+import { styles } from "../general.styles";
 
 export default function SignIn() {
 	const router = useRouter();
