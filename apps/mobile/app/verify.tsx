@@ -25,7 +25,7 @@ export default function Verify() {
 					secureTextEntry={false}
 					onChange={(text) => {
 						if (text.length === PIN_LENGTH) {
-							router.push("/catalog");
+							router.push("/authorized/learning");
 						}
 					}}
 				/>
