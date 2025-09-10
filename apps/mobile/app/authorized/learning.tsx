@@ -3,7 +3,7 @@ import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { VocabCatalogItem } from "@/components/VocabCatalogItem";
 import { WText } from "@/mob-ui";
-import { styles } from "../general.styles";
+import { styles } from "../../general.styles";
 
 const DATA: VocabCatalog[] = [
 	{
@@ -107,7 +107,7 @@ const DATA: VocabCatalog[] = [
 	},
 ];
 
-export default function Catalog() {
+export default function Learning() {
 	const renderItem = (item: ListRenderItemInfo<VocabCatalog>) => {
 		return <VocabCatalogItem {...item.item} />;
 	};
@@ -124,7 +124,7 @@ export default function Catalog() {
 				}}
 			>
 				<WText mode="primary" size="2xl">
-					Catalog
+					Learning
 				</WText>
 
 				<FlatList

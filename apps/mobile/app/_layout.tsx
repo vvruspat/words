@@ -26,7 +26,7 @@ export default function RootLayout() {
 			<Stack.Screen name="signin" options={{ title: "Sign In" }} />
 			<Stack.Screen name="signup" options={{ title: "Sign Up" }} />
 			<Stack.Screen name="verify" options={{ title: "" }} />
-			<Stack.Screen name="catalog" options={{ title: "Vocabulary catalog" }} />
+			<Stack.Screen name="authorized" options={{ headerShown: false }} />
 		</Stack>
 	);
 }
