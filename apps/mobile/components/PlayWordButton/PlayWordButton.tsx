@@ -64,7 +64,7 @@ export const PlayWordButton = () => {
 			scaleAnim.stopAnimation();
 			scaleAnim.setValue(1);
 		}
-	}, [isPlaying, scaleAnim]);
+	}, [isPlaying, scaleAnim, colorAnim]);
 
 	return (
 		<Pressable onPress={onPlayPressed}>

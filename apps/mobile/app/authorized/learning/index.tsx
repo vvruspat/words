@@ -8,7 +8,7 @@ import { WCard, WText } from "@/mob-ui";
 import { Colors } from "@/mob-ui/brand/colors";
 import { styles } from "../../../general.styles";
 
-const appsSyles = {
+const appsStyles = {
 	true_or_false: {
 		titleColor: Colors.dark.black,
 		backgroundColor: "#F9A1FF",
@@ -99,7 +99,7 @@ export default function Learning() {
 	const renderItem = (
 		item: ListRenderItemInfo<
 			Training & {
-				name: keyof typeof appsSyles;
+				name: keyof typeof appsStyles;
 			}
 		>,
 	) => {
@@ -114,8 +114,8 @@ export default function Learning() {
 							mode="primary"
 							size="lg"
 							style={{
-								color: appsSyles[item.item.name]
-									? appsSyles[item.item.name].titleColor
+								color: appsStyles[item.item.name]
+									? appsStyles[item.item.name].titleColor
 									: Colors.dark.black,
 							}}
 						>
@@ -123,8 +123,8 @@ export default function Learning() {
 						</WText>
 					}
 					style={{
-						backgroundColor: appsSyles[item.item.name]
-							? appsSyles[item.item.name].backgroundColor
+						backgroundColor: appsStyles[item.item.name]
+							? appsStyles[item.item.name].backgroundColor
 							: Colors.dark.dark4,
 						gap: 32,
 						padding: 16,
@@ -134,8 +134,8 @@ export default function Learning() {
 						mode="tertiary"
 						size="sm"
 						style={{
-							color: appsSyles[item.item.name as keyof typeof appsSyles]
-								? appsSyles[item.item.name as keyof typeof appsSyles]
+							color: appsStyles[item.item.name as keyof typeof appsStyles]
+								? appsStyles[item.item.name as keyof typeof appsStyles]
 										.descriptionColor
 								: Colors.dark.dark1,
 						}}
