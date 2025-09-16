@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { GlowingEllipse } from "@/components/GlowingElipse";
+import { GlowingEllipse } from "@/components/GlowingEllipse";
 import { PlayWordButton } from "@/components/PlayWordButton";
 import { TrainingAppWrapper } from "@/components/TrainingAppWrapper";
 import { BackgroundContext } from "@/context/BackgroundContext";
