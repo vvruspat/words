@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { ScreenBackground } from "@/components/ScreenBackground";
+import { BackgroundProvider } from "@/context/BackgroundContext";
 import { styles } from "@/general.styles";
 import { WZStack } from "@/mob-ui";
 
@@ -8,11 +9,13 @@ export default function RootLayout() {
 	return (
 		<Stack
 			screenLayout={({ children }) => (
-				<WZStack>
-					<StatusBar style="light" />
-					<ScreenBackground />
-					{children}
-				</WZStack>
+				<BackgroundProvider>
+					<WZStack>
+						<StatusBar style="light" />
+						<ScreenBackground />
+						{children}
+					</WZStack>
+				</BackgroundProvider>
 			)}
 			screenOptions={{
 				headerShown: false,

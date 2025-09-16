@@ -1,11 +1,19 @@
+import { useContext } from "react";
 import { Defs, G, RadialGradient, Rect, Stop, Svg } from "react-native-svg";
+import { BackgroundContext } from "@/context/BackgroundContext";
 import { Colors } from "@/mob-ui/brand/colors";
 
 export const ScreenBackground = () => {
+	const { color, opacity } = useContext(BackgroundContext);
+
 	return (
 		<Svg width="100%" height="100%" viewBox="0 0 393 852" fill="none">
-			<G opacity="0.3">
-				<Rect width="393" height="852" fill={Colors.dark.primaryBackground} />
+			<G opacity={opacity}>
+				<Rect
+					width="393"
+					height="852"
+					fill={Colors.backgrounds.primaryBackground}
+				/>
 				<Rect
 					width="393"
 					height="852"
@@ -22,7 +30,7 @@ export const ScreenBackground = () => {
 					gradientTransform="matrix(-457.5 1019.17 -503.55 -1058.85 381 6.77014)"
 					gradientUnits="userSpaceOnUse"
 				>
-					<Stop stopColor={Colors.primary.base} />
+					<Stop stopColor={color} />
 					<Stop offset="1" stopOpacity="0" />
 				</RadialGradient>
 			</Defs>

@@ -10,7 +10,7 @@ export default function RootLayout() {
 				tabBarActiveTintColor: Colors.primary.base,
 				tabBarInactiveTintColor: Colors.greys.grey8,
 				tabBarStyle: {
-					backgroundColor: Colors.dark.primaryBackground,
+					backgroundColor: Colors.backgrounds.primaryBackground,
 					borderTopColor: Colors.greys.whiteAlpha60,
 				},
 				sceneStyle: { backgroundColor: "transparent" },

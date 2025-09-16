@@ -3,14 +3,14 @@ import { Colors } from "@/mob-ui/brand/colors";
 
 export const styles = StyleSheet.create({
 	screen: {
-		backgroundColor: Colors.dark.primaryBackground,
+		backgroundColor: Colors.backgrounds.primaryBackground,
 	},
 	page: {
 		flex: 1,
 		justifyContent: "flex-start",
 		paddingHorizontal: 16,
 		alignItems: "flex-start",
-		// backgroundColor: Colors.dark.primaryBackground,
+		// backgroundColor: Colors.backgrounds.primaryBackground,
 	},
 
 	formWrapper: {
