@@ -16,7 +16,11 @@ export default function SignIn() {
 					</WText>
 					<WInput placeholder="example@domain.com" />
 				</View>
-				<WButton mode="primary" onPress={() => router.push("/verify")}>
+				<WButton
+					mode="primary"
+					fullWidth
+					onPress={() => router.push("/verify")}
+				>
 					<Text>Continue</Text>
 				</WButton>
 			</View>

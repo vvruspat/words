@@ -7,7 +7,6 @@ export const wButtonStyles = StyleSheet.create({
 		justifyContent: "center",
 		paddingHorizontal: 36,
 		paddingVertical: 18,
-		width: "100%",
 		borderRadius: 16,
 		borderStyle: "solid",
 		borderWidth: 1,
@@ -16,6 +15,12 @@ export const wButtonStyles = StyleSheet.create({
 		transitionDuration: "0.2s",
 		transitionTimingFunction: "ease-in-out",
 		transitionProperty: "opacity",
+	},
+	stretch: {
+		flex: 1,
+	},
+	fullWidth: {
+		width: "100%",
 	},
 	primary: {
 		backgroundColor: Colors.primary.base,
@@ -48,9 +53,9 @@ export const wButtonStyles = StyleSheet.create({
 		color: Colors.greys.white,
 	},
 	dark: {
-		backgroundColor: Colors.dark.black,
+		backgroundColor: Colors.dark.black60,
 		color: Colors.greys.white,
-		borderColor: Colors.dark.black,
+		borderColor: Colors.dark.dark4,
 	},
 	containerPressed: {
 		opacity: 0.75,

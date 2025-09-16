@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 	},
 
 	primary: {
-		color: Colors.greys.grey3,
+		color: Colors.greys.white,
 	},
 	secondary: {
 		color: Colors.greys.grey5,

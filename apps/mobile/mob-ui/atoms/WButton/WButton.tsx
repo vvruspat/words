@@ -16,9 +16,17 @@ export interface WButtonProps extends PressableProps {
 		| "green"
 		| "purple"
 		| "dark";
+	stretch?: boolean;
+	fullWidth?: boolean;
 }
 
-export const WButton = ({ mode, children, ...props }: WButtonProps) => {
+export const WButton = ({
+	mode,
+	children,
+	fullWidth = true,
+	stretch = false,
+	...props
+}: WButtonProps) => {
 	const mapChildren = (node: React.ReactNode) =>
 		React.Children.map(node, (child) => {
 			if (React.isValidElement(child) && child.type === Text) {
@@ -46,6 +54,8 @@ export const WButton = ({ mode, children, ...props }: WButtonProps) => {
 				wButtonStyles.container,
 				wButtonStyles[mode],
 				pressed && wButtonStyles.containerPressed,
+				stretch && wButtonStyles.stretch,
+				fullWidth && wButtonStyles.fullWidth,
 			]}
 		>
 			{processedChildren}

@@ -14,7 +14,11 @@ export default function SignUp() {
 					<WInput placeholder="Your name" label="Name" />
 					<WInput placeholder="example@domain.com" label="E-Mail" />
 				</View>
-				<WButton mode="primary" onPress={() => router.push("/verify")}>
+				<WButton
+					mode="primary"
+					fullWidth
+					onPress={() => router.push("/verify")}
+				>
 					<Text>Continue</Text>
 				</WButton>
 			</View>

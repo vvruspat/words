@@ -15,6 +15,8 @@ export const Colors = {
 		grey6: "#7E8695",
 		grey7: "#636A79",
 		grey8: "#494F5A",
+		grey9: "#32363E",
+		grey10: "#1C1E22",
 	},
 	accents: {
 		pink: "#F9A1FF",
@@ -26,12 +28,21 @@ export const Colors = {
 	},
 	dark: {
 		black: "#000000",
-		primaryBackground: "#101114",
-		secondaryBackground: "#3F4040",
+		black60: "rgba(0, 0, 0, 0.6)",
 		dark1: "#1C1E22",
 		dark2: "#25272D",
 		dark3: "#30343B",
 		dark4: "#3C4049",
+	},
+
+	backgrounds: {
+		primaryBackground: "#101114",
+		secondaryBackground: "#3F4040",
+		purple: "#CA7FE8",
+		blue: "#5F8FF7",
+		green: "#3DA000",
+		red: "#D53434",
+		cian: "#6EC5BF",
 	},
 
 	transparent: "transparent" as const,

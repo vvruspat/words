@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { WButton } from "@/mob-ui";
+import { WButton, WText } from "@/mob-ui";
 import { styles } from "../general.styles";
 
 export default function Index() {
@@ -11,17 +11,26 @@ export default function Index() {
 		<SafeAreaView mode="padding" style={styles.page}>
 			<View
 				style={{
+					flexDirection: "column",
 					gap: 16,
 					width: "100%",
 					alignItems: "center",
 					justifyContent: "center",
 				}}
 			>
-				<WButton mode="primary" onPress={() => router.push("/signin")}>
-					<Text>Sign in</Text>
+				<WButton
+					mode="primary"
+					fullWidth
+					onPress={() => router.push("/signin")}
+				>
+					<WText>Sign in</WText>
 				</WButton>
-				<WButton mode="secondary" onPress={() => router.push("/signup")}>
-					<Text>Sign up</Text>
+				<WButton
+					mode="secondary"
+					fullWidth
+					onPress={() => router.push("/signup")}
+				>
+					<WText>Sign up</WText>
 				</WButton>
 			</View>
 		</SafeAreaView>
