@@ -11,7 +11,7 @@ export default function ChooseTranslation() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
 
 	useEffect(() => {
-		setColor(Colors.backgrounds.cian);
+		setColor(Colors.backgrounds.cyan);
 		setOpacity(1);
 
 		return () => {
@@ -20,7 +20,7 @@ export default function ChooseTranslation() {
 	}, [setColor, setOpacity]);
 
 	return (
-		<TrainingAppWrapper title="Choose the correct translation">
+		<TrainingAppWrapper title="Choose the right translation">
 			<WCard style={styles.container}>
 				<WZStack style={{ overflow: "hidden" }}>
 					<GlowingEllipse />
@@ -41,18 +41,11 @@ export default function ChooseTranslation() {
 			</WCard>
 
 			<View style={styles.buttonsContainer}>
-				<WButton mode="dark" fullWidth>
-					<WText>Love</WText>
-				</WButton>
-				<WButton mode="dark" fullWidth>
-					<WText>World</WText>
-				</WButton>
-				<WButton mode="dark" fullWidth>
-					<WText>Death</WText>
-				</WButton>
-				<WButton mode="dark" fullWidth>
-					<WText>Robots</WText>
-				</WButton>
+				{["Love", "World", "Death", "Robots"].map((option) => (
+					<WButton key={option} mode="dark" fullWidth>
+						<WText>{option}</WText>
+					</WButton>
+				))}
 			</View>
 		</TrainingAppWrapper>
 	);

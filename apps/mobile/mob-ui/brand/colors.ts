@@ -42,7 +42,7 @@ export const Colors = {
 		blue: "#5F8FF7",
 		green: "#3DA000",
 		red: "#D53434",
-		cian: "#6EC5BF",
+		cyan: "#6EC5BF",
 	},
 
 	transparent: "transparent" as const,
