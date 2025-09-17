@@ -1,8 +1,7 @@
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { WText } from "@/mob-ui";
-import { WPinInput } from "@/mob-ui/molecules/WPinInput";
+import { WCharInput, WText } from "@/mob-ui";
 import { styles } from "../general.styles";
 
 const PIN_LENGTH = 4;
@@ -20,10 +19,11 @@ export default function Verify() {
 					to your email
 				</WText>
 
-				<WPinInput
+				<WCharInput
 					length={PIN_LENGTH}
 					secureTextEntry={false}
-					onChange={(text) => {
+					keyboardType="visible-password"
+					onChangeText={(text) => {
 						if (text.length === PIN_LENGTH) {
 							router.push("/authorized/learning");
 						}

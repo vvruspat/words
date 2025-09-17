@@ -2,13 +2,13 @@ import { type Meta, type StoryObj } from "@storybook/react-native";
 import { View } from "react-native";
 import { expect, fn, userEvent } from "storybook/test";
 
-import { WPinInput } from "./WPinInput";
+import { WCharInput } from "./WCharInput";
 
 const onChangeTextMock = fn();
 
 const meta = {
-	title: "Molecules/WPinInput",
-	component: WPinInput,
+	title: "Molecules/WCharInput",
+	component: WCharInput,
 	decorators: [
 		(Story) => (
 			<View style={{ flex: 1, alignItems: "flex-start" }}>
@@ -18,7 +18,7 @@ const meta = {
 	],
 
 	tags: ["autodocs"],
-} satisfies Meta<typeof WPinInput>;
+} satisfies Meta<typeof WCharInput>;
 
 export default meta;
 
@@ -42,8 +42,7 @@ export const Base: Story = {
 	},
 	args: {
 		length: 4,
-		onChange: onChangeTextMock,
-		value: "",
+		onChangeText: onChangeTextMock,
 	},
 	play: async ({ canvas }) => {
 		const inputs = await canvas.findAllByTestId(/pin-input/);
