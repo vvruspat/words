@@ -36,6 +36,10 @@ export const Base: Story = {
 			control: { type: "radio" },
 			options: ["regular", "bold", "semibold", "light", "thin"],
 		},
+		uppercase: {
+			control: { type: "boolean" },
+			defaultValue: false,
+		},
 	},
 	args: {
 		testID: "text-base",
@@ -43,6 +47,7 @@ export const Base: Story = {
 		mode: "primary",
 		size: "md",
 		weight: "regular",
+		uppercase: false,
 	},
 	play: async ({ canvas }) => {
 		const text = await canvas.getByTestId("text-base");

@@ -6,6 +6,7 @@ export type WTextProps = TextProps & {
 	size?: keyof typeof typography.fontSize;
 	mode?: "primary" | "secondary" | "tertiary";
 	weight?: "bold" | "semibold" | "medium" | "regular" | "light" | "thin";
+	uppercase?: boolean;
 };
 
 export const WText = ({
@@ -13,6 +14,7 @@ export const WText = ({
 	size = "md",
 	mode = "primary",
 	weight = "regular",
+	uppercase,
 	style,
 	...rest
 }: WTextProps) => {
@@ -25,6 +27,7 @@ export const WText = ({
 					styles[`${mode}`],
 					styles[`${weight}`],
 					{ fontSize: typography.fontSize[size] },
+					uppercase && { textTransform: "uppercase" },
 				],
 				style,
 			)}
