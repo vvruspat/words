@@ -49,7 +49,7 @@ export const WCharInput = ({
 					style={[
 						wInputStyles.inputRow,
 						styles.inputRow,
-						val[index]
+						val[index] !== undefined
 							? wInputStyles.inputRowSuccess
 							: wInputStyles.inputRowDefault,
 						status === "error" && wInputStyles.inputRowError,
