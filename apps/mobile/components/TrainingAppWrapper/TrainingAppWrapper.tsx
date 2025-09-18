@@ -1,22 +1,31 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link } from "expo-router";
-import { ReactNode } from "react";
 import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+	SafeAreaView,
+	SafeAreaViewProps,
+} from "react-native-safe-area-context";
 import { styles } from "@/general.styles";
 import { WText } from "@/mob-ui";
 import { Colors } from "@/mob-ui/brand/colors";
 import { trainingAppWrapperStyles } from "./TrainingAppWrapper.styles";
 
+type TrainingAppWrapperProps = SafeAreaViewProps & {
+	title: string;
+};
+
 export const TrainingAppWrapper = ({
 	title,
 	children,
-}: {
-	children: ReactNode;
-	title: string;
-}) => {
+	style,
+	...restViewProps
+}: TrainingAppWrapperProps) => {
 	return (
-		<SafeAreaView mode="padding" style={styles.page}>
+		<SafeAreaView
+			mode="padding"
+			style={[styles.page, style]}
+			{...restViewProps}
+		>
 			<View style={trainingAppWrapperStyles.headerRow}>
 				<WText mode="primary" size="2xl" style={trainingAppWrapperStyles.title}>
 					{title}

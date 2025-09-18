@@ -1,13 +1,114 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { WText } from "@/mob-ui";
-import { styles } from "../../../general.styles";
+import { useMemo, useState } from "react";
+import { View } from "react-native";
+import { MatchWordCard } from "@/components/MatchWordCard/MatchWordCard";
+import { TrainingAppWrapper } from "@/components/TrainingAppWrapper";
+import { shuffleArray } from "@/utils";
+
+type WordTranslation = { word: string; translation: string };
+
+const data: WordTranslation[] = [
+	{ word: "Hello", translation: "Hola" },
+	{ word: "Goodbye", translation: "Adiós" },
+	{ word: "Please", translation: "Por favor" },
+	{ word: "Thank you", translation: "Gracias" },
+	{ word: "Yes", translation: "Sí" },
+	{ word: "No", translation: "No" },
+];
 
 export default function MatchWords() {
+	const [selectedWord, setSelectedWord] = useState<string | null>(null);
+	const [selectedTranslation, setSelectedTranslation] = useState<string | null>(
+		null,
+	);
+	const [burnedPairs, setBurnedPairs] = useState<WordTranslation[]>([]);
+
+	const shuffledData = useMemo(() => shuffleArray(data), [data]);
+
+	const handleWordSelect = (word: string) => {
+		if (!selectedTranslation) {
+			setSelectedWord(word === selectedWord ? null : word);
+		} else {
+			const pair = data.find((item) => item.word === word);
+
+			if (pair?.translation === selectedTranslation) {
+				// Correct match
+				setSelectedWord(null);
+				setSelectedTranslation(null);
+				setBurnedPairs((prev) => [...prev, pair]);
+			} else {
+				// Incorrect match
+				setSelectedWord(null);
+			}
+		}
+	};
+
+	const handleTranslationSelect = (translation: string) => {
+		if (!selectedWord) {
+			setSelectedTranslation(
+				translation === selectedTranslation ? null : translation,
+			);
+		} else {
+			const pair = data.find((item) => item.translation === translation);
+
+			if (pair?.word === selectedWord) {
+				// Correct match
+				setSelectedWord(null);
+				setSelectedTranslation(null);
+				setBurnedPairs((prev) => [...prev, pair]);
+			} else {
+				// Incorrect match
+				setSelectedTranslation(null);
+			}
+		}
+	};
+
 	return (
-		<SafeAreaView mode="padding" style={styles.page}>
-			<WText mode="primary" size="2xl">
-				Match words
-			</WText>
-		</SafeAreaView>
+		<TrainingAppWrapper title="Type the translation">
+			<View
+				style={{
+					flex: 1,
+					flexDirection: "row",
+					gap: 16,
+					justifyContent: "space-between",
+					marginTop: 32,
+				}}
+			>
+				<View style={{ flex: 1, gap: 16 }}>
+					{data.map((item) => (
+						<MatchWordCard
+							key={item.word}
+							text={item.word}
+							onPress={() => handleWordSelect(item.word)}
+							state={
+								burnedPairs.some((pair) => pair.word === item.word)
+									? "correct"
+									: selectedWord === item.word
+										? "selected"
+										: "default"
+							}
+						/>
+					))}
+				</View>
+
+				<View style={{ flex: 1, gap: 16 }}>
+					{shuffledData.map((item) => (
+						<MatchWordCard
+							key={item.word}
+							text={item.translation}
+							onPress={() => handleTranslationSelect(item.translation)}
+							state={
+								burnedPairs.some(
+									(pair) => pair.translation === item.translation,
+								)
+									? "correct"
+									: selectedTranslation === item.translation
+										? "selected"
+										: "default"
+							}
+						/>
+					))}
+				</View>
+			</View>
+		</TrainingAppWrapper>
 	);
 }
