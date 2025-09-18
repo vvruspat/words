@@ -1,4 +1,5 @@
 import { VocabCatalog } from "@repo/types";
+import { useTranslation } from "react-i18next";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { VocabCatalogItem } from "@/components/VocabCatalogItem";
@@ -108,6 +109,7 @@ const DATA: VocabCatalog[] = [
 ];
 
 export default function Catalog() {
+	const { t } = useTranslation();
 	const renderItem = (item: ListRenderItemInfo<VocabCatalog>) => {
 		return <VocabCatalogItem {...item.item} />;
 	};
@@ -124,7 +126,7 @@ export default function Catalog() {
 				}}
 			>
 				<WText mode="primary" size="2xl">
-					Catalog
+					{t("catalog_title")}
 				</WText>
 
 				<FlatList

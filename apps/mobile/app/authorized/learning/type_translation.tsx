@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { GlowingEllipse } from "@/components/GlowingEllipse";
 import { PlayWordButton } from "@/components/PlayWordButton";
@@ -12,6 +13,7 @@ const answer = "World";
 export default function TypeTranslation() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
 	const [status, setStatus] = useState<WCharInputProps["status"]>("default");
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		setColor(Colors.backgrounds.blue);
@@ -40,17 +42,17 @@ export default function TypeTranslation() {
 	};
 
 	return (
-		<TrainingAppWrapper title="Type the translation">
+		<TrainingAppWrapper title={t("app_type_translation_header")}>
 			<WCard style={styles.container}>
 				<WZStack style={{ overflow: "hidden" }}>
 					<GlowingEllipse />
 					<View style={[StyleSheet.absoluteFill, styles.translationContainer]}>
 						<View style={styles.wordContainer}>
 							<WText mode="primary" weight="bold" size="3xl">
-								Word
+								{t("type_translation_word")}
 							</WText>
 							<WText mode="secondary" size="xl">
-								[transliteration]
+								{t("type_translation_transliteration")}
 							</WText>
 						</View>
 						<View style={styles.wordTranslationContainer}>

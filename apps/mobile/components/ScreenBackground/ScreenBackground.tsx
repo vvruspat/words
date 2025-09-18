@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import { useContext, useId } from "react";
 import { Defs, G, RadialGradient, Rect, Stop, Svg } from "react-native-svg";
 import { BackgroundContext } from "@/context/BackgroundContext";
 import { Colors } from "@/mob-ui/brand/colors";
 
 export const ScreenBackground = () => {
 	const { color, opacity } = useContext(BackgroundContext);
+
+	const id = useId();
+	const gradientId = `gradient-${id}`;
 
 	return (
 		<Svg width="100%" height="100%" viewBox="0 0 393 852" fill="none">
@@ -17,13 +20,13 @@ export const ScreenBackground = () => {
 				<Rect
 					width="393"
 					height="852"
-					fill="url(#paint0_radial_388_4862)"
+					fill={`url(#${gradientId})`}
 					fillOpacity="0.5"
 				/>
 			</G>
 			<Defs>
 				<RadialGradient
-					id="paint0_radial_388_4862"
+					id={gradientId}
 					cx="0"
 					cy="0"
 					r="1"

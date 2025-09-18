@@ -4,8 +4,12 @@ import { ScreenBackground } from "@/components/ScreenBackground";
 import { BackgroundProvider } from "@/context/BackgroundContext";
 import { styles } from "@/general.styles";
 import { WZStack } from "@/mob-ui";
+import "../i18n";
+import { useTranslation } from "react-i18next";
 
 export default function RootLayout() {
+	const { t } = useTranslation();
+
 	return (
 		<Stack
 			screenLayout={({ children }) => (
@@ -24,10 +28,10 @@ export default function RootLayout() {
 		>
 			<Stack.Screen
 				name="index"
-				options={{ title: "Home", headerShown: false }}
+				options={{ title: t("home"), headerShown: false }}
 			/>
-			<Stack.Screen name="signin" options={{ title: "Sign In" }} />
-			<Stack.Screen name="signup" options={{ title: "Sign Up" }} />
+			<Stack.Screen name="signin" options={{ title: t("sign_in") }} />
+			<Stack.Screen name="signup" options={{ title: t("sign_up") }} />
 			<Stack.Screen name="verify" options={{ title: "" }} />
 			<Stack.Screen name="authorized" options={{ headerShown: false }} />
 		</Stack>

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { GlowingEllipse } from "@/components/GlowingEllipse";
 import { PlayWordButton } from "@/components/PlayWordButton";
@@ -10,6 +11,8 @@ import { Colors } from "@/mob-ui/brand/colors";
 export default function ListeningPractice() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
 
+	const { t } = useTranslation();
+
 	useEffect(() => {
 		setColor(Colors.backgrounds.yellow);
 		setOpacity(1);
@@ -20,7 +23,7 @@ export default function ListeningPractice() {
 	}, [setColor, setOpacity]);
 
 	return (
-		<TrainingAppWrapper title="Listening practice">
+		<TrainingAppWrapper title={t("app_listening_practice_header")}>
 			<WCard style={styles.container}>
 				<WZStack style={{ overflow: "hidden" }}>
 					<GlowingEllipse />

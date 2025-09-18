@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { MatchWordCard } from "@/components/MatchWordCard/MatchWordCard";
 import { TrainingAppWrapper } from "@/components/TrainingAppWrapper";
@@ -21,6 +22,8 @@ export default function MatchWords() {
 		null,
 	);
 	const [burnedPairs, setBurnedPairs] = useState<WordTranslation[]>([]);
+
+	const { t } = useTranslation();
 
 	const shuffledData = useMemo(() => shuffleArray(data), []);
 
@@ -63,7 +66,7 @@ export default function MatchWords() {
 	};
 
 	return (
-		<TrainingAppWrapper title="Match words">
+		<TrainingAppWrapper title={t("app_match_words_header")}>
 			<View
 				style={{
 					flex: 1,
