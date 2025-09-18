@@ -22,7 +22,7 @@ export default function MatchWords() {
 	);
 	const [burnedPairs, setBurnedPairs] = useState<WordTranslation[]>([]);
 
-	const shuffledData = useMemo(() => shuffleArray(data), [data]);
+	const shuffledData = useMemo(() => shuffleArray(data), []);
 
 	const handleWordSelect = (word: string) => {
 		if (!selectedTranslation) {
@@ -63,7 +63,7 @@ export default function MatchWords() {
 	};
 
 	return (
-		<TrainingAppWrapper title="Type the translation">
+		<TrainingAppWrapper title="Match words">
 			<View
 				style={{
 					flex: 1,
