@@ -5,7 +5,11 @@ import { Animated, Pressable } from "react-native";
 import { Colors } from "@/mob-ui/brand/colors";
 import { styles } from "./PlayWordButton.styles";
 
-export const PlayWordButton = () => {
+export type PlayWordButtonProps = {
+	autoplay?: boolean;
+};
+
+export const PlayWordButton = ({ autoplay }: PlayWordButtonProps) => {
 	const audioSource = require("../../assets/audio/test.mp3");
 	const player = useAudioPlayer(audioSource);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -25,7 +29,9 @@ export const PlayWordButton = () => {
 				player.seekTo(0);
 			}
 		});
-	}, [player]);
+
+		if (autoplay) player.play();
+	}, [player, autoplay]);
 
 	const onPlayPressed = useCallback(() => {
 		player.play();

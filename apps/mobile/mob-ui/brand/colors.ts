@@ -43,6 +43,9 @@ export const Colors = {
 		green: "#3DA000",
 		red: "#D53434",
 		cyan: "#6EC5BF",
+		yellow: "#E5C30B",
+		orange: "#F58C32",
+		pink: "#E26FF5",
 	},
 
 	transparent: "transparent" as const,
