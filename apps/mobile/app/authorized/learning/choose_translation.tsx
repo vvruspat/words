@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { GlowingEllipse } from "@/components/GlowingEllipse";
 import { PlayWordButton } from "@/components/PlayWordButton";
@@ -9,6 +10,7 @@ import { Colors } from "@/mob-ui/brand/colors";
 
 export default function ChooseTranslation() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		setColor(Colors.backgrounds.cyan);
@@ -20,17 +22,17 @@ export default function ChooseTranslation() {
 	}, [setColor, setOpacity]);
 
 	return (
-		<TrainingAppWrapper title="Choose the right translation">
+		<TrainingAppWrapper title={t("app_choose_translation_header")}>
 			<WCard style={styles.container}>
 				<WZStack style={{ overflow: "hidden" }}>
 					<GlowingEllipse />
 					<View style={[StyleSheet.absoluteFill, styles.translationContainer]}>
 						<View style={styles.wordContainer}>
 							<WText mode="primary" weight="bold" size="3xl">
-								Word
+								{t("choose_translation_word")}
 							</WText>
 							<WText mode="secondary" size="xl">
-								[transliteration]
+								{t("choose_translation_transliteration")}
 							</WText>
 						</View>
 						<View style={styles.wordTranslationContainer}>

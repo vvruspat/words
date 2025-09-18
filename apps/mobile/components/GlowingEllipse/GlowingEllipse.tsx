@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useId } from "react";
 import { Ellipse, FeGaussianBlur, Filter, Svg } from "react-native-svg";
 import { BackgroundContext } from "@/context/BackgroundContext";
 
 export const GlowingEllipse = () => {
 	const { color } = useContext(BackgroundContext);
 
+	const id = useId();
+	const filterId = `filter-${id}`;
+
 	return (
 		<Svg width="353" height="129" viewBox="0 0 353 129" fill="none">
 			<Filter
-				id="filter0_f_226_2385"
+				id={filterId}
 				x="-55"
 				y="-163"
 				width="456"
@@ -29,7 +32,7 @@ export const GlowingEllipse = () => {
 				ry="46"
 				fill={color}
 				fillOpacity="1"
-				filter="url(#filter0_f_226_2385)"
+				filter={`url(#${filterId})`}
 			/>
 		</Svg>
 	);

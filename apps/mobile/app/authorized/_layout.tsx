@@ -1,8 +1,11 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Tabs } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/mob-ui/brand/colors";
 
 export default function RootLayout() {
+	const { t } = useTranslation();
+
 	return (
 		<Tabs
 			screenOptions={{
@@ -19,7 +22,7 @@ export default function RootLayout() {
 			<Tabs.Screen
 				name="learning"
 				options={{
-					title: "Learning",
+					title: t("dashboard_learning"),
 					headerShown: false,
 					tabBarIcon: ({ color }) => (
 						<FontAwesome5 name="chalkboard-teacher" size={24} color={color} />
@@ -29,7 +32,7 @@ export default function RootLayout() {
 			<Tabs.Screen
 				name="catalog"
 				options={{
-					title: "Vocabulary catalog",
+					title: t("dashboard_vocabulary"),
 					headerShown: false,
 					tabBarIcon: ({ color }) => (
 						<FontAwesome5 name="book" size={24} color={color} />
@@ -39,7 +42,7 @@ export default function RootLayout() {
 			<Tabs.Screen
 				name="settings"
 				options={{
-					title: "Settings",
+					title: t("dashboard_settings"),
 					headerShown: false,
 					tabBarIcon: ({ color }) => (
 						<FontAwesome5 name="cog" size={24} color={color} />

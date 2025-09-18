@@ -1,6 +1,7 @@
 import { Training } from "@repo/types";
 import { Link } from "expo-router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BackgroundContext } from "@/context/BackgroundContext";
@@ -36,56 +37,9 @@ const appsStyles = {
 	},
 } as const;
 
-const DATA = [
-	{
-		id: 1,
-		created_at: "2023-01-01T00:00:00Z",
-		title: "Correct translation",
-		description: "Decide if the translation is correct or not",
-		score: 0,
-		name: "true_or_false",
-		image: "",
-	},
-	{
-		id: 2,
-		created_at: "2023-01-02T00:00:00Z",
-		title: "Choose the right translation",
-		description: "Choose the correct translation from the options",
-		score: 0,
-		name: "choose_translation",
-		image: "",
-	},
-	{
-		id: 3,
-		created_at: "2023-01-03T00:00:00Z",
-		title: "Type the translation",
-		description: "Type the correct translation for the word",
-		score: 0,
-		name: "type_translation",
-		image: "",
-	},
-	{
-		id: 4,
-		created_at: "2023-01-04T00:00:00Z",
-		title: "Match the words",
-		description: "Match the words with their translations",
-		score: 0,
-		name: "match_words",
-		image: "",
-	},
-	{
-		id: 5,
-		created_at: "2023-01-04T00:00:00Z",
-		title: "Listening practice",
-		description: "Listen to the word and choose the translation",
-		score: 0,
-		name: "listening_practice",
-		image: "",
-	},
-] as const;
-
 export default function Learning() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		setColor(Colors.backgrounds.green);
@@ -95,6 +49,58 @@ export default function Learning() {
 			setOpacity(0.3);
 		};
 	}, [setColor, setOpacity]);
+
+	const DATA = useMemo(
+		() =>
+			[
+				{
+					id: 1,
+					created_at: "2023-01-01T00:00:00Z",
+					title: t("app_true_or_false_title"),
+					description: t("app_true_or_false_description"),
+					score: 0,
+					name: "true_or_false",
+					image: "",
+				},
+				{
+					id: 2,
+					created_at: "2023-01-02T00:00:00Z",
+					title: t("app_choose_translation_title"),
+					description: t("app_choose_translation_description"),
+					score: 0,
+					name: "choose_translation",
+					image: "",
+				},
+				{
+					id: 3,
+					created_at: "2023-01-03T00:00:00Z",
+					title: t("app_type_translation_title"),
+					description: t("app_type_translation_description"),
+					score: 0,
+					name: "type_translation",
+					image: "",
+				},
+				{
+					id: 4,
+					created_at: "2023-01-04T00:00:00Z",
+					title: t("app_match_words_title"),
+					description: t("app_match_words_description"),
+					score: 0,
+					name: "match_words",
+					image: "",
+				},
+				{
+					id: 5,
+					created_at: "2023-01-04T00:00:00Z",
+					title: t("app_listening_practice_title"),
+					description: t("app_listening_practice_description"),
+					score: 0,
+					name: "listening_practice",
+					image: "",
+				},
+			] as const,
+		[t],
+	);
 
 	const renderItem = (
 		item: ListRenderItemInfo<
@@ -159,7 +165,7 @@ export default function Learning() {
 				}}
 			>
 				<WText mode="primary" size="2xl">
-					Learning
+					{t("learning_title")}
 				</WText>
 
 				<FlatList

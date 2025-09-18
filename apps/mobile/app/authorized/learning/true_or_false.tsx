@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { GlowingEllipse } from "@/components/GlowingEllipse";
 import { PlayWordButton } from "@/components/PlayWordButton";
@@ -9,6 +10,7 @@ import { Colors } from "@/mob-ui/brand/colors";
 
 export default function TrueOrFalse() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
+	const { t } = useTranslation();
 
 	useEffect(() => {
 		setColor(Colors.backgrounds.purple);
@@ -20,22 +22,22 @@ export default function TrueOrFalse() {
 	}, [setColor, setOpacity]);
 
 	return (
-		<TrainingAppWrapper title="Is it right or wrong?">
+		<TrainingAppWrapper title={t("app_true_or_false_header")}>
 			<WCard style={styles.container}>
 				<WZStack style={{ overflow: "hidden" }}>
 					<GlowingEllipse />
 					<View style={[StyleSheet.absoluteFill, styles.translationContainer]}>
 						<View style={styles.wordContainer}>
 							<WText mode="primary" weight="bold" size="3xl">
-								Word
+								{t("true_or_false_word")}
 							</WText>
 							<WText mode="secondary" size="xl">
-								[transliteration]
+								{t("true_or_false_transliteration")}
 							</WText>
 						</View>
 						<View style={styles.wordTranslationContainer}>
 							<WText mode="primary" size="xl">
-								translation
+								{t("true_or_false_translation")}
 							</WText>
 
 							<PlayWordButton />
@@ -46,10 +48,10 @@ export default function TrueOrFalse() {
 
 			<View style={styles.buttonsContainer}>
 				<WButton mode="dark" stretch>
-					<WText>Yes</WText>
+					<WText>{t("true_or_false_yes")}</WText>
 				</WButton>
 				<WButton mode="dark" stretch>
-					<WText>No</WText>
+					<WText>{t("true_or_false_no")}</WText>
 				</WButton>
 			</View>
 		</TrainingAppWrapper>
