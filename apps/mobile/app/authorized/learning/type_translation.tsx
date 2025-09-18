@@ -7,11 +7,11 @@ import { BackgroundContext } from "@/context/BackgroundContext";
 import { WCard, WCharInput, WCharInputProps, WText, WZStack } from "@/mob-ui";
 import { Colors } from "@/mob-ui/brand/colors";
 
+const answer = "World";
+
 export default function TypeTranslation() {
 	const { setColor, setOpacity } = useContext(BackgroundContext);
 	const [status, setStatus] = useState<WCharInputProps["status"]>("default");
-
-	const answer = "World";
 
 	useEffect(() => {
 		setColor(Colors.backgrounds.blue);

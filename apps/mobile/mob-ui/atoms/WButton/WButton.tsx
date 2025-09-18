@@ -25,6 +25,7 @@ export const WButton = ({
 	children,
 	fullWidth = true,
 	stretch = false,
+	style,
 	...props
 }: WButtonProps) => {
 	const mapChildren = (node: React.ReactNode) =>
@@ -50,12 +51,13 @@ export const WButton = ({
 	return (
 		<Pressable
 			{...props}
-			style={({ pressed }) => [
+			style={({ pressed, ...attr }) => [
 				wButtonStyles.container,
 				wButtonStyles[mode],
 				pressed && wButtonStyles.containerPressed,
 				stretch && wButtonStyles.stretch,
 				fullWidth && wButtonStyles.fullWidth,
+				typeof style === "function" ? style({ pressed, ...attr }) : style,
 			]}
 		>
 			{processedChildren}
