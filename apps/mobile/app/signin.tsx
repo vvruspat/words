@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WButton, WInput, WText } from "@/mob-ui";
 import { styles } from "../general.styles";
@@ -14,7 +14,7 @@ export default function SignIn() {
 			<View style={styles.formWrapper}>
 				<View style={styles.fieldsGroup}>
 					<WText mode="primary" size="2xl">
-						{t("your_email")}
+						{t("label_your_email")}
 					</WText>
 					<WInput placeholder="example@domain.com" />
 				</View>
@@ -23,7 +23,7 @@ export default function SignIn() {
 					fullWidth
 					onPress={() => router.push("/verify")}
 				>
-					<Text>Continue</Text>
+					<WText>{t("button_continue")}</WText>
 				</WButton>
 			</View>
 		</SafeAreaView>

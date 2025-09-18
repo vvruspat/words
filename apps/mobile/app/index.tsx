@@ -25,14 +25,14 @@ export default function Index() {
 					fullWidth
 					onPress={() => router.push("/signin")}
 				>
-					<WText>{t("sign_in")}</WText>
+					<WText>{t("button_sign_in")}</WText>
 				</WButton>
 				<WButton
 					mode="secondary"
 					fullWidth
 					onPress={() => router.push("/signup")}
 				>
-					<WText>{t("sign_up")}</WText>
+					<WText>{t("button_sign_up")}</WText>
 				</WButton>
 			</View>
 		</SafeAreaView>
