@@ -1,13 +1,78 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { WText } from "@/mob-ui";
-import { styles } from "../../../general.styles";
+import { useContext, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import { GlowingEllipse } from "@/components/GlowingEllipse";
+import { PlayWordButton } from "@/components/PlayWordButton";
+import { TrainingAppWrapper } from "@/components/TrainingAppWrapper";
+import { BackgroundContext } from "@/context/BackgroundContext";
+import { WButton, WCard, WText, WZStack } from "@/mob-ui";
+import { Colors } from "@/mob-ui/brand/colors";
 
 export default function ListeningPractice() {
+	const { setColor, setOpacity } = useContext(BackgroundContext);
+
+	useEffect(() => {
+		setColor(Colors.backgrounds.yellow);
+		setOpacity(1);
+
+		return () => {
+			setOpacity(0.3);
+		};
+	}, [setColor, setOpacity]);
+
 	return (
-		<SafeAreaView mode="padding" style={styles.page}>
-			<WText mode="primary" size="2xl">
-				Listening practice
-			</WText>
-		</SafeAreaView>
+		<TrainingAppWrapper title="Listening practice">
+			<WCard style={styles.container}>
+				<WZStack style={{ overflow: "hidden" }}>
+					<GlowingEllipse />
+					<View style={[StyleSheet.absoluteFill, styles.translationContainer]}>
+						<View style={styles.wordTranslationContainer}>
+							<PlayWordButton autoplay />
+						</View>
+					</View>
+				</WZStack>
+			</WCard>
+
+			<View style={styles.buttonsContainer}>
+				{["Love", "World", "Death", "Robots"].map((option) => (
+					<WButton key={option} mode="dark" fullWidth>
+						<WText>{option}</WText>
+					</WButton>
+				))}
+			</View>
+		</TrainingAppWrapper>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		width: "100%",
+		padding: 0,
+		marginVertical: 32,
+		backgroundColor: Colors.backgrounds.primaryBackground,
+		flex: 1,
+	},
+	translationContainer: {
+		padding: 24,
+		justifyContent: "center",
+		alignItems: "center",
+		gap: 16,
+	},
+	wordContainer: {
+		justifyContent: "center",
+		alignItems: "center",
+		gap: 16,
+	},
+	wordTranslationContainer: {
+		justifyContent: "center",
+		alignItems: "center",
+		gap: 64,
+	},
+	buttonsContainer: {
+		width: "100%",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		alignContent: "stretch",
+		gap: 16,
+	},
+});
