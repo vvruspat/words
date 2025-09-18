@@ -15,11 +15,8 @@ export default function Verify() {
 	return (
 		<SafeAreaView mode="padding" style={styles.page}>
 			<View style={styles.formWrapper}>
-				<WText mode="primary" size="2xl">
+				<WText mode="primary" size="2xl" align="center">
 					{t("verify_enter_code")}
-				</WText>
-				<WText mode="primary" size="2xl">
-					{t("verify_to_email")}
 				</WText>
 
 				<WCharInput
