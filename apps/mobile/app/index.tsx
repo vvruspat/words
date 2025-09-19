@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { WButton, WText } from "@/mob-ui";
+import { WButton } from "@/mob-ui";
 import { styles } from "../general.styles";
 
 export default function Index() {
@@ -25,14 +25,14 @@ export default function Index() {
 					fullWidth
 					onPress={() => router.push("/signin")}
 				>
-					<WText>{t("button_sign_in")}</WText>
+					<Text>{t("button_sign_in")}</Text>
 				</WButton>
 				<WButton
 					mode="secondary"
 					fullWidth
 					onPress={() => router.push("/signup")}
 				>
-					<WText>{t("button_sign_up")}</WText>
+					<Text>{t("button_sign_up")}</Text>
 				</WButton>
 			</View>
 		</SafeAreaView>

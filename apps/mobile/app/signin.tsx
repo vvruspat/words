@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WButton, WInput, WText } from "@/mob-ui";
 import { styles } from "../general.styles";
@@ -23,7 +23,7 @@ export default function SignIn() {
 					fullWidth
 					onPress={() => router.push("/verify")}
 				>
-					<WText>{t("button_continue")}</WText>
+					<Text>{t("button_continue")}</Text>
 				</WButton>
 			</View>
 		</SafeAreaView>

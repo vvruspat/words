@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { MatchWordCard } from "@/components/MatchWordCard/MatchWordCard";
 import { TrainingAppWrapper } from "@/components/TrainingAppWrapper";
+import { BackgroundContext } from "@/context/BackgroundContext";
+import { Colors } from "@/mob-ui/brand/colors";
 import { shuffleArray } from "@/utils";
 
 type WordTranslation = { word: string; translation: string };
@@ -23,7 +25,17 @@ export default function MatchWords() {
 	);
 	const [burnedPairs, setBurnedPairs] = useState<WordTranslation[]>([]);
 
+	const { setColor, setOpacity } = useContext(BackgroundContext);
 	const { t } = useTranslation();
+
+	useEffect(() => {
+		setColor(Colors.backgrounds.pink);
+		setOpacity(1);
+
+		return () => {
+			setOpacity(0.3);
+		};
+	}, [setColor, setOpacity]);
 
 	const shuffledData = useMemo(() => shuffleArray(data), []);
 
