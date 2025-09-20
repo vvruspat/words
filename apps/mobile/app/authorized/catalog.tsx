@@ -1,4 +1,7 @@
+import { Model } from "@nozbe/watermelondb";
+import { useDatabase } from "@nozbe/watermelondb/hooks";
 import { VocabCatalog } from "@repo/types";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -110,6 +113,26 @@ const DATA: VocabCatalog[] = [
 
 export default function Catalog() {
 	const { t } = useTranslation();
+	const database = useDatabase();
+
+	const [progress, setProgress] = useState<Model[]>([]);
+
+	useEffect(() => {
+		const progressCollection = database.get("learning_progress");
+
+		const subscription = progressCollection
+			.query()
+			.observe()
+			.subscribe(setProgress);
+
+		return () => subscription.unsubscribe();
+	}, [database]);
+
+	useEffect(() => {
+		// Here you can use the `progress` state to update your UI or perform other actions
+		console.log("Learning progress updated:", progress);
+	}, [progress]);
+
 	const renderItem = (item: ListRenderItemInfo<VocabCatalog>) => {
 		return <VocabCatalogItem {...item.item} />;
 	};

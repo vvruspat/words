@@ -1,4 +1,6 @@
+import { authenticateAsync } from "expo-local-authentication";
 import { useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,8 +25,21 @@ export default function Verify() {
 					length={PIN_LENGTH}
 					secureTextEntry={false}
 					keyboardType="visible-password"
-					onChangeText={(text) => {
+					onChangeText={async (text) => {
 						if (text.length === PIN_LENGTH) {
+							// verify code with backend
+							// if success:
+
+							await SecureStore.setItemAsync("userId", "1"); // mock user ID
+							await authenticateAsync({
+								promptMessage: "Authenticate to access the app",
+							}).then((result) => {
+								if (!result.success) {
+									router.push("/");
+								} else {
+									router.push("/authorized/learning");
+								}
+							});
 							router.push("/authorized/learning");
 						}
 					}}

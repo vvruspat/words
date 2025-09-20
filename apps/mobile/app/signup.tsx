@@ -1,14 +1,19 @@
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { WButton, WInput, WText } from "@/mob-ui";
+import { WButton, WInput } from "@/mob-ui";
 import { styles } from "../general.styles";
 
 export default function SignUp() {
 	const router = useRouter();
 
 	const { t } = useTranslation();
+
+	const handleContinueClick = () => {
+		// send email
+		router.push("/verify");
+	};
 
 	return (
 		<SafeAreaView mode="padding" style={styles.page}>
@@ -17,12 +22,8 @@ export default function SignUp() {
 					<WInput placeholder={t("placeholder_name")} label={t("label_name")} />
 					<WInput placeholder="example@domain.com" label={t("label_email")} />
 				</View>
-				<WButton
-					mode="primary"
-					fullWidth
-					onPress={() => router.push("/verify")}
-				>
-					<WText>{t("button_continue")}</WText>
+				<WButton mode="primary" fullWidth onPress={handleContinueClick}>
+					<Text>{t("button_continue")}</Text>
 				</WButton>
 			</View>
 		</SafeAreaView>
