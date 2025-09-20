@@ -24,4 +24,9 @@ export const styles = StyleSheet.create({
 		gap: 16,
 		width: "100%",
 	},
+
+	spinnerContainer: {
+		flex: 1,
+		justifyContent: "center",
+	},
 });
