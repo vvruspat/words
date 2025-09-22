@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "pod install (apps/mobile/ios)",
+			"type": "shell",
+			"command": "cd apps/mobile/ios && pod install",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
