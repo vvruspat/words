@@ -485,6 +485,22 @@ paths:
           in: query
           schema:
             type: string
+        - name: language_speak
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: email_verified
+          required: false
+          in: query
+          schema:
+            default: false
+            type: boolean
+        - name: password
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -760,6 +776,11 @@ paths:
           schema:
             format: int64
             type: string
+        - name: word
+          required: false
+          in: query
+          schema:
+            type: string
         - name: catalog
           required: false
           in: query
@@ -767,6 +788,21 @@ paths:
             format: int64
             type: string
         - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: audio
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: transcribtion
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: meaning
           required: false
           in: query
           schema:
@@ -969,15 +1005,29 @@ paths:
           description: ''
       tags: *ref_7
   /auth/verify-email:
-    get:
+    post:
       operationId: AuthController_sendVerificationEmail
-      parameters:
-        - name: token
-          required: true
-          in: query
-          description: Email verification token
-          schema:
-            type: string
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostVerifyEmailRequestDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_7
+  /auth/verify-email/resend:
+    post:
+      operationId: AuthController_resendVerificationEmail
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostVerifyEmailResendRequestDto'
       responses:
         '200':
           description: ''
@@ -1518,11 +1568,19 @@ components:
           type: string
         name:
           type: string
+        language_speak:
+          type: string
+        email_verified:
+          type: boolean
+          default: false
+        password:
+          type: string
       required:
         - id
         - created_at
         - email
         - name
+        - language_speak
     GetUserResponseDto:
       type: object
       properties:
@@ -1555,10 +1613,21 @@ components:
           type: string
         name:
           type: string
+        language_speak:
+          type: string
+        email_verified:
+          type: boolean
+          default: false
+        password:
+          type: string
+        language_learn:
+          type: string
       required:
         - created_at
         - email
         - name
+        - language_speak
+        - language_learn
     PostUserResponseDto:
       type: object
       properties:
@@ -1572,11 +1641,19 @@ components:
           type: string
         name:
           type: string
+        language_speak:
+          type: string
+        email_verified:
+          type: boolean
+          default: false
+        password:
+          type: string
       required:
         - id
         - created_at
         - email
         - name
+        - language_speak
     PutUserRequestDto:
       type: object
       properties:
@@ -1589,6 +1666,13 @@ components:
         email:
           type: string
         name:
+          type: string
+        language_speak:
+          type: string
+        email_verified:
+          type: boolean
+          default: false
+        password:
           type: string
     PutUserResponseDto:
       type: object
@@ -1603,11 +1687,19 @@ components:
           type: string
         name:
           type: string
+        language_speak:
+          type: string
+        email_verified:
+          type: boolean
+          default: false
+        password:
+          type: string
       required:
         - id
         - created_at
         - email
         - name
+        - language_speak
     DeleteUserResponseDto:
       type: object
       properties:
@@ -1784,10 +1876,18 @@ components:
         topic:
           type: string
           format: int64
+        word:
+          type: string
         catalog:
           type: string
           format: int64
         language:
+          type: string
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
           type: string
         topicData:
           $ref: '#/components/schemas/TopicDto'
@@ -1797,8 +1897,11 @@ components:
         - id
         - created_at
         - topic
+        - word
         - catalog
         - language
+        - audio
+        - transcribtion
         - topicData
         - catalogData
     GetWordResponseDto:
@@ -1832,16 +1935,27 @@ components:
         topic:
           type: string
           format: int64
+        word:
+          type: string
         catalog:
           type: string
           format: int64
         language:
           type: string
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
+          type: string
       required:
         - created_at
         - topic
+        - word
         - catalog
         - language
+        - audio
+        - transcribtion
     PostWordResponseDto:
       type: object
       properties:
@@ -1854,17 +1968,28 @@ components:
         topic:
           type: string
           format: int64
+        word:
+          type: string
         catalog:
           type: string
           format: int64
         language:
           type: string
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
+          type: string
       required:
         - id
         - created_at
         - topic
+        - word
         - catalog
         - language
+        - audio
+        - transcribtion
     PutWordRequestDto:
       type: object
       properties:
@@ -1877,10 +2002,18 @@ components:
         topic:
           type: string
           format: int64
+        word:
+          type: string
         catalog:
           type: string
           format: int64
         language:
+          type: string
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
           type: string
     PutWordResponseDto:
       type: object
@@ -1894,17 +2027,28 @@ components:
         topic:
           type: string
           format: int64
+        word:
+          type: string
         catalog:
           type: string
           format: int64
         language:
           type: string
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
+          type: string
       required:
         - id
         - created_at
         - topic
+        - word
         - catalog
         - language
+        - audio
+        - transcribtion
     DeleteWordResponseDto:
       type: object
       properties:
@@ -2016,14 +2160,19 @@ components:
           type: string
         name:
           type: string
-        password:
+        language_speak:
           type: string
-          description: User password
-          example: Strong#Password123
+          description: Language the user speaks
+          example: en
+        language_learn:
+          type: string
+          description: Language the user is learning
+          example: es
       required:
         - email
         - name
-        - password
+        - language_speak
+        - language_learn
     PutResetPasswordRequestDto:
       type: object
       properties:
@@ -2037,6 +2186,26 @@ components:
       required:
         - new_password
         - token
+    PostVerifyEmailRequestDto:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Email verification code
+        email:
+          type: string
+          description: User email
+      required:
+        - code
+        - email
+    PostVerifyEmailResendRequestDto:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User email
+      required:
+        - email
     PostRefreshTokenRequestDto:
       type: object
       properties:

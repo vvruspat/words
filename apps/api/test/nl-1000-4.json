@@ -1,0 +1,1613 @@
+[
+  {
+    "score": 0.54,
+    "word": "bankstel",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "set van banken voor de woonkamer",
+    "language": "nl",
+    "transcription": "/ˈbɑŋk.stɛl/"
+  },
+  {
+    "score": 0.46,
+    "word": "eettafel",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "tafel waarop je eet",
+    "language": "nl",
+    "transcription": "/ˈeːtˌtaː.fəl/"
+  },
+  {
+    "score": 0.42,
+    "word": "salontafel",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "lage tafel voor in de woonkamer",
+    "language": "nl",
+    "transcription": "/saˈlɔnˌtaː.fəl/"
+  },
+  {
+    "score": 0.48,
+    "word": "keukenkast",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "kast in de keuken voor opslag",
+    "language": "nl",
+    "transcription": "/ˈkøː.kənˌkɑst/"
+  },
+  {
+    "score": 0.37,
+    "word": "keukenkastje",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "klein kastje in de keuken",
+    "language": "nl",
+    "transcription": "/ˈkøː.kənˌkɑsjə/"
+  },
+  {
+    "score": 0.41,
+    "word": "kastdeur",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "deur van een kast",
+    "language": "nl",
+    "transcription": "/ˈkɑstˌdøːr/"
+  },
+  {
+    "score": 0.57,
+    "word": "boekenkast",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "kast om boeken in te zetten",
+    "language": "nl",
+    "transcription": "/ˈbuː.kənˌkɑst/"
+  },
+  {
+    "score": 0.39,
+    "word": "hanglamp",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "lamp die aan het plafond hangt",
+    "language": "nl",
+    "transcription": "/ˈɦɑŋˌlɑmp/"
+  },
+  {
+    "score": 0.33,
+    "word": "wandlamp",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "lamp die aan de muur hangt",
+    "language": "nl",
+    "transcription": "/ˈʋɑntˌlɑmp/"
+  },
+  {
+    "score": 0.41,
+    "word": "vloerlamp",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "staande lamp op de vloer",
+    "language": "nl",
+    "transcription": "/ˈvluːrˌlɑmp/"
+  },
+  {
+    "score": 0.4,
+    "word": "nachtlampje",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "klein lampje naast het bed",
+    "language": "nl",
+    "transcription": "/ˈnɑxtˌlɑmp.jə/"
+  },
+  {
+    "score": 0.3,
+    "word": "verlengdoos",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "meervoudig stopcontact aan snoer",
+    "language": "nl",
+    "transcription": "/vɛrˈlɛŋˌdoːs/"
+  },
+  {
+    "score": 0.34,
+    "word": "lampenkap",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "kap die het lamplicht dempt",
+    "language": "nl",
+    "transcription": "/ˈlɑm.pənˌkɑp/"
+  },
+  {
+    "score": 0.49,
+    "word": "deurmat",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "mat bij de deur voor schoenen",
+    "language": "nl",
+    "transcription": "/ˈdøːrˌmɑt/"
+  },
+  {
+    "score": 0.44,
+    "word": "kapstok",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "rek om jassen aan op te hangen",
+    "language": "nl",
+    "transcription": "/ˈkɑpˌstɔk/"
+  },
+  {
+    "score": 0.35,
+    "word": "drempel",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "opstaande rand bij een deur",
+    "language": "nl",
+    "transcription": "/ˈdrɛm.pəl/"
+  },
+  {
+    "score": 0.4,
+    "word": "vensterbank",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "smalle plank onder een raam",
+    "language": "nl",
+    "transcription": "/ˈvɛn.stərˌbɑŋk/"
+  },
+  {
+    "score": 0.23,
+    "word": "gordijnrail",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "rail waar gordijnen aan hangen",
+    "language": "nl",
+    "transcription": "/ɣɔrˈdɛi̯nˌreːl/"
+  },
+  {
+    "score": 0.39,
+    "word": "kozijn",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "omlijsting van een raam of deur",
+    "language": "nl",
+    "transcription": "/koːˈzɛi̯n/"
+  },
+  {
+    "score": 0.28,
+    "word": "dakkapel",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "opbouw op een schuin dak met raam",
+    "language": "nl",
+    "transcription": "/ˈdɑk.kɑˌpɛl/"
+  },
+  {
+    "score": 0.52,
+    "word": "terras",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "buitenplaats met zitruimte",
+    "language": "nl",
+    "transcription": "/tɛˈrɑs/"
+  },
+  {
+    "score": 0.43,
+    "word": "schuur",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "bergruimte, vaak naast het huis",
+    "language": "nl",
+    "transcription": "/sxyːr/"
+  },
+  {
+    "score": 0.29,
+    "word": "carport",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "overkapping voor het parkeren",
+    "language": "nl",
+    "transcription": "/ˈkɑr.pɔrt/"
+  },
+  {
+    "score": 0.38,
+    "word": "schutting",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "houten afscheiding in de tuin",
+    "language": "nl",
+    "transcription": "/ˈsxʏ.tɪŋ/"
+  },
+  {
+    "score": 0.55,
+    "word": "brievenbus",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "gleuf of kastje voor post",
+    "language": "nl",
+    "transcription": "/ˈbriː.vənˌbʏs/"
+  },
+  {
+    "score": 0.54,
+    "word": "deurbel",
+    "topic": "Wonen & huishouden",
+    "level": "A1",
+    "meaning": "bel bij de voordeur",
+    "language": "nl",
+    "transcription": "/ˈdøːrˌbɛl/"
+  },
+  {
+    "score": 0.31,
+    "word": "klink",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "handgreep om de deur te openen",
+    "language": "nl",
+    "transcription": "/klɪŋk/"
+  },
+  {
+    "score": 0.29,
+    "word": "scharnier",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "bevestiging die laat scharnieren",
+    "language": "nl",
+    "transcription": "/sxɑrˈniːr/"
+  },
+  {
+    "score": 0.36,
+    "word": "legplank",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "plank om spullen op te leggen",
+    "language": "nl",
+    "transcription": "/ˈlɛxˌplɑŋk/"
+  },
+  {
+    "score": 0.27,
+    "word": "schoenenrek",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "rek om schoenen op te bergen",
+    "language": "nl",
+    "transcription": "/ˈsxuː.nənˌrɛk/"
+  },
+  {
+    "score": 0.33,
+    "word": "opbergdoos",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "doos om spullen in te bewaren",
+    "language": "nl",
+    "transcription": "/ˈɔp.bɛrxˌdoːs/"
+  },
+  {
+    "score": 0.25,
+    "word": "gereedschapskist",
+    "topic": "Wonen & huishouden",
+    "level": "B1",
+    "meaning": "kist om gereedschap in te bewaren",
+    "language": "nl",
+    "transcription": "/ɣəˈreːt.sxɑpsˌkɪst/"
+  },
+  {
+    "score": 0.49,
+    "word": "snijplank",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "plank om op te snijden",
+    "language": "nl",
+    "transcription": "/ˈsnɛi̯ˌplɑŋk/"
+  },
+  {
+    "score": 0.41,
+    "word": "pollepel",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "grote lepel voor soep of saus",
+    "language": "nl",
+    "transcription": "/ˈpɔˌleː.pəl/"
+  },
+  {
+    "score": 0.26,
+    "word": "schuimspaan",
+    "topic": "Keuken",
+    "level": "B1",
+    "meaning": "lepel met gaten voor afschuimen",
+    "language": "nl",
+    "transcription": "/ˈsxœy̯mˌspaːn/"
+  },
+  {
+    "score": 0.46,
+    "word": "vergiet",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "zeefkom om vocht te laten weglopen",
+    "language": "nl",
+    "transcription": "/vɛrˈɣit/"
+  },
+  {
+    "score": 0.45,
+    "word": "zeef",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "gereedschap om te zeven",
+    "language": "nl",
+    "transcription": "/zeːf/"
+  },
+  {
+    "score": 0.4,
+    "word": "rasp",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "gereedschap om fijn te raspen",
+    "language": "nl",
+    "transcription": "/rɑsp/"
+  },
+  {
+    "score": 0.38,
+    "word": "dunschiller",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "schiller om dunne schil te verwijderen",
+    "language": "nl",
+    "transcription": "/ˈdʏnˌsxɪ.lər/"
+  },
+  {
+    "score": 0.34,
+    "word": "blikopener",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "opener voor conservenblikken",
+    "language": "nl",
+    "transcription": "/ˈblɪkˌoː.pə.nər/"
+  },
+  {
+    "score": 0.35,
+    "word": "kurkentrekker",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "gereedschap om kurken te trekken",
+    "language": "nl",
+    "transcription": "/ˈkʏr.kənˌtrɛ.kər/"
+  },
+  {
+    "score": 0.36,
+    "word": "flessenopener",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "opener voor kroonkurken",
+    "language": "nl",
+    "transcription": "/ˈflɛ.sənˌoː.pə.nər/"
+  },
+  {
+    "score": 0.42,
+    "word": "onderzetter",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "bescherming voor tafel tegen hitte",
+    "language": "nl",
+    "transcription": "/ˈɔn.dərˌzɛ.tər/"
+  },
+  {
+    "score": 0.41,
+    "word": "pannenlap",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "lap om hete pannen vast te pakken",
+    "language": "nl",
+    "transcription": "/ˈpɑ.nənˌlɑp/"
+  },
+  {
+    "score": 0.33,
+    "word": "maatlepel",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "lepel met vaste inhoudsmaat",
+    "language": "nl",
+    "transcription": "/ˈmaːtˌleː.pəl/"
+  },
+  {
+    "score": 0.27,
+    "word": "kruidenpotje",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "klein potje voor kruiden",
+    "language": "nl",
+    "transcription": "/ˈkrœy̯.dənˌpɔ.cjə/"
+  },
+  {
+    "score": 0.31,
+    "word": "voorraadpot",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "glazen pot voor droge voorraad",
+    "language": "nl",
+    "transcription": "/ˈvoː.raːtˌpɔt/"
+  },
+  {
+    "score": 0.47,
+    "word": "steelpan",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "kleine pan met steel",
+    "language": "nl",
+    "transcription": "/ˈsteːlˌpɑn/"
+  },
+  {
+    "score": 0.53,
+    "word": "koekenpan",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "platte pan om te bakken",
+    "language": "nl",
+    "transcription": "/ˈkuː.kənˌpɑn/"
+  },
+  {
+    "score": 0.45,
+    "word": "braadpan",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "zware pan voor stoven of braden",
+    "language": "nl",
+    "transcription": "/ˈbraːtˌpɑn/"
+  },
+  {
+    "score": 0.33,
+    "word": "wokpan",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "ronde pan voor roerbakken",
+    "language": "nl",
+    "transcription": "/ˈʋɔkˌpɑn/"
+  },
+  {
+    "score": 0.4,
+    "word": "soeplepel",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "grote lepel voor soep opscheppen",
+    "language": "nl",
+    "transcription": "/ˈsupˌleː.pəl/"
+  },
+  {
+    "score": 0.38,
+    "word": "keukenschaar",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "schaar voor keukenwerk",
+    "language": "nl",
+    "transcription": "/ˈkøː.kənˌsxaːr/"
+  },
+  {
+    "score": 0.25,
+    "word": "keukentimer",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "timer om kooktijd te meten",
+    "language": "nl",
+    "transcription": "/ˈkøː.kənˌtɑi̯.mər/"
+  },
+  {
+    "score": 0.32,
+    "word": "grillplaat",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "plaat om op te grillen",
+    "language": "nl",
+    "transcription": "/ˈɣrɪlˌplaːt/"
+  },
+  {
+    "score": 0.51,
+    "word": "broodrooster",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "apparaat om brood te roosteren",
+    "language": "nl",
+    "transcription": "/ˈbroːdˌroː.stər/"
+  },
+  {
+    "score": 0.39,
+    "word": "citruspers",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "pers voor sinaasappel of citroen",
+    "language": "nl",
+    "transcription": "/ˈsiː.trʏsˌpɛrs/"
+  },
+  {
+    "score": 0.6,
+    "word": "waterkoker",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "apparaat om water te koken",
+    "language": "nl",
+    "transcription": "/ˈʋaː.tərˌkoː.kər/"
+  },
+  {
+    "score": 0.59,
+    "word": "magnetron",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "apparaat om snel te verwarmen",
+    "language": "nl",
+    "transcription": "/ˌmɑɣ.nəˈtrɔn/"
+  },
+  {
+    "score": 0.49,
+    "word": "weegschaal",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "apparaat om gewicht te meten",
+    "language": "nl",
+    "transcription": "/ˈʋeːxˌskaːl/"
+  },
+  {
+    "score": 0.35,
+    "word": "maatkan",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "kan met maatstrepen",
+    "language": "nl",
+    "transcription": "/ˈmaːtˌkɑn/"
+  },
+  {
+    "score": 0.26,
+    "word": "klopper",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "handmixer om te kloppen",
+    "language": "nl",
+    "transcription": "/ˈklɔ.pər/"
+  },
+  {
+    "score": 0.22,
+    "word": "braadslee",
+    "topic": "Keuken",
+    "level": "B1",
+    "meaning": "metalen schaal voor braden",
+    "language": "nl",
+    "transcription": "/ˈbraːtˌsleː/"
+  },
+  {
+    "score": 0.52,
+    "word": "theedoek",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "doek om af te drogen",
+    "language": "nl",
+    "transcription": "/ˈteːˌduk/"
+  },
+  {
+    "score": 0.47,
+    "word": "afwasborstel",
+    "topic": "Keuken",
+    "level": "A1",
+    "meaning": "borstel om af te wassen",
+    "language": "nl",
+    "transcription": "/ˈɑf.ʋɑsˌbɔr.stəl/"
+  },
+  {
+    "score": 0.31,
+    "word": "afdruiprek",
+    "topic": "Keuken",
+    "level": "A2",
+    "meaning": "rekje om vaat te laten drogen",
+    "language": "nl",
+    "transcription": "/ˈɑf.drœy̯pˌrɛk/"
+  },
+  {
+    "score": 0.27,
+    "word": "keukentrap",
+    "topic": "Wonen & huishouden",
+    "level": "A2",
+    "meaning": "kleine inklapbare trap voor thuis",
+    "language": "nl",
+    "transcription": "/ˈkøː.kənˌtrɑp/"
+  },
+  {
+    "score": 0.45,
+    "word": "zuurkool",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "gefermenteerde witte kool",
+    "language": "nl",
+    "transcription": "/ˈzyːrˌkoːl/"
+  },
+  {
+    "score": 0.38,
+    "word": "hutspot",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "stamppot van aardappel, wortel, ui",
+    "language": "nl",
+    "transcription": "/ˈɦʏtˌspɔt/"
+  },
+  {
+    "score": 0.47,
+    "word": "stamppot",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "gerecht van gestampte aardappelen",
+    "language": "nl",
+    "transcription": "/ˈstɑmˌpɔt/"
+  },
+  {
+    "score": 0.44,
+    "word": "bitterbal",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "kleine gefrituurde snack",
+    "language": "nl",
+    "transcription": "/ˈbɪ.tərˌbɑl/"
+  },
+  {
+    "score": 0.53,
+    "word": "kroket",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "gefrituurde snack met ragout",
+    "language": "nl",
+    "transcription": "/krɔˈkɛt/"
+  },
+  {
+    "score": 0.51,
+    "word": "frikandel",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "langwerpige gefrituurde vleessnack",
+    "language": "nl",
+    "transcription": "/ˌfri.kɑnˈdɛl/"
+  },
+  {
+    "score": 0.46,
+    "word": "haring",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "rauw ingelegde vis, Hollandse snack",
+    "language": "nl",
+    "transcription": "/ˈɦaː.rɪŋ/"
+  },
+  {
+    "score": 0.33,
+    "word": "kibbeling",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "gefrituurde stukken witvis",
+    "language": "nl",
+    "transcription": "/ˈkɪ.bəˌlɪŋ/"
+  },
+  {
+    "score": 0.32,
+    "word": "erwtensoep",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "dikke soep van spliterwten",
+    "language": "nl",
+    "transcription": "/ˈɛr.tənˌsup/"
+  },
+  {
+    "score": 0.39,
+    "word": "oliebol",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "nieuwjaarsgebak, gefrituurde bol",
+    "language": "nl",
+    "transcription": "/ˈoː.liˌbɔl/"
+  },
+  {
+    "score": 0.35,
+    "word": "poffertje",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "klein rond pannenkoekje",
+    "language": "nl",
+    "transcription": "/ˈpɔ.fər.cjə/"
+  },
+  {
+    "score": 0.34,
+    "word": "kruidnoten",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "kleine kruidige sinterklaaskoeken",
+    "language": "nl",
+    "transcription": "/ˈkrœy̯tˌnoː.tən/"
+  },
+  {
+    "score": 0.31,
+    "word": "pepernoten",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "traditionele sinterklaaskoeken",
+    "language": "nl",
+    "transcription": "/ˈpeː.pərˌnoː.tən/"
+  },
+  {
+    "score": 0.52,
+    "word": "drop",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "zoete of zoute zoetwaren van zoethout",
+    "language": "nl",
+    "transcription": "/drɔp/"
+  },
+  {
+    "score": 0.49,
+    "word": "beschuit",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "droog, knapperig rond broodje",
+    "language": "nl",
+    "transcription": "/bəˈsxœy̯t/"
+  },
+  {
+    "score": 0.38,
+    "word": "ontbijtkoek",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "kruimige kruidkoek bij ontbijt",
+    "language": "nl",
+    "transcription": "/ɔntˈbɛitˌkuk/"
+  },
+  {
+    "score": 0.4,
+    "word": "rookworst",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "gerookte worst, vaak bij stamppot",
+    "language": "nl",
+    "transcription": "/ˈroːkˌʋɔrst/"
+  },
+  {
+    "score": 0.29,
+    "word": "frikandelbroodje",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "bladerdeeg met frikandelvulling",
+    "language": "nl",
+    "transcription": "/ˌfri.kɑnˈdɛlˌbroː.cjə/"
+  },
+  {
+    "score": 0.33,
+    "word": "appelflap",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "gebakje met appelvulling",
+    "language": "nl",
+    "transcription": "/ˈɑ.pəlˌflɑp/"
+  },
+  {
+    "score": 0.3,
+    "word": "gevuldekoek",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "koek met amandelspijs",
+    "language": "nl",
+    "transcription": "/ɣəˈvʏl.dəˌkuk/"
+  },
+  {
+    "score": 0.51,
+    "word": "vla",
+    "topic": "Eten & drinken",
+    "level": "A1",
+    "meaning": "dikke puddingachtige zuiveldrank",
+    "language": "nl",
+    "transcription": "/vlaː/"
+  },
+  {
+    "score": 0.31,
+    "word": "eierkoek",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "luchtig, rond gebakje",
+    "language": "nl",
+    "transcription": "/ˈɛi̯.ərˌkuk/"
+  },
+  {
+    "score": 0.38,
+    "word": "ontbijtgranen",
+    "topic": "Eten & drinken",
+    "level": "A2",
+    "meaning": "granen voor bij het ontbijt",
+    "language": "nl",
+    "transcription": "/ɔntˈbɛitˌxraː.nən/"
+  },
+  {
+    "score": 0.32,
+    "word": "blazer",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "net jasje voor bovenkleding",
+    "language": "nl",
+    "transcription": "/ˈbleː.zər/"
+  },
+  {
+    "score": 0.34,
+    "word": "colbert",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "net jasje, herenjas",
+    "language": "nl",
+    "transcription": "/kɔlˈbɛr/"
+  },
+  {
+    "score": 0.26,
+    "word": "cardigan",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "gebreid open vest",
+    "language": "nl",
+    "transcription": "/ˈkɑrdiɣɑn/"
+  },
+  {
+    "score": 0.39,
+    "word": "trainingspak",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "sportpak met jas en broek",
+    "language": "nl",
+    "transcription": "/ˈtrɛi̯.nɪŋsˌpɑk/"
+  },
+  {
+    "score": 0.42,
+    "word": "panty",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "dunne damessok/maillot",
+    "language": "nl",
+    "transcription": "/ˈpɛn.ti/"
+  },
+  {
+    "score": 0.37,
+    "word": "legging",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "strakke broek van rekbare stof",
+    "language": "nl",
+    "transcription": "/ˈlɛ.ɣɪŋ/"
+  },
+  {
+    "score": 0.3,
+    "word": "overall",
+    "topic": "Kleding & accessoires",
+    "level": "B1",
+    "meaning": "eendelig werkpak",
+    "language": "nl",
+    "transcription": "/ˌoː.vəˈrɑl/"
+  },
+  {
+    "score": 0.51,
+    "word": "muts",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "warme hoofdbedekking van wol",
+    "language": "nl",
+    "transcription": "/mʏts/"
+  },
+  {
+    "score": 0.41,
+    "word": "wanten",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "handschoenen met één vingerdeel",
+    "language": "nl",
+    "transcription": "/ˈʋɑn.tən/"
+  },
+  {
+    "score": 0.42,
+    "word": "pantoffel",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "warme schoen voor binnenshuis",
+    "language": "nl",
+    "transcription": "/pɑnˈtɔ.fəl/"
+  },
+  {
+    "score": 0.37,
+    "word": "schoenveter",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "koord om schoenen te strikken",
+    "language": "nl",
+    "transcription": "/ˈsxuːnˌveː.tər/"
+  },
+  {
+    "score": 0.35,
+    "word": "speld",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "kleine pin om te bevestigen",
+    "language": "nl",
+    "transcription": "/spɛlt/"
+  },
+  {
+    "score": 0.23,
+    "word": "ceintuur",
+    "topic": "Kleding & accessoires",
+    "level": "B1",
+    "meaning": "riem om de taille",
+    "language": "nl",
+    "transcription": "/sɛ̃ˈtyːr/"
+  },
+  {
+    "score": 0.28,
+    "word": "bretels",
+    "topic": "Kleding & accessoires",
+    "level": "B1",
+    "meaning": "banden om broek op te houden",
+    "language": "nl",
+    "transcription": "/brəˈtɛls/"
+  },
+  {
+    "score": 0.29,
+    "word": "strikdas",
+    "topic": "Kleding & accessoires",
+    "level": "B1",
+    "meaning": "vlinderdas, nette halsstrik",
+    "language": "nl",
+    "transcription": "/ˈstrɪkˌdɑs/"
+  },
+  {
+    "score": 0.52,
+    "word": "rugzak",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "tas die je op je rug draagt",
+    "language": "nl",
+    "transcription": "/ˈrʏxˌzɑk/"
+  },
+  {
+    "score": 0.41,
+    "word": "schoudertas",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "tas met hengsel over de schouder",
+    "language": "nl",
+    "transcription": "/ˈsxʌu̯.dərˌtɑs/"
+  },
+  {
+    "score": 0.53,
+    "word": "handtas",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "kleine tas die je in de hand draagt",
+    "language": "nl",
+    "transcription": "/ˈɦɑnˌtɑs/"
+  },
+  {
+    "score": 0.55,
+    "word": "portemonnee",
+    "topic": "Kleding & accessoires",
+    "level": "A1",
+    "meaning": "klein tasje voor geld en pasjes",
+    "language": "nl",
+    "transcription": "/ˌpɔr.tə.moːˈneː/"
+  },
+  {
+    "score": 0.28,
+    "word": "portefeuille",
+    "topic": "Kleding & accessoires",
+    "level": "B1",
+    "meaning": "mapje of beurs voor documenten",
+    "language": "nl",
+    "transcription": "/ˌpɔr.təˈfœj.jə/"
+  },
+  {
+    "score": 0.25,
+    "word": "zonnehoed",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "hoed die tegen de zon beschermt",
+    "language": "nl",
+    "transcription": "/ˈzɔnəˌhut/"
+  },
+  {
+    "score": 0.32,
+    "word": "regenlaars",
+    "topic": "Kleding & accessoires",
+    "level": "A2",
+    "meaning": "waterdichte laars voor nat weer",
+    "language": "nl",
+    "transcription": "/ˈreː.ɣənˌlaːrs/"
+  },
+  {
+    "score": 0.5,
+    "word": "pols",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "gewricht tussen hand en arm",
+    "language": "nl",
+    "transcription": "/pɔls/"
+  },
+  {
+    "score": 0.48,
+    "word": "elleboog",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "gewricht in de arm",
+    "language": "nl",
+    "transcription": "/ˈɛ.ləˌboːx/"
+  },
+  {
+    "score": 0.49,
+    "word": "enkel",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "gewricht tussen voet en been",
+    "language": "nl",
+    "transcription": "/ˈɛŋ.kəl/"
+  },
+  {
+    "score": 0.43,
+    "word": "heup",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "gewricht aan de zijkant van het bekken",
+    "language": "nl",
+    "transcription": "/høːp/"
+  },
+  {
+    "score": 0.32,
+    "word": "scheenbeen",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "voorste bot van het onderbeen",
+    "language": "nl",
+    "transcription": "/ˈsxeːnˌbeːn/"
+  },
+  {
+    "score": 0.27,
+    "word": "wervelkolom",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "de ruggengraat",
+    "language": "nl",
+    "transcription": "/ˈʋɛr.vəl.kɔˌlɔm/"
+  },
+  {
+    "score": 0.42,
+    "word": "kuit",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "spier aan de achterzijde van het onderbeen",
+    "language": "nl",
+    "transcription": "/kœy̯t/"
+  },
+  {
+    "score": 0.51,
+    "word": "hoofdpijn",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "pijn in het hoofd",
+    "language": "nl",
+    "transcription": "/ˈɦoːftˌpɛi̯n/"
+  },
+  {
+    "score": 0.33,
+    "word": "kiespijn",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "pijn aan een kies",
+    "language": "nl",
+    "transcription": "/ˈkisˌpɛi̯n/"
+  },
+  {
+    "score": 0.34,
+    "word": "buikgriep",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "griep met maag- en darmklachten",
+    "language": "nl",
+    "transcription": "/ˈbœy̯xˌxrip/"
+  },
+  {
+    "score": 0.45,
+    "word": "zalf",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "vettig smeersel voor de huid",
+    "language": "nl",
+    "transcription": "/zɑlf/"
+  },
+  {
+    "score": 0.46,
+    "word": "verband",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "gaas of bandage voor wonden",
+    "language": "nl",
+    "transcription": "/vərˈbɑnt/"
+  },
+  {
+    "score": 0.47,
+    "word": "pleister",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "kleefstrip voor kleine wonden",
+    "language": "nl",
+    "transcription": "/ˈplɛi̯.stər/"
+  },
+  {
+    "score": 0.23,
+    "word": "mitella",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "doek om een arm te ondersteunen",
+    "language": "nl",
+    "transcription": "/miˈtɛl.a/"
+  },
+  {
+    "score": 0.44,
+    "word": "thermometer",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "instrument om temperatuur te meten",
+    "language": "nl",
+    "transcription": "/ˈtɛr.moːˌmeː.tər/"
+  },
+  {
+    "score": 0.39,
+    "word": "rolstoel",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "stoel op wielen voor mobiliteit",
+    "language": "nl",
+    "transcription": "/ˈrɔlˌstul/"
+  },
+  {
+    "score": 0.26,
+    "word": "loopkruk",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "kruk om mee te lopen",
+    "language": "nl",
+    "transcription": "/ˈloːpˌkrʏk/"
+  },
+  {
+    "score": 0.24,
+    "word": "bijsluiter",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "informatieblad bij een medicijn",
+    "language": "nl",
+    "transcription": "/ˈbɛi̯ˌslœy̯.tər/"
+  },
+  {
+    "score": 0.51,
+    "word": "huisarts",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "algemene dokter in de buurt",
+    "language": "nl",
+    "transcription": "/ˈɦœy̯sˌɑrts/"
+  },
+  {
+    "score": 0.33,
+    "word": "tandvlees",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "zacht weefsel rond de tanden",
+    "language": "nl",
+    "transcription": "/ˈtɑntˌvleːs/"
+  },
+  {
+    "score": 0.29,
+    "word": "mondhygiëne",
+    "topic": "Gezondheid",
+    "level": "B2",
+    "meaning": "verzorging van tanden en mond",
+    "language": "nl",
+    "transcription": "/ˈmɔnt hiːxiˈjeː.nə/"
+  },
+  {
+    "score": 0.39,
+    "word": "veerpont",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "veerboot voor korte overtocht",
+    "language": "nl",
+    "transcription": "/ˈveːrˌpɔnt/"
+  },
+  {
+    "score": 0.37,
+    "word": "aanhanger",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "wagen die achter auto hangt",
+    "language": "nl",
+    "transcription": "/ˈaːnˌɦɑŋ.ər/"
+  },
+  {
+    "score": 0.43,
+    "word": "bestelwagen",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "kleine vrachtwagen voor levering",
+    "language": "nl",
+    "transcription": "/bəˈstɛlˌʋaː.ɣən/"
+  },
+  {
+    "score": 0.35,
+    "word": "vrachtauto",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "grote auto voor goederenvervoer",
+    "language": "nl",
+    "transcription": "/ˈvrɑxtˌʌu̯.toː/"
+  },
+  {
+    "score": 0.49,
+    "word": "scooter",
+    "topic": "Vervoer",
+    "level": "A1",
+    "meaning": "lichte motor met plateau",
+    "language": "nl",
+    "transcription": "/ˈskuː.tər/"
+  },
+  {
+    "score": 0.36,
+    "word": "bakfiets",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "fiets met grote bak voorop",
+    "language": "nl",
+    "transcription": "/ˈbɑkˌfits/"
+  },
+  {
+    "score": 0.41,
+    "word": "step",
+    "topic": "Vervoer",
+    "level": "A1",
+    "meaning": "voertuig met plank en stuur",
+    "language": "nl",
+    "transcription": "/stɛp/"
+  },
+  {
+    "score": 0.21,
+    "word": "achteruitkijkspiegel",
+    "topic": "Vervoer",
+    "level": "B2",
+    "meaning": "spiegel om achter je te kijken",
+    "language": "nl",
+    "transcription": "/ˌɑxtərˈœy̯tˌkɛi̯kˌspiː.ɣəl/"
+  },
+  {
+    "score": 0.43,
+    "word": "rempedaal",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "pedaal om te remmen",
+    "language": "nl",
+    "transcription": "/ˈrɛm.pəˌdaːl/"
+  },
+  {
+    "score": 0.41,
+    "word": "gaspedaal",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "pedaal om gas te geven",
+    "language": "nl",
+    "transcription": "/ˈxɑs.pəˌdaːl/"
+  },
+  {
+    "score": 0.34,
+    "word": "koppeling",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "mechanisme tussen motor en versnellingsbak",
+    "language": "nl",
+    "transcription": "/ˈkɔ.pə.lɪŋ/"
+  },
+  {
+    "score": 0.28,
+    "word": "versnellingspook",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "hendel voor de versnellingen",
+    "language": "nl",
+    "transcription": "/vərˈsnɛ.lɪŋsˌpoːk/"
+  },
+  {
+    "score": 0.33,
+    "word": "achterbak",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "ruimte achterin de auto",
+    "language": "nl",
+    "transcription": "/ˈɑxtərˌbɑk/"
+  },
+  {
+    "score": 0.29,
+    "word": "dakdrager",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "rek op autodak voor bagage",
+    "language": "nl",
+    "transcription": "/ˈdɑkˌdraː.ɣər/"
+  },
+  {
+    "score": 0.22,
+    "word": "bagagerek",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "rek om bagage op te leggen",
+    "language": "nl",
+    "transcription": "/baˈxaː.ɣəˌrɛk/"
+  },
+  {
+    "score": 0.24,
+    "word": "kilometerteller",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "meter die afstand registreert",
+    "language": "nl",
+    "transcription": "/ˈkiː.loːˌmeː.tərˌtɛl.ər/"
+  },
+  {
+    "score": 0.36,
+    "word": "rijstrook",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "strook op de weg voor verkeer",
+    "language": "nl",
+    "transcription": "/ˈrɛi̯ˌstroːk/"
+  },
+  {
+    "score": 0.18,
+    "word": "carpoolstrook",
+    "topic": "Vervoer",
+    "level": "B2",
+    "meaning": "strook voor auto's met meerdere inzittenden",
+    "language": "nl",
+    "transcription": "/ˈkɑrˌpulˌstroːk/"
+  },
+  {
+    "score": 0.35,
+    "word": "e-bike",
+    "topic": "Vervoer",
+    "level": "A2",
+    "meaning": "elektrische fiets",
+    "language": "nl",
+    "transcription": "/ˈiːˌbɛi̯k/"
+  },
+  {
+    "score": 0.31,
+    "word": "laadpaal",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "paal om elektrische auto op te laden",
+    "language": "nl",
+    "transcription": "/ˈlaːtˌpaːl/"
+  },
+  {
+    "score": 0.21,
+    "word": "snelfietsroute",
+    "topic": "Vervoer",
+    "level": "B1",
+    "meaning": "doorlopende, snelle fietsverbinding",
+    "language": "nl",
+    "transcription": "/ˈsnɛlˌfitsˌruː.tə/"
+  },
+  {
+    "score": 0.38,
+    "word": "boekhandel",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "winkel waar je boeken koopt",
+    "language": "nl",
+    "transcription": "/ˈbukˌɦɑn.dəl/"
+  },
+  {
+    "score": 0.43,
+    "word": "bloemist",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "winkel voor bloemen en planten",
+    "language": "nl",
+    "transcription": "/bluːˈmɪst/"
+  },
+  {
+    "score": 0.33,
+    "word": "drogisterij",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "winkel met verzorgingsproducten",
+    "language": "nl",
+    "transcription": "/droːxɪstəˈrɛi̯/"
+  },
+  {
+    "score": 0.41,
+    "word": "warenhuis",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "grote winkel met veel afdelingen",
+    "language": "nl",
+    "transcription": "/ˈʋaː.rənˌɦœy̯s/"
+  },
+  {
+    "score": 0.26,
+    "word": "kringloopwinkel",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "winkel met tweedehands goederen",
+    "language": "nl",
+    "transcription": "/ˈkrɪŋˌloːpˌʋɪŋ.kəl/"
+  },
+  {
+    "score": 0.42,
+    "word": "bouwmarkt",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "winkel voor klus- en bouwmaterialen",
+    "language": "nl",
+    "transcription": "/ˈbʌu̯ˌmɑrkt/"
+  },
+  {
+    "score": 0.36,
+    "word": "tuincentrum",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "winkel voor tuinplanten en spullen",
+    "language": "nl",
+    "transcription": "/ˈtœy̯nˌsɛn.trʏm/"
+  },
+  {
+    "score": 0.39,
+    "word": "sporthal",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "grote hal voor sportactiviteiten",
+    "language": "nl",
+    "transcription": "/ˈspɔrtˌɦɑl/"
+  },
+  {
+    "score": 0.31,
+    "word": "dorpshuis",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "gemeenschapsgebouw in een dorp",
+    "language": "nl",
+    "transcription": "/ˈdɔrpsˌɦœy̯s/"
+  },
+  {
+    "score": 0.34,
+    "word": "clubhuis",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "gebouw van een vereniging",
+    "language": "nl",
+    "transcription": "/ˈklʏbˌɦœy̯s/"
+  },
+  {
+    "score": 0.48,
+    "word": "snackbar",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "zaak met snacks en friet",
+    "language": "nl",
+    "transcription": "/ˈsnɛkˌbɑr/"
+  },
+  {
+    "score": 0.44,
+    "word": "cafetaria",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "eetgelegenheid met snelle hap",
+    "language": "nl",
+    "transcription": "/kɑfɛˈtaː.ria/"
+  },
+  {
+    "score": 0.37,
+    "word": "ijssalon",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "winkel waar je ijs kunt kopen",
+    "language": "nl",
+    "transcription": "/ˈɛi̯s.saˌlɔn/"
+  },
+  {
+    "score": 0.43,
+    "word": "kapsalon",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "zaak waar je je haar laat knippen",
+    "language": "nl",
+    "transcription": "/ˈkɑp.saˌlɔn/"
+  },
+  {
+    "score": 0.29,
+    "word": "schoonheidssalon",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "zaak voor gezichts- en lichaamsverzorging",
+    "language": "nl",
+    "transcription": "/ˈsxon.ɦɛi̯ts.saˌlɔn/"
+  },
+  {
+    "score": 0.27,
+    "word": "huisartsenpost",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "spoedpost voor huisartshulp",
+    "language": "nl",
+    "transcription": "/ˈɦœy̯sˌɑrtsənˌpɔst/"
+  },
+  {
+    "score": 0.24,
+    "word": "tandartsenpraktijk",
+    "topic": "Winkels & diensten",
+    "level": "B1",
+    "meaning": "praktijk van meerdere tandartsen",
+    "language": "nl",
+    "transcription": "/ˈtɑn.dɑrtsənprɑkˌtɛi̯k/"
+  },
+  {
+    "score": 0.31,
+    "word": "dierenkliniek",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "kliniek voor behandeling van dieren",
+    "language": "nl",
+    "transcription": "/ˈdiː.rənkliˌnik/"
+  },
+  {
+    "score": 0.38,
+    "word": "dierenwinkel",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "winkel met spullen voor huisdieren",
+    "language": "nl",
+    "transcription": "/ˈdiː.rənˌʋɪŋ.kəl/"
+  },
+  {
+    "score": 0.35,
+    "word": "kinderboerderij",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "plaats met boerderijdieren voor kinderen",
+    "language": "nl",
+    "transcription": "/ˈkɪn.dərˌbur.dəˌrɛi̯/"
+  },
+  {
+    "score": 0.46,
+    "word": "dierentuin",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "park met wilde dieren",
+    "language": "nl",
+    "transcription": "/ˈdiː.rənˌtœy̯n/"
+  },
+  {
+    "score": 0.41,
+    "word": "pretpark",
+    "topic": "Winkels & diensten",
+    "level": "A1",
+    "meaning": "park met attracties en achtbanen",
+    "language": "nl",
+    "transcription": "/ˈprɛtˌpɑrk/"
+  },
+  {
+    "score": 0.22,
+    "word": "klimhal",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "hal met klimmuren",
+    "language": "nl",
+    "transcription": "/ˈklɪmˌɦɑl/"
+  },
+  {
+    "score": 0.3,
+    "word": "bowlingbaan",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "baan om te bowlen",
+    "language": "nl",
+    "transcription": "/ˈboː.lɪŋˌbaːn/"
+  },
+  {
+    "score": 0.21,
+    "word": "kartbaan",
+    "topic": "Winkels & diensten",
+    "level": "A2",
+    "meaning": "baan voor karten",
+    "language": "nl",
+    "transcription": "/ˈkɑrtˌbaːn/"
+  }
+]

@@ -18,7 +18,19 @@ export class WordEntity implements Word {
 	catalog: number;
 
 	@Column()
+	word: string;
+
+	@Column()
 	language: string;
+
+	@Column()
+	audio: string;
+
+	@Column()
+	transcribtion: string;
+
+	@Column({ type: "text", nullable: true })
+	meaning?: string;
 }
 
 @Entity({ name: "word_data" })

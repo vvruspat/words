@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+// import OpenAI from "openai";
 import type { Repository } from "typeorm";
 import { GetWordRequestDto } from "~/dto";
 import {
@@ -43,4 +44,29 @@ export class WordService {
 	async remove(id: WordEntity["id"]): Promise<void> {
 		await this.wordRepository.delete({ id });
 	}
+
+	// async generateWords(language: string): Promise<void> {
+	// 	const openai = new OpenAI({
+	// 		apiKey: process.env.OPENAI_API_KEY,
+	// 	});
+
+	// 	const existingWords = await this.wordRepository.find({
+	// 		where: { language },
+	// 		select: ["word"],
+	// 	});
+	// 	const existingWordsSet = existingWords.map((w) => w.word);
+
+	// 	const response = await openai.responses.create({
+	// 		prompt: {
+	// 			id: "pmpt_68d7dd4ba27c81938c9bbdec444b680709d28b2b08dcd74e",
+	// 			version: "8",
+	// 			variables: {
+	// 				wordlanguage: language,
+	// 				exclude: existingWordsSet.join(","),
+	// 			},
+	// 		},
+	// 	});
+
+	// 	return response
+	// }
 }

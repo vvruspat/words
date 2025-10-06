@@ -23,7 +23,7 @@ type MailOptions = {
 			templateId: MailTemplate.CONFIRM_EMAIL;
 			params: {
 				name: string;
-				link: string;
+				code: string;
 			};
 	  }
 	| {

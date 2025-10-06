@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-example}
+      POSTGRES_DB: ${POSTGRES_DB:-words_dev}
+    ports:
+      - "${POSTGRES_PORT:-5434}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - words-network
+
+  redis:
+    image: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - words-network
+
+volumes:
+  pgdata:
+
+networks:
+  words-network:
+    driver: bridge

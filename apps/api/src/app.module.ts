@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 import { LearningModule } from "./learning/learning.module";
 import { MailerModule } from "./mailer/mailer.module";
+import { RedisModule } from "./redis/redis.module";
 import { TopicModule } from "./topic/topic.module";
 import { TrainingModule } from "./training/training.module";
 import { UserModule } from "./user/user.module";
@@ -25,6 +26,7 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		WordModule,
 		WordTranslationModule,
 		MailerModule,
+		RedisModule,
 		AuthModule,
 	],
 	controllers: [AppController],

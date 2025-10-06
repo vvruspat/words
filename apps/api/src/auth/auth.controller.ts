@@ -10,18 +10,19 @@ import {
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import {
-	GetVerifyEmailRequestDto,
 	PostRefreshTokenRequestDto,
 	PostRefreshTokenResponseDto,
 	PostSignInRequestDto,
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
 	PostSignUpResponseDto,
+	PostVerifyEmailRequestDto,
 } from "~/dto";
 import {
 	GetResetPasswordRequestDto,
 	PutResetPasswordRequestDto,
 } from "~/dto/api/reset-password";
+import { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
 import { AuthService } from "./auth.service";
 
 @ApiTags("auth")
@@ -42,7 +43,12 @@ export class AuthController {
 	async signup(
 		@Body() dto: PostSignUpRequestDto,
 	): Promise<PostSignUpResponseDto> {
-		return this.authService.signUp(dto.name, dto.email, dto.password);
+		return this.authService.signUp(
+			dto.name,
+			dto.email,
+			dto.language_speak,
+			dto.language_learn,
+		);
 	}
 
 	@Put("reset-password")
@@ -59,12 +65,20 @@ export class AuthController {
 		return this.authService.sendResetPasswordEmail(dto.email);
 	}
 
-	@Get("verify-email")
+	@Post("verify-email")
 	@HttpCode(HttpStatus.OK)
 	async sendVerificationEmail(
-		@Query() dto: GetVerifyEmailRequestDto,
+		@Body() dto: PostVerifyEmailRequestDto,
 	): Promise<void> {
-		return this.authService.verifyEmail(dto.token);
+		return this.authService.verifyEmail(dto.email, dto.code);
+	}
+
+	@Post("verify-email/resend")
+	@HttpCode(HttpStatus.OK)
+	async resendVerificationEmail(
+		@Body() dto: PostVerifyEmailResendRequestDto,
+	): Promise<void> {
+		return this.authService.sendVerificationEmail(dto.email);
 	}
 
 	@Post("refresh-token")

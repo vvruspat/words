@@ -1,11 +1,13 @@
 import {
 	BadRequestException,
+	Inject,
 	Injectable,
 	UnauthorizedException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
+import Redis from "ioredis";
 import {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
@@ -21,6 +23,7 @@ export class AuthService {
 		private readonly configService: ConfigService,
 		private readonly jwtService: JwtService,
 		private readonly mailerService: MailerService,
+		@Inject("REDIS_CLIENT") private readonly redis: Redis,
 	) {}
 
 	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
@@ -45,8 +48,6 @@ export class AuthService {
 			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
 		});
 
-		delete user.password;
-
 		const result = {
 			user,
 			access_token: accessToken,
@@ -59,12 +60,9 @@ export class AuthService {
 	async signUp(
 		name: PostSignUpRequestDto["name"],
 		email: PostSignUpRequestDto["email"],
-		password: PostSignUpRequestDto["password"],
+		_language_learn: PostSignUpRequestDto["language_learn"],
+		language_speak: PostSignUpRequestDto["language_speak"],
 	): Promise<PostSignUpResponseDto> {
-		const salt = Number(this.configService.get<string>("BCRYPT_SALT_ROUNDS"));
-
-		const hashedPassword = await bcrypt.hash(password, salt);
-
 		const existingUser = await this.userService.findOneByEmail(email);
 
 		if (existingUser) {
@@ -74,29 +72,13 @@ export class AuthService {
 		await this.userService.create({
 			email,
 			name,
-			password: hashedPassword,
+			language_speak,
 		});
 
-		const verifyEmailToken = this.jwtService.sign(
-			{ email },
-			{
-				expiresIn:
-					this.configService.get<string | number>("VERIFY_EMAIL_EXPIRES_IN") ||
-					"1h",
-				secret: this.configService.get<string>("JWT_SECRET"),
-			},
-		);
+		await this.sendVerificationEmail(email);
 
-		this.mailerService.sendMail({
-			to: [{ email }],
-			templateId: MailTemplate.CONFIRM_EMAIL,
-			params: {
-				name,
-				link: `${this.configService.get("DOMAIN")}/verify-email?token=${verifyEmailToken}`,
-			},
-		});
-
-		return this.signIn(email, password);
+		// TODO: authorize user after signup
+		return { access_token: "", refresh_token: "", user: null };
 	}
 
 	async refreshToken(token: string): Promise<PostSignInResponseDto> {
@@ -123,20 +105,47 @@ export class AuthService {
 		return this.signIn(user.email, user.password);
 	}
 
-	async verifyEmail(token: string) {
-		const decoded = this.jwtService.verify(token, {
-			secret: this.configService.get<string>("JWT_SECRET"),
-		});
-		const { email, exp } = decoded;
-		if (Date.now() >= exp * 1000) {
-			throw new UnauthorizedException("Token expired");
+	async verifyEmail(email: string, code: string) {
+		const storedCode = await this.redis.get(`verify-email:${email}`);
+
+		if (!storedCode || storedCode !== code.toUpperCase()) {
+			throw new BadRequestException("Invalid or expired verification code");
 		}
+
+		await this.redis.del(`verify-email:${email}`);
+
 		const user = await this.userService.findOneByEmail(email);
+
 		if (!user) {
 			throw new UnauthorizedException();
 		}
 
 		await this.userService.setEmailVerified(user.id);
+	}
+
+	async sendVerificationEmail(email: string) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		const code = Array.from(
+			{ length: 4 },
+			() => chars[Math.floor(Math.random() * chars.length)],
+		).join("");
+
+		await this.redis.set(`verify-email:${email}`, code, "EX", 60 * 60 * 1); // 1 hour expiration
+
+		await this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.CONFIRM_EMAIL,
+			params: {
+				name: user.name,
+				code,
+			},
+		});
 	}
 
 	async sendResetPasswordEmail(email: string) {

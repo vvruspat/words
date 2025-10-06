@@ -16,10 +16,13 @@ export class UserEntity implements User {
 	name: string;
 
 	@Column({ nullable: true })
-	password?: string;
+	language_speak: string;
 
 	@Column({ nullable: true, default: false })
 	email_verified?: boolean;
+
+	@Column({ nullable: true })
+	password?: string;
 }
 
 export { UserEntity as User };

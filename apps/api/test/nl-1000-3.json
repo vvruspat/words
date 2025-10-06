@@ -1,0 +1,3944 @@
+[
+  {
+    "score": 0.78,
+    "word": "avontuur",
+    "topic": "reizen",
+    "level": "B1",
+    "meaning": "spannende of ongewone gebeurtenis",
+    "language": "nl",
+    "transcription": "/ˌaː.vɔn.ˈtyr/"
+  },
+  {
+    "score": 0.71,
+    "word": "gebeurtenis",
+    "topic": "algemeen",
+    "level": "B2",
+    "meaning": "iets dat plaatsvindt",
+    "language": "nl",
+    "transcription": "/ɣə.ˈbøːr.tə.nɪs/"
+  },
+  {
+    "score": 0.73,
+    "word": "herinnering",
+    "topic": "psychologie",
+    "level": "B2",
+    "meaning": "iets dat je je uit het verleden herinnert",
+    "language": "nl",
+    "transcription": "/ɦə.ˈrɪ.nə.rɪŋ/"
+  },
+  {
+    "score": 0.82,
+    "word": "toekomst",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "tijd die nog moet komen",
+    "language": "nl",
+    "transcription": "/ˈtuː.kɔmst/"
+  },
+  {
+    "score": 0.65,
+    "word": "verleden",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "tijd die al geweest is",
+    "language": "nl",
+    "transcription": "/vər.ˈleː.də(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "heden",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "de tegenwoordige tijd",
+    "language": "nl",
+    "transcription": "/ˈɦeː.də(n)/"
+  },
+  {
+    "score": 0.69,
+    "word": "project",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "gepland geheel van activiteiten",
+    "language": "nl",
+    "transcription": "/proː.ˈjɛkt/"
+  },
+  {
+    "score": 0.7,
+    "word": "proces",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "aaneenschakeling van handelingen",
+    "language": "nl",
+    "transcription": "/proː.ˈsɛs/"
+  },
+  {
+    "score": 0.74,
+    "word": "systeem",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "geheel van samenwerkende delen",
+    "language": "nl",
+    "transcription": "/siːs.ˈteːm/"
+  },
+  {
+    "score": 0.67,
+    "word": "methode",
+    "topic": "onderwijs",
+    "level": "B1",
+    "meaning": "geordende manier van werken",
+    "language": "nl",
+    "transcription": "/meː.ˈtoː.də/"
+  },
+  {
+    "score": 0.69,
+    "word": "techniek",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "wijze van uitvoeren of vakgebied van technologie",
+    "language": "nl",
+    "transcription": "/tɛx.ˈniːk/"
+  },
+  {
+    "score": 0.59,
+    "word": "uitdaging",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "taak die inspanning vraagt",
+    "language": "nl",
+    "transcription": "/ˈœy̯t.ˌdaː.ɣɪŋ/"
+  },
+  {
+    "score": 0.62,
+    "word": "mogelijkheid",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "dat wat kan gebeuren of gedaan kan worden",
+    "language": "nl",
+    "transcription": "/ˈmoː.ɣə.lək.ˌɦɛit/"
+  },
+  {
+    "score": 0.58,
+    "word": "beperking",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "grens aan wat mogelijk is",
+    "language": "nl",
+    "transcription": "/bə.ˈpɛr.kɪŋ/"
+  },
+  {
+    "score": 0.47,
+    "word": "verantwoordelijkheid",
+    "topic": "ethiek",
+    "level": "B2",
+    "meaning": "plicht om voor iets of iemand te zorgen",
+    "language": "nl",
+    "transcription": "/vər.ɑnt.vɔr.ˈdeː.lək.ˌɦɛit/"
+  },
+  {
+    "score": 0.42,
+    "word": "bevoegdheid",
+    "topic": "recht",
+    "level": "B2",
+    "meaning": "wettelijke of formele bevoegdheid om iets te doen",
+    "language": "nl",
+    "transcription": "/bə.ˈvuːxt.ˌɦɛit/"
+  },
+  {
+    "score": 0.55,
+    "word": "verplichting",
+    "topic": "recht",
+    "level": "B1",
+    "meaning": "iets wat je moet doen",
+    "language": "nl",
+    "transcription": "/vər.ˈplɪx.tɪŋ/"
+  },
+  {
+    "score": 0.39,
+    "word": "rechtvaardigheid",
+    "topic": "ethiek",
+    "level": "C1",
+    "meaning": "eerlijkheid en gelijke behandeling",
+    "language": "nl",
+    "transcription": "/rɛxt.ˈfaːr.dəx.ɦɛit/"
+  },
+  {
+    "score": 0.52,
+    "word": "gelijkheid",
+    "topic": "ethiek",
+    "level": "B2",
+    "meaning": "hetzelfde rechten en kansen hebben",
+    "language": "nl",
+    "transcription": "/ɣə.ˈlɛi̯k.ɦɛit/"
+  },
+  {
+    "score": 0.49,
+    "word": "diversiteit",
+    "topic": "samenleving",
+    "level": "B2",
+    "meaning": "verscheidenheid aan achtergronden en kenmerken",
+    "language": "nl",
+    "transcription": "/diː.vɛr.siː.ˈtɛit/"
+  },
+  {
+    "score": 0.46,
+    "word": "inclusie",
+    "topic": "samenleving",
+    "level": "B2",
+    "meaning": "actieve betrokkenheid van iedereen",
+    "language": "nl",
+    "transcription": "/ɪŋ.ˈklyː.zi/"
+  },
+  {
+    "score": 0.51,
+    "word": "solidariteit",
+    "topic": "samenleving",
+    "level": "B2",
+    "meaning": "gevoel van saamhorigheid en steun",
+    "language": "nl",
+    "transcription": "/soː.li.daː.ri.ˈtɛit/"
+  },
+  {
+    "score": 0.57,
+    "word": "empathie",
+    "topic": "psychologie",
+    "level": "B2",
+    "meaning": "vermogen mee te voelen met anderen",
+    "language": "nl",
+    "transcription": "/ɛm.pa.ˈti/"
+  },
+  {
+    "score": 0.51,
+    "word": "compassie",
+    "topic": "psychologie",
+    "level": "B2",
+    "meaning": "mededogen met het lijden van anderen",
+    "language": "nl",
+    "transcription": "/kɔm.ˈpɑ.si/"
+  },
+  {
+    "score": 0.61,
+    "word": "beleefdheid",
+    "topic": "samenleving",
+    "level": "A2",
+    "meaning": "vriendelijk en netjes gedrag",
+    "language": "nl",
+    "transcription": "/bə.ˈleːft.ɦɛit/"
+  },
+  {
+    "score": 0.66,
+    "word": "moed",
+    "topic": "karakter",
+    "level": "B1",
+    "meaning": "dapperheid om iets moeilijks te doen",
+    "language": "nl",
+    "transcription": "/mut/"
+  },
+  {
+    "score": 0.6,
+    "word": "eerlijkheid",
+    "topic": "ethiek",
+    "level": "A2",
+    "meaning": "de waarheid spreken en niet bedriegen",
+    "language": "nl",
+    "transcription": "/ˈeːr.lək.ɦɛit/"
+  },
+  {
+    "score": 0.41,
+    "word": "integriteit",
+    "topic": "ethiek",
+    "level": "B2",
+    "meaning": "morele onkreukbaarheid",
+    "language": "nl",
+    "transcription": "/ɪn.teː.ɣri.ˈtɛit/"
+  },
+  {
+    "score": 0.53,
+    "word": "ethiek",
+    "topic": "filosofie",
+    "level": "B2",
+    "meaning": "leer van goed en kwaad handelen",
+    "language": "nl",
+    "transcription": "/eː.ˈtik/"
+  },
+  {
+    "score": 0.49,
+    "word": "principe",
+    "topic": "algemeen",
+    "level": "B2",
+    "meaning": "grondregel of uitgangspunt",
+    "language": "nl",
+    "transcription": "/prɪn.ˈsi.pə/"
+  },
+  {
+    "score": 0.54,
+    "word": "reputatie",
+    "topic": "samenleving",
+    "level": "B2",
+    "meaning": "algemene waardering die men van iemand heeft",
+    "language": "nl",
+    "transcription": "/reː.puː.ˈtaː.tsi/"
+  },
+  {
+    "score": 0.63,
+    "word": "traditie",
+    "topic": "cultuur",
+    "level": "B1",
+    "meaning": "gebruik dat van generatie op generatie wordt doorgegeven",
+    "language": "nl",
+    "transcription": "/traː.ˈdi.tsi/"
+  },
+  {
+    "score": 0.73,
+    "word": "cultuur",
+    "topic": "cultuur",
+    "level": "B1",
+    "meaning": "ideeën en gewoonten van een groep mensen",
+    "language": "nl",
+    "transcription": "/kʏl.ˈtyr/"
+  },
+  {
+    "score": 0.68,
+    "word": "gewoonte",
+    "topic": "samenleving",
+    "level": "A2",
+    "meaning": "iets wat je vaak op dezelfde manier doet",
+    "language": "nl",
+    "transcription": "/ɣə.ˈʋoːn.tə/"
+  },
+  {
+    "score": 0.5,
+    "word": "ritueel",
+    "topic": "cultuur",
+    "level": "B2",
+    "meaning": "plechtige handeling met symbolische betekenis",
+    "language": "nl",
+    "transcription": "/ri.ty.ˈeːl/"
+  },
+  {
+    "score": 0.56,
+    "word": "symbool",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "teken dat iets anders voorstelt",
+    "language": "nl",
+    "transcription": "/sɪm.ˈboːl/"
+  },
+  {
+    "score": 0.64,
+    "word": "betekenis",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "wat iets wil zeggen",
+    "language": "nl",
+    "transcription": "/bə.ˈteː.kə.nɪs/"
+  },
+  {
+    "score": 0.62,
+    "word": "context",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "omstandigheden die betekenis geven",
+    "language": "nl",
+    "transcription": "/ˈkɔn.tɛkst/"
+  },
+  {
+    "score": 0.58,
+    "word": "perspectief",
+    "topic": "kunst",
+    "level": "B2",
+    "meaning": "kijkrichting of gezichtspunt",
+    "language": "nl",
+    "transcription": "/pɛr.spɛk.ˈtif/"
+  },
+  {
+    "score": 0.57,
+    "word": "analyse",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "ontleding in onderdelen",
+    "language": "nl",
+    "transcription": "/aː.naː.ˈli.zə/"
+  },
+  {
+    "score": 0.44,
+    "word": "synthese",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "samenstelling van delen tot een geheel",
+    "language": "nl",
+    "transcription": "/sɪn.ˈteː.zə/"
+  },
+  {
+    "score": 0.64,
+    "word": "theorie",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "systeem van ideeën ter verklaring",
+    "language": "nl",
+    "transcription": "/teː.oː.ˈri/"
+  },
+  {
+    "score": 0.66,
+    "word": "praktijk",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "de toepassing in het echte leven",
+    "language": "nl",
+    "transcription": "/prɑk.ˈtɛik/"
+  },
+  {
+    "score": 0.61,
+    "word": "concept",
+    "topic": "taal",
+    "level": "B2",
+    "meaning": "idee of voorlopig ontwerp",
+    "language": "nl",
+    "transcription": "/kɔn.ˈsɛpt/"
+  },
+  {
+    "score": 0.7,
+    "word": "voorbeeld",
+    "topic": "onderwijs",
+    "level": "A2",
+    "meaning": "iets dat verduidelijkt hoe het moet",
+    "language": "nl",
+    "transcription": "/ˈvoːr.beːlt/"
+  },
+  {
+    "score": 0.57,
+    "word": "onderdeel",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "kleinere sectie van een geheel",
+    "language": "nl",
+    "transcription": "/ˈɔn.dər.deːl/"
+  },
+  {
+    "score": 0.6,
+    "word": "geheel",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "het totaal van alle delen",
+    "language": "nl",
+    "transcription": "/ɣə.ˈɦeːl/"
+  },
+  {
+    "score": 0.59,
+    "word": "kenmerk",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "opvallende eigenschap",
+    "language": "nl",
+    "transcription": "/ˈkɛn.mɛrk/"
+  },
+  {
+    "score": 0.62,
+    "word": "eigenschap",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "iets wat typisch is voor iemand of iets",
+    "language": "nl",
+    "transcription": "/ˈɛi̯.ɣən.sxɑp/"
+  },
+  {
+    "score": 0.6,
+    "word": "functie",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "taak of doel van iets",
+    "language": "nl",
+    "transcription": "/ˈfʏŋk.si/"
+  },
+  {
+    "score": 0.52,
+    "word": "structuur",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "opbouw en samenhang van onderdelen",
+    "language": "nl",
+    "transcription": "/strʏk.ˈtyr/"
+  },
+  {
+    "score": 0.67,
+    "word": "balans",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "evenwichtige verhouding",
+    "language": "nl",
+    "transcription": "/baː.ˈlɑns/"
+  },
+  {
+    "score": 0.51,
+    "word": "harmonie",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "samenklank of evenwicht",
+    "language": "nl",
+    "transcription": "/ɦɑr.moː.ˈni/"
+  },
+  {
+    "score": 0.58,
+    "word": "contrast",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "duidelijk verschil tussen zaken",
+    "language": "nl",
+    "transcription": "/kɔn.ˈtrɑst/"
+  },
+  {
+    "score": 0.63,
+    "word": "diepte",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "hoe ver iets naar beneden gaat",
+    "language": "nl",
+    "transcription": "/ˈdip.tə/"
+  },
+  {
+    "score": 0.66,
+    "word": "afstand",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "ruimte tussen twee punten",
+    "language": "nl",
+    "transcription": "/ˈɑf.stɑnt/"
+  },
+  {
+    "score": 0.65,
+    "word": "richting",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "waarheen iets gaat of wijst",
+    "language": "nl",
+    "transcription": "/ˈrɪx.tɪŋ/"
+  },
+  {
+    "score": 0.57,
+    "word": "beweging",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "verplaatsing in de ruimte",
+    "language": "nl",
+    "transcription": "/bə.ˈʋeː.ɣɪŋ/"
+  },
+  {
+    "score": 0.6,
+    "word": "massa",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "hoeveelheid materie",
+    "language": "nl",
+    "transcription": "/ˈmɑ.sa/"
+  },
+  {
+    "score": 0.63,
+    "word": "kracht",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "invloed die beweging kan veranderen",
+    "language": "nl",
+    "transcription": "/krɑxt/"
+  },
+  {
+    "score": 0.54,
+    "word": "druk",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "kracht per oppervlakte-eenheid",
+    "language": "nl",
+    "transcription": "/drʏk/"
+  },
+  {
+    "score": 0.51,
+    "word": "spanning",
+    "topic": "natuur",
+    "level": "B2",
+    "meaning": "verschil in potentiaal of toestand van spanning",
+    "language": "nl",
+    "transcription": "/ˈspɑ.nɪŋ/"
+  },
+  {
+    "score": 0.49,
+    "word": "weerstand",
+    "topic": "natuur",
+    "level": "B2",
+    "meaning": "tegenwerking van materiaal of stroming",
+    "language": "nl",
+    "transcription": "/ˈʋeːr.stɑnt/"
+  },
+  {
+    "score": 0.55,
+    "word": "vermogen",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "hoeveelheid energie per tijdseenheid",
+    "language": "nl",
+    "transcription": "/vər.ˈmoː.ɣə(n)/"
+  },
+  {
+    "score": 0.5,
+    "word": "frequentie",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "hoe vaak iets gebeurt in een periode",
+    "language": "nl",
+    "transcription": "/frɛ.ˈkwɛn.tsi/"
+  },
+  {
+    "score": 0.44,
+    "word": "amplitude",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "maximale uitwijking van een trilling",
+    "language": "nl",
+    "transcription": "/ɑm.pli.ˈtyː.də/"
+  },
+  {
+    "score": 0.41,
+    "word": "golflengte",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "afstand tussen twee toppen van een golf",
+    "language": "nl",
+    "transcription": "/ˈɣɔlf.ˌlɛŋ.tə/"
+  },
+  {
+    "score": 0.68,
+    "word": "volume",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "hoeveel ruimte iets inneemt",
+    "language": "nl",
+    "transcription": "/voː.ˈlyː.mə/"
+  },
+  {
+    "score": 0.63,
+    "word": "oppervlakte",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "maat van het oppervlak",
+    "language": "nl",
+    "transcription": "/ˈɔ.pər.vlɑk.tə/"
+  },
+  {
+    "score": 0.67,
+    "word": "inhoud",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "wat er in iets zit of het volume",
+    "language": "nl",
+    "transcription": "/ˈɪn.ɦʌut/"
+  },
+  {
+    "score": 0.55,
+    "word": "afmeting",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "maat of grootte in een richting",
+    "language": "nl",
+    "transcription": "/ˈɑf.ˌmeː.tɪŋ/"
+  },
+  {
+    "score": 0.51,
+    "word": "diameter",
+    "topic": "natuur",
+    "level": "B1",
+    "meaning": "rechte lijn door het middelpunt van een cirkel",
+    "language": "nl",
+    "transcription": "/diː.ˈaː.me.tər/"
+  },
+  {
+    "score": 0.57,
+    "word": "straal",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "afstand van middelpunt tot rand",
+    "language": "nl",
+    "transcription": "/straːl/"
+  },
+  {
+    "score": 0.62,
+    "word": "hoek",
+    "topic": "natuur",
+    "level": "A2",
+    "meaning": "maat tussen twee lijnen",
+    "language": "nl",
+    "transcription": "/ɦuk/"
+  },
+  {
+    "score": 0.45,
+    "word": "vector",
+    "topic": "wiskunde",
+    "level": "B2",
+    "meaning": "grootheid met richting en grootte",
+    "language": "nl",
+    "transcription": "/ˈvɛk.tɔr/"
+  },
+  {
+    "score": 0.46,
+    "word": "matrix",
+    "topic": "wiskunde",
+    "level": "B2",
+    "meaning": "rechthoekige tabel van getallen",
+    "language": "nl",
+    "transcription": "/ˈmaː.trɪks/"
+  },
+  {
+    "score": 0.47,
+    "word": "algoritme",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "stappenplan voor berekening of taak",
+    "language": "nl",
+    "transcription": "/ɑl.ɣoː.ˈrɪt.mə/"
+  },
+  {
+    "score": 0.61,
+    "word": "data",
+    "topic": "informatica",
+    "level": "B1",
+    "meaning": "verzameling van gegevens",
+    "language": "nl",
+    "transcription": "/ˈdaː.ta/"
+  },
+  {
+    "score": 0.63,
+    "word": "tabel",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "overzicht in rijen en kolommen",
+    "language": "nl",
+    "transcription": "/taː.ˈbɛl/"
+  },
+  {
+    "score": 0.6,
+    "word": "grafiek",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "tekening die gegevens weergeeft",
+    "language": "nl",
+    "transcription": "/ɣraː.ˈfik/"
+  },
+  {
+    "score": 0.55,
+    "word": "diagram",
+    "topic": "informatica",
+    "level": "B1",
+    "meaning": "schematische voorstelling van verbanden",
+    "language": "nl",
+    "transcription": "/diː.aː.ˈɣrɑm/"
+  },
+  {
+    "score": 0.59,
+    "word": "schema",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "overzichtelijke voorstelling",
+    "language": "nl",
+    "transcription": "/ˈsxeː.ma/"
+  },
+  {
+    "score": 0.64,
+    "word": "formule",
+    "topic": "wiskunde",
+    "level": "B1",
+    "meaning": "wiskundige uitdrukking",
+    "language": "nl",
+    "transcription": "/fɔr.ˈmyː.lə/"
+  },
+  {
+    "score": 0.62,
+    "word": "conclusie",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "einduitkomst van redenering",
+    "language": "nl",
+    "transcription": "/kɔn.ˈklyː.zi/"
+  },
+  {
+    "score": 0.51,
+    "word": "hypothese",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "voorlopige veronderstelling",
+    "language": "nl",
+    "transcription": "/ɦi.poː.ˈteː.zə/"
+  },
+  {
+    "score": 0.58,
+    "word": "proef",
+    "topic": "wetenschap",
+    "level": "A2",
+    "meaning": "test om iets te onderzoeken",
+    "language": "nl",
+    "transcription": "/pruf/"
+  },
+  {
+    "score": 0.56,
+    "word": "experiment",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "onderzoek met een proefopstelling",
+    "language": "nl",
+    "transcription": "/ɛks.pɛ.ri.ˈmɛnt/"
+  },
+  {
+    "score": 0.58,
+    "word": "laboratorium",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "ruimte voor wetenschappelijk onderzoek",
+    "language": "nl",
+    "transcription": "/laː.bɔ.ˈraː.tɔ.ri.ʏm/"
+  },
+  {
+    "score": 0.54,
+    "word": "onderzoeker",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "iemand die onderzoek doet",
+    "language": "nl",
+    "transcription": "/ˈɔn.dər.ˌzʏ.kər/"
+  },
+  {
+    "score": 0.54,
+    "word": "wetenschapper",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "iemand die wetenschap beoefent",
+    "language": "nl",
+    "transcription": "/ˈʋeː.tən.sxɑ.pər/"
+  },
+  {
+    "score": 0.59,
+    "word": "microscoop",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "instrument dat kleine dingen vergroot",
+    "language": "nl",
+    "transcription": "/miː.krɔ.ˈskoːp/"
+  },
+  {
+    "score": 0.57,
+    "word": "telescoop",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "instrument om verre objecten te zien",
+    "language": "nl",
+    "transcription": "/teː.lə.ˈskoːp/"
+  },
+  {
+    "score": 0.63,
+    "word": "robot",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "automatisch werkende machine",
+    "language": "nl",
+    "transcription": "/ˈroː.bɔt/"
+  },
+  {
+    "score": 0.56,
+    "word": "drone",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "op afstand bestuurbaar luchtvaartuig",
+    "language": "nl",
+    "transcription": "/droː.nə/"
+  },
+  {
+    "score": 0.61,
+    "word": "sensor",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "onderdeel dat metingen uitvoert",
+    "language": "nl",
+    "transcription": "/ˈsɛn.sɔr/"
+  },
+  {
+    "score": 0.45,
+    "word": "actuator",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "onderdeel dat beweging aanstuurt",
+    "language": "nl",
+    "transcription": "/ɑk.ty.ˈaː.tɔr/"
+  },
+  {
+    "score": 0.73,
+    "word": "camera",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "apparaat om beelden vast te leggen",
+    "language": "nl",
+    "transcription": "/ˈkaː.me.raː/"
+  },
+  {
+    "score": 0.65,
+    "word": "lens",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "glas dat licht bundelt of spreidt",
+    "language": "nl",
+    "transcription": "/lɛns/"
+  },
+  {
+    "score": 0.6,
+    "word": "filter",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "zeef of methode om te scheiden",
+    "language": "nl",
+    "transcription": "/ˈfɪl.tər/"
+  },
+  {
+    "score": 0.61,
+    "word": "antenne",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "apparaat om signalen te zenden of ontvangen",
+    "language": "nl",
+    "transcription": "/ɑn.ˈtɛn.ə/"
+  },
+  {
+    "score": 0.66,
+    "word": "batterij",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "opslag voor elektrische energie",
+    "language": "nl",
+    "transcription": "/bɑ.tə.ˈrɛi̯/"
+  },
+  {
+    "score": 0.52,
+    "word": "accu",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "oplaadbare batterij",
+    "language": "nl",
+    "transcription": "/ˈɑ.ky/"
+  },
+  {
+    "score": 0.43,
+    "word": "generator",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "apparaat dat energie opwekt",
+    "language": "nl",
+    "transcription": "/ɣeː.nə.ˈraː.tɔr/"
+  },
+  {
+    "score": 0.4,
+    "word": "turbine",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "roterend apparaat dat energie uit stroming haalt",
+    "language": "nl",
+    "transcription": "/tʏr.ˈbiː.nə/"
+  },
+  {
+    "score": 0.52,
+    "word": "brandstof",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "materiaal dat energie levert bij verbranding",
+    "language": "nl",
+    "transcription": "/ˈbrɑnt.stɔf/"
+  },
+  {
+    "score": 0.6,
+    "word": "paneel",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "platte plaat of bedieningsbord",
+    "language": "nl",
+    "transcription": "/paː.ˈneːl/"
+  },
+  {
+    "score": 0.66,
+    "word": "melodie",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "opeenvolging van tonen",
+    "language": "nl",
+    "transcription": "/meː.lɔ.ˈdi/"
+  },
+  {
+    "score": 0.64,
+    "word": "ritme",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "afwisseling van korte en lange klanken",
+    "language": "nl",
+    "transcription": "/ˈrɪt.mə/"
+  },
+  {
+    "score": 0.61,
+    "word": "akkoord",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "meerdere tonen die samenklinken",
+    "language": "nl",
+    "transcription": "/ɑ.ˈkoːrt/"
+  },
+  {
+    "score": 0.67,
+    "word": "toon",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "geluid met bepaalde hoogte",
+    "language": "nl",
+    "transcription": "/toːn/"
+  },
+  {
+    "score": 0.44,
+    "word": "maatsoort",
+    "topic": "muziek",
+    "level": "B2",
+    "meaning": "indeling van de maat in muziek",
+    "language": "nl",
+    "transcription": "/ˈmaːt.soːrt/"
+  },
+  {
+    "score": 0.41,
+    "word": "dynamiek",
+    "topic": "muziek",
+    "level": "B2",
+    "meaning": "sterkteverschillen in muziek",
+    "language": "nl",
+    "transcription": "/diː.naː.ˈmik/"
+  },
+  {
+    "score": 0.56,
+    "word": "orkest",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "grote groep musici",
+    "language": "nl",
+    "transcription": "/ɔr.ˈkɛst/"
+  },
+  {
+    "score": 0.42,
+    "word": "dirigent",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "leider van een orkest of koor",
+    "language": "nl",
+    "transcription": "/diː.ri.ˈɣɛnt/"
+  },
+  {
+    "score": 0.48,
+    "word": "componist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die muziek schrijft",
+    "language": "nl",
+    "transcription": "/kɔm.poː.ˈnɪst/"
+  },
+  {
+    "score": 0.68,
+    "word": "zanger",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "iemand die zingt",
+    "language": "nl",
+    "transcription": "/ˈzɑŋ.ər/"
+  },
+  {
+    "score": 0.58,
+    "word": "zangeres",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "vrouw die zingt",
+    "language": "nl",
+    "transcription": "/zɑŋ.ə.ˈrɛs/"
+  },
+  {
+    "score": 0.49,
+    "word": "gitarist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die gitaar speelt",
+    "language": "nl",
+    "transcription": "/xi.taː.ˈrɪst/"
+  },
+  {
+    "score": 0.52,
+    "word": "pianist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die piano speelt",
+    "language": "nl",
+    "transcription": "/piː.aː.ˈnɪst/"
+  },
+  {
+    "score": 0.48,
+    "word": "violist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die viool speelt",
+    "language": "nl",
+    "transcription": "/viː.oː.ˈlɪst/"
+  },
+  {
+    "score": 0.55,
+    "word": "drummer",
+    "topic": "muziek",
+    "level": "A2",
+    "meaning": "iemand die drums bespeelt",
+    "language": "nl",
+    "transcription": "/ˈdrʏ.mər/"
+  },
+  {
+    "score": 0.43,
+    "word": "bassist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die basgitaar speelt",
+    "language": "nl",
+    "transcription": "/bɑ.ˈsɪst/"
+  },
+  {
+    "score": 0.39,
+    "word": "saxofonist",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "iemand die saxofoon speelt",
+    "language": "nl",
+    "transcription": "/sɑk.sɔ.foː.ˈnɪst/"
+  },
+  {
+    "score": 0.62,
+    "word": "schilderen",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "met verf een afbeelding maken",
+    "language": "nl",
+    "transcription": "/ˈsxɪl.də.rə(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "tekening",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "afbeelding gemaakt met potlood of pen",
+    "language": "nl",
+    "transcription": "/ˈteː.kə.nɪŋ/"
+  },
+  {
+    "score": 0.56,
+    "word": "schets",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "snelle, globale tekening",
+    "language": "nl",
+    "transcription": "/sxɛts/"
+  },
+  {
+    "score": 0.55,
+    "word": "illustratie",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "afbeelding ter verduidelijking",
+    "language": "nl",
+    "transcription": "/ɪ.lʏs.ˈtraː.tsi/"
+  },
+  {
+    "score": 0.47,
+    "word": "grafisch",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "betrekking hebbend op vormgeving",
+    "language": "nl",
+    "transcription": "/ˈɣraː.fɪs/"
+  },
+  {
+    "score": 0.44,
+    "word": "typografie",
+    "topic": "kunst",
+    "level": "B2",
+    "meaning": "letterontwerp en -opmaak",
+    "language": "nl",
+    "transcription": "/tiː.poː.ɣraː.ˈfi/"
+  },
+  {
+    "score": 0.53,
+    "word": "lettertype",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "ontwerp van lettervormen",
+    "language": "nl",
+    "transcription": "/ˈlɛ.tər.ˌti.pə/"
+  },
+  {
+    "score": 0.52,
+    "word": "compositie",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "ordening van elementen in een werk",
+    "language": "nl",
+    "transcription": "/kɔm.poː.ˈzi.tsi/"
+  },
+  {
+    "score": 0.51,
+    "word": "canvas",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "doek om op te schilderen",
+    "language": "nl",
+    "transcription": "/ˈkɑn.vɑs/"
+  },
+  {
+    "score": 0.43,
+    "word": "palet",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "bord voor het mengen van verf",
+    "language": "nl",
+    "transcription": "/paː.ˈlɛt/"
+  },
+  {
+    "score": 0.39,
+    "word": "ets",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "grafische techniek met zuur",
+    "language": "nl",
+    "transcription": "/ɛts/"
+  },
+  {
+    "score": 0.46,
+    "word": "aquarel",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "schilderen met waterverf",
+    "language": "nl",
+    "transcription": "/aː.kʋaː.ˈrɛl/"
+  },
+  {
+    "score": 0.48,
+    "word": "keramiek",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "voorwerpen van gebakken klei",
+    "language": "nl",
+    "transcription": "/keː.raː.ˈmik/"
+  },
+  {
+    "score": 0.42,
+    "word": "sculptuur",
+    "topic": "kunst",
+    "level": "B2",
+    "meaning": "beeldhouwwerk",
+    "language": "nl",
+    "transcription": "/skʏlp.ˈtyr/"
+  },
+  {
+    "score": 0.46,
+    "word": "beeldhouwer",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "iemand die beelden hakt of vormt",
+    "language": "nl",
+    "transcription": "/ˈbeːlt.ˌɦʌu̯.ər/"
+  },
+  {
+    "score": 0.55,
+    "word": "atelier",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "werkplaats van een kunstenaar",
+    "language": "nl",
+    "transcription": "/aː.tə.ˈljeː/"
+  },
+  {
+    "score": 0.52,
+    "word": "galerie",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "ruimte waar kunst wordt getoond",
+    "language": "nl",
+    "transcription": "/ɣaː.lə.ˈri/"
+  },
+  {
+    "score": 0.54,
+    "word": "tentoonstelling",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "publieke presentatie van werken",
+    "language": "nl",
+    "transcription": "/tən.ˈtoʊ̯n.stɛl.lɪŋ/"
+  },
+  {
+    "score": 0.66,
+    "word": "literatuur",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "geschreven kunst zoals romans en poëzie",
+    "language": "nl",
+    "transcription": "/liː.tə.raː.ˈtyr/"
+  },
+  {
+    "score": 0.59,
+    "word": "poëzie",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "gedichten en poëtische teksten",
+    "language": "nl",
+    "transcription": "/poː.eː.ˈzi/"
+  },
+  {
+    "score": 0.65,
+    "word": "roman",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "lang, verzonnen verhaal in boekvorm",
+    "language": "nl",
+    "transcription": "/roː.ˈmɑn/"
+  },
+  {
+    "score": 0.49,
+    "word": "novelle",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "korte roman",
+    "language": "nl",
+    "transcription": "/noː.ˈvɛl.ə/"
+  },
+  {
+    "score": 0.69,
+    "word": "verhaal",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "beschrijving van gebeurtenissen",
+    "language": "nl",
+    "transcription": "/vər.ˈɦaːl/"
+  },
+  {
+    "score": 0.56,
+    "word": "vertelling",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "manier van een verhaal presenteren",
+    "language": "nl",
+    "transcription": "/vər.ˈtɛ.lɪŋ/"
+  },
+  {
+    "score": 0.53,
+    "word": "mythe",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "traditioneel verhaal met symboliek",
+    "language": "nl",
+    "transcription": "/ˈmi.tə/"
+  },
+  {
+    "score": 0.52,
+    "word": "legende",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "oude, deels verzonnen vertelling",
+    "language": "nl",
+    "transcription": "/lə.ˈɣɛn.də/"
+  },
+  {
+    "score": 0.64,
+    "word": "sprookje",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "fantasierijk volksverhaal",
+    "language": "nl",
+    "transcription": "/ˈsproː.kjə/"
+  },
+  {
+    "score": 0.54,
+    "word": "fabel",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "verhaal met een moraal",
+    "language": "nl",
+    "transcription": "/ˈfaː.bəl/"
+  },
+  {
+    "score": 0.63,
+    "word": "schrijver",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "iemand die teksten schrijft",
+    "language": "nl",
+    "transcription": "/ˈsxrɛi̯.vər/"
+  },
+  {
+    "score": 0.54,
+    "word": "dichter",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "iemand die gedichten maakt",
+    "language": "nl",
+    "transcription": "/ˈdɪx.tər/"
+  },
+  {
+    "score": 0.51,
+    "word": "uitgever",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "bedrijf of persoon die boeken uitbrengt",
+    "language": "nl",
+    "transcription": "/ˈœy̯t.ˌɣeː.vər/"
+  },
+  {
+    "score": 0.65,
+    "word": "lezer",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "iemand die leest",
+    "language": "nl",
+    "transcription": "/ˈleː.zər/"
+  },
+  {
+    "score": 0.52,
+    "word": "recensie",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "kritische bespreking",
+    "language": "nl",
+    "transcription": "/rə.ˈsɛn.si/"
+  },
+  {
+    "score": 0.49,
+    "word": "alinea",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "stuk tekst binnen een groter geheel",
+    "language": "nl",
+    "transcription": "/aː.ˈliː.ni.aː/"
+  },
+  {
+    "score": 0.5,
+    "word": "paragraaf",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "onderdeel van een hoofdstuk",
+    "language": "nl",
+    "transcription": "/paː.raː.ˈɣraːf/"
+  },
+  {
+    "score": 0.54,
+    "word": "plot",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "verhaallijn of gebeurtenissenreeks",
+    "language": "nl",
+    "transcription": "/plɔt/"
+  },
+  {
+    "score": 0.51,
+    "word": "personage",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "figuur die in een verhaal voorkomt",
+    "language": "nl",
+    "transcription": "/pɛr.soː.ˈnaː.ʒə/"
+  },
+  {
+    "score": 0.58,
+    "word": "thema",
+    "topic": "literatuur",
+    "level": "A2",
+    "meaning": "centrale gedachte van een werk",
+    "language": "nl",
+    "transcription": "/ˈteː.maː/"
+  },
+  {
+    "score": 0.49,
+    "word": "motief",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "terugkerend element in een verhaal",
+    "language": "nl",
+    "transcription": "/moː.ˈtif/"
+  },
+  {
+    "score": 0.57,
+    "word": "stijl",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "manier waarop iets wordt uitgedrukt",
+    "language": "nl",
+    "transcription": "/stɛi̯l/"
+  },
+  {
+    "score": 0.44,
+    "word": "genre",
+    "topic": "literatuur",
+    "level": "B1",
+    "meaning": "soort of categorie binnen kunst",
+    "language": "nl",
+    "transcription": "/ˈʒɑn.rə/"
+  },
+  {
+    "score": 0.53,
+    "word": "geïrriteerd",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "licht boos of geprikkeld",
+    "language": "nl",
+    "transcription": "/ɣə.ˌi.ri.ˈteːrt/"
+  },
+  {
+    "score": 0.6,
+    "word": "verveeld",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "zonder interesse of plezier",
+    "language": "nl",
+    "transcription": "/vər.ˈveːlt/"
+  },
+  {
+    "score": 0.64,
+    "word": "enthousiast",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "heel blij en gemotiveerd",
+    "language": "nl",
+    "transcription": "/ɑn.tʏ.zi.ˈjast/"
+  },
+  {
+    "score": 0.55,
+    "word": "opgelucht",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "rustig na spanning",
+    "language": "nl",
+    "transcription": "/ˈɔp.ɣə.lʏxt/"
+  },
+  {
+    "score": 0.55,
+    "word": "teleurgesteld",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "niet voldaan aan verwachting",
+    "language": "nl",
+    "transcription": "/tə.ˈlør.ɣə.stɛlt/"
+  },
+  {
+    "score": 0.46,
+    "word": "gekwetst",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "emotioneel of fysiek geraakt",
+    "language": "nl",
+    "transcription": "/ɣə.ˈkwɛtst/"
+  },
+  {
+    "score": 0.49,
+    "word": "vastberaden",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "met een sterke wil om door te gaan",
+    "language": "nl",
+    "transcription": "/ˌvɑst.bə.ˈraː.də(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "nieuwsgierig",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "graag meer willen weten",
+    "language": "nl",
+    "transcription": "/niws.ˈxiː.rəx/"
+  },
+  {
+    "score": 0.41,
+    "word": "melancholisch",
+    "topic": "emoties",
+    "level": "B2",
+    "meaning": "weemoedig of zwaarmoedig",
+    "language": "nl",
+    "transcription": "/meː.lɑŋ.xoː.ˈlis/"
+  },
+  {
+    "score": 0.44,
+    "word": "nostalgisch",
+    "topic": "emoties",
+    "level": "B2",
+    "meaning": "met verlangen naar vroeger",
+    "language": "nl",
+    "transcription": "/nɔs.ˈtɑl.xis/"
+  },
+  {
+    "score": 0.45,
+    "word": "verbijsterd",
+    "topic": "emoties",
+    "level": "B2",
+    "meaning": "zeer verbaasd en van streek",
+    "language": "nl",
+    "transcription": "/vər.ˈbɛi̯.stərt/"
+  },
+  {
+    "score": 0.56,
+    "word": "ontroerd",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "geraakt door emotie",
+    "language": "nl",
+    "transcription": "/ɔn.ˈtur̥t/"
+  },
+  {
+    "score": 0.51,
+    "word": "hoopvol",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "vol positieve verwachting",
+    "language": "nl",
+    "transcription": "/ˈɦoːp.fɔl/"
+  },
+  {
+    "score": 0.42,
+    "word": "wantrouwig",
+    "topic": "emoties",
+    "level": "B2",
+    "meaning": "geneigd om te twijfelen aan anderen",
+    "language": "nl",
+    "transcription": "/vɑn.ˈtrɑu̯.əx/"
+  },
+  {
+    "score": 0.64,
+    "word": "dankbaar",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "gevoeld wanneer iemand jou helpt",
+    "language": "nl",
+    "transcription": "/ˈdɑŋk.baːr/"
+  },
+  {
+    "score": 0.55,
+    "word": "schuldig",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "zich verantwoordelijk voelen voor fout",
+    "language": "nl",
+    "transcription": "/ˈsxʏl.dɪx/"
+  },
+  {
+    "score": 0.5,
+    "word": "beschaamd",
+    "topic": "emoties",
+    "level": "B1",
+    "meaning": "zich ongemakkelijk door eigen fout",
+    "language": "nl",
+    "transcription": "/bə.ˈsxaːmt/"
+  },
+  {
+    "score": 0.62,
+    "word": "kalm",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "rustig en zonder opwinding",
+    "language": "nl",
+    "transcription": "/kɑlm/"
+  },
+  {
+    "score": 0.57,
+    "word": "opgewekt",
+    "topic": "emoties",
+    "level": "A2",
+    "meaning": "vrolijk en energiek",
+    "language": "nl",
+    "transcription": "/ˈɔp.ɣə.wɛkt/"
+  },
+  {
+    "score": 0.72,
+    "word": "bovendien",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "verder nog; daarnaast",
+    "language": "nl",
+    "transcription": "/boʊ̯.və(n).ˈdiːn/"
+  },
+  {
+    "score": 0.38,
+    "word": "desalniettemin",
+    "topic": "taal",
+    "level": "C1",
+    "meaning": "toch; ondanks het voorgaande",
+    "language": "nl",
+    "transcription": "/deː.zɑl.niː.tə.ˈmɪn/"
+  },
+  {
+    "score": 0.58,
+    "word": "alsnog",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "toch nog op een later moment",
+    "language": "nl",
+    "transcription": "/ɑlz.ˈnɔx/"
+  },
+  {
+    "score": 0.64,
+    "word": "reeds",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "al eerder",
+    "language": "nl",
+    "transcription": "/reːts/"
+  },
+  {
+    "score": 0.63,
+    "word": "tevens",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "ook; bovendien",
+    "language": "nl",
+    "transcription": "/ˈteː.vəns/"
+  },
+  {
+    "score": 0.62,
+    "word": "wellicht",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "misschien",
+    "language": "nl",
+    "transcription": "/ʋɛl.ˈlɪxt/"
+  },
+  {
+    "score": 0.56,
+    "word": "vermoedelijk",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "waarschijnlijk",
+    "language": "nl",
+    "transcription": "/vər.ˈmuː.də.lək/"
+  },
+  {
+    "score": 0.69,
+    "word": "waarschijnlijk",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "met grote kans",
+    "language": "nl",
+    "transcription": "/ʋaːr.ˈsxɛi̯.nələk/"
+  },
+  {
+    "score": 0.6,
+    "word": "eventueel",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "mogelijk, indien nodig",
+    "language": "nl",
+    "transcription": "/eː.vɛn.ˈty.ˌeːl/"
+  },
+  {
+    "score": 0.71,
+    "word": "ongeveer",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "bij benadering",
+    "language": "nl",
+    "transcription": "/ɔŋ.ɣə.ˈveːr/"
+  },
+  {
+    "score": 0.58,
+    "word": "nauwelijks",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "bijna niet",
+    "language": "nl",
+    "transcription": "/ˈnʌu̯.də.ləks/"
+  },
+  {
+    "score": 0.56,
+    "word": "beslist",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "zeker; zonder twijfel",
+    "language": "nl",
+    "transcription": "/bə.ˈslɪst/"
+  },
+  {
+    "score": 0.65,
+    "word": "absoluut",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "volkomen; helemaal",
+    "language": "nl",
+    "transcription": "/ɑp.sɔ.ˈlyt/"
+  },
+  {
+    "score": 0.64,
+    "word": "volledig",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "compleet; totaal",
+    "language": "nl",
+    "transcription": "/voː.ˈleː.dɪx/"
+  },
+  {
+    "score": 0.56,
+    "word": "gedeeltelijk",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "voor een deel",
+    "language": "nl",
+    "transcription": "/ɣə.ˈdeːl.tə.lək/"
+  },
+  {
+    "score": 0.66,
+    "word": "tijdelijk",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "voor beperkte tijd",
+    "language": "nl",
+    "transcription": "/ˈtɛi̯.də.lək/"
+  },
+  {
+    "score": 0.55,
+    "word": "permanent",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "blijvend",
+    "language": "nl",
+    "transcription": "/pɛr.maː.ˈnɛnt/"
+  },
+  {
+    "score": 0.68,
+    "word": "uiteindelijk",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "na verloop van tijd; tenslotte",
+    "language": "nl",
+    "transcription": "/œy̯t.ˈɛin.də.lək/"
+  },
+  {
+    "score": 0.63,
+    "word": "plotseling",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "heel snel en onverwacht",
+    "language": "nl",
+    "transcription": "/ˈplɔt.sə.lɪŋ/"
+  },
+  {
+    "score": 0.73,
+    "word": "meteen",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "direct; zonder wachten",
+    "language": "nl",
+    "transcription": "/mə.ˈteːn/"
+  },
+  {
+    "score": 0.66,
+    "word": "gelijk",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "onmiddellijk; hetzelfde",
+    "language": "nl",
+    "transcription": "/ɣə.ˈlɛi̯k/"
+  },
+  {
+    "score": 0.69,
+    "word": "straks",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "over korte tijd",
+    "language": "nl",
+    "transcription": "/strɑks/"
+  },
+  {
+    "score": 0.67,
+    "word": "zojuist",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "kort geleden",
+    "language": "nl",
+    "transcription": "/zoː.ˈjœyst/"
+  },
+  {
+    "score": 0.7,
+    "word": "inmiddels",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "intussen; ondertussen",
+    "language": "nl",
+    "transcription": "/ɪn.ˈmɪ.dəls/"
+  },
+  {
+    "score": 0.65,
+    "word": "voorlopig",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "tot er iets anders beslist is",
+    "language": "nl",
+    "transcription": "/voːr.ˈloː.pʏx/"
+  },
+  {
+    "score": 0.64,
+    "word": "binnenkort",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "op korte termijn",
+    "language": "nl",
+    "transcription": "/ˌbɪ.nə(k).ˈkɔrt/"
+  },
+  {
+    "score": 0.6,
+    "word": "spoedig",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "snel; binnenkort",
+    "language": "nl",
+    "transcription": "/ˈspuː.dɪx/"
+  },
+  {
+    "score": 0.59,
+    "word": "traag",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "langzaam van tempo",
+    "language": "nl",
+    "transcription": "/traːx/"
+  },
+  {
+    "score": 0.66,
+    "word": "tenzij",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "behalve als",
+    "language": "nl",
+    "transcription": "/tɛn.ˈzɛi̯/"
+  },
+  {
+    "score": 0.55,
+    "word": "mits",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "op voorwaarde dat",
+    "language": "nl",
+    "transcription": "/mɪts/"
+  },
+  {
+    "score": 0.62,
+    "word": "aangezien",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "omdat; gezien het feit dat",
+    "language": "nl",
+    "transcription": "/ˈaːn.ɣə.ˌziːn/"
+  },
+  {
+    "score": 0.74,
+    "word": "toch",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "desondanks; echter",
+    "language": "nl",
+    "transcription": "/tɔx/"
+  },
+  {
+    "score": 0.68,
+    "word": "echter",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "maar; daarentegen",
+    "language": "nl",
+    "transcription": "/ˈɛx.tər/"
+  },
+  {
+    "score": 0.39,
+    "word": "nochtans",
+    "topic": "taal",
+    "level": "C1",
+    "meaning": "desondanks (Belgisch-Nederlands)",
+    "language": "nl",
+    "transcription": "/ˈnɔx.tɑns/"
+  },
+  {
+    "score": 0.61,
+    "word": "verbeteren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "beter maken",
+    "language": "nl",
+    "transcription": "/vər.ˈbeː.tə.rə(n)/"
+  },
+  {
+    "score": 0.57,
+    "word": "verklaren",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "uitleggen; tot officieel maken",
+    "language": "nl",
+    "transcription": "/vər.ˈklaː.rə(n)/"
+  },
+  {
+    "score": 0.53,
+    "word": "beschouwen",
+    "topic": "taal",
+    "level": "B2",
+    "meaning": "op een bepaalde manier zien",
+    "language": "nl",
+    "transcription": "/bə.ˈsxʌu̯.ə(n)/"
+  },
+  {
+    "score": 0.6,
+    "word": "onderzoeken",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "systematisch nagaan",
+    "language": "nl",
+    "transcription": "/ˈɔn.dər.ˌzʏ.kə(n)/"
+  },
+  {
+    "score": 0.52,
+    "word": "analyseren",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "in onderdelen ontleden",
+    "language": "nl",
+    "transcription": "/aː.naː.li.ˈzeː.rə(n)/"
+  },
+  {
+    "score": 0.6,
+    "word": "ontwikkelen",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "geleidelijk verbeteren of maken",
+    "language": "nl",
+    "transcription": "/ɔnt.ˈʋɪ.kə.lə(n)/"
+  },
+  {
+    "score": 0.55,
+    "word": "ontwerpen",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "een plan of model maken",
+    "language": "nl",
+    "transcription": "/ɔnt.ˈʋɛr.pə(n)/"
+  },
+  {
+    "score": 0.58,
+    "word": "produceren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "maken, vervaardigen",
+    "language": "nl",
+    "transcription": "/proʊ̯.dy.ˈseː.rə(n)/"
+  },
+  {
+    "score": 0.43,
+    "word": "fabriceren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "in een fabriek vervaardigen",
+    "language": "nl",
+    "transcription": "/faː.bri.ˈseː.rə(n)/"
+  },
+  {
+    "score": 0.57,
+    "word": "monteren",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "in elkaar zetten",
+    "language": "nl",
+    "transcription": "/mɔn.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.55,
+    "word": "programmeren",
+    "topic": "informatica",
+    "level": "B1",
+    "meaning": "code schrijven voor computers",
+    "language": "nl",
+    "transcription": "/proʊ̯.ɣraː.ˈmeː.rə(n)/"
+  },
+  {
+    "score": 0.43,
+    "word": "optimaliseren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "zo goed mogelijk maken",
+    "language": "nl",
+    "transcription": "/ɔp.tiː.maː.li.ˈzeː.rə(n)/"
+  },
+  {
+    "score": 0.46,
+    "word": "integreren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "onderdelen samenvoegen",
+    "language": "nl",
+    "transcription": "/ɪn.teː.ˈɣreː.rə(n)/"
+  },
+  {
+    "score": 0.66,
+    "word": "communiceren",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "met elkaar informatie uitwisselen",
+    "language": "nl",
+    "transcription": "/kɔ.my.ni.ˈseː.rə(n)/"
+  },
+  {
+    "score": 0.5,
+    "word": "publiceren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "uitgeven of openbaar maken",
+    "language": "nl",
+    "transcription": "/pyː.bli.ˈseː.rə(n)/"
+  },
+  {
+    "score": 0.53,
+    "word": "presenteren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "iets tonen of toelichten",
+    "language": "nl",
+    "transcription": "/preː.zɛn.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.48,
+    "word": "demonstreren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "voordoen hoe iets werkt",
+    "language": "nl",
+    "transcription": "/deː.mɔn.ˈstreː.rə(n)/"
+  },
+  {
+    "score": 0.47,
+    "word": "illustreren",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "met voorbeelden of beelden verduidelijken",
+    "language": "nl",
+    "transcription": "/ɪ.lʏs.ˈtreː.rə(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "benoemen",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "een naam geven; aanstellen",
+    "language": "nl",
+    "transcription": "/bə.ˈnuː.mə(n)/"
+  },
+  {
+    "score": 0.55,
+    "word": "toelichten",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "uitleg geven",
+    "language": "nl",
+    "transcription": "/ˈtuː.ˌlɪx.tə(n)/"
+  },
+  {
+    "score": 0.64,
+    "word": "vergelijken",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "overeenkomsten en verschillen zoeken",
+    "language": "nl",
+    "transcription": "/vər.ɣə.ˈlɛi̯.kə(n)/"
+  },
+  {
+    "score": 0.49,
+    "word": "evalueren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "beoordelen na afloop",
+    "language": "nl",
+    "transcription": "/eː.vaː.ˈlyː.ˌeː.rə(n)/"
+  },
+  {
+    "score": 0.58,
+    "word": "organiseren",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "regelen en structureren",
+    "language": "nl",
+    "transcription": "/ɔr.ɣaː.ni.ˈzeː.rə(n)/"
+  },
+  {
+    "score": 0.66,
+    "word": "plannen",
+    "topic": "werk",
+    "level": "A2",
+    "meaning": "vooraf bepalen wat je wanneer doet",
+    "language": "nl",
+    "transcription": "/ˈplɛn.ə(n)/"
+  },
+  {
+    "score": 0.54,
+    "word": "reserveren",
+    "topic": "reizen",
+    "level": "A2",
+    "meaning": "van tevoren vastleggen",
+    "language": "nl",
+    "transcription": "/reː.zɛr.ˈveː.rə(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "boeken",
+    "topic": "reizen",
+    "level": "A2",
+    "meaning": "een ticket of kamer vastleggen",
+    "language": "nl",
+    "transcription": "/ˈbuː.kə(n)/"
+  },
+  {
+    "score": 0.46,
+    "word": "afwisselen",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "variatie aanbrengen",
+    "language": "nl",
+    "transcription": "/ˈɑf.ˌʋɪ.sə.lə(n)/"
+  },
+  {
+    "score": 0.58,
+    "word": "verplaatsen",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "naar een andere plek brengen",
+    "language": "nl",
+    "transcription": "/vər.ˈplaːts.ə(n)/"
+  },
+  {
+    "score": 0.6,
+    "word": "verlaten",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "weggaan uit",
+    "language": "nl",
+    "transcription": "/vər.ˈlaː.tə(n)/"
+  },
+  {
+    "score": 0.67,
+    "word": "bereiken",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "tot iets of iemand komen",
+    "language": "nl",
+    "transcription": "/bə.ˈrɛi̯.kə(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "behouden",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "niet verliezen; bewaren",
+    "language": "nl",
+    "transcription": "/bə.ˈɦʌu̯.də(n)/"
+  },
+  {
+    "score": 0.64,
+    "word": "beschermen",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "veilig houden tegen schade",
+    "language": "nl",
+    "transcription": "/bə.ˈsxɛr.mə(n)/"
+  },
+  {
+    "score": 0.49,
+    "word": "bestrijden",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "tegenwerken of tegengaan",
+    "language": "nl",
+    "transcription": "/bə.ˈstrɛi̯.də(n)/"
+  },
+  {
+    "score": 0.66,
+    "word": "voorkomen",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "zorgen dat iets niet gebeurt",
+    "language": "nl",
+    "transcription": "/voːr.ˈkoː.mə(n)/"
+  },
+  {
+    "score": 0.59,
+    "word": "genezen",
+    "topic": "gezondheid",
+    "level": "B1",
+    "meaning": "gezond worden of maken",
+    "language": "nl",
+    "transcription": "/ɣə.ˈneː.zə(n)/"
+  },
+  {
+    "score": 0.58,
+    "word": "verzorgen",
+    "topic": "gezondheid",
+    "level": "A2",
+    "meaning": "zorgen voor iemands welzijn",
+    "language": "nl",
+    "transcription": "/vər.ˈzɔr.ɣə(n)/"
+  },
+  {
+    "score": 0.49,
+    "word": "verplegen",
+    "topic": "gezondheid",
+    "level": "B1",
+    "meaning": "professioneel zorg geven",
+    "language": "nl",
+    "transcription": "/vər.ˈpleː.ɣə(n)/"
+  },
+  {
+    "score": 0.41,
+    "word": "adverteren",
+    "topic": "marketing",
+    "level": "B2",
+    "meaning": "reclame maken voor iets",
+    "language": "nl",
+    "transcription": "/ɑt.fɛr.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.52,
+    "word": "onderhandelen",
+    "topic": "economie",
+    "level": "B2",
+    "meaning": "praten om tot een overeenkomst te komen",
+    "language": "nl",
+    "transcription": "/ˌɔn.dər.ˈɦɑn.də.lə(n)/"
+  },
+  {
+    "score": 0.47,
+    "word": "investeren",
+    "topic": "economie",
+    "level": "B1",
+    "meaning": "geld of tijd in iets steken",
+    "language": "nl",
+    "transcription": "/ɪn.vɛs.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.6,
+    "word": "besparen",
+    "topic": "economie",
+    "level": "A2",
+    "meaning": "minder uitgeven",
+    "language": "nl",
+    "transcription": "/bə.ˈspaː.rə(n)/"
+  },
+  {
+    "score": 0.66,
+    "word": "rekenen",
+    "topic": "onderwijs",
+    "level": "A2",
+    "meaning": "wiskundige bewerkingen uitvoeren",
+    "language": "nl",
+    "transcription": "/ˈreː.kə.nə(n)/"
+  },
+  {
+    "score": 0.66,
+    "word": "tekenen",
+    "topic": "kunst",
+    "level": "A2",
+    "meaning": "afbeelden met lijnen",
+    "language": "nl",
+    "transcription": "/ˈteː.kə.nə(n)/"
+  },
+  {
+    "score": 0.43,
+    "word": "beeldhouwen",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "beelden maken uit steen of hout",
+    "language": "nl",
+    "transcription": "/ˈbeːlt.ˌɦʌu̯.ə(n)/"
+  },
+  {
+    "score": 0.71,
+    "word": "zingen",
+    "topic": "muziek",
+    "level": "A1",
+    "meaning": "zingen met de stem",
+    "language": "nl",
+    "transcription": "/ˈzɪŋ.ə(n)/"
+  },
+  {
+    "score": 0.72,
+    "word": "spelen",
+    "topic": "muziek",
+    "level": "A1",
+    "meaning": "een spel of instrument uitvoeren",
+    "language": "nl",
+    "transcription": "/ˈspeː.lə(n)/"
+  },
+  {
+    "score": 0.65,
+    "word": "oefenen",
+    "topic": "onderwijs",
+    "level": "A2",
+    "meaning": "iets herhalen om beter te worden",
+    "language": "nl",
+    "transcription": "/ˈuː.fə.nə(n)/"
+  },
+  {
+    "score": 0.57,
+    "word": "trainen",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "gericht oefenen",
+    "language": "nl",
+    "transcription": "/ˈtreː.nə(n)/"
+  },
+  {
+    "score": 0.44,
+    "word": "repeteren",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "herhaald oefenen voor uitvoering",
+    "language": "nl",
+    "transcription": "/reː.pə.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.41,
+    "word": "dirigeren",
+    "topic": "muziek",
+    "level": "B2",
+    "meaning": "een ensemble leiden",
+    "language": "nl",
+    "transcription": "/diː.ri.ˈɣeː.rə(n)/"
+  },
+  {
+    "score": 0.49,
+    "word": "componeren",
+    "topic": "muziek",
+    "level": "B1",
+    "meaning": "muziek schrijven",
+    "language": "nl",
+    "transcription": "/kɔm.poː.ˈneː.rə(n)/"
+  },
+  {
+    "score": 0.4,
+    "word": "improviseren",
+    "topic": "muziek",
+    "level": "B2",
+    "meaning": "ter plekke iets bedenken en uitvoeren",
+    "language": "nl",
+    "transcription": "/ɪm.proː.vi.ˈzeː.rə(n)/"
+  },
+  {
+    "score": 0.63,
+    "word": "vertalen",
+    "topic": "taal",
+    "level": "A2",
+    "meaning": "tekst in een andere taal omzetten",
+    "language": "nl",
+    "transcription": "/vər.ˈtaː.lə(n)/"
+  },
+  {
+    "score": 0.44,
+    "word": "tolken",
+    "topic": "taal",
+    "level": "B1",
+    "meaning": "mondeling vertalen",
+    "language": "nl",
+    "transcription": "/ˈtɔl.kə(n)/"
+  },
+  {
+    "score": 0.42,
+    "word": "corrigeren",
+    "topic": "onderwijs",
+    "level": "B1",
+    "meaning": "fouten verbeteren",
+    "language": "nl",
+    "transcription": "/kɔ.ri.ˈʒeː.rə(n)/"
+  },
+  {
+    "score": 0.4,
+    "word": "redigeren",
+    "topic": "onderwijs",
+    "level": "B2",
+    "meaning": "taal en stijl van tekst bewerken",
+    "language": "nl",
+    "transcription": "/reː.di.ˈɣeː.rə(n)/"
+  },
+  {
+    "score": 0.48,
+    "word": "selecteren",
+    "topic": "algemeen",
+    "level": "B1",
+    "meaning": "uitkiezen",
+    "language": "nl",
+    "transcription": "/sə.lɛk.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.59,
+    "word": "filteren",
+    "topic": "techniek",
+    "level": "A2",
+    "meaning": "ongewenste delen verwijderen",
+    "language": "nl",
+    "transcription": "/ˈfɪl.tə.rə(n)/"
+  },
+  {
+    "score": 0.58,
+    "word": "sorteren",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "op volgorde of soort leggen",
+    "language": "nl",
+    "transcription": "/sɔr.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.42,
+    "word": "assembleren",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "onderdelen samenvoegen tot geheel",
+    "language": "nl",
+    "transcription": "/aː.sɑm.ˈbleː.rə(n)/"
+  },
+  {
+    "score": 0.68,
+    "word": "testen",
+    "topic": "werk",
+    "level": "A2",
+    "meaning": "controleren of iets werkt",
+    "language": "nl",
+    "transcription": "/ˈtɛs.tə(n)/"
+  },
+  {
+    "score": 0.36,
+    "word": "debuggen",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "fouten in code opsporen en verhelpen",
+    "language": "nl",
+    "transcription": "/diː.ˈbʏ.ɣə(n)/"
+  },
+  {
+    "score": 0.43,
+    "word": "implementeren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "in gebruik nemen; uitvoeren",
+    "language": "nl",
+    "transcription": "/ɪm.plɛ.mɛn.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.44,
+    "word": "documenteren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "vastleggen in documenten",
+    "language": "nl",
+    "transcription": "/doː.kyː.mɛn.ˈteː.rə(n)/"
+  },
+  {
+    "score": 0.46,
+    "word": "archiveren",
+    "topic": "werk",
+    "level": "B2",
+    "meaning": "systematisch opslaan voor later gebruik",
+    "language": "nl",
+    "transcription": "/ɑr.xiː.ˈveː.rə(n)/"
+  },
+  {
+    "score": 0.62,
+    "word": "uploaden",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "bestanden naar internet sturen",
+    "language": "nl",
+    "transcription": "/ˈʏp.loː.də(n)/"
+  },
+  {
+    "score": 0.65,
+    "word": "downloaden",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "bestanden van internet ophalen",
+    "language": "nl",
+    "transcription": "/ˈdɑun.loː.də(n)/"
+  },
+  {
+    "score": 0.67,
+    "word": "mailen",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "via e-mail versturen",
+    "language": "nl",
+    "transcription": "/ˈmeː.lə(n)/"
+  },
+  {
+    "score": 0.28,
+    "word": "back-uppen",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "reservekopie maken",
+    "language": "nl",
+    "transcription": "/bɛk.ˈʏ.pə(n)/"
+  },
+  {
+    "score": 0.52,
+    "word": "privacy",
+    "topic": "recht",
+    "level": "B1",
+    "meaning": "recht op persoonlijke levenssfeer",
+    "language": "nl",
+    "transcription": "/ˈprɛi̯.və.si/"
+  },
+  {
+    "score": 0.41,
+    "word": "moraal",
+    "topic": "filosofie",
+    "level": "B2",
+    "meaning": "opvattingen over goed en kwaad",
+    "language": "nl",
+    "transcription": "/moː.ˈraːl/"
+  },
+  {
+    "score": 0.41,
+    "word": "algoritmiek",
+    "topic": "informatica",
+    "level": "C1",
+    "meaning": "vakgebied van algoritmen",
+    "language": "nl",
+    "transcription": "/ɑl.ɣoː.rɪt.ˈmik/"
+  },
+  {
+    "score": 0.34,
+    "word": "cyberbeveiliging",
+    "topic": "informatica",
+    "level": "C1",
+    "meaning": "bescherming van digitale systemen",
+    "language": "nl",
+    "transcription": "/ˈsɛi̯.bər.bə.ˌvɛi̯.lə.xɪŋ/"
+  },
+  {
+    "score": 0.5,
+    "word": "encryptie",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "versleutelen van gegevens",
+    "language": "nl",
+    "transcription": "/ɛn.ˈkrɪp.tsi/"
+  },
+  {
+    "score": 0.48,
+    "word": "versleuteling",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "proces van gegevens onleesbaar maken",
+    "language": "nl",
+    "transcription": "/vər.ˈsløː.tə.lɪŋ/"
+  },
+  {
+    "score": 0.41,
+    "word": "decoder",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "apparaat of programma dat code omzet",
+    "language": "nl",
+    "transcription": "/deː.ˈkoː.dər/"
+  },
+  {
+    "score": 0.39,
+    "word": "encoder",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "apparaat of programma dat codeert",
+    "language": "nl",
+    "transcription": "/ɛn.ˈkoː.dər/"
+  },
+  {
+    "score": 0.48,
+    "word": "compressie",
+    "topic": "informatica",
+    "level": "B2",
+    "meaning": "gegevens kleiner maken",
+    "language": "nl",
+    "transcription": "/kɔm.ˈprɛ.si/"
+  },
+  {
+    "score": 0.56,
+    "word": "archief",
+    "topic": "werk",
+    "level": "B1",
+    "meaning": "geordende verzameling documenten",
+    "language": "nl",
+    "transcription": "/ɑr.ˈxiːf/"
+  },
+  {
+    "score": 0.63,
+    "word": "opslag",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "ruimte of systeem om te bewaren",
+    "language": "nl",
+    "transcription": "/ˈɔp.slɑx/"
+  },
+  {
+    "score": 0.66,
+    "word": "geheugen",
+    "topic": "informatica",
+    "level": "A2",
+    "meaning": "capaciteit om te onthouden of op te slaan",
+    "language": "nl",
+    "transcription": "/ɣə.ˈɦøː.ɣə(n)/"
+  },
+  {
+    "score": 0.53,
+    "word": "processor",
+    "topic": "informatica",
+    "level": "B1",
+    "meaning": "centrale verwerkingsunit",
+    "language": "nl",
+    "transcription": "/proː.ˈsɛs.ɔr/"
+  },
+  {
+    "score": 0.44,
+    "word": "microchip",
+    "topic": "techniek",
+    "level": "B1",
+    "meaning": "klein geïntegreerd schakelingetje",
+    "language": "nl",
+    "transcription": "/ˈmiː.kroː.tʃɪp/"
+  },
+  {
+    "score": 0.33,
+    "word": "halfgeleider",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "materiaal met geleidbaarheid tussen metaal en isolator",
+    "language": "nl",
+    "transcription": "/ˈɦɑlf.ɣə.ˌlɛi̯.dər/"
+  },
+  {
+    "score": 0.37,
+    "word": "transistor",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "elektronische schakelcomponent",
+    "language": "nl",
+    "transcription": "/trɑn.ˈsɪs.tɔr/"
+  },
+  {
+    "score": 0.41,
+    "word": "printplaat",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "plaat met geleidende banen voor componenten",
+    "language": "nl",
+    "transcription": "/ˈprɪnt.plaːt/"
+  },
+  {
+    "score": 0.39,
+    "word": "soldeerbout",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "gereedschap om te solderen",
+    "language": "nl",
+    "transcription": "/sɔl.ˈdeːr.bʌut/"
+  },
+  {
+    "score": 0.45,
+    "word": "soldeer",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "metaal om verbindingen te maken",
+    "language": "nl",
+    "transcription": "/sɔl.ˈdeːr/"
+  },
+  {
+    "score": 0.36,
+    "word": "relais",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "schakelaar bediend door een elektromagneet",
+    "language": "nl",
+    "transcription": "/rə.ˈlɛ/"
+  },
+  {
+    "score": 0.6,
+    "word": "som",
+    "topic": "wiskunde",
+    "level": "A2",
+    "meaning": "uitkomst van optellen",
+    "language": "nl",
+    "transcription": "/sɔm/"
+  },
+  {
+    "score": 0.5,
+    "word": "product",
+    "topic": "wiskunde",
+    "level": "B1",
+    "meaning": "uitkomst van vermenigvuldigen",
+    "language": "nl",
+    "transcription": "/prɔ.ˈdykt/"
+  },
+  {
+    "score": 0.39,
+    "word": "quotiënt",
+    "topic": "wiskunde",
+    "level": "B2",
+    "meaning": "uitkomst van delen",
+    "language": "nl",
+    "transcription": "/kʋoː.ti.ˈɛnt/"
+  },
+  {
+    "score": 0.55,
+    "word": "macht",
+    "topic": "wiskunde",
+    "level": "B1",
+    "meaning": "herhaald vermenigvuldigen met zichzelf",
+    "language": "nl",
+    "transcription": "/mɑxt/"
+  },
+  {
+    "score": 0.44,
+    "word": "afgeleide",
+    "topic": "wiskunde",
+    "level": "B2",
+    "meaning": "maat voor verandering van een functie",
+    "language": "nl",
+    "transcription": "/ɑf.ɣə.ˈlɛi̯.də/"
+  },
+  {
+    "score": 0.45,
+    "word": "integraal",
+    "topic": "wiskunde",
+    "level": "B2",
+    "meaning": "oppervlakte onder een curve",
+    "language": "nl",
+    "transcription": "/ɪn.tə.ˈɣraːl/"
+  },
+  {
+    "score": 0.39,
+    "word": "tensor",
+    "topic": "wiskunde",
+    "level": "C1",
+    "meaning": "wiskundig object dat vectoren generaliseert",
+    "language": "nl",
+    "transcription": "/ˈtɛn.sɔr/"
+  },
+  {
+    "score": 0.4,
+    "word": "statistiek",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "leer van het verzamelen en analyseren van data",
+    "language": "nl",
+    "transcription": "/staː.tɪs.ˈtik/"
+  },
+  {
+    "score": 0.5,
+    "word": "astronomie",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "kunde van hemellichamen",
+    "language": "nl",
+    "transcription": "/ɑs.trɔ.noː.ˈmi/"
+  },
+  {
+    "score": 0.46,
+    "word": "geologie",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "studie van de aarde en gesteenten",
+    "language": "nl",
+    "transcription": "/ɣeː.oː.loː.ˈxi/"
+  },
+  {
+    "score": 0.48,
+    "word": "ecologie",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "studie van relaties tussen organismen en omgeving",
+    "language": "nl",
+    "transcription": "/eː.koː.loː.ˈxi/"
+  },
+  {
+    "score": 0.44,
+    "word": "genetica",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "erfelijkheidsleer",
+    "language": "nl",
+    "transcription": "/ɣeː.ˈneː.ti.ka/"
+  },
+  {
+    "score": 0.42,
+    "word": "microbiologie",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "studie van micro-organismen",
+    "language": "nl",
+    "transcription": "/miː.kroː.bi.oː.loː.ˈxi/"
+  },
+  {
+    "score": 0.43,
+    "word": "neurologie",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "studie van het zenuwstelsel",
+    "language": "nl",
+    "transcription": "/nøː.roː.loː.ˈxi/"
+  },
+  {
+    "score": 0.55,
+    "word": "informatica",
+    "topic": "informatica",
+    "level": "B1",
+    "meaning": "wetenschap van informatieverwerking",
+    "language": "nl",
+    "transcription": "/ɪn.fɔr.ˈmaː.ti.ka/"
+  },
+  {
+    "score": 0.38,
+    "word": "robotica",
+    "topic": "techniek",
+    "level": "B2",
+    "meaning": "technologie van robots",
+    "language": "nl",
+    "transcription": "/roː.ˈbɔ.ti.ka/"
+  },
+  {
+    "score": 0.36,
+    "word": "cybernetica",
+    "topic": "wetenschap",
+    "level": "C1",
+    "meaning": "studie van besturing en communicatie in systemen",
+    "language": "nl",
+    "transcription": "/ˌsiː.bər.ˈneː.ti.ka/"
+  },
+  {
+    "score": 0.58,
+    "word": "aubergine",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "donkerpaarse groente",
+    "language": "nl",
+    "transcription": "/oː.bɛr.ˈʒin/"
+  },
+  {
+    "score": 0.62,
+    "word": "prei",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "lange groene groente",
+    "language": "nl",
+    "transcription": "/prɛi̯/"
+  },
+  {
+    "score": 0.59,
+    "word": "selderij",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "aromatische groente en kruid",
+    "language": "nl",
+    "transcription": "/ˈsɛl.də.rɛi̯/"
+  },
+  {
+    "score": 0.51,
+    "word": "asperge",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "lange witte of groene stengelgroente",
+    "language": "nl",
+    "transcription": "/ɑs.ˈpɛr.ʒə/"
+  },
+  {
+    "score": 0.48,
+    "word": "spruit",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine koolroosjes",
+    "language": "nl",
+    "transcription": "/sprœy̯t/"
+  },
+  {
+    "score": 0.53,
+    "word": "boerenkool",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "groene krulkool",
+    "language": "nl",
+    "transcription": "/ˈbuː.rə(n).koːl/"
+  },
+  {
+    "score": 0.49,
+    "word": "andijvie",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "bladgroente voor stamppot of salade",
+    "language": "nl",
+    "transcription": "/ɑn.ˈdɛi̯.vi/"
+  },
+  {
+    "score": 0.45,
+    "word": "koolrabi",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "knolvormige koolgroente",
+    "language": "nl",
+    "transcription": "/koːl.ˈraː.bi/"
+  },
+  {
+    "score": 0.55,
+    "word": "radijs",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine pittige knol",
+    "language": "nl",
+    "transcription": "/raː.ˈdɛi̯s/"
+  },
+  {
+    "score": 0.52,
+    "word": "biet",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "rode zoete knolgroente",
+    "language": "nl",
+    "transcription": "/bit/"
+  },
+  {
+    "score": 0.6,
+    "word": "pompoen",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "ronde oranje vruchtgroente",
+    "language": "nl",
+    "transcription": "/pɔm.ˈpun/"
+  },
+  {
+    "score": 0.56,
+    "word": "erwt",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine groene peulvrucht",
+    "language": "nl",
+    "transcription": "/ɛrt/"
+  },
+  {
+    "score": 0.6,
+    "word": "boon",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "peulvrucht zoals bruine of witte boon",
+    "language": "nl",
+    "transcription": "/boːn/"
+  },
+  {
+    "score": 0.46,
+    "word": "linze",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "platte kleine peulvrucht",
+    "language": "nl",
+    "transcription": "/ˈlɪn.zə/"
+  },
+  {
+    "score": 0.48,
+    "word": "kikkererwt",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "rondbeukige peulvrucht",
+    "language": "nl",
+    "transcription": "/ˈkɪ.kər.ˌɛrt/"
+  },
+  {
+    "score": 0.41,
+    "word": "quinoa",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "zaad gebruikt als graanvervanger",
+    "language": "nl",
+    "transcription": "/kiː.ˈnoː.aː/"
+  },
+  {
+    "score": 0.36,
+    "word": "bulgur",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "gebroken tarwe",
+    "language": "nl",
+    "transcription": "/ˈbʏl.ɣʏr/"
+  },
+  {
+    "score": 0.43,
+    "word": "kuskus",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "gestoomde gries van tarwe",
+    "language": "nl",
+    "transcription": "/ˈkʏs.kʏs/"
+  },
+  {
+    "score": 0.35,
+    "word": "gierst",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "kleine graansoort",
+    "language": "nl",
+    "transcription": "/xiːrst/"
+  },
+  {
+    "score": 0.6,
+    "word": "peer",
+    "topic": "voeding",
+    "level": "A1",
+    "meaning": "zoete vrucht met klokhuis",
+    "language": "nl",
+    "transcription": "/peːr/"
+  },
+  {
+    "score": 0.58,
+    "word": "perzik",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoete zachte vrucht met pit",
+    "language": "nl",
+    "transcription": "/ˈpɛr.zɪk/"
+  },
+  {
+    "score": 0.55,
+    "word": "abrikoos",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "oranje steenvrucht",
+    "language": "nl",
+    "transcription": "/aː.bri.ˈkoːs/"
+  },
+  {
+    "score": 0.66,
+    "word": "druif",
+    "topic": "voeding",
+    "level": "A1",
+    "meaning": "kleine ronde vrucht in trossen",
+    "language": "nl",
+    "transcription": "/drœy̯f/"
+  },
+  {
+    "score": 0.6,
+    "word": "meloen",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "grote zoete vrucht met veel water",
+    "language": "nl",
+    "transcription": "/mə.ˈluːn/"
+  },
+  {
+    "score": 0.63,
+    "word": "watermeloen",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "grote groene meloen met rood vruchtvlees",
+    "language": "nl",
+    "transcription": "/ˈʋaː.tər.mə.ˌluːn/"
+  },
+  {
+    "score": 0.57,
+    "word": "kers",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine rode steenvrucht",
+    "language": "nl",
+    "transcription": "/kɛrs/"
+  },
+  {
+    "score": 0.58,
+    "word": "pruim",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoete steenvrucht in paarse of gele kleur",
+    "language": "nl",
+    "transcription": "/prœy̯m/"
+  },
+  {
+    "score": 0.6,
+    "word": "citroen",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zure gele citrusvrucht",
+    "language": "nl",
+    "transcription": "/sɪ.ˈtrun/"
+  },
+  {
+    "score": 0.54,
+    "word": "limoen",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "groene citrusvrucht",
+    "language": "nl",
+    "transcription": "/li.ˈmun/"
+  },
+  {
+    "score": 0.61,
+    "word": "mandarijn",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine sinaasappelachtige vrucht",
+    "language": "nl",
+    "transcription": "/mɑn.daː.ˈrɛi̯n/"
+  },
+  {
+    "score": 0.49,
+    "word": "grapefruit",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "grote bittere citrusvrucht",
+    "language": "nl",
+    "transcription": "/ˈɣreːp.frœy̯t/"
+  },
+  {
+    "score": 0.67,
+    "word": "aardbei",
+    "topic": "voeding",
+    "level": "A1",
+    "meaning": "kleine rode vrucht met zaadjes aan buitenkant",
+    "language": "nl",
+    "transcription": "/ˈaːrt.bɛi̯/"
+  },
+  {
+    "score": 0.53,
+    "word": "framboos",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zachte rode vrucht met bolletjes",
+    "language": "nl",
+    "transcription": "/frɑm.ˈboːs/"
+  },
+  {
+    "score": 0.49,
+    "word": "braam",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "donkere bosvrucht",
+    "language": "nl",
+    "transcription": "/braːm/"
+  },
+  {
+    "score": 0.52,
+    "word": "bosbes",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kleine blauwe bosvrucht",
+    "language": "nl",
+    "transcription": "/ˈbɔs.bɛs/"
+  },
+  {
+    "score": 0.57,
+    "word": "kiwi",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "bruine vrucht met groen vruchtvlees",
+    "language": "nl",
+    "transcription": "/ˈkiː.ʋi/"
+  },
+  {
+    "score": 0.65,
+    "word": "ananas",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "tropische vrucht met stekelige schil",
+    "language": "nl",
+    "transcription": "/ˈaː.na.nɑs/"
+  },
+  {
+    "score": 0.63,
+    "word": "mango",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoete tropische vrucht",
+    "language": "nl",
+    "transcription": "/ˈmɑŋ.ɣoː/"
+  },
+  {
+    "score": 0.49,
+    "word": "papaja",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "tropische oranje vrucht",
+    "language": "nl",
+    "transcription": "/paː.ˈpaː.jaː/"
+  },
+  {
+    "score": 0.42,
+    "word": "passievrucht",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "geurige tropische vrucht met pitjes",
+    "language": "nl",
+    "transcription": "/ˈpɑ.si.ˌvrʏxt/"
+  },
+  {
+    "score": 0.43,
+    "word": "granaatappel",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "rode vrucht met veel sappige pitjes",
+    "language": "nl",
+    "transcription": "/ɣraː.ˈnaːt.ˌɑ.pəl/"
+  },
+  {
+    "score": 0.6,
+    "word": "limonade",
+    "topic": "drank",
+    "level": "A1",
+    "meaning": "zoete frisdrank met fruitsmaak",
+    "language": "nl",
+    "transcription": "/li.moː.ˈnaː.də/"
+  },
+  {
+    "score": 0.56,
+    "word": "espresso",
+    "topic": "drank",
+    "level": "A2",
+    "meaning": "sterke koffie in kleine hoeveelheid",
+    "language": "nl",
+    "transcription": "/ɛs.ˈprɛs.oː/"
+  },
+  {
+    "score": 0.55,
+    "word": "cappuccino",
+    "topic": "drank",
+    "level": "A2",
+    "meaning": "koffie met melk en schuim",
+    "language": "nl",
+    "transcription": "/kɑ.pu.ˈtʃiː.noː/"
+  },
+  {
+    "score": 0.6,
+    "word": "latte",
+    "topic": "drank",
+    "level": "A2",
+    "meaning": "koffie met veel melk",
+    "language": "nl",
+    "transcription": "/ˈlɑ.tə/"
+  },
+  {
+    "score": 0.63,
+    "word": "smoothie",
+    "topic": "drank",
+    "level": "A2",
+    "meaning": "gepureerde drank van fruit of groente",
+    "language": "nl",
+    "transcription": "/ˈsmuː.ði/"
+  },
+  {
+    "score": 0.51,
+    "word": "kwark",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "dikke zure melkproduct",
+    "language": "nl",
+    "transcription": "/kwɑrk/"
+  },
+  {
+    "score": 0.43,
+    "word": "karnemelk",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "zure melkdrank na boterbereiding",
+    "language": "nl",
+    "transcription": "/ˈkɑr.nə.mɛlk/"
+  },
+  {
+    "score": 0.54,
+    "word": "ingrediënt",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "bestandsdeel van een gerecht",
+    "language": "nl",
+    "transcription": "/ɪŋ.ɣreː.di.ˈɛnt/"
+  },
+  {
+    "score": 0.6,
+    "word": "specerij",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "gedroogde kruidige plantendelen",
+    "language": "nl",
+    "transcription": "/speː.sə.ˈrɛi̯/"
+  },
+  {
+    "score": 0.6,
+    "word": "komijn",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "aromatisch zaad als specerij",
+    "language": "nl",
+    "transcription": "/koː.ˈmɛi̯n/"
+  },
+  {
+    "score": 0.63,
+    "word": "koriander",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kruid met uitgesproken smaak",
+    "language": "nl",
+    "transcription": "/kɔ.ri.ˈɑn.dər/"
+  },
+  {
+    "score": 0.59,
+    "word": "kaneel",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoete specerij van schors",
+    "language": "nl",
+    "transcription": "/kaː.ˈneːl/"
+  },
+  {
+    "score": 0.48,
+    "word": "kurkuma",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "gele specerij uit wortel",
+    "language": "nl",
+    "transcription": "/kʏr.ˈkyː.ma/"
+  },
+  {
+    "score": 0.6,
+    "word": "gember",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "pittige wortel als specerij",
+    "language": "nl",
+    "transcription": "/ˈɣɛm.bər/"
+  },
+  {
+    "score": 0.43,
+    "word": "nootmuskaat",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "aromatische noot als specerij",
+    "language": "nl",
+    "transcription": "/ˈnoːt.mʏs.ˌkaːt/"
+  },
+  {
+    "score": 0.42,
+    "word": "kruidnagel",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "droog bloemknopje als specerij",
+    "language": "nl",
+    "transcription": "/ˈkrœy̯t.ˌnaː.ɣəl/"
+  },
+  {
+    "score": 0.37,
+    "word": "anijs",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "specerij met zoete smaak",
+    "language": "nl",
+    "transcription": "/aː.ˈnɛi̯s/"
+  },
+  {
+    "score": 0.36,
+    "word": "karwij",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "specerij verwant aan komijn",
+    "language": "nl",
+    "transcription": "/kɑr.ˈʋɛi̯/"
+  },
+  {
+    "score": 0.49,
+    "word": "dille",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zacht kruid met anijssmaak",
+    "language": "nl",
+    "transcription": "/ˈdɪ.lə/"
+  },
+  {
+    "score": 0.63,
+    "word": "peterselie",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "veelgebruikt groen kruid",
+    "language": "nl",
+    "transcription": "/peː.tər.ˈseː.li/"
+  },
+  {
+    "score": 0.61,
+    "word": "basilicum",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "geurig kruid voor mediterrane gerechten",
+    "language": "nl",
+    "transcription": "/baː.ˈzi.li.kʏm/"
+  },
+  {
+    "score": 0.6,
+    "word": "tijm",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "klein geurend kruid",
+    "language": "nl",
+    "transcription": "/tɛi̯m/"
+  },
+  {
+    "score": 0.61,
+    "word": "rozemarijn",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "aromatisch naaldachtig kruid",
+    "language": "nl",
+    "transcription": "/ˈroː.zə.maː.ˌrɛi̯n/"
+  },
+  {
+    "score": 0.58,
+    "word": "salie",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "geurig bladkruid",
+    "language": "nl",
+    "transcription": "/ˈsaː.li/"
+  },
+  {
+    "score": 0.59,
+    "word": "oregano",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "kruid voor Italiaanse gerechten",
+    "language": "nl",
+    "transcription": "/oː.rə.ˈɣaː.noː/"
+  },
+  {
+    "score": 0.57,
+    "word": "laurier",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "bladkruid gebruikt in stoofgerechten",
+    "language": "nl",
+    "transcription": "/lʌu̯.ˈrir/"
+  },
+  {
+    "score": 0.65,
+    "word": "mayonaise",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "saus van olie en eidooier",
+    "language": "nl",
+    "transcription": "/maː.joː.ˈnɛː.zə/"
+  },
+  {
+    "score": 0.6,
+    "word": "mosterd",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "pittige saus van mosterdzaad",
+    "language": "nl",
+    "transcription": "/ˈmɔ.stərt/"
+  },
+  {
+    "score": 0.57,
+    "word": "ketchup",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "tomatensaus met azijn en suiker",
+    "language": "nl",
+    "transcription": "/ˈkɛt.tʃʏp/"
+  },
+  {
+    "score": 0.6,
+    "word": "baguette",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "lang Frans broodje",
+    "language": "nl",
+    "transcription": "/ba.ˈɡɛt/"
+  },
+  {
+    "score": 0.58,
+    "word": "croissant",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "Frans halvemaanvormig broodje",
+    "language": "nl",
+    "transcription": "/krwa.ˈsɑ̃/"
+  },
+  {
+    "score": 0.53,
+    "word": "ciabatta",
+    "topic": "voeding",
+    "level": "B1",
+    "meaning": "Italiaans brood met luchtige structuur",
+    "language": "nl",
+    "transcription": "/tʃaː.ˈbat.ta/"
+  },
+  {
+    "score": 0.59,
+    "word": "gebak",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoete bakwaren",
+    "language": "nl",
+    "transcription": "/ɣə.ˈbɑk/"
+  },
+  {
+    "score": 0.63,
+    "word": "cake",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "zoet gebak in rechthoekige vorm",
+    "language": "nl",
+    "transcription": "/keːk/"
+  },
+  {
+    "score": 0.58,
+    "word": "muffin",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "klein rond cakeje",
+    "language": "nl",
+    "transcription": "/ˈmʏ.fɪn/"
+  },
+  {
+    "score": 0.55,
+    "word": "brownie",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "chocoladecake in blokjes",
+    "language": "nl",
+    "transcription": "/ˈbrʌu̯.ni/"
+  },
+  {
+    "score": 0.53,
+    "word": "noedel",
+    "topic": "voeding",
+    "level": "A2",
+    "meaning": "lange sliert van deeg",
+    "language": "nl",
+    "transcription": "/ˈnuː.dəl/"
+  },
+  {
+    "score": 0.61,
+    "word": "sensoriek",
+    "topic": "wetenschap",
+    "level": "B2",
+    "meaning": "leer van zintuiglijke waarneming",
+    "language": "nl",
+    "transcription": "/sɛn.soː.ˈrik/"
+  },
+  {
+    "score": 0.45,
+    "word": "middernacht",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "twaalf uur in de nacht",
+    "language": "nl",
+    "transcription": "/ˈmɪ.dər.nɑxt/"
+  },
+  {
+    "score": 0.5,
+    "word": "zonsopgang",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "moment waarop de zon opkomt",
+    "language": "nl",
+    "transcription": "/ˈzɔns.ɔp.ˌxɑŋ/"
+  },
+  {
+    "score": 0.49,
+    "word": "zonsondergang",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "moment waarop de zon ondergaat",
+    "language": "nl",
+    "transcription": "/ˈzɔns.ɔndər.ˌxɑŋ/"
+  },
+  {
+    "score": 0.55,
+    "word": "schemering",
+    "topic": "tijd",
+    "level": "B1",
+    "meaning": "tijd tussen dag en nacht",
+    "language": "nl",
+    "transcription": "/ˈsxeː.mə.rɪŋ/"
+  },
+  {
+    "score": 0.56,
+    "word": "dageraad",
+    "topic": "tijd",
+    "level": "B1",
+    "meaning": "eerste licht van de ochtend",
+    "language": "nl",
+    "transcription": "/ˈdaː.ɣə.raːt/"
+  },
+  {
+    "score": 0.52,
+    "word": "tijdstip",
+    "topic": "tijd",
+    "level": "A2",
+    "meaning": "precies moment in de tijd",
+    "language": "nl",
+    "transcription": "/ˈtɛi̯t.stɪp/"
+  },
+  {
+    "score": 0.46,
+    "word": "interval",
+    "topic": "tijd",
+    "level": "B1",
+    "meaning": "tijd tussen twee gebeurtenissen",
+    "language": "nl",
+    "transcription": "/ˈɪn.tər.val/"
+  },
+  {
+    "score": 0.56,
+    "word": "wandelen",
+    "topic": "beweging",
+    "level": "A1",
+    "meaning": "rustig lopen voor plezier",
+    "language": "nl",
+    "transcription": "/ˈʋɑn.də.lə(n)/"
+  },
+  {
+    "score": 0.48,
+    "word": "hardlopen",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "rennen als sport of training",
+    "language": "nl",
+    "transcription": "/ˈɦɑrt.ˌloː.pə(n)/"
+  },
+  {
+    "score": 0.5,
+    "word": "klimmen",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "omhoog gaan met handen en voeten",
+    "language": "nl",
+    "transcription": "/ˈklɪ.mə(n)/"
+  },
+  {
+    "score": 0.46,
+    "word": "zeilen",
+    "topic": "beweging",
+    "level": "B1",
+    "meaning": "varen met behulp van zeilen",
+    "language": "nl",
+    "transcription": "/ˈzɛi̯.lə(n)/"
+  },
+  {
+    "score": 0.46,
+    "word": "skiën",
+    "topic": "beweging",
+    "level": "B1",
+    "meaning": "glijden over sneeuw met ski’s",
+    "language": "nl",
+    "transcription": "/ˈskiː.ən/"
+  },
+  {
+    "score": 0.48,
+    "word": "schaatsen",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "glijden op ijs met schaatsen",
+    "language": "nl",
+    "transcription": "/ˈsxaːt.sə(n)/"
+  },
+  {
+    "score": 0.49,
+    "word": "snowboarden",
+    "topic": "beweging",
+    "level": "B1",
+    "meaning": "op een plank over sneeuw glijden",
+    "language": "nl",
+    "transcription": "/ˈsnoʊ̯.bɔr.də(n)/"
+  },
+  {
+    "score": 0.52,
+    "word": "surfen",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "golfrijden op een plank",
+    "language": "nl",
+    "transcription": "/ˈsʏr.fə(n)/"
+  },
+  {
+    "score": 0.5,
+    "word": "duiken",
+    "topic": "beweging",
+    "level": "A2",
+    "meaning": "onder water zwemmen of springen",
+    "language": "nl",
+    "transcription": "/ˈdœy̯.kə(n)/"
+  },
+  {
+    "score": 0.48,
+    "word": "borduren",
+    "topic": "hobby",
+    "level": "B1",
+    "meaning": "met naald en draad versieren",
+    "language": "nl",
+    "transcription": "/bɔr.ˈdyː.rə(n)/"
+  },
+  {
+    "score": 0.53,
+    "word": "tekenen",
+    "topic": "hobby",
+    "level": "A2",
+    "meaning": "afbeeldingen maken met lijnen",
+    "language": "nl",
+    "transcription": "/ˈteː.kə.nə(n)/"
+  },
+  {
+    "score": 0.45,
+    "word": "beeldhouwen",
+    "topic": "hobby",
+    "level": "B1",
+    "meaning": "beelden maken door materiaal weg te nemen",
+    "language": "nl",
+    "transcription": "/ˈbeːlt.ˌɦʌu̯.ə(n)/"
+  },
+  {
+    "score": 0.44,
+    "word": "pottenbakken",
+    "topic": "hobby",
+    "level": "B1",
+    "meaning": "potten en schalen van klei maken",
+    "language": "nl",
+    "transcription": "/ˈpɔ.tən.ˌbɑ.kə(n)/"
+  },
+  {
+    "score": 0.4,
+    "word": "modelbouw",
+    "topic": "hobby",
+    "level": "B1",
+    "meaning": "schalenmodellen maken",
+    "language": "nl",
+    "transcription": "/moː.ˈdɛl.ˌbʌu̯/"
+  },
+  {
+    "score": 0.51,
+    "word": "vissen",
+    "topic": "hobby",
+    "level": "A2",
+    "meaning": "vis proberen te vangen",
+    "language": "nl",
+    "transcription": "/ˈvɪ.sə(n)/"
+  },
+  {
+    "score": 0.56,
+    "word": "kamperen",
+    "topic": "hobby",
+    "level": "A2",
+    "meaning": "overnachten op een camping",
+    "language": "nl",
+    "transcription": "/kɑm.ˈpeː.rə(n)/"
+  },
+  {
+    "score": 0.62,
+    "word": "student",
+    "topic": "onderwijs",
+    "level": "A2",
+    "meaning": "persoon die hoger onderwijs volgt",
+    "language": "nl",
+    "transcription": "/sty.ˈdɛnt/"
+  },
+  {
+    "score": 0.55,
+    "word": "architect",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "ontwerper van gebouwen",
+    "language": "nl",
+    "transcription": "/ɑr.xi.ˈtɛxt/"
+  },
+  {
+    "score": 0.58,
+    "word": "ingenieur",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "technisch opgeleide ontwerper of onderzoeker",
+    "language": "nl",
+    "transcription": "/ˌɪn.ɣə.ˈnjøːr/"
+  },
+  {
+    "score": 0.62,
+    "word": "journalist",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "verslaggever van nieuws",
+    "language": "nl",
+    "transcription": "/ʒur.naː.ˈlɪst/"
+  },
+  {
+    "score": 0.49,
+    "word": "redacteur",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "iemand die teksten bewerkt en samenstelt",
+    "language": "nl",
+    "transcription": "/reː.dɑk.ˈtøːr/"
+  },
+  {
+    "score": 0.55,
+    "word": "vertaler",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "iemand die teksten vertaalt",
+    "language": "nl",
+    "transcription": "/vər.ˈtaː.lər/"
+  },
+  {
+    "score": 0.47,
+    "word": "tolk",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "iemand die mondeling vertaalt",
+    "language": "nl",
+    "transcription": "/tɔlk/"
+  },
+  {
+    "score": 0.6,
+    "word": "programmeur",
+    "topic": "beroep",
+    "level": "B1",
+    "meaning": "iemand die software schrijft",
+    "language": "nl",
+    "transcription": "/proʊ̯.ɣraː.ˈmøːr/"
+  },
+  {
+    "score": 0.56,
+    "word": "onderzoek",
+    "topic": "wetenschap",
+    "level": "B1",
+    "meaning": "systematische studie naar een vraag",
+    "language": "nl",
+    "transcription": "/ˈɔn.dər.zuk/"
+  },
+  {
+    "score": 0.58,
+    "word": "atelierwerk",
+    "topic": "kunst",
+    "level": "B2",
+    "meaning": "praktische werkzaamheden in het atelier",
+    "language": "nl",
+    "transcription": "/aː.tə.ˈljeː.ʋɛrk/"
+  },
+  {
+    "score": 0.52,
+    "word": "veiligheid",
+    "topic": "algemeen",
+    "level": "A2",
+    "meaning": "toestand zonder gevaar",
+    "language": "nl",
+    "transcription": "/ˈvɛi̯.ləx.ɦɛit/"
+  },
+  {
+    "score": 0.46,
+    "word": "ethologie",
+    "topic": "wetenschap",
+    "level": "C1",
+    "meaning": "studie van diergedrag",
+    "language": "nl",
+    "transcription": "/eː.toː.loː.ˈxi/"
+  },
+  {
+    "score": 0.5,
+    "word": "atelierdag",
+    "topic": "kunst",
+    "level": "B1",
+    "meaning": "dag waarop in het atelier gewerkt wordt",
+    "language": "nl",
+    "transcription": "/aː.tə.ˈljeː.dɑx/"
+  }
+]

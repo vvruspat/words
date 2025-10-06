@@ -40,6 +40,7 @@ export interface User {
 	email: string;
 	name?: string;
 	password?: string;
+	language_speak: string;
 	email_verified?: boolean;
 }
 
@@ -59,6 +60,9 @@ export interface Word {
 	topic: number;
 	catalog: number;
 	language: string;
+	audio: string;
+	transcribtion: string;
+	meaning?: string;
 }
 
 export interface WordData extends Word {

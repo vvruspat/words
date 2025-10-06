@@ -331,9 +331,25 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		get: operations["AuthController_sendVerificationEmail"];
+		get?: never;
 		put?: never;
-		post?: never;
+		post: operations["AuthController_sendVerificationEmail"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/verify-email/resend": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["AuthController_resendVerificationEmail"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -628,6 +644,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		GetUserResponseDto: {
 			/** @example 100 */
@@ -644,6 +664,11 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+			language_learn: string;
 		};
 		PostUserResponseDto: {
 			/** Format: int64 */
@@ -652,6 +677,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		PutUserRequestDto: {
 			/** Format: int64 */
@@ -660,6 +689,10 @@ export interface components {
 			created_at?: string;
 			email?: string;
 			name?: string;
+			language_speak?: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		PutUserResponseDto: {
 			/** Format: int64 */
@@ -668,6 +701,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		DeleteUserResponseDto: {
 			/** Format: int64 */
@@ -750,9 +787,13 @@ export interface components {
 			created_at: string;
 			/** Format: int64 */
 			topic: string;
+			word: string;
 			/** Format: int64 */
 			catalog: string;
 			language: string;
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
 			topicData: components["schemas"]["TopicDto"];
 			catalogData: components["schemas"]["VocabCatalogDto"];
 		};
@@ -771,9 +812,13 @@ export interface components {
 			created_at: string;
 			/** Format: int64 */
 			topic: string;
+			word: string;
 			/** Format: int64 */
 			catalog: string;
 			language: string;
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
 		};
 		PostWordResponseDto: {
 			/** Format: int64 */
@@ -782,9 +827,13 @@ export interface components {
 			created_at: string;
 			/** Format: int64 */
 			topic: string;
+			word: string;
 			/** Format: int64 */
 			catalog: string;
 			language: string;
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
 		};
 		PutWordRequestDto: {
 			/** Format: int64 */
@@ -793,9 +842,13 @@ export interface components {
 			created_at?: string;
 			/** Format: int64 */
 			topic?: string;
+			word?: string;
 			/** Format: int64 */
 			catalog?: string;
 			language?: string;
+			audio?: string;
+			transcribtion?: string;
+			meaning?: string;
 		};
 		PutWordResponseDto: {
 			/** Format: int64 */
@@ -804,9 +857,13 @@ export interface components {
 			created_at: string;
 			/** Format: int64 */
 			topic: string;
+			word: string;
 			/** Format: int64 */
 			catalog: string;
 			language: string;
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
 		};
 		DeleteWordResponseDto: {
 			/** Format: int64 */
@@ -862,10 +919,15 @@ export interface components {
 			email: string;
 			name: string;
 			/**
-			 * @description User password
-			 * @example Strong#Password123
+			 * @description Language the user speaks
+			 * @example en
 			 */
-			password: string;
+			language_speak: string;
+			/**
+			 * @description Language the user is learning
+			 * @example es
+			 */
+			language_learn: string;
 		};
 		PutResetPasswordRequestDto: {
 			/**
@@ -875,6 +937,16 @@ export interface components {
 			new_password: string;
 			/** @description Password reset token */
 			token: string;
+		};
+		PostVerifyEmailRequestDto: {
+			/** @description Email verification code */
+			code: string;
+			/** @description User email */
+			email: string;
+		};
+		PostVerifyEmailResendRequestDto: {
+			/** @description User email */
+			email: string;
 		};
 		PostRefreshTokenRequestDto: {
 			/** @description Refresh token */
@@ -1409,6 +1481,9 @@ export interface operations {
 				created_at?: string;
 				email?: string;
 				name?: string;
+				language_speak?: string;
+				email_verified?: boolean;
+				password?: string;
 			};
 			header?: never;
 			path?: never;
@@ -1735,8 +1810,12 @@ export interface operations {
 				id?: number;
 				created_at?: string;
 				topic?: string;
+				word?: string;
 				catalog?: string;
 				language?: string;
+				audio?: string;
+				transcribtion?: string;
+				meaning?: string;
 				topicData?: components["schemas"]["TopicDto"];
 				catalogData?: components["schemas"]["VocabCatalogDto"];
 			};
@@ -2033,15 +2112,37 @@ export interface operations {
 	};
 	AuthController_sendVerificationEmail: {
 		parameters: {
-			query: {
-				/** @description Email verification token */
-				token: string;
-			};
+			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		requestBody?: never;
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_resendVerificationEmail: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
 		responses: {
 			200: {
 				headers: {

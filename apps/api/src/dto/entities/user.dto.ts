@@ -26,4 +26,18 @@ export class UserDto implements User {
 	@IsString()
 	@IsOptional()
 	name: string;
+
+	@ApiProperty({ type: "string" })
+	@IsString()
+	@IsOptional()
+	language_speak: string;
+
+	@ApiProperty({ type: "boolean", required: false, default: false })
+	@IsOptional()
+	email_verified?: boolean;
+
+	@ApiProperty({ type: "string", required: false })
+	@IsString()
+	@IsOptional()
+	password?: string;
 }
