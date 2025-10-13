@@ -14,6 +14,7 @@ import {
 	PostSignUpResponseDto,
 } from "~/dto";
 import { MailerService, MailTemplate } from "~/mailer/mailer.service";
+import { UserEntity } from "~/user/user.entity";
 import { UserService } from "../user/user.service";
 
 @Injectable()
@@ -26,6 +27,28 @@ export class AuthService {
 		@Inject("REDIS_CLIENT") private readonly redis: Redis,
 	) {}
 
+	async getAccessToken(user: UserEntity) {
+		const payload = { sub: user.id, email: user.email };
+		const accessToken = this.jwtService.sign(payload, {
+			expiresIn:
+				this.configService.get<string | number>("JWT_EXPIRES_IN") || "14d",
+			secret: this.configService.get<string>("JWT_SECRET"),
+		});
+		const refreshToken = this.jwtService.sign(payload, {
+			expiresIn:
+				this.configService.get<string | number>("JWT_REFRESH_EXPIRES_IN") ||
+				"60d",
+			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
+		});
+
+		const result = {
+			access_token: accessToken,
+			refresh_token: refreshToken,
+		};
+
+		return result;
+	}
+
 	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
 		const user = await this.userService.findOneByEmail(email);
 
@@ -35,18 +58,8 @@ export class AuthService {
 			throw new UnauthorizedException("Invalid credentials");
 		}
 
-		const payload = { sub: user.id, email: user.email };
-		const accessToken = this.jwtService.sign(payload, {
-			expiresIn:
-				this.configService.get<string | number>("JWT_EXPIRES_IN") || "1h",
-			secret: this.configService.get<string>("JWT_SECRET"),
-		});
-		const refreshToken = this.jwtService.sign(payload, {
-			expiresIn:
-				this.configService.get<string | number>("JWT_REFRESH_EXPIRES_IN") ||
-				"7d",
-			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
-		});
+		const { access_token: accessToken, refresh_token: refreshToken } =
+			await this.getAccessToken(user);
 
 		const result = {
 			user,
@@ -69,7 +82,7 @@ export class AuthService {
 			throw new BadRequestException("User already exists");
 		}
 
-		await this.userService.create({
+		const user = await this.userService.create({
 			email,
 			name,
 			language_speak,
@@ -77,8 +90,9 @@ export class AuthService {
 
 		await this.sendVerificationEmail(email);
 
-		// TODO: authorize user after signup
-		return { access_token: "", refresh_token: "", user: null };
+		const tokens = await this.getAccessToken(user);
+
+		return { ...tokens, user };
 	}
 
 	async refreshToken(token: string): Promise<PostSignInResponseDto> {

@@ -1542,9 +1542,20 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "User successfully signed in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostSignInResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
           }
         },
+        "summary": "Sign in to an existing account",
         "tags": [
           "auth"
         ]
@@ -1566,9 +1577,23 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostSignUpResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data or user already exists"
+          },
+          "409": {
+            "description": "User already exists"
           }
         },
+        "summary": "Create a new user account",
         "tags": [
           "auth"
         ]
@@ -1590,9 +1615,16 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Password successfully reset"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "401": {
+            "description": "Invalid or expired token"
           }
         },
+        "summary": "Reset user password with token",
         "tags": [
           "auth"
         ]
@@ -1611,9 +1643,16 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Password reset email sent successfully"
+          },
+          "400": {
+            "description": "Invalid email"
+          },
+          "401": {
+            "description": "User not found"
           }
         },
+        "summary": "Send password reset email",
         "tags": [
           "auth"
         ]
@@ -1635,9 +1674,16 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Email successfully verified"
+          },
+          "400": {
+            "description": "Invalid or expired verification code"
+          },
+          "401": {
+            "description": "User not found"
           }
         },
+        "summary": "Verify email with verification code",
         "tags": [
           "auth"
         ]
@@ -1659,9 +1705,16 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Verification email sent successfully"
+          },
+          "400": {
+            "description": "Invalid email"
+          },
+          "401": {
+            "description": "User not found"
           }
         },
+        "summary": "Resend email verification code",
         "tags": [
           "auth"
         ]
@@ -1683,9 +1736,20 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Token successfully refreshed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostRefreshTokenResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or expired refresh token"
           }
         },
+        "summary": "Refresh access token",
         "tags": [
           "auth"
         ]
@@ -3208,6 +3272,32 @@
           "password"
         ]
       },
+      "PostSignInResponseDto": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "JWT access token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "JWT refresh token"
+          },
+          "user": {
+            "description": "User information without password",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "access_token",
+          "refresh_token",
+          "user"
+        ]
+      },
       "PostSignUpRequestDto": {
         "type": "object",
         "properties": {
@@ -3233,6 +3323,32 @@
           "name",
           "language_speak",
           "language_learn"
+        ]
+      },
+      "PostSignUpResponseDto": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "JWT access token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "JWT refresh token"
+          },
+          "user": {
+            "description": "User information without password",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "access_token",
+          "refresh_token",
+          "user"
         ]
       },
       "PutResetPasswordRequestDto": {
@@ -3292,6 +3408,32 @@
         },
         "required": [
           "refresh_token"
+        ]
+      },
+      "PostRefreshTokenResponseDto": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "JWT access token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "JWT refresh token"
+          },
+          "user": {
+            "description": "User information without password",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "access_token",
+          "refresh_token",
+          "user"
         ]
       }
     }
