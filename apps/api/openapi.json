@@ -1658,6 +1658,34 @@
         ]
       }
     },
+    "/auth/tmp-password": {
+      "post": {
+        "operationId": "AuthController_sendTmpPasswordToEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostVerifyEmailResendRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password successfully sent"
+          },
+          "401": {
+            "description": "User not found"
+          }
+        },
+        "summary": "Send temp password to email",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/auth/verify-email": {
       "post": {
         "operationId": "AuthController_sendVerificationEmail",
@@ -3369,6 +3397,18 @@
           "token"
         ]
       },
+      "PostVerifyEmailResendRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
       "PostVerifyEmailRequestDto": {
         "type": "object",
         "properties": {
@@ -3383,18 +3423,6 @@
         },
         "required": [
           "code",
-          "email"
-        ]
-      },
-      "PostVerifyEmailResendRequestDto": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User email"
-          }
-        },
-        "required": [
           "email"
         ]
       },

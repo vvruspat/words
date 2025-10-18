@@ -52,7 +52,12 @@ export class AuthService {
 	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
 		const user = await this.userService.findOneByEmail(email);
 
-		const isMatch = await bcrypt.compare(pass, user?.password);
+		const hashedPassword = await this.redis.get(`tmp-password:${email}`);
+
+		const isMatch = await bcrypt.compare(
+			pass,
+			hashedPassword || user?.password || "",
+		);
 
 		if (!isMatch) {
 			throw new UnauthorizedException("Invalid credentials");
@@ -93,6 +98,34 @@ export class AuthService {
 		const tokens = await this.getAccessToken(user);
 
 		return { ...tokens, user };
+	}
+
+	async sendTmpPasswordToEmail(email: string) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const tmpPassword = Math.random().toString(36).slice(-4);
+
+		const hashedPassword = await bcrypt.hash(tmpPassword, 10);
+
+		await this.redis.set(
+			`tmp-password:${email}`,
+			hashedPassword,
+			"EX",
+			60 * 60 * 1,
+		); // 1 hour expiration
+
+		await this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.TEMPORARY_PASSWORD,
+			params: {
+				name: user.name,
+				tmpPassword,
+			},
+		});
 	}
 
 	async refreshToken(token: string): Promise<PostSignInResponseDto> {

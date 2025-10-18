@@ -115,6 +115,23 @@ export class AuthController {
 		return this.authService.sendResetPasswordEmail(dto.email);
 	}
 
+	@Post("tmp-password")
+	@HttpCode(HttpStatus.OK)
+	@ApiOperation({ summary: "Send temp password to email" })
+	@ApiResponse({
+		status: HttpStatus.OK,
+		description: "Password successfully sent",
+	})
+	@ApiResponse({
+		status: HttpStatus.UNAUTHORIZED,
+		description: "User not found",
+	})
+	async sendTmpPasswordToEmail(
+		@Body() dto: PostVerifyEmailResendRequestDto,
+	): Promise<void> {
+		return this.authService.sendTmpPasswordToEmail(dto.email);
+	}
+
 	@Post("verify-email")
 	@HttpCode(HttpStatus.OK)
 	@ApiOperation({ summary: "Verify email with verification code" })

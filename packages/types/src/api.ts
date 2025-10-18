@@ -328,6 +328,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/auth/tmp-password": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Send temp password to email */
+		post: operations["AuthController_sendTmpPasswordToEmail"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/auth/verify-email": {
 		parameters: {
 			query?: never;
@@ -961,13 +978,13 @@ export interface components {
 			/** @description Password reset token */
 			token: string;
 		};
-		PostVerifyEmailRequestDto: {
-			/** @description Email verification code */
-			code: string;
+		PostVerifyEmailResendRequestDto: {
 			/** @description User email */
 			email: string;
 		};
-		PostVerifyEmailResendRequestDto: {
+		PostVerifyEmailRequestDto: {
+			/** @description Email verification code */
+			code: string;
 			/** @description User email */
 			email: string;
 		};
@@ -2190,6 +2207,35 @@ export interface operations {
 				content?: never;
 			};
 			/** @description Invalid or expired token */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_sendTmpPasswordToEmail: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
+		responses: {
+			/** @description Password successfully sent */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
 			401: {
 				headers: {
 					[name: string]: unknown;
