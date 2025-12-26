@@ -1,17 +1,20 @@
 import {
 	BadRequestException,
+	Inject,
 	Injectable,
 	UnauthorizedException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
+import Redis from "ioredis";
 import {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
 	PostSignUpResponseDto,
 } from "~/dto";
 import { MailerService, MailTemplate } from "~/mailer/mailer.service";
+import { UserEntity } from "~/user/user.entity";
 import { UserService } from "../user/user.service";
 
 @Injectable()
@@ -21,31 +24,47 @@ export class AuthService {
 		private readonly configService: ConfigService,
 		private readonly jwtService: JwtService,
 		private readonly mailerService: MailerService,
+		@Inject("REDIS_CLIENT") private readonly redis: Redis,
 	) {}
 
-	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
-		const user = await this.userService.findOneByEmail(email);
-
-		const isMatch = await bcrypt.compare(pass, user?.password);
-
-		if (!isMatch) {
-			throw new UnauthorizedException("Invalid credentials");
-		}
-
+	async getAccessToken(user: UserEntity) {
 		const payload = { sub: user.id, email: user.email };
 		const accessToken = this.jwtService.sign(payload, {
 			expiresIn:
-				this.configService.get<string | number>("JWT_EXPIRES_IN") || "1h",
+				this.configService.get<string | number>("JWT_EXPIRES_IN") || "14d",
 			secret: this.configService.get<string>("JWT_SECRET"),
 		});
 		const refreshToken = this.jwtService.sign(payload, {
 			expiresIn:
 				this.configService.get<string | number>("JWT_REFRESH_EXPIRES_IN") ||
-				"7d",
+				"60d",
 			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
 		});
 
-		delete user.password;
+		const result = {
+			access_token: accessToken,
+			refresh_token: refreshToken,
+		};
+
+		return result;
+	}
+
+	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
+		const user = await this.userService.findOneByEmail(email);
+
+		const hashedPassword = await this.redis.get(`tmp-password:${email}`);
+
+		const isMatch = await bcrypt.compare(
+			pass,
+			hashedPassword || user?.password || "",
+		);
+
+		if (!isMatch) {
+			throw new UnauthorizedException("Invalid credentials");
+		}
+
+		const { access_token: accessToken, refresh_token: refreshToken } =
+			await this.getAccessToken(user);
 
 		const result = {
 			user,
@@ -59,44 +78,54 @@ export class AuthService {
 	async signUp(
 		name: PostSignUpRequestDto["name"],
 		email: PostSignUpRequestDto["email"],
-		password: PostSignUpRequestDto["password"],
+		_language_learn: PostSignUpRequestDto["language_learn"],
+		language_speak: PostSignUpRequestDto["language_speak"],
 	): Promise<PostSignUpResponseDto> {
-		const salt = Number(this.configService.get<string>("BCRYPT_SALT_ROUNDS"));
-
-		const hashedPassword = await bcrypt.hash(password, salt);
-
 		const existingUser = await this.userService.findOneByEmail(email);
 
 		if (existingUser) {
 			throw new BadRequestException("User already exists");
 		}
 
-		await this.userService.create({
+		const user = await this.userService.create({
 			email,
 			name,
-			password: hashedPassword,
+			language_speak,
 		});
 
-		const verifyEmailToken = this.jwtService.sign(
-			{ email },
-			{
-				expiresIn:
-					this.configService.get<string | number>("VERIFY_EMAIL_EXPIRES_IN") ||
-					"1h",
-				secret: this.configService.get<string>("JWT_SECRET"),
-			},
-		);
+		await this.sendVerificationEmail(email);
 
-		this.mailerService.sendMail({
-			to: [{ email }],
-			templateId: MailTemplate.CONFIRM_EMAIL,
+		const tokens = await this.getAccessToken(user);
+
+		return { ...tokens, user };
+	}
+
+	async sendTmpPasswordToEmail(email: string) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const tmpPassword = Math.random().toString(36).slice(-4);
+
+		const hashedPassword = await bcrypt.hash(tmpPassword, 10);
+
+		await this.redis.set(
+			`tmp-password:${email}`,
+			hashedPassword,
+			"EX",
+			60 * 60 * 1,
+		); // 1 hour expiration
+
+		await this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.TEMPORARY_PASSWORD,
 			params: {
-				name,
-				link: `${this.configService.get("DOMAIN")}/verify-email?token=${verifyEmailToken}`,
+				name: user.name,
+				tmpPassword,
 			},
 		});
-
-		return this.signIn(email, password);
 	}
 
 	async refreshToken(token: string): Promise<PostSignInResponseDto> {
@@ -123,20 +152,47 @@ export class AuthService {
 		return this.signIn(user.email, user.password);
 	}
 
-	async verifyEmail(token: string) {
-		const decoded = this.jwtService.verify(token, {
-			secret: this.configService.get<string>("JWT_SECRET"),
-		});
-		const { email, exp } = decoded;
-		if (Date.now() >= exp * 1000) {
-			throw new UnauthorizedException("Token expired");
+	async verifyEmail(email: string, code: string) {
+		const storedCode = await this.redis.get(`verify-email:${email}`);
+
+		if (!storedCode || storedCode !== code.toUpperCase()) {
+			throw new BadRequestException("Invalid or expired verification code");
 		}
+
+		await this.redis.del(`verify-email:${email}`);
+
 		const user = await this.userService.findOneByEmail(email);
+
 		if (!user) {
 			throw new UnauthorizedException();
 		}
 
 		await this.userService.setEmailVerified(user.id);
+	}
+
+	async sendVerificationEmail(email: string) {
+		const user = await this.userService.findOneByEmail(email);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		const code = Array.from(
+			{ length: 4 },
+			() => chars[Math.floor(Math.random() * chars.length)],
+		).join("");
+
+		await this.redis.set(`verify-email:${email}`, code, "EX", 60 * 60 * 1); // 1 hour expiration
+
+		await this.mailerService.sendMail({
+			to: [{ email: user.email }],
+			templateId: MailTemplate.CONFIRM_EMAIL,
+			params: {
+				name: user.name,
+				code,
+			},
+		});
 	}
 
 	async sendResetPasswordEmail(email: string) {

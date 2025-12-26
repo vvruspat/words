@@ -212,12 +212,10 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		/** Get all words */
-		get: operations["WordController_getAll"];
+		get?: never;
 		/** Update word */
 		put: operations["WordController_update"];
-		/** Create word */
-		post: operations["WordController_create"];
+		post?: never;
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -231,12 +229,28 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		/** Get word by id */
-		get: operations["WordController_getById"];
+		get?: never;
 		put?: never;
 		post?: never;
 		/** Delete word */
 		delete: operations["WordController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/word/generate": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Generate words */
+		post: operations["WordController_generateWords"];
+		delete?: never;
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -285,6 +299,7 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
+		/** Sign in to an existing account */
 		post: operations["AuthController_signin"];
 		delete?: never;
 		options?: never;
@@ -301,6 +316,7 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
+		/** Create a new user account */
 		post: operations["AuthController_signup"];
 		delete?: never;
 		options?: never;
@@ -315,9 +331,28 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
+		/** Send password reset email */
 		get: operations["AuthController_sendResetPasswordEmail"];
+		/** Reset user password with token */
 		put: operations["AuthController_resetPassword"];
 		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/tmp-password": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Send temp password to email */
+		post: operations["AuthController_sendTmpPasswordToEmail"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -331,9 +366,27 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		get: operations["AuthController_sendVerificationEmail"];
+		get?: never;
 		put?: never;
-		post?: never;
+		/** Verify email with verification code */
+		post: operations["AuthController_sendVerificationEmail"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/auth/verify-email/resend": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Resend email verification code */
+		post: operations["AuthController_resendVerificationEmail"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -349,7 +402,24 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
+		/** Refresh access token */
 		post: operations["AuthController_refreshToken"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/openai/webhook": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["OpenAIController_handleWebhook"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -628,6 +698,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		GetUserResponseDto: {
 			/** @example 100 */
@@ -644,6 +718,11 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+			language_learn: string;
 		};
 		PostUserResponseDto: {
 			/** Format: int64 */
@@ -652,6 +731,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		PutUserRequestDto: {
 			/** Format: int64 */
@@ -660,6 +743,10 @@ export interface components {
 			created_at?: string;
 			email?: string;
 			name?: string;
+			language_speak?: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		PutUserResponseDto: {
 			/** Format: int64 */
@@ -668,6 +755,10 @@ export interface components {
 			created_at: string;
 			email: string;
 			name: string;
+			language_speak: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
 		};
 		DeleteUserResponseDto: {
 			/** Format: int64 */
@@ -743,49 +834,6 @@ export interface components {
 			/** Format: int64 */
 			id: number;
 		};
-		WordDataDto: {
-			/** Format: int64 */
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-			topicData: components["schemas"]["TopicDto"];
-			catalogData: components["schemas"]["VocabCatalogDto"];
-		};
-		GetWordResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of words */
-			items: components["schemas"]["WordDataDto"][];
-		};
-		PostWordRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-		};
-		PostWordResponseDto: {
-			/** Format: int64 */
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-		};
 		PutWordRequestDto: {
 			/** Format: int64 */
 			id?: number;
@@ -793,9 +841,13 @@ export interface components {
 			created_at?: string;
 			/** Format: int64 */
 			topic?: string;
+			word?: string;
 			/** Format: int64 */
 			catalog?: string;
 			language?: string;
+			audio?: string;
+			transcribtion?: string;
+			meaning?: string;
 		};
 		PutWordResponseDto: {
 			/** Format: int64 */
@@ -804,9 +856,13 @@ export interface components {
 			created_at: string;
 			/** Format: int64 */
 			topic: string;
+			word: string;
 			/** Format: int64 */
 			catalog: string;
 			language: string;
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
 		};
 		DeleteWordResponseDto: {
 			/** Format: int64 */
@@ -858,14 +914,35 @@ export interface components {
 			 */
 			password: string;
 		};
+		PostSignInResponseDto: {
+			/** @description JWT access token */
+			access_token: string;
+			/** @description JWT refresh token */
+			refresh_token: string;
+			/** @description User information without password */
+			user: components["schemas"]["UserDto"];
+		};
 		PostSignUpRequestDto: {
 			email: string;
 			name: string;
 			/**
-			 * @description User password
-			 * @example Strong#Password123
+			 * @description Language the user speaks
+			 * @example en
 			 */
-			password: string;
+			language_speak: string;
+			/**
+			 * @description Language the user is learning
+			 * @example es
+			 */
+			language_learn: string;
+		};
+		PostSignUpResponseDto: {
+			/** @description JWT access token */
+			access_token: string;
+			/** @description JWT refresh token */
+			refresh_token: string;
+			/** @description User information without password */
+			user: components["schemas"]["UserDto"];
 		};
 		PutResetPasswordRequestDto: {
 			/**
@@ -876,9 +953,27 @@ export interface components {
 			/** @description Password reset token */
 			token: string;
 		};
+		PostVerifyEmailResendRequestDto: {
+			/** @description User email */
+			email: string;
+		};
+		PostVerifyEmailRequestDto: {
+			/** @description Email verification code */
+			code: string;
+			/** @description User email */
+			email: string;
+		};
 		PostRefreshTokenRequestDto: {
 			/** @description Refresh token */
 			refresh_token: string;
+		};
+		PostRefreshTokenResponseDto: {
+			/** @description JWT access token */
+			access_token: string;
+			/** @description JWT refresh token */
+			refresh_token: string;
+			/** @description User information without password */
+			user: components["schemas"]["UserDto"];
 		};
 	};
 	responses: never;
@@ -1409,6 +1504,9 @@ export interface operations {
 				created_at?: string;
 				email?: string;
 				name?: string;
+				language_speak?: string;
+				email_verified?: boolean;
+				password?: string;
 			};
 			header?: never;
 			path?: never;
@@ -1727,49 +1825,6 @@ export interface operations {
 			};
 		};
 	};
-	WordController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				topic?: string;
-				catalog?: string;
-				language?: string;
-				topicData?: components["schemas"]["TopicDto"];
-				catalogData?: components["schemas"]["VocabCatalogDto"];
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
 	WordController_update: {
 		parameters: {
 			query?: never;
@@ -1814,64 +1869,6 @@ export interface operations {
 			};
 		};
 	};
-	WordController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostWordRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostWordResponseDto"];
-				};
-			};
-		};
-	};
-	WordController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordResponseDto"];
-				};
-			};
-			/** @description Word not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
 	WordController_remove: {
 		parameters: {
 			query?: never;
@@ -1888,6 +1885,25 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["DeleteWordResponseDto"];
 				};
+			};
+		};
+	};
+	WordController_generateWords: {
+		parameters: {
+			query: {
+				language: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};
@@ -1962,7 +1978,17 @@ export interface operations {
 			};
 		};
 		responses: {
+			/** @description User successfully signed in */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostSignInResponseDto"];
+				};
+			};
+			/** @description Invalid credentials */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -1983,7 +2009,24 @@ export interface operations {
 			};
 		};
 		responses: {
+			/** @description User successfully created */
 			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostSignUpResponseDto"];
+				};
+			};
+			/** @description Invalid input data or user already exists */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User already exists */
+			409: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -2002,7 +2045,22 @@ export interface operations {
 		};
 		requestBody?: never;
 		responses: {
+			/** @description Password reset email sent successfully */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid email */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -2023,7 +2081,51 @@ export interface operations {
 			};
 		};
 		responses: {
+			/** @description Password successfully reset */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid input data */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid or expired token */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_sendTmpPasswordToEmail: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
+		responses: {
+			/** @description Password successfully sent */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -2033,17 +2135,69 @@ export interface operations {
 	};
 	AuthController_sendVerificationEmail: {
 		parameters: {
-			query: {
-				/** @description Email verification token */
-				token: string;
-			};
+			query?: never;
 			header?: never;
 			path?: never;
 			cookie?: never;
 		};
-		requestBody?: never;
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailRequestDto"];
+			};
+		};
 		responses: {
+			/** @description Email successfully verified */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid or expired verification code */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	AuthController_resendVerificationEmail: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
+		responses: {
+			/** @description Verification email sent successfully */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Invalid email */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
+			401: {
 				headers: {
 					[name: string]: unknown;
 				};
@@ -2064,7 +2218,34 @@ export interface operations {
 			};
 		};
 		responses: {
+			/** @description Token successfully refreshed */
 			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostRefreshTokenResponseDto"];
+				};
+			};
+			/** @description Invalid or expired refresh token */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	OpenAIController_handleWebhook: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			201: {
 				headers: {
 					[name: string]: unknown;
 				};

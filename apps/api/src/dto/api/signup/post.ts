@@ -1,5 +1,5 @@
 import { ApiProperty, PickType } from "@nestjs/swagger";
-import { IsStrongPassword } from "class-validator";
+import { IsString } from "class-validator";
 import { UserDto } from "~/dto/entities";
 import { PostSignInResponseDto } from "../signin";
 
@@ -8,19 +8,18 @@ export class PostSignUpRequestDto extends PickType(UserDto, [
 	"name",
 ] as const) {
 	@ApiProperty({
-		type: String,
-		description: "User password",
-		example: "Strong#Password123",
-		required: true,
+		description: "Language the user speaks",
+		example: "en",
 	})
-	@IsStrongPassword({
-		minLength: 8,
-		minLowercase: 1,
-		minUppercase: 1,
-		minNumbers: 1,
-		minSymbols: 1,
+	@IsString()
+	language_speak: string;
+
+	@ApiProperty({
+		description: "Language the user is learning",
+		example: "es",
 	})
-	password!: string;
+	@IsString()
+	language_learn: string;
 }
 
 export class PostSignUpResponseDto extends PostSignInResponseDto {}

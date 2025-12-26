@@ -1,11 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
 
-export class GetVerifyEmailRequestDto {
+export class PostVerifyEmailResendRequestDto {
 	@ApiProperty({
 		type: String,
-		description: "Email verification token",
+		description: "User email",
 	})
 	@IsString()
-	token!: string;
+	email!: string;
 }

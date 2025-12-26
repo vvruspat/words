@@ -19,8 +19,7 @@ export interface Topic {
 	id: number;
 	created_at: string;
 	title: string;
-	description: string;
-	catalog: number;
+	description?: string;
 	image?: string | null;
 }
 
@@ -40,6 +39,7 @@ export interface User {
 	email: string;
 	name?: string;
 	password?: string;
+	language_speak: string;
 	email_verified?: boolean;
 }
 
@@ -56,9 +56,13 @@ export interface VocabCatalog {
 export interface Word {
 	id: number;
 	created_at: string;
+	word: string;
 	topic: number;
 	catalog: number;
 	language: string;
+	audio: string;
+	transcribtion: string;
+	meaning?: string;
 }
 
 export interface WordData extends Word {

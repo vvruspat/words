@@ -22,10 +22,6 @@
       "cache": false,
       "persistent": true
     },
-    "android": {
-      "cache": false,
-      "persistent": true
-    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]

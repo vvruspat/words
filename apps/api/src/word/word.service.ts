@@ -1,33 +1,49 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { InjectQueue } from "@nestjs/bullmq";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { GetWordRequestDto } from "~/dto";
 import {
-	WORD_DATA_REPOSITORY,
-	WORD_REPOSITORY,
-} from "../constants/database.constants";
-import type { WordDataEntity, WordEntity } from "./word.entity";
+	AUDIO_CREATION_START,
+	TRANSLATION_START,
+	WORDS_GENERATION_START,
+} from "~/constants/queue-events.constants";
+import { OPENAI_QUEUE, TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
+import { GetWordRequestDto } from "~/dto";
+import { GcsService } from "~/gcs/gcs.service";
+import { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
+import { WORD_REPOSITORY } from "../constants/database.constants";
+import { TopicService } from "../topic/topic.service";
+import { GeneratedWord } from "./types/generated-word";
+import type { WordEntity } from "./word.entity";
+
+export type WordStatus = "pending" | "processing" | "processed";
 
 @Injectable()
 export class WordService {
+	private readonly logger = new Logger(WordService.name);
+
 	constructor(
 		@Inject(WORD_REPOSITORY)
 		private wordRepository: Repository<WordEntity>,
-		@Inject(WORD_DATA_REPOSITORY)
-		private wordDataRepository: Repository<WordDataEntity>,
+		private readonly topicService: TopicService,
+		private readonly vocabCatalogService: VocabCatalogService,
+		private readonly gcsService: GcsService,
+		@InjectQueue(TRANSLATIONS_QUEUE) private translationQueue: Queue,
+		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 	) {}
 
-	async findAll(query: GetWordRequestDto): Promise<WordDataEntity[]> {
+	async findAll(query: GetWordRequestDto): Promise<WordEntity[]> {
 		const { limit, offset, ...restQuery } = query;
 
-		return this.wordDataRepository.find({
+		return this.wordRepository.find({
 			where: { ...restQuery },
 			take: limit ?? 10,
 			skip: offset ?? 0,
 		});
 	}
 
-	async findOne(id: WordEntity["id"]): Promise<WordDataEntity | null> {
-		return this.wordDataRepository.findOneBy({ id });
+	async findOne(id: WordEntity["id"]): Promise<WordEntity | null> {
+		return this.wordRepository.findOneBy({ id });
 	}
 
 	async create(word: Omit<WordEntity, "id">): Promise<WordEntity> {
@@ -42,5 +58,127 @@ export class WordService {
 
 	async remove(id: WordEntity["id"]): Promise<void> {
 		await this.wordRepository.delete({ id });
+	}
+
+	async markProcessing(ids: number[]): Promise<void> {
+		await this.wordRepository.update(ids, { status: "processing" });
+	}
+
+	async markProcessed(ids: number[]): Promise<void> {
+		await this.wordRepository.update(ids, { status: "processed" });
+	}
+
+	async generateWords(language: string): Promise<void> {
+		const existingWords = await this.wordRepository.find({
+			where: { language },
+		});
+
+		const except = existingWords.map((w) => w.word);
+
+		this.logger.log(
+			`Queueing word generation in ${language}, except: ${except.join(", ")}`,
+		);
+
+		await this.openAIQueue.add(WORDS_GENERATION_START, { language, except });
+	}
+
+	async makeAudio(
+		language: string,
+		word: string,
+		wordId: WordEntity["id"],
+	): Promise<void> {
+		this.openAIQueue.add(AUDIO_CREATION_START, { language, word, wordId });
+	}
+
+	async wordsGenerated(words: GeneratedWord[]): Promise<void> {
+		const wordsTopics = words.reduce<Set<string>>((acc, wordData) => {
+			acc.add(wordData.topic);
+			return acc;
+		}, new Set<string>());
+
+		const wordsCatalogs = words.reduce<Set<string>>((acc, wordData) => {
+			acc.add(wordData.level);
+			return acc;
+		}, new Set<string>());
+
+		this.logger.log(
+			`Generated ${words.length} words, topics: ${Array.from(wordsTopics).join(
+				", ",
+			)}, catalogs: ${Array.from(wordsCatalogs).join(", ")}`,
+		);
+
+		const topics = await this.topicService.findAllAndCreateIfNotExist(
+			Array.from(wordsTopics.values()),
+		);
+		const catalog = await this.vocabCatalogService.findAllAndCreateIfNotExist(
+			Array.from(wordsCatalogs.values()),
+			words[0].language,
+		);
+
+		const topicMap = new Map(topics.map((t) => [t.title, t.id]));
+		const catalogMap = new Map(catalog.map((c) => [c.title, c.id]));
+
+		this.logger.log("Saving generated words to database...");
+
+		const wordsPromises = words.map(async (wordData) => {
+			const word = await this.create({
+				word: wordData.word,
+				topic: topicMap.get(wordData.topic),
+				catalog: catalogMap.get(wordData.level),
+				meaning: wordData.meaning,
+				created_at: new Date().toISOString(),
+				language: wordData.language,
+				audio: "",
+				transcribtion: wordData.transcription,
+				score: wordData.score,
+				status: "processing",
+			});
+
+			this.makeAudio(wordData.language, wordData.word, word.id);
+
+			return word;
+		});
+
+		this.logger.log("Waiting for all words to be saved to the database...");
+
+		const createdWords = await Promise.all(wordsPromises);
+
+		this.logger.log(
+			`Created ${createdWords.length} words, initiating translations...`,
+		);
+
+		this.makeTranslationsForWords(createdWords);
+	}
+
+	makeTranslationsForWords(words: WordEntity[]) {
+		this.translationQueue.add(TRANSLATION_START, {
+			words,
+		});
+	}
+
+	/**
+	 * Calls when audio is created for word
+	 * @param filename filename to create
+	 * @param audio base64 audio data to save as file
+	 * @param wordId wordId this file belongs to
+	 * @returns
+	 */
+	async audioMade(filename: string, audio: string, wordId: WordEntity["id"]) {
+		const word = await this.findOne(wordId);
+
+		if (!word) {
+			this.logger.warn(`Word with id ${wordId} not found for audio update`);
+			return;
+		}
+
+		const url = await this.gcsService.uploadMp3FromBase64(audio, filename);
+
+		word.audio = url;
+
+		await this.wordRepository.save(word);
+
+		this.logger.log(
+			`Audio updated for word id ${wordId}, filename: ${filename}`,
+		);
 	}
 }

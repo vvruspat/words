@@ -24,6 +24,7 @@ async function generateSwagger() {
 	console.log("✅ Generated openapi.yaml");
 
 	await app.close();
+	process.exit(0);
 }
 
 generateSwagger().catch((err) => {

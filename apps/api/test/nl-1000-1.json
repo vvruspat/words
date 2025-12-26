@@ -1,0 +1,4511 @@
+[
+  {
+    "score": 1,
+    "word": "de",
+    "topic": "Lidwoorden",
+    "level": "A1",
+    "meaning": "bepaald lidwoord voor de-woorden in het enkelvoud en alle zelfstandige naamwoorden in het meervoud",
+    "language": "nl",
+    "transcription": "də"
+  },
+  {
+    "score": 0.999,
+    "word": "het",
+    "topic": "Lidwoorden",
+    "level": "A1",
+    "meaning": "bepaald lidwoord voor het-woorden in het enkelvoud",
+    "language": "nl",
+    "transcription": "ɦɛt"
+  },
+  {
+    "score": 0.998,
+    "word": "een",
+    "topic": "Lidwoorden",
+    "level": "A1",
+    "meaning": "onbepaald lidwoord; verwijst naar iets niet-specifieks",
+    "language": "nl",
+    "transcription": "ən"
+  },
+  {
+    "score": 0.997,
+    "word": "en",
+    "topic": "Voegwoorden",
+    "level": "A1",
+    "meaning": "voegwoord dat twee woorden of zinnen met elkaar verbindt",
+    "language": "nl",
+    "transcription": "ɛn"
+  },
+  {
+    "score": 0.996,
+    "word": "ik",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord in de eerste persoon enkelvoud",
+    "language": "nl",
+    "transcription": "ɪk"
+  },
+  {
+    "score": 0.995,
+    "word": "je",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "onbeklemtoonde vorm van ‘jij’ of bezittelijk; informeel tweede persoon",
+    "language": "nl",
+    "transcription": "jə"
+  },
+  {
+    "score": 0.994,
+    "word": "jij",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord tweede persoon enkelvoud, benadrukt",
+    "language": "nl",
+    "transcription": "jɛi"
+  },
+  {
+    "score": 0.993,
+    "word": "u",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "beleefde vorm van de tweede persoon",
+    "language": "nl",
+    "transcription": "y"
+  },
+  {
+    "score": 0.992,
+    "word": "hij",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord derde persoon mannelijk enkelvoud",
+    "language": "nl",
+    "transcription": "ɦɛi"
+  },
+  {
+    "score": 0.992,
+    "word": "zij",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord derde persoon vrouwelijk enkelvoud of meervoud",
+    "language": "nl",
+    "transcription": "zɛi"
+  },
+  {
+    "score": 0.991,
+    "word": "ze",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "onbeklemtoonde vorm van ‘zij’",
+    "language": "nl",
+    "transcription": "zə"
+  },
+  {
+    "score": 0.99,
+    "word": "we",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "onbeklemtoonde vorm van ‘wij’, eerste persoon meervoud",
+    "language": "nl",
+    "transcription": "ʋə"
+  },
+  {
+    "score": 0.989,
+    "word": "wij",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord eerste persoon meervoud, benadrukt",
+    "language": "nl",
+    "transcription": "ʋɛi"
+  },
+  {
+    "score": 0.988,
+    "word": "jullie",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "persoonlijk voornaamwoord tweede persoon meervoud",
+    "language": "nl",
+    "transcription": "ˈjʏli"
+  },
+  {
+    "score": 0.987,
+    "word": "dit",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "aanwijzend voornaamwoord voor iets dichtbij (het-woord)",
+    "language": "nl",
+    "transcription": "dɪt"
+  },
+  {
+    "score": 0.986,
+    "word": "dat",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "aanwijzend voornaamwoord voor iets verder weg (het-woord)",
+    "language": "nl",
+    "transcription": "dɑt"
+  },
+  {
+    "score": 0.985,
+    "word": "die",
+    "topic": "Voornaamwoorden",
+    "level": "A1",
+    "meaning": "aanwijzend voornaamwoord voor de-woorden of meervoud",
+    "language": "nl",
+    "transcription": "di"
+  },
+  {
+    "score": 0.984,
+    "word": "wat",
+    "topic": "Vragende woorden",
+    "level": "A1",
+    "meaning": "vragend voornaamwoord; vraagt naar een ding of situatie",
+    "language": "nl",
+    "transcription": "ʋɑt"
+  },
+  {
+    "score": 0.983,
+    "word": "waar",
+    "topic": "Vragende woorden",
+    "level": "A1",
+    "meaning": "vragend bijwoord; vraagt naar een plaats",
+    "language": "nl",
+    "transcription": "ʋaːr"
+  },
+  {
+    "score": 0.982,
+    "word": "wanneer",
+    "topic": "Vragende woorden",
+    "level": "A1",
+    "meaning": "vragend bijwoord; vraagt naar tijd",
+    "language": "nl",
+    "transcription": "ʋɑˈneːr"
+  },
+  {
+    "score": 0.981,
+    "word": "hoe",
+    "topic": "Vragende woorden",
+    "level": "A1",
+    "meaning": "vragend bijwoord; vraagt naar wijze of manier",
+    "language": "nl",
+    "transcription": "ɦu"
+  },
+  {
+    "score": 0.98,
+    "word": "waarom",
+    "topic": "Vragende woorden",
+    "level": "A1",
+    "meaning": "vragend bijwoord; vraagt naar reden",
+    "language": "nl",
+    "transcription": "ʋaːˈrɔm"
+  },
+  {
+    "score": 0.979,
+    "word": "welk",
+    "topic": "Vragende woorden",
+    "level": "A2",
+    "meaning": "vragend voornaamwoord; vraagt naar keuze uit bekende opties",
+    "language": "nl",
+    "transcription": "ʋɛlk"
+  },
+  {
+    "score": 0.978,
+    "word": "er",
+    "topic": "Bijwoorden",
+    "level": "A2",
+    "meaning": "plaatsvervangend bijwoord in vele constructies; vaak zonder concrete betekenis",
+    "language": "nl",
+    "transcription": "ər"
+  },
+  {
+    "score": 0.977,
+    "word": "hier",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "aanduiding voor een nabijgelegen plaats",
+    "language": "nl",
+    "transcription": "ɦiːr"
+  },
+  {
+    "score": 0.976,
+    "word": "daar",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "aanduiding voor een verder weg gelegen plaats",
+    "language": "nl",
+    "transcription": "daːr"
+  },
+  {
+    "score": 0.975,
+    "word": "al",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "reeds; op een eerder moment dan verwacht",
+    "language": "nl",
+    "transcription": "ɑl"
+  },
+  {
+    "score": 0.974,
+    "word": "nog",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "ook in de huidige situatie; bovendien; extra",
+    "language": "nl",
+    "transcription": "nɔx"
+  },
+  {
+    "score": 0.973,
+    "word": "niet",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "ontkenning van een werkwoord, bijvoeglijk naamwoord of bijwoord",
+    "language": "nl",
+    "transcription": "nit"
+  },
+  {
+    "score": 0.972,
+    "word": "wel",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "bevestiging; tegenovergestelde van ‘niet’",
+    "language": "nl",
+    "transcription": "ʋɛl"
+  },
+  {
+    "score": 0.971,
+    "word": "ook",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "in aanvulling; bovendien",
+    "language": "nl",
+    "transcription": "oːk"
+  },
+  {
+    "score": 0.97,
+    "word": "maar",
+    "topic": "Voegwoorden",
+    "level": "A1",
+    "meaning": "tegenstellend voegwoord",
+    "language": "nl",
+    "transcription": "maːr"
+  },
+  {
+    "score": 0.969,
+    "word": "of",
+    "topic": "Voegwoorden",
+    "level": "A1",
+    "meaning": "keuzend voegwoord; alternatief aangeven",
+    "language": "nl",
+    "transcription": "ɔf"
+  },
+  {
+    "score": 0.968,
+    "word": "want",
+    "topic": "Voegwoorden",
+    "level": "A2",
+    "meaning": "redengevend voegwoord; geeft een verklaring",
+    "language": "nl",
+    "transcription": "ʋɑnt"
+  },
+  {
+    "score": 0.967,
+    "word": "dus",
+    "topic": "Voegwoorden",
+    "level": "A2",
+    "meaning": "concluderend voegwoord",
+    "language": "nl",
+    "transcription": "dʏs"
+  },
+  {
+    "score": 0.966,
+    "word": "omdat",
+    "topic": "Voegwoorden",
+    "level": "A2",
+    "meaning": "ondergeschikt voegwoord dat een reden aangeeft",
+    "language": "nl",
+    "transcription": "ɔmˈdɑt"
+  },
+  {
+    "score": 0.965,
+    "word": "hoewel",
+    "topic": "Voegwoorden",
+    "level": "B1",
+    "meaning": "ondergeschikt voegwoord dat een tegenstelling aangeeft",
+    "language": "nl",
+    "transcription": "ɦuˈʋɛl"
+  },
+  {
+    "score": 0.964,
+    "word": "terwijl",
+    "topic": "Voegwoorden",
+    "level": "B1",
+    "meaning": "ondergeschikt voegwoord dat gelijktijdigheid aangeeft",
+    "language": "nl",
+    "transcription": "tərˈʋɛi̯l"
+  },
+  {
+    "score": 0.963,
+    "word": "zodat",
+    "topic": "Voegwoorden",
+    "level": "B1",
+    "meaning": "ondergeschikt voegwoord dat doel of gevolg aangeeft",
+    "language": "nl",
+    "transcription": "zoːˈdɑt"
+  },
+  {
+    "score": 0.962,
+    "word": "voordat",
+    "topic": "Voegwoorden",
+    "level": "B1",
+    "meaning": "ondergeschikt voegwoord dat voorafgaande tijd aangeeft",
+    "language": "nl",
+    "transcription": "ˈvoːr.dɑt"
+  },
+  {
+    "score": 0.961,
+    "word": "nadat",
+    "topic": "Voegwoorden",
+    "level": "B1",
+    "meaning": "ondergeschikt voegwoord dat latere tijd aangeeft",
+    "language": "nl",
+    "transcription": "ˈnaː.dɑt"
+  },
+  {
+    "score": 0.96,
+    "word": "in",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "plaatsbepalend voorzetsel; binnen een ruimte of periode",
+    "language": "nl",
+    "transcription": "ɪn"
+  },
+  {
+    "score": 0.959,
+    "word": "op",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "plaatsbepalend voorzetsel; op een oppervlak",
+    "language": "nl",
+    "transcription": "ɔp"
+  },
+  {
+    "score": 0.958,
+    "word": "aan",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "plaats of richting; aan iets vast of bij een activiteit",
+    "language": "nl",
+    "transcription": "aːn"
+  },
+  {
+    "score": 0.957,
+    "word": "bij",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "in de nabijheid van; bij iemand of iets",
+    "language": "nl",
+    "transcription": "bɛi̯"
+  },
+  {
+    "score": 0.956,
+    "word": "voor",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "aan de voorkant van; ten behoeve van",
+    "language": "nl",
+    "transcription": "voːr"
+  },
+  {
+    "score": 0.955,
+    "word": "achter",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "aan de achterkant van",
+    "language": "nl",
+    "transcription": "ˈɑxtər"
+  },
+  {
+    "score": 0.954,
+    "word": "naast",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "aan de zijkant van; naastgelegen",
+    "language": "nl",
+    "transcription": "naːst"
+  },
+  {
+    "score": 0.953,
+    "word": "tussen",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "in de ruimte die twee dingen scheidt",
+    "language": "nl",
+    "transcription": "ˈtʏsən"
+  },
+  {
+    "score": 0.952,
+    "word": "naar",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "richting aangevend; in de richting van",
+    "language": "nl",
+    "transcription": "naːr"
+  },
+  {
+    "score": 0.951,
+    "word": "van",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "herkomst of bezit",
+    "language": "nl",
+    "transcription": "vɑn"
+  },
+  {
+    "score": 0.95,
+    "word": "tot",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "eindpunt in tijd of ruimte",
+    "language": "nl",
+    "transcription": "tɔt"
+  },
+  {
+    "score": 0.949,
+    "word": "met",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "samen met; inclusief",
+    "language": "nl",
+    "transcription": "mɛt"
+  },
+  {
+    "score": 0.948,
+    "word": "zonder",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "niet hebbend; exclusief",
+    "language": "nl",
+    "transcription": "ˈzɔndər"
+  },
+  {
+    "score": 0.947,
+    "word": "over",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "boven iets heen; betreffende",
+    "language": "nl",
+    "transcription": "ˈoːvər"
+  },
+  {
+    "score": 0.946,
+    "word": "onder",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "lager dan; beneden",
+    "language": "nl",
+    "transcription": "ˈɔndər"
+  },
+  {
+    "score": 0.945,
+    "word": "boven",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "hoger dan",
+    "language": "nl",
+    "transcription": "ˈboːvən"
+  },
+  {
+    "score": 0.944,
+    "word": "tegen",
+    "topic": "Voorzetsels",
+    "level": "A2",
+    "meaning": "in aanraking met; in oppositie tot",
+    "language": "nl",
+    "transcription": "ˈteːɣən"
+  },
+  {
+    "score": 0.943,
+    "word": "sinds",
+    "topic": "Voorzetsels",
+    "level": "A2",
+    "meaning": "vanaf een bepaald moment in het verleden",
+    "language": "nl",
+    "transcription": "sɪnts"
+  },
+  {
+    "score": 0.942,
+    "word": "tijdens",
+    "topic": "Voorzetsels",
+    "level": "A2",
+    "meaning": "in de loop van; gedurende",
+    "language": "nl",
+    "transcription": "ˈtɛi̯dəns"
+  },
+  {
+    "score": 0.941,
+    "word": "door",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "langs of via; als gevolg van",
+    "language": "nl",
+    "transcription": "doːr"
+  },
+  {
+    "score": 0.94,
+    "word": "om",
+    "topic": "Voorzetsels",
+    "level": "A1",
+    "meaning": "rond; met het doel te; op (tijd)",
+    "language": "nl",
+    "transcription": "ɔm"
+  },
+  {
+    "score": 0.939,
+    "word": "langs",
+    "topic": "Voorzetsels",
+    "level": "A2",
+    "meaning": "even bezoeken; aan de kant van",
+    "language": "nl",
+    "transcription": "lɑŋs"
+  },
+  {
+    "score": 0.938,
+    "word": "zijn",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "bestaan of zich bevinden; koppelwerkwoord",
+    "language": "nl",
+    "transcription": "zɛi̯n"
+  },
+  {
+    "score": 0.937,
+    "word": "hebben",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "in bezit hebben; hulpwerkwoord",
+    "language": "nl",
+    "transcription": "ˈɦɛbən"
+  },
+  {
+    "score": 0.936,
+    "word": "kunnen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "in staat zijn; mogelijkheid uitdrukken",
+    "language": "nl",
+    "transcription": "ˈkʏnən"
+  },
+  {
+    "score": 0.935,
+    "word": "moeten",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "noodzaak of verplichting uitdrukken",
+    "language": "nl",
+    "transcription": "ˈmutən"
+  },
+  {
+    "score": 0.934,
+    "word": "zullen",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "toekomst, belofte of voorstel uitdrukken",
+    "language": "nl",
+    "transcription": "ˈzʏlən"
+  },
+  {
+    "score": 0.933,
+    "word": "willen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "een wens of intentie hebben",
+    "language": "nl",
+    "transcription": "ˈʋɪlən"
+  },
+  {
+    "score": 0.932,
+    "word": "gaan",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "zich verplaatsen; toekomstconstructie met ‘gaan’ + infinitief",
+    "language": "nl",
+    "transcription": "xaːn"
+  },
+  {
+    "score": 0.931,
+    "word": "komen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "naderen of arriveren",
+    "language": "nl",
+    "transcription": "ˈkoːmən"
+  },
+  {
+    "score": 0.93,
+    "word": "zien",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "met de ogen waarnemen",
+    "language": "nl",
+    "transcription": "zin"
+  },
+  {
+    "score": 0.929,
+    "word": "doen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "een handeling uitvoeren",
+    "language": "nl",
+    "transcription": "dun"
+  },
+  {
+    "score": 0.928,
+    "word": "maken",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "iets produceren of veroorzaken",
+    "language": "nl",
+    "transcription": "ˈmaːkən"
+  },
+  {
+    "score": 0.927,
+    "word": "zeggen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "in woorden uitdrukken",
+    "language": "nl",
+    "transcription": "ˈzɛɣən"
+  },
+  {
+    "score": 0.926,
+    "word": "geven",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "aan iemand iets overhandigen",
+    "language": "nl",
+    "transcription": "ˈɣeːvən"
+  },
+  {
+    "score": 0.925,
+    "word": "nemen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "iets pakken of accepteren",
+    "language": "nl",
+    "transcription": "ˈneːmən"
+  },
+  {
+    "score": 0.924,
+    "word": "denken",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "met de geest overwegen of menen",
+    "language": "nl",
+    "transcription": "ˈdɛŋkən"
+  },
+  {
+    "score": 0.923,
+    "word": "weten",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "kennis hebben van",
+    "language": "nl",
+    "transcription": "ˈʋeːtən"
+  },
+  {
+    "score": 0.922,
+    "word": "werken",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "arbeid verrichten; functioneren",
+    "language": "nl",
+    "transcription": "ˈʋɛrkən"
+  },
+  {
+    "score": 0.921,
+    "word": "spreken",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "met woorden communiceren",
+    "language": "nl",
+    "transcription": "ˈspreːkən"
+  },
+  {
+    "score": 0.92,
+    "word": "blijven",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "niet weggaan; voortduren",
+    "language": "nl",
+    "transcription": "ˈblɛi̯vən"
+  },
+  {
+    "score": 0.919,
+    "word": "laten",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "toestaan; iemand iets laten doen",
+    "language": "nl",
+    "transcription": "ˈlaːtən"
+  },
+  {
+    "score": 0.918,
+    "word": "voelen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "met tast of emoties waarnemen",
+    "language": "nl",
+    "transcription": "ˈvulən"
+  },
+  {
+    "score": 0.917,
+    "word": "vinden",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "ontdekken; van mening zijn",
+    "language": "nl",
+    "transcription": "ˈvɪndən"
+  },
+  {
+    "score": 0.916,
+    "word": "krijgen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "ontvangen",
+    "language": "nl",
+    "transcription": "ˈkrɛi̯ɣən"
+  },
+  {
+    "score": 0.915,
+    "word": "eten",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "voedsel tot je nemen",
+    "language": "nl",
+    "transcription": "ˈeːtən"
+  },
+  {
+    "score": 0.914,
+    "word": "drinken",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "vloeistof tot je nemen",
+    "language": "nl",
+    "transcription": "ˈdrɪŋkən"
+  },
+  {
+    "score": 0.913,
+    "word": "koken",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "maaltijden bereiden",
+    "language": "nl",
+    "transcription": "ˈkoːkən"
+  },
+  {
+    "score": 0.912,
+    "word": "bakken",
+    "topic": "Eten en drinken",
+    "level": "A2",
+    "meaning": "garen in een pan of oven",
+    "language": "nl",
+    "transcription": "ˈbɑkən"
+  },
+  {
+    "score": 0.911,
+    "word": "snijden",
+    "topic": "Eten en drinken",
+    "level": "A2",
+    "meaning": "in stukken verdelen met een mes",
+    "language": "nl",
+    "transcription": "ˈsnɛi̯dən"
+  },
+  {
+    "score": 0.91,
+    "word": "roeren",
+    "topic": "Eten en drinken",
+    "level": "A2",
+    "meaning": "met een lepel mengen",
+    "language": "nl",
+    "transcription": "ˈruːrən"
+  },
+  {
+    "score": 0.909,
+    "word": "huis",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "gebouw om in te wonen",
+    "language": "nl",
+    "transcription": "ɦœys"
+  },
+  {
+    "score": 0.908,
+    "word": "man",
+    "topic": "Mensen",
+    "level": "A1",
+    "meaning": "volwassen mannelijke persoon",
+    "language": "nl",
+    "transcription": "mɑn"
+  },
+  {
+    "score": 0.907,
+    "word": "vrouw",
+    "topic": "Mensen",
+    "level": "A1",
+    "meaning": "volwassen vrouwelijke persoon",
+    "language": "nl",
+    "transcription": "ʋrɑu̯"
+  },
+  {
+    "score": 0.906,
+    "word": "kind",
+    "topic": "Mensen",
+    "level": "A1",
+    "meaning": "jong persoon; zoon of dochter",
+    "language": "nl",
+    "transcription": "kɪnt"
+  },
+  {
+    "score": 0.905,
+    "word": "vriend",
+    "topic": "Mensen",
+    "level": "A1",
+    "meaning": "iemand met wie je een goede band hebt",
+    "language": "nl",
+    "transcription": "ʋrint"
+  },
+  {
+    "score": 0.904,
+    "word": "mens",
+    "topic": "Mensen",
+    "level": "A1",
+    "meaning": "persoon; lid van de soort homo sapiens",
+    "language": "nl",
+    "transcription": "mɛns"
+  },
+  {
+    "score": 0.903,
+    "word": "dag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van 24 uur; groet",
+    "language": "nl",
+    "transcription": "dɑx"
+  },
+  {
+    "score": 0.902,
+    "word": "jaar",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van twaalf maanden",
+    "language": "nl",
+    "transcription": "jaːr"
+  },
+  {
+    "score": 0.901,
+    "word": "tijd",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "duur of moment waarin iets gebeurt",
+    "language": "nl",
+    "transcription": "tɛi̯t"
+  },
+  {
+    "score": 0.9,
+    "word": "werk",
+    "topic": "Werk",
+    "level": "A1",
+    "meaning": "arbeid; baan; bezigheid",
+    "language": "nl",
+    "transcription": "ʋɛrk"
+  },
+  {
+    "score": 0.899,
+    "word": "school",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "plaats waar je leert",
+    "language": "nl",
+    "transcription": "sxoːl"
+  },
+  {
+    "score": 0.898,
+    "word": "stad",
+    "topic": "Plaatsen",
+    "level": "A1",
+    "meaning": "grote plaats met veel gebouwen en mensen",
+    "language": "nl",
+    "transcription": "stɑt"
+  },
+  {
+    "score": 0.897,
+    "word": "dorp",
+    "topic": "Plaatsen",
+    "level": "A1",
+    "meaning": "kleine plaats met minder inwoners",
+    "language": "nl",
+    "transcription": "dɔrp"
+  },
+  {
+    "score": 0.896,
+    "word": "land",
+    "topic": "Plaatsen",
+    "level": "A1",
+    "meaning": "natie; gebied met eigen regering",
+    "language": "nl",
+    "transcription": "lɑnt"
+  },
+  {
+    "score": 0.895,
+    "word": "straat",
+    "topic": "Plaatsen",
+    "level": "A1",
+    "meaning": "weg in een bebouwde omgeving",
+    "language": "nl",
+    "transcription": "straːt"
+  },
+  {
+    "score": 0.894,
+    "word": "weg",
+    "topic": "Plaatsen",
+    "level": "A1",
+    "meaning": "route voor verkeer; niet aanwezig",
+    "language": "nl",
+    "transcription": "ʋɛx"
+  },
+  {
+    "score": 0.893,
+    "word": "auto",
+    "topic": "Verkeer",
+    "level": "A1",
+    "meaning": "motorvoertuig voor vervoer op de weg",
+    "language": "nl",
+    "transcription": "ˈʔɑu̯toː"
+  },
+  {
+    "score": 0.892,
+    "word": "trein",
+    "topic": "Verkeer",
+    "level": "A1",
+    "meaning": "vervoermiddel dat over rails rijdt",
+    "language": "nl",
+    "transcription": "trɛi̯n"
+  },
+  {
+    "score": 0.891,
+    "word": "bus",
+    "topic": "Verkeer",
+    "level": "A1",
+    "meaning": "groot voertuig voor openbaar vervoer",
+    "language": "nl",
+    "transcription": "bʏs"
+  },
+  {
+    "score": 0.89,
+    "word": "fiets",
+    "topic": "Verkeer",
+    "level": "A1",
+    "meaning": "voertuig met twee wielen dat je met pedalen aandrijft",
+    "language": "nl",
+    "transcription": "fits"
+  },
+  {
+    "score": 0.889,
+    "word": "vliegtuig",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "luchtvaartuig voor vervoer door de lucht",
+    "language": "nl",
+    "transcription": "ˈvliːxtœy̯x"
+  },
+  {
+    "score": 0.888,
+    "word": "boek",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "gebundelde bladen met tekst of afbeeldingen",
+    "language": "nl",
+    "transcription": "buk"
+  },
+  {
+    "score": 0.887,
+    "word": "pen",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "schrijfinstrument met inkt",
+    "language": "nl",
+    "transcription": "pɛn"
+  },
+  {
+    "score": 0.886,
+    "word": "tafel",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "meubel met blad op poten",
+    "language": "nl",
+    "transcription": "ˈtaːfəl"
+  },
+  {
+    "score": 0.885,
+    "word": "stoel",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "meubel om op te zitten",
+    "language": "nl",
+    "transcription": "stul"
+  },
+  {
+    "score": 0.884,
+    "word": "deur",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "bewegend deel dat een opening afsluit",
+    "language": "nl",
+    "transcription": "døːr"
+  },
+  {
+    "score": 0.883,
+    "word": "raam",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "opening in een muur met glas",
+    "language": "nl",
+    "transcription": "raːm"
+  },
+  {
+    "score": 0.882,
+    "word": "kamer",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "afgesloten ruimte in een gebouw",
+    "language": "nl",
+    "transcription": "ˈkaːmər"
+  },
+  {
+    "score": 0.881,
+    "word": "bed",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "meubel om op te slapen",
+    "language": "nl",
+    "transcription": "bɛt"
+  },
+  {
+    "score": 0.88,
+    "word": "keuken",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "ruimte waar je kookt",
+    "language": "nl",
+    "transcription": "ˈkøːkən"
+  },
+  {
+    "score": 0.879,
+    "word": "badkamer",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "ruimte om te douchen of te baden",
+    "language": "nl",
+    "transcription": "ˈbɑtˌkaːmər"
+  },
+  {
+    "score": 0.878,
+    "word": "water",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "kleurloze vloeistof die je drinkt",
+    "language": "nl",
+    "transcription": "ˈʋaːtər"
+  },
+  {
+    "score": 0.877,
+    "word": "brood",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "gebakken deeg van meel en water",
+    "language": "nl",
+    "transcription": "broːt"
+  },
+  {
+    "score": 0.876,
+    "word": "melk",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "witte drank van dieren of plantaardig",
+    "language": "nl",
+    "transcription": "mɛlk"
+  },
+  {
+    "score": 0.875,
+    "word": "koffie",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "warme drank van gebrande bonen",
+    "language": "nl",
+    "transcription": "ˈkɔfi"
+  },
+  {
+    "score": 0.874,
+    "word": "thee",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "warme drank van theebladeren",
+    "language": "nl",
+    "transcription": "teː"
+  },
+  {
+    "score": 0.873,
+    "word": "suiker",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "zoete stof gebruikt als zoetmiddel",
+    "language": "nl",
+    "transcription": "ˈsœy̯kər"
+  },
+  {
+    "score": 0.872,
+    "word": "zout",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "kruiderij met zoute smaak",
+    "language": "nl",
+    "transcription": "zɑu̯t"
+  },
+  {
+    "score": 0.871,
+    "word": "vlees",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "eetbare delen van dieren",
+    "language": "nl",
+    "transcription": "vleːs"
+  },
+  {
+    "score": 0.87,
+    "word": "vis",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "waterdier; ook het vlees daarvan",
+    "language": "nl",
+    "transcription": "vɪs"
+  },
+  {
+    "score": 0.869,
+    "word": "groente",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "eetbare plantendelen",
+    "language": "nl",
+    "transcription": "ˈxruntə"
+  },
+  {
+    "score": 0.868,
+    "word": "fruit",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "zoete eetbare vruchten",
+    "language": "nl",
+    "transcription": "frœy̯t"
+  },
+  {
+    "score": 0.867,
+    "word": "appel",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "ronde vrucht met schil",
+    "language": "nl",
+    "transcription": "ˈɑpəl"
+  },
+  {
+    "score": 0.866,
+    "word": "banaan",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "gele gebogen vrucht",
+    "language": "nl",
+    "transcription": "baˈnaːn"
+  },
+  {
+    "score": 0.865,
+    "word": "sinaasappel",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "oranje citrusvrucht",
+    "language": "nl",
+    "transcription": "ˈsiːnaːsˌɑpəl"
+  },
+  {
+    "score": 0.864,
+    "word": "kaas",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "melkproduct, vaak hard en geel",
+    "language": "nl",
+    "transcription": "kaːs"
+  },
+  {
+    "score": 0.863,
+    "word": "ei",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "ronde voeding uit kip of ander dier",
+    "language": "nl",
+    "transcription": "ɛi̯"
+  },
+  {
+    "score": 0.862,
+    "word": "soep",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "warme vloeibare maaltijd",
+    "language": "nl",
+    "transcription": "sup"
+  },
+  {
+    "score": 0.861,
+    "word": "goed",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "positieve kwaliteit; juist",
+    "language": "nl",
+    "transcription": "xut"
+  },
+  {
+    "score": 0.86,
+    "word": "slecht",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "negatieve kwaliteit; niet goed",
+    "language": "nl",
+    "transcription": "slɛxt"
+  },
+  {
+    "score": 0.859,
+    "word": "groot",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "van aanzienlijke omvang",
+    "language": "nl",
+    "transcription": "xroːt"
+  },
+  {
+    "score": 0.858,
+    "word": "klein",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "van geringe omvang",
+    "language": "nl",
+    "transcription": "klɛi̯n"
+  },
+  {
+    "score": 0.857,
+    "word": "lang",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "met grote lengte; gedurende veel tijd",
+    "language": "nl",
+    "transcription": "lɑŋ"
+  },
+  {
+    "score": 0.856,
+    "word": "kort",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "met kleine lengte of duur",
+    "language": "nl",
+    "transcription": "kɔrt"
+  },
+  {
+    "score": 0.855,
+    "word": "nieuw",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "recent; niet oud",
+    "language": "nl",
+    "transcription": "niu̯"
+  },
+  {
+    "score": 0.854,
+    "word": "oud",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "niet nieuw; met hoge leeftijd",
+    "language": "nl",
+    "transcription": "ɑu̯t"
+  },
+  {
+    "score": 0.853,
+    "word": "mooi",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "aantrekkelijk om te zien",
+    "language": "nl",
+    "transcription": "moːi̯"
+  },
+  {
+    "score": 0.852,
+    "word": "lelijk",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A2",
+    "meaning": "onaantrekkelijk",
+    "language": "nl",
+    "transcription": "ˈleːlək"
+  },
+  {
+    "score": 0.851,
+    "word": "duur",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "kostbaar; veel geld kostend",
+    "language": "nl",
+    "transcription": "dyːr"
+  },
+  {
+    "score": 0.85,
+    "word": "goedkoop",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "niet duur; lage prijs",
+    "language": "nl",
+    "transcription": "ɣutˈkoːp"
+  },
+  {
+    "score": 0.849,
+    "word": "warm",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "hoge temperatuur",
+    "language": "nl",
+    "transcription": "ʋɑrm"
+  },
+  {
+    "score": 0.848,
+    "word": "koud",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "lage temperatuur",
+    "language": "nl",
+    "transcription": "kɑu̯t"
+  },
+  {
+    "score": 0.847,
+    "word": "nat",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "vochtig; met water bedekt",
+    "language": "nl",
+    "transcription": "nɑt"
+  },
+  {
+    "score": 0.846,
+    "word": "droog",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "niet nat; zonder vocht",
+    "language": "nl",
+    "transcription": "droːx"
+  },
+  {
+    "score": 0.845,
+    "word": "makkelijk",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "niet moeilijk; eenvoudig",
+    "language": "nl",
+    "transcription": "ˈmɑkələk"
+  },
+  {
+    "score": 0.844,
+    "word": "moeilijk",
+    "topic": "Bijvoeglijke naamwoorden",
+    "level": "A1",
+    "meaning": "niet makkelijk; complex",
+    "language": "nl",
+    "transcription": "ˈmui̯lək"
+  },
+  {
+    "score": 0.843,
+    "word": "snel",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "met hoge snelheid; vlug",
+    "language": "nl",
+    "transcription": "snɛl"
+  },
+  {
+    "score": 0.842,
+    "word": "langzaam",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "met lage snelheid; traag",
+    "language": "nl",
+    "transcription": "ˈlɑŋzaːm"
+  },
+  {
+    "score": 0.841,
+    "word": "alleen",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "zonder anderen; slechts",
+    "language": "nl",
+    "transcription": "ɑˈleːn"
+  },
+  {
+    "score": 0.84,
+    "word": "samen",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "met anderen",
+    "language": "nl",
+    "transcription": "ˈsaːmən"
+  },
+  {
+    "score": 0.839,
+    "word": "altijd",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "in alle gevallen; voortdurend",
+    "language": "nl",
+    "transcription": "ˈɑl.tɛi̯t"
+  },
+  {
+    "score": 0.838,
+    "word": "nooit",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "in geen enkel geval; nooit eerder",
+    "language": "nl",
+    "transcription": "noːi̯t"
+  },
+  {
+    "score": 0.837,
+    "word": "soms",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "af en toe; niet altijd",
+    "language": "nl",
+    "transcription": "sɔms"
+  },
+  {
+    "score": 0.836,
+    "word": "vaak",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "regelmatig; dikwijls",
+    "language": "nl",
+    "transcription": "vaːk"
+  },
+  {
+    "score": 0.835,
+    "word": "vroeg",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "in de ochtend; eerder dan normaal",
+    "language": "nl",
+    "transcription": "vruːx"
+  },
+  {
+    "score": 0.834,
+    "word": "laat",
+    "topic": "Bijwoorden",
+    "level": "A1",
+    "meaning": "op een later tijdstip dan verwacht",
+    "language": "nl",
+    "transcription": "laːt"
+  },
+  {
+    "score": 0.833,
+    "word": "één",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 1",
+    "language": "nl",
+    "transcription": "eːn"
+  },
+  {
+    "score": 0.832,
+    "word": "twee",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 2",
+    "language": "nl",
+    "transcription": "tʋeː"
+  },
+  {
+    "score": 0.831,
+    "word": "drie",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 3",
+    "language": "nl",
+    "transcription": "dri"
+  },
+  {
+    "score": 0.83,
+    "word": "vier",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 4",
+    "language": "nl",
+    "transcription": "viːr"
+  },
+  {
+    "score": 0.829,
+    "word": "vijf",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 5",
+    "language": "nl",
+    "transcription": "vɛi̯f"
+  },
+  {
+    "score": 0.828,
+    "word": "zes",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 6",
+    "language": "nl",
+    "transcription": "zɛs"
+  },
+  {
+    "score": 0.827,
+    "word": "zeven",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 7",
+    "language": "nl",
+    "transcription": "ˈzeːvən"
+  },
+  {
+    "score": 0.826,
+    "word": "acht",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 8",
+    "language": "nl",
+    "transcription": "ɑxt"
+  },
+  {
+    "score": 0.825,
+    "word": "negen",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 9",
+    "language": "nl",
+    "transcription": "ˈneːɣən"
+  },
+  {
+    "score": 0.824,
+    "word": "tien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 10",
+    "language": "nl",
+    "transcription": "tin"
+  },
+  {
+    "score": 0.823,
+    "word": "elf",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 11",
+    "language": "nl",
+    "transcription": "ɛlf"
+  },
+  {
+    "score": 0.822,
+    "word": "twaalf",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 12",
+    "language": "nl",
+    "transcription": "tʋaːlf"
+  },
+  {
+    "score": 0.821,
+    "word": "dertien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 13",
+    "language": "nl",
+    "transcription": "ˈdɛr.tin"
+  },
+  {
+    "score": 0.82,
+    "word": "veertien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 14",
+    "language": "nl",
+    "transcription": "ˈveːr.tin"
+  },
+  {
+    "score": 0.819,
+    "word": "vijftien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 15",
+    "language": "nl",
+    "transcription": "ˈvɛi̯f.tin"
+  },
+  {
+    "score": 0.818,
+    "word": "zestien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 16",
+    "language": "nl",
+    "transcription": "ˈzɛs.tin"
+  },
+  {
+    "score": 0.817,
+    "word": "zeventien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 17",
+    "language": "nl",
+    "transcription": "ˈzeː.vən.tin"
+  },
+  {
+    "score": 0.816,
+    "word": "achttien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 18",
+    "language": "nl",
+    "transcription": "ˈɑx.tin"
+  },
+  {
+    "score": 0.815,
+    "word": "negentien",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 19",
+    "language": "nl",
+    "transcription": "ˈneː.ɣən.tin"
+  },
+  {
+    "score": 0.814,
+    "word": "twintig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 20",
+    "language": "nl",
+    "transcription": "ˈtwɪn.təx"
+  },
+  {
+    "score": 0.813,
+    "word": "dertig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 30",
+    "language": "nl",
+    "transcription": "ˈdɛr.təx"
+  },
+  {
+    "score": 0.812,
+    "word": "veertig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 40",
+    "language": "nl",
+    "transcription": "ˈfeːr.təx"
+  },
+  {
+    "score": 0.811,
+    "word": "vijftig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 50",
+    "language": "nl",
+    "transcription": "ˈvɛi̯f.təx"
+  },
+  {
+    "score": 0.81,
+    "word": "zestig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 60",
+    "language": "nl",
+    "transcription": "ˈzɛs.təx"
+  },
+  {
+    "score": 0.809,
+    "word": "zeventig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 70",
+    "language": "nl",
+    "transcription": "ˈzeː.vən.təx"
+  },
+  {
+    "score": 0.808,
+    "word": "tachtig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 80",
+    "language": "nl",
+    "transcription": "ˈtɑx.təx"
+  },
+  {
+    "score": 0.807,
+    "word": "negentig",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 90",
+    "language": "nl",
+    "transcription": "ˈneː.ɣən.təx"
+  },
+  {
+    "score": 0.806,
+    "word": "honderd",
+    "topic": "Getallen",
+    "level": "A1",
+    "meaning": "het getal 100",
+    "language": "nl",
+    "transcription": "ˈɦɔn.dərt"
+  },
+  {
+    "score": 0.805,
+    "word": "duizend",
+    "topic": "Getallen",
+    "level": "A2",
+    "meaning": "het getal 1000",
+    "language": "nl",
+    "transcription": "ˈdœy̯.zənt"
+  },
+  {
+    "score": 0.804,
+    "word": "maandag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "eerste dag van de werkweek",
+    "language": "nl",
+    "transcription": "ˈmaːn.daːx"
+  },
+  {
+    "score": 0.803,
+    "word": "dinsdag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "tweede dag van de werkweek",
+    "language": "nl",
+    "transcription": "ˈdɪnz.daːx"
+  },
+  {
+    "score": 0.802,
+    "word": "woensdag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "derde dag van de werkweek",
+    "language": "nl",
+    "transcription": "ˈʋuns.daːx"
+  },
+  {
+    "score": 0.801,
+    "word": "donderdag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "vierde dag van de werkweek",
+    "language": "nl",
+    "transcription": "ˈdɔn.dər.daːx"
+  },
+  {
+    "score": 0.8,
+    "word": "vrijdag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "vijfde dag van de werkweek",
+    "language": "nl",
+    "transcription": "ˈvrɛi̯.daːx"
+  },
+  {
+    "score": 0.799,
+    "word": "zaterdag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "dag van het weekend",
+    "language": "nl",
+    "transcription": "ˈzaː.tər.daːx"
+  },
+  {
+    "score": 0.798,
+    "word": "zondag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "dag van het weekend",
+    "language": "nl",
+    "transcription": "ˈzɔn.daːx"
+  },
+  {
+    "score": 0.797,
+    "word": "januari",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "eerste maand van het jaar",
+    "language": "nl",
+    "transcription": "jaːnyˈaːri"
+  },
+  {
+    "score": 0.796,
+    "word": "februari",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "tweede maand van het jaar",
+    "language": "nl",
+    "transcription": "feːbrʏˈaːri"
+  },
+  {
+    "score": 0.795,
+    "word": "maart",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "derde maand van het jaar",
+    "language": "nl",
+    "transcription": "maːrt"
+  },
+  {
+    "score": 0.794,
+    "word": "april",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "vierde maand van het jaar",
+    "language": "nl",
+    "transcription": "aːˈprɪl"
+  },
+  {
+    "score": 0.793,
+    "word": "mei",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "vijfde maand van het jaar",
+    "language": "nl",
+    "transcription": "mɛi̯"
+  },
+  {
+    "score": 0.792,
+    "word": "juni",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "zesde maand van het jaar",
+    "language": "nl",
+    "transcription": "ˈjyːni"
+  },
+  {
+    "score": 0.791,
+    "word": "juli",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "zevende maand van het jaar",
+    "language": "nl",
+    "transcription": "ˈjyːli"
+  },
+  {
+    "score": 0.79,
+    "word": "augustus",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "achtste maand van het jaar",
+    "language": "nl",
+    "transcription": "ʌu̯ˈxʏstʏs"
+  },
+  {
+    "score": 0.789,
+    "word": "september",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "negende maand van het jaar",
+    "language": "nl",
+    "transcription": "sɛpˈtɛm.bər"
+  },
+  {
+    "score": 0.788,
+    "word": "oktober",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "tiende maand van het jaar",
+    "language": "nl",
+    "transcription": "ɔkˈtoː.bər"
+  },
+  {
+    "score": 0.787,
+    "word": "november",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "elfde maand van het jaar",
+    "language": "nl",
+    "transcription": "noːˈvɛm.bər"
+  },
+  {
+    "score": 0.786,
+    "word": "december",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "twaalfde maand van het jaar",
+    "language": "nl",
+    "transcription": "deːˈsɛm.bər"
+  },
+  {
+    "score": 0.785,
+    "word": "rood",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur van bloed of tomaten",
+    "language": "nl",
+    "transcription": "roːt"
+  },
+  {
+    "score": 0.784,
+    "word": "blauw",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur van de lucht",
+    "language": "nl",
+    "transcription": "blɑu̯"
+  },
+  {
+    "score": 0.783,
+    "word": "geel",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur van de zon of citroen",
+    "language": "nl",
+    "transcription": "xeːl"
+  },
+  {
+    "score": 0.782,
+    "word": "groen",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur van gras",
+    "language": "nl",
+    "transcription": "xrʊn"
+  },
+  {
+    "score": 0.781,
+    "word": "zwart",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "donkerste kleur",
+    "language": "nl",
+    "transcription": "zwɑrt"
+  },
+  {
+    "score": 0.78,
+    "word": "wit",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "lichtste kleur",
+    "language": "nl",
+    "transcription": "ʋɪt"
+  },
+  {
+    "score": 0.779,
+    "word": "grijs",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "menging van zwart en wit",
+    "language": "nl",
+    "transcription": "xrɛi̯s"
+  },
+  {
+    "score": 0.778,
+    "word": "oranje",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur tussen rood en geel",
+    "language": "nl",
+    "transcription": "oːˈrɑɲə"
+  },
+  {
+    "score": 0.777,
+    "word": "paars",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "kleur tussen rood en blauw",
+    "language": "nl",
+    "transcription": "paːrs"
+  },
+  {
+    "score": 0.776,
+    "word": "bruin",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "donkere kleur, mix van rood geel en zwart",
+    "language": "nl",
+    "transcription": "brœy̯n"
+  },
+  {
+    "score": 0.775,
+    "word": "roze",
+    "topic": "Kleuren",
+    "level": "A1",
+    "meaning": "zachte tint van rood",
+    "language": "nl",
+    "transcription": "ˈroːzə"
+  },
+  {
+    "score": 0.774,
+    "word": "hoofd",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "bovenste deel van het lichaam met hersenen en gezicht",
+    "language": "nl",
+    "transcription": "hoːft"
+  },
+  {
+    "score": 0.773,
+    "word": "haar",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "dunne draden op hoofd of lichaam",
+    "language": "nl",
+    "transcription": "haːr"
+  },
+  {
+    "score": 0.772,
+    "word": "oog",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "orgaan om te zien",
+    "language": "nl",
+    "transcription": "oːx"
+  },
+  {
+    "score": 0.771,
+    "word": "neus",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "orgaan om te ruiken en ademen",
+    "language": "nl",
+    "transcription": "nøːs"
+  },
+  {
+    "score": 0.77,
+    "word": "mond",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "deel van het gezicht om te spreken en eten",
+    "language": "nl",
+    "transcription": "mɔnt"
+  },
+  {
+    "score": 0.769,
+    "word": "oor",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "orgaan om te horen",
+    "language": "nl",
+    "transcription": "oːr"
+  },
+  {
+    "score": 0.768,
+    "word": "tand",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "harde delen in de mond om te kauwen",
+    "language": "nl",
+    "transcription": "tɑnt"
+  },
+  {
+    "score": 0.767,
+    "word": "tong",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "spier in de mond om te proeven en spreken",
+    "language": "nl",
+    "transcription": "tɔŋ"
+  },
+  {
+    "score": 0.766,
+    "word": "nek",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "deel dat hoofd en romp verbindt",
+    "language": "nl",
+    "transcription": "nɛk"
+  },
+  {
+    "score": 0.765,
+    "word": "schouder",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "bovenste deel van de armverbinding",
+    "language": "nl",
+    "transcription": "ˈsxʌu̯dər"
+  },
+  {
+    "score": 0.764,
+    "word": "arm",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "ledemaat tussen schouder en hand",
+    "language": "nl",
+    "transcription": "ɑrm"
+  },
+  {
+    "score": 0.763,
+    "word": "hand",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "uiteinde van de arm met vingers",
+    "language": "nl",
+    "transcription": "hɑnt"
+  },
+  {
+    "score": 0.762,
+    "word": "vinger",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "een van de vijf uiteinden van de hand",
+    "language": "nl",
+    "transcription": "ˈvɪŋər"
+  },
+  {
+    "score": 0.761,
+    "word": "borst",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "voorkant van de romp",
+    "language": "nl",
+    "transcription": "bɔrst"
+  },
+  {
+    "score": 0.76,
+    "word": "rug",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "achterkant van de romp",
+    "language": "nl",
+    "transcription": "rʏx"
+  },
+  {
+    "score": 0.759,
+    "word": "buik",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "onderste deel van de romp aan de voorkant",
+    "language": "nl",
+    "transcription": "bœy̯k"
+  },
+  {
+    "score": 0.758,
+    "word": "been",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "ledemaat waarmee je loopt",
+    "language": "nl",
+    "transcription": "beːn"
+  },
+  {
+    "score": 0.757,
+    "word": "knie",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "scharnier tussen boven- en onderbeen",
+    "language": "nl",
+    "transcription": "kni"
+  },
+  {
+    "score": 0.756,
+    "word": "voet",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "uiteinde van het been om op te staan",
+    "language": "nl",
+    "transcription": "fut"
+  },
+  {
+    "score": 0.755,
+    "word": "teen",
+    "topic": "Lichaam",
+    "level": "A1",
+    "meaning": "een van de uiteinden van de voet",
+    "language": "nl",
+    "transcription": "teːn"
+  },
+  {
+    "score": 0.754,
+    "word": "hart",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "spier die bloed rondpompt",
+    "language": "nl",
+    "transcription": "ɦɑrt"
+  },
+  {
+    "score": 0.753,
+    "word": "bloed",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "vloeistof die zuurstof transporteert",
+    "language": "nl",
+    "transcription": "blut"
+  },
+  {
+    "score": 0.752,
+    "word": "huid",
+    "topic": "Lichaam",
+    "level": "A2",
+    "meaning": "buitenste laag van het lichaam",
+    "language": "nl",
+    "transcription": "ɦœy̯t"
+  },
+  {
+    "score": 0.751,
+    "word": "jas",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "kledingstuk dat je over andere kleren draagt",
+    "language": "nl",
+    "transcription": "jɑs"
+  },
+  {
+    "score": 0.75,
+    "word": "broek",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "kledingstuk voor de benen",
+    "language": "nl",
+    "transcription": "bruk"
+  },
+  {
+    "score": 0.749,
+    "word": "shirt",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "bovenkleding voor het bovenlichaam",
+    "language": "nl",
+    "transcription": "ʃʏrt"
+  },
+  {
+    "score": 0.748,
+    "word": "trui",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "gebreid kledingstuk voor warmte",
+    "language": "nl",
+    "transcription": "trœy̯"
+  },
+  {
+    "score": 0.747,
+    "word": "rok",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "kledingstuk dat de heupen en benen bedekt",
+    "language": "nl",
+    "transcription": "rɔk"
+  },
+  {
+    "score": 0.746,
+    "word": "jurk",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "één stuk kleding voor vrouwen",
+    "language": "nl",
+    "transcription": "jʏrk"
+  },
+  {
+    "score": 0.745,
+    "word": "sok",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "kledingstuk voor de voet",
+    "language": "nl",
+    "transcription": "sɔk"
+  },
+  {
+    "score": 0.744,
+    "word": "schoen",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "schoeisel voor de voet",
+    "language": "nl",
+    "transcription": "sxun"
+  },
+  {
+    "score": 0.743,
+    "word": "laars",
+    "topic": "Kleding",
+    "level": "A2",
+    "meaning": "hoge schoen die de enkel bedekt",
+    "language": "nl",
+    "transcription": "laːrs"
+  },
+  {
+    "score": 0.742,
+    "word": "hoed",
+    "topic": "Kleding",
+    "level": "A2",
+    "meaning": "hoofdbedekking",
+    "language": "nl",
+    "transcription": "hut"
+  },
+  {
+    "score": 0.741,
+    "word": "pet",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "hoofdbedekking met klep",
+    "language": "nl",
+    "transcription": "pɛt"
+  },
+  {
+    "score": 0.74,
+    "word": "sjaal",
+    "topic": "Kleding",
+    "level": "A1",
+    "meaning": "lang kledingstuk voor om de nek",
+    "language": "nl",
+    "transcription": "ʃaːl"
+  },
+  {
+    "score": 0.739,
+    "word": "handschoen",
+    "topic": "Kleding",
+    "level": "A2",
+    "meaning": "bedekking voor de hand",
+    "language": "nl",
+    "transcription": "ˈɦɑnt.sxun"
+  },
+  {
+    "score": 0.738,
+    "word": "riem",
+    "topic": "Kleding",
+    "level": "A2",
+    "meaning": "band om kleding op te houden",
+    "language": "nl",
+    "transcription": "rim"
+  },
+  {
+    "score": 0.737,
+    "word": "weer",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "toestand van de atmosfeer",
+    "language": "nl",
+    "transcription": "ʋeːr"
+  },
+  {
+    "score": 0.736,
+    "word": "zon",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "ster die licht en warmte geeft",
+    "language": "nl",
+    "transcription": "zɔn"
+  },
+  {
+    "score": 0.735,
+    "word": "regen",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "water dat uit de lucht valt",
+    "language": "nl",
+    "transcription": "ˈreːɣən"
+  },
+  {
+    "score": 0.734,
+    "word": "sneeuw",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "bevroren waterdruppels als vlokken",
+    "language": "nl",
+    "transcription": "sneːu̯"
+  },
+  {
+    "score": 0.733,
+    "word": "wind",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "bewegende lucht",
+    "language": "nl",
+    "transcription": "ʋɪnt"
+  },
+  {
+    "score": 0.732,
+    "word": "wolk",
+    "topic": "Weer",
+    "level": "A1",
+    "meaning": "massa van waterdruppels in de lucht",
+    "language": "nl",
+    "transcription": "wɔlk"
+  },
+  {
+    "score": 0.731,
+    "word": "storm",
+    "topic": "Weer",
+    "level": "A2",
+    "meaning": "zeer harde wind",
+    "language": "nl",
+    "transcription": "stɔrm"
+  },
+  {
+    "score": 0.73,
+    "word": "temperatuur",
+    "topic": "Weer",
+    "level": "A2",
+    "meaning": "maat voor warmte of kou",
+    "language": "nl",
+    "transcription": "tɛmpəraːˈtyːr"
+  },
+  {
+    "score": 0.729,
+    "word": "vader",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "mannelijke ouder",
+    "language": "nl",
+    "transcription": "ˈvaːdər"
+  },
+  {
+    "score": 0.728,
+    "word": "moeder",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "vrouwelijke ouder",
+    "language": "nl",
+    "transcription": "ˈmudər"
+  },
+  {
+    "score": 0.727,
+    "word": "zoon",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "mannelijk kind",
+    "language": "nl",
+    "transcription": "zoːn"
+  },
+  {
+    "score": 0.726,
+    "word": "dochter",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "vrouwelijk kind",
+    "language": "nl",
+    "transcription": "ˈdɔxtər"
+  },
+  {
+    "score": 0.725,
+    "word": "broer",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "mannelijk familielid met dezelfde ouders",
+    "language": "nl",
+    "transcription": "bruːr"
+  },
+  {
+    "score": 0.724,
+    "word": "zus",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "vrouwelijk familielid met dezelfde ouders",
+    "language": "nl",
+    "transcription": "zʏs"
+  },
+  {
+    "score": 0.723,
+    "word": "opa",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "grootvader",
+    "language": "nl",
+    "transcription": "ˈoːpaː"
+  },
+  {
+    "score": 0.722,
+    "word": "oma",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "grootmoeder",
+    "language": "nl",
+    "transcription": "ˈoːmaː"
+  },
+  {
+    "score": 0.721,
+    "word": "oom",
+    "topic": "Familie",
+    "level": "A2",
+    "meaning": "broer van je vader of moeder",
+    "language": "nl",
+    "transcription": "oːm"
+  },
+  {
+    "score": 0.72,
+    "word": "tante",
+    "topic": "Familie",
+    "level": "A2",
+    "meaning": "zus van je vader of moeder",
+    "language": "nl",
+    "transcription": "ˈtɑntə"
+  },
+  {
+    "score": 0.719,
+    "word": "neef",
+    "topic": "Familie",
+    "level": "A2",
+    "meaning": "zoon van je oom of tante",
+    "language": "nl",
+    "transcription": "neːf"
+  },
+  {
+    "score": 0.718,
+    "word": "nicht",
+    "topic": "Familie",
+    "level": "A2",
+    "meaning": "dochter van je oom of tante",
+    "language": "nl",
+    "transcription": "nɪxt"
+  },
+  {
+    "score": 0.717,
+    "word": "familie",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "groep van verwante personen",
+    "language": "nl",
+    "transcription": "faˈmi.li"
+  },
+  {
+    "score": 0.716,
+    "word": "huwelijk",
+    "topic": "Familie",
+    "level": "B1",
+    "meaning": "juridische en sociale verbintenis tussen partners",
+    "language": "nl",
+    "transcription": "ˈɦyːʋələk"
+  },
+  {
+    "score": 0.715,
+    "word": "echtgenoot",
+    "topic": "Familie",
+    "level": "B1",
+    "meaning": "wettige partner (man)",
+    "language": "nl",
+    "transcription": "ˈɛxt.ɣə.noːt"
+  },
+  {
+    "score": 0.714,
+    "word": "echtgenote",
+    "topic": "Familie",
+    "level": "B1",
+    "meaning": "wettige partner (vrouw)",
+    "language": "nl",
+    "transcription": "ˈɛxt.ɣə.noːtə"
+  },
+  {
+    "score": 0.713,
+    "word": "baby",
+    "topic": "Familie",
+    "level": "A1",
+    "meaning": "zeer jong kind",
+    "language": "nl",
+    "transcription": "ˈbeːbi"
+  },
+  {
+    "score": 0.712,
+    "word": "baan",
+    "topic": "Werk",
+    "level": "A1",
+    "meaning": "werk of functie bij een organisatie",
+    "language": "nl",
+    "transcription": "baːn"
+  },
+  {
+    "score": 0.711,
+    "word": "beroep",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "soort werk dat iemand doet",
+    "language": "nl",
+    "transcription": "bəˈrup"
+  },
+  {
+    "score": 0.71,
+    "word": "bedrijf",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "onderneming die goederen of diensten levert",
+    "language": "nl",
+    "transcription": "bəˈdrɛi̯f"
+  },
+  {
+    "score": 0.709,
+    "word": "kantoor",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "werkplek voor administratief werk",
+    "language": "nl",
+    "transcription": "kɑnˈtoːr"
+  },
+  {
+    "score": 0.708,
+    "word": "collega",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "iemand met wie je samenwerkt",
+    "language": "nl",
+    "transcription": "kɔˈleːxa"
+  },
+  {
+    "score": 0.707,
+    "word": "baas",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "leidinggevende; werkgever",
+    "language": "nl",
+    "transcription": "baːs"
+  },
+  {
+    "score": 0.706,
+    "word": "werknemer",
+    "topic": "Werk",
+    "level": "B1",
+    "meaning": "iemand die in loondienst werkt",
+    "language": "nl",
+    "transcription": "ˈʋɛrkˌneːmər"
+  },
+  {
+    "score": 0.705,
+    "word": "klant",
+    "topic": "Werk",
+    "level": "A2",
+    "meaning": "iemand die goederen of diensten koopt",
+    "language": "nl",
+    "transcription": "klɑnt"
+  },
+  {
+    "score": 0.704,
+    "word": "vergadering",
+    "topic": "Werk",
+    "level": "B1",
+    "meaning": "bijeenkomst om zaken te bespreken",
+    "language": "nl",
+    "transcription": "vərˈxaːdərɪŋ"
+  },
+  {
+    "score": 0.703,
+    "word": "contract",
+    "topic": "Werk",
+    "level": "B1",
+    "meaning": "schriftelijke overeenkomst",
+    "language": "nl",
+    "transcription": "kɔnˈtrɑkt"
+  },
+  {
+    "score": 0.702,
+    "word": "salaris",
+    "topic": "Werk",
+    "level": "B1",
+    "meaning": "loon dat je voor werk ontvangt",
+    "language": "nl",
+    "transcription": "saˈlaːrɪs"
+  },
+  {
+    "score": 0.701,
+    "word": "ervaring",
+    "topic": "Werk",
+    "level": "B1",
+    "meaning": "kennis opgedaan door doen",
+    "language": "nl",
+    "transcription": "ɛrˈvaːrɪŋ"
+  },
+  {
+    "score": 0.7,
+    "word": "opleiding",
+    "topic": "Onderwijs",
+    "level": "B1",
+    "meaning": "traject waarin je voor een beroep leert",
+    "language": "nl",
+    "transcription": "ˈɔp.lɛi̯.dɪŋ"
+  },
+  {
+    "score": 0.699,
+    "word": "leraar",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "iemand die lesgeeft",
+    "language": "nl",
+    "transcription": "ˈleːraːr"
+  },
+  {
+    "score": 0.698,
+    "word": "leerling",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "iemand die onderwijs volgt",
+    "language": "nl",
+    "transcription": "ˈleːr.lɪŋ"
+  },
+  {
+    "score": 0.697,
+    "word": "klas",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "groep leerlingen of lokaal",
+    "language": "nl",
+    "transcription": "klɑs"
+  },
+  {
+    "score": 0.696,
+    "word": "les",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "onderwijsmoment over een onderwerp",
+    "language": "nl",
+    "transcription": "lɛs"
+  },
+  {
+    "score": 0.695,
+    "word": "studie",
+    "topic": "Onderwijs",
+    "level": "A2",
+    "meaning": "het leren van een vak of onderwerp",
+    "language": "nl",
+    "transcription": "ˈstyːdi"
+  },
+  {
+    "score": 0.694,
+    "word": "universiteit",
+    "topic": "Onderwijs",
+    "level": "B1",
+    "meaning": "hoger onderwijsinstelling",
+    "language": "nl",
+    "transcription": "ynivɛrsiˈtɛi̯t"
+  },
+  {
+    "score": 0.693,
+    "word": "examen",
+    "topic": "Onderwijs",
+    "level": "B1",
+    "meaning": "toets om kennis of vaardigheden te meten",
+    "language": "nl",
+    "transcription": "ɛkˈsaːmən"
+  },
+  {
+    "score": 0.692,
+    "word": "schrift",
+    "topic": "Onderwijs",
+    "level": "A1",
+    "meaning": "boekje om in te schrijven",
+    "language": "nl",
+    "transcription": "sxrɪft"
+  },
+  {
+    "score": 0.691,
+    "word": "bibliotheek",
+    "topic": "Onderwijs",
+    "level": "A2",
+    "meaning": "plaats waar je boeken kunt lenen",
+    "language": "nl",
+    "transcription": "bɪbli.oːˈteːk"
+  },
+  {
+    "score": 0.69,
+    "word": "reis",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "verplaatsing van de ene naar de andere plaats",
+    "language": "nl",
+    "transcription": "rɛis"
+  },
+  {
+    "score": 0.689,
+    "word": "vakantie",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "periode zonder werk of school om te ontspannen",
+    "language": "nl",
+    "transcription": "faˈkɑn.tsi"
+  },
+  {
+    "score": 0.688,
+    "word": "hotel",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "gebouw waar je tegen betaling overnacht",
+    "language": "nl",
+    "transcription": "hoːˈtɛl"
+  },
+  {
+    "score": 0.687,
+    "word": "kamer",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "aparte ruimte in hotel of huis",
+    "language": "nl",
+    "transcription": "ˈkaːmər"
+  },
+  {
+    "score": 0.686,
+    "word": "reservering",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "vooraf vastleggen van plaats of kamer",
+    "language": "nl",
+    "transcription": "rɛzɛrˈveːrɪŋ"
+  },
+  {
+    "score": 0.685,
+    "word": "paspoort",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "officieel document voor internationale reizen",
+    "language": "nl",
+    "transcription": "ˈpɑs.poːrt"
+  },
+  {
+    "score": 0.684,
+    "word": "ticket",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "bewijs van recht op vervoer of toegang",
+    "language": "nl",
+    "transcription": "ˈtɪkət"
+  },
+  {
+    "score": 0.683,
+    "word": "kaartje",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "klein papier als toegangsbewijs of voor vervoer",
+    "language": "nl",
+    "transcription": "ˈkaːr.cjə"
+  },
+  {
+    "score": 0.682,
+    "word": "station",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "plaats waar treinen stoppen",
+    "language": "nl",
+    "transcription": "staˈsjoːn"
+  },
+  {
+    "score": 0.681,
+    "word": "luchthaven",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "vliegveld; plaats voor vliegtuigen",
+    "language": "nl",
+    "transcription": "ˈlʏxtˌhaːvən"
+  },
+  {
+    "score": 0.68,
+    "word": "vertrek",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "het weggaan; begin van een reis",
+    "language": "nl",
+    "transcription": "vərˈtrɛk"
+  },
+  {
+    "score": 0.679,
+    "word": "aankomst",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "het arriveren op een plaats",
+    "language": "nl",
+    "transcription": "ˈaːn.kɔmst"
+  },
+  {
+    "score": 0.678,
+    "word": "perron",
+    "topic": "Reizen",
+    "level": "A2",
+    "meaning": "platform waar je in trein stapt",
+    "language": "nl",
+    "transcription": "pɛˈrɔn"
+  },
+  {
+    "score": 0.677,
+    "word": "halte",
+    "topic": "Reizen",
+    "level": "A1",
+    "meaning": "plaats waar bus of tram stopt",
+    "language": "nl",
+    "transcription": "ˈhɑltə"
+  },
+  {
+    "score": 0.676,
+    "word": "computer",
+    "topic": "Technologie",
+    "level": "A1",
+    "meaning": "elektronisch apparaat om te rekenen en te werken",
+    "language": "nl",
+    "transcription": "kɔmˈpjuːtər"
+  },
+  {
+    "score": 0.675,
+    "word": "laptop",
+    "topic": "Technologie",
+    "level": "A1",
+    "meaning": "draagbare computer",
+    "language": "nl",
+    "transcription": "ˈlɛp.tɔp"
+  },
+  {
+    "score": 0.674,
+    "word": "telefoon",
+    "topic": "Technologie",
+    "level": "A1",
+    "meaning": "apparaat om mee te bellen",
+    "language": "nl",
+    "transcription": "teːləˈfoːn"
+  },
+  {
+    "score": 0.673,
+    "word": "mobiel",
+    "topic": "Technologie",
+    "level": "A1",
+    "meaning": "draagbare telefoon; niet vast",
+    "language": "nl",
+    "transcription": "moːˈbil"
+  },
+  {
+    "score": 0.672,
+    "word": "internet",
+    "topic": "Technologie",
+    "level": "A1",
+    "meaning": "wereldwijd netwerk van computers",
+    "language": "nl",
+    "transcription": "ˈɪntərˌnɛt"
+  },
+  {
+    "score": 0.671,
+    "word": "website",
+    "topic": "Technologie",
+    "level": "A2",
+    "meaning": "verzameling webpagina’s op het internet",
+    "language": "nl",
+    "transcription": "ˈwɛb.sɛi̯t"
+  },
+  {
+    "score": 0.67,
+    "word": "e-mail",
+    "topic": "Technologie",
+    "level": "A2",
+    "meaning": "elektronisch bericht",
+    "language": "nl",
+    "transcription": "ˈiː.meːl"
+  },
+  {
+    "score": 0.669,
+    "word": "wachtwoord",
+    "topic": "Technologie",
+    "level": "A2",
+    "meaning": "geheime code om toegang te krijgen",
+    "language": "nl",
+    "transcription": "ˈwɑxt.ʋoːrt"
+  },
+  {
+    "score": 0.668,
+    "word": "account",
+    "topic": "Technologie",
+    "level": "A2",
+    "meaning": "persoonlijk profiel voor toegang tot een systeem",
+    "language": "nl",
+    "transcription": "aːˈkɑu̯nt"
+  },
+  {
+    "score": 0.667,
+    "word": "netwerk",
+    "topic": "Technologie",
+    "level": "B1",
+    "meaning": "systeem van verbonden apparaten of personen",
+    "language": "nl",
+    "transcription": "ˈnɛtʋɛrk"
+  },
+  {
+    "score": 0.666,
+    "word": "software",
+    "topic": "Technologie",
+    "level": "B1",
+    "meaning": "programma’s die op een computer draaien",
+    "language": "nl",
+    "transcription": "ˈsɔft.ʋeːr"
+  },
+  {
+    "score": 0.665,
+    "word": "hardware",
+    "topic": "Technologie",
+    "level": "B1",
+    "meaning": "fysieke onderdelen van een computer",
+    "language": "nl",
+    "transcription": "ˈɦaːrt.ʋeːr"
+  },
+  {
+    "score": 0.664,
+    "word": "printer",
+    "topic": "Technologie",
+    "level": "A2",
+    "meaning": "apparaat dat documenten afdrukt",
+    "language": "nl",
+    "transcription": "ˈprɪn.tər"
+  },
+  {
+    "score": 0.663,
+    "word": "dokter",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "arts; medisch specialist",
+    "language": "nl",
+    "transcription": "ˈdɔktər"
+  },
+  {
+    "score": 0.662,
+    "word": "arts",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "medisch behandelaar",
+    "language": "nl",
+    "transcription": "ɑrts"
+  },
+  {
+    "score": 0.661,
+    "word": "verpleegkundige",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "zorgverlener die patiënten verzorgt",
+    "language": "nl",
+    "transcription": "vərˈpleːxs.kʏn.də.xə"
+  },
+  {
+    "score": 0.66,
+    "word": "ziekenhuis",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "gebouw waar zieke mensen worden behandeld",
+    "language": "nl",
+    "transcription": "ˈziːkənˌɦœys"
+  },
+  {
+    "score": 0.659,
+    "word": "kliniek",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "medische instelling voor behandelingen",
+    "language": "nl",
+    "transcription": "kliˈnik"
+  },
+  {
+    "score": 0.658,
+    "word": "apotheek",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "winkel waar je medicijnen haalt",
+    "language": "nl",
+    "transcription": "ɑpoːˈteːk"
+  },
+  {
+    "score": 0.657,
+    "word": "medicijn",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "geneesmiddel",
+    "language": "nl",
+    "transcription": "meːdiˈsɛi̯n"
+  },
+  {
+    "score": 0.656,
+    "word": "recept",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "voorschrift van de arts voor een medicijn",
+    "language": "nl",
+    "transcription": "rəˈsɛpt"
+  },
+  {
+    "score": 0.655,
+    "word": "pijn",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "onaangenaam lichamelijk gevoel",
+    "language": "nl",
+    "transcription": "pɛi̯n"
+  },
+  {
+    "score": 0.654,
+    "word": "ziekte",
+    "topic": "Gezondheid",
+    "level": "A1",
+    "meaning": "toestand waarin je niet gezond bent",
+    "language": "nl",
+    "transcription": "ˈziktə"
+  },
+  {
+    "score": 0.653,
+    "word": "koorts",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "verhoogde lichaamstemperatuur",
+    "language": "nl",
+    "transcription": "koːrts"
+  },
+  {
+    "score": 0.652,
+    "word": "verkoudheid",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "lichte infectie met neus- en keelklachten",
+    "language": "nl",
+    "transcription": "vərˈkɑu̯tɦɛi̯t"
+  },
+  {
+    "score": 0.651,
+    "word": "griep",
+    "topic": "Gezondheid",
+    "level": "A2",
+    "meaning": "virusinfectie met koorts en spierpijn",
+    "language": "nl",
+    "transcription": "xrip"
+  },
+  {
+    "score": 0.65,
+    "word": "blessure",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "lichamelijk letsel, vooral door sport",
+    "language": "nl",
+    "transcription": "blɛˈsyrə"
+  },
+  {
+    "score": 0.649,
+    "word": "wond",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "beschadiging van de huid of weefsel",
+    "language": "nl",
+    "transcription": "wɔnt"
+  },
+  {
+    "score": 0.648,
+    "word": "behandeling",
+    "topic": "Gezondheid",
+    "level": "B1",
+    "meaning": "medische zorg voor genezing",
+    "language": "nl",
+    "transcription": "bəˈɦɑn.də.lɪŋ"
+  },
+  {
+    "score": 0.647,
+    "word": "bord",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "plat servies om eten op te leggen",
+    "language": "nl",
+    "transcription": "bɔrt"
+  },
+  {
+    "score": 0.646,
+    "word": "kom",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "diep servies voor soep of salade",
+    "language": "nl",
+    "transcription": "kɔm"
+  },
+  {
+    "score": 0.645,
+    "word": "lepel",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "bestek met hol lepeldeel",
+    "language": "nl",
+    "transcription": "ˈleːpəl"
+  },
+  {
+    "score": 0.644,
+    "word": "vork",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "bestek met tanden",
+    "language": "nl",
+    "transcription": "vɔrk"
+  },
+  {
+    "score": 0.643,
+    "word": "mes",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "snijgereedschap en bestek",
+    "language": "nl",
+    "transcription": "mɛs"
+  },
+  {
+    "score": 0.642,
+    "word": "glas",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "drinkbeker van glas",
+    "language": "nl",
+    "transcription": "xlɑs"
+  },
+  {
+    "score": 0.641,
+    "word": "kop",
+    "topic": "Eten en drinken",
+    "level": "A1",
+    "meaning": "klein kommetje met oor om uit te drinken",
+    "language": "nl",
+    "transcription": "kɔp"
+  },
+  {
+    "score": 0.64,
+    "word": "mok",
+    "topic": "Eten en drinken",
+    "level": "A2",
+    "meaning": "grote beker om uit te drinken",
+    "language": "nl",
+    "transcription": "mɔk"
+  },
+  {
+    "score": 0.639,
+    "word": "sport",
+    "topic": "Sport",
+    "level": "A1",
+    "meaning": "lichamelijke activiteit met regels",
+    "language": "nl",
+    "transcription": "spɔrt"
+  },
+  {
+    "score": 0.638,
+    "word": "voetbal",
+    "topic": "Sport",
+    "level": "A1",
+    "meaning": "teamsport met een bal die je trapt",
+    "language": "nl",
+    "transcription": "ˈfut.baːl"
+  },
+  {
+    "score": 0.637,
+    "word": "basketbal",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "teamsport met een bal en een ring",
+    "language": "nl",
+    "transcription": "ˈbɑs.kət.baːl"
+  },
+  {
+    "score": 0.636,
+    "word": "tennis",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "racketsport met bal over een net",
+    "language": "nl",
+    "transcription": "ˈtɛnɪs"
+  },
+  {
+    "score": 0.635,
+    "word": "zwemmen",
+    "topic": "Sport",
+    "level": "A1",
+    "meaning": "zich door water voortbewegen",
+    "language": "nl",
+    "transcription": "ˈzwɛmən"
+  },
+  {
+    "score": 0.634,
+    "word": "lopen",
+    "topic": "Sport",
+    "level": "A1",
+    "meaning": "te voet gaan; wandelen",
+    "language": "nl",
+    "transcription": "ˈloːpən"
+  },
+  {
+    "score": 0.633,
+    "word": "fietsen",
+    "topic": "Sport",
+    "level": "A1",
+    "meaning": "zich per fiets verplaatsen",
+    "language": "nl",
+    "transcription": "ˈfitsən"
+  },
+  {
+    "score": 0.632,
+    "word": "wedstrijd",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "competitieve ontmoeting tussen spelers of teams",
+    "language": "nl",
+    "transcription": "ˈwɛt.strɛi̯t"
+  },
+  {
+    "score": 0.631,
+    "word": "team",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "groep spelers die samen speelt",
+    "language": "nl",
+    "transcription": "tiːm"
+  },
+  {
+    "score": 0.63,
+    "word": "speler",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "iemand die een spel of sport beoefent",
+    "language": "nl",
+    "transcription": "ˈspeːlər"
+  },
+  {
+    "score": 0.629,
+    "word": "coach",
+    "topic": "Sport",
+    "level": "B1",
+    "meaning": "begeleider of trainer van een team of persoon",
+    "language": "nl",
+    "transcription": "koːtʃ"
+  },
+  {
+    "score": 0.628,
+    "word": "training",
+    "topic": "Sport",
+    "level": "A2",
+    "meaning": "oefening om beter te worden",
+    "language": "nl",
+    "transcription": "ˈtreːnɪŋ"
+  },
+  {
+    "score": 0.627,
+    "word": "uur",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van 60 minuten; tijdsaanduiding",
+    "language": "nl",
+    "transcription": "yːr"
+  },
+  {
+    "score": 0.626,
+    "word": "minuut",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van 60 seconden",
+    "language": "nl",
+    "transcription": "miˈnyːt"
+  },
+  {
+    "score": 0.625,
+    "word": "seconde",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "kleinste standaard tijdseenheid",
+    "language": "nl",
+    "transcription": "səˈkɔndə"
+  },
+  {
+    "score": 0.624,
+    "word": "maand",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van ongeveer 30 dagen",
+    "language": "nl",
+    "transcription": "maːnt"
+  },
+  {
+    "score": 0.623,
+    "word": "week",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "periode van 7 dagen",
+    "language": "nl",
+    "transcription": "weːk"
+  },
+  {
+    "score": 0.622,
+    "word": "weekend",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "zaterdag en zondag; vrije dagen",
+    "language": "nl",
+    "transcription": "ˈʋiːkɛnt"
+  },
+  {
+    "score": 0.621,
+    "word": "ochtend",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "deel van de dag tot de middag",
+    "language": "nl",
+    "transcription": "ˈɔxtənt"
+  },
+  {
+    "score": 0.62,
+    "word": "middag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "deel van de dag na de ochtend",
+    "language": "nl",
+    "transcription": "ˈmɪ.daːx"
+  },
+  {
+    "score": 0.619,
+    "word": "avond",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "deel van de dag na de middag",
+    "language": "nl",
+    "transcription": "ˈaː.vɔnt"
+  },
+  {
+    "score": 0.618,
+    "word": "nacht",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "donker deel van de dag",
+    "language": "nl",
+    "transcription": "nɑxt"
+  },
+  {
+    "score": 0.617,
+    "word": "gisteren",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "dag voor vandaag",
+    "language": "nl",
+    "transcription": "ˈxɪstərən"
+  },
+  {
+    "score": 0.616,
+    "word": "vandaag",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "deze dag",
+    "language": "nl",
+    "transcription": "vɑnˈdaːx"
+  },
+  {
+    "score": 0.615,
+    "word": "morgen",
+    "topic": "Tijd",
+    "level": "A1",
+    "meaning": "dag na vandaag",
+    "language": "nl",
+    "transcription": "ˈmɔrɣən"
+  },
+  {
+    "score": 0.614,
+    "word": "overmorgen",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "twee dagen na vandaag",
+    "language": "nl",
+    "transcription": "ˈoːvərˌmɔrɣən"
+  },
+  {
+    "score": 0.613,
+    "word": "eergisteren",
+    "topic": "Tijd",
+    "level": "A2",
+    "meaning": "twee dagen voor vandaag",
+    "language": "nl",
+    "transcription": "ˈeːrˌxɪstərən"
+  },
+  {
+    "score": 0.612,
+    "word": "boom",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "grote plant met stam en takken",
+    "language": "nl",
+    "transcription": "boːm"
+  },
+  {
+    "score": 0.611,
+    "word": "plant",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "levend organisme dat groeit in de grond",
+    "language": "nl",
+    "transcription": "plɑnt"
+  },
+  {
+    "score": 0.61,
+    "word": "bloem",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "kleurrijk deel van een plant",
+    "language": "nl",
+    "transcription": "blum"
+  },
+  {
+    "score": 0.609,
+    "word": "gras",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "korte groene plantjes die een veld bedekken",
+    "language": "nl",
+    "transcription": "xrɑs"
+  },
+  {
+    "score": 0.608,
+    "word": "bos",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "groot gebied met veel bomen",
+    "language": "nl",
+    "transcription": "bɔs"
+  },
+  {
+    "score": 0.607,
+    "word": "berg",
+    "topic": "Natuur",
+    "level": "A2",
+    "meaning": "natuurlijke verhoging van het landschap",
+    "language": "nl",
+    "transcription": "bɛrx"
+  },
+  {
+    "score": 0.606,
+    "word": "rivier",
+    "topic": "Natuur",
+    "level": "A2",
+    "meaning": "natuurlijke stroom water",
+    "language": "nl",
+    "transcription": "riˈviːr"
+  },
+  {
+    "score": 0.605,
+    "word": "meer",
+    "topic": "Natuur",
+    "level": "A2",
+    "meaning": "grote plas stilstaand water",
+    "language": "nl",
+    "transcription": "meːr"
+  },
+  {
+    "score": 0.604,
+    "word": "zee",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "groot zout wateroppervlak",
+    "language": "nl",
+    "transcription": "zeː"
+  },
+  {
+    "score": 0.603,
+    "word": "strand",
+    "topic": "Natuur",
+    "level": "A1",
+    "meaning": "zandstrook langs zee of meer",
+    "language": "nl",
+    "transcription": "strɑnt"
+  },
+  {
+    "score": 0.602,
+    "word": "eiland",
+    "topic": "Natuur",
+    "level": "A2",
+    "meaning": "land omgeven door water",
+    "language": "nl",
+    "transcription": "ˈeː.lɑnt"
+  },
+  {
+    "score": 0.601,
+    "word": "dier",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "levend wezen dat geen plant is",
+    "language": "nl",
+    "transcription": "diːr"
+  },
+  {
+    "score": 0.6,
+    "word": "hond",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "huisdier dat blaft",
+    "language": "nl",
+    "transcription": "hɔnt"
+  },
+  {
+    "score": 0.599,
+    "word": "kat",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "huisdier dat miauwt",
+    "language": "nl",
+    "transcription": "kɑt"
+  },
+  {
+    "score": 0.598,
+    "word": "vogel",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "dier dat kan vliegen",
+    "language": "nl",
+    "transcription": "ˈvoːɣəl"
+  },
+  {
+    "score": 0.597,
+    "word": "koe",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "boerderijdier dat melk geeft",
+    "language": "nl",
+    "transcription": "kuː"
+  },
+  {
+    "score": 0.596,
+    "word": "schaap",
+    "topic": "Dieren",
+    "level": "A2",
+    "meaning": "boerderijdier met wol",
+    "language": "nl",
+    "transcription": "sxaːp"
+  },
+  {
+    "score": 0.595,
+    "word": "paard",
+    "topic": "Dieren",
+    "level": "A1",
+    "meaning": "groot dier waarop je kunt rijden",
+    "language": "nl",
+    "transcription": "paːrt"
+  },
+  {
+    "score": 0.594,
+    "word": "varken",
+    "topic": "Dieren",
+    "level": "A2",
+    "meaning": "boerderijdier met roze huid",
+    "language": "nl",
+    "transcription": "ˈvɑrkən"
+  },
+  {
+    "score": 0.593,
+    "word": "appartement",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "woning in een groter gebouw",
+    "language": "nl",
+    "transcription": "ɑˌpartəˈmɛnt"
+  },
+  {
+    "score": 0.592,
+    "word": "flat",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "meergezinswoning in een hoog gebouw",
+    "language": "nl",
+    "transcription": "flɛt"
+  },
+  {
+    "score": 0.591,
+    "word": "woonkamer",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "kamer waar je zit en leeft",
+    "language": "nl",
+    "transcription": "ˈʋoːnˌkaːmər"
+  },
+  {
+    "score": 0.59,
+    "word": "slaapkamer",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "kamer waar je slaapt",
+    "language": "nl",
+    "transcription": "ˈslaːpˌkaːmər"
+  },
+  {
+    "score": 0.589,
+    "word": "balkon",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "uitstekend platform aan een gebouw",
+    "language": "nl",
+    "transcription": "bɑlˈkɔn"
+  },
+  {
+    "score": 0.588,
+    "word": "tuin",
+    "topic": "Wonen",
+    "level": "A1",
+    "meaning": "stuk grond bij een huis met planten",
+    "language": "nl",
+    "transcription": "tœy̯n"
+  },
+  {
+    "score": 0.587,
+    "word": "garage",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "ruimte voor het stallen van een auto",
+    "language": "nl",
+    "transcription": "xaˈraːʒə"
+  },
+  {
+    "score": 0.586,
+    "word": "kelder",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "ruimte onder het huis",
+    "language": "nl",
+    "transcription": "ˈkɛldər"
+  },
+  {
+    "score": 0.585,
+    "word": "zolder",
+    "topic": "Wonen",
+    "level": "A2",
+    "meaning": "ruimte onder het dak",
+    "language": "nl",
+    "transcription": "ˈzɔldər"
+  },
+  {
+    "score": 0.584,
+    "word": "gereedschap",
+    "topic": "Gereedschap",
+    "level": "B1",
+    "meaning": "verzameling hulpmiddelen om te klussen",
+    "language": "nl",
+    "transcription": "xəˈreːtsxaːp"
+  },
+  {
+    "score": 0.583,
+    "word": "hamer",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "werktuig om te slaan",
+    "language": "nl",
+    "transcription": "ˈhaːmər"
+  },
+  {
+    "score": 0.582,
+    "word": "schroevendraaier",
+    "topic": "Gereedschap",
+    "level": "B1",
+    "meaning": "gereedschap om schroeven te draaien",
+    "language": "nl",
+    "transcription": "ˈsxruːvənˌdraːjər"
+  },
+  {
+    "score": 0.581,
+    "word": "spijker",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "metalen pin om iets vast te slaan",
+    "language": "nl",
+    "transcription": "ˈspɛi̯kər"
+  },
+  {
+    "score": 0.58,
+    "word": "schroef",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "metalen bevestigingsmiddel met draad",
+    "language": "nl",
+    "transcription": "sxruf"
+  },
+  {
+    "score": 0.579,
+    "word": "boor",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "gereedschap om gaten te maken",
+    "language": "nl",
+    "transcription": "boːr"
+  },
+  {
+    "score": 0.578,
+    "word": "zaag",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "gereedschap om te zagen",
+    "language": "nl",
+    "transcription": "zaːx"
+  },
+  {
+    "score": 0.577,
+    "word": "tang",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "gereedschap om te klemmen of buigen",
+    "language": "nl",
+    "transcription": "tɑŋ"
+  },
+  {
+    "score": 0.576,
+    "word": "meetlint",
+    "topic": "Gereedschap",
+    "level": "A2",
+    "meaning": "flexibel lint om afstanden te meten",
+    "language": "nl",
+    "transcription": "ˈmeːt.lɪnt"
+  },
+  {
+    "score": 0.575,
+    "word": "politie",
+    "topic": "Recht",
+    "level": "A2",
+    "meaning": "instantie die zorgt voor orde en veiligheid",
+    "language": "nl",
+    "transcription": "poːˈliːtsi"
+  },
+  {
+    "score": 0.574,
+    "word": "rechtbank",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "instelling waar rechtszaken worden behandeld",
+    "language": "nl",
+    "transcription": "ˈrɛxtˌbɑŋk"
+  },
+  {
+    "score": 0.573,
+    "word": "advocaat",
+    "topic": "Recht",
+    "level": "B2",
+    "meaning": "jurist die cliënten in rechte bijstaat",
+    "language": "nl",
+    "transcription": "ɑdvoːˈkaːt"
+  },
+  {
+    "score": 0.572,
+    "word": "rechter",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "persoon die in de rechtbank uitspraak doet",
+    "language": "nl",
+    "transcription": "ˈrɛxtər"
+  },
+  {
+    "score": 0.571,
+    "word": "wet",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "officiële regel die door de overheid is vastgesteld",
+    "language": "nl",
+    "transcription": "wɛt"
+  },
+  {
+    "score": 0.57,
+    "word": "regel",
+    "topic": "Recht",
+    "level": "A2",
+    "meaning": "afspraak of voorschrift",
+    "language": "nl",
+    "transcription": "ˈreːɣəl"
+  },
+  {
+    "score": 0.569,
+    "word": "boete",
+    "topic": "Recht",
+    "level": "A2",
+    "meaning": "geldstraf",
+    "language": "nl",
+    "transcription": "ˈbuːtə"
+  },
+  {
+    "score": 0.568,
+    "word": "straf",
+    "topic": "Recht",
+    "level": "A2",
+    "meaning": "maatregel na overtreding",
+    "language": "nl",
+    "transcription": "strɑf"
+  },
+  {
+    "score": 0.567,
+    "word": "misdaad",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "ernstige overtreding van de wet",
+    "language": "nl",
+    "transcription": "ˈmɪs.daːt"
+  },
+  {
+    "score": 0.566,
+    "word": "diefstal",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "het onrechtmatig wegnemen van andermans bezit",
+    "language": "nl",
+    "transcription": "ˈdiːf.stɑl"
+  },
+  {
+    "score": 0.565,
+    "word": "geweld",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "het gebruiken van fysieke kracht",
+    "language": "nl",
+    "transcription": "ɣəˈʋɛlt"
+  },
+  {
+    "score": 0.564,
+    "word": "arrestatie",
+    "topic": "Recht",
+    "level": "B1",
+    "meaning": "het aanhouden van een verdachte",
+    "language": "nl",
+    "transcription": "ɑrɛsˈtaːtsi"
+  },
+  {
+    "score": 0.563,
+    "word": "geld",
+    "topic": "Financiën",
+    "level": "A1",
+    "meaning": "betaalmiddel in munten of biljetten",
+    "language": "nl",
+    "transcription": "xɛlt"
+  },
+  {
+    "score": 0.562,
+    "word": "bank",
+    "topic": "Financiën",
+    "level": "A1",
+    "meaning": "financiële instelling; ook zitmeubel",
+    "language": "nl",
+    "transcription": "bɑŋk"
+  },
+  {
+    "score": 0.561,
+    "word": "rekening",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "overzicht van te betalen bedrag; bankrekening",
+    "language": "nl",
+    "transcription": "ˈreːkənɪŋ"
+  },
+  {
+    "score": 0.56,
+    "word": "pinpas",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "kaart om elektronisch te betalen",
+    "language": "nl",
+    "transcription": "ˈpɪn.pɑs"
+  },
+  {
+    "score": 0.559,
+    "word": "contant",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "met fysiek geld betalen",
+    "language": "nl",
+    "transcription": "kɔnˈtɑnt"
+  },
+  {
+    "score": 0.558,
+    "word": "bedrag",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "hoeveelheid geld",
+    "language": "nl",
+    "transcription": "bəˈdraːx"
+  },
+  {
+    "score": 0.557,
+    "word": "prijs",
+    "topic": "Financiën",
+    "level": "A1",
+    "meaning": "wat iets kost; beloning",
+    "language": "nl",
+    "transcription": "prɛi̯s"
+  },
+  {
+    "score": 0.556,
+    "word": "kosten",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "uitgaven die je moet betalen",
+    "language": "nl",
+    "transcription": "ˈkɔstən"
+  },
+  {
+    "score": 0.555,
+    "word": "winst",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "positief verschil tussen opbrengst en kosten",
+    "language": "nl",
+    "transcription": "wɪnst"
+  },
+  {
+    "score": 0.554,
+    "word": "verlies",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "negatief verschil tussen kosten en opbrengst",
+    "language": "nl",
+    "transcription": "vərˈlis"
+  },
+  {
+    "score": 0.553,
+    "word": "belasting",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "verplichte betaling aan de overheid",
+    "language": "nl",
+    "transcription": "bəˈlɑstɪŋ"
+  },
+  {
+    "score": 0.552,
+    "word": "lening",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "geleend geld dat je terugbetaalt",
+    "language": "nl",
+    "transcription": "ˈleːnɪŋ"
+  },
+  {
+    "score": 0.551,
+    "word": "rente",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "vergoeding voor het lenen van geld",
+    "language": "nl",
+    "transcription": "ˈrɛntə"
+  },
+  {
+    "score": 0.55,
+    "word": "schuld",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "bedrag dat je nog moet betalen; verantwoordelijkheid",
+    "language": "nl",
+    "transcription": "sxʏlt"
+  },
+  {
+    "score": 0.549,
+    "word": "begroting",
+    "topic": "Financiën",
+    "level": "B2",
+    "meaning": "overzicht van geplande inkomsten en uitgaven",
+    "language": "nl",
+    "transcription": "bəˈxroːtɪŋ"
+  },
+  {
+    "score": 0.548,
+    "word": "uitgave",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "bedrag dat je uitgeeft",
+    "language": "nl",
+    "transcription": "ˈœy̯tˌxaːvə"
+  },
+  {
+    "score": 0.547,
+    "word": "inkomen",
+    "topic": "Financiën",
+    "level": "B1",
+    "meaning": "geld dat je ontvangt",
+    "language": "nl",
+    "transcription": "ˈɪŋˌkoːmən"
+  },
+  {
+    "score": 0.546,
+    "word": "sparen",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "geld opzijzetten voor later",
+    "language": "nl",
+    "transcription": "ˈspaːrən"
+  },
+  {
+    "score": 0.545,
+    "word": "betalen",
+    "topic": "Financiën",
+    "level": "A1",
+    "meaning": "geld geven voor iets",
+    "language": "nl",
+    "transcription": "bəˈtaːlən"
+  },
+  {
+    "score": 0.544,
+    "word": "kopen",
+    "topic": "Financiën",
+    "level": "A1",
+    "meaning": "iets verwerven door te betalen",
+    "language": "nl",
+    "transcription": "ˈkoːpən"
+  },
+  {
+    "score": 0.543,
+    "word": "verkopen",
+    "topic": "Financiën",
+    "level": "A2",
+    "meaning": "iets aan iemand anders overdragen tegen betaling",
+    "language": "nl",
+    "transcription": "vɛrˈkoːpən"
+  },
+  {
+    "score": 0.542,
+    "word": "rijbewijs",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "bewijs dat je een voertuig mag besturen",
+    "language": "nl",
+    "transcription": "ˈrɛi̯bə.ʋɛi̯s"
+  },
+  {
+    "score": 0.541,
+    "word": "verzekering",
+    "topic": "Verkeer",
+    "level": "B1",
+    "meaning": "overeenkomst voor financiële dekking bij schade",
+    "language": "nl",
+    "transcription": "vərˈzeːkərɪŋ"
+  },
+  {
+    "score": 0.54,
+    "word": "verkeerslicht",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "lichtinstallatie die verkeer regelt",
+    "language": "nl",
+    "transcription": "vərˈkeːrs.lɪxt"
+  },
+  {
+    "score": 0.539,
+    "word": "kruispunt",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "plaats waar wegen elkaar kruisen",
+    "language": "nl",
+    "transcription": "ˈkrœy̯spʏnt"
+  },
+  {
+    "score": 0.538,
+    "word": "rotonde",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "verkeersplein met ronde rijrichting",
+    "language": "nl",
+    "transcription": "roːˈtɔndə"
+  },
+  {
+    "score": 0.537,
+    "word": "benzine",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "brandstof voor auto’s",
+    "language": "nl",
+    "transcription": "bɛnˈziːnə"
+  },
+  {
+    "score": 0.536,
+    "word": "diesel",
+    "topic": "Verkeer",
+    "level": "B1",
+    "meaning": "type brandstof voor motoren",
+    "language": "nl",
+    "transcription": "ˈdiːzəl"
+  },
+  {
+    "score": 0.535,
+    "word": "taxi",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "auto met chauffeur voor betaald vervoer",
+    "language": "nl",
+    "transcription": "ˈtɑksi"
+  },
+  {
+    "score": 0.534,
+    "word": "metro",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "ondergrondse trein",
+    "language": "nl",
+    "transcription": "ˈmeːtroː"
+  },
+  {
+    "score": 0.533,
+    "word": "tram",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "railvoertuig in de stad",
+    "language": "nl",
+    "transcription": "trɛm"
+  },
+  {
+    "score": 0.532,
+    "word": "motor",
+    "topic": "Verkeer",
+    "level": "A2",
+    "meaning": "voertuig met twee wielen met motor",
+    "language": "nl",
+    "transcription": "ˈmoːtɔr"
+  },
+  {
+    "score": 0.531,
+    "word": "schip",
+    "topic": "Verkeer",
+    "level": "B1",
+    "meaning": "groot vaartuig",
+    "language": "nl",
+    "transcription": "sxɪp"
+  },
+  {
+    "score": 0.53,
+    "word": "boot",
+    "topic": "Verkeer",
+    "level": "A1",
+    "meaning": "kleiner vaartuig",
+    "language": "nl",
+    "transcription": "boːt"
+  },
+  {
+    "score": 0.529,
+    "word": "idee",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "gedachte of plan",
+    "language": "nl",
+    "transcription": "iːˈdeː"
+  },
+  {
+    "score": 0.528,
+    "word": "probleem",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "moeilijkheid die een oplossing vraagt",
+    "language": "nl",
+    "transcription": "prɔˈbleːm"
+  },
+  {
+    "score": 0.527,
+    "word": "oplossing",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "antwoord op een probleem",
+    "language": "nl",
+    "transcription": "ˈɔp.lɔ.sɪŋ"
+  },
+  {
+    "score": 0.526,
+    "word": "vraag",
+    "topic": "Abstract",
+    "level": "A1",
+    "meaning": "iets wat je wilt weten; verzoek",
+    "language": "nl",
+    "transcription": "vraːx"
+  },
+  {
+    "score": 0.525,
+    "word": "antwoord",
+    "topic": "Abstract",
+    "level": "A1",
+    "meaning": "reactie op een vraag",
+    "language": "nl",
+    "transcription": "ˈɑnt.ʋoːrt"
+  },
+  {
+    "score": 0.524,
+    "word": "reden",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "oorzaak of verklaring",
+    "language": "nl",
+    "transcription": "ˈreːdən"
+  },
+  {
+    "score": 0.523,
+    "word": "gevolg",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "uitkomst van een oorzaak",
+    "language": "nl",
+    "transcription": "ɣəˈvɔlx"
+  },
+  {
+    "score": 0.522,
+    "word": "oorzaak",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "reden waarom iets gebeurt",
+    "language": "nl",
+    "transcription": "ˈoːr.zaːk"
+  },
+  {
+    "score": 0.521,
+    "word": "verschil",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "dat wat anders is",
+    "language": "nl",
+    "transcription": "vərˈsxɪl"
+  },
+  {
+    "score": 0.52,
+    "word": "gelijkenis",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "dat wat hetzelfde is",
+    "language": "nl",
+    "transcription": "ɣəˈlɛi̯.kə.nɪs"
+  },
+  {
+    "score": 0.519,
+    "word": "kans",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "waarschijnlijkheid dat iets gebeurt",
+    "language": "nl",
+    "transcription": "kɑns"
+  },
+  {
+    "score": 0.518,
+    "word": "risico",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "mogelijkheid op schade of verlies",
+    "language": "nl",
+    "transcription": "ˈriːzikoː"
+  },
+  {
+    "score": 0.517,
+    "word": "keuze",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "het selecteren uit opties",
+    "language": "nl",
+    "transcription": "ˈkøːzə"
+  },
+  {
+    "score": 0.516,
+    "word": "besluit",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "definitieve keuze; beslissing",
+    "language": "nl",
+    "transcription": "bəˈslœy̯t"
+  },
+  {
+    "score": 0.515,
+    "word": "plan",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "uitgewerkt idee voor actie",
+    "language": "nl",
+    "transcription": "plɑn"
+  },
+  {
+    "score": 0.514,
+    "word": "doel",
+    "topic": "Abstract",
+    "level": "A2",
+    "meaning": "eindpunt dat je wilt bereiken",
+    "language": "nl",
+    "transcription": "dul"
+  },
+  {
+    "score": 0.513,
+    "word": "resultaat",
+    "topic": "Abstract",
+    "level": "B1",
+    "meaning": "uitkomst van een proces",
+    "language": "nl",
+    "transcription": "rɛzulˈtaːt"
+  },
+  {
+    "score": 0.512,
+    "word": "leren",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "kennis of vaardigheid opdoen",
+    "language": "nl",
+    "transcription": "ˈleːrən"
+  },
+  {
+    "score": 0.511,
+    "word": "studeren",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "gestructureerd leren",
+    "language": "nl",
+    "transcription": "styˈdeːrən"
+  },
+  {
+    "score": 0.51,
+    "word": "lezen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "geschreven tekst begrijpen",
+    "language": "nl",
+    "transcription": "ˈleːzən"
+  },
+  {
+    "score": 0.509,
+    "word": "schrijven",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "tekens op papier of scherm zetten",
+    "language": "nl",
+    "transcription": "ˈsxrɛi̯vən"
+  },
+  {
+    "score": 0.508,
+    "word": "luisteren",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "aandachtig horen",
+    "language": "nl",
+    "transcription": "ˈlœy̯stərən"
+  },
+  {
+    "score": 0.507,
+    "word": "kijken",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "met aandacht zien",
+    "language": "nl",
+    "transcription": "ˈkɛi̯kən"
+  },
+  {
+    "score": 0.506,
+    "word": "horen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "geluiden waarnemen",
+    "language": "nl",
+    "transcription": "ˈhoːrən"
+  },
+  {
+    "score": 0.505,
+    "word": "ruiken",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "geur waarnemen",
+    "language": "nl",
+    "transcription": "ˈrœy̯kən"
+  },
+  {
+    "score": 0.504,
+    "word": "proeven",
+    "topic": "Werkwoorden",
+    "level": "A2",
+    "meaning": "smaak waarnemen",
+    "language": "nl",
+    "transcription": "ˈpruːvən"
+  },
+  {
+    "score": 0.503,
+    "word": "rennen",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "snel lopen",
+    "language": "nl",
+    "transcription": "ˈrɛnən"
+  },
+  {
+    "score": 0.502,
+    "word": "zitten",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "op een stoel of oppervlak rusten",
+    "language": "nl",
+    "transcription": "ˈzɪtən"
+  },
+  {
+    "score": 0.501,
+    "word": "staan",
+    "topic": "Werkwoorden",
+    "level": "A1",
+    "meaning": "op de voeten rusten",
+    "language": "nl",
+    "transcription": "staːn"
+  }
+]

@@ -13,11 +13,23 @@ export class WordDto implements Word {
 	@ApiProperty({ type: "string", format: "int64" })
 	topic!: number;
 
+	@ApiProperty({ type: "string" })
+	word: string;
+
 	@ApiProperty({ type: "string", format: "int64" })
 	catalog!: number;
 
 	@ApiProperty({ type: "string" })
 	language!: string;
+
+	@ApiProperty({ type: "string" })
+	audio!: string;
+
+	@ApiProperty({ type: "string" })
+	transcribtion!: string;
+
+	@ApiProperty({ type: String, required: false })
+	meaning?: string;
 }
 
 export class WordDataDto extends WordDto implements WordData {

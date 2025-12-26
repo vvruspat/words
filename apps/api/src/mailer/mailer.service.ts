@@ -11,6 +11,7 @@ export enum MailTemplate {
 	WELCOME = 1,
 	RESET_PASSWORD = 2,
 	CONFIRM_EMAIL = 3,
+	TEMPORARY_PASSWORD = 5,
 }
 
 type MailOptions = {
@@ -23,7 +24,7 @@ type MailOptions = {
 			templateId: MailTemplate.CONFIRM_EMAIL;
 			params: {
 				name: string;
-				link: string;
+				code: string;
 			};
 	  }
 	| {
@@ -37,6 +38,13 @@ type MailOptions = {
 			templateId: MailTemplate.WELCOME;
 			params: {
 				name: string;
+			};
+	  }
+	| {
+			templateId: MailTemplate.TEMPORARY_PASSWORD;
+			params: {
+				name: string;
+				tmpPassword: string;
 			};
 	  }
 );

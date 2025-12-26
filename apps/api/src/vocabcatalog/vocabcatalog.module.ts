@@ -8,5 +8,6 @@ import { VocabCatalogService } from "./vocabcatalog.service";
 	imports: [DatabaseModule],
 	providers: [...vocabCatalogProviders, VocabCatalogService],
 	controllers: [VocabCatalogController],
+	exports: [VocabCatalogService],
 })
 export class VocabCatalogModule {}

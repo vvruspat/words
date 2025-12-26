@@ -1,0 +1,5 @@
+export const GENERATE_WORDS_PROMPT_ID =
+	"pmpt_68d7dd4ba27c81938c9bbdec444b680709d28b2b08dcd74e";
+
+export const TRANSLATE_WORDS_PROMPT_ID =
+	"pmpt_6911bbfd49e48193b9cfaf1652e2655302b2db2d8d65857e";
