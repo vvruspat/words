@@ -1892,6 +1892,8 @@ export interface operations {
 		parameters: {
 			query: {
 				language: string;
+				topic: string;
+				level: string;
 			};
 			header?: never;
 			path?: never;
@@ -1899,7 +1901,8 @@ export interface operations {
 		};
 		requestBody?: never;
 		responses: {
-			201: {
+			/** @description Word generation started */
+			200: {
 				headers: {
 					[name: string]: unknown;
 				};

@@ -1,5 +1,5 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Language } from "@repo/types";
 import { Job } from "bullmq";
 import {
@@ -14,17 +14,24 @@ import { OpenAIService } from "./openai.service";
 @Processor(OPENAI_QUEUE)
 @Injectable()
 export class OpenAIQueueProcessor extends WorkerHost {
+	private readonly logger = new Logger(OpenAIQueueProcessor.name);
+
 	constructor(private readonly openAIService: OpenAIService) {
 		super();
 	}
 
 	async process(job: Job) {
-		console.log(`Processing job: ${job.name}`);
+		this.logger.log(`Processing job: ${job.name}`, job.data);
 		switch (job.name) {
 			case TRANSLATION_START:
 				return this.translateWords(job.data.language, job.data.words ?? []);
 			case WORDS_GENERATION_START:
-				return this.generateWords(job.data.language, job.data.except ?? []);
+				return this.generateWords(
+					job.data.language,
+					job.data.except ?? [],
+					job.data.topic,
+					job.data.level,
+				);
 			case AUDIO_CREATION_START:
 				return this.makeAudio(
 					job.data.language,
@@ -37,17 +44,22 @@ export class OpenAIQueueProcessor extends WorkerHost {
 	}
 
 	private async translateWords(language: string, words: WordEntity[]) {
-		console.log(
+		this.logger.log(
 			`Translating words to ${language}: ${words.map((word) => word.word).join(", ")}`,
 		);
 		this.openAIService.translateWords(language, words);
 	}
 
-	private async generateWords(language: string, except: string[]) {
-		console.log(
+	private async generateWords(
+		language: string,
+		except: string[],
+		topic?: string,
+		level?: string,
+	) {
+		this.logger.log(
 			`Generating words in ${language}, except: ${except.join(", ")}`,
 		);
-		this.openAIService.generateWords(language, except);
+		this.openAIService.generateWords(language, except, topic, level);
 	}
 
 	private async makeAudio(
@@ -55,7 +67,7 @@ export class OpenAIQueueProcessor extends WorkerHost {
 		word: string,
 		wordId: WordEntity["id"],
 	) {
-		console.log(`Making audio in ${language} for word: ${word}`);
+		this.logger.log(`Making audio in ${language} for word: ${word}`);
 		await this.openAIService.makeAudio(language, word, wordId);
 	}
 }
