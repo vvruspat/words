@@ -60,3 +60,6 @@ pnpm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+apps/api/keys
+apps/api/keys/*.json

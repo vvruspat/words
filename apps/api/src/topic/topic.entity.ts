@@ -6,20 +6,20 @@ export class TopicEntity implements Topic {
 	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
-	@Column({ type: "timestamptz" })
+	@Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
 	created_at: string;
 
 	@Column()
 	title: string;
 
-	@Column()
+	@Column({ nullable: true })
 	description: string;
-
-	@Column({ type: "bigint" })
-	catalog: number;
 
 	@Column({ nullable: true })
 	image?: string | null;
+
+	@Column({ type: "bigint", nullable: true })
+	catalog: number;
 }
 
 export type { Topic };

@@ -39,6 +39,9 @@
     "packages/*"
   ],
   "dependencies": {
+    "@google-cloud/storage": "^7.18.0",
+    "@nestjs/bullmq": "^11.0.4",
+    "bullmq": "^5.66.2",
     "cross-env": "^10.0.0",
     "openai": "^5.23.1",
     "pino": "^9.9.0"

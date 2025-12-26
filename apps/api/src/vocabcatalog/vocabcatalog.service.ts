@@ -1,4 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { Language } from "@repo/types";
 import { Repository } from "typeorm";
 import { GetVocabCatalogRequestDto } from "~/dto";
 import { VOCABCATALOG_REPOSITORY } from "../constants/database.constants";
@@ -23,6 +24,28 @@ export class VocabCatalogService {
 			skip: Number(offset ?? 0),
 			take: Number(limit ?? 10),
 		});
+	}
+
+	async findAllAndCreateIfNotExist(
+		titles: VocabCatalogEntity["title"][],
+		language: Language,
+	): Promise<VocabCatalogEntity[]> {
+		const existingCatalogs = await this.vocabCatalogRepository.find({
+			where: titles.map((title) => ({ title })),
+		});
+
+		const existingTitles = new Set(existingCatalogs.map((c) => c.title));
+		const newTitles = titles.filter((title) => !existingTitles.has(title));
+
+		const newCatalogs = this.vocabCatalogRepository.create(
+			newTitles.map((title) => ({ title, owner: 1, language })), // Replace `en` with the actual language as needed
+		);
+
+		if (newCatalogs.length > 0) {
+			await this.vocabCatalogRepository.save(newCatalogs);
+		}
+
+		return [...existingCatalogs, ...newCatalogs];
 	}
 
 	async findOne(

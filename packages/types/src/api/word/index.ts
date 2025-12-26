@@ -1,4 +1,3 @@
-export * from "./get";
+export * from "./generate";
 export * from "./id";
-export * from "./post";
 export * from "./put";

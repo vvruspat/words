@@ -19,8 +19,7 @@ export interface Topic {
 	id: number;
 	created_at: string;
 	title: string;
-	description: string;
-	catalog: number;
+	description?: string;
 	image?: string | null;
 }
 
@@ -57,6 +56,7 @@ export interface VocabCatalog {
 export interface Word {
 	id: number;
 	created_at: string;
+	word: string;
 	topic: number;
 	catalog: number;
 	language: string;

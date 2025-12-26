@@ -1,6 +1,7 @@
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Redis } from "ioredis";
+import { BullQueueProvider } from "./queue.provider";
 
 @Global()
 @Module({
@@ -17,7 +18,8 @@ import { Redis } from "ioredis";
 				});
 			},
 		},
+		BullQueueProvider,
 	],
-	exports: ["REDIS_CLIENT"],
+	exports: ["REDIS_CLIENT", "BULLMQ_QUEUE"],
 })
 export class RedisModule {}

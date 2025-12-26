@@ -8,7 +8,11 @@ export class WordEntity implements Word {
 	@PrimaryGeneratedColumn({ type: "bigint" })
 	id: number;
 
-	@Column({ type: "timestamptz" })
+	@Column({
+		type: "timestamptz",
+		default: () => "CURRENT_TIMESTAMP",
+		nullable: true,
+	})
 	created_at: string;
 
 	@Column({ type: "bigint" })
@@ -23,11 +27,21 @@ export class WordEntity implements Word {
 	@Column()
 	language: string;
 
-	@Column()
+	@Column({ nullable: true })
 	audio: string;
 
 	@Column()
 	transcribtion: string;
+
+	@Column({ type: "float", default: 0 })
+	score: number;
+
+	@Column({
+		type: "enum",
+		enum: ["processing", "processed"],
+		default: "processing",
+	})
+	status: string;
 
 	@Column({ type: "text", nullable: true })
 	meaning?: string;

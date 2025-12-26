@@ -743,112 +743,6 @@ paths:
       summary: Delete vocab catalog
       tags: *ref_4
   /word:
-    get:
-      operationId: WordController_getAll
-      parameters:
-        - name: offset
-          required: true
-          in: query
-          schema:
-            example: 0
-            type: number
-        - name: limit
-          required: true
-          in: query
-          schema:
-            example: 10
-            type: number
-        - name: id
-          required: false
-          in: query
-          schema:
-            format: int64
-            type: number
-        - name: created_at
-          required: false
-          in: query
-          schema:
-            format: date-time
-            type: string
-        - name: topic
-          required: false
-          in: query
-          schema:
-            format: int64
-            type: string
-        - name: word
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: catalog
-          required: false
-          in: query
-          schema:
-            format: int64
-            type: string
-        - name: language
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: audio
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: transcribtion
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: meaning
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: topicData
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/TopicDto'
-        - name: catalogData
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/VocabCatalogDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetWordResponseDto'
-        '400':
-          description: Invalid param
-        '500':
-          description: Server error
-      summary: Get all words
-      tags: &ref_5
-        - word
-    post:
-      operationId: WordController_create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostWordRequestDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostWordResponseDto'
-      summary: Create word
-      tags: *ref_5
     put:
       operationId: WordController_update
       parameters: []
@@ -872,29 +766,9 @@ paths:
         '500':
           description: Server error
       summary: Update word
-      tags: *ref_5
+      tags: &ref_5
+        - word
   /word/{id}:
-    get:
-      operationId: WordController_getById
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: number
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetWordResponseDto'
-        '404':
-          description: Word not found
-        '500':
-          description: Server error
-      summary: Get word by id
-      tags: *ref_5
     delete:
       operationId: WordController_remove
       parameters: []
@@ -906,6 +780,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteWordResponseDto'
       summary: Delete word
+      tags: *ref_5
+  /word/generate:
+    post:
+      operationId: WordController_generateWords
+      parameters:
+        - name: language
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      summary: Generate words
       tags: *ref_5
   /words-translation/{id}:
     get:
@@ -1106,6 +994,15 @@ paths:
           description: Invalid or expired refresh token
       summary: Refresh access token
       tags: *ref_7
+  /openai/webhook:
+    post:
+      operationId: OpenAIController_handleWebhook
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+        - OpenAI
 info:
   title: My API
   description: API description
@@ -1924,132 +1821,6 @@ components:
           format: int64
       required:
         - id
-    WordDataDto:
-      type: object
-      properties:
-        id:
-          type: number
-          format: int64
-        created_at:
-          type: string
-          format: date-time
-        topic:
-          type: string
-          format: int64
-        word:
-          type: string
-        catalog:
-          type: string
-          format: int64
-        language:
-          type: string
-        audio:
-          type: string
-        transcribtion:
-          type: string
-        meaning:
-          type: string
-        topicData:
-          $ref: '#/components/schemas/TopicDto'
-        catalogData:
-          $ref: '#/components/schemas/VocabCatalogDto'
-      required:
-        - id
-        - created_at
-        - topic
-        - word
-        - catalog
-        - language
-        - audio
-        - transcribtion
-        - topicData
-        - catalogData
-    GetWordResponseDto:
-      type: object
-      properties:
-        total:
-          type: number
-          example: 100
-        offset:
-          type: number
-          example: 0
-        limit:
-          type: number
-          example: 10
-        items:
-          description: List of words
-          type: array
-          items:
-            $ref: '#/components/schemas/WordDataDto'
-      required:
-        - total
-        - offset
-        - limit
-        - items
-    PostWordRequestDto:
-      type: object
-      properties:
-        created_at:
-          type: string
-          format: date-time
-        topic:
-          type: string
-          format: int64
-        word:
-          type: string
-        catalog:
-          type: string
-          format: int64
-        language:
-          type: string
-        audio:
-          type: string
-        transcribtion:
-          type: string
-        meaning:
-          type: string
-      required:
-        - created_at
-        - topic
-        - word
-        - catalog
-        - language
-        - audio
-        - transcribtion
-    PostWordResponseDto:
-      type: object
-      properties:
-        id:
-          type: number
-          format: int64
-        created_at:
-          type: string
-          format: date-time
-        topic:
-          type: string
-          format: int64
-        word:
-          type: string
-        catalog:
-          type: string
-          format: int64
-        language:
-          type: string
-        audio:
-          type: string
-        transcribtion:
-          type: string
-        meaning:
-          type: string
-      required:
-        - id
-        - created_at
-        - topic
-        - word
-        - catalog
-        - language
-        - audio
-        - transcribtion
     PutWordRequestDto:
       type: object
       properties:

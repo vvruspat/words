@@ -25,6 +25,27 @@ export class TopicService {
 		});
 	}
 
+	async findAllAndCreateIfNotExist(
+		topics: Topic["title"][],
+	): Promise<TopicEntity[]> {
+		const existingTopics = await this.topicRepository.find({
+			where: topics.map((title) => ({ title })),
+		});
+
+		const existingTitles = new Set(existingTopics.map((t) => t.title));
+		const newTitles = topics.filter((title) => !existingTitles.has(title));
+
+		const newTopics = this.topicRepository.create(
+			newTitles.map((title) => ({ title })),
+		);
+
+		if (newTopics.length > 0) {
+			await this.topicRepository.save(newTopics);
+		}
+
+		return [...existingTopics, ...newTopics];
+	}
+
 	async findOne(id: TopicEntity["id"]): Promise<TopicEntity | null> {
 		return this.topicRepository.findOneBy({ id });
 	}

@@ -212,12 +212,10 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		/** Get all words */
-		get: operations["WordController_getAll"];
+		get?: never;
 		/** Update word */
 		put: operations["WordController_update"];
-		/** Create word */
-		post: operations["WordController_create"];
+		post?: never;
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -231,12 +229,28 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		/** Get word by id */
-		get: operations["WordController_getById"];
+		get?: never;
 		put?: never;
 		post?: never;
 		/** Delete word */
 		delete: operations["WordController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/word/generate": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Generate words */
+		post: operations["WordController_generateWords"];
+		delete?: never;
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -390,6 +404,22 @@ export interface paths {
 		put?: never;
 		/** Refresh access token */
 		post: operations["AuthController_refreshToken"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/openai/webhook": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post: operations["OpenAIController_handleWebhook"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -803,61 +833,6 @@ export interface components {
 		DeleteVocabCatalogResponseDto: {
 			/** Format: int64 */
 			id: number;
-		};
-		WordDataDto: {
-			/** Format: int64 */
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			word: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-			audio: string;
-			transcribtion: string;
-			meaning?: string;
-			topicData: components["schemas"]["TopicDto"];
-			catalogData: components["schemas"]["VocabCatalogDto"];
-		};
-		GetWordResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of words */
-			items: components["schemas"]["WordDataDto"][];
-		};
-		PostWordRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			word: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-			audio: string;
-			transcribtion: string;
-			meaning?: string;
-		};
-		PostWordResponseDto: {
-			/** Format: int64 */
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			/** Format: int64 */
-			topic: string;
-			word: string;
-			/** Format: int64 */
-			catalog: string;
-			language: string;
-			audio: string;
-			transcribtion: string;
-			meaning?: string;
 		};
 		PutWordRequestDto: {
 			/** Format: int64 */
@@ -1850,53 +1825,6 @@ export interface operations {
 			};
 		};
 	};
-	WordController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				topic?: string;
-				word?: string;
-				catalog?: string;
-				language?: string;
-				audio?: string;
-				transcribtion?: string;
-				meaning?: string;
-				topicData?: components["schemas"]["TopicDto"];
-				catalogData?: components["schemas"]["VocabCatalogDto"];
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
 	WordController_update: {
 		parameters: {
 			query?: never;
@@ -1941,64 +1869,6 @@ export interface operations {
 			};
 		};
 	};
-	WordController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostWordRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostWordResponseDto"];
-				};
-			};
-		};
-	};
-	WordController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordResponseDto"];
-				};
-			};
-			/** @description Word not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
 	WordController_remove: {
 		parameters: {
 			query?: never;
@@ -2015,6 +1885,25 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["DeleteWordResponseDto"];
 				};
+			};
+		};
+	};
+	WordController_generateWords: {
+		parameters: {
+			query: {
+				language: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};
@@ -2340,6 +2229,23 @@ export interface operations {
 			};
 			/** @description Invalid or expired refresh token */
 			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	OpenAIController_handleWebhook: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			201: {
 				headers: {
 					[name: string]: unknown;
 				};
