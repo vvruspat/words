@@ -68,7 +68,11 @@ export class WordService {
 		await this.wordRepository.update(ids, { status: "processed" });
 	}
 
-	async generateWords(language: string): Promise<void> {
+	async generateWords(
+		language: string,
+		topic: string,
+		level: string,
+	): Promise<void> {
 		const existingWords = await this.wordRepository.find({
 			where: { language },
 		});
@@ -79,7 +83,12 @@ export class WordService {
 			`Queueing word generation in ${language}, except: ${except.join(", ")}`,
 		);
 
-		await this.openAIQueue.add(WORDS_GENERATION_START, { language, except });
+		await this.openAIQueue.add(WORDS_GENERATION_START, {
+			language,
+			except,
+			topic,
+			level,
+		});
 	}
 
 	async makeAudio(

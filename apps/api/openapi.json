@@ -1266,11 +1266,27 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "topic",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "level",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Word generation started"
           }
         },
         "summary": "Generate words",

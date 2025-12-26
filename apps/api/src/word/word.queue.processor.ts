@@ -1,5 +1,5 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Job } from "bullmq";
 import {
 	AUDIO_CREATION_DONE,
@@ -13,12 +13,15 @@ import { WordService } from "./word.service";
 @Processor(WORDS_QUEUE)
 @Injectable()
 export class WordQueueProcessor extends WorkerHost {
+	private readonly logger = new Logger(WordQueueProcessor.name);
+
 	constructor(private readonly wordService: WordService) {
 		super();
 	}
 
 	async process(job: Job) {
-		console.log(`Processing job: ${job.name}`);
+		this.logger.log(`Processing job: ${job.name}`);
+
 		switch (job.name) {
 			case WORDS_GENERATION_DONE:
 				return this.wordsGenerated(job.data.words);
@@ -34,7 +37,7 @@ export class WordQueueProcessor extends WorkerHost {
 	}
 
 	private async wordsGenerated(words: unknown) {
-		console.log(`Generated word data: ${JSON.stringify(words)}`);
+		this.logger.log(`Generated word data: ${JSON.stringify(words)}`);
 		if (isWordsArray(words)) {
 			this.wordService.wordsGenerated(words);
 		} else {
@@ -47,7 +50,9 @@ export class WordQueueProcessor extends WorkerHost {
 		audio: string,
 		wordId: WordEntity["id"],
 	) {
-		console.log(`Audio made for word ID ${wordId} with filename ${filename}`);
+		this.logger.log(
+			`Audio made for word ID ${wordId} with filename ${filename}`,
+		);
 		this.wordService.audioMade(filename, audio, wordId);
 	}
 }

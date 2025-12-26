@@ -50,7 +50,7 @@ export class WordTranslationService {
 	}
 
 	async makeTranslations(words: WordEntity[]): Promise<void> {
-		console.log(
+		this.logger.log(
 			`Enqueuing translation job for words: ${words
 				.map((w) => w.word)
 				.join(", ")}`,

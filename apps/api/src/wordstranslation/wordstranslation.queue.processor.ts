@@ -1,5 +1,5 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Job } from "bullmq";
 import {
 	TRANSLATION_DONE,
@@ -13,12 +13,14 @@ import { WordTranslationService } from "./wordstranslation.service";
 @Processor(TRANSLATIONS_QUEUE)
 @Injectable()
 export class WordsTranslationQueueProcessor extends WorkerHost {
+	private readonly logger = new Logger(WordsTranslationQueueProcessor.name);
+
 	constructor(private readonly wordTranslationService: WordTranslationService) {
 		super();
 	}
 
 	async process(job: Job) {
-		console.log(
+		this.logger.log(
 			`Processing job: ${job.name} in WordTranslationQueueProcessor`,
 			job.data,
 		);
@@ -36,7 +38,7 @@ export class WordsTranslationQueueProcessor extends WorkerHost {
 	}
 
 	private async makeTranslations(words: WordEntity[]) {
-		console.log(
+		this.logger.log(
 			`Making translations for words: ${words.map((w) => w.word).join(", ")}`,
 		);
 		this.wordTranslationService.makeTranslations(words);

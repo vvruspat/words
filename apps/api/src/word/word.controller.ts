@@ -94,13 +94,16 @@ export class WordController {
 
 	@Post("generate")
 	@ApiOperation({ summary: "Generate words" })
+	@ApiResponse({ status: 200, description: "Word generation started" })
 	async generateWords(
 		@Query("language") language: string,
+		@Query("topic") topic?: string,
+		@Query("level") level?: string,
 	): Promise<{ message: string }> {
 		if (!language) {
 			throw new Error("Language query parameter is required");
 		}
-		await this.wordService.generateWords(language);
+		await this.wordService.generateWords(language, topic, level);
 		return { message: "Word generation started" };
 	}
 }
