@@ -16,7 +16,7 @@ export default function RootLayout({
 			lang="en"
 			data-theme="light"
 			data-brand="words-control"
-			data-platform="web-desktop"
+			data-platform="desktop"
 		>
 			<body>{children}</body>
 		</html>

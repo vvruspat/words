@@ -30,9 +30,10 @@ const extractTextFromReactNode = (reactNode: ReactNode) => {
 	// Convert the ReactNode to static markup (HTML string)
 	const markup = ReactDOMServer.renderToStaticMarkup(reactNode);
 
-	// parse the HTML string
-	const doc = new DOMParser().parseFromString(markup, "text/html");
+	if (typeof DOMParser === "undefined") return "";
 
+	// parse the HTML string (browser only)
+	const doc = new DOMParser().parseFromString(markup, "text/html");
 	// get the text from the parsed document
 	return doc.body.textContent || "";
 };

@@ -27,3 +27,11 @@ export class ApiPaginatedRequestDto {
 	@ApiProperty({ type: Number, example: 10 })
 	limit: number;
 }
+
+export class ApiSortingRequestDto {
+	@ApiProperty({ type: String, example: "created_at" })
+	sortBy: string;
+
+	@ApiProperty({ type: String, example: "DESC" })
+	sortOrder: "ASC" | "DESC";
+}

@@ -13,7 +13,7 @@ const preview = {
 		}),
 		(Story, { _parameters }) => {
 			document.documentElement.setAttribute("data-brand", "words-control");
-			document.documentElement.setAttribute("data-platform", "web-desktop");
+			document.documentElement.setAttribute("data-platform", "desktop");
 			return <Story />;
 		},
 	],

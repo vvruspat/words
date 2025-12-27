@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Delete,
+	Get,
 	Param,
 	ParseIntPipe,
 	Post,
@@ -11,11 +12,12 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Language } from "@repo/types";
 import {
 	DeleteWordRequestDto,
 	DeleteWordResponseDto,
-	// GetWordRequestDto,
-	// GetWordResponseDto,
+	GetWordRequestDto,
+	GetWordResponseDto,
 	// PostWordRequestDto,
 	// PostWordResponseDto,
 	PutWordRequestDto,
@@ -28,20 +30,20 @@ import { WordService } from "./word.service";
 export class WordController {
 	constructor(private readonly wordService: WordService) {}
 
-	// @Get()
-	// @ApiOperation({ summary: "Get all words" })
-	// @ApiResponse({ status: 200, type: GetWordResponseDto })
-	// @ApiResponse({ status: 400, description: "Invalid param" })
-	// @ApiResponse({ status: 500, description: "Server error" })
-	// async getAll(@Query() query: GetWordRequestDto): Promise<GetWordResponseDto> {
-	// 	const entities = await this.wordService.findAll(query);
-	// 	return {
-	// 		items: entities,
-	// 		total: entities.length,
-	// 		limit: query.limit ?? 10,
-	// 		offset: query.offset ?? 0,
-	// 	};
-	// }
+	@Get()
+	@ApiOperation({ summary: "Get all words" })
+	@ApiResponse({ status: 200, type: GetWordResponseDto })
+	@ApiResponse({ status: 400, description: "Invalid param" })
+	@ApiResponse({ status: 500, description: "Server error" })
+	async getAll(@Query() query: GetWordRequestDto): Promise<GetWordResponseDto> {
+		const entities = await this.wordService.findAll(query);
+		return {
+			items: entities.items,
+			total: entities.total,
+			limit: query.limit ?? 10,
+			offset: query.offset ?? 0,
+		};
+	}
 
 	// @Get(":id")
 	// @ApiOperation({ summary: "Get word by id" })
@@ -96,7 +98,7 @@ export class WordController {
 	@ApiOperation({ summary: "Generate words" })
 	@ApiResponse({ status: 200, description: "Word generation started" })
 	async generateWords(
-		@Query("language") language: string,
+		@Query("language") language: Language,
 		@Query("topic") topic?: string,
 		@Query("level") level?: string,
 	): Promise<{ message: string }> {

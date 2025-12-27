@@ -1,3 +1,5 @@
+import { Language } from "common";
+
 export interface Learning {
 	id: number;
 	created_at: string; // timestamp with time zone
@@ -59,9 +61,10 @@ export interface Word {
 	word: string;
 	topic: number;
 	catalog: number;
-	language: string;
+	language: Language;
 	audio: string;
 	transcribtion: string;
+	status: "processing" | "processed";
 	meaning?: string;
 }
 

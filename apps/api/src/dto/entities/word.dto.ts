@@ -1,26 +1,36 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { Topic, VocabCatalog, Word, WordData } from "@repo/types";
+import {
+	AVAILABLE_LANGUAGES,
+	type Language,
+	type Topic,
+	type VocabCatalog,
+	type Word,
+	type WordData,
+} from "@repo/types";
 import { TopicDto } from "./topic.dto";
 import { VocabCatalogDto } from "./vocab-catalog.dto";
 
 export class WordDto implements Word {
+	@ApiProperty({ enum: ["processing", "processed"] })
+	status: "processing" | "processed";
+
 	@ApiProperty({ type: Number, format: "int64" })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })
 	created_at!: string;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: "number", format: "int64" })
 	topic!: number;
 
 	@ApiProperty({ type: "string" })
 	word: string;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: "number", format: "int64" })
 	catalog!: number;
 
-	@ApiProperty({ type: "string" })
-	language!: string;
+	@ApiProperty({ enum: Object.keys(AVAILABLE_LANGUAGES) })
+	language!: Language;
 
 	@ApiProperty({ type: "string" })
 	audio!: string;

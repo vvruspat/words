@@ -25,12 +25,9 @@ export type MDataGridRowType = Record<string, MDataGridCellValue> & {
 
 export type MDataGridPagination = {
 	total: number;
-	limit?: number;
-	onLoadMore: (
-		offset: number,
-		limit: number,
-		filters: Record<string, string>,
-		sortBy?: string,
-		sortOrder?: "asc" | "desc",
-	) => Promise<MDataGridRowType[]>;
+	limit: number;
+	offset: number;
+	onNextPage: (offset: number, limit: number) => void;
+	onPreviousPage: (offset: number, limit: number) => void;
+	onRowsPerPageChange: (limit: number) => void;
 };
