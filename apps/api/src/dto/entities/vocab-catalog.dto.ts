@@ -3,7 +3,7 @@ import type { VocabCatalog } from "@repo/types";
 import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class VocabCatalogDto implements VocabCatalog {
-	@ApiProperty({ type: Number, format: "int64" })
+	@ApiProperty({ type: Number })
 	@IsInt()
 	id!: number;
 
@@ -11,7 +11,7 @@ export class VocabCatalogDto implements VocabCatalog {
 	@IsString()
 	created_at!: string;
 
-	@ApiProperty({ type: "number", format: "int64" })
+	@ApiProperty({ type: Number })
 	@IsInt()
 	owner!: number;
 

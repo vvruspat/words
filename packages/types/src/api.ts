@@ -257,6 +257,24 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/words-translation": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get words translations */
+		get: operations["WordTranslationController_get"];
+		put?: never;
+		/** Create words translation */
+		post: operations["WordTranslationController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/words-translation/{id}": {
 		parameters: {
 			query?: never;
@@ -268,23 +286,6 @@ export interface paths {
 		get: operations["WordTranslationController_getById"];
 		put?: never;
 		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/words-translation": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Create words translation */
-		post: operations["WordTranslationController_create"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -432,27 +433,22 @@ export type webhooks = Record<string, never>;
 export interface components {
 	schemas: {
 		LearningDto: {
-			/** Format: int64 */
 			id: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp with time zone
 			 */
 			created_at: string;
-			/** Format: int64 */
-			user: string;
-			/** Format: int64 */
-			word: string;
+			user: number;
+			word: number;
 			score: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp without time zone
 			 */
 			last_review: string;
-			/** Format: int64 */
-			training: string;
-			/** Format: int64 */
-			translation: string;
+			training: number;
+			translation: number;
 		};
 		GetLearningResponseDto: {
 			/** @example 100 */
@@ -470,103 +466,81 @@ export interface components {
 			 * @description timestamp with time zone
 			 */
 			created_at: string;
-			/** Format: int64 */
-			user: string;
-			/** Format: int64 */
-			word: string;
+			user: number;
+			word: number;
 			score: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp without time zone
 			 */
 			last_review: string;
-			/** Format: int64 */
-			training: string;
-			/** Format: int64 */
-			translation: string;
+			training: number;
+			translation: number;
 		};
 		PostLearningResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp with time zone
 			 */
 			created_at: string;
-			/** Format: int64 */
-			user: string;
-			/** Format: int64 */
-			word: string;
+			user: number;
+			word: number;
 			score: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp without time zone
 			 */
 			last_review: string;
-			/** Format: int64 */
-			training: string;
-			/** Format: int64 */
-			translation: string;
+			training: number;
+			translation: number;
 		};
 		PutLearningRequestDto: {
-			/** Format: int64 */
-			id?: string;
+			id?: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp with time zone
 			 */
 			created_at?: string;
-			/** Format: int64 */
-			user?: string;
-			/** Format: int64 */
-			word?: string;
+			user?: number;
+			word?: number;
 			score?: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp without time zone
 			 */
 			last_review?: string;
-			/** Format: int64 */
-			training?: string;
-			/** Format: int64 */
-			translation?: string;
+			training?: number;
+			translation?: number;
 		};
 		PutLearningResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp with time zone
 			 */
 			created_at: string;
-			/** Format: int64 */
-			user: string;
-			/** Format: int64 */
-			word: string;
+			user: number;
+			word: number;
 			score: number;
 			/**
 			 * Format: date-time
 			 * @description timestamp without time zone
 			 */
 			last_review: string;
-			/** Format: int64 */
-			training: string;
-			/** Format: int64 */
-			translation: string;
+			training: number;
+			translation: number;
 		};
 		DeleteLearningResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		TopicDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
 			title: string;
 			description: string;
-			/** Format: int64 */
-			catalog: string;
+			language: string;
 			image?: string | null;
 		};
 		GetTopicResponseDto: {
@@ -584,49 +558,40 @@ export interface components {
 			created_at: string;
 			title: string;
 			description: string;
-			/** Format: int64 */
-			catalog: string;
+			language: string;
 			image?: string | null;
 		};
 		PostTopicResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
 			title: string;
 			description: string;
-			/** Format: int64 */
-			catalog: string;
+			language: string;
 			image?: string | null;
 		};
 		PutTopicRequestDto: {
-			/** Format: int64 */
 			id?: number;
 			/** Format: date-time */
 			created_at?: string;
 			title?: string;
 			description?: string;
-			/** Format: int64 */
-			catalog?: string;
+			language?: string;
 			image?: string | null;
 		};
 		PutTopicResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
 			title: string;
 			description: string;
-			/** Format: int64 */
-			catalog: string;
+			language: string;
 			image?: string | null;
 		};
 		DeleteTopicResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		TrainingDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -656,7 +621,6 @@ export interface components {
 			score: number;
 		};
 		PostTrainingResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -667,7 +631,6 @@ export interface components {
 			score: number;
 		};
 		PutTrainingRequestDto: {
-			/** Format: int64 */
 			id?: number;
 			/** Format: date-time */
 			created_at?: string;
@@ -678,7 +641,6 @@ export interface components {
 			score?: number;
 		};
 		PutTrainingResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -689,11 +651,9 @@ export interface components {
 			score: number;
 		};
 		DeleteTrainingResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		UserDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -726,7 +686,6 @@ export interface components {
 			language_learn: string;
 		};
 		PostUserResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -738,7 +697,6 @@ export interface components {
 			password?: string;
 		};
 		PutUserRequestDto: {
-			/** Format: int64 */
 			id?: number;
 			/** Format: date-time */
 			created_at?: string;
@@ -750,7 +708,6 @@ export interface components {
 			password?: string;
 		};
 		PutUserResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -762,15 +719,12 @@ export interface components {
 			password?: string;
 		};
 		DeleteUserResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		VocabCatalogDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
 			owner: number;
 			title: string;
 			description?: string | null;
@@ -788,7 +742,6 @@ export interface components {
 			items: components["schemas"]["VocabCatalogDto"][];
 		};
 		PostVocabCatalogRequestDto: {
-			/** Format: int64 */
 			owner: number;
 			title: string;
 			description?: string | null;
@@ -796,11 +749,9 @@ export interface components {
 			image?: string | null;
 		};
 		PostVocabCatalogResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
 			owner: number;
 			title: string;
 			description?: string | null;
@@ -808,11 +759,9 @@ export interface components {
 			image?: string | null;
 		};
 		PutVocabCatalogRequestDto: {
-			/** Format: int64 */
 			id?: number;
 			/** Format: date-time */
 			created_at?: string;
-			/** Format: int64 */
 			owner?: number;
 			title?: string;
 			description?: string | null;
@@ -820,11 +769,9 @@ export interface components {
 			image?: string | null;
 		};
 		PutVocabCatalogResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
 			owner: number;
 			title: string;
 			description?: string | null;
@@ -832,20 +779,16 @@ export interface components {
 			image?: string | null;
 		};
 		DeleteVocabCatalogResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		WordDto: {
 			/** @enum {string} */
 			status: "processing" | "processed";
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
 			topic: number;
 			word: string;
-			/** Format: int64 */
 			catalog: number;
 			/** @enum {string} */
 			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
@@ -866,14 +809,11 @@ export interface components {
 		PutWordRequestDto: {
 			/** @enum {string} */
 			status?: "processing" | "processed";
-			/** Format: int64 */
 			id?: number;
 			/** Format: date-time */
 			created_at?: string;
-			/** Format: int64 */
 			topic?: number;
 			word?: string;
-			/** Format: int64 */
 			catalog?: number;
 			/** @enum {string} */
 			language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
@@ -884,14 +824,11 @@ export interface components {
 		PutWordResponseDto: {
 			/** @enum {string} */
 			status: "processing" | "processed";
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
 			topic: number;
 			word: string;
-			/** Format: int64 */
 			catalog: number;
 			/** @enum {string} */
 			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
@@ -900,18 +837,25 @@ export interface components {
 			meaning?: string;
 		};
 		DeleteWordResponseDto: {
-			/** Format: int64 */
 			id: number;
 		};
 		WordTranslationDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
-			word: string;
+			word: number;
 			translation: string;
 			language: string;
+		};
+		GetWordsTranslationsResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of word translations */
+			items: components["schemas"]["WordTranslationDto"][];
 		};
 		GetWordTranslationResponseDto: {
 			/** @example 100 */
@@ -926,18 +870,15 @@ export interface components {
 		PostWordTranslationRequestDto: {
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
-			word: string;
+			word: number;
 			translation: string;
 			language: string;
 		};
 		PostWordTranslationResponseDto: {
-			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
-			/** Format: int64 */
-			word: string;
+			word: number;
 			translation: string;
 			language: string;
 		};
@@ -1044,13 +985,13 @@ export interface operations {
 				id?: number;
 				/** @description timestamp with time zone */
 				created_at?: string;
-				user?: string;
-				word?: string;
+				user?: number;
+				word?: number;
 				score?: number;
 				/** @description timestamp without time zone */
 				last_review?: string;
-				training?: string;
-				translation?: string;
+				training?: number;
+				translation?: number;
 			};
 			header?: never;
 			path?: never;
@@ -1212,7 +1153,7 @@ export interface operations {
 				created_at?: string;
 				title?: string;
 				description?: string;
-				catalog?: string;
+				language?: string;
 				image?: string | null;
 			};
 			header?: never;
@@ -1875,8 +1816,8 @@ export interface operations {
 				audio?: string;
 				transcribtion?: string;
 				meaning?: string;
-				sortBy: string;
-				sortOrder: string;
+				sortBy?: string;
+				sortOrder?: string;
 			};
 			header?: never;
 			path?: never;
@@ -1993,6 +1934,65 @@ export interface operations {
 			};
 		};
 	};
+	WordTranslationController_get: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				created_at?: string;
+				word?: number;
+				translation?: string;
+				language?: string;
+				/** @description Word ID or array of Word IDs */
+				words?: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetWordsTranslationsResponseDto"];
+				};
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordTranslationController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostWordTranslationRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostWordTranslationResponseDto"];
+				};
+			};
+		};
+	};
 	WordTranslationController_getById: {
 		parameters: {
 			query?: never;
@@ -2025,29 +2025,6 @@ export interface operations {
 					[name: string]: unknown;
 				};
 				content?: never;
-			};
-		};
-	};
-	WordTranslationController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostWordTranslationRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostWordTranslationResponseDto"];
-				};
 			};
 		};
 	};

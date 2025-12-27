@@ -1,0 +1,29 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+}
+
+.overlay {
+  border: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: color-mix(
+    in srgb,
+    var(--palette-black, #000) 50%,
+    transparent
+  );
+}
+
+.modal {
+  position: relative;
+  z-index: 2;
+  margin: var(--whiteSpace-general-4x, 32px);
+}

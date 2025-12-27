@@ -13,5 +13,6 @@ import { WordTranslationService } from "./wordstranslation.service";
 		WordsTranslationQueueProcessor,
 	],
 	controllers: [WordTranslationController],
+	exports: [WordTranslationService],
 })
 export class WordTranslationModule {}

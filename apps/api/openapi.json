@@ -42,7 +42,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -61,8 +60,7 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -70,8 +68,7 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -97,8 +94,7 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
-              "type": "string"
+              "type": "number"
             }
           },
           {
@@ -106,8 +102,7 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
-              "type": "string"
+              "type": "number"
             }
           }
         ],
@@ -288,7 +283,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -318,11 +312,10 @@
             }
           },
           {
-            "name": "catalog",
+            "name": "language",
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "string"
             }
           },
@@ -513,7 +506,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -744,7 +736,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -976,7 +967,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -994,7 +984,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -1231,7 +1220,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -1249,7 +1237,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -1266,7 +1253,6 @@
             "required": false,
             "in": "query",
             "schema": {
-              "format": "int64",
               "type": "number"
             }
           },
@@ -1314,7 +1300,7 @@
           },
           {
             "name": "sortBy",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "example": "created_at",
@@ -1323,7 +1309,7 @@
           },
           {
             "name": "sortOrder",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "example": "DESC",
@@ -1456,6 +1442,131 @@
         ]
       }
     },
+    "/words-translation": {
+      "get": {
+        "operationId": "WordTranslationController_get",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "words",
+            "required": false,
+            "in": "query",
+            "description": "Word ID or array of Word IDs",
+            "schema": {
+              "example": "1,2,3",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWordsTranslationsResponseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get words translations",
+        "tags": [
+          "words-translation"
+        ]
+      },
+      "post": {
+        "operationId": "WordTranslationController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostWordTranslationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostWordTranslationResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create words translation",
+        "tags": [
+          "words-translation"
+        ]
+      }
+    },
     "/words-translation/{id}": {
       "get": {
         "operationId": "WordTranslationController_getById",
@@ -1488,38 +1599,6 @@
           }
         },
         "summary": "Get words translation by id",
-        "tags": [
-          "words-translation"
-        ]
-      }
-    },
-    "/words-translation": {
-      "post": {
-        "operationId": "WordTranslationController_create",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostWordTranslationRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostWordTranslationResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create words translation",
         "tags": [
           "words-translation"
         ]
@@ -1811,8 +1890,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -1820,12 +1898,10 @@
             "description": "timestamp with time zone"
           },
           "user": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "score": {
             "type": "number"
@@ -1836,12 +1912,10 @@
             "description": "timestamp without time zone"
           },
           "training": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -1894,12 +1968,10 @@
             "description": "timestamp with time zone"
           },
           "user": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "score": {
             "type": "number"
@@ -1910,12 +1982,10 @@
             "description": "timestamp without time zone"
           },
           "training": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -1932,8 +2002,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -1941,12 +2010,10 @@
             "description": "timestamp with time zone"
           },
           "user": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "score": {
             "type": "number"
@@ -1957,12 +2024,10 @@
             "description": "timestamp without time zone"
           },
           "training": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -1980,8 +2045,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -1989,12 +2053,10 @@
             "description": "timestamp with time zone"
           },
           "user": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "score": {
             "type": "number"
@@ -2005,12 +2067,10 @@
             "description": "timestamp without time zone"
           },
           "training": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           }
         }
       },
@@ -2018,8 +2078,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2027,12 +2086,10 @@
             "description": "timestamp with time zone"
           },
           "user": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "score": {
             "type": "number"
@@ -2043,12 +2100,10 @@
             "description": "timestamp without time zone"
           },
           "training": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2066,8 +2121,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2078,8 +2132,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2091,9 +2144,8 @@
           "description": {
             "type": "string"
           },
-          "catalog": {
-            "type": "string",
-            "format": "int64"
+          "language": {
+            "type": "string"
           },
           "image": {
             "type": "string",
@@ -2105,7 +2157,7 @@
           "created_at",
           "title",
           "description",
-          "catalog"
+          "language"
         ]
       },
       "GetTopicResponseDto": {
@@ -2151,9 +2203,8 @@
           "description": {
             "type": "string"
           },
-          "catalog": {
-            "type": "string",
-            "format": "int64"
+          "language": {
+            "type": "string"
           },
           "image": {
             "type": "string",
@@ -2164,15 +2215,14 @@
           "created_at",
           "title",
           "description",
-          "catalog"
+          "language"
         ]
       },
       "PostTopicResponseDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2184,9 +2234,8 @@
           "description": {
             "type": "string"
           },
-          "catalog": {
-            "type": "string",
-            "format": "int64"
+          "language": {
+            "type": "string"
           },
           "image": {
             "type": "string",
@@ -2198,15 +2247,14 @@
           "created_at",
           "title",
           "description",
-          "catalog"
+          "language"
         ]
       },
       "PutTopicRequestDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2218,9 +2266,8 @@
           "description": {
             "type": "string"
           },
-          "catalog": {
-            "type": "string",
-            "format": "int64"
+          "language": {
+            "type": "string"
           },
           "image": {
             "type": "string",
@@ -2232,8 +2279,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2245,9 +2291,8 @@
           "description": {
             "type": "string"
           },
-          "catalog": {
-            "type": "string",
-            "format": "int64"
+          "language": {
+            "type": "string"
           },
           "image": {
             "type": "string",
@@ -2259,15 +2304,14 @@
           "created_at",
           "title",
           "description",
-          "catalog"
+          "language"
         ]
       },
       "DeleteTopicResponseDto": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2278,8 +2322,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2377,8 +2420,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2414,8 +2456,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2442,8 +2483,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2479,8 +2519,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2491,8 +2530,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2592,8 +2630,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2628,8 +2665,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2657,8 +2693,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
@@ -2693,8 +2728,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2705,16 +2739,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "owner": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "title": {
             "type": "string"
@@ -2773,8 +2805,7 @@
         "type": "object",
         "properties": {
           "owner": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "title": {
             "type": "string"
@@ -2801,16 +2832,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "owner": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "title": {
             "type": "string"
@@ -2839,16 +2868,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "owner": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "title": {
             "type": "string"
@@ -2870,16 +2897,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "owner": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "title": {
             "type": "string"
@@ -2908,8 +2933,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -2927,23 +2951,20 @@
             ]
           },
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "topic": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
             "type": "string"
           },
           "catalog": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "language": {
             "type": "string",
@@ -3021,23 +3042,20 @@
             ]
           },
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "topic": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
             "type": "string"
           },
           "catalog": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "language": {
             "type": "string",
@@ -3074,23 +3092,20 @@
             ]
           },
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "topic": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "word": {
             "type": "string"
           },
           "catalog": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "language": {
             "type": "string",
@@ -3131,8 +3146,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           }
         },
         "required": [
@@ -3143,16 +3157,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
             "type": "string"
@@ -3167,6 +3179,36 @@
           "word",
           "translation",
           "language"
+        ]
+      },
+      "GetWordsTranslationsResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of word translations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WordTranslationDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
         ]
       },
       "GetWordTranslationResponseDto": {
@@ -3207,8 +3249,7 @@
             "format": "date-time"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
             "type": "string"
@@ -3228,16 +3269,14 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64"
+            "type": "number"
           },
           "created_at": {
             "type": "string",
             "format": "date-time"
           },
           "word": {
-            "type": "string",
-            "format": "int64"
+            "type": "number"
           },
           "translation": {
             "type": "string"

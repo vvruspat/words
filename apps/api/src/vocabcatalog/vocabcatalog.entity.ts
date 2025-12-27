@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "vocab_catalogs" })
 export class VocabCatalogEntity implements VocabCatalog {
-	@PrimaryGeneratedColumn({ type: "bigint" })
+	@PrimaryGeneratedColumn({ type: "int" })
 	id: number;
 
 	@Column({
@@ -13,7 +13,7 @@ export class VocabCatalogEntity implements VocabCatalog {
 	})
 	created_at: string;
 
-	@Column({ type: "bigint" })
+	@Column({ type: "int" })
 	owner: number;
 
 	@Column()

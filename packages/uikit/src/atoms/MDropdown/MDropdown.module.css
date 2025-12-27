@@ -3,6 +3,7 @@
 }
 
 .dropdown {
+	width: 100%;
 	display: none;
 	position: var(--dropdown-position);
 	bottom: 0;

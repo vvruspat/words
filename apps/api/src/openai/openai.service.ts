@@ -18,6 +18,7 @@ import {
 	GENERATE_WORDS_PROMPT_ID,
 	TRANSLATE_WORDS_PROMPT_ID,
 } from "./constants/prompts";
+import { chooseVoice } from "./utlis/chooseVoice";
 
 const WORDS_LIMIT = 10;
 
@@ -237,10 +238,11 @@ export class OpenAIService {
 
 		this.translationsQueue.add(TRANSLATION_DONE, {
 			generatedTranslations:
-				translatedWords.result ||
-				translatedWords.results ||
-				translatedWords.data ||
-				translatedWords.items ||
+				translatedWords.translations ??
+				translatedWords.result ??
+				translatedWords.results ??
+				translatedWords.data ??
+				translatedWords.items ??
 				translatedWords,
 			words,
 		});
@@ -249,7 +251,7 @@ export class OpenAIService {
 	async makeAudio(language: Language, word: string, wordId: WordEntity["id"]) {
 		const mp3 = await this.openai.audio.speech.create({
 			model: "gpt-4o-mini-tts",
-			voice: "coral",
+			voice: chooseVoice(language),
 			input: word,
 			instructions: `Generate clear pronunciation of the word in ${codeToLanguage(language)}. Speak as a teacher.`,
 		});

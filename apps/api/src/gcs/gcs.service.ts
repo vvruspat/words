@@ -49,7 +49,7 @@ export class GcsService {
 				throw new Error(`Failed to upload MP3: ${error.message}`);
 			}
 
-			throw new Error(`Failed to upload MP3: ${error}`);
+			this.logger.error(`Failed to upload MP3: ${error}`);
 		}
 	}
 }

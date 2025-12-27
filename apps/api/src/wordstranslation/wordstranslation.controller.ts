@@ -6,11 +6,14 @@ import {
 	Param,
 	ParseIntPipe,
 	Post,
+	Query,
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
+	GetWordsTranslationsRequestDto,
+	GetWordsTranslationsResponseDto,
 	GetWordTranslationResponseDto,
 	PostWordTranslationRequestDto,
 	PostWordTranslationResponseDto,
@@ -23,6 +26,38 @@ export class WordTranslationController {
 	constructor(
 		private readonly wordsTranslationService: WordTranslationService,
 	) {}
+
+	@Get()
+	@ApiOperation({ summary: "Get words translations" })
+	@ApiResponse({ status: 200, type: GetWordsTranslationsResponseDto })
+	@ApiResponse({ status: 500, description: "Server error" })
+	async get(
+		@Query() query: GetWordsTranslationsRequestDto,
+	): Promise<GetWordsTranslationsResponseDto> {
+		const { limit, offset, words, ...filters } = query;
+
+		const wordsArray = words
+			? words
+					.split(",")
+					.map(Number)
+					.filter((id) => !Number.isNaN(id))
+			: undefined;
+		const items = await this.wordsTranslationService.findAll({
+			words: wordsArray,
+			...filters,
+		});
+		const total = await this.wordsTranslationService.count({
+			words: wordsArray,
+			...filters,
+		});
+
+		return {
+			items,
+			total,
+			limit: limit ?? 10,
+			offset: offset ?? 0,
+		};
+	}
 
 	@Get(":id")
 	@ApiOperation({ summary: "Get words translation by id" })

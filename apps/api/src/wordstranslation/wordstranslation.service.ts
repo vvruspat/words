@@ -1,7 +1,8 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Queue } from "bullmq";
-import type { Repository } from "typeorm";
+import type { FindOptionsWhere, Repository } from "typeorm";
+import { In } from "typeorm";
 import { TRANSLATION_START } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
 import { WordEntity } from "~/word/word.entity";
@@ -19,8 +20,74 @@ export class WordTranslationService {
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 	) {}
 
-	async findAll(): Promise<WordTranslationEntity[]> {
-		return this.wordsTranslationRepository.find();
+	async findAll(
+		filters: Partial<WordTranslationEntity> & {
+			words?: WordTranslationEntity["word"][] | string;
+		},
+	): Promise<WordTranslationEntity[]> {
+		const { words, ...restFilters } = filters;
+		const where: FindOptionsWhere<WordTranslationEntity> = {
+			...restFilters,
+		} as FindOptionsWhere<WordTranslationEntity>;
+
+		console.log("-----------------words-----------------");
+		console.log(words, filters);
+		// Handle multiple word IDs using In operator
+		if (words !== undefined) {
+			// Normalize words to an array of numbers
+			let wordIds: number[];
+
+			if (Array.isArray(words)) {
+				wordIds = words.map((w) =>
+					typeof w === "string" ? parseInt(w, 10) : w,
+				);
+			} else if (typeof words === "string") {
+				// Handle comma-separated string
+				wordIds = words.split(",").map((w) => parseInt(w.trim(), 10));
+			} else {
+				wordIds = [words];
+			}
+			// Filter out any NaN values
+			wordIds = wordIds.filter((id) => !Number.isNaN(id));
+			if (wordIds.length > 0) {
+				where.word = In(wordIds);
+			}
+		}
+
+		return this.wordsTranslationRepository.find({ where });
+	}
+
+	async count(
+		filters: Partial<WordTranslationEntity> & {
+			words?: WordTranslationEntity["word"][] | string;
+		},
+	): Promise<number> {
+		const { words, ...restFilters } = filters;
+		const where: FindOptionsWhere<WordTranslationEntity> = {
+			...restFilters,
+		} as FindOptionsWhere<WordTranslationEntity>;
+
+		if (words !== undefined) {
+			// Normalize words to an array of numbers
+			let wordIds: number[];
+			if (Array.isArray(words)) {
+				wordIds = words.map((w) =>
+					typeof w === "string" ? parseInt(w, 10) : w,
+				);
+			} else if (typeof words === "string") {
+				// Handle comma-separated string
+				wordIds = words.split(",").map((w) => parseInt(w.trim(), 10));
+			} else {
+				wordIds = [words];
+			}
+			// Filter out any NaN values
+			wordIds = wordIds.filter((id) => !Number.isNaN(id));
+			if (wordIds.length > 0) {
+				where.word = In(wordIds);
+			}
+		}
+
+		return this.wordsTranslationRepository.count({ where });
 	}
 
 	async findOne(
@@ -74,12 +141,13 @@ export class WordTranslationService {
 			words.map((word) => [word.word, word]),
 		);
 
-		generatedTranslations.forEach(async (translation) => {
+		// Create all translations
+		for (const translation of generatedTranslations) {
 			const word = wordsMap.get(translation.word);
-			if (!word) return;
+			if (!word) continue;
 
-			Object.keys(translation).forEach(async (key) => {
-				if (key === "word") return;
+			for (const key of Object.keys(translation)) {
+				if (key === "word") continue;
 
 				this.logger.log(
 					`Creating translation for word ${word.word} in language ${key}: ${translation[key]}`,
@@ -91,7 +159,7 @@ export class WordTranslationService {
 					language: key,
 					created_at: new Date().toISOString(),
 				});
-			});
-		});
+			}
+		}
 	}
 }

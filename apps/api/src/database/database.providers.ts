@@ -1,5 +1,7 @@
 import { DataSource } from "typeorm";
 import { DATA_SOURCE } from "../constants/database.constants";
+import { WordSubscriber } from "../word/word.subscriber";
+import { TranslationSubscriber } from "../wordstranslation/wordtranslation.subscriber";
 
 export const databaseProviders = [
 	{
@@ -16,6 +18,8 @@ export const databaseProviders = [
 				synchronize: true,
 				logging: true,
 				logger: "advanced-console",
+
+				subscribers: [WordSubscriber, TranslationSubscriber],
 			});
 
 			return dataSource.initialize();

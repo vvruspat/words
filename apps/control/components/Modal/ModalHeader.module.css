@@ -1,0 +1,11 @@
+.closeButton {
+  padding: 0;
+  color: var(--button-secondary-enabled-font-color, #1e222a);
+  cursor: pointer;
+  background: none;
+  border: 0 none;
+}
+
+.closeButton:hover {
+  color: var(--button-secondary-hover-font-color, #000);
+}

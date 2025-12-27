@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 
 export type MDataGridHeaderType = ComponentProps<"th"> & {
+	key?: string;
 	field: string;
 	label: ReactNode;
 	sortable?: boolean;
@@ -14,7 +15,7 @@ export type MDataGridHeaderType = ComponentProps<"th"> & {
 	renderFilter?: (
 		props: ComponentProps<"input">,
 	) => ReactElement<ComponentProps<"input">>;
-	renderCell?: (value: MDataGridCellValue) => ReactNode;
+	renderCell?: (value: MDataGridCellValue, row: MDataGridRowType) => ReactNode;
 };
 
 export type MDataGridCellValue = string | number | boolean | object;
@@ -23,7 +24,7 @@ export type MDataGridRowType = Record<string, MDataGridCellValue> & {
 	id: string | number;
 };
 
-export type MDataGridPagination = {
+export type MDataGridPaginationConfig = {
 	total: number;
 	limit: number;
 	offset: number;

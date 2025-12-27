@@ -11,7 +11,8 @@
 	table-layout: fixed;
 }
 
-.dataGridTable thead th {
+.dataGridTable thead th,
+.dataGridTable tfoot td {
 	vertical-align: top;
 	background: var(--table-head-background-color);
 	padding: var(--table-head-padding-vertical)
@@ -24,6 +25,16 @@
 }
 
 .dataGridTable thead th:nth-last-child(1) {
+	border-top-right-radius: var(--border-radius-2xl);
+	border-bottom-right-radius: var(--border-radius-2xl);
+}
+
+.dataGridTable tfoot td:nth-child(1) {
+	border-top-left-radius: var(--border-radius-2xl);
+	border-bottom-left-radius: var(--border-radius-2xl);
+}
+
+.dataGridTable tfoot td:nth-last-child(1) {
 	border-top-right-radius: var(--border-radius-2xl);
 	border-bottom-right-radius: var(--border-radius-2xl);
 }

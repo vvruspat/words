@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@repo/uikit/styles/index.css";
+import { Modal } from "@/components/Modal";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -18,7 +19,10 @@ export default function RootLayout({
 			data-brand="words-control"
 			data-platform="desktop"
 		>
-			<body>{children}</body>
+			<body>
+				{children}
+				<Modal />
+			</body>
 		</html>
 	);
 }

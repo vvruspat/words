@@ -1,31 +1,40 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import {
+	ComponentProps,
+	ReactNode,
+	useCallback,
+	useMemo,
+	useState,
+} from "react";
 import styles from "./MDataGrid.module.css";
 import { MDataGridHeader } from "./MDataGridHeader";
 import { MDataGridPagination } from "./MDataGridPagination";
 import { MDataGridRow } from "./MDataGridRow";
 import type {
 	MDataGridHeaderType,
-	MDataGridPagination as MDataGridPaginationType,
+	MDataGridPaginationConfig,
 	MDataGridRowType,
 } from "./types";
 import "./MDataGrid.vars.css";
 
-type MDataGridProps = {
+type MDataGridProps = ComponentProps<"table"> & {
+	emptyMessage?: ReactNode;
 	headers: MDataGridHeaderType[];
 	rows?: MDataGridRowType[];
 	onSelect?: (selected: MDataGridRowType[]) => void;
 	onSort?: (field: string, direction: "asc" | "desc") => void;
-	pagination: MDataGridPaginationType;
+	pagination: MDataGridPaginationConfig;
 };
 
 export const MDataGrid = ({
+	emptyMessage,
 	headers,
 	rows,
 	onSelect,
 	onSort,
 	pagination,
+	...tableProps
 }: MDataGridProps) => {
 	const [selectedRows, setSelectedRows] = useState<Set<string | number>>(
 		new Set(),
@@ -121,14 +130,14 @@ export const MDataGrid = ({
 
 	return (
 		<div className={styles.dataGridContainer}>
-			<table className={styles.dataGridTable}>
+			<table className={styles.dataGridTable} {...tableProps}>
 				<thead>
 					<tr>
 						{onSelect && <th />}
 						{headers.map((header) => (
 							<MDataGridHeader
 								{...header}
-								key={header.field}
+								key={`${header.key ?? "header"}-${header.field}`}
 								sortingNow={sortedField === header.field}
 								onSort={(direction) => handleSort(header.field, direction)}
 								onFilter={handleFilter}
@@ -146,16 +155,29 @@ export const MDataGrid = ({
 							selected={selectedRows.has(row.id)}
 						/>
 					))}
+					{filteredRows.length === 0 && (
+						<tr>
+							<td colSpan={headers.length + 1} align="center">
+								{emptyMessage}
+							</td>
+						</tr>
+					)}
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colSpan={headers.length + 1}>
+							<MDataGridPagination
+								total={pagination.total}
+								limit={pagination.limit}
+								offset={pagination.offset}
+								onNextPage={pagination.onNextPage}
+								onPreviousPage={pagination.onPreviousPage}
+								onRowsPerPageChange={pagination.onRowsPerPageChange}
+							/>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
-			<MDataGridPagination
-				total={pagination.total}
-				limit={pagination.limit}
-				offset={pagination.offset}
-				onNextPage={pagination.onNextPage}
-				onPreviousPage={pagination.onPreviousPage}
-				onRowsPerPageChange={pagination.onRowsPerPageChange}
-			/>
 		</div>
 	);
 };
