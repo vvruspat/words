@@ -32,6 +32,7 @@ export const MInput = ({
 	inputWidth = "auto",
 	headingClassName,
 	footerClassName,
+	onClick,
 	...restProps
 }: InputProps) => {
 	const { ClearButton, ...restClearableProps } = useClearable({
@@ -43,6 +44,7 @@ export const MInput = ({
 			direction="column"
 			align="start"
 			className={clsx(styles.inputWrapper, styles[status], wrapperClassName)}
+			onClick={onClick}
 		>
 			<MFlex
 				className={clsx(

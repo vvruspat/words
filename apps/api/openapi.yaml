@@ -825,13 +825,13 @@ paths:
           schema:
             type: string
         - name: sortBy
-          required: true
+          required: false
           in: query
           schema:
             example: created_at
             type: string
         - name: sortOrder
-          required: true
+          required: false
           in: query
           schema:
             example: DESC

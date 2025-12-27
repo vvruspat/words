@@ -9,7 +9,7 @@ import {
 export class GetWordRequestDto extends IntersectionType(
 	ApiPaginatedRequestDto,
 	PartialType(WordDto),
-	ApiSortingRequestDto,
+	PartialType(ApiSortingRequestDto),
 ) {}
 
 export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {

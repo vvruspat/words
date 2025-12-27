@@ -16,6 +16,8 @@ export const databaseProviders = [
 				synchronize: true,
 				logging: true,
 				logger: "advanced-console",
+
+				subscribers: [`${__dirname}/../**/*.subscriber.ts`],
 			});
 
 			return dataSource.initialize();

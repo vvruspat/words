@@ -14,7 +14,6 @@ export async function fetchWordsAction(props: {
 	sortOrder?: "asc" | "desc";
 }) {
 	const { filters, ...restProps } = props;
-	console.log("--------------------------------\n", props);
 	return await $fetch("/word", "get", {
 		query: {
 			...restProps,

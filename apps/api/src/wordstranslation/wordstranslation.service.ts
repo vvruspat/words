@@ -74,12 +74,13 @@ export class WordTranslationService {
 			words.map((word) => [word.word, word]),
 		);
 
-		generatedTranslations.forEach(async (translation) => {
+		// Create all translations
+		for (const translation of generatedTranslations) {
 			const word = wordsMap.get(translation.word);
-			if (!word) return;
+			if (!word) continue;
 
-			Object.keys(translation).forEach(async (key) => {
-				if (key === "word") return;
+			for (const key of Object.keys(translation)) {
+				if (key === "word") continue;
 
 				this.logger.log(
 					`Creating translation for word ${word.word} in language ${key}: ${translation[key]}`,
@@ -91,7 +92,7 @@ export class WordTranslationService {
 					language: key,
 					created_at: new Date().toISOString(),
 				});
-			});
-		});
+			}
+		}
 	}
 }

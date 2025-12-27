@@ -1314,7 +1314,7 @@
           },
           {
             "name": "sortBy",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "example": "created_at",
@@ -1323,7 +1323,7 @@
           },
           {
             "name": "sortOrder",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "example": "DESC",

@@ -5,6 +5,7 @@ import {
 	type ChangeEvent,
 	type ReactNode,
 	useCallback,
+	useEffect,
 	useMemo,
 	useState,
 } from "react";
@@ -49,7 +50,7 @@ export const MSelect = ({
 	const [open, setOpen] = useState(false);
 	const getInitialVisibleValue = (): string => {
 		if (value) {
-			const option = options.find((opt) => opt.key === defaultValue);
+			const option = options.find((opt) => opt.key === value);
 			return extractTextFromReactNode(option?.value ?? "");
 		}
 		if (defaultValue) {
@@ -63,6 +64,18 @@ export const MSelect = ({
 		getInitialVisibleValue(),
 	);
 	const [hiddenValue, setHiddenlValue] = useState(value || defaultValue || "");
+
+	useEffect(() => {
+		if (value !== undefined) {
+			const option = options.find((opt) => opt.key === value);
+			setVisibleValue(extractTextFromReactNode(option?.value ?? ""));
+			setHiddenlValue(value);
+		} else if (defaultValue !== undefined) {
+			const option = options.find((opt) => opt.key === defaultValue);
+			setVisibleValue(extractTextFromReactNode(option?.value ?? ""));
+			setHiddenlValue(defaultValue);
+		}
+	}, [value, defaultValue, options]);
 
 	const handleClick = () => {
 		setOpen(!open);
@@ -114,6 +127,7 @@ export const MSelect = ({
 			dropdownContent={
 				<MList showDivider options={mappedOptions} onChoose={onChoose} />
 			}
+			dropdownContentClassName={styles.dropdown}
 		>
 			<input type="hidden" name={name} value={hiddenValue} />
 			<MInput

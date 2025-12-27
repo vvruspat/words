@@ -1875,8 +1875,8 @@ export interface operations {
 				audio?: string;
 				transcribtion?: string;
 				meaning?: string;
-				sortBy: string;
-				sortOrder: string;
+				sortBy?: string;
+				sortOrder?: string;
 			};
 			header?: never;
 			path?: never;
