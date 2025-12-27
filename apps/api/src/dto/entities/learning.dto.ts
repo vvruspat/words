@@ -10,7 +10,7 @@ import { WordDataDto } from "./word.dto";
 import { WordTranslationDto } from "./words-translation.dto";
 
 export class LearningDto implements Learning {
-	@ApiProperty({ type: Number, format: "int64" })
+	@ApiProperty({ type: Number })
 	id!: number;
 
 	@ApiProperty({
@@ -20,10 +20,10 @@ export class LearningDto implements Learning {
 	})
 	created_at!: string;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number })
 	user!: number;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number })
 	word!: number;
 
 	@ApiProperty({ type: "number" })
@@ -36,10 +36,10 @@ export class LearningDto implements Learning {
 	})
 	last_review!: string;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number })
 	training!: number;
 
-	@ApiProperty({ type: "string", format: "int64" })
+	@ApiProperty({ type: Number })
 	translation!: number;
 }
 

@@ -39,8 +39,8 @@ export const GenerateWordsForm = () => {
 		try {
 			await generateWordsAction(
 				language,
-				generateTopic ? topics[generateTopic].title : "",
-				generateCatalog ? catalogs[generateCatalog].title : "",
+				topics.find((t) => t.id === generateTopic)?.title ?? "",
+				catalogs.find((c) => c.id === generateCatalog)?.title ?? "",
 			);
 			setGenerateMessage("Word generation started!");
 		} catch (err) {

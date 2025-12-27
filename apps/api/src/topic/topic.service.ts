@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ApiPaginationRequest, Topic } from "@repo/types";
+import { ApiPaginationRequest, Language, Topic } from "@repo/types";
 import { Repository } from "typeorm";
 import { TOPIC_REPOSITORY } from "../constants/database.constants";
 import { TopicEntity } from "./topic.entity";
@@ -27,6 +27,7 @@ export class TopicService {
 
 	async findAllAndCreateIfNotExist(
 		topics: Topic["title"][],
+		language: Language,
 	): Promise<TopicEntity[]> {
 		const existingTopics = await this.topicRepository.find({
 			where: topics.map((title) => ({ title })),
@@ -36,7 +37,7 @@ export class TopicService {
 		const newTitles = topics.filter((title) => !existingTitles.has(title));
 
 		const newTopics = this.topicRepository.create(
-			newTitles.map((title) => ({ title })),
+			newTitles.map((title) => ({ title, language })),
 		);
 
 		if (newTopics.length > 0) {

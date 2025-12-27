@@ -29,7 +29,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -42,14 +41,12 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
-            type: string
+            type: number
         - name: word
           required: false
           in: query
           schema:
-            format: int64
-            type: string
+            type: number
         - name: score
           required: false
           in: query
@@ -66,14 +63,12 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
-            type: string
+            type: number
         - name: translation
           required: false
           in: query
           schema:
-            format: int64
-            type: string
+            type: number
       responses:
         '200':
           description: ''
@@ -184,7 +179,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -202,11 +196,10 @@ paths:
           in: query
           schema:
             type: string
-        - name: catalog
+        - name: language
           required: false
           in: query
           schema:
-            format: int64
             type: string
         - name: image
           required: false
@@ -324,7 +317,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -467,7 +459,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -611,7 +602,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -623,7 +613,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: title
           required: false
@@ -770,7 +759,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: created_at
           required: false
@@ -782,7 +770,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: word
           required: false
@@ -793,7 +780,6 @@ paths:
           required: false
           in: query
           schema:
-            format: int64
             type: number
         - name: language
           required: false
@@ -911,6 +897,85 @@ paths:
           description: Word generation started
       summary: Generate words
       tags: *ref_5
+  /words-translation:
+    get:
+      operationId: WordTranslationController_get
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: word
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: translation
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: words
+          required: false
+          in: query
+          description: Word ID or array of Word IDs
+          schema:
+            example: 1,2,3
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWordsTranslationsResponseDto'
+        '500':
+          description: Server error
+      summary: Get words translations
+      tags: &ref_6
+        - words-translation
+    post:
+      operationId: WordTranslationController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostWordTranslationRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostWordTranslationResponseDto'
+      summary: Create words translation
+      tags: *ref_6
   /words-translation/{id}:
     get:
       operationId: WordTranslationController_getById
@@ -932,26 +997,6 @@ paths:
         '500':
           description: Server error
       summary: Get words translation by id
-      tags: &ref_6
-        - words-translation
-  /words-translation:
-    post:
-      operationId: WordTranslationController_create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostWordTranslationRequestDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PostWordTranslationResponseDto'
-      summary: Create words translation
       tags: *ref_6
   /auth/signin:
     post:
@@ -1133,17 +1178,14 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
           description: timestamp with time zone
         user:
-          type: string
-          format: int64
+          type: number
         word:
-          type: string
-          format: int64
+          type: number
         score:
           type: number
         last_review:
@@ -1151,11 +1193,9 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: string
-          format: int64
+          type: number
         translation:
-          type: string
-          format: int64
+          type: number
       required:
         - id
         - created_at
@@ -1195,11 +1235,9 @@ components:
           format: date-time
           description: timestamp with time zone
         user:
-          type: string
-          format: int64
+          type: number
         word:
-          type: string
-          format: int64
+          type: number
         score:
           type: number
         last_review:
@@ -1207,11 +1245,9 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: string
-          format: int64
+          type: number
         translation:
-          type: string
-          format: int64
+          type: number
       required:
         - created_at
         - user
@@ -1225,17 +1261,14 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
           description: timestamp with time zone
         user:
-          type: string
-          format: int64
+          type: number
         word:
-          type: string
-          format: int64
+          type: number
         score:
           type: number
         last_review:
@@ -1243,11 +1276,9 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: string
-          format: int64
+          type: number
         translation:
-          type: string
-          format: int64
+          type: number
       required:
         - id
         - created_at
@@ -1261,18 +1292,15 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: int64
+          type: number
         created_at:
           type: string
           format: date-time
           description: timestamp with time zone
         user:
-          type: string
-          format: int64
+          type: number
         word:
-          type: string
-          format: int64
+          type: number
         score:
           type: number
         last_review:
@@ -1280,27 +1308,22 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: string
-          format: int64
+          type: number
         translation:
-          type: string
-          format: int64
+          type: number
     PutLearningResponseDto:
       type: object
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
           description: timestamp with time zone
         user:
-          type: string
-          format: int64
+          type: number
         word:
-          type: string
-          format: int64
+          type: number
         score:
           type: number
         last_review:
@@ -1308,11 +1331,9 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: string
-          format: int64
+          type: number
         translation:
-          type: string
-          format: int64
+          type: number
       required:
         - id
         - created_at
@@ -1327,7 +1348,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     TopicDto:
@@ -1335,7 +1355,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1343,9 +1362,8 @@ components:
           type: string
         description:
           type: string
-        catalog:
+        language:
           type: string
-          format: int64
         image:
           type: string
           nullable: true
@@ -1354,7 +1372,7 @@ components:
         - created_at
         - title
         - description
-        - catalog
+        - language
     GetTopicResponseDto:
       type: object
       properties:
@@ -1387,9 +1405,8 @@ components:
           type: string
         description:
           type: string
-        catalog:
+        language:
           type: string
-          format: int64
         image:
           type: string
           nullable: true
@@ -1397,13 +1414,12 @@ components:
         - created_at
         - title
         - description
-        - catalog
+        - language
     PostTopicResponseDto:
       type: object
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1411,9 +1427,8 @@ components:
           type: string
         description:
           type: string
-        catalog:
+        language:
           type: string
-          format: int64
         image:
           type: string
           nullable: true
@@ -1422,13 +1437,12 @@ components:
         - created_at
         - title
         - description
-        - catalog
+        - language
     PutTopicRequestDto:
       type: object
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1436,9 +1450,8 @@ components:
           type: string
         description:
           type: string
-        catalog:
+        language:
           type: string
-          format: int64
         image:
           type: string
           nullable: true
@@ -1447,7 +1460,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1455,9 +1467,8 @@ components:
           type: string
         description:
           type: string
-        catalog:
+        language:
           type: string
-          format: int64
         image:
           type: string
           nullable: true
@@ -1466,13 +1477,12 @@ components:
         - created_at
         - title
         - description
-        - catalog
+        - language
     DeleteTopicResponseDto:
       type: object
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     TrainingDto:
@@ -1480,7 +1490,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1552,7 +1561,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1579,7 +1587,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1598,7 +1605,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1625,7 +1631,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     UserDto:
@@ -1633,7 +1638,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1706,7 +1710,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1732,7 +1735,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1752,7 +1754,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
@@ -1778,7 +1779,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     VocabCatalogDto:
@@ -1786,13 +1786,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         owner:
           type: number
-          format: int64
         title:
           type: string
         description:
@@ -1836,7 +1834,6 @@ components:
       properties:
         owner:
           type: number
-          format: int64
         title:
           type: string
         description:
@@ -1856,13 +1853,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         owner:
           type: number
-          format: int64
         title:
           type: string
         description:
@@ -1884,13 +1879,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         owner:
           type: number
-          format: int64
         title:
           type: string
         description:
@@ -1906,13 +1899,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         owner:
           type: number
-          format: int64
         title:
           type: string
         description:
@@ -1934,7 +1925,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     WordDto:
@@ -1947,18 +1937,15 @@ components:
             - processed
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         topic:
           type: number
-          format: int64
         word:
           type: string
         catalog:
           type: number
-          format: int64
         language:
           type: string
           enum: &ref_9
@@ -2016,18 +2003,15 @@ components:
           enum: *ref_8
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         topic:
           type: number
-          format: int64
         word:
           type: string
         catalog:
           type: number
-          format: int64
         language:
           type: string
           enum: *ref_9
@@ -2045,18 +2029,15 @@ components:
           enum: *ref_8
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         topic:
           type: number
-          format: int64
         word:
           type: string
         catalog:
           type: number
-          format: int64
         language:
           type: string
           enum: *ref_9
@@ -2081,7 +2062,6 @@ components:
       properties:
         id:
           type: number
-          format: int64
       required:
         - id
     WordTranslationDto:
@@ -2089,13 +2069,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         word:
-          type: string
-          format: int64
+          type: number
         translation:
           type: string
         language:
@@ -2106,6 +2084,28 @@ components:
         - word
         - translation
         - language
+    GetWordsTranslationsResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of word translations
+          type: array
+          items:
+            $ref: '#/components/schemas/WordTranslationDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
     GetWordTranslationResponseDto:
       type: object
       properties:
@@ -2135,8 +2135,7 @@ components:
           type: string
           format: date-time
         word:
-          type: string
-          format: int64
+          type: number
         translation:
           type: string
         language:
@@ -2151,13 +2150,11 @@ components:
       properties:
         id:
           type: number
-          format: int64
         created_at:
           type: string
           format: date-time
         word:
-          type: string
-          format: int64
+          type: number
         translation:
           type: string
         language:

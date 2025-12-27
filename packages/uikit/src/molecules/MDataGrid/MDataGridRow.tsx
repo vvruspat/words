@@ -29,14 +29,14 @@ export const MDataGridRow = ({
 		) => {
 			return (
 				<td
-					key={`${header.field}-${rowId}`}
+					key={`${header.key ?? "cell"}-${header.field}-${rowId}`}
 					className={clsx({ [styles.selected]: selected })}
 				>
-					{cell ? (header.renderCell?.(cell) ?? cell.toString()) : ""}
+					{cell ? (header.renderCell?.(cell, row) ?? cell.toString()) : ""}
 				</td>
 			);
 		},
-		[selected],
+		[selected, row],
 	);
 
 	return (

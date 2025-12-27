@@ -13,7 +13,7 @@ import { MDataGridPagination } from "./MDataGridPagination";
 import { MDataGridRow } from "./MDataGridRow";
 import type {
 	MDataGridHeaderType,
-	MDataGridPagination as MDataGridPaginationType,
+	MDataGridPaginationConfig,
 	MDataGridRowType,
 } from "./types";
 import "./MDataGrid.vars.css";
@@ -24,7 +24,7 @@ type MDataGridProps = ComponentProps<"table"> & {
 	rows?: MDataGridRowType[];
 	onSelect?: (selected: MDataGridRowType[]) => void;
 	onSort?: (field: string, direction: "asc" | "desc") => void;
-	pagination: MDataGridPaginationType;
+	pagination: MDataGridPaginationConfig;
 };
 
 export const MDataGrid = ({
@@ -137,7 +137,7 @@ export const MDataGrid = ({
 						{headers.map((header) => (
 							<MDataGridHeader
 								{...header}
-								key={header.field}
+								key={`${header.key ?? "header"}-${header.field}`}
 								sortingNow={sortedField === header.field}
 								onSort={(direction) => handleSort(header.field, direction)}
 								onFilter={handleFilter}

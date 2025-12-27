@@ -74,8 +74,19 @@ export const $fetch = async <U extends ValidUrl, M extends ValidMethod<U>>(
 
 		const isServer = typeof window === "undefined";
 
+		// Build query string manually to handle arrays properly
 		const queryString = query
-			? `?${new URLSearchParams(query as Record<string, string>).toString()}`
+			? `?${Object.entries(query)
+					.map(([key, value]) => {
+						if (value === undefined || value === null) return "";
+						if (Array.isArray(value)) {
+							// For arrays, join with commas
+							return `${key}=${value.join(",")}`;
+						}
+						return `${key}=${encodeURIComponent(String(value))}`;
+					})
+					.filter(Boolean)
+					.join("&")}`
 			: "";
 
 		const authHeader: {

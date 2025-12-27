@@ -9,7 +9,7 @@ import {
 } from "class-validator";
 
 export class UserDto implements User {
-	@ApiProperty({ type: Number, format: "int64" })
+	@ApiProperty({ type: Number })
 	@IsNumber()
 	@IsOptional()
 	id!: number;

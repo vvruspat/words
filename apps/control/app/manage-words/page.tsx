@@ -1,6 +1,7 @@
 "use client";
 import { AVAILABLE_LANGUAGES, type Language, type Word } from "@repo/types";
 import {
+	MBadge,
 	MButton,
 	MDataGrid,
 	MFlex,
@@ -14,7 +15,10 @@ import {
 } from "@repo/uikit";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
+import { TranslationsDropdown } from "@/components/TranslationsDropdown/TranslationsDropdown";
 import useModal, { MODALS } from "@/stores/useModal";
+import { useTranslationsStore } from "@/stores/useTranslationsStore";
 import { useWordsStore } from "@/stores/useWordsStore";
 import { fetchCatalogsAction } from "../../actions/fetchCatalogsAction";
 import { fetchTopicsAction } from "../../actions/fetchTopicsAction";
@@ -33,6 +37,9 @@ export default function ManageWordsPage() {
 		setCatalogs,
 		setTopics,
 	} = useWordsStore();
+
+	const { translations, setTranslations } = useTranslationsStore();
+
 	const [words, setWords] = useState<Word[]>([]);
 
 	const [total, setTotal] = useState(0);
@@ -59,12 +66,25 @@ export default function ManageWordsPage() {
 
 	// Fetch topics using server action
 	useEffect(() => {
-		fetchTopicsAction()
+		fetchTopicsAction(language)
 			.then((data) => {
 				setTopics(data.items);
 			})
 			.catch(() => setTopics([]));
-	}, [setTopics]);
+	}, [setTopics, language]);
+
+	// Fetch translations using server action
+	useEffect(() => {
+		fetchTranslationsAction({
+			offset: 0,
+			limit: words.length * Object.keys(AVAILABLE_LANGUAGES).length,
+			words: words.map((word) => word.id),
+		})
+			.then((data) => {
+				setTranslations(data.items);
+			})
+			.catch(() => setTranslations([]));
+	}, [setTranslations, words]);
 
 	const languageOptions = Object.entries(AVAILABLE_LANGUAGES).map(
 		([key, value]) => ({
@@ -210,6 +230,13 @@ export default function ManageWordsPage() {
 							{
 								field: "status",
 								label: "Status",
+								renderCell: (status) => (
+									<MBadge
+										mode={status === "processing" ? "warning" : "success"}
+									>
+										{status as "processing" | "processed"}
+									</MBadge>
+								),
 							},
 							{ field: "word", label: "Word" },
 							{
@@ -261,6 +288,17 @@ export default function ManageWordsPage() {
 										options={topicsOptions}
 										value={selectedTopic}
 										onChange={(e) => setSelectedTopic(e.target.value)}
+									/>
+								),
+							},
+							{
+								field: "id",
+								key: "translations",
+								label: "Translations",
+								renderCell: (id) => (
+									<TranslationsDropdown
+										id={Number(id)}
+										translations={translations}
 									/>
 								),
 							},

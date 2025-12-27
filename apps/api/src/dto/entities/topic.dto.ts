@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import type { Topic } from "@repo/types";
 
 export class TopicDto implements Topic {
-	@ApiProperty({ type: Number, format: "int64" })
+	@ApiProperty({ type: Number })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })
@@ -14,8 +14,8 @@ export class TopicDto implements Topic {
 	@ApiProperty({ type: "string" })
 	description!: string;
 
-	@ApiProperty({ type: "string", format: "int64" })
-	catalog!: number;
+	@ApiProperty({ type: "string" })
+	language!: string;
 
 	@ApiProperty({ type: "string", required: false, nullable: true })
 	image?: string | null;

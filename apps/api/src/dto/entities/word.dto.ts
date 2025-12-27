@@ -14,19 +14,19 @@ export class WordDto implements Word {
 	@ApiProperty({ enum: ["processing", "processed"] })
 	status: "processing" | "processed";
 
-	@ApiProperty({ type: Number, format: "int64" })
+	@ApiProperty({ type: Number })
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })
 	created_at!: string;
 
-	@ApiProperty({ type: "number", format: "int64" })
+	@ApiProperty({ type: Number })
 	topic!: number;
 
 	@ApiProperty({ type: "string" })
 	word: string;
 
-	@ApiProperty({ type: "number", format: "int64" })
+	@ApiProperty({ type: Number })
 	catalog!: number;
 
 	@ApiProperty({ enum: Object.keys(AVAILABLE_LANGUAGES) })

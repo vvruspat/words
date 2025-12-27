@@ -36,7 +36,14 @@ export class WordController {
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(@Query() query: GetWordRequestDto): Promise<GetWordResponseDto> {
+		console.log("-----------------controller query-----------------");
+		console.log(query);
+
 		const entities = await this.wordService.findAll(query);
+
+		console.log("-----------------controller entities-----------------");
+		console.log(entities);
+
 		return {
 			items: entities.items,
 			total: entities.total,

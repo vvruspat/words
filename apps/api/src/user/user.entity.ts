@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class UserEntity implements User {
-	@PrimaryGeneratedColumn({ type: "bigint" })
+	@PrimaryGeneratedColumn({ type: "int" })
 	id: number;
 
 	@Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

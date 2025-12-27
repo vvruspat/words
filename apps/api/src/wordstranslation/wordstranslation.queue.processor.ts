@@ -54,7 +54,10 @@ export class WordsTranslationQueueProcessor extends WorkerHost {
 				words,
 			);
 		} else {
-			throw new Error("Invalid translations data format");
+			this.logger.error(
+				"Invalid translations data format",
+				generatedTranslations,
+			);
 		}
 	}
 }

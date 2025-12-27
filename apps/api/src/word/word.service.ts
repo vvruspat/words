@@ -69,8 +69,12 @@ export class WordService {
 	}
 
 	async update(word: Partial<WordEntity>): Promise<WordEntity | null> {
-		await this.wordRepository.update({ id: word.id }, word);
-		return this.findOne(word.id);
+		const existingWord = await this.findOne(word.id);
+		if (!existingWord) {
+			return null;
+		}
+		Object.assign(existingWord, word);
+		return this.wordRepository.save(existingWord);
 	}
 
 	async remove(id: WordEntity["id"]): Promise<void> {
@@ -135,6 +139,7 @@ export class WordService {
 
 		const topics = await this.topicService.findAllAndCreateIfNotExist(
 			Array.from(wordsTopics.values()),
+			words[0].language,
 		);
 		const catalog = await this.vocabCatalogService.findAllAndCreateIfNotExist(
 			Array.from(wordsCatalogs.values()),

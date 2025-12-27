@@ -11,13 +11,11 @@ export function isWordsTranslationsArray(
 ): data is GeneratedTranslation[] {
 	return (
 		Array.isArray(data) &&
-		data.every(
+		data.some(
 			(item) =>
-				typeof item === "object" &&
-				item !== null &&
 				typeof item.word === "string" &&
-				Object.keys(AVAILABLE_LANGUAGES).every(
-					(lang) => lang in item && typeof item[lang] === "string",
+				Object.keys(AVAILABLE_LANGUAGES).some(
+					(lang) => typeof item[lang] === "string",
 				),
 		)
 	);

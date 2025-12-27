@@ -18,16 +18,16 @@ import { WordTranslationEntity } from "../wordstranslation/wordstranslation.enti
 
 @Entity({ name: "learning" })
 export class LearningEntity implements Learning {
-	@PrimaryGeneratedColumn({ type: "bigint" })
+	@PrimaryGeneratedColumn({ type: "int" })
 	id: number;
 
 	@Column({ type: "timestamptz" })
 	created_at: string;
 
-	@Column({ type: "bigint" })
+	@Column({ type: "int" })
 	user: number;
 
-	@Column({ type: "bigint" })
+	@Column({ type: "int" })
 	word: number;
 
 	@Column({ type: "int" })
@@ -36,10 +36,10 @@ export class LearningEntity implements Learning {
 	@Column({ type: "timestamp" })
 	last_review: string;
 
-	@Column({ type: "bigint" })
+	@Column({ type: "int" })
 	training: number;
 
-	@Column({ type: "bigint" })
+	@Column({ type: "int" })
 	translation: number;
 }
 
