@@ -40,7 +40,7 @@ export const MDataGridRow = ({
 	);
 
 	return (
-		<>
+		<tr>
 			{onCheckboxChange && (
 				<td className={clsx({ [styles.selected]: selected })}>
 					<MFlex
@@ -57,6 +57,6 @@ export const MDataGridRow = ({
 				</td>
 			)}
 			{headers.map((header) => renderCell(header, row.id, row[header.field]))}
-		</>
+		</tr>
 	);
 };

@@ -1,4 +1,4 @@
-import { Topic, VocabCatalog, Word, WordData } from "@repo/types";
+import { Language, Topic, VocabCatalog, Word, WordData } from "@repo/types";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TopicEntity } from "../topic/topic.entity";
 import { VocabCatalogEntity } from "../vocabcatalog/vocabcatalog.entity";
@@ -24,8 +24,8 @@ export class WordEntity implements Word {
 	@Column()
 	word: string;
 
-	@Column()
-	language: string;
+	@Column({ type: "varchar" })
+	language: Language;
 
 	@Column({ nullable: true })
 	audio: string;
@@ -41,7 +41,7 @@ export class WordEntity implements Word {
 		enum: ["processing", "processed"],
 		default: "processing",
 	})
-	status: string;
+	status: "processing" | "processed";
 
 	@Column({ type: "text", nullable: true })
 	meaning?: string;

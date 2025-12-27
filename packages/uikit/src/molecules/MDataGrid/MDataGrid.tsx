@@ -1,14 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { TableVirtuoso } from "react-virtuoso";
-import { MFlex, MSpinner } from "../../atoms";
+import { useCallback, useMemo, useState } from "react";
 import styles from "./MDataGrid.module.css";
 import { MDataGridHeader } from "./MDataGridHeader";
+import { MDataGridPagination } from "./MDataGridPagination";
 import { MDataGridRow } from "./MDataGridRow";
 import type {
 	MDataGridHeaderType,
-	MDataGridPagination,
+	MDataGridPagination as MDataGridPaginationType,
 	MDataGridRowType,
 } from "./types";
 import "./MDataGrid.vars.css";
@@ -18,7 +17,7 @@ type MDataGridProps = {
 	rows?: MDataGridRowType[];
 	onSelect?: (selected: MDataGridRowType[]) => void;
 	onSort?: (field: string, direction: "asc" | "desc") => void;
-	pagination: MDataGridPagination;
+	pagination: MDataGridPaginationType;
 };
 
 export const MDataGrid = ({
@@ -34,10 +33,7 @@ export const MDataGrid = ({
 	const [sortedField, setSortedField] = useState<string | null>(null);
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 	const [filters, setFilters] = useState<Map<string, string>>(new Map());
-	const [currentRows, setCurrentRows] = useState<MDataGridRowType[]>(
-		rows ?? [],
-	);
-	const [loading, setLoading] = useState<boolean>(false);
+	const currentRows = useMemo(() => rows ?? [], [rows]);
 
 	const toggleSelect = useCallback(
 		(row: MDataGridRowType, checked: boolean) => {
@@ -49,9 +45,9 @@ export const MDataGrid = ({
 					newSelectedRows.add(row.id);
 				}
 				onSelect?.(
-					[...newSelectedRows].map((id) =>
-						currentRows.find((row) => row.id === id),
-					),
+					[...newSelectedRows]
+						.map((id) => currentRows.find((row) => row.id === id))
+						.filter((row): row is MDataGridRowType => row !== undefined),
 				);
 				return newSelectedRows;
 			});
@@ -123,39 +119,10 @@ export const MDataGrid = ({
 		});
 	}, []);
 
-	const loadMoreRows = useCallback(async () => {
-		setLoading(true);
-		const newRows = await pagination.onLoadMore(
-			sortedRows.length,
-			pagination.limit ?? 10,
-			[...filters.entries()].reduce<Record<string, string>>(
-				(acc, [key, value]) => {
-					acc[key] = value;
-					return acc;
-				},
-				{},
-			),
-			sortedField || undefined, // sortedField could be null, in this case better not to pass it to the function
-			sortedField ? sortOrder : undefined,
-		);
-		setCurrentRows((prevRows) => [...prevRows, ...newRows]);
-		setLoading(false);
-	}, [pagination, sortedRows.length, sortedField, sortOrder, filters]);
-
-	useEffect(() => {
-		if (!rows?.length) {
-			loadMoreRows();
-		}
-	}, [rows, loadMoreRows]);
-
 	return (
 		<div className={styles.dataGridContainer}>
-			<TableVirtuoso
-				className={styles.dataGridTable}
-				data={filteredRows}
-				endReached={loadMoreRows}
-				useWindowScroll
-				fixedHeaderContent={() => (
+			<table className={styles.dataGridTable}>
+				<thead>
 					<tr>
 						{onSelect && <th />}
 						{headers.map((header) => (
@@ -168,26 +135,27 @@ export const MDataGrid = ({
 							/>
 						))}
 					</tr>
-				)}
-				itemContent={(_index, row: MDataGridRowType) => (
-					<MDataGridRow
-						row={row}
-						headers={headers}
-						key={row.id}
-						onCheckboxChange={onSelect ? toggleSelect : undefined}
-						selected={selectedRows.has(row.id)}
-					/>
-				)}
+				</thead>
+				<tbody>
+					{filteredRows.map((row) => (
+						<MDataGridRow
+							row={row}
+							headers={headers}
+							key={row.id}
+							onCheckboxChange={onSelect ? toggleSelect : undefined}
+							selected={selectedRows.has(row.id)}
+						/>
+					))}
+				</tbody>
+			</table>
+			<MDataGridPagination
+				total={pagination.total}
+				limit={pagination.limit}
+				offset={pagination.offset}
+				onNextPage={pagination.onNextPage}
+				onPreviousPage={pagination.onPreviousPage}
+				onRowsPerPageChange={pagination.onRowsPerPageChange}
 			/>
-			{loading && (
-				<MFlex
-					align="center"
-					justify="center"
-					className={styles.loadingSpinner}
-				>
-					<MSpinner mode="primary" size="m" />
-				</MFlex>
-			)}
 		</div>
 	);
 };

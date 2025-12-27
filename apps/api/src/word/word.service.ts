@@ -1,5 +1,6 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ApiPaginatedResponse, Language } from "@repo/types";
 import { Queue } from "bullmq";
 import type { Repository } from "typeorm";
 import {
@@ -32,14 +33,30 @@ export class WordService {
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 	) {}
 
-	async findAll(query: GetWordRequestDto): Promise<WordEntity[]> {
-		const { limit, offset, ...restQuery } = query;
+	async findAll(
+		query: GetWordRequestDto,
+	): Promise<ApiPaginatedResponse<WordEntity>> {
+		const { limit, offset, sortBy, sortOrder, ...restQuery } = query;
 
-		return this.wordRepository.find({
+		const total = await this.wordRepository.count({
+			where: { ...restQuery },
+		});
+
+		const words = await this.wordRepository.find({
 			where: { ...restQuery },
 			take: limit ?? 10,
 			skip: offset ?? 0,
+			order: {
+				[sortBy ?? "created_at"]: sortOrder ?? "DESC",
+			},
 		});
+
+		return {
+			items: words,
+			total,
+			limit: limit ?? 10,
+			offset: offset ?? 0,
+		};
 	}
 
 	async findOne(id: WordEntity["id"]): Promise<WordEntity | null> {
@@ -69,7 +86,7 @@ export class WordService {
 	}
 
 	async generateWords(
-		language: string,
+		language: Language,
 		topic: string,
 		level: string,
 	): Promise<void> {

@@ -2,18 +2,20 @@ import { ApiProperty, IntersectionType, PartialType } from "@nestjs/swagger";
 import {
 	ApiPaginatedRequestDto,
 	ApiPaginatedResponseDto,
-	WordDataDto,
+	ApiSortingRequestDto,
+	WordDto,
 } from "~/dto/entities";
 
 export class GetWordRequestDto extends IntersectionType(
 	ApiPaginatedRequestDto,
-	PartialType(WordDataDto),
+	PartialType(WordDto),
+	ApiSortingRequestDto,
 ) {}
 
-export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDataDto> {
+export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {
 	@ApiProperty({
-		type: [WordDataDto],
+		type: [WordDto],
 		description: "List of words",
 	})
-	items: WordDataDto[];
+	items: WordDto[];
 }

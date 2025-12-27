@@ -743,6 +743,113 @@ paths:
       summary: Delete vocab catalog
       tags: *ref_4
   /word:
+    get:
+      operationId: WordController_getAll
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: status
+          required: false
+          in: query
+          schema:
+            type: string
+            enum:
+              - processing
+              - processed
+        - name: id
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: topic
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: word
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: catalog
+          required: false
+          in: query
+          schema:
+            format: int64
+            type: number
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - fr
+              - de
+              - it
+              - ru
+              - el
+              - nl
+        - name: audio
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: transcribtion
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: meaning
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          required: true
+          in: query
+          schema:
+            example: created_at
+            type: string
+        - name: sortOrder
+          required: true
+          in: query
+          schema:
+            example: DESC
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWordResponseDto'
+        '400':
+          description: Invalid param
+        '500':
+          description: Server error
+      summary: Get all words
+      tags: &ref_5
+        - word
     put:
       operationId: WordController_update
       parameters: []
@@ -766,8 +873,7 @@ paths:
         '500':
           description: Server error
       summary: Update word
-      tags: &ref_5
-        - word
+      tags: *ref_5
   /word/{id}:
     delete:
       operationId: WordController_remove
@@ -1831,9 +1937,14 @@ components:
           format: int64
       required:
         - id
-    PutWordRequestDto:
+    WordDto:
       type: object
       properties:
+        status:
+          type: string
+          enum: &ref_8
+            - processing
+            - processed
         id:
           type: number
           format: int64
@@ -1841,15 +1952,85 @@ components:
           type: string
           format: date-time
         topic:
-          type: string
+          type: number
           format: int64
         word:
           type: string
         catalog:
-          type: string
+          type: number
           format: int64
         language:
           type: string
+          enum: &ref_9
+            - en
+            - es
+            - fr
+            - de
+            - it
+            - ru
+            - el
+            - nl
+        audio:
+          type: string
+        transcribtion:
+          type: string
+        meaning:
+          type: string
+      required:
+        - status
+        - id
+        - created_at
+        - topic
+        - word
+        - catalog
+        - language
+        - audio
+        - transcribtion
+    GetWordResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of words
+          type: array
+          items:
+            $ref: '#/components/schemas/WordDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PutWordRequestDto:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: *ref_8
+        id:
+          type: number
+          format: int64
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+          format: int64
+        word:
+          type: string
+        catalog:
+          type: number
+          format: int64
+        language:
+          type: string
+          enum: *ref_9
         audio:
           type: string
         transcribtion:
@@ -1859,6 +2040,9 @@ components:
     PutWordResponseDto:
       type: object
       properties:
+        status:
+          type: string
+          enum: *ref_8
         id:
           type: number
           format: int64
@@ -1866,15 +2050,16 @@ components:
           type: string
           format: date-time
         topic:
-          type: string
+          type: number
           format: int64
         word:
           type: string
         catalog:
-          type: string
+          type: number
           format: int64
         language:
           type: string
+          enum: *ref_9
         audio:
           type: string
         transcribtion:
@@ -1882,6 +2067,7 @@ components:
         meaning:
           type: string
       required:
+        - status
         - id
         - created_at
         - topic

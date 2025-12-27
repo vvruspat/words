@@ -212,7 +212,8 @@ export interface paths {
 			path?: never;
 			cookie?: never;
 		};
-		get?: never;
+		/** Get all words */
+		get: operations["WordController_getAll"];
 		/** Update word */
 		put: operations["WordController_update"];
 		post?: never;
@@ -834,32 +835,66 @@ export interface components {
 			/** Format: int64 */
 			id: number;
 		};
-		PutWordRequestDto: {
-			/** Format: int64 */
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			/** Format: int64 */
-			topic?: string;
-			word?: string;
-			/** Format: int64 */
-			catalog?: string;
-			language?: string;
-			audio?: string;
-			transcribtion?: string;
-			meaning?: string;
-		};
-		PutWordResponseDto: {
+		WordDto: {
+			/** @enum {string} */
+			status: "processing" | "processed";
 			/** Format: int64 */
 			id: number;
 			/** Format: date-time */
 			created_at: string;
 			/** Format: int64 */
-			topic: string;
+			topic: number;
 			word: string;
 			/** Format: int64 */
-			catalog: string;
-			language: string;
+			catalog: number;
+			/** @enum {string} */
+			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+			audio: string;
+			transcribtion: string;
+			meaning?: string;
+		};
+		GetWordResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of words */
+			items: components["schemas"]["WordDto"][];
+		};
+		PutWordRequestDto: {
+			/** @enum {string} */
+			status?: "processing" | "processed";
+			/** Format: int64 */
+			id?: number;
+			/** Format: date-time */
+			created_at?: string;
+			/** Format: int64 */
+			topic?: number;
+			word?: string;
+			/** Format: int64 */
+			catalog?: number;
+			/** @enum {string} */
+			language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+			audio?: string;
+			transcribtion?: string;
+			meaning?: string;
+		};
+		PutWordResponseDto: {
+			/** @enum {string} */
+			status: "processing" | "processed";
+			/** Format: int64 */
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			/** Format: int64 */
+			topic: number;
+			word: string;
+			/** Format: int64 */
+			catalog: number;
+			/** @enum {string} */
+			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
 			audio: string;
 			transcribtion: string;
 			meaning?: string;
@@ -1822,6 +1857,54 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["DeleteVocabCatalogResponseDto"];
 				};
+			};
+		};
+	};
+	WordController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				status?: "processing" | "processed";
+				id?: number;
+				created_at?: string;
+				topic?: number;
+				word?: string;
+				catalog?: number;
+				language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+				audio?: string;
+				transcribtion?: string;
+				meaning?: string;
+				sortBy: string;
+				sortOrder: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetWordResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};
