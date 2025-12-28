@@ -1442,6 +1442,21 @@
         ]
       }
     },
+    "/word/events": {
+      "get": {
+        "operationId": "WordController_streamEvents",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "SSE stream of word updates"
+          }
+        },
+        "summary": "Stream word update events via Server-Sent Events",
+        "tags": [
+          "word"
+        ]
+      }
+    },
     "/words-translation": {
       "get": {
         "operationId": "WordTranslationController_get",

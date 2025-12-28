@@ -3,6 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ApiPaginatedResponse, Language } from "@repo/types";
 import { Queue } from "bullmq";
 import type { Repository } from "typeorm";
+import { In } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	TRANSLATION_START,
@@ -16,6 +17,7 @@ import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import { GeneratedWord } from "./types/generated-word";
 import type { WordEntity } from "./word.entity";
+import { WordEventService } from "./word-event.service";
 
 export type WordStatus = "pending" | "processing" | "processed";
 
@@ -31,6 +33,7 @@ export class WordService {
 		private readonly gcsService: GcsService,
 		@InjectQueue(TRANSLATIONS_QUEUE) private translationQueue: Queue,
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
+		private readonly wordEventService: WordEventService,
 	) {}
 
 	async findAll(
@@ -65,7 +68,9 @@ export class WordService {
 
 	async create(word: Omit<WordEntity, "id">): Promise<WordEntity> {
 		const newWord = this.wordRepository.create(word);
-		return this.wordRepository.save(newWord);
+		const savedWord = await this.wordRepository.save(newWord);
+		this.wordEventService.emit({ type: "create", word: savedWord });
+		return savedWord;
 	}
 
 	async update(word: Partial<WordEntity>): Promise<WordEntity | null> {
@@ -74,19 +79,41 @@ export class WordService {
 			return null;
 		}
 		Object.assign(existingWord, word);
-		return this.wordRepository.save(existingWord);
+		const updatedWord = await this.wordRepository.save(existingWord);
+		this.wordEventService.emit({ type: "update", word: updatedWord });
+		return updatedWord;
 	}
 
 	async remove(id: WordEntity["id"]): Promise<void> {
-		await this.wordRepository.delete({ id });
+		const word = await this.findOne(id);
+		if (word) {
+			await this.wordRepository.delete({ id });
+			this.wordEventService.emit({ type: "delete", word });
+		}
 	}
 
 	async markProcessing(ids: number[]): Promise<void> {
+		if (ids.length === 0) return;
 		await this.wordRepository.update(ids, { status: "processing" });
+		// Emit events for updated words
+		const updatedWords = await this.wordRepository.find({
+			where: { id: In(ids) },
+		});
+		for (const word of updatedWords) {
+			this.wordEventService.emit({ type: "update", word });
+		}
 	}
 
 	async markProcessed(ids: number[]): Promise<void> {
+		if (ids.length === 0) return;
 		await this.wordRepository.update(ids, { status: "processed" });
+		// Emit events for updated words
+		const updatedWords = await this.wordRepository.find({
+			where: { id: In(ids) },
+		});
+		for (const word of updatedWords) {
+			this.wordEventService.emit({ type: "update", word });
+		}
 	}
 
 	async generateWords(
@@ -152,6 +179,7 @@ export class WordService {
 		this.logger.log("Saving generated words to database...");
 
 		const wordsPromises = words.map(async (wordData) => {
+			// create() already emits the event, so we don't need to emit it again
 			const word = await this.create({
 				word: wordData.word,
 				topic: topicMap.get(wordData.topic),
@@ -206,7 +234,8 @@ export class WordService {
 
 		word.audio = url;
 
-		await this.wordRepository.save(word);
+		const updatedWord = await this.wordRepository.save(word);
+		this.wordEventService.emit({ type: "update", word: updatedWord });
 
 		this.logger.log(
 			`Audio updated for word id ${wordId}, filename: ${filename}`,

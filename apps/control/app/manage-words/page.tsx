@@ -1,5 +1,5 @@
 "use client";
-import { AVAILABLE_LANGUAGES, type Language, type Word } from "@repo/types";
+import { AVAILABLE_LANGUAGES, type Language } from "@repo/types";
 import {
 	MBadge,
 	MButton,
@@ -31,20 +31,20 @@ export default function ManageWordsPage() {
 		selectedTopic,
 		catalogs,
 		topics,
+		words,
 		setLanguage,
 		setSelectedCatalog,
 		setSelectedTopic,
 		setCatalogs,
 		setTopics,
+		setWords,
 	} = useWordsStore();
 
 	const { translations, setTranslations } = useTranslationsStore();
 
-	const [words, setWords] = useState<Word[]>([]);
-
 	const [total, setTotal] = useState(0);
 	const [offset, setOffset] = useState(0);
-	const [limit, setLimit] = useState(10);
+	const [limit, setLimit] = useState(50);
 
 	const { showModal } = useModal();
 
@@ -133,7 +133,7 @@ export default function ManageWordsPage() {
 			setWords(data.items);
 		};
 		void fetchWords();
-	}, [language, selectedCatalog, selectedTopic, offset, limit]);
+	}, [language, selectedCatalog, selectedTopic, offset, limit, setWords]);
 
 	const handleNextPage = useCallback((newOffset: number, newLimit: number) => {
 		setOffset(newOffset);

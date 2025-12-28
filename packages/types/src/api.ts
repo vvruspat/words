@@ -257,6 +257,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/word/events": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Stream word update events via Server-Sent Events */
+		get: operations["WordController_streamEvents"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/words-translation": {
 		parameters: {
 			query?: never;
@@ -1924,6 +1941,24 @@ export interface operations {
 		requestBody?: never;
 		responses: {
 			/** @description Word generation started */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordController_streamEvents: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description SSE stream of word updates */
 			200: {
 				headers: {
 					[name: string]: unknown;

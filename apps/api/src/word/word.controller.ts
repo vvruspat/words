@@ -8,11 +8,13 @@ import {
 	Post,
 	Put,
 	Query,
+	Res,
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Language } from "@repo/types";
+import type { Response } from "express";
 import {
 	DeleteWordRequestDto,
 	DeleteWordResponseDto,
@@ -24,11 +26,15 @@ import {
 	PutWordResponseDto,
 } from "~/dto/api/word";
 import { WordService } from "./word.service";
+import { WordEventService } from "./word-event.service";
 
 @ApiTags("word")
 @Controller("word")
 export class WordController {
-	constructor(private readonly wordService: WordService) {}
+	constructor(
+		private readonly wordService: WordService,
+		private readonly wordEventService: WordEventService,
+	) {}
 
 	@Get()
 	@ApiOperation({ summary: "Get all words" })
@@ -108,5 +114,47 @@ export class WordController {
 		}
 		await this.wordService.generateWords(language, topic, level);
 		return { message: "Word generation started" };
+	}
+
+	@Get("events")
+	@ApiOperation({ summary: "Stream word update events via Server-Sent Events" })
+	@ApiResponse({ status: 200, description: "SSE stream of word updates" })
+	async streamEvents(@Res() res: Response): Promise<void> {
+		// Set SSE headers
+		res.setHeader("Content-Type", "text/event-stream");
+		res.setHeader("Cache-Control", "no-cache");
+		res.setHeader("Connection", "keep-alive");
+		res.setHeader("X-Accel-Buffering", "no"); // Disable buffering in nginx
+
+		// Send initial connection message
+		res.write(": connected\n\n");
+
+		// Subscribe to word update events
+		const subscription = this.wordEventService.getEventStream().subscribe({
+			next: (event) => {
+				// Format as SSE message
+				const data = JSON.stringify(event);
+				res.write(`data: ${data}\n\n`);
+			},
+			error: (error) => {
+				const errorData = JSON.stringify({
+					type: "error",
+					message: error.message,
+				});
+				res.write(`data: ${errorData}\n\n`);
+			},
+		});
+
+		// Send periodic heartbeat to keep connection alive
+		const heartbeatInterval = setInterval(() => {
+			res.write(": heartbeat\n\n");
+		}, 30000); // Every 30 seconds
+
+		// Handle client disconnect
+		res.on("close", () => {
+			clearInterval(heartbeatInterval);
+			subscription.unsubscribe();
+			res.end();
+		});
 	}
 }
