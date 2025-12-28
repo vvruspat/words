@@ -195,14 +195,28 @@ export default function ManageWordsPage() {
 							}
 						/>
 					</div>
-					<div>
+					<MFlex direction="row" gap="s">
+						<MButton
+							mode="tertiary"
+							onClick={() => showModal(MODALS.MANAGE_CATALOGS)}
+						>
+							Add Catalogs
+						</MButton>
+
+						<MButton
+							mode="tertiary"
+							onClick={() => showModal(MODALS.MANAGE_TOPICS)}
+						>
+							Add Topics
+						</MButton>
+
 						<MButton
 							mode="primary"
 							onClick={() => showModal(MODALS.GENERATE_WORDS)}
 						>
 							Generate Words
 						</MButton>
-					</div>
+					</MFlex>
 				</MFlex>
 
 				{language && (

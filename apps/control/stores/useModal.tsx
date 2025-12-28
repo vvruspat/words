@@ -1,10 +1,14 @@
 import { ReactNode } from "react";
 import { create } from "zustand";
 import { GenerateWordsForm } from "@/components/GenerateWordsForm";
+import { ManageCatalogsForm } from "@/components/ManageCatalogsForm/ManageCatalogsForm";
+import { ManageTopicsForm } from "@/components/ManageTopicsForm/ManageTopicsForm";
 import ModalHeader from "@/components/Modal/ModalHeader";
 
 export enum MODALS {
 	GENERATE_WORDS = "GENERATE_WORDS",
+	MANAGE_CATALOGS = "MANAGE_CATALOGS",
+	MANAGE_TOPICS = "MANAGE_TOPICS",
 }
 
 interface ModalsState {
@@ -35,6 +39,22 @@ const useModal = create<ModalsState>((set) => ({
 			{
 				header: <ModalHeader title="Generate new words" />,
 				content: <GenerateWordsForm />,
+				footer: null,
+			},
+		],
+		[
+			MODALS.MANAGE_CATALOGS,
+			{
+				header: <ModalHeader title="Manage catalogs" />,
+				content: <ManageCatalogsForm />,
+				footer: null,
+			},
+		],
+		[
+			MODALS.MANAGE_TOPICS,
+			{
+				header: <ModalHeader title="Manage topics" />,
+				content: <ManageTopicsForm />,
 				footer: null,
 			},
 		],
