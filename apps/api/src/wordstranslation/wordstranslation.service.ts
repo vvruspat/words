@@ -30,8 +30,6 @@ export class WordTranslationService {
 			...restFilters,
 		} as FindOptionsWhere<WordTranslationEntity>;
 
-		console.log("-----------------words-----------------");
-		console.log(words, filters);
 		// Handle multiple word IDs using In operator
 		if (words !== undefined) {
 			// Normalize words to an array of numbers

@@ -10,9 +10,6 @@ export async function fetchTranslationsAction(props: {
 }) {
 	const { words, offset = 0, limit = 1000 } = props;
 
-	console.log("-----------------words-----------------");
-	console.log(words);
-
 	return await $fetch("/words-translation", "get", {
 		query: {
 			words: words?.join(","),

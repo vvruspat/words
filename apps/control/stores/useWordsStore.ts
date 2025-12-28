@@ -13,6 +13,12 @@ interface WordsStore {
 	setSelectedTopic: (topic: string) => void;
 	setTopics: (topics: Topic[]) => void;
 	setCatalogs: (catalogs: VocabCatalog[]) => void;
+	addCatalogs: (catalog: VocabCatalog) => void;
+	removeCatalog: (catalog: VocabCatalog) => void;
+	updateCatalog: (catalog: VocabCatalog) => void;
+	addTopics: (topic: Topic) => void;
+	removeTopic: (topic: Topic) => void;
+	updateTopic: (topic: Topic) => void;
 }
 
 export const useWordsStore = create<WordsStore>()(
@@ -27,7 +33,13 @@ export const useWordsStore = create<WordsStore>()(
 			setSelectedCatalog: (selectedCatalog) => set({ selectedCatalog }),
 			setSelectedTopic: (selectedTopic) => set({ selectedTopic }),
 			setTopics: (topics: Topic[]) => set({ topics }),
+			addTopics: (topic: Topic) => set((state) => ({ topics: [...state.topics, topic] })),
+			removeTopic: (topic: Topic) => set((state) => ({ topics: state.topics.filter((t) => t.id !== topic.id) })),
+			updateTopic: (topic: Topic) => set((state) => ({ topics: state.topics.map((t) => t.id === topic.id ? topic : t) })),
 			setCatalogs: (catalogs: VocabCatalog[]) => set({ catalogs }),
+			addCatalogs: (catalog: VocabCatalog) => set((state) => ({ catalogs: [...state.catalogs, catalog] })),
+			removeCatalog: (catalog: VocabCatalog) => set((state) => ({ catalogs: state.catalogs.filter((c) => c.id !== catalog.id) })),
+			updateCatalog: (catalog: VocabCatalog) => set((state) => ({ catalogs: state.catalogs.map((c) => c.id === catalog.id ? catalog : c) })),
 		}),
 		{
 			name: "words-store",

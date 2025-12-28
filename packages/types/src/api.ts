@@ -539,7 +539,7 @@ export interface components {
 			/** Format: date-time */
 			created_at: string;
 			title: string;
-			description: string;
+			description?: string;
 			language: string;
 			image?: string | null;
 		};
@@ -554,10 +554,8 @@ export interface components {
 			items: components["schemas"]["TopicDto"][];
 		};
 		PostTopicRequestDto: {
-			/** Format: date-time */
-			created_at: string;
 			title: string;
-			description: string;
+			description?: string;
 			language: string;
 			image?: string | null;
 		};
@@ -566,7 +564,7 @@ export interface components {
 			/** Format: date-time */
 			created_at: string;
 			title: string;
-			description: string;
+			description?: string;
 			language: string;
 			image?: string | null;
 		};
@@ -584,7 +582,7 @@ export interface components {
 			/** Format: date-time */
 			created_at: string;
 			title: string;
-			description: string;
+			description?: string;
 			language: string;
 			image?: string | null;
 		};

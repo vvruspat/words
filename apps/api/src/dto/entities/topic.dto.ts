@@ -1,22 +1,33 @@
 import { ApiProperty } from "@nestjs/swagger";
 import type { Topic } from "@repo/types";
+import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class TopicDto implements Topic {
 	@ApiProperty({ type: Number })
+	@IsInt()
 	id!: number;
 
 	@ApiProperty({ type: "string", format: "date-time" })
+	@IsString()
 	created_at!: string;
 
 	@ApiProperty({ type: "string" })
+	@IsString()
+	@IsNotEmpty()
 	title!: string;
 
-	@ApiProperty({ type: "string" })
-	description!: string;
+	@ApiProperty({ type: "string", required: false })
+	@IsString()
+	@IsOptional()
+	description: string;
 
 	@ApiProperty({ type: "string" })
+	@IsString()
+	@IsNotEmpty()
 	language!: string;
 
 	@ApiProperty({ type: "string", required: false, nullable: true })
+	@IsString()
+	@IsOptional()
 	image?: string | null;
 }

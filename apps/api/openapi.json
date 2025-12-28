@@ -2156,7 +2156,6 @@
           "id",
           "created_at",
           "title",
-          "description",
           "language"
         ]
       },
@@ -2193,10 +2192,6 @@
       "PostTopicRequestDto": {
         "type": "object",
         "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
           "title": {
             "type": "string"
           },
@@ -2212,9 +2207,7 @@
           }
         },
         "required": [
-          "created_at",
           "title",
-          "description",
           "language"
         ]
       },
@@ -2246,7 +2239,6 @@
           "id",
           "created_at",
           "title",
-          "description",
           "language"
         ]
       },
@@ -2303,7 +2295,6 @@
           "id",
           "created_at",
           "title",
-          "description",
           "language"
         ]
       },

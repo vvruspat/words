@@ -19,9 +19,10 @@ export interface LearningData extends Learning {
 
 export interface Topic {
 	id: number;
-	created_at: string;
+	created_at?: string;
 	title: string;
 	description?: string;
+	language: string;
 	image?: string | null;
 }
 

@@ -15,9 +15,6 @@ export class TranslationSubscriber
 	}
 
 	async afterInsert(event: InsertEvent<WordTranslationEntity>) {
-		console.log("-----------------afterInsert-----------------");
-		console.log(event.entity);
-
 		const wordId = event.entity.word;
 
 		const word = await event.manager.findOne(WordEntity, {
