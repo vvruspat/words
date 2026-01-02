@@ -18,6 +18,9 @@ export class UserEntity implements User {
 	@Column({ nullable: true })
 	language_speak: string;
 
+	@Column({ nullable: true })
+	language_learn: string;
+
 	@Column({ nullable: true, default: false })
 	email_verified?: boolean;
 

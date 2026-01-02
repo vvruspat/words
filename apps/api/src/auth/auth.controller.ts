@@ -70,8 +70,8 @@ export class AuthController {
 		return this.authService.signUp(
 			dto.name,
 			dto.email,
-			dto.language_speak,
 			dto.language_learn,
+			dto.language_speak,
 		);
 	}
 

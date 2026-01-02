@@ -7,6 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "turbo run dev",
+    "dev:control": "turbo run dev --filter=control",
+    "dev:api": "turbo run dev --filter=api",
     "ios": "turbo run ios",
     "storybook": "turbo run storybook",
     "storybook:expo:ios": "turbo run storybook:expo:ios",

@@ -481,6 +481,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: language_learn
+          required: false
+          in: query
+          schema:
+            type: string
         - name: email_verified
           required: false
           in: query
@@ -1648,6 +1653,8 @@ components:
           type: string
         language_speak:
           type: string
+        language_learn:
+          type: string
         email_verified:
           type: boolean
           default: false
@@ -1659,6 +1666,7 @@ components:
         - email
         - name
         - language_speak
+        - language_learn
     GetUserResponseDto:
       type: object
       properties:
@@ -1693,12 +1701,12 @@ components:
           type: string
         language_speak:
           type: string
+        language_learn:
+          type: string
         email_verified:
           type: boolean
           default: false
         password:
-          type: string
-        language_learn:
           type: string
       required:
         - created_at
@@ -1720,6 +1728,8 @@ components:
           type: string
         language_speak:
           type: string
+        language_learn:
+          type: string
         email_verified:
           type: boolean
           default: false
@@ -1731,6 +1741,7 @@ components:
         - email
         - name
         - language_speak
+        - language_learn
     PutUserRequestDto:
       type: object
       properties:
@@ -1744,6 +1755,8 @@ components:
         name:
           type: string
         language_speak:
+          type: string
+        language_learn:
           type: string
         email_verified:
           type: boolean
@@ -1764,6 +1777,8 @@ components:
           type: string
         language_speak:
           type: string
+        language_learn:
+          type: string
         email_verified:
           type: boolean
           default: false
@@ -1775,6 +1790,7 @@ components:
         - email
         - name
         - language_speak
+        - language_learn
     DeleteUserResponseDto:
       type: object
       properties:

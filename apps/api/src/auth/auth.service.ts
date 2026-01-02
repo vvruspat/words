@@ -78,7 +78,7 @@ export class AuthService {
 	async signUp(
 		name: PostSignUpRequestDto["name"],
 		email: PostSignUpRequestDto["email"],
-		_language_learn: PostSignUpRequestDto["language_learn"],
+		language_learn: PostSignUpRequestDto["language_learn"],
 		language_speak: PostSignUpRequestDto["language_speak"],
 	): Promise<PostSignUpResponseDto> {
 		const existingUser = await this.userService.findOneByEmail(email);
@@ -91,11 +91,15 @@ export class AuthService {
 			email,
 			name,
 			language_speak,
+			language_learn,
 		});
 
 		await this.sendVerificationEmail(email);
 
 		const tokens = await this.getAccessToken(user);
+
+		console.log(tokens);
+		console.log(user);
 
 		return { ...tokens, user };
 	}
