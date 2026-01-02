@@ -43,6 +43,7 @@ export interface User {
 	name?: string;
 	password?: string;
 	language_speak: string;
+	language_learn: string;
 	email_verified?: boolean;
 }
 

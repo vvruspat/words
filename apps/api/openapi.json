@@ -773,6 +773,14 @@
             }
           },
           {
+            "name": "language_learn",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "email_verified",
             "required": false,
             "in": "query",
@@ -2551,6 +2559,9 @@
           "language_speak": {
             "type": "string"
           },
+          "language_learn": {
+            "type": "string"
+          },
           "email_verified": {
             "type": "boolean",
             "default": false
@@ -2564,7 +2575,8 @@
           "created_at",
           "email",
           "name",
-          "language_speak"
+          "language_speak",
+          "language_learn"
         ]
       },
       "GetUserResponseDto": {
@@ -2613,14 +2625,14 @@
           "language_speak": {
             "type": "string"
           },
+          "language_learn": {
+            "type": "string"
+          },
           "email_verified": {
             "type": "boolean",
             "default": false
           },
           "password": {
-            "type": "string"
-          },
-          "language_learn": {
             "type": "string"
           }
         },
@@ -2651,6 +2663,9 @@
           "language_speak": {
             "type": "string"
           },
+          "language_learn": {
+            "type": "string"
+          },
           "email_verified": {
             "type": "boolean",
             "default": false
@@ -2664,7 +2679,8 @@
           "created_at",
           "email",
           "name",
-          "language_speak"
+          "language_speak",
+          "language_learn"
         ]
       },
       "PutUserRequestDto": {
@@ -2684,6 +2700,9 @@
             "type": "string"
           },
           "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
             "type": "string"
           },
           "email_verified": {
@@ -2714,6 +2733,9 @@
           "language_speak": {
             "type": "string"
           },
+          "language_learn": {
+            "type": "string"
+          },
           "email_verified": {
             "type": "boolean",
             "default": false
@@ -2727,7 +2749,8 @@
           "created_at",
           "email",
           "name",
-          "language_speak"
+          "language_speak",
+          "language_learn"
         ]
       },
       "DeleteUserResponseDto": {

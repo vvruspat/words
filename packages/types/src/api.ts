@@ -675,6 +675,7 @@ export interface components {
 			email: string;
 			name: string;
 			language_speak: string;
+			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
 			password?: string;
@@ -695,10 +696,10 @@ export interface components {
 			email: string;
 			name: string;
 			language_speak: string;
+			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
 			password?: string;
-			language_learn: string;
 		};
 		PostUserResponseDto: {
 			id: number;
@@ -707,6 +708,7 @@ export interface components {
 			email: string;
 			name: string;
 			language_speak: string;
+			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
 			password?: string;
@@ -718,6 +720,7 @@ export interface components {
 			email?: string;
 			name?: string;
 			language_speak?: string;
+			language_learn?: string;
 			/** @default false */
 			email_verified: boolean;
 			password?: string;
@@ -729,6 +732,7 @@ export interface components {
 			email: string;
 			name: string;
 			language_speak: string;
+			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
 			password?: string;
@@ -1496,6 +1500,7 @@ export interface operations {
 				email?: string;
 				name?: string;
 				language_speak?: string;
+				language_learn?: string;
 				email_verified?: boolean;
 				password?: string;
 			};
