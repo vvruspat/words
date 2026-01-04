@@ -20,7 +20,7 @@ import {
 } from "./constants/prompts";
 import { chooseVoice } from "./utlis/chooseVoice";
 
-const WORDS_LIMIT = 10;
+const WORDS_LIMIT = 100;
 
 @Injectable()
 export class OpenAIService {
@@ -107,7 +107,7 @@ export class OpenAIService {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_TOPIC_PROMPT_ID,
-				version: "3",
+				version: "4",
 				variables: {
 					limit: WORDS_LIMIT.toString(),
 					wordlanguage: language,
