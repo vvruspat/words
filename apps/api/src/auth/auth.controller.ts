@@ -23,7 +23,7 @@ import type {
 	PutResetPasswordRequestDto,
 } from "~/dto/api/reset-password";
 import type { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
-import type { AuthService } from "./auth.service";
+import { AuthService } from "./auth.service";
 
 @ApiTags("auth")
 @Controller("auth")

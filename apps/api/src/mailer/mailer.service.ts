@@ -5,7 +5,7 @@ import {
 	TransactionalEmailsApi,
 } from "@getbrevo/brevo";
 import { Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 
 export enum MailTemplate {
 	WELCOME = 1,

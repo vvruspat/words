@@ -22,7 +22,7 @@ import {
 	PostUserResponseDto,
 } from "~/dto/api/user/post";
 import { type PutUserRequestDto, PutUserResponseDto } from "~/dto/api/user/put";
-import type { UserService } from "./user.service";
+import { UserService } from "./user.service";
 
 @ApiTags("user")
 @Controller("user")

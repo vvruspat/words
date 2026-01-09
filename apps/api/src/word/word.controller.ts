@@ -23,8 +23,8 @@ import {
 	type PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
-import type { WordService } from "./word.service";
-import type { WordEventService } from "./word-event.service";
+import { WordService } from "./word.service";
+import { WordEventService } from "./word-event.service";
 
 @ApiTags("word")
 @Controller("word")

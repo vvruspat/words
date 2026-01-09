@@ -8,7 +8,7 @@ import {
 import { TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
 import type { WordEntity } from "~/word/word.entity";
 import { isWordsTranslationsArray } from "./types/generated-translations";
-import type { WordTranslationService } from "./wordstranslation.service";
+import { WordTranslationService } from "./wordstranslation.service";
 
 @Processor(TRANSLATIONS_QUEUE)
 @Injectable()

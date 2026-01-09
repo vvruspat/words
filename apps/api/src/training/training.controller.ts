@@ -28,7 +28,7 @@ import {
 	type PutTrainingRequestDto,
 	PutTrainingResponseDto,
 } from "~/dto/api/training/put";
-import type { TrainingService } from "./training.service";
+import { TrainingService } from "./training.service";
 
 @ApiTags("training")
 @Controller("training")

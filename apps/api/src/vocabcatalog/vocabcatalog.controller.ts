@@ -25,7 +25,7 @@ import {
 	type PutVocabCatalogRequestDto,
 	PutVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/put";
-import type { VocabCatalogService } from "./vocabcatalog.service";
+import { VocabCatalogService } from "./vocabcatalog.service";
 
 @ApiTags("vocabcatalog")
 @Controller("vocabcatalog")

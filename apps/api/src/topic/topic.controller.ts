@@ -23,7 +23,7 @@ import {
 	type PutTopicRequestDto,
 	PutTopicResponseDto,
 } from "~/dto";
-import type { TopicService } from "./topic.service";
+import { TopicService } from "./topic.service";
 
 @ApiTags("topic")
 @Controller("topic")

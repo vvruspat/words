@@ -18,7 +18,7 @@ import {
 	type PostWordTranslationRequestDto,
 	PostWordTranslationResponseDto,
 } from "~/dto";
-import type { WordTranslationService } from "./wordstranslation.service";
+import { WordTranslationService } from "./wordstranslation.service";
 
 @ApiTags("words-translation")
 @Controller("words-translation")

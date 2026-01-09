@@ -9,7 +9,7 @@ import {
 } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
 import type { WordEntity } from "~/word/word.entity";
-import type { OpenAIService } from "./openai.service";
+import { OpenAIService } from "./openai.service";
 
 @Processor(OPENAI_QUEUE)
 @Injectable()

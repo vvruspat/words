@@ -11,13 +11,13 @@ import {
 } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE, TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
 import type { GetWordRequestDto } from "~/dto";
-import type { GcsService } from "~/gcs/gcs.service";
-import type { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
+import { GcsService } from "~/gcs/gcs.service";
+import { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
 import { WORD_REPOSITORY } from "../constants/database.constants";
-import type { TopicService } from "../topic/topic.service";
+import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
 import type { WordEntity } from "./word.entity";
-import type { WordEventService } from "./word-event.service";
+import { WordEventService } from "./word-event.service";
 
 export type WordStatus = "pending" | "processing" | "processed";
 
