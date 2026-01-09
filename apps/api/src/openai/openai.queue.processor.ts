@@ -1,15 +1,15 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { Injectable, Logger } from "@nestjs/common";
-import { Language } from "@repo/types";
-import { Job } from "bullmq";
+import type { Language } from "@repo/types";
+import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_START,
 	TRANSLATION_START,
 	WORDS_GENERATION_START,
 } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
-import { WordEntity } from "~/word/word.entity";
-import { OpenAIService } from "./openai.service";
+import type { WordEntity } from "~/word/word.entity";
+import type { OpenAIService } from "./openai.service";
 
 @Processor(OPENAI_QUEUE)
 @Injectable()

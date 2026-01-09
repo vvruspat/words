@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { type ApiPaginatedResponse, type ApiResponseError } from "@repo/types";
+import type { ApiPaginatedResponse, ApiResponseError } from "@repo/types";
 
 export class ApiResponseErrorDto implements ApiResponseError {
 	@ApiProperty({ type: String })

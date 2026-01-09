@@ -4,18 +4,18 @@ import {
 	Injectable,
 	UnauthorizedException,
 } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { JwtService } from "@nestjs/jwt";
+import type { ConfigService } from "@nestjs/config";
+import type { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
-import Redis from "ioredis";
-import {
+import type Redis from "ioredis";
+import type {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
 	PostSignUpResponseDto,
 } from "~/dto";
-import { MailerService, MailTemplate } from "~/mailer/mailer.service";
-import { UserEntity } from "~/user/user.entity";
-import { UserService } from "../user/user.service";
+import { type MailerService, MailTemplate } from "~/mailer/mailer.service";
+import type { UserEntity } from "~/user/user.entity";
+import type { UserService } from "../user/user.service";
 
 @Injectable()
 export class AuthService {

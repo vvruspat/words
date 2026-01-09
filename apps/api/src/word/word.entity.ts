@@ -1,4 +1,10 @@
-import { Language, Topic, VocabCatalog, Word, WordData } from "@repo/types";
+import type {
+	Language,
+	Topic,
+	VocabCatalog,
+	Word,
+	WordData,
+} from "@repo/types";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TopicEntity } from "../topic/topic.entity";
 import { VocabCatalogEntity } from "../vocabcatalog/vocabcatalog.entity";

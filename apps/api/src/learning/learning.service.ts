@@ -1,12 +1,12 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Learning, LearningData } from "@repo/types";
-import { Repository } from "typeorm";
-import { GetLearningRequestDto } from "~/dto";
+import type { Learning, LearningData } from "@repo/types";
+import type { Repository } from "typeorm";
+import type { GetLearningRequestDto } from "~/dto";
 import {
 	LEARNING_DATA_REPOSITORY,
 	LEARNING_REPOSITORY,
 } from "../constants/database.constants";
-import { LearningDataEntity, LearningEntity } from "./learning.entity";
+import type { LearningDataEntity, LearningEntity } from "./learning.entity";
 
 @Injectable()
 export class LearningService {

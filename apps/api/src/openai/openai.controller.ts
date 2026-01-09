@@ -1,6 +1,6 @@
 import { Controller, Post, Req, Res } from "@nestjs/common";
 import type { Request, Response } from "express";
-import { OpenAIService } from "./openai.service";
+import type { OpenAIService } from "./openai.service";
 
 @Controller("openai")
 export class OpenAIController {

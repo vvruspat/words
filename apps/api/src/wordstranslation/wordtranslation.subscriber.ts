@@ -1,7 +1,7 @@
 import {
-	EntitySubscriberInterface,
+	type EntitySubscriberInterface,
 	EventSubscriber,
-	InsertEvent,
+	type InsertEvent,
 } from "typeorm";
 import { WordEntity } from "~/word/word.entity";
 import { WordTranslationEntity } from "./wordstranslation.entity";

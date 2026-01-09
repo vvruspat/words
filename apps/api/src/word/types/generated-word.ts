@@ -1,4 +1,4 @@
-import { Language } from "@repo/types";
+import type { Language } from "@repo/types";
 
 export type GeneratedWord = {
 	score: number;

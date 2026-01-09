@@ -10,20 +10,20 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	PostRefreshTokenRequestDto,
+	type PostRefreshTokenRequestDto,
 	PostRefreshTokenResponseDto,
-	PostSignInRequestDto,
+	type PostSignInRequestDto,
 	PostSignInResponseDto,
-	PostSignUpRequestDto,
+	type PostSignUpRequestDto,
 	PostSignUpResponseDto,
-	PostVerifyEmailRequestDto,
+	type PostVerifyEmailRequestDto,
 } from "~/dto";
-import {
+import type {
 	GetResetPasswordRequestDto,
 	PutResetPasswordRequestDto,
 } from "~/dto/api/reset-password";
-import { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
-import { AuthService } from "./auth.service";
+import type { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
+import type { AuthService } from "./auth.service";
 
 @ApiTags("auth")
 @Controller("auth")

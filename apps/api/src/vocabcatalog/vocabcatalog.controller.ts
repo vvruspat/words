@@ -14,18 +14,18 @@ import {
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { DeleteVocabCatalogResponseDto } from "~/dto/api/vocabcatalog/delete";
 import {
-	GetVocabCatalogRequestDto,
+	type GetVocabCatalogRequestDto,
 	GetVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/get";
 import {
-	PostVocabCatalogRequestDto,
+	type PostVocabCatalogRequestDto,
 	PostVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/post";
 import {
-	PutVocabCatalogRequestDto,
+	type PutVocabCatalogRequestDto,
 	PutVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/put";
-import { VocabCatalogService } from "./vocabcatalog.service";
+import type { VocabCatalogService } from "./vocabcatalog.service";
 
 @ApiTags("vocabcatalog")
 @Controller("vocabcatalog")

@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { ApiPaginationRequest, Language, Topic } from "@repo/types";
-import { Repository } from "typeorm";
+import type { ApiPaginationRequest, Language, Topic } from "@repo/types";
+import type { Repository } from "typeorm";
 import { TOPIC_REPOSITORY } from "../constants/database.constants";
-import { TopicEntity } from "./topic.entity";
+import type { TopicEntity } from "./topic.entity";
 
 @Injectable()
 export class TopicService {

@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { GetTrainingRequestDto } from "~/dto";
+import type { Repository } from "typeorm";
+import type { GetTrainingRequestDto } from "~/dto";
 import { TRAINING_REPOSITORY } from "../constants/database.constants";
-import { TrainingEntity } from "./training.entity";
+import type { TrainingEntity } from "./training.entity";
 
 @Injectable()
 export class TrainingService {
