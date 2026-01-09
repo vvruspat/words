@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES, Language } from "../common";
+import { AVAILABLE_LANGUAGES, type Language } from "../common";
 
 export const isAvailableLanguage = (
 	language?: string,

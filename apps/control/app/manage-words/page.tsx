@@ -46,12 +46,17 @@ export default function ManageWordsPage() {
 	const [offset, setOffset] = useState(0);
 	const [limit, setLimit] = useState(50);
 
+	const [selectedStatus, setSelectedStatus] = useState<
+		"processing" | "processed"
+	>("processing");
+
 	const { showModal } = useModal();
 
 	const prevFiltersRef = useRef({
 		language,
 		selectedCatalog,
 		selectedTopic,
+		selectedStatus,
 	});
 
 	// Fetch catalogs
@@ -109,15 +114,31 @@ export default function ManageWordsPage() {
 		const filtersChanged =
 			prevFilters.language !== language ||
 			prevFilters.selectedCatalog !== selectedCatalog ||
-			prevFilters.selectedTopic !== selectedTopic;
+			prevFilters.selectedTopic !== selectedTopic ||
+			prevFilters.selectedStatus !== selectedStatus;
 
 		// Reset to first page when filters change
 		if (filtersChanged) {
 			setOffset(0);
-			prevFiltersRef.current = { language, selectedCatalog, selectedTopic };
+			prevFiltersRef.current = {
+				language,
+				selectedCatalog,
+				selectedTopic,
+				selectedStatus,
+			};
 		}
 
 		const fetchWords = async () => {
+			console.log("-------fetchWords-------", {
+				language,
+				catalog: selectedCatalog ? Number(selectedCatalog) : undefined,
+				topic: selectedTopic ? Number(selectedTopic) : undefined,
+				offset,
+				limit,
+				sortBy: undefined,
+				sortOrder: undefined,
+				filters: { status: selectedStatus },
+			});
 			const data = await fetchWordsAction({
 				language,
 				catalog: selectedCatalog ? Number(selectedCatalog) : undefined,
@@ -126,14 +147,22 @@ export default function ManageWordsPage() {
 				limit,
 				sortBy: undefined,
 				sortOrder: undefined,
-				filters: {},
+				filters: { status: selectedStatus },
 			});
 
 			setTotal(data.total);
 			setWords(data.items);
 		};
 		void fetchWords();
-	}, [language, selectedCatalog, selectedTopic, offset, limit, setWords]);
+	}, [
+		language,
+		selectedCatalog,
+		selectedTopic,
+		selectedStatus,
+		offset,
+		limit,
+		setWords,
+	]);
 
 	const handleNextPage = useCallback((newOffset: number, newLimit: number) => {
 		setOffset(newOffset);
@@ -250,6 +279,21 @@ export default function ManageWordsPage() {
 									>
 										{status as "processing" | "processed"}
 									</MBadge>
+								),
+								renderFilter: (props) => (
+									<MSelect
+										{...props}
+										options={[
+											{ key: "processing", value: "Processing" },
+											{ key: "processed", value: "Processed" },
+										]}
+										value={selectedStatus}
+										onChange={(e) =>
+											setSelectedStatus(
+												e.target.value as "processing" | "processed",
+											)
+										}
+									/>
 								),
 							},
 							{ field: "word", label: "Word" },
