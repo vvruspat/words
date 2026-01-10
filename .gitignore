@@ -63,3 +63,9 @@ pnpm-debug.log*
 
 apps/api/keys
 apps/api/keys/*.json
+
+secrets
+secrets/*.json
+
+apps/api/secrets
+apps/api/secrets/*.json

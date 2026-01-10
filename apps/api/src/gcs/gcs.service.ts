@@ -1,18 +1,9 @@
 import { Storage } from "@google-cloud/storage";
 import { Injectable, Logger } from "@nestjs/common";
 
-const credentials = JSON.parse(process.env.GCP_SERVICE_ACCOUNT_JSON || "{}");
-
-if (credentials.private_key) {
-	credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
-}
-
 @Injectable()
 export class GcsService {
-	private storage = new Storage({
-		projectId: credentials.project_id,
-		credentials,
-	});
+	private storage = new Storage();
 
 	private readonly logger = new Logger(GcsService.name);
 
