@@ -14,13 +14,13 @@ import {
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 import {
-	DeleteTopicRequestDto,
+	type DeleteTopicRequestDto,
 	DeleteTopicResponseDto,
-	GetTopicRequestDto,
+	type GetTopicRequestDto,
 	GetTopicResponseDto,
-	PostTopicRequestDto,
+	type PostTopicRequestDto,
 	PostTopicResponseDto,
-	PutTopicRequestDto,
+	type PutTopicRequestDto,
 	PutTopicResponseDto,
 } from "~/dto";
 import { TopicService } from "./topic.service";

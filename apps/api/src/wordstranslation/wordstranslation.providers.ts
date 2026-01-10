@@ -1,4 +1,4 @@
-import { DataSource } from "typeorm";
+import type { DataSource } from "typeorm";
 import {
 	DATA_SOURCE,
 	WORDS_TRANSLATION_REPOSITORY,

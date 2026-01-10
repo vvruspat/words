@@ -7,14 +7,14 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
-import Redis from "ioredis";
-import {
+import type Redis from "ioredis";
+import type {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
 	PostSignUpResponseDto,
 } from "~/dto";
 import { MailerService, MailTemplate } from "~/mailer/mailer.service";
-import { UserEntity } from "~/user/user.entity";
+import type { UserEntity } from "~/user/user.entity";
 import { UserService } from "../user/user.service";
 
 @Injectable()

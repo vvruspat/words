@@ -1,13 +1,13 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { Injectable, Logger } from "@nestjs/common";
-import { Job } from "bullmq";
+import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_DONE,
 	WORDS_GENERATION_DONE,
 } from "~/constants/queue-events.constants";
 import { WORDS_QUEUE } from "~/constants/queues.constants";
 import { isWordsArray } from "./types/generated-word";
-import { WordEntity } from "./word.entity";
+import type { WordEntity } from "./word.entity";
 import { WordService } from "./word.service";
 
 @Processor(WORDS_QUEUE)

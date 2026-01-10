@@ -1,7 +1,7 @@
 import {
-	SendSmtpEmailAttachmentInner,
-	SendSmtpEmailSender,
-	SendSmtpEmailToInner,
+	type SendSmtpEmailAttachmentInner,
+	type SendSmtpEmailSender,
+	type SendSmtpEmailToInner,
 	TransactionalEmailsApi,
 } from "@getbrevo/brevo";
 import { Injectable } from "@nestjs/common";

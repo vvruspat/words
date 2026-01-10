@@ -13,12 +13,15 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	DeleteUserRequestDto,
+	type DeleteUserRequestDto,
 	DeleteUserResponseDto,
 } from "~/dto/api/user/delete";
-import { GetUserRequestDto, GetUserResponseDto } from "~/dto/api/user/get";
-import { PostUserRequestDto, PostUserResponseDto } from "~/dto/api/user/post";
-import { PutUserRequestDto, PutUserResponseDto } from "~/dto/api/user/put";
+import { type GetUserRequestDto, GetUserResponseDto } from "~/dto/api/user/get";
+import {
+	type PostUserRequestDto,
+	PostUserResponseDto,
+} from "~/dto/api/user/post";
+import { type PutUserRequestDto, PutUserResponseDto } from "~/dto/api/user/put";
 import { UserService } from "./user.service";
 
 @ApiTags("user")

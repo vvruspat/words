@@ -1,9 +1,9 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Language } from "@repo/types";
-import { Repository } from "typeorm";
-import { GetVocabCatalogRequestDto } from "~/dto";
+import type { Language } from "@repo/types";
+import type { Repository } from "typeorm";
+import type { GetVocabCatalogRequestDto } from "~/dto";
 import { VOCABCATALOG_REPOSITORY } from "../constants/database.constants";
-import { VocabCatalogEntity } from "./vocabcatalog.entity";
+import type { VocabCatalogEntity } from "./vocabcatalog.entity";
 
 @Injectable()
 export class VocabCatalogService {

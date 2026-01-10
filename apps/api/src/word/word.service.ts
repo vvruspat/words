@@ -1,7 +1,7 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { ApiPaginatedResponse, Language } from "@repo/types";
-import { Queue } from "bullmq";
+import type { ApiPaginatedResponse, Language } from "@repo/types";
+import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
 import { In } from "typeorm";
 import {
@@ -10,12 +10,12 @@ import {
 	WORDS_GENERATION_START,
 } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE, TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
-import { GetWordRequestDto } from "~/dto";
+import type { GetWordRequestDto } from "~/dto";
 import { GcsService } from "~/gcs/gcs.service";
 import { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
-import { GeneratedWord } from "./types/generated-word";
+import type { GeneratedWord } from "./types/generated-word";
 import type { WordEntity } from "./word.entity";
 import { WordEventService } from "./word-event.service";
 

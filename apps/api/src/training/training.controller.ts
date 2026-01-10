@@ -13,19 +13,19 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	DeleteTrainingRequestDto,
+	type DeleteTrainingRequestDto,
 	DeleteTrainingResponseDto,
 } from "~/dto/api/training/delete";
 import {
-	GetTrainingRequestDto,
+	type GetTrainingRequestDto,
 	GetTrainingResponseDto,
 } from "~/dto/api/training/get";
 import {
-	PostTrainingRequestDto,
+	type PostTrainingRequestDto,
 	PostTrainingResponseDto,
 } from "~/dto/api/training/post";
 import {
-	PutTrainingRequestDto,
+	type PutTrainingRequestDto,
 	PutTrainingResponseDto,
 } from "~/dto/api/training/put";
 import { TrainingService } from "./training.service";

@@ -1,11 +1,11 @@
 import {
-	ArgumentsHost,
+	type ArgumentsHost,
 	Catch,
-	ExceptionFilter,
+	type ExceptionFilter,
 	HttpException,
 	HttpStatus,
 } from "@nestjs/common";
-import { ApiResponseError, ApiResponseStatus } from "@repo/types";
+import { type ApiResponseError, ApiResponseStatus } from "@repo/types";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

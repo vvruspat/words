@@ -1,12 +1,12 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { Injectable, Logger } from "@nestjs/common";
-import { Job } from "bullmq";
+import type { Job } from "bullmq";
 import {
 	TRANSLATION_DONE,
 	TRANSLATION_START,
 } from "~/constants/queue-events.constants";
 import { TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
-import { WordEntity } from "~/word/word.entity";
+import type { WordEntity } from "~/word/word.entity";
 import { isWordsTranslationsArray } from "./types/generated-translations";
 import { WordTranslationService } from "./wordstranslation.service";
 

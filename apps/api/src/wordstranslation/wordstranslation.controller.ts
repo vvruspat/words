@@ -12,10 +12,10 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	GetWordsTranslationsRequestDto,
+	type GetWordsTranslationsRequestDto,
 	GetWordsTranslationsResponseDto,
 	GetWordTranslationResponseDto,
-	PostWordTranslationRequestDto,
+	type PostWordTranslationRequestDto,
 	PostWordTranslationResponseDto,
 } from "~/dto";
 import { WordTranslationService } from "./wordstranslation.service";

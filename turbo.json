@@ -24,7 +24,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": [
         "PG_HOST",
         "PG_PORT",
@@ -39,7 +39,15 @@
         "BREVO_API_KEY",
         "DOMAIN",
         "RESET_PASSWORD_EXPIRES_IN",
-        "VERIFY_EMAIL_EXPIRES_IN"
+        "VERIFY_EMAIL_EXPIRES_IN",
+        "BCRYPT_SALT_ROUNDS",
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "REDIS_PASSWORD",
+        "OPENAI_API_KEY",
+        "WEBHOOK_SECRET",
+        "GCP_SERVICE_ACCOUNT_JSON",
+        "GCS_BUCKET_NAME"
       ]
     },
     "lint": {},

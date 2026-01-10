@@ -13,16 +13,14 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Language } from "@repo/types";
+import type { Language } from "@repo/types";
 import type { Response } from "express";
 import {
-	DeleteWordRequestDto,
+	type DeleteWordRequestDto,
 	DeleteWordResponseDto,
-	GetWordRequestDto,
+	type GetWordRequestDto,
 	GetWordResponseDto,
-	// PostWordRequestDto,
-	// PostWordResponseDto,
-	PutWordRequestDto,
+	type PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
 import { WordService } from "./word.service";

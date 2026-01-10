@@ -1,13 +1,13 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Queue } from "bullmq";
+import type { Queue } from "bullmq";
 import type { FindOptionsWhere, Repository } from "typeorm";
 import { In } from "typeorm";
 import { TRANSLATION_START } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
-import { WordEntity } from "~/word/word.entity";
+import type { WordEntity } from "~/word/word.entity";
 import { WORDS_TRANSLATION_REPOSITORY } from "../constants/database.constants";
-import { GeneratedTranslation } from "./types/generated-translations";
+import type { GeneratedTranslation } from "./types/generated-translations";
 import type { WordTranslationEntity } from "./wordstranslation.entity";
 
 @Injectable()

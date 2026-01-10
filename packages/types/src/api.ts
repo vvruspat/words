@@ -477,23 +477,7 @@ export interface components {
             /** @description List of learning items */
             items: components["schemas"]["LearningDto"][];
         };
-        PostLearningRequestDto: {
-            /**
-             * Format: date-time
-             * @description timestamp with time zone
-             */
-            created_at: string;
-            user: number;
-            word: number;
-            score: number;
-            /**
-             * Format: date-time
-             * @description timestamp without time zone
-             */
-            last_review: string;
-            training: number;
-            translation: number;
-        };
+        Function: Record<string, never>;
         PostLearningResponseDto: {
             id: number;
             /**
@@ -511,24 +495,6 @@ export interface components {
             last_review: string;
             training: number;
             translation: number;
-        };
-        PutLearningRequestDto: {
-            id?: number;
-            /**
-             * Format: date-time
-             * @description timestamp with time zone
-             */
-            created_at?: string;
-            user?: number;
-            word?: number;
-            score?: number;
-            /**
-             * Format: date-time
-             * @description timestamp without time zone
-             */
-            last_review?: string;
-            training?: number;
-            translation?: number;
         };
         PutLearningResponseDto: {
             id: number;
@@ -570,12 +536,6 @@ export interface components {
             /** @description List of topics */
             items: components["schemas"]["TopicDto"][];
         };
-        PostTopicRequestDto: {
-            title: string;
-            description?: string;
-            language: string;
-            image?: string | null;
-        };
         PostTopicResponseDto: {
             id: number;
             /** Format: date-time */
@@ -583,15 +543,6 @@ export interface components {
             title: string;
             description?: string;
             language: string;
-            image?: string | null;
-        };
-        PutTopicRequestDto: {
-            id?: number;
-            /** Format: date-time */
-            created_at?: string;
-            title?: string;
-            description?: string;
-            language?: string;
             image?: string | null;
         };
         PutTopicResponseDto: {
@@ -626,15 +577,6 @@ export interface components {
             /** @description List of training items */
             items: components["schemas"]["TrainingDto"][];
         };
-        PostTrainingRequestDto: {
-            /** Format: date-time */
-            created_at: string;
-            name: string;
-            title: string;
-            description: string;
-            image: string;
-            score: number;
-        };
         PostTrainingResponseDto: {
             id: number;
             /** Format: date-time */
@@ -644,16 +586,6 @@ export interface components {
             description: string;
             image: string;
             score: number;
-        };
-        PutTrainingRequestDto: {
-            id?: number;
-            /** Format: date-time */
-            created_at?: string;
-            name?: string;
-            title?: string;
-            description?: string;
-            image?: string;
-            score?: number;
         };
         PutTrainingResponseDto: {
             id: number;
@@ -690,17 +622,6 @@ export interface components {
             /** @description List of users */
             items: components["schemas"]["UserDto"][];
         };
-        PostUserRequestDto: {
-            /** Format: date-time */
-            created_at: string;
-            email: string;
-            name: string;
-            language_speak: string;
-            language_learn: string;
-            /** @default false */
-            email_verified: boolean;
-            password?: string;
-        };
         PostUserResponseDto: {
             id: number;
             /** Format: date-time */
@@ -709,18 +630,6 @@ export interface components {
             name: string;
             language_speak: string;
             language_learn: string;
-            /** @default false */
-            email_verified: boolean;
-            password?: string;
-        };
-        PutUserRequestDto: {
-            id?: number;
-            /** Format: date-time */
-            created_at?: string;
-            email?: string;
-            name?: string;
-            language_speak?: string;
-            language_learn?: string;
             /** @default false */
             email_verified: boolean;
             password?: string;
@@ -760,13 +669,6 @@ export interface components {
             /** @description List of vocabulary catalogs */
             items: components["schemas"]["VocabCatalogDto"][];
         };
-        PostVocabCatalogRequestDto: {
-            owner: number;
-            title: string;
-            description?: string | null;
-            language: string;
-            image?: string | null;
-        };
         PostVocabCatalogResponseDto: {
             id: number;
             /** Format: date-time */
@@ -775,16 +677,6 @@ export interface components {
             title: string;
             description?: string | null;
             language: string;
-            image?: string | null;
-        };
-        PutVocabCatalogRequestDto: {
-            id?: number;
-            /** Format: date-time */
-            created_at?: string;
-            owner?: number;
-            title?: string;
-            description?: string | null;
-            language?: string;
             image?: string | null;
         };
         PutVocabCatalogResponseDto: {
@@ -824,21 +716,6 @@ export interface components {
             limit: number;
             /** @description List of words */
             items: components["schemas"]["WordDto"][];
-        };
-        PutWordRequestDto: {
-            /** @enum {string} */
-            status?: "processing" | "processed";
-            id?: number;
-            /** Format: date-time */
-            created_at?: string;
-            topic?: number;
-            word?: string;
-            catalog?: number;
-            /** @enum {string} */
-            language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-            audio?: string;
-            transcribtion?: string;
-            meaning?: string;
         };
         PutWordResponseDto: {
             /** @enum {string} */
@@ -886,13 +763,6 @@ export interface components {
             /** @description List of word translations */
             items: components["schemas"]["WordTranslationDto"][];
         };
-        PostWordTranslationRequestDto: {
-            /** Format: date-time */
-            created_at: string;
-            word: number;
-            translation: string;
-            language: string;
-        };
         PostWordTranslationResponseDto: {
             id: number;
             /** Format: date-time */
@@ -900,14 +770,6 @@ export interface components {
             word: number;
             translation: string;
             language: string;
-        };
-        PostSignInRequestDto: {
-            email: string;
-            /**
-             * @description User password
-             * @example Strong#Password123
-             */
-            password: string;
         };
         PostSignInResponseDto: {
             /** @description JWT access token */
@@ -917,20 +779,6 @@ export interface components {
             /** @description User information without password */
             user: components["schemas"]["UserDto"];
         };
-        PostSignUpRequestDto: {
-            email: string;
-            name: string;
-            /**
-             * @description Language the user speaks
-             * @example en
-             */
-            language_speak: string;
-            /**
-             * @description Language the user is learning
-             * @example es
-             */
-            language_learn: string;
-        };
         PostSignUpResponseDto: {
             /** @description JWT access token */
             access_token: string;
@@ -938,29 +786,6 @@ export interface components {
             refresh_token: string;
             /** @description User information without password */
             user: components["schemas"]["UserDto"];
-        };
-        PutResetPasswordRequestDto: {
-            /**
-             * @description User password
-             * @example Strong#Password123
-             */
-            new_password: string;
-            /** @description Password reset token */
-            token: string;
-        };
-        PostVerifyEmailResendRequestDto: {
-            /** @description User email */
-            email: string;
-        };
-        PostVerifyEmailRequestDto: {
-            /** @description Email verification code */
-            code: string;
-            /** @description User email */
-            email: string;
-        };
-        PostRefreshTokenRequestDto: {
-            /** @description Refresh token */
-            refresh_token: string;
         };
         PostRefreshTokenResponseDto: {
             /** @description JWT access token */
@@ -998,20 +823,7 @@ export interface operations {
     };
     LearningController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                /** @description timestamp with time zone */
-                created_at?: string;
-                user?: number;
-                word?: number;
-                score?: number;
-                /** @description timestamp without time zone */
-                last_review?: string;
-                training?: number;
-                translation?: number;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1051,7 +863,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutLearningRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1095,7 +907,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostLearningRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1165,16 +977,7 @@ export interface operations {
     };
     TopicController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                created_at?: string;
-                title?: string;
-                description?: string;
-                language?: string;
-                image?: string | null;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1214,7 +1017,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutTopicRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1258,7 +1061,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostTopicRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1328,17 +1131,7 @@ export interface operations {
     };
     TrainingController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                created_at?: string;
-                name?: string;
-                title?: string;
-                description?: string;
-                image?: string;
-                score?: number;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1378,7 +1171,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutTrainingRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1422,7 +1215,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostTrainingRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1492,18 +1285,7 @@ export interface operations {
     };
     UserController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                created_at?: string;
-                email?: string;
-                name?: string;
-                language_speak?: string;
-                language_learn?: string;
-                email_verified?: boolean;
-                password?: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1543,7 +1325,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutUserRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1587,7 +1369,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostUserRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1657,17 +1439,7 @@ export interface operations {
     };
     VocabCatalogController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                created_at?: string;
-                owner?: number;
-                title?: string;
-                description?: string | null;
-                language?: string;
-                image?: string | null;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1707,7 +1479,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutVocabCatalogRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1751,7 +1523,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostVocabCatalogRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1823,22 +1595,7 @@ export interface operations {
     };
     WordController_getAll: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                status?: "processing" | "processed";
-                id?: number;
-                created_at?: string;
-                topic?: number;
-                word?: string;
-                catalog?: number;
-                language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-                audio?: string;
-                transcribtion?: string;
-                meaning?: string;
-                sortBy?: string;
-                sortOrder?: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1878,7 +1635,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutWordRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -1974,17 +1731,7 @@ export interface operations {
     };
     WordTranslationController_get: {
         parameters: {
-            query: {
-                offset: number;
-                limit: number;
-                id?: number;
-                created_at?: string;
-                word?: number;
-                translation?: string;
-                language?: string;
-                /** @description Word ID or array of Word IDs */
-                words?: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -2017,7 +1764,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostWordTranslationRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2075,7 +1822,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostSignInRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2106,7 +1853,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostSignUpRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2137,9 +1884,7 @@ export interface operations {
     };
     AuthController_sendResetPasswordEmail: {
         parameters: {
-            query: {
-                email: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -2178,7 +1923,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PutResetPasswordRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2214,7 +1959,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2243,7 +1988,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostVerifyEmailRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2279,7 +2024,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
@@ -2315,7 +2060,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["PostRefreshTokenRequestDto"];
+                "application/json": components["schemas"]["Function"];
             };
         };
         responses: {
