@@ -1,6 +1,6 @@
 import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
@@ -34,11 +34,14 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		AuthModule,
 		OpenAIModule,
 		GcsModule,
-		BullModule.forRoot({
-			connection: {
-				host: "localhost",
-				port: 6379,
-			},
+		BullModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: (config: ConfigService) => ({
+				connection: {
+					url: config.getOrThrow("REDIS_URL"),
+				},
+			}),
 		}),
 		QueuesModule,
 	],
