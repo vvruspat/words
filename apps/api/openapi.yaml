@@ -888,15 +888,20 @@ paths:
           schema:
             type: string
         - name: topic
-          required: true
+          required: false
           in: query
           schema:
             type: string
         - name: level
-          required: true
+          required: false
           in: query
           schema:
             type: string
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
       responses:
         '200':
           description: Word generation started
