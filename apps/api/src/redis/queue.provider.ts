@@ -1,12 +1,14 @@
+import { ConfigService } from "@nestjs/config";
 import { Queue } from "bullmq";
-import { Redis } from "ioredis";
 
 export const BullQueueProvider = {
 	provide: "BULLMQ_QUEUE",
-	inject: ["REDIS_CLIENT"],
-	useFactory: (redis: Redis) => {
+	inject: [ConfigService],
+	useFactory: (config: ConfigService) => {
 		return new Queue("word-translation", {
-			connection: redis,
+			connection: {
+				url: config.getOrThrow("REDIS_URL"),
+			},
 		});
 	},
 };
