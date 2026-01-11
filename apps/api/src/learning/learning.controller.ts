@@ -13,19 +13,19 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	type DeleteLearningRequestDto,
+	DeleteLearningRequestDto,
 	DeleteLearningResponseDto,
 } from "~/dto/api/learning/delete";
 import {
-	type GetLearningRequestDto,
+	GetLearningRequestDto,
 	GetLearningResponseDto,
 } from "~/dto/api/learning/get";
 import {
-	type PostLearningRequestDto,
+	PostLearningRequestDto,
 	PostLearningResponseDto,
 } from "~/dto/api/learning/post";
 import {
-	type PutLearningRequestDto,
+	PutLearningRequestDto,
 	PutLearningResponseDto,
 } from "~/dto/api/learning/put";
 import { LearningService } from "./learning.service";

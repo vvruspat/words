@@ -16,11 +16,11 @@ import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import type { Language } from "@repo/types";
 import type { Response } from "express";
 import {
-	type DeleteWordRequestDto,
+	DeleteWordRequestDto,
 	DeleteWordResponseDto,
-	type GetWordRequestDto,
+	GetWordRequestDto,
 	GetWordResponseDto,
-	type PutWordRequestDto,
+	PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
 import { WordService } from "./word.service";

@@ -11,18 +11,24 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+	ApiBody,
+	ApiOperation,
+	ApiParam,
+	ApiResponse,
+	ApiTags,
+} from "@nestjs/swagger";
 import { DeleteVocabCatalogResponseDto } from "~/dto/api/vocabcatalog/delete";
 import {
-	type GetVocabCatalogRequestDto,
+	GetVocabCatalogRequestDto,
 	GetVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/get";
 import {
-	type PostVocabCatalogRequestDto,
+	PostVocabCatalogRequestDto,
 	PostVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/post";
 import {
-	type PutVocabCatalogRequestDto,
+	PutVocabCatalogRequestDto,
 	PutVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/put";
 import { VocabCatalogService } from "./vocabcatalog.service";
@@ -70,6 +76,7 @@ export class VocabCatalogController {
 
 	@Post()
 	@ApiOperation({ summary: "Create vocab catalog" })
+	@ApiBody({ type: PostVocabCatalogRequestDto })
 	@ApiResponse({ status: 201, type: PostVocabCatalogResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(
@@ -80,6 +87,7 @@ export class VocabCatalogController {
 
 	@Put()
 	@ApiOperation({ summary: "Update vocab catalog" })
+	@ApiBody({ type: PutVocabCatalogRequestDto })
 	@ApiResponse({ status: 200, type: PutVocabCatalogResponseDto })
 	@ApiResponse({ status: 404, description: "VocabCatalog not found" })
 	@ApiResponse({ status: 400, description: "Invalid data" })

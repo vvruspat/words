@@ -11,16 +11,22 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+	ApiBody,
+	ApiOperation,
+	ApiParam,
+	ApiResponse,
+	ApiTags,
+} from "@nestjs/swagger";
 
 import {
 	type DeleteTopicRequestDto,
 	DeleteTopicResponseDto,
-	type GetTopicRequestDto,
+	GetTopicRequestDto,
 	GetTopicResponseDto,
-	type PostTopicRequestDto,
+	PostTopicRequestDto,
 	PostTopicResponseDto,
-	type PutTopicRequestDto,
+	PutTopicRequestDto,
 	PutTopicResponseDto,
 } from "~/dto";
 import { TopicService } from "./topic.service";
@@ -68,6 +74,7 @@ export class TopicController {
 
 	@Post()
 	@ApiOperation({ summary: "Create topic" })
+	@ApiBody({ type: PostTopicRequestDto })
 	@ApiResponse({ status: 201, type: PostTopicResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(
@@ -78,6 +85,7 @@ export class TopicController {
 
 	@Put()
 	@ApiOperation({ summary: "Update topic" })
+	@ApiBody({ type: PutTopicRequestDto })
 	@ApiResponse({ status: 200, type: PutTopicResponseDto })
 	@ApiResponse({ status: 404, description: "Topic not found" })
 	@ApiResponse({ status: 400, description: "Invalid data" })
