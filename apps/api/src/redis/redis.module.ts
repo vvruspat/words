@@ -12,17 +12,27 @@ import { Redis } from "ioredis";
 			useFactory: (config: ConfigService) => {
 				const url = config.get<string>("REDIS_URL");
 
+				console.log("url", url);
+				console.log("config.get('REDIS_HOST')", config.get("REDIS_HOST"));
+				console.log("config.get('REDIS_PORT')", config.get("REDIS_PORT"));
+				console.log("config.get('REDIS_USER')", config.get("REDIS_USER"));
+				console.log(
+					"config.get('REDIS_PASSWORD')",
+					config.get("REDIS_PASSWORD"),
+				);
+				console.log("config.get('REDIS_DB')", config.get("REDIS_DB"));
+
 				const redis = url
 					? new Redis(url, {
 							lazyConnect: true,
 							maxRetriesPerRequest: null,
 						})
 					: new Redis({
-							host: config.get("REDIS_HOST", "127.0.0.1"),
-							port: config.get("REDIS_PORT", 6379),
+							host: config.get("REDIS_HOST"),
+							port: config.get("REDIS_PORT"),
 							username: config.get("REDIS_USER"),
 							password: config.get("REDIS_PASSWORD"),
-							db: config.get("REDIS_DB", 0),
+							db: config.get("REDIS_DB"),
 							lazyConnect: true,
 							maxRetriesPerRequest: null,
 						});
