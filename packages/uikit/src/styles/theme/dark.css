@@ -47,7 +47,12 @@
 	--input-field-enabled-border-color: var(--palette-base-500);
 	--input-field-enabled-background-color: rgba(255, 255, 255, 0);
 	--input-field-hover-border-color: var(--palette-base-500);
-	--input-field-hover-background-color: rgba(255, 255, 255, 0.05000000074505806);
+	--input-field-hover-background-color: rgba(
+		255,
+		255,
+		255,
+		0.05000000074505806
+	);
 	--input-field-active-border-color: var(--palette-base-700);
 	--input-field-active-background-color: rgba(255, 255, 255, 0);
 	--input-field-focus-border-color: var(--palette-active-500);
@@ -114,7 +119,9 @@
 	--input-checkbox-indeterminate-icon-enabled: var(--palette-base-10-white);
 	--input-checkbox-indeterminate-icon-hover: var(--palette-base-10-white);
 	--input-checkbox-indeterminate-icon-active: var(--palette-base-10-white);
-	--input-checkbox-indeterminate-icon-invalid: var(--palette-semantic-error-500);
+	--input-checkbox-indeterminate-icon-invalid: var(
+		--palette-semantic-error-500
+	);
 	--input-checkbox-indeterminate-icon-disabled: var(--palette-base-10-white);
 	--input-checkbox-indeterminate-label-default: var(
 		--typography-body-font-color

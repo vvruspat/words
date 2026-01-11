@@ -14,7 +14,9 @@
 
 	--step-progress-border-color-info: transparent;
 	--step-progress-label-color-info: var(--palette-semantic-information-400);
-	--step-progress-background-color-info: var(--palette-semantic-information-100);
+	--step-progress-background-color-info: var(
+		--palette-semantic-information-100
+	);
 	--step-progress-color-info: var(--palette-semantic-information-800);
 
 	--step-progress-border-color-warning: transparent;

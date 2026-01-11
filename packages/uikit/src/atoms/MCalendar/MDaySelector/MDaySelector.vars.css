@@ -14,6 +14,8 @@
 	--calendar-day-button-today-color: var(--palette-base-0);
 
 	--calendar-day-button-selected-background-color: var(--palette-base-1000);
-	--calendar-day-button-selected-hover-background-color: var(--palette-base-900);
+	--calendar-day-button-selected-hover-background-color: var(
+		--palette-base-900
+	);
 	--calendar-day-button-selected-color: var(--palette-base-0);
 }
