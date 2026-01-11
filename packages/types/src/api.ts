@@ -4,2340 +4,2340 @@
  */
 
 export interface paths {
-	"/": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get: operations["AppController_getHello"];
-		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/learning": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all learning records */
-		get: operations["LearningController_getAll"];
-		/** Update learning */
-		put: operations["LearningController_update"];
-		/** Create learning */
-		post: operations["LearningController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/learning/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get learning by id */
-		get: operations["LearningController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete learning */
-		delete: operations["LearningController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/topic": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all topics */
-		get: operations["TopicController_getAll"];
-		/** Update topic */
-		put: operations["TopicController_update"];
-		/** Create topic */
-		post: operations["TopicController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/topic/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get topic by id */
-		get: operations["TopicController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete topic */
-		delete: operations["TopicController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/training": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all training records */
-		get: operations["TrainingController_getAll"];
-		/** Update training */
-		put: operations["TrainingController_update"];
-		/** Create training */
-		post: operations["TrainingController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/training/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get training by id */
-		get: operations["TrainingController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete training */
-		delete: operations["TrainingController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/user": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all users */
-		get: operations["UserController_getAll"];
-		/** Update user */
-		put: operations["UserController_update"];
-		/** Create user */
-		post: operations["UserController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/user/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get user by id */
-		get: operations["UserController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete user */
-		delete: operations["UserController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/vocabcatalog": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all vocab catalogs */
-		get: operations["VocabCatalogController_getAll"];
-		/** Update vocab catalog */
-		put: operations["VocabCatalogController_update"];
-		/** Create vocab catalog */
-		post: operations["VocabCatalogController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/vocabcatalog/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get vocab catalog by id */
-		get: operations["VocabCatalogController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete vocab catalog */
-		delete: operations["VocabCatalogController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/word": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all words */
-		get: operations["WordController_getAll"];
-		/** Update word */
-		put: operations["WordController_update"];
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/word/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		post?: never;
-		/** Delete word */
-		delete: operations["WordController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/word/generate": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Generate words */
-		post: operations["WordController_generateWords"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/word/events": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Stream word update events via Server-Sent Events */
-		get: operations["WordController_streamEvents"];
-		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/words-translation": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get words translations */
-		get: operations["WordTranslationController_get"];
-		put?: never;
-		/** Create words translation */
-		post: operations["WordTranslationController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/words-translation/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get words translation by id */
-		get: operations["WordTranslationController_getById"];
-		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/signin": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Sign in to an existing account */
-		post: operations["AuthController_signin"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/signup": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Create a new user account */
-		post: operations["AuthController_signup"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/reset-password": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Send password reset email */
-		get: operations["AuthController_sendResetPasswordEmail"];
-		/** Reset user password with token */
-		put: operations["AuthController_resetPassword"];
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/tmp-password": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Send temp password to email */
-		post: operations["AuthController_sendTmpPasswordToEmail"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/verify-email": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Verify email with verification code */
-		post: operations["AuthController_sendVerificationEmail"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/verify-email/resend": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Resend email verification code */
-		post: operations["AuthController_resendVerificationEmail"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/auth/refresh-token": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		/** Refresh access token */
-		post: operations["AuthController_refreshToken"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/openai/webhook": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		get?: never;
-		put?: never;
-		post: operations["OpenAIController_handleWebhook"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
+    "/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["AppController_getHello"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/learning": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all learning records */
+        get: operations["LearningController_getAll"];
+        /** Update learning */
+        put: operations["LearningController_update"];
+        /** Create learning */
+        post: operations["LearningController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/learning/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get learning by id */
+        get: operations["LearningController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete learning */
+        delete: operations["LearningController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/topic": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all topics */
+        get: operations["TopicController_getAll"];
+        /** Update topic */
+        put: operations["TopicController_update"];
+        /** Create topic */
+        post: operations["TopicController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/topic/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get topic by id */
+        get: operations["TopicController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete topic */
+        delete: operations["TopicController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/training": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all training records */
+        get: operations["TrainingController_getAll"];
+        /** Update training */
+        put: operations["TrainingController_update"];
+        /** Create training */
+        post: operations["TrainingController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/training/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get training by id */
+        get: operations["TrainingController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete training */
+        delete: operations["TrainingController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all users */
+        get: operations["UserController_getAll"];
+        /** Update user */
+        put: operations["UserController_update"];
+        /** Create user */
+        post: operations["UserController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/user/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get user by id */
+        get: operations["UserController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete user */
+        delete: operations["UserController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/vocabcatalog": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all vocab catalogs */
+        get: operations["VocabCatalogController_getAll"];
+        /** Update vocab catalog */
+        put: operations["VocabCatalogController_update"];
+        /** Create vocab catalog */
+        post: operations["VocabCatalogController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/vocabcatalog/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get vocab catalog by id */
+        get: operations["VocabCatalogController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete vocab catalog */
+        delete: operations["VocabCatalogController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/word": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get all words */
+        get: operations["WordController_getAll"];
+        /** Update word */
+        put: operations["WordController_update"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/word/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete word */
+        delete: operations["WordController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/word/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Generate words */
+        post: operations["WordController_generateWords"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/word/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Stream word update events via Server-Sent Events */
+        get: operations["WordController_streamEvents"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/words-translation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get words translations */
+        get: operations["WordTranslationController_get"];
+        put?: never;
+        /** Create words translation */
+        post: operations["WordTranslationController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/words-translation/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get words translation by id */
+        get: operations["WordTranslationController_getById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/signin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Sign in to an existing account */
+        post: operations["AuthController_signin"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/signup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create a new user account */
+        post: operations["AuthController_signup"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/reset-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Send password reset email */
+        get: operations["AuthController_sendResetPasswordEmail"];
+        /** Reset user password with token */
+        put: operations["AuthController_resetPassword"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/tmp-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send temp password to email */
+        post: operations["AuthController_sendTmpPasswordToEmail"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/verify-email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Verify email with verification code */
+        post: operations["AuthController_sendVerificationEmail"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/verify-email/resend": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Resend email verification code */
+        post: operations["AuthController_resendVerificationEmail"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/refresh-token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Refresh access token */
+        post: operations["AuthController_refreshToken"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/openai/webhook": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["OpenAIController_handleWebhook"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-	schemas: {
-		LearningDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		GetLearningResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of learning items */
-			items: components["schemas"]["LearningDto"][];
-		};
-		PostLearningRequestDto: {
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		PostLearningResponseDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		PutLearningRequestDto: {
-			id?: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at?: string;
-			user?: number;
-			word?: number;
-			score?: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review?: string;
-			training?: number;
-			translation?: number;
-		};
-		PutLearningResponseDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		DeleteLearningResponseDto: {
-			id: number;
-		};
-		TopicDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			title: string;
-			description?: string;
-			language: string;
-			image?: string | null;
-		};
-		GetTopicResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of topics */
-			items: components["schemas"]["TopicDto"][];
-		};
-		PostTopicRequestDto: {
-			title: string;
-			description?: string;
-			language: string;
-			image?: string | null;
-		};
-		PostTopicResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			title: string;
-			description?: string;
-			language: string;
-			image?: string | null;
-		};
-		PutTopicRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			title?: string;
-			description?: string;
-			language?: string;
-			image?: string | null;
-		};
-		PutTopicResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			title: string;
-			description?: string;
-			language: string;
-			image?: string | null;
-		};
-		DeleteTopicResponseDto: {
-			id: number;
-		};
-		TrainingDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		GetTrainingResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of training items */
-			items: components["schemas"]["TrainingDto"][];
-		};
-		PostTrainingRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		PostTrainingResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		PutTrainingRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			name?: string;
-			title?: string;
-			description?: string;
-			image?: string;
-			score?: number;
-		};
-		PutTrainingResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		DeleteTrainingResponseDto: {
-			id: number;
-		};
-		UserDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		GetUserResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of users */
-			items: components["schemas"]["UserDto"][];
-		};
-		PostUserRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PostUserResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PutUserRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			email?: string;
-			name?: string;
-			language_speak?: string;
-			language_learn?: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PutUserResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		DeleteUserResponseDto: {
-			id: number;
-		};
-		VocabCatalogDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			owner: number;
-			title: string;
-			description?: string | null;
-			language: string;
-			image?: string | null;
-		};
-		GetVocabCatalogResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of vocabulary catalogs */
-			items: components["schemas"]["VocabCatalogDto"][];
-		};
-		PostVocabCatalogRequestDto: {
-			owner: number;
-			title: string;
-			description?: string | null;
-			language: string;
-			image?: string | null;
-		};
-		PostVocabCatalogResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			owner: number;
-			title: string;
-			description?: string | null;
-			language: string;
-			image?: string | null;
-		};
-		PutVocabCatalogRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			owner?: number;
-			title?: string;
-			description?: string | null;
-			language?: string;
-			image?: string | null;
-		};
-		PutVocabCatalogResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			owner: number;
-			title: string;
-			description?: string | null;
-			language: string;
-			image?: string | null;
-		};
-		DeleteVocabCatalogResponseDto: {
-			id: number;
-		};
-		WordDto: {
-			/** @enum {string} */
-			status: "processing" | "processed";
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			topic: number;
-			word: string;
-			catalog: number;
-			/** @enum {string} */
-			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-			audio: string;
-			transcribtion: string;
-			meaning?: string;
-		};
-		GetWordResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of words */
-			items: components["schemas"]["WordDto"][];
-		};
-		PutWordRequestDto: {
-			/** @enum {string} */
-			status?: "processing" | "processed";
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			topic?: number;
-			word?: string;
-			catalog?: number;
-			/** @enum {string} */
-			language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-			audio?: string;
-			transcribtion?: string;
-			meaning?: string;
-		};
-		PutWordResponseDto: {
-			/** @enum {string} */
-			status: "processing" | "processed";
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			topic: number;
-			word: string;
-			catalog: number;
-			/** @enum {string} */
-			language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-			audio: string;
-			transcribtion: string;
-			meaning?: string;
-		};
-		DeleteWordResponseDto: {
-			id: number;
-		};
-		WordTranslationDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			translation: string;
-			language: string;
-		};
-		GetWordsTranslationsResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of word translations */
-			items: components["schemas"]["WordTranslationDto"][];
-		};
-		GetWordTranslationResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of word translations */
-			items: components["schemas"]["WordTranslationDto"][];
-		};
-		PostWordTranslationRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			translation: string;
-			language: string;
-		};
-		PostWordTranslationResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			translation: string;
-			language: string;
-		};
-		PostSignInRequestDto: {
-			email: string;
-			/**
-			 * @description User password
-			 * @example Strong#Password123
-			 */
-			password: string;
-		};
-		PostSignInResponseDto: {
-			/** @description JWT access token */
-			access_token: string;
-			/** @description JWT refresh token */
-			refresh_token: string;
-			/** @description User information without password */
-			user: components["schemas"]["UserDto"];
-		};
-		PostSignUpRequestDto: {
-			email: string;
-			name: string;
-			/**
-			 * @description Language the user speaks
-			 * @example en
-			 */
-			language_speak: string;
-			/**
-			 * @description Language the user is learning
-			 * @example es
-			 */
-			language_learn: string;
-		};
-		PostSignUpResponseDto: {
-			/** @description JWT access token */
-			access_token: string;
-			/** @description JWT refresh token */
-			refresh_token: string;
-			/** @description User information without password */
-			user: components["schemas"]["UserDto"];
-		};
-		Function: Record<string, never>;
-		PostVerifyEmailRequestDto: {
-			/** @description Email verification code */
-			code: string;
-			/** @description User email */
-			email: string;
-		};
-		PostRefreshTokenRequestDto: {
-			/** @description Refresh token */
-			refresh_token: string;
-		};
-		PostRefreshTokenResponseDto: {
-			/** @description JWT access token */
-			access_token: string;
-			/** @description JWT refresh token */
-			refresh_token: string;
-			/** @description User information without password */
-			user: components["schemas"]["UserDto"];
-		};
-	};
-	responses: never;
-	parameters: never;
-	requestBodies: never;
-	headers: never;
-	pathItems: never;
+    schemas: {
+        LearningDto: {
+            id: number;
+            /**
+             * Format: date-time
+             * @description timestamp with time zone
+             */
+            created_at: string;
+            user: number;
+            word: number;
+            score: number;
+            /**
+             * Format: date-time
+             * @description timestamp without time zone
+             */
+            last_review: string;
+            training: number;
+            translation: number;
+        };
+        GetLearningResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of learning items */
+            items: components["schemas"]["LearningDto"][];
+        };
+        PostLearningRequestDto: {
+            /**
+             * Format: date-time
+             * @description timestamp with time zone
+             */
+            created_at: string;
+            user: number;
+            word: number;
+            score: number;
+            /**
+             * Format: date-time
+             * @description timestamp without time zone
+             */
+            last_review: string;
+            training: number;
+            translation: number;
+        };
+        PostLearningResponseDto: {
+            id: number;
+            /**
+             * Format: date-time
+             * @description timestamp with time zone
+             */
+            created_at: string;
+            user: number;
+            word: number;
+            score: number;
+            /**
+             * Format: date-time
+             * @description timestamp without time zone
+             */
+            last_review: string;
+            training: number;
+            translation: number;
+        };
+        PutLearningRequestDto: {
+            id?: number;
+            /**
+             * Format: date-time
+             * @description timestamp with time zone
+             */
+            created_at?: string;
+            user?: number;
+            word?: number;
+            score?: number;
+            /**
+             * Format: date-time
+             * @description timestamp without time zone
+             */
+            last_review?: string;
+            training?: number;
+            translation?: number;
+        };
+        PutLearningResponseDto: {
+            id: number;
+            /**
+             * Format: date-time
+             * @description timestamp with time zone
+             */
+            created_at: string;
+            user: number;
+            word: number;
+            score: number;
+            /**
+             * Format: date-time
+             * @description timestamp without time zone
+             */
+            last_review: string;
+            training: number;
+            translation: number;
+        };
+        DeleteLearningResponseDto: {
+            id: number;
+        };
+        TopicDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            title: string;
+            description?: string;
+            language: string;
+            image?: string | null;
+        };
+        GetTopicResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of topics */
+            items: components["schemas"]["TopicDto"][];
+        };
+        PostTopicRequestDto: {
+            title: string;
+            description?: string;
+            language: string;
+            image?: string | null;
+        };
+        PostTopicResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            title: string;
+            description?: string;
+            language: string;
+            image?: string | null;
+        };
+        PutTopicRequestDto: {
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            title?: string;
+            description?: string;
+            language?: string;
+            image?: string | null;
+        };
+        PutTopicResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            title: string;
+            description?: string;
+            language: string;
+            image?: string | null;
+        };
+        DeleteTopicResponseDto: {
+            id: number;
+        };
+        TrainingDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            name: string;
+            title: string;
+            description: string;
+            image: string;
+            score: number;
+        };
+        GetTrainingResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of training items */
+            items: components["schemas"]["TrainingDto"][];
+        };
+        PostTrainingRequestDto: {
+            /** Format: date-time */
+            created_at: string;
+            name: string;
+            title: string;
+            description: string;
+            image: string;
+            score: number;
+        };
+        PostTrainingResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            name: string;
+            title: string;
+            description: string;
+            image: string;
+            score: number;
+        };
+        PutTrainingRequestDto: {
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            name?: string;
+            title?: string;
+            description?: string;
+            image?: string;
+            score?: number;
+        };
+        PutTrainingResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            name: string;
+            title: string;
+            description: string;
+            image: string;
+            score: number;
+        };
+        DeleteTrainingResponseDto: {
+            id: number;
+        };
+        UserDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            email: string;
+            name: string;
+            language_speak: string;
+            language_learn: string;
+            /** @default false */
+            email_verified: boolean;
+            password?: string;
+        };
+        GetUserResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of users */
+            items: components["schemas"]["UserDto"][];
+        };
+        PostUserRequestDto: {
+            /** Format: date-time */
+            created_at: string;
+            email: string;
+            name: string;
+            language_speak: string;
+            language_learn: string;
+            /** @default false */
+            email_verified: boolean;
+            password?: string;
+        };
+        PostUserResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            email: string;
+            name: string;
+            language_speak: string;
+            language_learn: string;
+            /** @default false */
+            email_verified: boolean;
+            password?: string;
+        };
+        PutUserRequestDto: {
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            email?: string;
+            name?: string;
+            language_speak?: string;
+            language_learn?: string;
+            /** @default false */
+            email_verified: boolean;
+            password?: string;
+        };
+        PutUserResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            email: string;
+            name: string;
+            language_speak: string;
+            language_learn: string;
+            /** @default false */
+            email_verified: boolean;
+            password?: string;
+        };
+        DeleteUserResponseDto: {
+            id: number;
+        };
+        VocabCatalogDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            owner: number;
+            title: string;
+            description?: string | null;
+            language: string;
+            image?: string | null;
+        };
+        GetVocabCatalogResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of vocabulary catalogs */
+            items: components["schemas"]["VocabCatalogDto"][];
+        };
+        PostVocabCatalogRequestDto: {
+            owner: number;
+            title: string;
+            description?: string | null;
+            language: string;
+            image?: string | null;
+        };
+        PostVocabCatalogResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            owner: number;
+            title: string;
+            description?: string | null;
+            language: string;
+            image?: string | null;
+        };
+        PutVocabCatalogRequestDto: {
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            owner?: number;
+            title?: string;
+            description?: string | null;
+            language?: string;
+            image?: string | null;
+        };
+        PutVocabCatalogResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            owner: number;
+            title: string;
+            description?: string | null;
+            language: string;
+            image?: string | null;
+        };
+        DeleteVocabCatalogResponseDto: {
+            id: number;
+        };
+        WordDto: {
+            /** @enum {string} */
+            status: "processing" | "processed";
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            word: string;
+            catalog: number;
+            /** @enum {string} */
+            language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+            audio: string;
+            transcribtion: string;
+            meaning?: string;
+        };
+        GetWordResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of words */
+            items: components["schemas"]["WordDto"][];
+        };
+        PutWordRequestDto: {
+            /** @enum {string} */
+            status?: "processing" | "processed";
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            topic?: number;
+            word?: string;
+            catalog?: number;
+            /** @enum {string} */
+            language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+            audio?: string;
+            transcribtion?: string;
+            meaning?: string;
+        };
+        PutWordResponseDto: {
+            /** @enum {string} */
+            status: "processing" | "processed";
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            word: string;
+            catalog: number;
+            /** @enum {string} */
+            language: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+            audio: string;
+            transcribtion: string;
+            meaning?: string;
+        };
+        DeleteWordResponseDto: {
+            id: number;
+        };
+        WordTranslationDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            word: number;
+            translation: string;
+            language: string;
+        };
+        GetWordsTranslationsResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of word translations */
+            items: components["schemas"]["WordTranslationDto"][];
+        };
+        GetWordTranslationResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of word translations */
+            items: components["schemas"]["WordTranslationDto"][];
+        };
+        PostWordTranslationRequestDto: {
+            /** Format: date-time */
+            created_at: string;
+            word: number;
+            translation: string;
+            language: string;
+        };
+        PostWordTranslationResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            word: number;
+            translation: string;
+            language: string;
+        };
+        PostSignInRequestDto: {
+            email: string;
+            /**
+             * @description User password
+             * @example Strong#Password123
+             */
+            password: string;
+        };
+        PostSignInResponseDto: {
+            /** @description JWT access token */
+            access_token: string;
+            /** @description JWT refresh token */
+            refresh_token: string;
+            /** @description User information without password */
+            user: components["schemas"]["UserDto"];
+        };
+        PostSignUpRequestDto: {
+            email: string;
+            name: string;
+            /**
+             * @description Language the user speaks
+             * @example en
+             */
+            language_speak: string;
+            /**
+             * @description Language the user is learning
+             * @example es
+             */
+            language_learn: string;
+        };
+        PostSignUpResponseDto: {
+            /** @description JWT access token */
+            access_token: string;
+            /** @description JWT refresh token */
+            refresh_token: string;
+            /** @description User information without password */
+            user: components["schemas"]["UserDto"];
+        };
+        Function: Record<string, never>;
+        PostVerifyEmailRequestDto: {
+            /** @description Email verification code */
+            code: string;
+            /** @description User email */
+            email: string;
+        };
+        PostRefreshTokenRequestDto: {
+            /** @description Refresh token */
+            refresh_token: string;
+        };
+        PostRefreshTokenResponseDto: {
+            /** @description JWT access token */
+            access_token: string;
+            /** @description JWT refresh token */
+            refresh_token: string;
+            /** @description User information without password */
+            user: components["schemas"]["UserDto"];
+        };
+    };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-	AppController_getHello: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				/** @description timestamp with time zone */
-				created_at?: string;
-				user?: number;
-				word?: number;
-				score?: number;
-				/** @description timestamp without time zone */
-				last_review?: string;
-				training?: number;
-				translation?: number;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetLearningResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutLearningRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutLearningResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Learning not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostLearningRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostLearningResponseDto"];
-				};
-			};
-		};
-	};
-	LearningController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetLearningResponseDto"];
-				};
-			};
-			/** @description Learning not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteLearningResponseDto"];
-				};
-			};
-		};
-	};
-	TopicController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				title?: string;
-				description?: string;
-				language?: string;
-				image?: string | null;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTopicResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TopicController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutTopicRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutTopicResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Topic not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TopicController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostTopicRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostTopicResponseDto"];
-				};
-			};
-		};
-	};
-	TopicController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTopicResponseDto"];
-				};
-			};
-			/** @description Topic not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TopicController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteTopicResponseDto"];
-				};
-			};
-		};
-	};
-	TrainingController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				name?: string;
-				title?: string;
-				description?: string;
-				image?: string;
-				score?: number;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTrainingResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutTrainingRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutTrainingResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Training not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostTrainingRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostTrainingResponseDto"];
-				};
-			};
-		};
-	};
-	TrainingController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTrainingResponseDto"];
-				};
-			};
-			/** @description Training not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteTrainingResponseDto"];
-				};
-			};
-		};
-	};
-	UserController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				email?: string;
-				name?: string;
-				language_speak?: string;
-				language_learn?: string;
-				email_verified?: boolean;
-				password?: string;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetUserResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutUserRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutUserResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostUserRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostUserResponseDto"];
-				};
-			};
-		};
-	};
-	UserController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetUserResponseDto"];
-				};
-			};
-			/** @description User not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteUserResponseDto"];
-				};
-			};
-		};
-	};
-	VocabCatalogController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				owner?: number;
-				title?: string;
-				description?: string | null;
-				language?: string;
-				image?: string | null;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetVocabCatalogResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	VocabCatalogController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutVocabCatalogRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutVocabCatalogResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description VocabCatalog not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	VocabCatalogController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostVocabCatalogRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostVocabCatalogResponseDto"];
-				};
-			};
-		};
-	};
-	VocabCatalogController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetVocabCatalogResponseDto"];
-				};
-			};
-			/** @description VocabCatalog not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	VocabCatalogController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteVocabCatalogResponseDto"];
-				};
-			};
-		};
-	};
-	WordController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				status?: "processing" | "processed";
-				id?: number;
-				created_at?: string;
-				topic?: number;
-				word?: string;
-				catalog?: number;
-				language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
-				audio?: string;
-				transcribtion?: string;
-				meaning?: string;
-				sortBy?: string;
-				sortOrder?: string;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	WordController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutWordRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutWordResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Word not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	WordController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteWordResponseDto"];
-				};
-			};
-		};
-	};
-	WordController_generateWords: {
-		parameters: {
-			query: {
-				language: string;
-				topic: string;
-				level: string;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			/** @description Word generation started */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	WordController_streamEvents: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			/** @description SSE stream of word updates */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	WordTranslationController_get: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				word?: number;
-				translation?: string;
-				language?: string;
-				/** @description Word ID or array of Word IDs */
-				words?: string;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordsTranslationsResponseDto"];
-				};
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	WordTranslationController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostWordTranslationRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostWordTranslationResponseDto"];
-				};
-			};
-		};
-	};
-	WordTranslationController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetWordTranslationResponseDto"];
-				};
-			};
-			/** @description Words translation not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_signin: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostSignInRequestDto"];
-			};
-		};
-		responses: {
-			/** @description User successfully signed in */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostSignInResponseDto"];
-				};
-			};
-			/** @description Invalid credentials */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_signup: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostSignUpRequestDto"];
-			};
-		};
-		responses: {
-			/** @description User successfully created */
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostSignUpResponseDto"];
-				};
-			};
-			/** @description Invalid input data or user already exists */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User already exists */
-			409: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_sendResetPasswordEmail: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			/** @description Password reset email sent successfully */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Invalid email */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_resetPassword: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
-		responses: {
-			/** @description Password successfully reset */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Invalid input data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Invalid or expired token */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_sendTmpPasswordToEmail: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
-		responses: {
-			/** @description Password successfully sent */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_sendVerificationEmail: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostVerifyEmailRequestDto"];
-			};
-		};
-		responses: {
-			/** @description Email successfully verified */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Invalid or expired verification code */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_resendVerificationEmail: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
-		responses: {
-			/** @description Verification email sent successfully */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Invalid email */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	AuthController_refreshToken: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostRefreshTokenRequestDto"];
-			};
-		};
-		responses: {
-			/** @description Token successfully refreshed */
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostRefreshTokenResponseDto"];
-				};
-			};
-			/** @description Invalid or expired refresh token */
-			401: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	OpenAIController_handleWebhook: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
+    AppController_getHello: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    LearningController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                /** @description timestamp with time zone */
+                created_at?: string;
+                user?: number;
+                word?: number;
+                score?: number;
+                /** @description timestamp without time zone */
+                last_review?: string;
+                training?: number;
+                translation?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetLearningResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    LearningController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutLearningRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutLearningResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Learning not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    LearningController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostLearningRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostLearningResponseDto"];
+                };
+            };
+        };
+    };
+    LearningController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetLearningResponseDto"];
+                };
+            };
+            /** @description Learning not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    LearningController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteLearningResponseDto"];
+                };
+            };
+        };
+    };
+    TopicController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                title?: string;
+                description?: string;
+                language?: string;
+                image?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTopicResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutTopicRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutTopicResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Topic not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTopicRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTopicResponseDto"];
+                };
+            };
+        };
+    };
+    TopicController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTopicResponseDto"];
+                };
+            };
+            /** @description Topic not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteTopicResponseDto"];
+                };
+            };
+        };
+    };
+    TrainingController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                name?: string;
+                title?: string;
+                description?: string;
+                image?: string;
+                score?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTrainingResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TrainingController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutTrainingRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutTrainingResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Training not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TrainingController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTrainingRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTrainingResponseDto"];
+                };
+            };
+        };
+    };
+    TrainingController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTrainingResponseDto"];
+                };
+            };
+            /** @description Training not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TrainingController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteTrainingResponseDto"];
+                };
+            };
+        };
+    };
+    UserController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                email?: string;
+                name?: string;
+                language_speak?: string;
+                language_learn?: string;
+                email_verified?: boolean;
+                password?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetUserResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutUserRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutUserResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostUserRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostUserResponseDto"];
+                };
+            };
+        };
+    };
+    UserController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetUserResponseDto"];
+                };
+            };
+            /** @description User not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UserController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteUserResponseDto"];
+                };
+            };
+        };
+    };
+    VocabCatalogController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                owner?: number;
+                title?: string;
+                description?: string | null;
+                language?: string;
+                image?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetVocabCatalogResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    VocabCatalogController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutVocabCatalogRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutVocabCatalogResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description VocabCatalog not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    VocabCatalogController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostVocabCatalogRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostVocabCatalogResponseDto"];
+                };
+            };
+        };
+    };
+    VocabCatalogController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetVocabCatalogResponseDto"];
+                };
+            };
+            /** @description VocabCatalog not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    VocabCatalogController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteVocabCatalogResponseDto"];
+                };
+            };
+        };
+    };
+    WordController_getAll: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                status?: "processing" | "processed";
+                id?: number;
+                created_at?: string;
+                topic?: number;
+                word?: string;
+                catalog?: number;
+                language?: "en" | "es" | "fr" | "de" | "it" | "ru" | "el" | "nl";
+                audio?: string;
+                transcribtion?: string;
+                meaning?: string;
+                sortBy?: string;
+                sortOrder?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetWordResponseDto"];
+                };
+            };
+            /** @description Invalid param */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WordController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutWordRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutWordResponseDto"];
+                };
+            };
+            /** @description Invalid data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Word not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WordController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteWordResponseDto"];
+                };
+            };
+        };
+    };
+    WordController_generateWords: {
+        parameters: {
+            query: {
+                language: string;
+                topic: string;
+                level: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Word generation started */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WordController_streamEvents: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description SSE stream of word updates */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WordTranslationController_get: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                word?: number;
+                translation?: string;
+                language?: string;
+                /** @description Word ID or array of Word IDs */
+                words?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetWordsTranslationsResponseDto"];
+                };
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    WordTranslationController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostWordTranslationRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostWordTranslationResponseDto"];
+                };
+            };
+        };
+    };
+    WordTranslationController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetWordTranslationResponseDto"];
+                };
+            };
+            /** @description Words translation not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_signin: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostSignInRequestDto"];
+            };
+        };
+        responses: {
+            /** @description User successfully signed in */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostSignInResponseDto"];
+                };
+            };
+            /** @description Invalid credentials */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_signup: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostSignUpRequestDto"];
+            };
+        };
+        responses: {
+            /** @description User successfully created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostSignUpResponseDto"];
+                };
+            };
+            /** @description Invalid input data or user already exists */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User already exists */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_sendResetPasswordEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Password reset email sent successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid email */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User not found */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_resetPassword: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Function"];
+            };
+        };
+        responses: {
+            /** @description Password successfully reset */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid input data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid or expired token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_sendTmpPasswordToEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Function"];
+            };
+        };
+        responses: {
+            /** @description Password successfully sent */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User not found */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_sendVerificationEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostVerifyEmailRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Email successfully verified */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid or expired verification code */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User not found */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_resendVerificationEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Function"];
+            };
+        };
+        responses: {
+            /** @description Verification email sent successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Invalid email */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description User not found */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AuthController_refreshToken: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostRefreshTokenRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Token successfully refreshed */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostRefreshTokenResponseDto"];
+                };
+            };
+            /** @description Invalid or expired refresh token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    OpenAIController_handleWebhook: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }
