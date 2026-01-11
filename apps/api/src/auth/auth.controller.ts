@@ -10,13 +10,13 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
-	type PostRefreshTokenRequestDto,
+	PostRefreshTokenRequestDto,
 	PostRefreshTokenResponseDto,
-	type PostSignInRequestDto,
+	PostSignInRequestDto,
 	PostSignInResponseDto,
-	type PostSignUpRequestDto,
+	PostSignUpRequestDto,
 	PostSignUpResponseDto,
-	type PostVerifyEmailRequestDto,
+	PostVerifyEmailRequestDto,
 } from "~/dto";
 import type {
 	GetResetPasswordRequestDto,

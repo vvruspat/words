@@ -18,7 +18,94 @@
     "/learning": {
       "get": {
         "operationId": "LearningController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "description": "timestamp with time zone",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "score",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "last_review",
+            "required": false,
+            "in": "query",
+            "description": "timestamp without time zone",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "training",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -50,7 +137,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostLearningRequestDto"
               }
             }
           }
@@ -80,7 +167,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutLearningRequestDto"
               }
             }
           }
@@ -172,7 +259,76 @@
     "/topic": {
       "get": {
         "operationId": "TopicController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "nullable": true,
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -204,7 +360,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostTopicRequestDto"
               }
             }
           }
@@ -234,7 +390,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutTopicRequestDto"
               }
             }
           }
@@ -326,7 +482,83 @@
     "/training": {
       "get": {
         "operationId": "TrainingController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "score",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -358,7 +590,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostTrainingRequestDto"
               }
             }
           }
@@ -388,7 +620,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutTrainingRequestDto"
               }
             }
           }
@@ -480,7 +712,92 @@
     "/user": {
       "get": {
         "operationId": "UserController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language_speak",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language_learn",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_verified",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "password",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -512,7 +829,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostUserRequestDto"
               }
             }
           }
@@ -542,7 +859,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutUserRequestDto"
               }
             }
           }
@@ -634,7 +951,85 @@
     "/vocabcatalog": {
       "get": {
         "operationId": "VocabCatalogController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "owner",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "nullable": true,
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "nullable": true,
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -666,7 +1061,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostVocabCatalogRequestDto"
               }
             }
           }
@@ -696,7 +1091,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutVocabCatalogRequestDto"
               }
             }
           }
@@ -797,7 +1192,139 @@
     "/word": {
       "get": {
         "operationId": "WordController_getAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "processing",
+                "processed"
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "topic",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "catalog",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "it",
+                "ru",
+                "el",
+                "nl"
+              ]
+            }
+          },
+          {
+            "name": "audio",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "transcribtion",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "meaning",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "created_at",
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "DESC",
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -829,7 +1356,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PutWordRequestDto"
               }
             }
           }
@@ -941,7 +1468,77 @@
     "/words-translation": {
       "get": {
         "operationId": "WordTranslationController_get",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "words",
+            "required": false,
+            "in": "query",
+            "description": "Word ID or array of Word IDs",
+            "schema": {
+              "example": "1,2,3",
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -970,7 +1567,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostWordTranslationRequestDto"
               }
             }
           }
@@ -1039,7 +1636,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostSignInRequestDto"
               }
             }
           }
@@ -1074,7 +1671,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostSignUpRequestDto"
               }
             }
           }
@@ -1190,7 +1787,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostVerifyEmailRequestDto"
               }
             }
           }
@@ -1252,7 +1849,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Function"
+                "$ref": "#/components/schemas/PostRefreshTokenRequestDto"
               }
             }
           }
@@ -1376,9 +1973,44 @@
           "items"
         ]
       },
-      "Function": {
+      "PostLearningRequestDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "created_at",
+          "user",
+          "word",
+          "score",
+          "last_review",
+          "training",
+          "translation"
+        ]
       },
       "PostLearningResponseDto": {
         "type": "object",
@@ -1422,6 +2054,39 @@
           "training",
           "translation"
         ]
+      },
+      "PutLearningRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        }
       },
       "PutLearningResponseDto": {
         "type": "object",
@@ -1538,6 +2203,28 @@
           "items"
         ]
       },
+      "PostTopicRequestDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "title",
+          "language"
+        ]
+      },
       "PostTopicResponseDto": {
         "type": "object",
         "properties": {
@@ -1568,6 +2255,31 @@
           "title",
           "language"
         ]
+      },
+      "PutTopicRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "PutTopicResponseDto": {
         "type": "object",
@@ -1677,6 +2389,38 @@
           "items"
         ]
       },
+      "PostTrainingRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "created_at",
+          "name",
+          "title",
+          "description",
+          "image",
+          "score"
+        ]
+      },
       "PostTrainingResponseDto": {
         "type": "object",
         "properties": {
@@ -1712,6 +2456,33 @@
           "image",
           "score"
         ]
+      },
+      "PutTrainingRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        }
       },
       "PutTrainingResponseDto": {
         "type": "object",
@@ -1829,6 +2600,41 @@
           "items"
         ]
       },
+      "PostUserRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at",
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
       "PostUserResponseDto": {
         "type": "object",
         "properties": {
@@ -1867,6 +2673,37 @@
           "language_speak",
           "language_learn"
         ]
+      },
+      "PutUserRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        }
       },
       "PutUserResponseDto": {
         "type": "object",
@@ -1984,6 +2821,33 @@
           "items"
         ]
       },
+      "PostVocabCatalogRequestDto": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "language": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "owner",
+          "title",
+          "language"
+        ]
+      },
       "PostVocabCatalogResponseDto": {
         "type": "object",
         "properties": {
@@ -2019,6 +2883,35 @@
           "title",
           "language"
         ]
+      },
+      "PutVocabCatalogRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "language": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "PutVocabCatalogResponseDto": {
         "type": "object",
@@ -2157,6 +3050,56 @@
           "limit",
           "items"
         ]
+      },
+      "PutWordRequestDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "processed"
+            ]
+          },
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "topic": {
+            "type": "number"
+          },
+          "word": {
+            "type": "string"
+          },
+          "catalog": {
+            "type": "number"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "es",
+              "fr",
+              "de",
+              "it",
+              "ru",
+              "el",
+              "nl"
+            ]
+          },
+          "audio": {
+            "type": "string"
+          },
+          "transcribtion": {
+            "type": "string"
+          },
+          "meaning": {
+            "type": "string"
+          }
+        }
       },
       "PutWordResponseDto": {
         "type": "object",
@@ -2318,6 +3261,30 @@
           "items"
         ]
       },
+      "PostWordTranslationRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at",
+          "word",
+          "translation",
+          "language"
+        ]
+      },
       "PostWordTranslationResponseDto": {
         "type": "object",
         "properties": {
@@ -2346,6 +3313,23 @@
           "language"
         ]
       },
+      "PostSignInRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password",
+            "example": "Strong#Password123"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
       "PostSignInResponseDto": {
         "type": "object",
         "properties": {
@@ -2372,6 +3356,33 @@
           "user"
         ]
       },
+      "PostSignUpRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string",
+            "description": "Language the user speaks",
+            "example": "en"
+          },
+          "language_learn": {
+            "type": "string",
+            "description": "Language the user is learning",
+            "example": "es"
+          }
+        },
+        "required": [
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
       "PostSignUpResponseDto": {
         "type": "object",
         "properties": {
@@ -2396,6 +3407,39 @@
           "access_token",
           "refresh_token",
           "user"
+        ]
+      },
+      "Function": {
+        "type": "object",
+        "properties": {}
+      },
+      "PostVerifyEmailRequestDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Email verification code"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email"
+          }
+        },
+        "required": [
+          "code",
+          "email"
+        ]
+      },
+      "PostRefreshTokenRequestDto": {
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "description": "Refresh token"
+          }
+        },
+        "required": [
+          "refresh_token"
         ]
       },
       "PostRefreshTokenResponseDto": {
