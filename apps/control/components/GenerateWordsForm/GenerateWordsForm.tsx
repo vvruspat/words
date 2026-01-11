@@ -2,6 +2,7 @@ import {
 	MButton,
 	MFlex,
 	MFormField,
+	MInput,
 	MSelect,
 	MSelectOption,
 } from "@repo/uikit";
@@ -14,6 +15,7 @@ export const GenerateWordsForm = () => {
 	const [generateCatalog, setGenerateCatalog] = useState<number>();
 	const [generating, setGenerating] = useState(false);
 	const [generateMessage, setGenerateMessage] = useState("");
+	const [generateLimit, setGenerateLimit] = useState(20);
 
 	const { language, topics, catalogs, selectedCatalog, selectedTopic } =
 		useWordsStore();
@@ -41,6 +43,7 @@ export const GenerateWordsForm = () => {
 				language,
 				topics.find((t) => t.id === generateTopic)?.title ?? "",
 				catalogs.find((c) => c.id === generateCatalog)?.title ?? "",
+				generateLimit,
 			);
 			setGenerateMessage("Word generation started!");
 		} catch (err) {
@@ -83,6 +86,19 @@ export const GenerateWordsForm = () => {
 							options={topicsOptions}
 							value={generateTopic?.toString()}
 							onChange={(e) => setGenerateTopic(Number(e.target.value))}
+						/>
+					}
+				/>
+
+				<MFormField
+					label="Limit"
+					description="The number of words to generate"
+					control={
+						<MInput
+							type="number"
+							name="generateLimit"
+							value={generateLimit}
+							onChange={(e) => setGenerateLimit(Number(e.target.value))}
 						/>
 					}
 				/>

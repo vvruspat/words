@@ -12,7 +12,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import type { Language } from "@repo/types";
 import type { Response } from "express";
 import {
@@ -101,16 +101,21 @@ export class WordController {
 
 	@Post("generate")
 	@ApiOperation({ summary: "Generate words" })
+	@ApiQuery({ name: "language", required: true, type: String })
+	@ApiQuery({ name: "topic", required: false, type: String })
+	@ApiQuery({ name: "level", required: false, type: String })
+	@ApiQuery({ name: "limit", required: false, type: Number })
 	@ApiResponse({ status: 200, description: "Word generation started" })
 	async generateWords(
 		@Query("language") language: Language,
 		@Query("topic") topic?: string,
 		@Query("level") level?: string,
+		@Query("limit", ParseIntPipe) limit?: number,
 	): Promise<{ message: string }> {
 		if (!language) {
 			throw new Error("Language query parameter is required");
 		}
-		await this.wordService.generateWords(language, topic, level);
+		await this.wordService.generateWords(language, topic, level, limit);
 		return { message: "Word generation started" };
 	}
 

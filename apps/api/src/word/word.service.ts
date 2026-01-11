@@ -120,6 +120,7 @@ export class WordService {
 		language: Language,
 		topic: string,
 		level: string,
+		limit?: number,
 	): Promise<void> {
 		const existingWords = await this.wordRepository.find({
 			where: { language },
@@ -136,6 +137,7 @@ export class WordService {
 			except,
 			topic,
 			level,
+			limit,
 		});
 	}
 

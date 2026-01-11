@@ -134,13 +134,14 @@ export class OpenAIService {
 		except: string[],
 		topic: string,
 		level: string,
+		limit?: number,
 	): Promise<APIPromise<OpenAI.Responses.Response>> {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
 				version: "3",
 				variables: {
-					limit: WORDS_LIMIT.toString(),
+					limit: limit.toString() || WORDS_LIMIT.toString(),
 					wordlanguage: language,
 					topic,
 					level,
@@ -166,6 +167,7 @@ export class OpenAIService {
 		except: string[],
 		topic?: string,
 		level?: string,
+		limit?: number,
 	): Promise<void> {
 		this.logger.log(
 			`Generating words in ${language}, except: ${except.join(", ")}`,
@@ -179,6 +181,7 @@ export class OpenAIService {
 				except,
 				topic,
 				level,
+				limit,
 			);
 		} else if (topic) {
 			response = await this.generateWordsForTopic(language, except, topic);

@@ -1924,8 +1924,9 @@ export interface operations {
 		parameters: {
 			query: {
 				language: string;
-				topic: string;
-				level: string;
+				topic?: string;
+				level?: string;
+				limit?: number;
 			};
 			header?: never;
 			path?: never;
