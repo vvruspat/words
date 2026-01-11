@@ -1,31 +1,40 @@
 import { Global, Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Redis } from "ioredis";
-import { BullQueueProvider } from "./queue.provider";
 
 @Global()
 @Module({
-	imports: [ConfigModule.forRoot({ isGlobal: true })],
+	imports: [ConfigModule],
 	providers: [
 		{
 			provide: "REDIS_CLIENT",
 			inject: [ConfigService],
-			useFactory: (configService: ConfigService) => {
-				if (configService.get<string>("REDIS_URL")) {
-					return new Redis(configService.get<string>("REDIS_URL"));
-				} else {
-					return new Redis({
-						host: configService.get<string>("REDIS_HOST"),
-						port: configService.get<number>("REDIS_PORT"),
-						password: configService.get<string>("REDIS_PASSWORD"),
-						username: configService.get<string>("REDIS_USER"),
-						db: configService.get<number>("REDIS_DB"),
-					});
-				}
+			useFactory: (config: ConfigService) => {
+				const url = config.get<string>("REDIS_URL");
+
+				const redis = url
+					? new Redis(url, {
+							lazyConnect: true,
+							maxRetriesPerRequest: null,
+						})
+					: new Redis({
+							host: config.get("REDIS_HOST", "127.0.0.1"),
+							port: config.get("REDIS_PORT", 6379),
+							username: config.get("REDIS_USER"),
+							password: config.get("REDIS_PASSWORD"),
+							db: config.get("REDIS_DB", 0),
+							lazyConnect: true,
+							maxRetriesPerRequest: null,
+						});
+
+				redis.on("error", (err) => {
+					console.error("[Redis] connection error:", err.message);
+				});
+
+				return redis;
 			},
 		},
-		BullQueueProvider,
 	],
-	exports: ["REDIS_CLIENT", "BULLMQ_QUEUE"],
+	exports: ["REDIS_CLIENT"],
 })
 export class RedisModule {}
