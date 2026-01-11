@@ -192,7 +192,9 @@
 	--input-checkbox-indeterminate-icon-enabled: var(--palette-base-0);
 	--input-checkbox-indeterminate-icon-hover: var(--palette-base-0);
 	--input-checkbox-indeterminate-icon-active: var(--palette-base-0);
-	--input-checkbox-indeterminate-icon-invalid: var(--palette-semantic-error-600);
+	--input-checkbox-indeterminate-icon-invalid: var(
+		--palette-semantic-error-600
+	);
 	--input-checkbox-indeterminate-icon-disabled: var(--palette-base-0);
 	--input-checkbox-indeterminate-label-default: var(
 		--typography-body-font-color

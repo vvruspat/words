@@ -8,6 +8,7 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import type Redis from "ioredis";
+import type { SignOptions } from "jsonwebtoken";
 import type {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
@@ -29,15 +30,18 @@ export class AuthService {
 
 	async getAccessToken(user: UserEntity) {
 		const payload = { sub: user.id, email: user.email };
+		const accessExpiresIn = (this.configService.get<string | number>(
+			"JWT_EXPIRES_IN",
+		) || "14d") as SignOptions["expiresIn"];
+		const refreshExpiresIn = (this.configService.get<string | number>(
+			"JWT_REFRESH_EXPIRES_IN",
+		) || "60d") as SignOptions["expiresIn"];
 		const accessToken = this.jwtService.sign(payload, {
-			expiresIn:
-				this.configService.get<string | number>("JWT_EXPIRES_IN") || "14d",
+			expiresIn: accessExpiresIn,
 			secret: this.configService.get<string>("JWT_SECRET"),
 		});
 		const refreshToken = this.jwtService.sign(payload, {
-			expiresIn:
-				this.configService.get<string | number>("JWT_REFRESH_EXPIRES_IN") ||
-				"60d",
+			expiresIn: refreshExpiresIn,
 			secret: this.configService.get<string>("JWT_REFRESH_SECRET"),
 		});
 
@@ -206,13 +210,13 @@ export class AuthService {
 			throw new UnauthorizedException();
 		}
 
+		const resetPasswordExpiresIn = (this.configService.get<string | number>(
+			"RESET_PASSWORD_EXPIRES_IN",
+		) || "1h") as SignOptions["expiresIn"];
 		const token = this.jwtService.sign(
 			{ sub: user.id, email: user.email },
 			{
-				expiresIn:
-					this.configService.get<string | number>(
-						"RESET_PASSWORD_EXPIRES_IN",
-					) || "1h",
+				expiresIn: resetPasswordExpiresIn,
 				secret: this.configService.get<string>("JWT_SECRET"),
 			},
 		);

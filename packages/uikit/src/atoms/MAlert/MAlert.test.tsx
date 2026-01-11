@@ -11,20 +11,22 @@ describe("MAlert", () => {
 		expect(alert).toHaveClass("alert-mode-info");
 	});
 
-	it.each([["info"], ["success"], ["warning"], ["error"]])(
-		'applies the correct mode class for mode="%s"',
-		(mode) => {
-			render(
-				<MAlert
-					mode={mode as "error" | "warning" | "success" | "info" | undefined}
-				>
-					Alert content
-				</MAlert>,
-			);
-			const alert = screen.getByText("Alert content");
-			expect(alert).toHaveClass(`alert-mode-${mode}`);
-		},
-	);
+	it.each([
+		["info"],
+		["success"],
+		["warning"],
+		["error"],
+	])('applies the correct mode class for mode="%s"', (mode) => {
+		render(
+			<MAlert
+				mode={mode as "error" | "warning" | "success" | "info" | undefined}
+			>
+				Alert content
+			</MAlert>,
+		);
+		const alert = screen.getByText("Alert content");
+		expect(alert).toHaveClass(`alert-mode-${mode}`);
+	});
 
 	it("merges additional className prop", () => {
 		render(<MAlert className="custom-class">Alert with extra class</MAlert>);

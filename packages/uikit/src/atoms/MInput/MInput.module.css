@@ -120,7 +120,10 @@
 
 /* focus */
 .inputWrapper:not(.invalid):has(.input:focus) .inputContainer {
-	background: var(--input-field-focus-background-color, transparent); /* this property was here initially, but I can't see any visual effect */
+	background: var(
+		--input-field-focus-background-color,
+		transparent
+	); /* this property was here initially, but I can't see any visual effect */
 	color: var(--input-field-focus-font-color-before-after, #747e97);
 }
 
@@ -131,7 +134,10 @@
 /* active */
 .inputWrapper:not(.invalid):has(.input:active) .inputContainer {
 	color: var(--input-field-active-font-color, #747e97);
-	background: var(--input-field-active-background-color, rgba(255, 255, 255, 0)); /* this property was here initially, but I can't see any visual effect */
+	background: var(
+		--input-field-active-background-color,
+		rgba(255, 255, 255, 0)
+	); /* this property was here initially, but I can't see any visual effect */
 }
 
 .inputWrapper:has(.input:active) .inputContainer input {
