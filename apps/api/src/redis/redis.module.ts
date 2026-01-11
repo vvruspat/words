@@ -11,13 +11,17 @@ import { BullQueueProvider } from "./queue.provider";
 			provide: "REDIS_CLIENT",
 			inject: [ConfigService],
 			useFactory: (configService: ConfigService) => {
-				return new Redis({
-					host: configService.get<string>("REDIS_HOST"),
-					port: configService.get<number>("REDIS_PORT"),
-					password: configService.get<string>("REDIS_PASSWORD"),
-					username: configService.get<string>("REDIS_USER"),
-					db: configService.get<number>("REDIS_DB"),
-				});
+				if (configService.get<string>("REDIS_URL")) {
+					return new Redis(configService.get<string>("REDIS_URL"));
+				} else {
+					return new Redis({
+						host: configService.get<string>("REDIS_HOST"),
+						port: configService.get<number>("REDIS_PORT"),
+						password: configService.get<string>("REDIS_PASSWORD"),
+						username: configService.get<string>("REDIS_USER"),
+						db: configService.get<number>("REDIS_DB"),
+					});
+				}
 			},
 		},
 		BullQueueProvider,
