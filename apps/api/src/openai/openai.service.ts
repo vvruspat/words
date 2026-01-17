@@ -107,7 +107,7 @@ export class OpenAIService {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_TOPIC_PROMPT_ID,
-				version: "5",
+				version: "4",
 				variables: {
 					limit: WORDS_LIMIT.toString(),
 					wordlanguage: language,
@@ -128,24 +128,13 @@ export class OpenAIService {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
-				version: "3",
+				version: "5",
 				variables: {
 					limit: limit.toString() || WORDS_LIMIT.toString(),
 					wordlanguage: language,
 					topic,
 					level,
 					exclude: except.join(","),
-				},
-			},
-			input: [
-				{
-					role: "user",
-					content: "Return the result as JSON.",
-				},
-			],
-			text: {
-				format: {
-					type: "json_object",
 				},
 			},
 		});
