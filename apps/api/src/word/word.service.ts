@@ -232,7 +232,13 @@ export class WordService {
 			return;
 		}
 
-		const url = await this.gcsService.uploadMp3FromBase64(audio, filename);
+		const uniqueFilename = `${word.id}-${filename}`;
+
+		const url = await this.gcsService.uploadMp3FromBase64(
+			word.language,
+			audio,
+			uniqueFilename,
+		);
 
 		word.audio = url;
 
@@ -240,7 +246,7 @@ export class WordService {
 		this.wordEventService.emit({ type: "update", word: updatedWord });
 
 		this.logger.log(
-			`Audio updated for word id ${wordId}, filename: ${filename}`,
+			`Audio updated for word id ${wordId}, filename: ${uniqueFilename}`,
 		);
 	}
 }

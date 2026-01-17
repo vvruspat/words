@@ -58,10 +58,13 @@ export class AuthService {
 
 		const hashedPassword = await this.redis.get(`tmp-password:${email}`);
 
-		const isMatch = await bcrypt.compare(
-			pass,
-			hashedPassword || user?.password || "",
-		);
+		const passwordHash = hashedPassword || user?.password;
+
+		if (!passwordHash || !user) {
+			throw new UnauthorizedException("Invalid credentials");
+		}
+
+		const isMatch = await bcrypt.compare(pass, passwordHash);
 
 		if (!isMatch) {
 			throw new UnauthorizedException("Invalid credentials");
@@ -157,7 +160,14 @@ export class AuthService {
 			throw new UnauthorizedException();
 		}
 
-		return this.signIn(user.email, user.password);
+		const { access_token: accessToken, refresh_token: refreshToken } =
+			await this.getAccessToken(user);
+
+		return {
+			user,
+			access_token: accessToken,
+			refresh_token: refreshToken,
+		};
 	}
 
 	async verifyEmail(email: string, code: string) {
