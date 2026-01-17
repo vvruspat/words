@@ -193,24 +193,13 @@ export class OpenAIService {
 		const response = await this.openai.responses.create({
 			prompt: {
 				id: TRANSLATE_WORDS_PROMPT_ID,
-				version: "1",
+				version: "2",
 				variables: {
 					from_language: language,
 					languages: Object.keys(AVAILABLE_LANGUAGES)
 						.filter((lang) => lang !== language)
 						.join(","),
 					words: words.map((word) => word.word).join(","),
-				},
-			},
-			input: [
-				{
-					role: "user",
-					content: "Return the result as JSON.",
-				},
-			],
-			text: {
-				format: {
-					type: "json_object",
 				},
 			},
 		});
@@ -221,11 +210,12 @@ export class OpenAIService {
 
 		this.translationsQueue.add(TRANSLATION_DONE, {
 			generatedTranslations:
+				translatedWords.items ??
+				// The other are possible fallbacks for AI hallucinations
 				translatedWords.translations ??
 				translatedWords.result ??
 				translatedWords.results ??
 				translatedWords.data ??
-				translatedWords.items ??
 				translatedWords,
 			words,
 		});
@@ -242,7 +232,7 @@ export class OpenAIService {
 		const buffer = Buffer.from(await mp3.arrayBuffer());
 
 		this.wordsQueue.add(AUDIO_CREATION_DONE, {
-			filename: `word_${language}_${word}.mp3`,
+			filename: `${word}.mp3`,
 			audio: buffer.toString("base64"),
 			wordId,
 		});

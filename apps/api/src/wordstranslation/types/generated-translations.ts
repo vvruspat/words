@@ -1,9 +1,11 @@
-import { AVAILABLE_LANGUAGES, type Language } from "@repo/types";
+import { type Language } from "@repo/types";
 
 export type GeneratedTranslation = {
 	word: string;
-} & {
-	[lang in Language]: string;
+	translations: {
+		language: Language;
+		translation: string;
+	}[];
 };
 
 export function isWordsTranslationsArray(
@@ -11,11 +13,19 @@ export function isWordsTranslationsArray(
 ): data is GeneratedTranslation[] {
 	return (
 		Array.isArray(data) &&
-		data.some(
+		data.every(
 			(item) =>
-				typeof item.word === "string" &&
-				Object.keys(AVAILABLE_LANGUAGES).some(
-					(lang) => typeof item[lang] === "string",
+				typeof item === "object" &&
+				item !== null &&
+				"word" in item &&
+				"translations" in item &&
+				Array.isArray(item.translations) &&
+				item.translations.every(
+					(translation) =>
+						typeof translation === "object" &&
+						translation !== null &&
+						"language" in translation &&
+						"translation" in translation,
 				),
 		)
 	);

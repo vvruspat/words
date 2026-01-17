@@ -140,21 +140,22 @@ export class WordTranslationService {
 		);
 
 		// Create all translations
-		for (const translation of generatedTranslations) {
-			const word = wordsMap.get(translation.word);
-			if (!word) continue;
 
-			for (const key of Object.keys(translation)) {
-				if (key === "word") continue;
-
-				this.logger.log(
-					`Creating translation for word ${word.word} in language ${key}: ${translation[key]}`,
+		for (const wordWithTranslations of generatedTranslations) {
+			const word = wordsMap.get(wordWithTranslations.word);
+			if (!word) {
+				this.logger.error(
+					`Word ${wordWithTranslations.word} not found in words map`,
+					generatedTranslations,
 				);
+				continue;
+			}
 
+			for (const translationItem of wordWithTranslations.translations) {
 				await this.create({
 					word: word.id,
-					translation: translation[key],
-					language: key,
+					translation: translationItem.translation,
+					language: translationItem.language,
 					created_at: new Date().toISOString(),
 				});
 			}
