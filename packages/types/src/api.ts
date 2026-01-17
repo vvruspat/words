@@ -939,7 +939,6 @@ export interface components {
 			/** @description User information without password */
 			user: components["schemas"]["UserDto"];
 		};
-		Function: Record<string, never>;
 		PostVerifyEmailRequestDto: {
 			/** @description Email verification code */
 			code: string;
@@ -1923,10 +1922,10 @@ export interface operations {
 	WordController_generateWords: {
 		parameters: {
 			query: {
-				language: string;
 				topic?: string;
 				level?: string;
 				limit?: number;
+				language: string;
 			};
 			header?: never;
 			path?: never;
@@ -2163,11 +2162,7 @@ export interface operations {
 			path?: never;
 			cookie?: never;
 		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
+		requestBody?: never;
 		responses: {
 			/** @description Password successfully reset */
 			200: {
@@ -2199,11 +2194,7 @@ export interface operations {
 			path?: never;
 			cookie?: never;
 		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
+		requestBody?: never;
 		responses: {
 			/** @description Password successfully sent */
 			200: {
@@ -2264,11 +2255,7 @@ export interface operations {
 			path?: never;
 			cookie?: never;
 		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["Function"];
-			};
-		};
+		requestBody?: never;
 		responses: {
 			/** @description Verification email sent successfully */
 			200: {

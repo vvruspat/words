@@ -7,6 +7,20 @@ export const databaseProviders = [
 	{
 		provide: DATA_SOURCE,
 		useFactory: async () => {
+			// Skip database connection during Swagger generation
+			if (process.env.SKIP_DB_CONNECTION === "true") {
+				// Return an uninitialized DataSource - this prevents connection
+				// but maintains type safety. Swagger generation only needs metadata
+				// from decorators, not actual database connections.
+				const dataSourceOptions: DataSourceOptions = {
+					type: "postgres",
+					entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
+				};
+				const dataSource = new DataSource(dataSourceOptions);
+				// Don't call initialize() - just return the uninitialized DataSource
+				return dataSource;
+			}
+
 			let connectionOptions = {};
 			const dataSourceOptions: DataSourceOptions = {
 				type: "postgres",

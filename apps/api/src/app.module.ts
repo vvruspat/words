@@ -34,16 +34,22 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		AuthModule,
 		OpenAIModule,
 		GcsModule,
-		BullModule.forRootAsync({
-			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: (config: ConfigService) => ({
-				connection: {
-					url: config.getOrThrow("REDIS_URL"),
-				},
-			}),
-		}),
-		QueuesModule,
+		// Skip BullMQ during Swagger generation (doesn't need connections)
+		...(process.env.SKIP_REDIS_CONNECTION !== "true"
+			? [
+					BullModule.forRootAsync({
+						imports: [ConfigModule],
+						inject: [ConfigService],
+						useFactory: (config: ConfigService) => ({
+							connection: {
+								url:
+									config.get<string>("REDIS_URL") || "redis://localhost:6379",
+							},
+						}),
+					}),
+					QueuesModule,
+				]
+			: []),
 	],
 	controllers: [AppController],
 	providers: [AppService],

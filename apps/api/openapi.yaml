@@ -882,11 +882,6 @@ paths:
     post:
       operationId: WordController_generateWords
       parameters:
-        - name: language
-          required: true
-          in: query
-          schema:
-            type: string
         - name: topic
           required: false
           in: query
@@ -902,6 +897,11 @@ paths:
           in: query
           schema:
             type: number
+        - name: language
+          required: true
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: Word generation started
@@ -1066,12 +1066,6 @@ paths:
     put:
       operationId: AuthController_resetPassword
       parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Function'
       responses:
         '200':
           description: Password successfully reset
@@ -1097,12 +1091,6 @@ paths:
     post:
       operationId: AuthController_sendTmpPasswordToEmail
       parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Function'
       responses:
         '200':
           description: Password successfully sent
@@ -1133,12 +1121,6 @@ paths:
     post:
       operationId: AuthController_resendVerificationEmail
       parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Function'
       responses:
         '200':
           description: Verification email sent successfully
@@ -2248,9 +2230,6 @@ components:
         - access_token
         - refresh_token
         - user
-    Function:
-      type: object
-      properties: {}
     PostVerifyEmailRequestDto:
       type: object
       properties:
