@@ -107,23 +107,12 @@ export class OpenAIService {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_TOPIC_PROMPT_ID,
-				version: "4",
+				version: "5",
 				variables: {
 					limit: WORDS_LIMIT.toString(),
 					wordlanguage: language,
 					topic,
 					exclude: except.join(","),
-				},
-			},
-			input: [
-				{
-					role: "user",
-					content: "Return the result as JSON.",
-				},
-			],
-			text: {
-				format: {
-					type: "json_object",
 				},
 			},
 		});
@@ -196,6 +185,8 @@ export class OpenAIService {
 
 			this.wordsQueue.add(WORDS_GENERATION_DONE, {
 				words:
+					newWords.words ||
+					// The other are possible fallbacks for AI hallucinations
 					newWords.result ||
 					newWords.results ||
 					newWords.data ||
