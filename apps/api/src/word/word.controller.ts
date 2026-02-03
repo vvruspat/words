@@ -90,6 +90,20 @@ export class WordController {
 		return await this.wordService.update(dto);
 	}
 
+	@Post("bulk-delete")
+	@ApiOperation({ summary: "Bulk delete words" })
+	@ApiResponse({ status: 200, description: "Words deleted" })
+	async bulkDelete(
+		@Body() body: { ids: number[] },
+	): Promise<{ deleted: number }> {
+		const ids = body?.ids ?? [];
+		if (!Array.isArray(ids) || ids.length === 0) {
+			return { deleted: 0 };
+		}
+		const deleted = await this.wordService.removeMany(ids);
+		return { deleted };
+	}
+
 	@Post("generate")
 	@ApiOperation({ summary: "Generate words" })
 	@ApiQuery({ name: "language", required: true, type: String })

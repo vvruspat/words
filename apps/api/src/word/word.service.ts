@@ -89,9 +89,26 @@ export class WordService {
 	async remove(id: WordEntity["id"]): Promise<void> {
 		const word = await this.findOne(id);
 		if (word) {
+			await this.wordTranslationService.removeByWordId(id);
 			await this.wordRepository.delete({ id });
 			this.wordEventService.emit({ type: "delete", word });
 		}
+	}
+
+	async removeMany(ids: WordEntity["id"][]): Promise<number> {
+		if (ids.length === 0) return 0;
+		const words = await this.wordRepository.find({
+			where: { id: In(ids) },
+		});
+		for (const word of words) {
+			await this.wordTranslationService.removeByWordId(word.id);
+		}
+		const result = await this.wordRepository.delete({ id: In(ids) });
+		for (const word of words) {
+			this.wordEventService.emit({ type: "delete", word });
+		}
+		this.logger.log(`Deleted ${result.affected ?? 0} words: ${ids.join(", ")}`);
+		return result.affected ?? 0;
 	}
 
 	async markProcessing(ids: number[]): Promise<void> {

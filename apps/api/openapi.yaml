@@ -865,6 +865,15 @@ paths:
           description: Server error
       summary: Update word
       tags: *ref_5
+  /word/bulk-delete:
+    post:
+      operationId: WordController_bulkDelete
+      parameters: []
+      responses:
+        '200':
+          description: Words deleted
+      summary: Bulk delete words
+      tags: *ref_5
   /word/generate:
     post:
       operationId: WordController_generateWords

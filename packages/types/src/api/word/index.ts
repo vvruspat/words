@@ -1,3 +1,4 @@
+export * from "./bulk-delete";
 export * from "./events";
 export * from "./generate";
 export * from "./get";

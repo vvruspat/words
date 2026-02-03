@@ -223,6 +223,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/word/bulk-delete": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Bulk delete words */
+		post: operations["WordController_bulkDelete"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/word/generate": {
 		parameters: {
 			query?: never;
@@ -1927,6 +1944,24 @@ export interface operations {
 			};
 			/** @description Server error */
 			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordController_bulkDelete: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Words deleted */
+			200: {
 				headers: {
 					[name: string]: unknown;
 				};
