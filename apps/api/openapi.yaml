@@ -865,18 +865,14 @@ paths:
           description: Server error
       summary: Update word
       tags: *ref_5
-  /word/{id}:
-    delete:
-      operationId: WordController_remove
+  /word/bulk-delete:
+    post:
+      operationId: WordController_bulkDelete
       parameters: []
       responses:
         '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteWordResponseDto'
-      summary: Delete word
+          description: Words deleted
+      summary: Bulk delete words
       tags: *ref_5
   /word/generate:
     post:
@@ -906,6 +902,51 @@ paths:
         '200':
           description: Word generation started
       summary: Generate words
+      tags: *ref_5
+  /word/{id}:
+    delete:
+      operationId: WordController_remove
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWordResponseDto'
+      summary: Delete word
+      tags: *ref_5
+  /word/{id}/retranslate:
+    post:
+      operationId: WordController_retranslate
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Retranslation queued
+        '404':
+          description: Word not found
+      summary: Retranslate word - delete existing translations and regenerate
+      tags: *ref_5
+  /word/{id}/regenerate-audio:
+    post:
+      operationId: WordController_regenerateAudio
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Audio regeneration queued
+        '404':
+          description: Word not found
+      summary: Regenerate audio for word
       tags: *ref_5
   /word/events:
     get:

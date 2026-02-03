@@ -3,6 +3,7 @@ import {
 	Controller,
 	Delete,
 	Get,
+	NotFoundException,
 	Param,
 	ParseIntPipe,
 	Post,
@@ -89,14 +90,18 @@ export class WordController {
 		return await this.wordService.update(dto);
 	}
 
-	@Delete(":id")
-	@ApiOperation({ summary: "Delete word" })
-	@ApiResponse({ status: 200, type: DeleteWordResponseDto })
-	async remove(
-		@Param("id", ParseIntPipe) id: DeleteWordRequestDto["id"],
-	): Promise<DeleteWordResponseDto> {
-		await this.wordService.remove(id);
-		return { id };
+	@Post("bulk-delete")
+	@ApiOperation({ summary: "Bulk delete words" })
+	@ApiResponse({ status: 200, description: "Words deleted" })
+	async bulkDelete(
+		@Body() body: { ids: number[] },
+	): Promise<{ deleted: number }> {
+		const ids = body?.ids ?? [];
+		if (!Array.isArray(ids) || ids.length === 0) {
+			return { deleted: 0 };
+		}
+		const deleted = await this.wordService.removeMany(ids);
+		return { deleted };
 	}
 
 	@Post("generate")
@@ -117,6 +122,46 @@ export class WordController {
 		}
 		await this.wordService.generateWords(language, topic, level, limit);
 		return { message: "Word generation started" };
+	}
+
+	@Delete(":id")
+	@ApiOperation({ summary: "Delete word" })
+	@ApiResponse({ status: 200, type: DeleteWordResponseDto })
+	async remove(
+		@Param("id", ParseIntPipe) id: DeleteWordRequestDto["id"],
+	): Promise<DeleteWordResponseDto> {
+		await this.wordService.remove(id);
+		return { id };
+	}
+
+	@Post(":id/retranslate")
+	@ApiOperation({
+		summary: "Retranslate word - delete existing translations and regenerate",
+	})
+	@ApiResponse({ status: 200, description: "Retranslation queued" })
+	@ApiResponse({ status: 404, description: "Word not found" })
+	async retranslate(
+		@Param("id", ParseIntPipe) id: number,
+	): Promise<{ message: string }> {
+		const word = await this.wordService.retranslateWord(id);
+		if (!word) {
+			throw new NotFoundException("Word not found");
+		}
+		return { message: "Retranslation queued" };
+	}
+
+	@Post(":id/regenerate-audio")
+	@ApiOperation({ summary: "Regenerate audio for word" })
+	@ApiResponse({ status: 200, description: "Audio regeneration queued" })
+	@ApiResponse({ status: 404, description: "Word not found" })
+	async regenerateAudio(
+		@Param("id", ParseIntPipe) id: number,
+	): Promise<{ message: string }> {
+		const word = await this.wordService.regenerateAudio(id);
+		if (!word) {
+			throw new NotFoundException("Word not found");
+		}
+		return { message: "Audio regeneration queued" };
 	}
 
 	@Get("events")

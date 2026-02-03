@@ -13,6 +13,7 @@ import { OPENAI_QUEUE, TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
 import type { GetWordRequestDto } from "~/dto";
 import { GcsService } from "~/gcs/gcs.service";
 import { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
+import { WordTranslationService } from "~/wordstranslation/wordstranslation.service";
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
@@ -34,6 +35,7 @@ export class WordService {
 		@InjectQueue(TRANSLATIONS_QUEUE) private translationQueue: Queue,
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 		private readonly wordEventService: WordEventService,
+		private readonly wordTranslationService: WordTranslationService,
 	) {}
 
 	async findAll(
@@ -87,9 +89,26 @@ export class WordService {
 	async remove(id: WordEntity["id"]): Promise<void> {
 		const word = await this.findOne(id);
 		if (word) {
+			await this.wordTranslationService.removeByWordId(id);
 			await this.wordRepository.delete({ id });
 			this.wordEventService.emit({ type: "delete", word });
 		}
+	}
+
+	async removeMany(ids: WordEntity["id"][]): Promise<number> {
+		if (ids.length === 0) return 0;
+		const words = await this.wordRepository.find({
+			where: { id: In(ids) },
+		});
+		for (const word of words) {
+			await this.wordTranslationService.removeByWordId(word.id);
+		}
+		const result = await this.wordRepository.delete({ id: In(ids) });
+		for (const word of words) {
+			this.wordEventService.emit({ type: "delete", word });
+		}
+		this.logger.log(`Deleted ${result.affected ?? 0} words: ${ids.join(", ")}`);
+		return result.affected ?? 0;
 	}
 
 	async markProcessing(ids: number[]): Promise<void> {
@@ -215,6 +234,40 @@ export class WordService {
 		this.translationQueue.add(TRANSLATION_START, {
 			words,
 		});
+	}
+
+	async retranslateWord(wordId: WordEntity["id"]): Promise<WordEntity | null> {
+		const word = await this.findOne(wordId);
+		if (!word) return null;
+
+		await this.wordTranslationService.removeByWordId(wordId);
+		await this.markProcessing([wordId]);
+		this.makeTranslationsForWords([word]);
+
+		this.logger.log(
+			`Retranslation queued for word ${word.word} (id: ${wordId})`,
+		);
+		return word;
+	}
+
+	async regenerateAudio(wordId: WordEntity["id"]): Promise<WordEntity | null> {
+		const word = await this.findOne(wordId);
+		if (!word) return null;
+
+		await this.wordRepository.update(wordId, {
+			audio: "",
+			status: "processing",
+		});
+		const updatedWord = await this.findOne(wordId);
+		if (updatedWord) {
+			this.wordEventService.emit({ type: "update", word: updatedWord });
+		}
+
+		this.makeAudio(word.language, word.word, wordId);
+		this.logger.log(
+			`Audio regeneration queued for word ${word.word} (id: ${wordId})`,
+		);
+		return updatedWord ?? word;
 	}
 
 	/**

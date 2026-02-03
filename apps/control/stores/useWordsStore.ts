@@ -32,6 +32,7 @@ interface WordsStore {
 	removeTopic: (topic: Topic) => void;
 	updateTopic: (topic: Topic) => void;
 	setWords: (words: Word[]) => void;
+	removeWords: (ids: number[]) => void;
 
 	connect: () => void;
 	disconnect: () => void;
@@ -48,6 +49,10 @@ export const useWordsStore = create<WordsStore>()(
 			connected: false,
 			words: [],
 			setWords: (words: Word[]) => set({ words }),
+			removeWords: (ids: number[]) =>
+				set((state) => ({
+					words: state.words.filter((w) => !ids.includes(w.id)),
+				})),
 			setLanguage: (language) => set({ language }),
 			setSelectedCatalog: (selectedCatalog) => set({ selectedCatalog }),
 			setSelectedTopic: (selectedTopic) => set({ selectedTopic }),

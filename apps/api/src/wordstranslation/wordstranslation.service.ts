@@ -114,6 +114,10 @@ export class WordTranslationService {
 		await this.wordsTranslationRepository.delete({ id });
 	}
 
+	async removeByWordId(wordId: WordTranslationEntity["word"]): Promise<void> {
+		await this.wordsTranslationRepository.delete({ word: wordId });
+	}
+
 	async makeTranslations(words: WordEntity[]): Promise<void> {
 		this.logger.log(
 			`Enqueuing translation job for words: ${words
