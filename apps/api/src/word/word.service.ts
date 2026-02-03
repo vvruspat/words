@@ -13,6 +13,7 @@ import { OPENAI_QUEUE, TRANSLATIONS_QUEUE } from "~/constants/queues.constants";
 import type { GetWordRequestDto } from "~/dto";
 import { GcsService } from "~/gcs/gcs.service";
 import { VocabCatalogService } from "~/vocabcatalog/vocabcatalog.service";
+import { WordTranslationService } from "~/wordstranslation/wordstranslation.service";
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
@@ -34,6 +35,7 @@ export class WordService {
 		@InjectQueue(TRANSLATIONS_QUEUE) private translationQueue: Queue,
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 		private readonly wordEventService: WordEventService,
+		private readonly wordTranslationService: WordTranslationService,
 	) {}
 
 	async findAll(
@@ -215,6 +217,40 @@ export class WordService {
 		this.translationQueue.add(TRANSLATION_START, {
 			words,
 		});
+	}
+
+	async retranslateWord(wordId: WordEntity["id"]): Promise<WordEntity | null> {
+		const word = await this.findOne(wordId);
+		if (!word) return null;
+
+		await this.wordTranslationService.removeByWordId(wordId);
+		await this.markProcessing([wordId]);
+		this.makeTranslationsForWords([word]);
+
+		this.logger.log(
+			`Retranslation queued for word ${word.word} (id: ${wordId})`,
+		);
+		return word;
+	}
+
+	async regenerateAudio(wordId: WordEntity["id"]): Promise<WordEntity | null> {
+		const word = await this.findOne(wordId);
+		if (!word) return null;
+
+		await this.wordRepository.update(wordId, {
+			audio: "",
+			status: "processing",
+		});
+		const updatedWord = await this.findOne(wordId);
+		if (updatedWord) {
+			this.wordEventService.emit({ type: "update", word: updatedWord });
+		}
+
+		this.makeAudio(word.language, word.word, wordId);
+		this.logger.log(
+			`Audio regeneration queued for word ${word.word} (id: ${wordId})`,
+		);
+		return updatedWord ?? word;
 	}
 
 	/**

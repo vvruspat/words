@@ -7,8 +7,10 @@ import {
 	MFlex,
 	MFormField,
 	MHeading,
+	MIconArrowsClockwise,
 	MIconInfo,
 	MIconPlay,
+	MIconTranslate,
 	MSelect,
 	type MSelectOption,
 	MText,
@@ -16,6 +18,8 @@ import {
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
+import { regenerateAudioAction } from "@/actions/regenerateAudioAction";
+import { retranslateWordAction } from "@/actions/retranslateWordAction";
 import { TranslationsDropdown } from "@/components/TranslationsDropdown/TranslationsDropdown";
 import useModal, { MODALS } from "@/stores/useModal";
 import { useTranslationsStore } from "@/stores/useTranslationsStore";
@@ -190,6 +194,39 @@ export default function ManageWordsPage() {
 		});
 	}, []);
 
+	const [pendingRetranslate, setPendingRetranslate] = useState<Set<number>>(
+		new Set(),
+	);
+	const [pendingRegenerate, setPendingRegenerate] = useState<Set<number>>(
+		new Set(),
+	);
+
+	const handleRetranslate = useCallback(async (wordId: number) => {
+		setPendingRetranslate((prev) => new Set(prev).add(wordId));
+		try {
+			await retranslateWordAction(wordId);
+		} finally {
+			setPendingRetranslate((prev) => {
+				const next = new Set(prev);
+				next.delete(wordId);
+				return next;
+			});
+		}
+	}, []);
+
+	const handleRegenerateAudio = useCallback(async (wordId: number) => {
+		setPendingRegenerate((prev) => new Set(prev).add(wordId));
+		try {
+			await regenerateAudioAction(wordId);
+		} finally {
+			setPendingRegenerate((prev) => {
+				const next = new Set(prev);
+				next.delete(wordId);
+				return next;
+			});
+		}
+	}, []);
+
 	return (
 		<main
 			style={{
@@ -358,6 +395,37 @@ export default function ManageWordsPage() {
 										id={Number(id)}
 										translations={translations}
 									/>
+								),
+							},
+							{
+								field: "id",
+								key: "actions",
+								label: "Actions",
+								renderCell: (id) => (
+									<MFlex direction="row" gap="s" align="center">
+										<MButton
+											mode="tertiary"
+											size="s"
+											onClick={() => handleRetranslate(Number(id))}
+											disabled={pendingRetranslate.has(Number(id))}
+											title="Retranslate"
+										>
+											<MIconTranslate mode="regular" width={16} height={16} />
+										</MButton>
+										<MButton
+											mode="tertiary"
+											size="s"
+											onClick={() => handleRegenerateAudio(Number(id))}
+											disabled={pendingRegenerate.has(Number(id))}
+											title="Regenerate audio"
+										>
+											<MIconArrowsClockwise
+												mode="regular"
+												width={16}
+												height={16}
+											/>
+										</MButton>
+									</MFlex>
 								),
 							},
 						]}

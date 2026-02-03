@@ -3,6 +3,7 @@ import {
 	Controller,
 	Delete,
 	Get,
+	NotFoundException,
 	Param,
 	ParseIntPipe,
 	Post,
@@ -89,16 +90,6 @@ export class WordController {
 		return await this.wordService.update(dto);
 	}
 
-	@Delete(":id")
-	@ApiOperation({ summary: "Delete word" })
-	@ApiResponse({ status: 200, type: DeleteWordResponseDto })
-	async remove(
-		@Param("id", ParseIntPipe) id: DeleteWordRequestDto["id"],
-	): Promise<DeleteWordResponseDto> {
-		await this.wordService.remove(id);
-		return { id };
-	}
-
 	@Post("generate")
 	@ApiOperation({ summary: "Generate words" })
 	@ApiQuery({ name: "language", required: true, type: String })
@@ -117,6 +108,46 @@ export class WordController {
 		}
 		await this.wordService.generateWords(language, topic, level, limit);
 		return { message: "Word generation started" };
+	}
+
+	@Delete(":id")
+	@ApiOperation({ summary: "Delete word" })
+	@ApiResponse({ status: 200, type: DeleteWordResponseDto })
+	async remove(
+		@Param("id", ParseIntPipe) id: DeleteWordRequestDto["id"],
+	): Promise<DeleteWordResponseDto> {
+		await this.wordService.remove(id);
+		return { id };
+	}
+
+	@Post(":id/retranslate")
+	@ApiOperation({
+		summary: "Retranslate word - delete existing translations and regenerate",
+	})
+	@ApiResponse({ status: 200, description: "Retranslation queued" })
+	@ApiResponse({ status: 404, description: "Word not found" })
+	async retranslate(
+		@Param("id", ParseIntPipe) id: number,
+	): Promise<{ message: string }> {
+		const word = await this.wordService.retranslateWord(id);
+		if (!word) {
+			throw new NotFoundException("Word not found");
+		}
+		return { message: "Retranslation queued" };
+	}
+
+	@Post(":id/regenerate-audio")
+	@ApiOperation({ summary: "Regenerate audio for word" })
+	@ApiResponse({ status: 200, description: "Audio regeneration queued" })
+	@ApiResponse({ status: 404, description: "Word not found" })
+	async regenerateAudio(
+		@Param("id", ParseIntPipe) id: number,
+	): Promise<{ message: string }> {
+		const word = await this.wordService.regenerateAudio(id);
+		if (!word) {
+			throw new NotFoundException("Word not found");
+		}
+		return { message: "Audio regeneration queued" };
 	}
 
 	@Get("events")

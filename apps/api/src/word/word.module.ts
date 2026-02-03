@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { DatabaseModule } from "~/database/database.module";
 import { GcsModule } from "~/gcs/gcs.module";
 import { VocabCatalogModule } from "~/vocabcatalog/vocabcatalog.module";
+import { WordTranslationModule } from "~/wordstranslation/wordstranslation.module";
 import { TopicModule } from "../topic/topic.module";
 import { WordController } from "./word.controller";
 import { wordProviders } from "./word.providers";
@@ -10,7 +11,13 @@ import { WordService } from "./word.service";
 import { WordEventService } from "./word-event.service";
 
 @Module({
-	imports: [DatabaseModule, TopicModule, VocabCatalogModule, GcsModule],
+	imports: [
+		DatabaseModule,
+		TopicModule,
+		VocabCatalogModule,
+		GcsModule,
+		WordTranslationModule,
+	],
 	providers: [
 		...wordProviders,
 		WordService,
