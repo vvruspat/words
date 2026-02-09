@@ -15,6 +15,7 @@ interface WordsStore {
 	language: Language;
 	selectedCatalog: string;
 	selectedTopic: string;
+	selectedStatus: "processing" | "processed";
 	topics: Topic[];
 	catalogs: VocabCatalog[];
 	connected: boolean;
@@ -23,6 +24,7 @@ interface WordsStore {
 	setLanguage: (language: Language) => void;
 	setSelectedCatalog: (catalog: string) => void;
 	setSelectedTopic: (topic: string) => void;
+	setSelectedStatus: (status: "processing" | "processed") => void;
 	setTopics: (topics: Topic[]) => void;
 	setCatalogs: (catalogs: VocabCatalog[]) => void;
 	addCatalogs: (catalog: VocabCatalog) => void;
@@ -44,6 +46,7 @@ export const useWordsStore = create<WordsStore>()(
 			language: "en",
 			selectedCatalog: "",
 			selectedTopic: "",
+			selectedStatus: "processing",
 			topics: [],
 			catalogs: [],
 			connected: false,
@@ -56,6 +59,7 @@ export const useWordsStore = create<WordsStore>()(
 			setLanguage: (language) => set({ language }),
 			setSelectedCatalog: (selectedCatalog) => set({ selectedCatalog }),
 			setSelectedTopic: (selectedTopic) => set({ selectedTopic }),
+			setSelectedStatus: (selectedStatus) => set({ selectedStatus }),
 			setTopics: (topics: Topic[]) => set({ topics }),
 			addTopics: (topic: Topic) =>
 				set((state) => ({ topics: [...state.topics, topic] })),
@@ -186,6 +190,7 @@ export const useWordsStore = create<WordsStore>()(
 				language: state.language,
 				selectedCatalog: state.selectedCatalog,
 				selectedTopic: state.selectedTopic,
+				selectedStatus: state.selectedStatus,
 				topics: state.topics,
 				catalogs: state.catalogs,
 			}),
