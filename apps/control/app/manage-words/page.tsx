@@ -109,20 +109,24 @@ export default function ManageWordsPage() {
 	);
 
 	const topicsOptions: MSelectOption[] = useMemo(
-		() =>
-			topics.map((topic) => ({
+		() => [
+			{ key: "all", value: "All" },
+			...topics.map((topic) => ({
 				key: topic.id.toString(),
 				value: topic.title,
 			})),
+		],
 		[topics],
 	);
 
 	const catalogsOptions: MSelectOption[] = useMemo(
-		() =>
-			catalogs.map((catalog) => ({
+		() => [
+			{ key: "all", value: "All" },
+			...catalogs.map((catalog) => ({
 				key: catalog.id.toString(),
 				value: catalog.title,
 			})),
+		],
 		[catalogs],
 	);
 
@@ -149,13 +153,19 @@ export default function ManageWordsPage() {
 		const fetchWords = async () => {
 			const data = await fetchWordsAction({
 				language,
-				catalog: selectedCatalog ? Number(selectedCatalog) : undefined,
-				topic: selectedTopic ? Number(selectedTopic) : undefined,
+				catalog:
+					selectedCatalog && selectedCatalog !== "all"
+						? Number(selectedCatalog)
+						: undefined,
+				topic:
+					selectedTopic && selectedTopic !== "all"
+						? Number(selectedTopic)
+						: undefined,
 				offset,
 				limit,
 				sortBy: undefined,
 				sortOrder: undefined,
-				filters: { status: selectedStatus },
+				filters: selectedStatus === "all" ? {} : { status: selectedStatus },
 			});
 
 			setTotal(data.total);
@@ -371,13 +381,14 @@ export default function ManageWordsPage() {
 									<MSelect
 										{...props}
 										options={[
+											{ key: "all", value: "All" },
 											{ key: "processing", value: "Processing" },
 											{ key: "processed", value: "Processed" },
 										]}
 										value={selectedStatus}
 										onChange={(e) =>
 											setSelectedStatus(
-												e.target.value as "processing" | "processed",
+												e.target.value as "all" | "processing" | "processed",
 											)
 										}
 									/>
@@ -416,7 +427,7 @@ export default function ManageWordsPage() {
 									<MSelect
 										{...props}
 										options={catalogsOptions}
-										value={selectedCatalog}
+										value={selectedCatalog || "all"}
 										onChange={(e) => setSelectedCatalog(e.target.value)}
 									/>
 								),
@@ -431,7 +442,7 @@ export default function ManageWordsPage() {
 									<MSelect
 										{...props}
 										options={topicsOptions}
-										value={selectedTopic}
+										value={selectedTopic || "all"}
 										onChange={(e) => setSelectedTopic(e.target.value)}
 									/>
 								),

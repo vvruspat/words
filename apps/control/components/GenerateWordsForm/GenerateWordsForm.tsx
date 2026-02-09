@@ -57,11 +57,15 @@ export const GenerateWordsForm = () => {
 	};
 
 	useEffect(() => {
-		selectedTopic && setGenerateTopic(Number(selectedTopic));
+		if (selectedTopic && selectedTopic !== "all") {
+			setGenerateTopic(Number(selectedTopic));
+		}
 	}, [selectedTopic]);
 
 	useEffect(() => {
-		selectedCatalog && setGenerateCatalog(Number(selectedCatalog));
+		if (selectedCatalog && selectedCatalog !== "all") {
+			setGenerateCatalog(Number(selectedCatalog));
+		}
 	}, [selectedCatalog]);
 
 	return (
