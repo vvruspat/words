@@ -128,7 +128,7 @@ export class OpenAIService {
 		return await this.openai.responses.create({
 			prompt: {
 				id: GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
-				version: "5",
+				version: "6",
 				variables: {
 					limit: limit.toString() || WORDS_LIMIT.toString(),
 					wordlanguage: language,
