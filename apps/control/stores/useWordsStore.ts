@@ -15,7 +15,7 @@ interface WordsStore {
 	language: Language;
 	selectedCatalog: string;
 	selectedTopic: string;
-	selectedStatus: "processing" | "processed";
+	selectedStatus: "all" | "processing" | "processed";
 	topics: Topic[];
 	catalogs: VocabCatalog[];
 	connected: boolean;
@@ -24,7 +24,7 @@ interface WordsStore {
 	setLanguage: (language: Language) => void;
 	setSelectedCatalog: (catalog: string) => void;
 	setSelectedTopic: (topic: string) => void;
-	setSelectedStatus: (status: "processing" | "processed") => void;
+	setSelectedStatus: (status: "all" | "processing" | "processed") => void;
 	setTopics: (topics: Topic[]) => void;
 	setCatalogs: (catalogs: VocabCatalog[]) => void;
 	addCatalogs: (catalog: VocabCatalog) => void;
@@ -44,9 +44,9 @@ export const useWordsStore = create<WordsStore>()(
 	persist(
 		(set, get) => ({
 			language: "en",
-			selectedCatalog: "",
-			selectedTopic: "",
-			selectedStatus: "processing",
+			selectedCatalog: "all",
+			selectedTopic: "all",
+			selectedStatus: "all",
 			topics: [],
 			catalogs: [],
 			connected: false,
@@ -185,6 +185,23 @@ export const useWordsStore = create<WordsStore>()(
 		{
 			name: "words-store",
 			storage: createJSONStorage(() => localStorage),
+			version: 1,
+			migrate: (persistedState, _version) => {
+				const state = persistedState as Record<string, unknown>;
+				return {
+					...state,
+					selectedCatalog:
+						state.selectedCatalog === "" || state.selectedCatalog == null
+							? "all"
+							: state.selectedCatalog,
+					selectedTopic:
+						state.selectedTopic === "" || state.selectedTopic == null
+							? "all"
+							: state.selectedTopic,
+					selectedStatus:
+						state.selectedStatus == null ? "all" : state.selectedStatus,
+				};
+			},
 			partialize: (state) => ({
 				// Don't persist connection state
 				language: state.language,
