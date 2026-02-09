@@ -17,7 +17,7 @@ import {
 	MText,
 } from "@repo/uikit";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { bulkDeleteWordsAction } from "@/actions/bulkDeleteWordsAction";
 import { deleteWordAction } from "@/actions/deleteWordAction";
 import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
@@ -36,10 +36,12 @@ export default function ManageWordsPage() {
 		language,
 		selectedCatalog,
 		selectedTopic,
+		selectedStatus,
 		catalogs,
 		topics,
 		words,
 		setLanguage,
+		setSelectedStatus,
 		setSelectedCatalog,
 		setSelectedTopic,
 		setCatalogs,
@@ -53,10 +55,6 @@ export default function ManageWordsPage() {
 	const [total, setTotal] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [limit, setLimit] = useState(50);
-
-	const [selectedStatus, setSelectedStatus] = useState<
-		"processing" | "processed"
-	>("processing");
 
 	const [selectedRows, setSelectedRows] = useState<
 		Array<{ id: number; [key: string]: unknown }>
@@ -110,15 +108,23 @@ export default function ManageWordsPage() {
 		}),
 	);
 
-	const topicsOptions: MSelectOption[] = topics.map((topic) => ({
-		key: topic.id.toString(),
-		value: topic.title,
-	}));
+	const topicsOptions: MSelectOption[] = useMemo(
+		() =>
+			topics.map((topic) => ({
+				key: topic.id.toString(),
+				value: topic.title,
+			})),
+		[topics],
+	);
 
-	const catalogsOptions: MSelectOption[] = catalogs.map((catalog) => ({
-		key: catalog.id.toString(),
-		value: catalog.title,
-	}));
+	const catalogsOptions: MSelectOption[] = useMemo(
+		() =>
+			catalogs.map((catalog) => ({
+				key: catalog.id.toString(),
+				value: catalog.title,
+			})),
+		[catalogs],
+	);
 
 	// Fetch words when filters or pagination changes
 	useEffect(() => {
@@ -141,16 +147,6 @@ export default function ManageWordsPage() {
 		}
 
 		const fetchWords = async () => {
-			console.log("-------fetchWords-------", {
-				language,
-				catalog: selectedCatalog ? Number(selectedCatalog) : undefined,
-				topic: selectedTopic ? Number(selectedTopic) : undefined,
-				offset,
-				limit,
-				sortBy: undefined,
-				sortOrder: undefined,
-				filters: { status: selectedStatus },
-			});
 			const data = await fetchWordsAction({
 				language,
 				catalog: selectedCatalog ? Number(selectedCatalog) : undefined,
