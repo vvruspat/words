@@ -10,7 +10,6 @@ import {
 	WORDS_GENERATION_DONE,
 } from "~/constants/queue-events.constants";
 import { TRANSLATIONS_QUEUE, WORDS_QUEUE } from "~/constants/queues.constants";
-import { codeToLanguage } from "~/utils/codeToLanguage";
 import type { WordEntity } from "~/word/word.entity";
 import {
 	GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
@@ -18,6 +17,7 @@ import {
 	GENERATE_WORDS_PROMPT_ID,
 	TRANSLATE_WORDS_PROMPT_ID,
 } from "./constants/prompts";
+import { audioInstructions } from "./utlis/audioInstructions";
 import { chooseVoice } from "./utlis/chooseVoice";
 
 const WORDS_LIMIT = 100;
@@ -226,7 +226,7 @@ export class OpenAIService {
 			model: "gpt-4o-mini-tts",
 			voice: chooseVoice(language),
 			input: word,
-			instructions: `Generate clear pronunciation of the word in ${codeToLanguage(language)}. Speak as a teacher.`,
+			instructions: audioInstructions(language),
 		});
 
 		const buffer = Buffer.from(await mp3.arrayBuffer());
