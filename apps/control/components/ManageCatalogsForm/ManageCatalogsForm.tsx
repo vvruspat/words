@@ -9,7 +9,7 @@ import {
 	MSpinner,
 	MText,
 } from "@repo/uikit";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { addCatalogAction } from "@/actions/addCatalogAction";
 import { updateCatalogAction } from "@/actions/updateCatalogAction";
 import { useWordsStore } from "@/stores/useWordsStore";
@@ -47,7 +47,12 @@ export const ManageCatalogsForm = () => {
 
 	const titleRef = useRef<HTMLInputElement>(null);
 
-	const catalogsOptions: MSelectOption[] = catalogs.map((catalog) => ({
+	const catalogsByLanguage = useMemo(
+		() => catalogs.filter((catalog) => catalog.language === language),
+		[catalogs, language],
+	);
+
+	const catalogsOptions: MSelectOption[] = catalogsByLanguage.map((catalog) => ({
 		key: catalog.id.toString(),
 		value: catalog.title,
 		style: {
@@ -81,7 +86,7 @@ export const ManageCatalogsForm = () => {
 	}, [updateState, updateCatalog]);
 
 	const handleChooseCatalog = (option: MSelectOption) => {
-		const foundCatalog = catalogs.find(
+		const foundCatalog = catalogsByLanguage.find(
 			(catalog) => catalog.id.toString() === option.key,
 		);
 		if (foundCatalog) {

@@ -6,7 +6,7 @@ import {
 	MSelect,
 	MSelectOption,
 } from "@repo/uikit";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { generateWordsAction } from "@/actions/generateWordsAction";
 import { useWordsStore } from "@/stores/useWordsStore";
 
@@ -17,15 +17,32 @@ export const GenerateWordsForm = () => {
 	const [generateMessage, setGenerateMessage] = useState("");
 	const [generateLimit, setGenerateLimit] = useState(20);
 
-	const { language, topics, catalogs, selectedCatalog, selectedTopic } =
-		useWordsStore();
+	const {
+		language,
+		topics,
+		catalogs,
+		selectedCatalog,
+		selectedTopic,
+		addPendingGenerationCount,
+		adjustPendingGenerationCount,
+	} = useWordsStore();
 
-	const topicsOptions: MSelectOption[] = topics.map((topic) => ({
+	const topicsByLanguage = useMemo(
+		() => topics.filter((topic) => topic.language === language),
+		[topics, language],
+	);
+
+	const catalogsByLanguage = useMemo(
+		() => catalogs.filter((catalog) => catalog.language === language),
+		[catalogs, language],
+	);
+
+	const topicsOptions: MSelectOption[] = topicsByLanguage.map((topic) => ({
 		key: topic.id.toString(),
 		value: topic.title,
 	}));
 
-	const catalogsOptions: MSelectOption[] = catalogs.map((catalog) => ({
+	const catalogsOptions: MSelectOption[] = catalogsByLanguage.map((catalog) => ({
 		key: catalog.id.toString(),
 		value: catalog.title,
 	}));
@@ -38,15 +55,22 @@ export const GenerateWordsForm = () => {
 		}
 		setGenerating(true);
 		setGenerateMessage("");
+		const pendingFilter = {
+			language,
+			catalog: generateCatalog ?? 0,
+			topic: generateTopic ?? 0,
+		};
+		addPendingGenerationCount(generateLimit, pendingFilter);
 		try {
 			await generateWordsAction(
 				language,
-				topics.find((t) => t.id === generateTopic)?.title ?? "",
-				catalogs.find((c) => c.id === generateCatalog)?.title ?? "",
+				generateTopic ?? 0,
+				generateCatalog ?? 0,
 				generateLimit,
 			);
 			setGenerateMessage("Word generation started!");
 		} catch (err) {
+			adjustPendingGenerationCount(-generateLimit);
 			if (err instanceof Error) {
 				setGenerateMessage(err.message ?? "Failed to generate words");
 			} else {

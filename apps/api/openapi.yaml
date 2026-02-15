@@ -878,16 +878,16 @@ paths:
     post:
       operationId: WordController_generateWords
       parameters:
-        - name: topic
+        - name: topicId
           required: false
           in: query
           schema:
-            type: string
-        - name: level
+            type: number
+        - name: catalogId
           required: false
           in: query
           schema:
-            type: string
+            type: number
         - name: limit
           required: false
           in: query

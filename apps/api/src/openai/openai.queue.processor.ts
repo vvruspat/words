@@ -32,6 +32,8 @@ export class OpenAIQueueProcessor extends WorkerHost {
 					job.data.topic,
 					job.data.level,
 					job.data.limit,
+					job.data.topicId,
+					job.data.catalogId,
 				);
 			case AUDIO_CREATION_START:
 				return this.makeAudio(
@@ -57,11 +59,21 @@ export class OpenAIQueueProcessor extends WorkerHost {
 		topic?: string,
 		level?: string,
 		limit?: number,
+		topicId?: number,
+		catalogId?: number,
 	) {
 		this.logger.log(
 			`Generating words in ${language}, except: ${except.join(", ")}`,
 		);
-		this.openAIService.generateWords(language, except, topic, level, limit);
+		this.openAIService.generateWords(
+			language,
+			except,
+			topic,
+			level,
+			limit,
+			topicId,
+			catalogId,
+		);
 	}
 
 	private async makeAudio(

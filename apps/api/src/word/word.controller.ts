@@ -107,20 +107,31 @@ export class WordController {
 	@Post("generate")
 	@ApiOperation({ summary: "Generate words" })
 	@ApiQuery({ name: "language", required: true, type: String })
-	@ApiQuery({ name: "topic", required: false, type: String })
-	@ApiQuery({ name: "level", required: false, type: String })
+	@ApiQuery({ name: "topicId", required: false, type: Number })
+	@ApiQuery({ name: "catalogId", required: false, type: Number })
 	@ApiQuery({ name: "limit", required: false, type: Number })
 	@ApiResponse({ status: 200, description: "Word generation started" })
 	async generateWords(
 		@Query("language") language: Language,
-		@Query("topic") topic?: string,
-		@Query("level") level?: string,
-		@Query("limit", ParseIntPipe) limit?: number,
+		@Query("topicId") topicId?: string,
+		@Query("catalogId") catalogId?: string,
+		@Query("limit") limit?: string,
 	): Promise<{ message: string }> {
 		if (!language) {
 			throw new Error("Language query parameter is required");
 		}
-		await this.wordService.generateWords(language, topic, level, limit);
+		const parsedTopicId =
+			topicId != null && topicId !== "" ? Number(topicId) : undefined;
+		const parsedCatalogId =
+			catalogId != null && catalogId !== "" ? Number(catalogId) : undefined;
+		const parsedLimit =
+			limit != null && limit !== "" ? Number(limit) : undefined;
+		await this.wordService.generateWords(
+			language,
+			parsedTopicId,
+			parsedCatalogId,
+			parsedLimit,
+		);
 		return { message: "Word generation started" };
 	}
 

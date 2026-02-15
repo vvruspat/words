@@ -20,6 +20,12 @@ interface WordsStore {
 	catalogs: VocabCatalog[];
 	connected: boolean;
 	words: Word[];
+	pendingGenerationCount: number;
+	pendingGenerationFilter: {
+		language: Language;
+		catalog: number;
+		topic: number;
+	} | null;
 
 	setLanguage: (language: Language) => void;
 	setSelectedCatalog: (catalog: string) => void;
@@ -35,6 +41,15 @@ interface WordsStore {
 	updateTopic: (topic: Topic) => void;
 	setWords: (words: Word[]) => void;
 	removeWords: (ids: number[]) => void;
+	addPendingGenerationCount: (
+		count: number,
+		filter: {
+			language: Language;
+			catalog: number;
+			topic: number;
+		},
+	) => void;
+	adjustPendingGenerationCount: (delta: number) => void;
 
 	connect: () => void;
 	disconnect: () => void;
@@ -51,10 +66,32 @@ export const useWordsStore = create<WordsStore>()(
 			catalogs: [],
 			connected: false,
 			words: [],
+			pendingGenerationCount: 0,
+			pendingGenerationFilter: null,
 			setWords: (words: Word[]) => set({ words }),
 			removeWords: (ids: number[]) =>
 				set((state) => ({
 					words: state.words.filter((w) => !ids.includes(w.id)),
+				})),
+			addPendingGenerationCount: (count, filter) =>
+				set((state) => {
+					const sameFilter =
+						state.pendingGenerationFilter?.language === filter.language &&
+						state.pendingGenerationFilter?.catalog === filter.catalog &&
+						state.pendingGenerationFilter?.topic === filter.topic;
+					return {
+						pendingGenerationCount: sameFilter
+							? state.pendingGenerationCount + count
+							: count,
+						pendingGenerationFilter: filter,
+					};
+				}),
+			adjustPendingGenerationCount: (delta) =>
+				set((state) => ({
+					pendingGenerationCount: Math.max(
+						0,
+						state.pendingGenerationCount + delta,
+					),
 				})),
 			setLanguage: (language) => set({ language }),
 			setSelectedCatalog: (selectedCatalog) => set({ selectedCatalog }),
@@ -130,6 +167,12 @@ export const useWordsStore = create<WordsStore>()(
 								} else if (data.type === "create") {
 									set((state) => ({
 										words: [...state.words, word],
+										pendingGenerationCount:
+											state.pendingGenerationFilter?.language === word.language &&
+											state.pendingGenerationFilter?.catalog === word.catalog &&
+											state.pendingGenerationFilter?.topic === word.topic
+												? Math.max(0, state.pendingGenerationCount - 1)
+												: state.pendingGenerationCount,
 									}));
 								} else if (data.type === "delete") {
 									set((state) => ({

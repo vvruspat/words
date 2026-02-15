@@ -17,10 +17,16 @@ export class VocabCatalogService {
 		offset,
 		...query
 	}: GetVocabCatalogRequestDto): Promise<VocabCatalogEntity[]> {
+		const where: Record<string, unknown> = {};
+
+		for (const [key, value] of Object.entries(query)) {
+			if (value !== undefined && value !== null && value !== "") {
+				where[key] = value;
+			}
+		}
+
 		return this.vocabCatalogRepository.find({
-			where: {
-				...query,
-			},
+			where,
 			skip: Number(offset ?? 0),
 			take: Number(limit ?? 10),
 		});

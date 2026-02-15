@@ -146,6 +146,8 @@ export class OpenAIService {
 		topic?: string,
 		level?: string,
 		limit?: number,
+		topicId?: number,
+		catalogId?: number,
 	): Promise<void> {
 		this.logger.log(
 			`Generating words in ${language}, except: ${except.join(", ")}`,
@@ -181,6 +183,8 @@ export class OpenAIService {
 					newWords.data ||
 					newWords.items ||
 					newWords,
+				topicId,
+				catalogId,
 			});
 
 			this.logger.log(`Generated words: ${JSON.stringify(newWords)}`);

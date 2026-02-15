@@ -24,7 +24,11 @@ export class WordQueueProcessor extends WorkerHost {
 
 		switch (job.name) {
 			case WORDS_GENERATION_DONE:
-				return this.wordsGenerated(job.data.words);
+				return this.wordsGenerated(
+					job.data.words,
+					job.data.topicId,
+					job.data.catalogId,
+				);
 			case AUDIO_CREATION_DONE:
 				return this.audioMade(
 					job.data.filename,
@@ -36,10 +40,14 @@ export class WordQueueProcessor extends WorkerHost {
 		}
 	}
 
-	private async wordsGenerated(words: unknown) {
+	private async wordsGenerated(
+		words: unknown,
+		topicId?: number,
+		catalogId?: number,
+	) {
 		this.logger.log(`Generated word data: ${JSON.stringify(words)}`);
 		if (isWordsArray(words)) {
-			this.wordService.wordsGenerated(words);
+			this.wordService.wordsGenerated(words, topicId, catalogId);
 		} else {
 			throw new Error("Invalid word data format");
 		}
