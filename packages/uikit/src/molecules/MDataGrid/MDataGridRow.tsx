@@ -39,6 +39,9 @@ export const MDataGridRow = ({
 		[selected, row],
 	);
 
+	const isSkeletonRow =
+		typeof row === "object" && row !== null && "__skeleton" in row;
+
 	return (
 		<tr>
 			{onCheckboxChange && (
@@ -48,11 +51,15 @@ export const MDataGridRow = ({
 						justify="center"
 						className={styles.checkboxCell}
 					>
-						<MCheckbox
-							label={""}
-							onChange={(event) => onCheckboxChange(row, event.target.checked)}
-							defaultChecked={selected}
-						/>
+						{isSkeletonRow ? null : (
+							<MCheckbox
+								label={""}
+								onChange={(event) =>
+									onCheckboxChange(row, event.target.checked)
+								}
+								defaultChecked={selected}
+							/>
+						)}
 					</MFlex>
 				</td>
 			)}

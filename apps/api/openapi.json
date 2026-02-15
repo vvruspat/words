@@ -1408,19 +1408,19 @@
         "operationId": "WordController_generateWords",
         "parameters": [
           {
-            "name": "topic",
+            "name": "topicId",
             "required": false,
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "number"
             }
           },
           {
-            "name": "level",
+            "name": "catalogId",
             "required": false,
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "number"
             }
           },
           {

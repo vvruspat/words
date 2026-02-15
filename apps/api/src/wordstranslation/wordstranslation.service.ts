@@ -6,7 +6,11 @@ import { In } from "typeorm";
 import { TRANSLATION_START } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
 import type { WordEntity } from "~/word/word.entity";
-import { WORDS_TRANSLATION_REPOSITORY } from "../constants/database.constants";
+import { WordEventService } from "~/word/word-event.service";
+import {
+	WORD_REPOSITORY,
+	WORDS_TRANSLATION_REPOSITORY,
+} from "../constants/database.constants";
 import type { GeneratedTranslation } from "./types/generated-translations";
 import type { WordTranslationEntity } from "./wordstranslation.entity";
 
@@ -17,7 +21,10 @@ export class WordTranslationService {
 	constructor(
 		@Inject(WORDS_TRANSLATION_REPOSITORY)
 		private wordsTranslationRepository: Repository<WordTranslationEntity>,
+		@Inject(WORD_REPOSITORY)
+		private wordRepository: Repository<WordEntity>,
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
+		private readonly wordEventService: WordEventService,
 	) {}
 
 	async findAll(
@@ -162,6 +169,38 @@ export class WordTranslationService {
 					language: translationItem.language,
 					created_at: new Date().toISOString(),
 				});
+			}
+		}
+
+		const wordIds = Array.from(
+			new Set(words.map((word) => word.id).filter(Boolean)),
+		);
+
+		if (wordIds.length > 0) {
+			const currentWords = await this.wordRepository.find({
+				where: { id: In(wordIds) },
+			});
+
+			for (const currentWord of currentWords) {
+				// Notify UI that translations exist even if status doesn't change.
+				this.wordEventService.emit({
+					type: "update",
+					word: currentWord,
+				});
+
+				if (!currentWord.audio || currentWord.status === "processed") continue;
+				await this.wordRepository.update(currentWord.id, {
+					status: "processed",
+				});
+				const processedWord = await this.wordRepository.findOneBy({
+					id: currentWord.id,
+				});
+				if (processedWord) {
+					this.wordEventService.emit({
+						type: "update",
+						word: processedWord,
+					});
+				}
 			}
 		}
 	}

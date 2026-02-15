@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { DatabaseModule } from "~/database/database.module";
 import { GcsModule } from "~/gcs/gcs.module";
 import { VocabCatalogModule } from "~/vocabcatalog/vocabcatalog.module";
@@ -16,7 +16,7 @@ import { WordEventService } from "./word-event.service";
 		TopicModule,
 		VocabCatalogModule,
 		GcsModule,
-		WordTranslationModule,
+		forwardRef(() => WordTranslationModule),
 	],
 	providers: [
 		...wordProviders,

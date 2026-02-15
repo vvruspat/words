@@ -200,11 +200,72 @@ export class GcsService implements OnModuleInit {
 			// Return the public URL of the uploaded file
 			return `https://storage.googleapis.com/${process.env.GCS_BUCKET_NAME}/${filePath}`;
 		} catch (error) {
-			if (error instanceof Error) {
-				throw new Error(`Failed to upload MP3: ${error.message}`);
+			const message =
+				error instanceof Error
+					? error.message
+					: (() => {
+							try {
+								return JSON.stringify(error);
+							} catch {
+								return String(error);
+							}
+						})();
+			this.logger.error(`Failed to upload MP3: ${message}`);
+			throw new Error(`Failed to upload MP3: ${message}`);
+		}
+	}
+
+	private getFilePathFromUrl(url: string): {
+		bucketName: string | null;
+		filePath: string | null;
+	} {
+		try {
+			const parsed = new URL(url);
+			if (parsed.hostname === "storage.googleapis.com") {
+				const parts = parsed.pathname.split("/").filter(Boolean);
+				if (parts.length >= 2) {
+					return {
+						bucketName: parts[0] ?? null,
+						filePath: parts.slice(1).join("/"),
+					};
+				}
 			}
 
-			this.logger.error(`Failed to upload MP3: ${error}`);
+			if (parsed.hostname.endsWith(".storage.googleapis.com")) {
+				const bucketName = parsed.hostname.replace(
+					".storage.googleapis.com",
+					"",
+				);
+				const filePath = parsed.pathname.replace(/^\//, "");
+				return { bucketName, filePath: filePath || null };
+			}
+		} catch {
+			return { bucketName: null, filePath: null };
+		}
+		return { bucketName: null, filePath: null };
+	}
+
+	async deleteFileByUrl(url: string): Promise<void> {
+		const { bucketName, filePath } = this.getFilePathFromUrl(url);
+		const resolvedBucketName = bucketName || process.env.GCS_BUCKET_NAME || "";
+		if (!resolvedBucketName || !filePath) return;
+
+		try {
+			const bucket = this.storage.bucket(resolvedBucketName);
+			const file = bucket.file(filePath);
+			await file.delete({ ignoreNotFound: true });
+		} catch (error) {
+			const message =
+				error instanceof Error
+					? error.message
+					: (() => {
+							try {
+								return JSON.stringify(error);
+							} catch {
+								return String(error);
+							}
+						})();
+			this.logger.warn(`Failed to delete MP3: ${message}`);
 		}
 	}
 }

@@ -137,8 +137,8 @@ export class WordService {
 
 	async generateWords(
 		language: Language,
-		topic: string,
-		level: string,
+		topicId?: number,
+		catalogId?: number,
 		limit?: number,
 	): Promise<void> {
 		const existingWords = await this.wordRepository.find({
@@ -147,6 +147,21 @@ export class WordService {
 
 		const except = existingWords.map((w) => w.word);
 
+		const topicEntity =
+			topicId != null ? await this.topicService.findOne(topicId) : null;
+		const catalogEntity =
+			catalogId != null
+				? await this.vocabCatalogService.findOne(catalogId)
+				: null;
+
+		if (topicId != null && !topicEntity) {
+			throw new Error(`Topic with id ${topicId} not found`);
+		}
+
+		if (catalogId != null && !catalogEntity) {
+			throw new Error(`Catalog with id ${catalogId} not found`);
+		}
+
 		this.logger.log(
 			`Queueing word generation in ${language}, except: ${except.join(", ")}`,
 		);
@@ -154,8 +169,10 @@ export class WordService {
 		await this.openAIQueue.add(WORDS_GENERATION_START, {
 			language,
 			except,
-			topic,
-			level,
+			topic: topicEntity?.title,
+			level: catalogEntity?.title,
+			topicId: topicEntity?.id,
+			catalogId: catalogEntity?.id,
 			limit,
 		});
 	}
@@ -168,14 +185,36 @@ export class WordService {
 		this.openAIQueue.add(AUDIO_CREATION_START, { language, word, wordId });
 	}
 
-	async wordsGenerated(words: GeneratedWord[]): Promise<void> {
+	async wordsGenerated(
+		words: GeneratedWord[],
+		topicId?: number,
+		catalogId?: number,
+	): Promise<void> {
+		const forcedTopic =
+			topicId != null ? await this.topicService.findOne(topicId) : null;
+		const forcedCatalog =
+			catalogId != null
+				? await this.vocabCatalogService.findOne(catalogId)
+				: null;
+
+		if (topicId != null && !forcedTopic) {
+			throw new Error(`Topic with id ${topicId} not found`);
+		}
+
+		if (catalogId != null && !forcedCatalog) {
+			throw new Error(`Catalog with id ${catalogId} not found`);
+		}
+
+		const normalizedTopic = forcedTopic?.title;
+		const normalizedLevel = forcedCatalog?.title;
+
 		const wordsTopics = words.reduce<Set<string>>((acc, wordData) => {
-			acc.add(wordData.topic);
+			acc.add(normalizedTopic ?? wordData.topic);
 			return acc;
 		}, new Set<string>());
 
 		const wordsCatalogs = words.reduce<Set<string>>((acc, wordData) => {
-			acc.add(wordData.level);
+			acc.add(normalizedLevel ?? wordData.level);
 			return acc;
 		}, new Set<string>());
 
@@ -185,26 +224,38 @@ export class WordService {
 			)}, catalogs: ${Array.from(wordsCatalogs).join(", ")}`,
 		);
 
-		const topics = await this.topicService.findAllAndCreateIfNotExist(
-			Array.from(wordsTopics.values()),
-			words[0].language,
-		);
-		const catalog = await this.vocabCatalogService.findAllAndCreateIfNotExist(
-			Array.from(wordsCatalogs.values()),
-			words[0].language,
-		);
+		const topics = forcedTopic
+			? [forcedTopic]
+			: await this.topicService.findAllAndCreateIfNotExist(
+					Array.from(wordsTopics.values()),
+					words[0].language,
+				);
+		const catalogs = forcedCatalog
+			? [forcedCatalog]
+			: await this.vocabCatalogService.findAllAndCreateIfNotExist(
+					Array.from(wordsCatalogs.values()),
+					words[0].language,
+				);
 
 		const topicMap = new Map(topics.map((t) => [t.title, t.id]));
-		const catalogMap = new Map(catalog.map((c) => [c.title, c.id]));
+		const catalogMap = new Map(catalogs.map((c) => [c.title, c.id]));
 
 		this.logger.log("Saving generated words to database...");
 
 		const wordsPromises = words.map(async (wordData) => {
+			const topicKey = normalizedTopic ?? wordData.topic;
+			const catalogKey = normalizedLevel ?? wordData.level;
 			// create() already emits the event, so we don't need to emit it again
 			const word = await this.create({
 				word: wordData.word,
-				topic: topicMap.get(wordData.topic),
-				catalog: catalogMap.get(wordData.level),
+				topic:
+					forcedTopic?.id ??
+					topicMap.get(topicKey) ??
+					topicMap.get(wordData.topic),
+				catalog:
+					forcedCatalog?.id ??
+					catalogMap.get(catalogKey) ??
+					catalogMap.get(wordData.level),
 				meaning: wordData.meaning,
 				created_at: new Date().toISOString(),
 				language: wordData.language,
@@ -287,6 +338,10 @@ export class WordService {
 
 		const uniqueFilename = `${word.id}-${filename}`;
 
+		if (word.audio) {
+			await this.gcsService.deleteFileByUrl(word.audio);
+		}
+
 		const url = await this.gcsService.uploadMp3FromBase64(
 			word.language,
 			audio,
@@ -297,6 +352,18 @@ export class WordService {
 
 		const updatedWord = await this.wordRepository.save(word);
 		this.wordEventService.emit({ type: "update", word: updatedWord });
+
+		const translationCount = await this.wordTranslationService.count({
+			words: [wordId],
+		});
+
+		if (translationCount > 0 && updatedWord.status !== "processed") {
+			await this.wordRepository.update(wordId, { status: "processed" });
+			const processedWord = await this.findOne(wordId);
+			if (processedWord) {
+				this.wordEventService.emit({ type: "update", word: processedWord });
+			}
+		}
 
 		this.logger.log(
 			`Audio updated for word id ${wordId}, filename: ${uniqueFilename}`,

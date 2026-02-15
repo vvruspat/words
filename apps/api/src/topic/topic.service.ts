@@ -15,11 +15,16 @@ export class TopicService {
 		query: Partial<Topic> & ApiPaginationRequest,
 	): Promise<TopicEntity[]> {
 		const { limit, offset, ...rest } = query;
+		const where: Record<string, unknown> = {};
+
+		for (const [key, value] of Object.entries(rest)) {
+			if (value !== undefined && value !== null && value !== "") {
+				where[key] = value;
+			}
+		}
 
 		return this.topicRepository.find({
-			where: {
-				...rest,
-			},
+			where,
 			take: limit || 10,
 			skip: offset || 0,
 		});

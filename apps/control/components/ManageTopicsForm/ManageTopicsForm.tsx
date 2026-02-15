@@ -9,7 +9,7 @@ import {
 	MSpinner,
 	MText,
 } from "@repo/uikit";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { addTopicAction } from "@/actions/addTopicAction";
 import { updateTopicAction } from "@/actions/updateTopicAction";
 import { useWordsStore } from "@/stores/useWordsStore";
@@ -42,7 +42,12 @@ export const ManageTopicsForm = () => {
 
 	const titleRef = useRef<HTMLInputElement>(null);
 
-	const topicsOptions: MSelectOption[] = topics.map((topic) => ({
+	const topicsByLanguage = useMemo(
+		() => topics.filter((topic) => topic.language === language),
+		[topics, language],
+	);
+
+	const topicsOptions: MSelectOption[] = topicsByLanguage.map((topic) => ({
 		key: topic.id.toString(),
 		value: topic.title,
 		style: {
@@ -76,7 +81,7 @@ export const ManageTopicsForm = () => {
 	}, [updateState, updateTopic]);
 
 	const handleChooseTopic = (option: MSelectOption) => {
-		const foundTopic = topics.find(
+		const foundTopic = topicsByLanguage.find(
 			(topic) => topic.id.toString() === option.key,
 		);
 		if (foundTopic) {

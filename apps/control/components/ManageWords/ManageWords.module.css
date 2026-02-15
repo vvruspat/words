@@ -1,0 +1,66 @@
+.skeleton {
+	display: inline-block;
+	height: 12px;
+	border-radius: 6px;
+	background: linear-gradient(
+		90deg,
+		var(--palette-primary-200),
+		var(--palette-primary-100),
+		var(--palette-primary-200)
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.skeletonCircle {
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	border-radius: 999px;
+	background: linear-gradient(
+		90deg,
+		var(--palette-primary-200),
+		var(--palette-primary-100),
+		var(--palette-primary-200)
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.skeletonActions {
+	display: inline-block;
+	width: 120px;
+	height: 24px;
+	border-radius: 6px;
+	background: linear-gradient(
+		90deg,
+		var(--palette-primary-200),
+		var(--palette-primary-100),
+		var(--palette-primary-200)
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.spin {
+	animation: spin 0.9s linear infinite;
+	transform-origin: 50% 50%;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

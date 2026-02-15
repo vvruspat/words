@@ -15,7 +15,7 @@ export class WordSubscriber implements EntitySubscriberInterface<WordEntity> {
 	async afterUpdate(event: UpdateEvent<WordEntity>) {
 		if (!event.entity) return;
 		if (event.entity.status === "processed") return;
-		if (event.entity.audio) return;
+		if (!event.entity.audio) return;
 
 		const word = event.entity;
 
