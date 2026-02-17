@@ -129,6 +129,8 @@ export class GcsService implements OnModuleInit {
 		fileName: string,
 	): Promise<string> {
 		try {
+			const safeFileName = this.sanitizeFileName(fileName);
+
 			// Clean base64 string: remove data URL prefix if present, trim whitespace
 			let cleanedBase64 = base64.trim();
 
@@ -174,7 +176,7 @@ export class GcsService implements OnModuleInit {
 			}
 
 			// Organize files by language folder
-			const filePath = `${language}/${fileName}`;
+			const filePath = `${language}/${safeFileName}`;
 
 			this.logger.log(
 				`Uploading MP3 to GCS: ${filePath}, size: ${buffer.length} bytes`,
@@ -213,6 +215,13 @@ export class GcsService implements OnModuleInit {
 			this.logger.error(`Failed to upload MP3: ${message}`);
 			throw new Error(`Failed to upload MP3: ${message}`);
 		}
+	}
+
+	private sanitizeFileName(value: string): string {
+		const normalized = value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+		const withoutSpaces = normalized.replace(/\s+/g, "_");
+		const sanitized = withoutSpaces.replace(/[^A-Za-z0-9._-]/g, "");
+		return sanitized || "audio";
 	}
 
 	private getFilePathFromUrl(url: string): {
