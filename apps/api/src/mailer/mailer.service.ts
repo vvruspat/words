@@ -1,9 +1,4 @@
-import {
-	type SendSmtpEmailAttachmentInner,
-	type SendSmtpEmailSender,
-	type SendSmtpEmailToInner,
-	TransactionalEmailsApi,
-} from "@getbrevo/brevo";
+import { Brevo, BrevoClient } from "@getbrevo/brevo";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
@@ -15,10 +10,10 @@ export enum MailTemplate {
 }
 
 type MailOptions = {
-	to: SendSmtpEmailToInner[];
-	sender?: SendSmtpEmailSender;
+	to: Brevo.SendTransacEmailRequest.To.Item[];
+	sender?: Brevo.SendTransacEmailRequest.Sender;
 	subject?: string;
-	attachment?: SendSmtpEmailAttachmentInner[];
+	attachment?: Brevo.SendTransacEmailRequest.Attachment.Item[];
 } & (
 	| {
 			templateId: MailTemplate.CONFIRM_EMAIL;
@@ -61,12 +56,14 @@ export class MailerService {
 		templateId,
 		attachment,
 	}: MailOptions): Promise<void> {
-		const apiKey = this.config.get("BREVO_API_KEY");
+		const apiKey = this.config.get<string>("BREVO_API_KEY");
+		if (!apiKey) {
+			throw new Error("BREVO_API_KEY is not configured");
+		}
 
-		const apiInstance = new TransactionalEmailsApi();
-		apiInstance.setApiKey(0, apiKey);
+		const client = new BrevoClient({ apiKey });
 
-		await apiInstance.sendTransacEmail({
+		await client.transactionalEmails.sendTransacEmail({
 			sender,
 			to,
 			subject: subject,
