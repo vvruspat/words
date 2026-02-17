@@ -337,7 +337,6 @@ export class WordService {
 		}
 
 		const uniqueFilename = `${word.id}-${filename}`;
-		const safeFilename = encodeURIComponent(uniqueFilename);
 
 		if (word.audio) {
 			await this.gcsService.deleteFileByUrl(word.audio);
@@ -346,7 +345,7 @@ export class WordService {
 		const url = await this.gcsService.uploadMp3FromBase64(
 			word.language,
 			audio,
-			safeFilename,
+			uniqueFilename,
 		);
 
 		word.audio = url;
