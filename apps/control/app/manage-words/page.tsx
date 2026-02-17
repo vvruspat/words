@@ -1,11 +1,20 @@
-import { fetchCatalogsAction } from "@/actions/fetchCatalogsAction";
-import { fetchTopicsAction } from "@/actions/fetchTopicsAction";
+import type { components } from "@repo/types";
+
 import ManageWords from "@/components/ManageWords";
+import { fetchJson } from "@/lib/fetchJson";
+import { getBaseUrl } from "@/lib/getBaseUrl";
+
+type GetVocabCatalogResponseDto =
+	components["schemas"]["GetVocabCatalogResponseDto"];
+type GetTopicResponseDto = components["schemas"]["GetTopicResponseDto"];
 
 export default async function ManageWordsPage() {
+	const baseUrl = await getBaseUrl();
 	const [catalogsResult, topicsResult] = await Promise.allSettled([
-		fetchCatalogsAction(),
-		fetchTopicsAction(),
+		fetchJson<GetVocabCatalogResponseDto>(
+			`${baseUrl}/api/vocabcatalog?offset=0&limit=100`,
+		),
+		fetchJson<GetTopicResponseDto>(`${baseUrl}/api/topic?offset=0&limit=100`),
 	]);
 
 	const initialCatalogs =
