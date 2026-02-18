@@ -24,6 +24,7 @@ export interface Topic {
 	description?: string;
 	language: string;
 	image?: string | null;
+	wordsCount?: number;
 }
 
 export interface Training {
@@ -55,6 +56,7 @@ export interface VocabCatalog {
 	description?: string | null;
 	language: string;
 	image?: string | null;
+	wordsCount?: number;
 }
 
 export interface Word {

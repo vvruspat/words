@@ -1,7 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import type { ApiPaginationRequest, Language, Topic } from "@repo/types";
 import type { Repository } from "typeorm";
-import { TOPIC_REPOSITORY } from "../constants/database.constants";
+import {
+	TOPIC_REPOSITORY,
+	WORD_REPOSITORY,
+} from "../constants/database.constants";
+import type { WordEntity } from "../word/word.entity";
 import type { TopicEntity } from "./topic.entity";
 
 @Injectable()
@@ -9,6 +13,8 @@ export class TopicService {
 	constructor(
 		@Inject(TOPIC_REPOSITORY)
 		private topicRepository: Repository<TopicEntity>,
+		@Inject(WORD_REPOSITORY)
+		private wordRepository: Repository<WordEntity>,
 	) {}
 
 	async findAll(
@@ -54,6 +60,32 @@ export class TopicService {
 
 	async findOne(id: TopicEntity["id"]): Promise<TopicEntity | null> {
 		return this.topicRepository.findOneBy({ id });
+	}
+
+	async getWordsCountByTopicIds(
+		ids: number[],
+		language?: string,
+	): Promise<Map<number, number>> {
+		if (ids.length === 0) {
+			return new Map();
+		}
+
+		const query = this.wordRepository
+			.createQueryBuilder("word")
+			.select("word.topic", "topicId")
+			.addSelect("COUNT(*)", "count")
+			.where("word.topic IN (:...ids)", { ids });
+
+		if (language) {
+			query.andWhere("word.language = :language", { language });
+		}
+
+		const rows = await query.groupBy("word.topic").getRawMany<{
+			topicId: string;
+			count: string;
+		}>();
+
+		return new Map(rows.map((row) => [Number(row.topicId), Number(row.count)]));
 	}
 
 	async create(topic: Omit<Topic, "id">): Promise<TopicEntity> {

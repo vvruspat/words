@@ -45,9 +45,16 @@ export class TopicController {
 		@Query() query: GetTopicRequestDto,
 	): Promise<GetTopicResponseDto> {
 		const entities = await this.topicService.findAll(query);
+		const counts = await this.topicService.getWordsCountByTopicIds(
+			entities.map((topic) => topic.id),
+			query.language,
+		);
 
 		return {
-			items: entities,
+			items: entities.map((topic) => ({
+				...topic,
+				wordsCount: counts.get(topic.id) ?? 0,
+			})),
 			total: entities.length,
 			limit: query.limit ?? 10,
 			offset: query.offset ?? 0,
@@ -64,8 +71,18 @@ export class TopicController {
 		@Param("id", ParseIntPipe) id: number,
 	): Promise<GetTopicResponseDto> {
 		const entity = await this.topicService.findOne(id);
+		const counts = await this.topicService.getWordsCountByTopicIds(
+			entity ? [entity.id] : [],
+		);
 		return {
-			items: entity ? [entity] : [],
+			items: entity
+				? [
+						{
+							...entity,
+							wordsCount: counts.get(entity.id) ?? 0,
+						},
+					]
+				: [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,

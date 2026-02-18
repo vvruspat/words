@@ -34,4 +34,9 @@ export class VocabCatalogDto implements VocabCatalog {
 	@IsString()
 	@IsOptional()
 	image?: string | null;
+
+	@ApiProperty({ type: Number, required: false })
+	@IsInt()
+	@IsOptional()
+	wordsCount?: number;
 }

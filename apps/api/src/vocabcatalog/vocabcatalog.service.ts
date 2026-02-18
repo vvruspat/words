@@ -2,7 +2,11 @@ import { Inject, Injectable } from "@nestjs/common";
 import type { Language } from "@repo/types";
 import type { Repository } from "typeorm";
 import type { GetVocabCatalogRequestDto } from "~/dto";
-import { VOCABCATALOG_REPOSITORY } from "../constants/database.constants";
+import {
+	VOCABCATALOG_REPOSITORY,
+	WORD_REPOSITORY,
+} from "../constants/database.constants";
+import type { WordEntity } from "../word/word.entity";
 import type { VocabCatalogEntity } from "./vocabcatalog.entity";
 
 @Injectable()
@@ -10,6 +14,8 @@ export class VocabCatalogService {
 	constructor(
 		@Inject(VOCABCATALOG_REPOSITORY)
 		private vocabCatalogRepository: Repository<VocabCatalogEntity>,
+		@Inject(WORD_REPOSITORY)
+		private wordRepository: Repository<WordEntity>,
 	) {}
 
 	async findAll({
@@ -58,6 +64,34 @@ export class VocabCatalogService {
 		id: VocabCatalogEntity["id"],
 	): Promise<VocabCatalogEntity | null> {
 		return this.vocabCatalogRepository.findOneBy({ id });
+	}
+
+	async getWordsCountByCatalogIds(
+		ids: number[],
+		language?: string,
+	): Promise<Map<number, number>> {
+		if (ids.length === 0) {
+			return new Map();
+		}
+
+		const query = this.wordRepository
+			.createQueryBuilder("word")
+			.select("word.catalog", "catalogId")
+			.addSelect("COUNT(*)", "count")
+			.where("word.catalog IN (:...ids)", { ids });
+
+		if (language) {
+			query.andWhere("word.language = :language", { language });
+		}
+
+		const rows = await query.groupBy("word.catalog").getRawMany<{
+			catalogId: string;
+			count: string;
+		}>();
+
+		return new Map(
+			rows.map((row) => [Number(row.catalogId), Number(row.count)]),
+		);
 	}
 
 	async create(

@@ -1,6 +1,11 @@
 "use client";
 
-import { AVAILABLE_LANGUAGES, type Language, type Topic, type VocabCatalog } from "@repo/types";
+import {
+	AVAILABLE_LANGUAGES,
+	type Language,
+	type Topic,
+	type VocabCatalog,
+} from "@repo/types";
 import {
 	MBadge,
 	MButton,
@@ -21,16 +26,16 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { bulkDeleteWordsAction } from "@/actions/bulkDeleteWordsAction";
 import { deleteWordAction } from "@/actions/deleteWordAction";
+import { fetchCatalogsAction } from "@/actions/fetchCatalogsAction";
+import { fetchTopicsAction } from "@/actions/fetchTopicsAction";
 import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
+import { fetchWordsAction } from "@/actions/fetchWordsAction";
 import { regenerateAudioAction } from "@/actions/regenerateAudioAction";
 import { retranslateWordAction } from "@/actions/retranslateWordAction";
 import { TranslationsDropdown } from "@/components/TranslationsDropdown/TranslationsDropdown";
 import useModal, { MODALS } from "@/stores/useModal";
 import { useTranslationsStore } from "@/stores/useTranslationsStore";
 import { useWordsStore } from "@/stores/useWordsStore";
-import { fetchCatalogsAction } from "@/actions/fetchCatalogsAction";
-import { fetchTopicsAction } from "@/actions/fetchTopicsAction";
-import { fetchWordsAction } from "@/actions/fetchWordsAction";
 import styles from "./ManageWords.module.css";
 
 interface ManageWordsProps {
@@ -165,7 +170,17 @@ export default function ManageWords({
 			{ key: "all", value: "All" },
 			...topicsByLanguage.map((topic) => ({
 				key: topic.id.toString(),
-				value: topic.title,
+				value: (
+					<MText mode="primary" style={{ textAlign: "left" }}>
+						{topic.title}
+					</MText>
+				),
+				justify: "space-between" as const,
+				after: (
+					<MBadge mode="info">
+						<MText mode="secondary">{topic.wordsCount ?? 0}</MText>
+					</MBadge>
+				),
 			})),
 		],
 		[topicsByLanguage],
@@ -176,7 +191,17 @@ export default function ManageWords({
 			{ key: "all", value: "All" },
 			...catalogsByLanguage.map((catalog) => ({
 				key: catalog.id.toString(),
-				value: catalog.title,
+				value: (
+					<MText mode="primary" style={{ textAlign: "left" }}>
+						{catalog.title}
+					</MText>
+				),
+				justify: "space-between" as const,
+				after: (
+					<MBadge mode="info">
+						<MText mode="secondary">{catalog.wordsCount ?? 0}</MText>
+					</MBadge>
+				),
 			})),
 		],
 		[catalogsByLanguage],
@@ -230,8 +255,7 @@ export default function ManageWords({
 		[skeletonRows, words],
 	);
 
-	const isSkeletonRow = (row: Record<string, unknown>) =>
-		"__skeleton" in row;
+	const isSkeletonRow = (row: Record<string, unknown>) => "__skeleton" in row;
 
 	const renderSkeleton = (width = "100%") => (
 		<span className={styles.skeleton} style={{ width }} />
@@ -531,10 +555,7 @@ export default function ManageWords({
 										value={selectedStatus}
 										onChange={(e) =>
 											setSelectedStatus(
-												e.target.value as
-													| "all"
-													| "processing"
-													| "processed",
+												e.target.value as "all" | "processing" | "processed",
 											)
 										}
 									/>
@@ -544,7 +565,9 @@ export default function ManageWords({
 								field: "word",
 								label: "Word",
 								renderCell: (_value, row) =>
-									isSkeletonRow(row) ? renderSkeleton("80%") : _value?.toString(),
+									isSkeletonRow(row)
+										? renderSkeleton("80%")
+										: _value?.toString(),
 							},
 							{
 								field: "audio",
@@ -566,13 +589,17 @@ export default function ManageWords({
 								field: "transcribtion",
 								label: "Transcription",
 								renderCell: (value, row) =>
-									isSkeletonRow(row) ? renderSkeleton("70%") : value?.toString(),
+									isSkeletonRow(row)
+										? renderSkeleton("70%")
+										: value?.toString(),
 							},
 							{
 								field: "meaning",
 								label: "Meaning",
 								renderCell: (value, row) =>
-									isSkeletonRow(row) ? renderSkeleton("90%") : value?.toString(),
+									isSkeletonRow(row)
+										? renderSkeleton("90%")
+										: value?.toString(),
 							},
 							{
 								field: "catalog",
@@ -580,9 +607,9 @@ export default function ManageWords({
 								renderCell: (catalog, row) =>
 									isSkeletonRow(row)
 										? renderSkeleton("75%")
-										: catalogsByLanguage.find(
+										: (catalogsByLanguage.find(
 												(c) => Number(c.id) === Number(catalog),
-											)?.title ?? "",
+											)?.title ?? ""),
 								renderFilter: (props) => (
 									<MSelect
 										{...props}
@@ -598,9 +625,9 @@ export default function ManageWords({
 								renderCell: (topic, row) =>
 									isSkeletonRow(row)
 										? renderSkeleton("75%")
-										: topicsByLanguage.find(
+										: (topicsByLanguage.find(
 												(t) => Number(t.id) === Number(topic),
-											)?.title ?? "",
+											)?.title ?? ""),
 								renderFilter: (props) => (
 									<MSelect
 										{...props}
@@ -632,7 +659,7 @@ export default function ManageWords({
 									isSkeletonRow(row) ? (
 										<span className={styles.skeletonActions} />
 									) : (
-									<MFlex direction="row" gap="s" align="center">
+										<MFlex direction="row" gap="s" align="center">
 											<MButton
 												mode="tertiary"
 												size="s"
@@ -652,7 +679,11 @@ export default function ManageWords({
 														className={styles.spin}
 													/>
 												) : (
-													<MIconTranslate mode="regular" width={16} height={16} />
+													<MIconTranslate
+														mode="regular"
+														width={16}
+														height={16}
+													/>
 												)}
 											</MButton>
 											<MButton

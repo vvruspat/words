@@ -207,6 +207,11 @@ paths:
           schema:
             nullable: true
             type: string
+        - name: wordsCount
+          required: false
+          in: query
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -641,6 +646,11 @@ paths:
           schema:
             nullable: true
             type: string
+        - name: wordsCount
+          required: false
+          in: query
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -1404,6 +1414,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at
@@ -1443,6 +1455,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - title
         - language
@@ -1463,6 +1477,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at
@@ -1485,6 +1501,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
     PutTopicResponseDto:
       type: object
       properties:
@@ -1502,6 +1520,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at
@@ -1841,6 +1861,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at
@@ -1884,6 +1906,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - owner
         - title
@@ -1908,6 +1932,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at
@@ -1934,6 +1960,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
     PutVocabCatalogResponseDto:
       type: object
       properties:
@@ -1954,6 +1982,8 @@ components:
         image:
           type: string
           nullable: true
+        wordsCount:
+          type: number
       required:
         - id
         - created_at

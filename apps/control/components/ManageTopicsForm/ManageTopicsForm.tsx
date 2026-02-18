@@ -1,5 +1,6 @@
 import { AVAILABLE_LANGUAGES, Topic } from "@repo/types";
 import {
+	MBadge,
 	MButton,
 	MFlex,
 	MFormField,
@@ -50,6 +51,11 @@ export const ManageTopicsForm = () => {
 	const topicsOptions: MSelectOption[] = topicsByLanguage.map((topic) => ({
 		key: topic.id.toString(),
 		value: topic.title,
+		after: (
+			<MBadge mode="info">
+				<MText mode="secondary">{topic.wordsCount ?? 0}</MText>
+			</MBadge>
+		),
 		style: {
 			paddingLeft: 0,
 		},
