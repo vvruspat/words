@@ -47,9 +47,16 @@ export class VocabCatalogController {
 		@Query() query: GetVocabCatalogRequestDto,
 	): Promise<GetVocabCatalogResponseDto> {
 		const entities = await this.vocabCatalogService.findAll(query);
+		const counts = await this.vocabCatalogService.getWordsCountByCatalogIds(
+			entities.map((catalog) => catalog.id),
+			query.language,
+		);
 
 		return {
-			items: entities,
+			items: entities.map((catalog) => ({
+				...catalog,
+				wordsCount: counts.get(catalog.id) ?? 0,
+			})),
 			total: entities.length,
 			limit: query.limit ?? 10,
 			offset: query.offset ?? 0,
@@ -66,8 +73,18 @@ export class VocabCatalogController {
 		@Param("id", ParseIntPipe) id: number,
 	): Promise<GetVocabCatalogResponseDto> {
 		const entity = await this.vocabCatalogService.findOne(id);
+		const counts = await this.vocabCatalogService.getWordsCountByCatalogIds(
+			entity ? [entity.id] : [],
+		);
 		return {
-			items: entity ? [entity] : [],
+			items: entity
+				? [
+						{
+							...entity,
+							wordsCount: counts.get(entity.id) ?? 0,
+						},
+					]
+				: [],
 			total: entity ? 1 : 0,
 			limit: 1,
 			offset: 0,

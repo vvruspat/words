@@ -327,6 +327,14 @@
               "nullable": true,
               "type": "string"
             }
+          },
+          {
+            "name": "wordsCount",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "responses": {
@@ -1027,6 +1035,14 @@
             "schema": {
               "nullable": true,
               "type": "string"
+            }
+          },
+          {
+            "name": "wordsCount",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
             }
           }
         ],
@@ -2211,6 +2227,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2265,6 +2284,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2294,6 +2316,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2325,6 +2350,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         }
       },
@@ -2350,6 +2378,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2828,6 +2859,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2887,6 +2921,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2921,6 +2958,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [
@@ -2957,6 +2997,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         }
       },
@@ -2986,6 +3029,9 @@
           "image": {
             "type": "string",
             "nullable": true
+          },
+          "wordsCount": {
+            "type": "number"
           }
         },
         "required": [

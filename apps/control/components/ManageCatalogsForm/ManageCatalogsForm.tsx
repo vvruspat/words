@@ -1,5 +1,6 @@
 import { AVAILABLE_LANGUAGES, VocabCatalog } from "@repo/types";
 import {
+	MBadge,
 	MButton,
 	MFlex,
 	MFormField,
@@ -52,13 +53,20 @@ export const ManageCatalogsForm = () => {
 		[catalogs, language],
 	);
 
-	const catalogsOptions: MSelectOption[] = catalogsByLanguage.map((catalog) => ({
-		key: catalog.id.toString(),
-		value: catalog.title,
-		style: {
-			paddingLeft: 0,
-		},
-	}));
+	const catalogsOptions: MSelectOption[] = catalogsByLanguage.map(
+		(catalog) => ({
+			key: catalog.id.toString(),
+			value: catalog.title,
+			after: (
+				<MBadge mode="info">
+					<MText mode="secondary">{catalog.wordsCount ?? 0}</MText>
+				</MBadge>
+			),
+			style: {
+				paddingLeft: 0,
+			},
+		}),
+	);
 
 	const [addState, addAction, addPending] = useActionState(
 		addCatalogAction,
