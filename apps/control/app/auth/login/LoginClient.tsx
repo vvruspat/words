@@ -4,7 +4,6 @@ import {
 	MAlert,
 	MButton,
 	MCard,
-	MDivider,
 	MFlex,
 	MHeading,
 	MInput,
@@ -43,26 +42,6 @@ export default function LoginClient() {
 		}
 
 		router.replace(nextPath);
-	};
-
-	const handleOAuth = async (provider: "google" | "github") => {
-		setLoading(true);
-		setError(null);
-
-		const { error: signInError } = await supabase.auth.signInWithOAuth({
-			provider,
-			options: {
-				redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(
-					nextPath,
-				)}`,
-			},
-		});
-
-		setLoading(false);
-
-		if (signInError) {
-			setError(signInError.message);
-		}
 	};
 
 	return (
@@ -113,33 +92,6 @@ export default function LoginClient() {
 							</MButton>
 						</MFlex>
 					</form>
-
-					<MFlex direction="row" align="center" justify="center" gap="s">
-						<MDivider style={{ flex: 1 }} />
-						<MText mode="tertiary">or</MText>
-						<MDivider style={{ flex: 1 }} />
-					</MFlex>
-
-					<MFlex direction="column" gap="s" align="stretch">
-						<MButton
-							mode="outlined"
-							stretch
-							onClick={() => handleOAuth("google")}
-							disabled={loading}
-							type="button"
-						>
-							Continue with Google
-						</MButton>
-						<MButton
-							mode="outlined"
-							stretch
-							onClick={() => handleOAuth("github")}
-							disabled={loading}
-							type="button"
-						>
-							Continue with GitHub
-						</MButton>
-					</MFlex>
 
 					{error ? <MAlert mode="error">{error}</MAlert> : null}
 				</MFlex>
