@@ -5,6 +5,7 @@ import {
 	MButton,
 	MCard,
 	MFlex,
+	MFormField,
 	MHeading,
 	MInput,
 	MText,
@@ -55,45 +56,45 @@ export default function LoginClient() {
 					<MFlex direction="column" gap="xs" align="start">
 						<MHeading mode="h3">Sign in</MHeading>
 						<MText mode="secondary" as="p">
-							Use email/password or continue with OAuth.
+							Use email/password
 						</MText>
 					</MFlex>
 
+					{error ? <MAlert mode="error">{error}</MAlert> : null}
+
 					<form onSubmit={handleEmailPassword}>
 						<MFlex direction="column" gap="m" align="stretch">
-							<MFlex direction="column" gap="xs" align="start">
-								<label htmlFor="auth-email">
-									<MText mode="secondary">Email</MText>
-								</label>
-								<MInput
-									id="auth-email"
-									required
-									type="email"
-									value={email}
-									onChange={(event) => setEmail(event.target.value)}
-								/>
-							</MFlex>
+							<MFormField
+								label="Email"
+								control={
+									<MInput
+										id="auth-email"
+										required
+										type="email"
+										value={email}
+										onChange={(event) => setEmail(event.target.value)}
+									/>
+								}
+							/>
 
-							<MFlex direction="column" gap="xs" align="start">
-								<label htmlFor="auth-password">
-									<MText mode="secondary">Password</MText>
-								</label>
-								<MInput
-									id="auth-password"
-									required
-									type="password"
-									value={password}
-									onChange={(event) => setPassword(event.target.value)}
-								/>
-							</MFlex>
+							<MFormField
+								label="Password"
+								control={
+									<MInput
+										id="auth-password"
+										required
+										type="password"
+										value={password}
+										onChange={(event) => setPassword(event.target.value)}
+									/>
+								}
+							/>
 
-							<MButton type="submit" stretch disabled={loading}>
+							<MButton type="submit" stretch disabled={loading} size="l">
 								{loading ? "Signing in..." : "Sign in"}
 							</MButton>
 						</MFlex>
 					</form>
-
-					{error ? <MAlert mode="error">{error}</MAlert> : null}
 				</MFlex>
 			</MCard>
 		</MFlex>

@@ -1,11 +1,8 @@
 "use client";
 
-import { MButton, MCard, MFlex, MHeading, MText } from "@repo/uikit";
-import { useRouter } from "next/navigation";
+import { MCard, MFlex, MHeading, MLinkButton, MText } from "@repo/uikit";
 
 export default function Home() {
-	const router = useRouter();
-
 	return (
 		<MFlex
 			align="center"
@@ -18,9 +15,9 @@ export default function Home() {
 					<MText as="p" mode="secondary">
 						Manage your vocabulary workflow from here.
 					</MText>
-					<MButton stretch onClick={() => router.push("/manage-words")}>
+					<MLinkButton stretch href="/manage-words" size="l">
 						Go to Manage Words
-					</MButton>
+					</MLinkButton>
 				</MFlex>
 			</MCard>
 		</MFlex>
