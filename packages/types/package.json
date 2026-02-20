@@ -1,7 +1,6 @@
 {
-  "name": "@repo/types",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@vvruspat/words-types",
+  "version": "0.9.0",
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.json",
@@ -12,6 +11,10 @@
     "format": "biome check src --write --unsafe"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "@nestjs/mapped-types": "*",
     "@nestjs/swagger": "^11.2.0"

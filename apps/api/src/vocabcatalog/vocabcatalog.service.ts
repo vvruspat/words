@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { Language } from "@repo/types";
+import type { Language } from "@vvruspat/words-types";
 import type { Repository } from "typeorm";
 import type { GetVocabCatalogRequestDto } from "~/dto";
 import {

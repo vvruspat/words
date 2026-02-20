@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { WordTranslation } from "@repo/types";
+import type { WordTranslation } from "@vvruspat/words-types";
 
 export class WordTranslationDto implements WordTranslation {
 	@ApiProperty({ type: Number })

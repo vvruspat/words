@@ -13,7 +13,7 @@
     "storybook": "turbo run storybook",
     "storybook:expo:ios": "turbo run storybook:expo:ios",
     "storybook:expo:android": "turbo run storybook:expo:android",
-    "generate": "turbo run generate --filter=api && turbo run generate --filter=@repo/types",
+    "generate": "turbo run generate --filter=api && turbo run generate --filter=@vvruspat/words-types",
     "build": "turbo run build",
     "build:control": "turbo run build --filter=control",
     "build:api": "turbo run build --filter=api",

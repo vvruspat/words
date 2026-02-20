@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { Learning, LearningData } from "@repo/types";
+import type { Learning, LearningData } from "@vvruspat/words-types";
 import type { Repository } from "typeorm";
 import type { GetLearningRequestDto } from "~/dto";
 import {

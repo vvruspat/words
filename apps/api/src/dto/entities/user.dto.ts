@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { User } from "@repo/types";
+import type { User } from "@vvruspat/words-types";
 import {
 	IsDateString,
 	IsEmail,

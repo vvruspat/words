@@ -12,7 +12,7 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.8.0",
 		"@supabase/supabase-js": "^2.96.0",
-		"@repo/types": "*",
+		"@vvruspat/words-types": "*",
 		"@repo/uikit": "*",
 		"@types/react-transition-group": "^4.4.12",
 		"next": "^16.1.6",

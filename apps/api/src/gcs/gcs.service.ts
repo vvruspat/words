@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { Storage } from "@google-cloud/storage";
 import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
-import { type Language } from "@repo/types";
+import { type Language } from "@vvruspat/words-types";
 
 @Injectable()
 export class GcsService implements OnModuleInit {

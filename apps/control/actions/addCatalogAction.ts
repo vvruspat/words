@@ -1,6 +1,6 @@
 "use server";
 
-import { VocabCatalog } from "@repo/types";
+import { VocabCatalog } from "@vvruspat/words-types";
 import { $fetch } from "@/lib/fetch";
 
 export const addCatalogAction = async (

@@ -4,7 +4,7 @@
 		"baseUrl": "./",
 		"outDir": "./dist",
 		"paths": {
-			"~/types/*": ["@repo/types/src/*"],
+			"~/types/*": ["@vvruspat/words-types/src/*"],
 			"~/*": ["./src/*"]
 		}
 	}

@@ -14,7 +14,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
-import type { Language } from "@repo/types";
+import type { Language } from "@vvruspat/words-types";
 import type { Response } from "express";
 import {
 	DeleteWordRequestDto,

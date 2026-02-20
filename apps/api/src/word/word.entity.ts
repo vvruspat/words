@@ -4,7 +4,7 @@ import type {
 	VocabCatalog,
 	Word,
 	WordData,
-} from "@repo/types";
+} from "@vvruspat/words-types";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TopicEntity } from "../topic/topic.entity";
 import { VocabCatalogEntity } from "../vocabcatalog/vocabcatalog.entity";

@@ -1,6 +1,6 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import type { ApiPaginatedResponse, Language } from "@repo/types";
+import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
 import { In } from "typeorm";

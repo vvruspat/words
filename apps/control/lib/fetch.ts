@@ -1,4 +1,4 @@
-import type { paths as Paths } from "@repo/types";
+import type { paths as Paths } from "@vvruspat/words-types";
 import { genericErrorMessage } from "./genericErrorMessage";
 // import { auth } from "~/auth";
 import logger from "./logger";

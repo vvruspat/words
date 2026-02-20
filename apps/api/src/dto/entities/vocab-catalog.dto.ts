@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { VocabCatalog } from "@repo/types";
+import type { VocabCatalog } from "@vvruspat/words-types";
 import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class VocabCatalogDto implements VocabCatalog {

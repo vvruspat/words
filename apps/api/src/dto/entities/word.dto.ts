@@ -6,7 +6,7 @@ import {
 	type VocabCatalog,
 	type Word,
 	type WordData,
-} from "@repo/types";
+} from "@vvruspat/words-types";
 import { TopicDto } from "./topic.dto";
 import { VocabCatalogDto } from "./vocab-catalog.dto";
 

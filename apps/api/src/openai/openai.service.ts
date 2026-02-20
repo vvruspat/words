@@ -1,6 +1,6 @@
 import { InjectQueue } from "@nestjs/bullmq";
 import { Injectable, Logger } from "@nestjs/common";
-import { AVAILABLE_LANGUAGES, type Language } from "@repo/types";
+import { AVAILABLE_LANGUAGES, type Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Request, Response } from "express";
 import OpenAI, { type APIPromise } from "openai";
