@@ -5,7 +5,7 @@ import {
 	type Language,
 	type Topic,
 	type VocabCatalog,
-} from "@repo/types";
+} from "@vvruspat/words-types";
 import {
 	MBadge,
 	MButton,

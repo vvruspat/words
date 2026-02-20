@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { Training } from "@repo/types";
+import type { Training } from "@vvruspat/words-types";
 
 export class TrainingDto implements Training {
 	@ApiProperty({ type: Number })

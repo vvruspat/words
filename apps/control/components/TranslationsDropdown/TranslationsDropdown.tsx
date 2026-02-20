@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES, Language, WordTranslation } from "@repo/types";
+import { AVAILABLE_LANGUAGES, Language, WordTranslation } from "@vvruspat/words-types";
 import { MButton, MDropdown, MFlex, MList, MText } from "@repo/uikit";
 import { useState } from "react";
 

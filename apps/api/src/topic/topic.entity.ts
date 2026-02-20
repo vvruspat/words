@@ -1,4 +1,4 @@
-import type { Topic } from "@repo/types";
+import type { Topic } from "@vvruspat/words-types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "topic" })

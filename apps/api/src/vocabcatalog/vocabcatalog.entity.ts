@@ -1,4 +1,4 @@
-import type { VocabCatalog } from "@repo/types";
+import type { VocabCatalog } from "@vvruspat/words-types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "vocab_catalogs" })

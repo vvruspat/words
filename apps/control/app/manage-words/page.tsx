@@ -1,4 +1,4 @@
-import type { components } from "@repo/types";
+import type { components } from "@vvruspat/words-types";
 
 import ManageWords from "@/components/ManageWords";
 import { fetchJson } from "@/lib/fetchJson";

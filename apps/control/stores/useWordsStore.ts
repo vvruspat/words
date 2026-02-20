@@ -1,5 +1,5 @@
-import type { Language, Topic, VocabCatalog, Word } from "@repo/types";
-import { isWord } from "@repo/types";
+import type { Language, Topic, VocabCatalog, Word } from "@vvruspat/words-types";
+import { isWord } from "@vvruspat/words-types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 

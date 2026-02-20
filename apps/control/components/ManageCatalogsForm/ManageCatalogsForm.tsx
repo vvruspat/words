@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES, VocabCatalog } from "@repo/types";
+import { AVAILABLE_LANGUAGES, VocabCatalog } from "@vvruspat/words-types";
 import {
 	MBadge,
 	MButton,

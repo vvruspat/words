@@ -1,4 +1,4 @@
-import type { User } from "@repo/types";
+import type { User } from "@vvruspat/words-types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

@@ -1,4 +1,4 @@
-import { type Language } from "@repo/types";
+import { type Language } from "@vvruspat/words-types";
 
 export type GeneratedTranslation = {
 	word: string;

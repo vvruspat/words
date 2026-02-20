@@ -5,7 +5,10 @@ import {
 	HttpException,
 	HttpStatus,
 } from "@nestjs/common";
-import { type ApiResponseError, ApiResponseStatus } from "@repo/types";
+import {
+	type ApiResponseError,
+	ApiResponseStatus,
+} from "@vvruspat/words-types";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

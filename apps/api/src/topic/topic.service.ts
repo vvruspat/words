@@ -1,5 +1,9 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { ApiPaginationRequest, Language, Topic } from "@repo/types";
+import type {
+	ApiPaginationRequest,
+	Language,
+	Topic,
+} from "@vvruspat/words-types";
 import type { Repository } from "typeorm";
 import {
 	TOPIC_REPOSITORY,

@@ -1,6 +1,6 @@
 "use server";
 
-import { Topic } from "@repo/types";
+import { Topic } from "@vvruspat/words-types";
 import { $fetch } from "@/lib/fetch";
 
 export const addTopicAction = async (

@@ -1,0 +1,60 @@
+name: Publish @vvruspat/words-types
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/types/**'
+
+jobs:
+  publish:
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@vvruspat'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check if version was already published
+        id: check
+        run: |
+          CURRENT=$(node -p "require('./packages/types/package.json').version")
+          PUBLISHED=$(npm view @vvruspat/words-types version --registry https://npm.pkg.github.com 2>/dev/null || echo "none")
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "published=$PUBLISHED" >> $GITHUB_OUTPUT
+          if [ "$CURRENT" = "$PUBLISHED" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Version $CURRENT is already published — skipping."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Publishing version $CURRENT (previously published: $PUBLISHED)"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        if: steps.check.outputs.skip == 'false'
+        run: npm run build
+        working-directory: packages/types
+
+      - name: Publish
+        if: steps.check.outputs.skip == 'false'
+        run: npm publish
+        working-directory: packages/types
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

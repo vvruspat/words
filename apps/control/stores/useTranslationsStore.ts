@@ -1,4 +1,4 @@
-import type { WordTranslation } from "@repo/types";
+import type { WordTranslation } from "@vvruspat/words-types";
 import { create } from "zustand";
 
 interface WordsStore {

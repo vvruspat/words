@@ -4,7 +4,7 @@ import type {
 	Training,
 	WordData,
 	WordTranslation,
-} from "@repo/types";
+} from "@vvruspat/words-types";
 import { TrainingDto } from "./training.dto";
 import { WordDataDto } from "./word.dto";
 import { WordTranslationDto } from "./words-translation.dto";

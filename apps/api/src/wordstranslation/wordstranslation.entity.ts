@@ -1,4 +1,4 @@
-import type { WordTranslation } from "@repo/types";
+import type { WordTranslation } from "@vvruspat/words-types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "words_translation" })

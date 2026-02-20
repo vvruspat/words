@@ -1,4 +1,4 @@
-import type { Language } from "@repo/types";
+import type { Language } from "@vvruspat/words-types";
 
 /**
  * TTS instruction phrase translated into each available language.

@@ -1,4 +1,4 @@
-import type { Training } from "@repo/types";
+import type { Training } from "@vvruspat/words-types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "training" })

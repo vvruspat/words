@@ -4,7 +4,7 @@ import type {
 	Training,
 	WordData,
 	WordTranslation,
-} from "@repo/types";
+} from "@vvruspat/words-types";
 import {
 	Column,
 	Entity,

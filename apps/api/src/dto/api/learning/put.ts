@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from "@nestjs/swagger";
-import type { Learning } from "@repo/types";
+import type { Learning } from "@vvruspat/words-types";
 import { LearningDto } from "../../entities/learning.dto";
 
 export class PutLearningRequestDto extends PartialType(LearningDto) {

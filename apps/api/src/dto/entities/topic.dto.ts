@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import type { Topic } from "@repo/types";
+import type { Topic } from "@vvruspat/words-types";
 import { IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class TopicDto implements Topic {

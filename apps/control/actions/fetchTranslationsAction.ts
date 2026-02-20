@@ -1,6 +1,6 @@
 "use server";
 
-import { WordTranslation } from "@repo/types";
+import { WordTranslation } from "@vvruspat/words-types";
 import { $fetch } from "../lib/fetch";
 
 export async function fetchTranslationsAction(props: {

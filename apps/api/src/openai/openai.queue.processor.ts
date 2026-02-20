@@ -1,6 +1,6 @@
 import { Processor, WorkerHost } from "@nestjs/bullmq";
 import { Injectable, Logger } from "@nestjs/common";
-import type { Language } from "@repo/types";
+import type { Language } from "@vvruspat/words-types";
 import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_START,
