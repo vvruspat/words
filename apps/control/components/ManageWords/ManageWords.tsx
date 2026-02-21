@@ -1,12 +1,6 @@
 "use client";
 
 import {
-	AVAILABLE_LANGUAGES,
-	type Language,
-	type Topic,
-	type VocabCatalog,
-} from "@vvruspat/words-types";
-import {
 	MBadge,
 	MButton,
 	MDataGrid,
@@ -18,10 +12,17 @@ import {
 	MIconPlay,
 	MIconTranslate,
 	MIconTrash,
+	MInput,
 	MSelect,
 	type MSelectOption,
 	MText,
 } from "@repo/uikit";
+import {
+	AVAILABLE_LANGUAGES,
+	type Language,
+	type Topic,
+	type VocabCatalog,
+} from "@vvruspat/words-types";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { bulkDeleteWordsAction } from "@/actions/bulkDeleteWordsAction";
@@ -52,6 +53,8 @@ export default function ManageWords({
 		selectedCatalog,
 		selectedTopic,
 		selectedStatus,
+		searchWord,
+		searchTranslation,
 		catalogs,
 		topics,
 		words,
@@ -61,6 +64,8 @@ export default function ManageWords({
 		setSelectedStatus,
 		setSelectedCatalog,
 		setSelectedTopic,
+		setSearchWord,
+		setSearchTranslation,
 		setCatalogs,
 		setTopics,
 		setWords,
@@ -70,6 +75,23 @@ export default function ManageWords({
 	} = useWordsStore();
 
 	const { translations, setTranslations } = useTranslationsStore();
+
+	const [debouncedSearchWord, setDebouncedSearchWord] = useState(searchWord);
+	const [debouncedSearchTranslation, setDebouncedSearchTranslation] =
+		useState(searchTranslation);
+
+	useEffect(() => {
+		const timer = setTimeout(() => setDebouncedSearchWord(searchWord), 300);
+		return () => clearTimeout(timer);
+	}, [searchWord]);
+
+	useEffect(() => {
+		const timer = setTimeout(
+			() => setDebouncedSearchTranslation(searchTranslation),
+			300,
+		);
+		return () => clearTimeout(timer);
+	}, [searchTranslation]);
 
 	const [total, setTotal] = useState(0);
 	const [offset, setOffset] = useState(0);
@@ -86,6 +108,8 @@ export default function ManageWords({
 		selectedCatalog,
 		selectedTopic,
 		selectedStatus,
+		debouncedSearchWord,
+		debouncedSearchTranslation,
 	});
 
 	const didSeedInitialRef = useRef(false);
@@ -268,7 +292,9 @@ export default function ManageWords({
 			prevFilters.language !== language ||
 			prevFilters.selectedCatalog !== selectedCatalog ||
 			prevFilters.selectedTopic !== selectedTopic ||
-			prevFilters.selectedStatus !== selectedStatus;
+			prevFilters.selectedStatus !== selectedStatus ||
+			prevFilters.debouncedSearchWord !== debouncedSearchWord ||
+			prevFilters.debouncedSearchTranslation !== debouncedSearchTranslation;
 
 		// Reset to first page when filters change
 		if (filtersChanged) {
@@ -278,6 +304,8 @@ export default function ManageWords({
 				selectedCatalog,
 				selectedTopic,
 				selectedStatus,
+				debouncedSearchWord,
+				debouncedSearchTranslation,
 			};
 		}
 
@@ -297,6 +325,8 @@ export default function ManageWords({
 				sortBy: undefined,
 				sortOrder: undefined,
 				filters: selectedStatus === "all" ? {} : { status: selectedStatus },
+				word: debouncedSearchWord || undefined,
+				translation: debouncedSearchTranslation || undefined,
 			});
 
 			setTotal(data.total);
@@ -308,6 +338,8 @@ export default function ManageWords({
 		selectedCatalog,
 		selectedTopic,
 		selectedStatus,
+		debouncedSearchWord,
+		debouncedSearchTranslation,
 		offset,
 		limit,
 		setWords,
@@ -452,7 +484,7 @@ export default function ManageWords({
 					justify="space-between"
 					style={{ width: "100%" }}
 				>
-					<div>
+					<MFlex direction="row" gap="m" align="end">
 						<MFormField
 							label="Language"
 							required
@@ -466,7 +498,7 @@ export default function ManageWords({
 								/>
 							}
 						/>
-					</div>
+					</MFlex>
 					<MFlex direction="row" gap="s">
 						<MButton
 							mode="tertiary"
@@ -568,6 +600,15 @@ export default function ManageWords({
 									isSkeletonRow(row)
 										? renderSkeleton("80%")
 										: _value?.toString(),
+								renderFilter: (props) => (
+									<MInput
+										{...props}
+										name="searchWord"
+										value={searchWord}
+										onChange={(e) => setSearchWord(e.target.value)}
+										placeholder="Word"
+									/>
+								),
 							},
 							{
 								field: "audio",
@@ -650,6 +691,15 @@ export default function ManageWords({
 											translations={translations}
 										/>
 									),
+								renderFilter: (props) => (
+									<MInput
+										{...props}
+										name="searchTranslation"
+										value={searchTranslation}
+										onChange={(e) => setSearchTranslation(e.target.value)}
+										placeholder="Translation"
+									/>
+								),
 							},
 							{
 								field: "id",

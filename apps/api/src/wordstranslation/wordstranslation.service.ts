@@ -2,7 +2,7 @@ import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { Queue } from "bullmq";
 import type { FindOptionsWhere, Repository } from "typeorm";
-import { In } from "typeorm";
+import { In, Like } from "typeorm";
 import { TRANSLATION_START } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
 import type { WordEntity } from "~/word/word.entity";
@@ -123,6 +123,14 @@ export class WordTranslationService {
 
 	async removeByWordId(wordId: WordTranslationEntity["word"]): Promise<void> {
 		await this.wordsTranslationRepository.delete({ word: wordId });
+	}
+
+	async findWordIdsByTranslationSearch(search: string): Promise<number[]> {
+		const matches = await this.wordsTranslationRepository.find({
+			where: { translation: Like(`%${search}%`) },
+			select: ["word"],
+		});
+		return [...new Set(matches.map((t) => t.word))];
 	}
 
 	async makeTranslations(words: WordEntity[]): Promise<void> {
