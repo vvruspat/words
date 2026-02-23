@@ -10,7 +10,10 @@ export class GetWordRequestDto extends IntersectionType(
 	ApiPaginatedRequestDto,
 	PartialType(WordDto),
 	PartialType(ApiSortingRequestDto),
-) {}
+) {
+	@ApiProperty({ type: String, required: false })
+	translation?: string;
+}
 
 export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {
 	@ApiProperty({

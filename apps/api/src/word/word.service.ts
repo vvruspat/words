@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In } from "typeorm";
+import { In, Like } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	TRANSLATION_START,
@@ -41,14 +41,36 @@ export class WordService {
 	async findAll(
 		query: GetWordRequestDto,
 	): Promise<ApiPaginatedResponse<WordEntity>> {
-		const { limit, offset, sortBy, sortOrder, ...restQuery } = query;
+		const {
+			limit,
+			offset,
+			sortBy,
+			sortOrder,
+			word,
+			translation,
+			...restQuery
+		} = query;
 
-		const total = await this.wordRepository.count({
-			where: { ...restQuery },
-		});
+		// Build the base where clause
+		const where: Record<string, unknown> = { ...restQuery };
+
+		if (word) {
+			where.word = Like(`%${word}%`);
+		}
+
+		// If searching by translation, resolve matching word IDs first
+		if (translation) {
+			const wordIds =
+				await this.wordTranslationService.findWordIdsByTranslationSearch(
+					translation,
+				);
+			where.id = wordIds.length > 0 ? In(wordIds) : In([-1]);
+		}
+
+		const total = await this.wordRepository.count({ where });
 
 		const words = await this.wordRepository.find({
-			where: { ...restQuery },
+			where,
 			take: limit ?? 10,
 			skip: offset ?? 0,
 			order: {

@@ -1888,6 +1888,7 @@ export interface operations {
 				meaning?: string;
 				sortBy?: string;
 				sortOrder?: string;
+				translation?: string;
 			};
 			header?: never;
 			path?: never;

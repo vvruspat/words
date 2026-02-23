@@ -12,12 +12,16 @@ export async function fetchWordsAction(props: {
 	filters: Record<string, string>;
 	sortBy?: string;
 	sortOrder?: "asc" | "desc";
+	word?: string;
+	translation?: string;
 }) {
-	const { filters, ...restProps } = props;
+	const { filters, word, translation, ...restProps } = props;
 	return await $fetch("/word", "get", {
 		query: {
 			...restProps,
 			...filters,
+			...(word ? { word } : {}),
+			...(translation ? { translation } : {}),
 		},
 	});
 }

@@ -1339,6 +1339,14 @@
               "example": "DESC",
               "type": "string"
             }
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
