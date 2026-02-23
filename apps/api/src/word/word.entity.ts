@@ -3,9 +3,14 @@ import type {
 	Topic,
 	VocabCatalog,
 	Word,
-	WordData,
 } from "@vvruspat/words-types";
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { TopicEntity } from "../topic/topic.entity";
 import { VocabCatalogEntity } from "../vocabcatalog/vocabcatalog.entity";
 
@@ -24,8 +29,16 @@ export class WordEntity implements Word {
 	@Column({ type: "int" })
 	topic: number;
 
+	@ManyToOne(() => TopicEntity, { nullable: true })
+	@JoinColumn({ name: "topic" })
+	topicData?: Topic;
+
 	@Column({ type: "int" })
 	catalog: number;
+
+	@ManyToOne(() => VocabCatalogEntity, { nullable: true })
+	@JoinColumn({ name: "catalog" })
+	catalogData?: VocabCatalog;
 
 	@Column()
 	word: string;
@@ -51,13 +64,4 @@ export class WordEntity implements Word {
 
 	@Column({ type: "text", nullable: true })
 	meaning?: string;
-}
-
-@Entity({ name: "word_data" })
-export class WordDataEntity extends WordEntity implements WordData {
-	@OneToOne(() => TopicEntity)
-	topicData: Topic;
-
-	@OneToOne(() => VocabCatalogEntity)
-	catalogData: VocabCatalog;
 }

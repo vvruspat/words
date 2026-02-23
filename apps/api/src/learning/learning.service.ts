@@ -2,33 +2,32 @@ import { Inject, Injectable } from "@nestjs/common";
 import type { Learning, LearningData } from "@vvruspat/words-types";
 import type { Repository } from "typeorm";
 import type { GetLearningRequestDto } from "~/dto";
-import {
-	LEARNING_DATA_REPOSITORY,
-	LEARNING_REPOSITORY,
-} from "../constants/database.constants";
-import type { LearningDataEntity, LearningEntity } from "./learning.entity";
+import { LEARNING_REPOSITORY } from "../constants/database.constants";
+import type { LearningEntity } from "./learning.entity";
 
 @Injectable()
 export class LearningService {
 	constructor(
 		@Inject(LEARNING_REPOSITORY)
 		private learningRepository: Repository<LearningEntity>,
-		@Inject(LEARNING_DATA_REPOSITORY)
-		private learningDataRepository: Repository<LearningDataEntity>,
 	) {}
 
 	async findAll(query: GetLearningRequestDto): Promise<LearningData[]> {
 		const { limit, offset, ...rest } = query;
 
-		return this.learningDataRepository.find({
+		return this.learningRepository.find({
 			where: { ...rest },
+			relations: ["wordData", "trainingData", "translationData"],
 			take: limit || 10,
 			skip: offset || 0,
 		});
 	}
 
 	async findOne(id: Learning["id"]): Promise<LearningData | null> {
-		return this.learningDataRepository.findOneBy({ id });
+		return this.learningRepository.findOne({
+			where: { id },
+			relations: ["wordData", "trainingData", "translationData"],
+		});
 	}
 
 	async create(learning: Omit<Learning, "id">): Promise<Learning> {

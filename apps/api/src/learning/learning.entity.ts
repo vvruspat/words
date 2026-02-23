@@ -1,5 +1,4 @@
 import type {
-	Learning,
 	LearningData,
 	Training,
 	WordData,
@@ -9,15 +8,15 @@ import {
 	Column,
 	Entity,
 	JoinColumn,
-	OneToOne,
+	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { TrainingEntity } from "../training/training.entity";
-import { WordDataEntity } from "../word/word.entity";
+import { WordEntity } from "../word/word.entity";
 import { WordTranslationEntity } from "../wordstranslation/wordstranslation.entity";
 
 @Entity({ name: "learning" })
-export class LearningEntity implements Learning {
+export class LearningEntity implements LearningData {
 	@PrimaryGeneratedColumn({ type: "int" })
 	id: number;
 
@@ -41,19 +40,16 @@ export class LearningEntity implements Learning {
 
 	@Column({ type: "int" })
 	translation: number;
-}
 
-@Entity({ name: "learning_data" })
-export class LearningDataEntity extends LearningEntity implements LearningData {
-	@OneToOne(() => WordDataEntity)
-	@JoinColumn()
+	@ManyToOne(() => WordEntity)
+	@JoinColumn({ name: "word" })
 	wordData: WordData;
 
-	@OneToOne(() => TrainingEntity)
-	@JoinColumn()
+	@ManyToOne(() => TrainingEntity)
+	@JoinColumn({ name: "training" })
 	trainingData: Training;
 
-	@OneToOne(() => WordTranslationEntity)
-	@JoinColumn()
+	@ManyToOne(() => WordTranslationEntity)
+	@JoinColumn({ name: "translation" })
 	translationData: WordTranslation;
 }

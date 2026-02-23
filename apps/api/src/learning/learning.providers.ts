@@ -1,16 +1,15 @@
+import type { DataSource } from "typeorm";
 import {
-	LEARNING_DATA_REPOSITORY,
+	DATA_SOURCE,
 	LEARNING_REPOSITORY,
 } from "../constants/database.constants";
-import { LearningDataEntity, LearningEntity } from "./learning.entity";
+import { LearningEntity } from "./learning.entity";
 
 export const learningProviders = [
 	{
 		provide: LEARNING_REPOSITORY,
-		useValue: LearningEntity,
-	},
-	{
-		provide: LEARNING_DATA_REPOSITORY,
-		useValue: LearningDataEntity,
+		useFactory: (dataSource: DataSource) =>
+			dataSource.getRepository(LearningEntity),
+		inject: [DATA_SOURCE],
 	},
 ];
