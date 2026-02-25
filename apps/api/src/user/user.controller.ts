@@ -41,6 +41,13 @@ export class UserController {
 		};
 	}
 
+	@Get("stats")
+	@ApiOperation({ summary: "Get user statistics" })
+	@ApiResponse({ status: 200 })
+	async getStats() {
+		return await this.userService.findUserStats();
+	}
+
 	@Get(":id")
 	@ApiOperation({ summary: "Get user by id" })
 	@ApiParam({ name: "id", type: Number, required: true })

@@ -19,6 +19,7 @@ import type { Response } from "express";
 import {
 	DeleteWordRequestDto,
 	DeleteWordResponseDto,
+	GetWordDuplicatesResponseDto,
 	GetWordRequestDto,
 	GetWordResponseDto,
 	PutWordRequestDto,
@@ -34,6 +35,36 @@ export class WordController {
 		private readonly wordService: WordService,
 		private readonly wordEventService: WordEventService,
 	) {}
+
+	@Get("stats")
+	@ApiOperation({
+		summary: "Get word statistics grouped by language and catalog",
+	})
+	@ApiResponse({ status: 200 })
+	async getStats() {
+		return await this.wordService.findWordStats();
+	}
+
+	@Get("duplicates")
+	@ApiOperation({ summary: "Get duplicate words grouped by text and language" })
+	@ApiQuery({ name: "limit", required: false, type: Number })
+	@ApiQuery({ name: "offset", required: false, type: Number })
+	@ApiQuery({ name: "language", required: false, type: String })
+	@ApiResponse({ status: 200, type: GetWordDuplicatesResponseDto })
+	async getDuplicates(
+		@Query("limit") limit?: string,
+		@Query("offset") offset?: string,
+		@Query("language") language?: string,
+	): Promise<GetWordDuplicatesResponseDto> {
+		const parsedLimit = limit != null ? Number(limit) : 20;
+		const parsedOffset = offset != null ? Number(offset) : 0;
+		const { groups, total } = await this.wordService.findDuplicates(
+			parsedLimit,
+			parsedOffset,
+			language,
+		);
+		return { groups, total, limit: parsedLimit, offset: parsedOffset };
+	}
 
 	@Get()
 	@ApiOperation({ summary: "Get all words" })

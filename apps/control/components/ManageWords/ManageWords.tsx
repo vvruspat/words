@@ -33,6 +33,7 @@ import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
 import { fetchWordsAction } from "@/actions/fetchWordsAction";
 import { regenerateAudioAction } from "@/actions/regenerateAudioAction";
 import { retranslateWordAction } from "@/actions/retranslateWordAction";
+import { updateWordAction } from "@/actions/updateWordAction";
 import { TranslationsDropdown } from "@/components/TranslationsDropdown/TranslationsDropdown";
 import useModal, { MODALS } from "@/stores/useModal";
 import { useTranslationsStore } from "@/stores/useTranslationsStore";
@@ -432,6 +433,19 @@ export default function ManageWords({
 
 	const [pendingDelete, setPendingDelete] = useState<Set<number>>(new Set());
 
+	const [editingWordId, setEditingWordId] = useState<number | null>(null);
+
+	const handleWordSave = useCallback(
+		async (wordId: number, newValue: string) => {
+			setEditingWordId(null);
+			const current = words.find((w) => w.id === wordId);
+			if (!newValue.trim() || newValue === current?.word) return;
+			const updated = await updateWordAction(wordId, newValue.trim());
+			setWords(words.map((w) => (w.id === wordId ? { ...w, ...updated } : w)));
+		},
+		[words, setWords],
+	);
+
 	const handleDelete = useCallback(
 		async (wordId: number) => {
 			setPendingDelete((prev) => new Set(prev).add(wordId));
@@ -596,10 +610,34 @@ export default function ManageWords({
 							{
 								field: "word",
 								label: "Word",
-								renderCell: (_value, row) =>
-									isSkeletonRow(row)
-										? renderSkeleton("80%")
-										: _value?.toString(),
+								renderCell: (_value, row) => {
+									if (isSkeletonRow(row)) return renderSkeleton("80%");
+									const id = Number(row.id);
+									if (editingWordId === id) {
+										return (
+											<input
+												autoFocus
+												className={styles.wordInput}
+												defaultValue={_value?.toString()}
+												onKeyDown={(e) => {
+													if (e.key === "Enter")
+														void handleWordSave(id, e.currentTarget.value);
+													if (e.key === "Escape") setEditingWordId(null);
+												}}
+												onBlur={(e) => void handleWordSave(id, e.target.value)}
+											/>
+										);
+									}
+									return (
+										<span
+											className={styles.wordCell}
+											onDoubleClick={() => setEditingWordId(id)}
+											title="Double-click to edit"
+										>
+											{_value?.toString()}
+										</span>
+									);
+								},
 								renderFilter: (props) => (
 									<MInput
 										{...props}

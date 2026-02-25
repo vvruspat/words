@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { USER_REPOSITORY } from "src/constants/database.constants";
-import type { Repository } from "typeorm";
+import { MoreThanOrEqual, type Repository } from "typeorm";
 import type { GetUserRequestDto } from "~/dto";
 import type { UserEntity } from "./user.entity";
 
@@ -54,5 +54,42 @@ export class UserService {
 
 	async setEmailVerified(id: UserEntity["id"]): Promise<void> {
 		await this.userRepository.update(id, { email_verified: true });
+	}
+
+	async findUserStats(): Promise<{
+		total: number;
+		emailVerified: number;
+		recentCount: number;
+		byLanguageLearn: Array<{ language: string; count: number }>;
+	}> {
+		const thirtyDaysAgo = new Date();
+		thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+		const [total, emailVerified, recentCount] = await Promise.all([
+			this.userRepository.count(),
+			this.userRepository.count({ where: { email_verified: true } }),
+			this.userRepository.count({
+				where: { created_at: MoreThanOrEqual(thirtyDaysAgo.toISOString()) },
+			}),
+		]);
+
+		const byLanguageLearnRaw = await this.userRepository
+			.createQueryBuilder("u")
+			.select("u.language_learn", "language")
+			.addSelect("COUNT(*)", "count")
+			.where("u.language_learn IS NOT NULL")
+			.groupBy("u.language_learn")
+			.orderBy("count", "DESC")
+			.getRawMany<{ language: string; count: string }>();
+
+		return {
+			total,
+			emailVerified,
+			recentCount,
+			byLanguageLearn: byLanguageLearnRaw.map((r) => ({
+				language: r.language,
+				count: Number(r.count),
+			})),
+		};
 	}
 }

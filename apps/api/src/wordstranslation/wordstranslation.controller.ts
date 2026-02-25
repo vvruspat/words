@@ -6,17 +6,20 @@ import {
 	Param,
 	ParseIntPipe,
 	Post,
+	Put,
 	Query,
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	GetWordsTranslationsRequestDto,
 	GetWordsTranslationsResponseDto,
 	GetWordTranslationResponseDto,
 	PostWordTranslationRequestDto,
 	PostWordTranslationResponseDto,
+	PutWordTranslationRequestDto,
+	PutWordTranslationResponseDto,
 } from "~/dto";
 import { WordTranslationService } from "./wordstranslation.service";
 
@@ -88,11 +91,32 @@ export class WordTranslationController {
 	@Post()
 	@ApiOperation({ summary: "Create words translation" })
 	@ApiResponse({ status: 201, type: PostWordTranslationResponseDto })
-
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(
 		@Body() dto: PostWordTranslationRequestDto,
 	): Promise<PostWordTranslationResponseDto> {
 		return await this.wordsTranslationService.create(dto);
+	}
+
+	@Put()
+	@ApiOperation({ summary: "Update words translation" })
+	@ApiBody({ type: PutWordTranslationRequestDto })
+	@ApiResponse({ status: 200, type: PutWordTranslationResponseDto })
+	@ApiResponse({ status: 404, description: "Words translation not found" })
+	@ApiResponse({ status: 500, description: "Server error" })
+	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+	async update(
+		@Body() dto: PutWordTranslationRequestDto,
+	): Promise<PutWordTranslationResponseDto> {
+		const { id, ...rest } = dto;
+		const updated = await this.wordsTranslationService.update(id, rest);
+		if (!updated) {
+			throw new NotFoundException({
+				message: "Words translation not found",
+				status: 404,
+				details: {},
+			});
+		}
+		return updated;
 	}
 }

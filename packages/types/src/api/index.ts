@@ -1,6 +1,7 @@
 export * from "./auth";
 export * from "./learning";
 export * from "./openai";
+export * from "./report";
 export * from "./root";
 export * from "./topic";
 export * from "./training";

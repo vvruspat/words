@@ -57,6 +57,59 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/report/stats": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get report statistics by status */
+		get: operations["ReportController_getStats"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/report": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get all reports */
+		get: operations["ReportController_getAll"];
+		/** Update report status */
+		put: operations["ReportController_update"];
+		/** Create a report */
+		post: operations["ReportController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/report/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post?: never;
+		/** Delete report */
+		delete: operations["ReportController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/topic": {
 		parameters: {
 			query?: never;
@@ -150,6 +203,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/user/stats": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get user statistics */
+		get: operations["UserController_getStats"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/user/{id}": {
 		parameters: {
 			query?: never;
@@ -200,6 +270,40 @@ export interface paths {
 		post?: never;
 		/** Delete vocab catalog */
 		delete: operations["VocabCatalogController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/word/stats": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get word statistics grouped by language and catalog */
+		get: operations["WordController_getStats"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/word/duplicates": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get duplicate words grouped by text and language */
+		get: operations["WordController_getDuplicates"];
+		put?: never;
+		post?: never;
+		delete?: never;
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -334,7 +438,8 @@ export interface paths {
 		};
 		/** Get words translations */
 		get: operations["WordTranslationController_get"];
-		put?: never;
+		/** Update words translation */
+		put: operations["WordTranslationController_update"];
 		/** Create words translation */
 		post: operations["WordTranslationController_create"];
 		delete?: never;
@@ -600,6 +705,63 @@ export interface components {
 			translation: number;
 		};
 		DeleteLearningResponseDto: {
+			id: number;
+		};
+		ReportDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		GetReportResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of reports */
+			items: components["schemas"]["ReportDto"][];
+		};
+		PostReportRequestDto: {
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+		};
+		PostReportResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		PutReportRequestDto: {
+			id: number;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		PutReportResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		DeleteReportResponseDto: {
 			id: number;
 		};
 		TopicDto: {
@@ -876,6 +1038,17 @@ export interface components {
 			transcribtion: string;
 			meaning?: string;
 		};
+		WordDuplicateGroupDto: {
+			word: string;
+			language: string;
+			items: components["schemas"]["WordDto"][];
+		};
+		GetWordDuplicatesResponseDto: {
+			groups: components["schemas"]["WordDuplicateGroupDto"][];
+			total: number;
+			limit: number;
+			offset: number;
+		};
 		GetWordResponseDto: {
 			/** @example 100 */
 			total: number;
@@ -955,6 +1128,22 @@ export interface components {
 			language: string;
 		};
 		PostWordTranslationResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			translation: string;
+			language: string;
+		};
+		PutWordTranslationRequestDto: {
+			id?: number;
+			/** Format: date-time */
+			created_at?: string;
+			word?: number;
+			translation?: string;
+			language?: string;
+		};
+		PutWordTranslationResponseDto: {
 			id: number;
 			/** Format: date-time */
 			created_at: string;
@@ -1208,6 +1397,153 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["DeleteLearningResponseDto"];
 				};
+			};
+		};
+	};
+	ReportController_getStats: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				created_at?: string;
+				word?: number;
+				type?: "word" | "translation" | "audio";
+				description?: string;
+				status?: "new" | "reviewed" | "resolved";
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetReportResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutReportRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutReportResponseDto"];
+				};
+			};
+			/** @description Report not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostReportRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostReportResponseDto"];
+				};
+			};
+		};
+	};
+	ReportController_remove: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["DeleteReportResponseDto"];
+				};
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 		};
 	};
@@ -1650,6 +1986,23 @@ export interface operations {
 			};
 		};
 	};
+	UserController_getStats: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
 	UserController_getById: {
 		parameters: {
 			query?: never;
@@ -1867,6 +2220,46 @@ export interface operations {
 				};
 				content: {
 					"application/json": components["schemas"]["DeleteVocabCatalogResponseDto"];
+				};
+			};
+		};
+	};
+	WordController_getStats: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordController_getDuplicates: {
+		parameters: {
+			query?: {
+				limit?: number;
+				offset?: number;
+				language?: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetWordDuplicatesResponseDto"];
 				};
 			};
 		};
@@ -2122,6 +2515,43 @@ export interface operations {
 				content: {
 					"application/json": components["schemas"]["GetWordsTranslationsResponseDto"];
 				};
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordTranslationController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutWordTranslationRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutWordTranslationResponseDto"];
+				};
+			};
+			/** @description Words translation not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
 			};
 			/** @description Server error */
 			500: {

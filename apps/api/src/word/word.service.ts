@@ -90,6 +90,106 @@ export class WordService {
 		return this.wordRepository.findOneBy({ id });
 	}
 
+	async findWordStats(): Promise<{
+		wordsByLanguageCatalog: Array<{
+			language: string;
+			catalogId: number | null;
+			catalogTitle: string | null;
+			count: number;
+		}>;
+		duplicatesByLanguage: Array<{ language: string; count: number }>;
+	}> {
+		const wordRows = await this.wordRepository.manager.query<
+			Array<{
+				language: string;
+				catalogId: string | null;
+				catalogTitle: string | null;
+				count: string;
+			}>
+		>(`
+			SELECT w.language, w.catalog AS "catalogId", vc.title AS "catalogTitle", COUNT(*) AS count
+			FROM word w
+			LEFT JOIN vocab_catalogs vc ON vc.id = w.catalog
+			GROUP BY w.language, w.catalog, vc.title
+			ORDER BY w.language ASC, vc.title ASC
+		`);
+
+		const dupRows = await this.wordRepository.manager.query<
+			Array<{ language: string; count: string }>
+		>(`
+			SELECT language, COUNT(*) AS count
+			FROM (
+				SELECT language, LOWER(word) AS word_key
+				FROM word
+				GROUP BY language, LOWER(word)
+				HAVING COUNT(*) > 1
+			) subq
+			GROUP BY language
+			ORDER BY language ASC
+		`);
+
+		return {
+			wordsByLanguageCatalog: wordRows.map((r) => ({
+				language: r.language,
+				catalogId: r.catalogId != null ? Number(r.catalogId) : null,
+				catalogTitle: r.catalogTitle,
+				count: Number(r.count),
+			})),
+			duplicatesByLanguage: dupRows.map((r) => ({
+				language: r.language,
+				count: Number(r.count),
+			})),
+		};
+	}
+
+	async findDuplicates(
+		limit: number,
+		offset: number,
+		language?: string,
+	): Promise<{
+		groups: { word: string; language: string; items: WordEntity[] }[];
+		total: number;
+	}> {
+		const qb = this.wordRepository
+			.createQueryBuilder("w")
+			.select("LOWER(w.word)", "wordKey")
+			.addSelect("w.language", "lang")
+			.addSelect("COUNT(*)", "cnt")
+			.groupBy("LOWER(w.word), w.language")
+			.having("COUNT(*) > 1")
+			.orderBy("cnt", "DESC")
+			.addOrderBy("LOWER(w.word)", "ASC");
+
+		if (language) {
+			qb.where("w.language = :language", { language });
+		}
+
+		const allGroups = await qb.getRawMany<{
+			wordKey: string;
+			lang: string;
+			cnt: string;
+		}>();
+
+		const total = allGroups.length;
+		const paginatedGroups = allGroups.slice(offset, offset + limit);
+
+		const groups = await Promise.all(
+			paginatedGroups.map(async ({ wordKey, lang }) => {
+				const items = await this.wordRepository
+					.createQueryBuilder("w")
+					.leftJoinAndSelect("w.topicData", "topic")
+					.leftJoinAndSelect("w.catalogData", "catalog")
+					.where("LOWER(w.word) = :wordKey", { wordKey })
+					.andWhere("w.language = :lang", { lang })
+					.orderBy("w.created_at", "ASC")
+					.getMany();
+				return { word: wordKey, language: lang, items };
+			}),
+		);
+
+		return { groups, total };
+	}
+
 	async create(word: Omit<WordEntity, "id">): Promise<WordEntity> {
 		const newWord = this.wordRepository.create(word);
 		const savedWord = await this.wordRepository.save(newWord);
