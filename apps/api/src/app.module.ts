@@ -11,6 +11,7 @@ import { MailerModule } from "./mailer/mailer.module";
 import { OpenAIModule } from "./openai/openai.module";
 import { QueuesModule } from "./queues/queues.module";
 import { RedisModule } from "./redis/redis.module";
+import { ReportModule } from "./report/report.module";
 import { TopicModule } from "./topic/topic.module";
 import { TrainingModule } from "./training/training.module";
 import { UserModule } from "./user/user.module";
@@ -23,6 +24,7 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		ConfigModule.forRoot(),
 		DatabaseModule,
 		LearningModule,
+		ReportModule,
 		TopicModule,
 		TrainingModule,
 		UserModule,

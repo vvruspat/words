@@ -7,6 +7,7 @@ interface WordsStore {
 		Map<WordTranslation["language"], WordTranslation>
 	>;
 	setTranslations: (translations: WordTranslation[]) => void;
+	updateTranslation: (updated: WordTranslation) => void;
 }
 
 export const useTranslationsStore = create<WordsStore>()((set) => ({
@@ -44,5 +45,15 @@ export const useTranslationsStore = create<WordsStore>()((set) => ({
 			return {
 				translations: newTranslations,
 			};
+		}),
+	updateTranslation: (updated: WordTranslation) =>
+		set((prevState) => {
+			const newTranslations = new Map(prevState.translations.entries());
+			const languageMap = new Map(
+				prevState.translations.get(updated.word)?.entries() ?? [],
+			);
+			languageMap.set(updated.language, updated);
+			newTranslations.set(updated.word, languageMap);
+			return { translations: newTranslations };
 		}),
 }));

@@ -84,3 +84,19 @@ export interface WordTranslation {
 	translation: string;
 	language: string;
 }
+
+export type ReportType = "word" | "translation" | "audio";
+export type ReportStatus = "new" | "reviewed" | "resolved";
+
+export interface Report {
+	id: number;
+	created_at: string;
+	word: number;
+	type: ReportType;
+	description?: string;
+	status: ReportStatus;
+}
+
+export interface ReportData extends Report {
+	wordData: Word;
+}

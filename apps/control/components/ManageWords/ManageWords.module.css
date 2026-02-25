@@ -64,3 +64,25 @@
 		transform: rotate(360deg);
 	}
 }
+
+.wordCell {
+	cursor: text;
+	display: inline-block;
+	min-width: 60px;
+}
+
+.wordInput {
+	font: inherit;
+	font-size: inherit;
+	border: 1px solid var(--palette-primary-300, #a0a0a0);
+	border-radius: 4px;
+	padding: 2px 6px;
+	background: var(--color-background-primary, #fff);
+	color: inherit;
+	outline: none;
+	width: 120px;
+}
+
+.wordInput:focus {
+	border-color: var(--palette-primary-500, #4a4a4a);
+}

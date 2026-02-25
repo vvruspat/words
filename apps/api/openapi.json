@@ -256,6 +256,227 @@
         ]
       }
     },
+    "/report/stats": {
+      "get": {
+        "operationId": "ReportController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get report statistics by status",
+        "tags": [
+          "report"
+        ]
+      }
+    },
+    "/report": {
+      "get": {
+        "operationId": "ReportController_getAll",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "word",
+                "translation",
+                "audio"
+              ]
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "new",
+                "reviewed",
+                "resolved"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetReportResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid param"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all reports",
+        "tags": [
+          "report"
+        ]
+      },
+      "post": {
+        "operationId": "ReportController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostReportResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a report",
+        "tags": [
+          "report"
+        ]
+      },
+      "put": {
+        "operationId": "ReportController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutReportResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Report not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update report status",
+        "tags": [
+          "report"
+        ]
+      }
+    },
+    "/report/{id}": {
+      "delete": {
+        "operationId": "ReportController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteReportResponseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Delete report",
+        "tags": [
+          "report"
+        ]
+      }
+    },
     "/topic": {
       "get": {
         "operationId": "TopicController_getAll",
@@ -899,6 +1120,21 @@
         ]
       }
     },
+    "/user/stats": {
+      "get": {
+        "operationId": "UserController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get user statistics",
+        "tags": [
+          "user"
+        ]
+      }
+    },
     "/user/{id}": {
       "get": {
         "operationId": "UserController_getById",
@@ -1202,6 +1438,68 @@
         "summary": "Delete vocab catalog",
         "tags": [
           "vocabcatalog"
+        ]
+      }
+    },
+    "/word/stats": {
+      "get": {
+        "operationId": "WordController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get word statistics grouped by language and catalog",
+        "tags": [
+          "word"
+        ]
+      }
+    },
+    "/word/duplicates": {
+      "get": {
+        "operationId": "WordController_getDuplicates",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWordDuplicatesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get duplicate words grouped by text and language",
+        "tags": [
+          "word"
         ]
       }
     },
@@ -1686,6 +1984,42 @@
           }
         },
         "summary": "Create words translation",
+        "tags": [
+          "words-translation"
+        ]
+      },
+      "put": {
+        "operationId": "WordTranslationController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutWordTranslationRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutWordTranslationResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Words translation not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update words translation",
         "tags": [
           "words-translation"
         ]
@@ -2203,6 +2537,213 @@
         ]
       },
       "DeleteLearningResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ReportDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "GetReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of reports",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
+        ]
+      },
+      "PostReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "word",
+          "type"
+        ]
+      },
+      "PostReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "PutReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ]
+      },
+      "PutReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "DeleteReportResponseDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -3122,6 +3663,54 @@
           "transcribtion"
         ]
       },
+      "WordDuplicateGroupDto": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WordDto"
+            }
+          }
+        },
+        "required": [
+          "word",
+          "language",
+          "items"
+        ]
+      },
+      "GetWordDuplicatesResponseDto": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WordDuplicateGroupDto"
+            }
+          },
+          "total": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "offset": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "groups",
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
       "GetWordResponseDto": {
         "type": "object",
         "properties": {
@@ -3387,6 +3976,55 @@
         ]
       },
       "PostWordTranslationResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "translation",
+          "language"
+        ]
+      },
+      "PutWordTranslationRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          }
+        }
+      },
+      "PutWordTranslationResponseDto": {
         "type": "object",
         "properties": {
           "id": {

@@ -1,5 +1,6 @@
 export * from "./api.dto";
 export * from "./learning.dto";
+export * from "./report.dto";
 export * from "./topic.dto";
 export * from "./training.dto";
 export * from "./user.dto";

@@ -1,5 +1,6 @@
 export * from "./learning";
 export * from "./refresh-token";
+export * from "./report";
 export * from "./reset-password";
 export * from "./signin";
 export * from "./signup";

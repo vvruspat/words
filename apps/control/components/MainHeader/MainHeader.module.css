@@ -1,0 +1,40 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px;
+	background: var(--color-background-secondary, #f9f9f9);
+	border-bottom: 1px solid var(--palette-primary-200, #e0e0e0);
+	gap: 24px;
+}
+
+.title {
+	flex-shrink: 0;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.navLink {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border-radius: 6px;
+	text-decoration: none;
+	color: inherit;
+	transition: background 0.15s ease;
+}
+
+.navLink:hover {
+	background: var(--palette-primary-100, #f0f0f0);
+}
+
+.navLinkActive {
+	background: var(--palette-primary-100, #f0f0f0);
+	font-weight: 600;
+}

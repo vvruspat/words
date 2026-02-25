@@ -22,3 +22,28 @@ export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {
 	})
 	items: WordDto[];
 }
+
+export class WordDuplicateGroupDto {
+	@ApiProperty({ type: String })
+	word: string;
+
+	@ApiProperty({ type: String })
+	language: string;
+
+	@ApiProperty({ type: [WordDto] })
+	items: WordDto[];
+}
+
+export class GetWordDuplicatesResponseDto {
+	@ApiProperty({ type: [WordDuplicateGroupDto] })
+	groups: WordDuplicateGroupDto[];
+
+	@ApiProperty({ type: Number })
+	total: number;
+
+	@ApiProperty({ type: Number })
+	limit: number;
+
+	@ApiProperty({ type: Number })
+	offset: number;
+}
