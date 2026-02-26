@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from "react";
 import { deleteReportAction } from "@/actions/deleteReportAction";
 import { fetchReportsAction } from "@/actions/fetchReportsAction";
 import { updateReportAction } from "@/actions/updateReportAction";
+import { WordDetailModal } from "@/components/WordDetailModal/WordDetailModal";
 
 const STATUS_OPTIONS = [
 	{ key: "all", value: "All" },
@@ -51,6 +52,7 @@ export default function Reports() {
 	const [statusFilter, setStatusFilter] = useState<string>("all");
 	const [pendingUpdate, setPendingUpdate] = useState<Set<number>>(new Set());
 	const [pendingDelete, setPendingDelete] = useState<Set<number>>(new Set());
+	const [selectedWordId, setSelectedWordId] = useState<number | null>(null);
 
 	const fetchReports = useCallback(async () => {
 		const data = await fetchReportsAction({
@@ -107,6 +109,7 @@ export default function Reports() {
 	);
 
 	return (
+		<>
 		<main
 			style={{
 				width: "100%",
@@ -147,8 +150,16 @@ export default function Reports() {
 						},
 						{
 							field: "word",
-							label: "Word ID",
-							renderCell: (value) => value?.toString(),
+							label: "Word",
+							renderCell: (value) => (
+								<MButton
+									mode="tertiary"
+									size="s"
+									onClick={() => setSelectedWordId(Number(value))}
+								>
+									#{value?.toString()}
+								</MButton>
+							),
 						},
 						{
 							field: "type",
@@ -243,5 +254,12 @@ export default function Reports() {
 				/>
 			</MFlex>
 		</main>
+		{selectedWordId !== null && (
+			<WordDetailModal
+				wordId={selectedWordId}
+				onClose={() => setSelectedWordId(null)}
+			/>
+		)}
+		</>
 	);
 }
