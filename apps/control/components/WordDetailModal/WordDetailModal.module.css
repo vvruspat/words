@@ -1,0 +1,74 @@
+.overlay {
+	border: none;
+	cursor: default;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100vw;
+	height: 100vh;
+	background-color: color-mix(
+		in srgb,
+		var(--palette-black, #000) 50%,
+		transparent
+	);
+}
+
+.wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1001;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+}
+
+.modal {
+	pointer-events: all;
+	position: relative;
+	margin: 32px;
+	min-width: 480px;
+	max-width: 700px;
+	width: 100%;
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+.spin {
+	animation: spin 0.9s linear infinite;
+	transform-origin: 50% 50%;
+}
+
+.wordInput {
+	font: inherit;
+	font-size: inherit;
+	border: 1px solid var(--palette-primary-300, #a0a0a0);
+	border-radius: 4px;
+	padding: 2px 6px;
+	background: var(--color-background-primary, #fff);
+	color: inherit;
+	outline: none;
+	width: 200px;
+}
+
+.wordInput:focus {
+	border-color: var(--palette-primary-500, #4a4a4a);
+}
+
+.wordCell {
+	cursor: text;
+}
+
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
