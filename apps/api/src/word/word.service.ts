@@ -17,12 +17,11 @@ import { WordTranslationService } from "~/wordstranslation/wordstranslation.serv
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
+import { DEFAULT_SIMILARITY_THRESHOLD } from "./word.constants";
 import type { WordEntity } from "./word.entity";
 import { WordEventService } from "./word-event.service";
 
 export type WordStatus = "pending" | "processing" | "processed";
-
-const DEFAULT_SIMILARITY_THRESHOLD = 0.95;
 
 @Injectable()
 export class WordService {

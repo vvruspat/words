@@ -25,6 +25,7 @@ import {
 	PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
+import { DEFAULT_SIMILARITY_THRESHOLD } from "./word.constants";
 import { WordService } from "./word.service";
 import { WordEventService } from "./word-event.service";
 
@@ -66,7 +67,9 @@ export class WordController {
 		const parsedLimit = limit != null ? Number(limit) : 20;
 		const parsedOffset = offset != null ? Number(offset) : 0;
 		const parsedThreshold =
-			similarityThreshold != null ? Number(similarityThreshold) : 0.9;
+			similarityThreshold != null
+				? Number(similarityThreshold)
+				: DEFAULT_SIMILARITY_THRESHOLD;
 		const { groups, total } = await this.wordService.findDuplicates(
 			parsedLimit,
 			parsedOffset,
