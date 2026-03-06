@@ -440,6 +440,178 @@ paths:
                 $ref: '#/components/schemas/DeleteTopicResponseDto'
       summary: Delete topic
       tags: *ref_2
+  /topic-translation:
+    get:
+      operationId: TopicTranslationController_get
+      parameters:
+        - name: offset
+          required: true
+          in: query
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: true
+          in: query
+          schema:
+            example: 10
+            type: number
+        - name: id
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: created_at
+          required: false
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: topic
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: translation
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: topics
+          required: false
+          in: query
+          description: Topic ID or array of Topic IDs
+          schema:
+            example: 1,2,3
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTopicTranslationsResponseDto'
+        '500':
+          description: Server error
+      summary: Get topic translations
+      tags: &ref_3
+        - topic-translation
+    post:
+      operationId: TopicTranslationController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTopicTranslationRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostTopicTranslationResponseDto'
+      summary: Create topic translation
+      tags: *ref_3
+    put:
+      operationId: TopicTranslationController_update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutTopicTranslationRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutTopicTranslationResponseDto'
+        '404':
+          description: Topic translation not found
+        '500':
+          description: Server error
+      summary: Update topic translation
+      tags: *ref_3
+  /topic-translation/{id}:
+    get:
+      operationId: TopicTranslationController_getById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTopicTranslationResponseDto'
+        '404':
+          description: Topic translation not found
+        '500':
+          description: Server error
+      summary: Get topic translation by id
+      tags: *ref_3
+    delete:
+      operationId: TopicTranslationController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTopicTranslationResponseDto'
+        '404':
+          description: Topic translation not found
+      summary: Delete topic translation
+      tags: *ref_3
+  /topic-translation/translate:
+    post:
+      operationId: TopicTranslationController_translate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateTopicsRequestDto'
+      responses:
+        '201':
+          description: Translation job enqueued
+      summary: Auto-translate topics via OpenAI
+      tags: *ref_3
+  /topic-translation/translate-untranslated:
+    post:
+      operationId: TopicTranslationController_translateUntranslated
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateUntranslatedTopicsRequestDto'
+      responses:
+        '201':
+          description: Translation job enqueued
+      summary: Auto-translate all untranslated topics for a language
+      tags: *ref_3
   /training:
     get:
       operationId: TrainingController_getAll
@@ -504,7 +676,7 @@ paths:
         '500':
           description: Server error
       summary: Get all training records
-      tags: &ref_3
+      tags: &ref_4
         - training
     post:
       operationId: TrainingController_create
@@ -523,7 +695,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PostTrainingResponseDto'
       summary: Create training
-      tags: *ref_3
+      tags: *ref_4
     put:
       operationId: TrainingController_update
       parameters: []
@@ -547,7 +719,7 @@ paths:
         '500':
           description: Server error
       summary: Update training
-      tags: *ref_3
+      tags: *ref_4
   /training/{id}:
     get:
       operationId: TrainingController_getById
@@ -569,7 +741,7 @@ paths:
         '500':
           description: Server error
       summary: Get training by id
-      tags: *ref_3
+      tags: *ref_4
     delete:
       operationId: TrainingController_remove
       parameters: []
@@ -581,7 +753,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteTrainingResponseDto'
       summary: Delete training
-      tags: *ref_3
+      tags: *ref_4
   /user:
     get:
       operationId: UserController_getAll
@@ -652,7 +824,7 @@ paths:
         '500':
           description: Server error
       summary: Get all users
-      tags: &ref_4
+      tags: &ref_5
         - user
     post:
       operationId: UserController_create
@@ -671,7 +843,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PostUserResponseDto'
       summary: Create user
-      tags: *ref_4
+      tags: *ref_5
     put:
       operationId: UserController_update
       parameters: []
@@ -695,7 +867,7 @@ paths:
         '500':
           description: Server error
       summary: Update user
-      tags: *ref_4
+      tags: *ref_5
   /user/stats:
     get:
       operationId: UserController_getStats
@@ -704,7 +876,7 @@ paths:
         '200':
           description: ''
       summary: Get user statistics
-      tags: *ref_4
+      tags: *ref_5
   /user/{id}:
     get:
       operationId: UserController_getById
@@ -726,7 +898,7 @@ paths:
         '500':
           description: Server error
       summary: Get user by id
-      tags: *ref_4
+      tags: *ref_5
     delete:
       operationId: UserController_remove
       parameters: []
@@ -738,7 +910,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteUserResponseDto'
       summary: Delete user
-      tags: *ref_4
+      tags: *ref_5
   /vocabcatalog:
     get:
       operationId: VocabCatalogController_getAll
@@ -810,7 +982,7 @@ paths:
         '500':
           description: Server error
       summary: Get all vocab catalogs
-      tags: &ref_5
+      tags: &ref_6
         - vocabcatalog
     post:
       operationId: VocabCatalogController_create
@@ -829,7 +1001,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PostVocabCatalogResponseDto'
       summary: Create vocab catalog
-      tags: *ref_5
+      tags: *ref_6
     put:
       operationId: VocabCatalogController_update
       parameters: []
@@ -853,7 +1025,7 @@ paths:
         '500':
           description: Server error
       summary: Update vocab catalog
-      tags: *ref_5
+      tags: *ref_6
   /vocabcatalog/{id}:
     get:
       operationId: VocabCatalogController_getById
@@ -875,7 +1047,7 @@ paths:
         '500':
           description: Server error
       summary: Get vocab catalog by id
-      tags: *ref_5
+      tags: *ref_6
     delete:
       operationId: VocabCatalogController_remove
       parameters:
@@ -892,7 +1064,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteVocabCatalogResponseDto'
       summary: Delete vocab catalog
-      tags: *ref_5
+      tags: *ref_6
   /word/stats:
     get:
       operationId: WordController_getStats
@@ -901,7 +1073,7 @@ paths:
         '200':
           description: ''
       summary: Get word statistics grouped by language and catalog
-      tags: &ref_6
+      tags: &ref_7
         - word
   /word/duplicates:
     get:
@@ -930,7 +1102,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetWordDuplicatesResponseDto'
       summary: Get duplicate words grouped by text and language
-      tags: *ref_6
+      tags: *ref_7
   /word:
     get:
       operationId: WordController_getAll
@@ -1039,7 +1211,7 @@ paths:
         '500':
           description: Server error
       summary: Get all words
-      tags: *ref_6
+      tags: *ref_7
     put:
       operationId: WordController_update
       parameters: []
@@ -1063,7 +1235,7 @@ paths:
         '500':
           description: Server error
       summary: Update word
-      tags: *ref_6
+      tags: *ref_7
   /word/bulk-delete:
     post:
       operationId: WordController_bulkDelete
@@ -1072,7 +1244,7 @@ paths:
         '200':
           description: Words deleted
       summary: Bulk delete words
-      tags: *ref_6
+      tags: *ref_7
   /word/generate:
     post:
       operationId: WordController_generateWords
@@ -1101,7 +1273,7 @@ paths:
         '200':
           description: Word generation started
       summary: Generate words
-      tags: *ref_6
+      tags: *ref_7
   /word/{id}:
     delete:
       operationId: WordController_remove
@@ -1114,7 +1286,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteWordResponseDto'
       summary: Delete word
-      tags: *ref_6
+      tags: *ref_7
   /word/{id}/retranslate:
     post:
       operationId: WordController_retranslate
@@ -1130,7 +1302,7 @@ paths:
         '404':
           description: Word not found
       summary: Retranslate word - delete existing translations and regenerate
-      tags: *ref_6
+      tags: *ref_7
   /word/{id}/regenerate-audio:
     post:
       operationId: WordController_regenerateAudio
@@ -1146,7 +1318,7 @@ paths:
         '404':
           description: Word not found
       summary: Regenerate audio for word
-      tags: *ref_6
+      tags: *ref_7
   /word/events:
     get:
       operationId: WordController_streamEvents
@@ -1155,7 +1327,7 @@ paths:
         '200':
           description: SSE stream of word updates
       summary: Stream word update events via Server-Sent Events
-      tags: *ref_6
+      tags: *ref_7
   /words-translation:
     get:
       operationId: WordTranslationController_get
@@ -1215,7 +1387,7 @@ paths:
         '500':
           description: Server error
       summary: Get words translations
-      tags: &ref_7
+      tags: &ref_8
         - words-translation
     post:
       operationId: WordTranslationController_create
@@ -1234,7 +1406,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PostWordTranslationResponseDto'
       summary: Create words translation
-      tags: *ref_7
+      tags: *ref_8
     put:
       operationId: WordTranslationController_update
       parameters: []
@@ -1256,7 +1428,7 @@ paths:
         '500':
           description: Server error
       summary: Update words translation
-      tags: *ref_7
+      tags: *ref_8
   /words-translation/{id}:
     get:
       operationId: WordTranslationController_getById
@@ -1278,7 +1450,7 @@ paths:
         '500':
           description: Server error
       summary: Get words translation by id
-      tags: *ref_7
+      tags: *ref_8
   /auth/signin:
     post:
       operationId: AuthController_signin
@@ -1299,7 +1471,7 @@ paths:
         '401':
           description: Invalid credentials
       summary: Sign in to an existing account
-      tags: &ref_8
+      tags: &ref_9
         - auth
   /auth/signup:
     post:
@@ -1323,7 +1495,7 @@ paths:
         '409':
           description: User already exists
       summary: Create a new user account
-      tags: *ref_8
+      tags: *ref_9
   /auth/reset-password:
     put:
       operationId: AuthController_resetPassword
@@ -1336,7 +1508,7 @@ paths:
         '401':
           description: Invalid or expired token
       summary: Reset user password with token
-      tags: *ref_8
+      tags: *ref_9
     get:
       operationId: AuthController_sendResetPasswordEmail
       parameters: []
@@ -1348,7 +1520,7 @@ paths:
         '401':
           description: User not found
       summary: Send password reset email
-      tags: *ref_8
+      tags: *ref_9
   /auth/tmp-password:
     post:
       operationId: AuthController_sendTmpPasswordToEmail
@@ -1359,7 +1531,7 @@ paths:
         '401':
           description: User not found
       summary: Send temp password to email
-      tags: *ref_8
+      tags: *ref_9
   /auth/verify-email:
     post:
       operationId: AuthController_sendVerificationEmail
@@ -1378,7 +1550,7 @@ paths:
         '401':
           description: User not found
       summary: Verify email with verification code
-      tags: *ref_8
+      tags: *ref_9
   /auth/verify-email/resend:
     post:
       operationId: AuthController_resendVerificationEmail
@@ -1391,7 +1563,7 @@ paths:
         '401':
           description: User not found
       summary: Resend email verification code
-      tags: *ref_8
+      tags: *ref_9
   /auth/refresh-token:
     post:
       operationId: AuthController_refreshToken
@@ -1412,7 +1584,7 @@ paths:
         '401':
           description: Invalid or expired refresh token
       summary: Refresh access token
-      tags: *ref_8
+      tags: *ref_9
   /openai/webhook:
     post:
       operationId: OpenAIController_handleWebhook
@@ -1620,7 +1792,7 @@ components:
           type: number
         type:
           type: string
-          enum: &ref_9
+          enum: &ref_10
             - word
             - translation
             - audio
@@ -1628,7 +1800,7 @@ components:
           type: string
         status:
           type: string
-          enum: &ref_10
+          enum: &ref_11
             - new
             - reviewed
             - resolved
@@ -1667,7 +1839,7 @@ components:
           type: number
         type:
           type: string
-          enum: *ref_9
+          enum: *ref_10
         description:
           type: string
       required:
@@ -1685,12 +1857,12 @@ components:
           type: number
         type:
           type: string
-          enum: *ref_9
+          enum: *ref_10
         description:
           type: string
         status:
           type: string
-          enum: *ref_10
+          enum: *ref_11
       required:
         - id
         - created_at
@@ -1704,7 +1876,7 @@ components:
           type: number
         status:
           type: string
-          enum: *ref_10
+          enum: *ref_11
       required:
         - id
         - status
@@ -1720,12 +1892,12 @@ components:
           type: number
         type:
           type: string
-          enum: *ref_9
+          enum: *ref_10
         description:
           type: string
         status:
           type: string
-          enum: *ref_10
+          enum: *ref_11
       required:
         - id
         - created_at
@@ -1870,6 +2042,164 @@ components:
         - title
         - language
     DeleteTopicResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+      required:
+        - id
+    TopicTranslationDto:
+      type: object
+      properties:
+        id:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - topic
+        - translation
+        - language
+    GetTopicTranslationsResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of topic translations
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicTranslationDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    GetTopicTranslationResponseDto:
+      type: object
+      properties:
+        total:
+          type: number
+          example: 100
+        offset:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 10
+        items:
+          description: List of topic translations
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicTranslationDto'
+      required:
+        - total
+        - offset
+        - limit
+        - items
+    PostTopicTranslationRequestDto:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - created_at
+        - topic
+        - translation
+        - language
+    PostTopicTranslationResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - topic
+        - translation
+        - language
+    TranslateTopicsRequestDto:
+      type: object
+      properties:
+        topicIds:
+          type: array
+          items:
+            type: number
+      required:
+        - topicIds
+    TranslateUntranslatedTopicsRequestDto:
+      type: object
+      properties:
+        language:
+          type: string
+      required:
+        - language
+    PutTopicTranslationRequestDto:
+      type: object
+      properties:
+        id:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+        translation:
+          type: string
+        language:
+          type: string
+    PutTopicTranslationResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        topic:
+          type: number
+        translation:
+          type: string
+        language:
+          type: string
+      required:
+        - id
+        - created_at
+        - topic
+        - translation
+        - language
+    DeleteTopicTranslationResponseDto:
       type: object
       properties:
         id:
@@ -2344,7 +2674,7 @@ components:
       properties:
         status:
           type: string
-          enum: &ref_11
+          enum: &ref_12
             - processing
             - processed
         id:
@@ -2360,7 +2690,7 @@ components:
           type: number
         language:
           type: string
-          enum: &ref_12
+          enum: &ref_13
             - en
             - es
             - fr
@@ -2445,7 +2775,7 @@ components:
       properties:
         status:
           type: string
-          enum: *ref_11
+          enum: *ref_12
         id:
           type: number
         created_at:
@@ -2459,7 +2789,7 @@ components:
           type: number
         language:
           type: string
-          enum: *ref_12
+          enum: *ref_13
         audio:
           type: string
         transcribtion:
@@ -2471,7 +2801,7 @@ components:
       properties:
         status:
           type: string
-          enum: *ref_11
+          enum: *ref_12
         id:
           type: number
         created_at:
@@ -2485,7 +2815,7 @@ components:
           type: number
         language:
           type: string
-          enum: *ref_12
+          enum: *ref_13
         audio:
           type: string
         transcribtion:

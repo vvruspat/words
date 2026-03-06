@@ -85,6 +85,14 @@ export interface WordTranslation {
 	language: string;
 }
 
+export interface TopicTranslation {
+	id: number;
+	created_at: string;
+	topic: number;
+	translation: string;
+	language: string;
+}
+
 export type ReportType = "word" | "translation" | "audio";
 export type ReportStatus = "new" | "reviewed" | "resolved";
 

@@ -13,6 +13,7 @@ import { QueuesModule } from "./queues/queues.module";
 import { RedisModule } from "./redis/redis.module";
 import { ReportModule } from "./report/report.module";
 import { TopicModule } from "./topic/topic.module";
+import { TopicTranslationModule } from "./topictranslation/topictranslation.module";
 import { TrainingModule } from "./training/training.module";
 import { UserModule } from "./user/user.module";
 import { VocabCatalogModule } from "./vocabcatalog/vocabcatalog.module";
@@ -26,6 +27,7 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		LearningModule,
 		ReportModule,
 		TopicModule,
+		TopicTranslationModule,
 		TrainingModule,
 		UserModule,
 		VocabCatalogModule,

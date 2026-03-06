@@ -6,15 +6,22 @@ import type { Request, Response } from "express";
 import OpenAI, { type APIPromise } from "openai";
 import {
 	AUDIO_CREATION_DONE,
+	TOPIC_TRANSLATION_DONE,
 	TRANSLATION_DONE,
 	WORDS_GENERATION_DONE,
 } from "~/constants/queue-events.constants";
-import { TRANSLATIONS_QUEUE, WORDS_QUEUE } from "~/constants/queues.constants";
+import {
+	TOPIC_TRANSLATIONS_QUEUE,
+	TRANSLATIONS_QUEUE,
+	WORDS_QUEUE,
+} from "~/constants/queues.constants";
+import type { TopicEntity } from "~/topic/topic.entity";
 import type { WordEntity } from "~/word/word.entity";
 import {
 	GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
 	GENERATE_WORDS_FOR_TOPIC_PROMPT_ID,
 	GENERATE_WORDS_PROMPT_ID,
+	TRANSLATE_TOPICS_PROMPT_ID,
 	TRANSLATE_WORDS_PROMPT_ID,
 } from "./constants/prompts";
 import { audioInstructions } from "./utlis/audioInstructions";
@@ -36,6 +43,8 @@ export class OpenAIService {
 	constructor(
 		@InjectQueue(WORDS_QUEUE) private wordsQueue: Queue,
 		@InjectQueue(TRANSLATIONS_QUEUE) private translationsQueue: Queue,
+		@InjectQueue(TOPIC_TRANSLATIONS_QUEUE)
+		private topicTranslationsQueue: Queue,
 	) {}
 
 	async handleWebhook(
@@ -222,6 +231,34 @@ export class OpenAIService {
 				translatedWords.data ??
 				translatedWords,
 			words,
+		});
+	}
+
+	async translateTopics(
+		language: string,
+		topics: TopicEntity[],
+	): Promise<void> {
+		const response = await this.openai.responses.create({
+			prompt: {
+				id: TRANSLATE_TOPICS_PROMPT_ID,
+				version: "3",
+				variables: {
+					from_language: language,
+					languages: Object.keys(AVAILABLE_LANGUAGES)
+						.filter((lang) => lang !== language)
+						.join(","),
+					topics: topics.map((t) => t.title).join(","),
+				},
+			},
+		});
+
+		this.logger.log("Topic translation response: ", response.output_text);
+
+		const result = JSON.parse(response.output_text);
+
+		this.topicTranslationsQueue.add(TOPIC_TRANSLATION_DONE, {
+			generatedTranslations: result.items ?? result,
+			topics,
 		});
 	}
 
