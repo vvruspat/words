@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In, Like } from "typeorm";
+import { In } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	TRANSLATION_START,
@@ -48,23 +48,48 @@ export class WordService {
 			sortOrder,
 			word,
 			translation,
+			similarityThreshold,
 			...restQuery
 		} = query;
 
 		// Build the base where clause
 		const where: Record<string, unknown> = { ...restQuery };
 
+		const threshold = Number(similarityThreshold) || 0.3;
+
+		let wordMatchIds: number[] | null = null;
+		let translationMatchIds: number[] | null = null;
+
+		// Use pg_trgm word_similarity to handle articles ("die Katze" ~ "Katze")
+		// and slash variants ("groß/klein" ~ "groß") as well as minor typos.
 		if (word) {
-			where.word = Like(`%${word}%`);
+			const matches = await this.wordRepository.manager.query<
+				Array<{ id: number }>
+			>(`SELECT id FROM word WHERE word_similarity($1, LOWER(word)) >= $2`, [
+				word.toLowerCase(),
+				threshold,
+			]);
+			wordMatchIds = matches.map((m) => m.id);
 		}
 
 		// If searching by translation, resolve matching word IDs first
 		if (translation) {
-			const wordIds =
+			translationMatchIds =
 				await this.wordTranslationService.findWordIdsByTranslationSearch(
 					translation,
 				);
-			where.id = wordIds.length > 0 ? In(wordIds) : In([-1]);
+		}
+
+		// Combine ID sets: if both filters are active, intersect them
+		if (wordMatchIds !== null && translationMatchIds !== null) {
+			const translationSet = new Set(translationMatchIds);
+			const intersection = wordMatchIds.filter((id) => translationSet.has(id));
+			where.id = intersection.length > 0 ? In(intersection) : In([-1]);
+		} else if (wordMatchIds !== null) {
+			where.id = wordMatchIds.length > 0 ? In(wordMatchIds) : In([-1]);
+		} else if (translationMatchIds !== null) {
+			where.id =
+				translationMatchIds.length > 0 ? In(translationMatchIds) : In([-1]);
 		}
 
 		const total = await this.wordRepository.count({ where });

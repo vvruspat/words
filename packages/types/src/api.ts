@@ -2624,6 +2624,8 @@ export interface operations {
 				sortBy?: string;
 				sortOrder?: string;
 				translation?: string;
+				/** @description Trigram similarity threshold for word search (0–1). Lower values return more results. */
+				similarityThreshold?: number;
 			};
 			header?: never;
 			path?: never;

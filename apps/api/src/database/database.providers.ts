@@ -51,7 +51,14 @@ export const databaseProviders = [
 				...connectionOptions,
 			});
 
-			return dataSource.initialize();
+			const initializedDataSource = await dataSource.initialize();
+			await initializedDataSource.query(
+				"CREATE EXTENSION IF NOT EXISTS pg_trgm",
+			);
+			await initializedDataSource.query(
+				"CREATE INDEX IF NOT EXISTS idx_word_word_trgm ON word USING gin(LOWER(word) gin_trgm_ops)",
+			);
+			return initializedDataSource;
 		},
 	},
 ];
