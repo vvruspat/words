@@ -1094,6 +1094,12 @@ paths:
           in: query
           schema:
             type: string
+        - name: similarityThreshold
+          required: false
+          in: query
+          description: Trigram similarity threshold (0–1, default 0.9)
+          schema:
+            type: number
       responses:
         '200':
           description: ''
@@ -1199,6 +1205,15 @@ paths:
           in: query
           schema:
             type: string
+        - name: similarityThreshold
+          required: false
+          in: query
+          description: >-
+            Trigram similarity threshold for word search (0–1). Lower values
+            return more results.
+          schema:
+            default: 0.3
+            type: number
       responses:
         '200':
           description: ''
