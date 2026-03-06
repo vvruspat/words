@@ -938,8 +938,12 @@ export interface components {
 			translation: string;
 			language: string;
 		};
-		TranslateTopicsRequestDto: Record<string, never>;
-		TranslateUntranslatedTopicsRequestDto: Record<string, never>;
+		TranslateTopicsRequestDto: {
+			topicIds: number[];
+		};
+		TranslateUntranslatedTopicsRequestDto: {
+			language: string;
+		};
 		PutTopicTranslationRequestDto: {
 			id?: number;
 			/** Format: date-time */

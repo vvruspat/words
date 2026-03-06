@@ -12,7 +12,13 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+	ApiBody,
+	ApiOperation,
+	ApiProperty,
+	ApiResponse,
+	ApiTags,
+} from "@nestjs/swagger";
 import { IsArray, IsInt, IsString } from "class-validator";
 import {
 	DeleteTopicTranslationResponseDto,
@@ -28,12 +34,14 @@ import { TopicService } from "~/topic/topic.service";
 import { TopicTranslationService } from "./topictranslation.service";
 
 class TranslateTopicsRequestDto {
+	@ApiProperty({ type: [Number] })
 	@IsArray()
 	@IsInt({ each: true })
 	topicIds!: number[];
 }
 
 class TranslateUntranslatedTopicsRequestDto {
+	@ApiProperty()
 	@IsString()
 	language!: string;
 }
