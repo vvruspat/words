@@ -10,10 +10,11 @@ import {
 	MSpinner,
 	MText,
 } from "@repo/uikit";
-import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { useActionState, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { addTopicAction } from "@/actions/addTopicAction";
 import { addTopicTranslationAction } from "@/actions/addTopicTranslationAction";
 import { fetchTopicTranslationsAction } from "@/actions/fetchTopicTranslationsAction";
+import { translateTopicsAction } from "@/actions/translateTopicsAction";
 import { updateTopicAction } from "@/actions/updateTopicAction";
 import { updateTopicTranslationAction } from "@/actions/updateTopicTranslationAction";
 import { useWordsStore } from "@/stores/useWordsStore";
@@ -40,9 +41,10 @@ const isTopic = (value: unknown): value is Topic => {
 function TopicTranslationsPanel({ topicId }: { topicId: number }) {
 	const [translations, setTranslations] = useState<Map<string, TopicTranslation>>(new Map());
 	const [saving, setSaving] = useState<string | null>(null);
+	const [translating, setTranslating] = useState(false);
 	const [values, setValues] = useState<Record<string, string>>({});
 
-	useEffect(() => {
+	const loadTranslations = useCallback(() => {
 		fetchTopicTranslationsAction({ offset: 0, limit: 100, topics: [topicId] }).then((res) => {
 			const map = new Map<string, TopicTranslation>();
 			const initialValues: Record<string, string> = {};
@@ -54,6 +56,24 @@ function TopicTranslationsPanel({ topicId }: { topicId: number }) {
 			setValues(initialValues);
 		});
 	}, [topicId]);
+
+	useEffect(() => {
+		loadTranslations();
+	}, [loadTranslations]);
+
+	const handleAutoTranslate = async () => {
+		setTranslating(true);
+		try {
+			await translateTopicsAction([topicId]);
+			// Poll briefly then reload — the job is async so give it a moment
+			setTimeout(() => {
+				loadTranslations();
+				setTranslating(false);
+			}, 3000);
+		} catch {
+			setTranslating(false);
+		}
+	};
 
 	const handleSave = async (language: string) => {
 		const value = values[language]?.trim();
@@ -76,7 +96,18 @@ function TopicTranslationsPanel({ topicId }: { topicId: number }) {
 
 	return (
 		<MFlex direction="column" gap="l" align="stretch">
-			<MText mode="tertiary">Translations</MText>
+			<MFlex direction="row" gap="s" align="center" justify="space-between">
+				<MText mode="tertiary">Translations</MText>
+				<MButton
+					size="s"
+					mode="secondary"
+					disabled={translating}
+					before={translating && <MSpinner size="s" mode="primary" />}
+					onClick={() => void handleAutoTranslate()}
+				>
+					Auto-translate
+				</MButton>
+			</MFlex>
 			{Object.entries(AVAILABLE_LANGUAGES).map(([lang, label]) => (
 				<MFlex key={lang} direction="row" gap="s" align="center">
 					<MText size="s" mode="secondary" style={{ minWidth: "70px" }}>

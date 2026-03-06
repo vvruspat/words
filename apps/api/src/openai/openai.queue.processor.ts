@@ -4,10 +4,12 @@ import type { Language } from "@vvruspat/words-types";
 import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_START,
+	TOPIC_TRANSLATION_START,
 	TRANSLATION_START,
 	WORDS_GENERATION_START,
 } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
+import type { TopicEntity } from "~/topic/topic.entity";
 import type { WordEntity } from "~/word/word.entity";
 import { OpenAIService } from "./openai.service";
 
@@ -41,9 +43,18 @@ export class OpenAIQueueProcessor extends WorkerHost {
 					job.data.word,
 					job.data.wordId,
 				);
+			case TOPIC_TRANSLATION_START:
+				return this.translateTopics(job.data.language, job.data.topics ?? []);
 			default:
 				throw new Error(`Unknown job name: ${job.name}`);
 		}
+	}
+
+	private async translateTopics(language: string, topics: TopicEntity[]) {
+		this.logger.log(
+			`Translating topics from ${language}: ${topics.map((t) => t.title).join(", ")}`,
+		);
+		this.openAIService.translateTopics(language, topics);
 	}
 
 	private async translateWords(language: string, words: WordEntity[]) {

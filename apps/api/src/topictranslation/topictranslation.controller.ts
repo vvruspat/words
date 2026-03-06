@@ -13,6 +13,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { IsArray, IsInt } from "class-validator";
 import {
 	DeleteTopicTranslationResponseDto,
 	GetTopicTranslationRequestDto,
@@ -23,13 +24,21 @@ import {
 	PutTopicTranslationRequestDto,
 	PutTopicTranslationResponseDto,
 } from "~/dto";
+import { TopicService } from "~/topic/topic.service";
 import { TopicTranslationService } from "./topictranslation.service";
+
+class TranslateTopicsRequestDto {
+	@IsArray()
+	@IsInt({ each: true })
+	topicIds!: number[];
+}
 
 @ApiTags("topic-translation")
 @Controller("topic-translation")
 export class TopicTranslationController {
 	constructor(
 		private readonly topicTranslationService: TopicTranslationService,
+		private readonly topicService: TopicService,
 	) {}
 
 	@Get()
@@ -98,6 +107,24 @@ export class TopicTranslationController {
 		@Body() dto: PostTopicTranslationRequestDto,
 	): Promise<PostTopicTranslationResponseDto> {
 		return await this.topicTranslationService.create(dto);
+	}
+
+	@Post("translate")
+	@ApiOperation({ summary: "Auto-translate topics via OpenAI" })
+	@ApiBody({ type: TranslateTopicsRequestDto })
+	@ApiResponse({ status: 201, description: "Translation job enqueued" })
+	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+	async translate(
+		@Body() dto: TranslateTopicsRequestDto,
+	): Promise<{ queued: boolean }> {
+		const topics = await Promise.all(
+			dto.topicIds.map((id) => this.topicService.findOne(id)),
+		);
+		const validTopics = topics.filter(Boolean);
+		if (validTopics.length > 0) {
+			await this.topicTranslationService.makeTranslations(validTopics);
+		}
+		return { queued: true };
 	}
 
 	@Put()

@@ -184,6 +184,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/topic-translation/translate": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Auto-translate topics via OpenAI */
+		post: operations["TopicTranslationController_translate"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/training": {
 		parameters: {
 			query?: never;
@@ -904,6 +921,7 @@ export interface components {
 			translation: string;
 			language: string;
 		};
+		TranslateTopicsRequestDto: Record<string, never>;
 		PutTopicTranslationRequestDto: {
 			id?: number;
 			/** Format: date-time */
@@ -1962,6 +1980,28 @@ export interface operations {
 			};
 			/** @description Topic translation not found */
 			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TopicTranslationController_translate: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["TranslateTopicsRequestDto"];
+			};
+		};
+		responses: {
+			/** @description Translation job enqueued */
+			201: {
 				headers: {
 					[name: string]: unknown;
 				};

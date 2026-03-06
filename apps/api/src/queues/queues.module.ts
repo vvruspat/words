@@ -2,6 +2,7 @@ import { BullModule } from "@nestjs/bullmq";
 import { Global, Module } from "@nestjs/common";
 import {
 	OPENAI_QUEUE,
+	TOPIC_TRANSLATIONS_QUEUE,
 	TRANSLATIONS_QUEUE,
 	WORDS_QUEUE,
 } from "~/constants/queues.constants";
@@ -12,6 +13,7 @@ import {
 		BullModule.registerQueue(
 			{ name: WORDS_QUEUE },
 			{ name: TRANSLATIONS_QUEUE },
+			{ name: TOPIC_TRANSLATIONS_QUEUE },
 			{ name: OPENAI_QUEUE },
 		),
 	],

@@ -938,6 +938,31 @@
         ]
       }
     },
+    "/topic-translation/translate": {
+      "post": {
+        "operationId": "TopicTranslationController_translate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateTopicsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Translation job enqueued"
+          }
+        },
+        "summary": "Auto-translate topics via OpenAI",
+        "tags": [
+          "topic-translation"
+        ]
+      }
+    },
     "/training": {
       "get": {
         "operationId": "TrainingController_getAll",
@@ -3319,6 +3344,10 @@
           "translation",
           "language"
         ]
+      },
+      "TranslateTopicsRequestDto": {
+        "type": "object",
+        "properties": {}
       },
       "PutTopicTranslationRequestDto": {
         "type": "object",

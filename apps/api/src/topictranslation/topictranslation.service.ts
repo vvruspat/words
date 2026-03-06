@@ -1,14 +1,23 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { InjectQueue } from "@nestjs/bullmq";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import type { Queue } from "bullmq";
 import type { FindOptionsWhere, Repository } from "typeorm";
 import { In } from "typeorm";
 import { TOPIC_TRANSLATION_REPOSITORY } from "../constants/database.constants";
+import { TOPIC_TRANSLATION_START } from "../constants/queue-events.constants";
+import { OPENAI_QUEUE } from "../constants/queues.constants";
+import type { TopicEntity } from "../topic/topic.entity";
 import type { TopicTranslationEntity } from "./topictranslation.entity";
+import type { GeneratedTopicTranslation } from "./types/generated-topic-translations";
 
 @Injectable()
 export class TopicTranslationService {
+	private readonly logger = new Logger(TopicTranslationService.name);
+
 	constructor(
 		@Inject(TOPIC_TRANSLATION_REPOSITORY)
 		private topicTranslationRepository: Repository<TopicTranslationEntity>,
+		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 	) {}
 
 	async findAll(
@@ -105,5 +114,56 @@ export class TopicTranslationService {
 		topicId: TopicTranslationEntity["topic"],
 	): Promise<void> {
 		await this.topicTranslationRepository.delete({ topic: topicId });
+	}
+
+	async makeTranslations(topics: TopicEntity[]): Promise<void> {
+		this.logger.log(
+			`Enqueuing topic translation job for: ${topics.map((t) => t.title).join(", ")}`,
+		);
+		this.openAIQueue.add(TOPIC_TRANSLATION_START, {
+			topics,
+			language: topics[0].language,
+		});
+	}
+
+	async translationsMade(
+		generatedTranslations: GeneratedTopicTranslation[],
+		topics: TopicEntity[],
+	): Promise<void> {
+		this.logger.log(
+			`Storing generated translations for topics: ${topics.map((t) => t.title).join(", ")}`,
+		);
+		const topicsMap = new Map<string, TopicEntity>(
+			topics.map((topic) => [topic.title, topic]),
+		);
+
+		for (const topicWithTranslations of generatedTranslations) {
+			const topic = topicsMap.get(topicWithTranslations.topic);
+			if (!topic) {
+				this.logger.error(
+					`Topic "${topicWithTranslations.topic}" not found in topics map`,
+				);
+				continue;
+			}
+
+			for (const translationItem of topicWithTranslations.translations) {
+				const existing = await this.topicTranslationRepository.findOne({
+					where: { topic: topic.id, language: translationItem.language },
+				});
+
+				if (existing) {
+					await this.topicTranslationRepository.update(existing.id, {
+						translation: translationItem.translation,
+					});
+				} else {
+					await this.create({
+						topic: topic.id,
+						translation: translationItem.translation,
+						language: translationItem.language,
+						created_at: new Date().toISOString(),
+					});
+				}
+			}
+		}
 	}
 }

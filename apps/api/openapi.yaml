@@ -582,6 +582,21 @@ paths:
           description: Topic translation not found
       summary: Delete topic translation
       tags: *ref_3
+  /topic-translation/translate:
+    post:
+      operationId: TopicTranslationController_translate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateTopicsRequestDto'
+      responses:
+        '201':
+          description: Translation job enqueued
+      summary: Auto-translate topics via OpenAI
+      tags: *ref_3
   /training:
     get:
       operationId: TrainingController_getAll
@@ -2119,6 +2134,9 @@ components:
         - topic
         - translation
         - language
+    TranslateTopicsRequestDto:
+      type: object
+      properties: {}
     PutTopicTranslationRequestDto:
       type: object
       properties:
