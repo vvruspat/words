@@ -1768,7 +1768,7 @@
             "name": "similarityThreshold",
             "required": false,
             "in": "query",
-            "description": "Trigram similarity threshold (0–1, default 0.3)",
+            "description": "Trigram similarity threshold (0–1, default 0.9)",
             "schema": {
               "type": "number"
             }

@@ -22,6 +22,8 @@ import { WordEventService } from "./word-event.service";
 
 export type WordStatus = "pending" | "processing" | "processed";
 
+const DEFAULT_SIMILARITY_THRESHOLD = 0.95;
+
 @Injectable()
 export class WordService {
 	private readonly logger = new Logger(WordService.name);
@@ -55,7 +57,8 @@ export class WordService {
 		// Build the base where clause
 		const where: Record<string, unknown> = { ...restQuery };
 
-		const threshold = Number(similarityThreshold) || 0.3;
+		const threshold =
+			Number(similarityThreshold) || DEFAULT_SIMILARITY_THRESHOLD;
 
 		let wordMatchIds: number[] | null = null;
 		let translationMatchIds: number[] | null = null;
@@ -171,7 +174,7 @@ export class WordService {
 		limit: number,
 		offset: number,
 		language?: string,
-		similarityThreshold = 0.3,
+		similarityThreshold = DEFAULT_SIMILARITY_THRESHOLD,
 	): Promise<{
 		groups: { word: string; language: string; items: WordEntity[] }[];
 		total: number;

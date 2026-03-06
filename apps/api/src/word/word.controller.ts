@@ -54,7 +54,7 @@ export class WordController {
 		name: "similarityThreshold",
 		required: false,
 		type: Number,
-		description: "Trigram similarity threshold (0–1, default 0.3)",
+		description: "Trigram similarity threshold (0–1, default 0.9)",
 	})
 	@ApiResponse({ status: 200, type: GetWordDuplicatesResponseDto })
 	async getDuplicates(
@@ -66,7 +66,7 @@ export class WordController {
 		const parsedLimit = limit != null ? Number(limit) : 20;
 		const parsedOffset = offset != null ? Number(offset) : 0;
 		const parsedThreshold =
-			similarityThreshold != null ? Number(similarityThreshold) : 0.3;
+			similarityThreshold != null ? Number(similarityThreshold) : 0.9;
 		const { groups, total } = await this.wordService.findDuplicates(
 			parsedLimit,
 			parsedOffset,

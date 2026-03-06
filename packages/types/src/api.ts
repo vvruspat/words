@@ -2589,7 +2589,7 @@ export interface operations {
 				limit?: number;
 				offset?: number;
 				language?: string;
-				/** @description Trigram similarity threshold (0–1, default 0.3) */
+				/** @description Trigram similarity threshold (0–1, default 0.9) */
 				similarityThreshold?: number;
 			};
 			header?: never;
