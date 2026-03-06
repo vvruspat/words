@@ -4,6 +4,7 @@ export * from "./openai";
 export * from "./report";
 export * from "./root";
 export * from "./topic";
+export * from "./topic-translation";
 export * from "./training";
 export * from "./user";
 export * from "./vocabcatalog";

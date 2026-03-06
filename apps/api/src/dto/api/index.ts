@@ -5,6 +5,7 @@ export * from "./reset-password";
 export * from "./signin";
 export * from "./signup";
 export * from "./topic";
+export * from "./topictranslation";
 export * from "./training";
 export * from "./user";
 export * from "./verify-email";

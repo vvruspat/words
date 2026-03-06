@@ -1,4 +1,4 @@
-import { AVAILABLE_LANGUAGES, Topic } from "@vvruspat/words-types";
+import { AVAILABLE_LANGUAGES, Topic, TopicTranslation, type Language } from "@vvruspat/words-types";
 import {
 	MBadge,
 	MButton,
@@ -12,7 +12,10 @@ import {
 } from "@repo/uikit";
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { addTopicAction } from "@/actions/addTopicAction";
+import { addTopicTranslationAction } from "@/actions/addTopicTranslationAction";
+import { fetchTopicTranslationsAction } from "@/actions/fetchTopicTranslationsAction";
 import { updateTopicAction } from "@/actions/updateTopicAction";
+import { updateTopicTranslationAction } from "@/actions/updateTopicTranslationAction";
 import { useWordsStore } from "@/stores/useWordsStore";
 
 const initialState: Omit<Topic, "id"> & { id?: number } = {
@@ -33,6 +36,74 @@ const isTopic = (value: unknown): value is Topic => {
 		typeof value.language === "string"
 	);
 };
+
+function TopicTranslationsPanel({ topicId }: { topicId: number }) {
+	const [translations, setTranslations] = useState<Map<string, TopicTranslation>>(new Map());
+	const [saving, setSaving] = useState<string | null>(null);
+	const [values, setValues] = useState<Record<string, string>>({});
+
+	useEffect(() => {
+		fetchTopicTranslationsAction({ offset: 0, limit: 100, topics: [topicId] }).then((res) => {
+			const map = new Map<string, TopicTranslation>();
+			const initialValues: Record<string, string> = {};
+			for (const t of res.items) {
+				map.set(t.language, t);
+				initialValues[t.language] = t.translation;
+			}
+			setTranslations(map);
+			setValues(initialValues);
+		});
+	}, [topicId]);
+
+	const handleSave = async (language: string) => {
+		const value = values[language]?.trim();
+		if (!value) return;
+
+		setSaving(language);
+		const existing = translations.get(language);
+		try {
+			if (existing) {
+				const updated = await updateTopicTranslationAction(existing.id, value);
+				setTranslations((prev) => new Map(prev).set(language, updated));
+			} else {
+				const created = await addTopicTranslationAction(topicId, value, language);
+				setTranslations((prev) => new Map(prev).set(language, created));
+			}
+		} finally {
+			setSaving(null);
+		}
+	};
+
+	return (
+		<MFlex direction="column" gap="l" align="stretch">
+			<MText mode="tertiary">Translations</MText>
+			{Object.entries(AVAILABLE_LANGUAGES).map(([lang, label]) => (
+				<MFlex key={lang} direction="row" gap="s" align="center">
+					<MText size="s" mode="secondary" style={{ minWidth: "70px" }}>
+						{label}
+					</MText>
+					<MInput
+						value={values[lang] ?? ""}
+						onChange={(e) => setValues((prev) => ({ ...prev, [lang]: e.target.value }))}
+						onKeyDown={(e) => {
+							if (e.key === "Enter") void handleSave(lang);
+						}}
+						placeholder={`${label} translation`}
+					/>
+					<MButton
+						size="s"
+						mode="secondary"
+						disabled={saving === lang || !values[lang]?.trim()}
+						before={saving === lang && <MSpinner size="s" mode="primary" />}
+						onClick={() => void handleSave(lang)}
+					>
+						{translations.has(lang) ? "Update" : "Add"}
+					</MButton>
+				</MFlex>
+			))}
+		</MFlex>
+	);
+}
 
 export const ManageTopicsForm = () => {
 	const { language, topics, addTopics, updateTopic } = useWordsStore();
@@ -114,53 +185,56 @@ export const ManageTopicsForm = () => {
 			justify="start"
 			wrap="nowrap"
 		>
-			<form action={formAction}>
-				<MFlex direction="column" gap="2xl" align="stretch" justify="start">
-					<MText mode="tertiary">
-						Language: {AVAILABLE_LANGUAGES[language]}
-					</MText>
-					<input type="hidden" name="language" value={language} />
-					{id && <input type="hidden" name="id" value={id} />}
+			<MFlex direction="column" gap="2xl" align="stretch" justify="start">
+				<form action={formAction}>
+					<MFlex direction="column" gap="2xl" align="stretch" justify="start">
+						<MText mode="tertiary">
+							Language: {AVAILABLE_LANGUAGES[language as Language]}
+						</MText>
+						<input type="hidden" name="language" value={language} />
+						{id && <input type="hidden" name="id" value={id} />}
 
-					<MFormField
-						label="Title"
-						direction="column"
-						spacing="full"
-						mobileSpacing="full"
-						required
-						control={
-							<MInput
-								name="title"
-								value={title}
-								onChange={(e) => setTitle(e.target.value)}
-								ref={titleRef}
-							/>
-						}
-						description="Enter title of the new topic."
-					/>
-					<MFormField
-						label="Description"
-						direction="column"
-						spacing="full"
-						mobileSpacing="full"
-						control={
-							<MInput
-								name="description"
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-						}
-					/>
+						<MFormField
+							label="Title"
+							direction="column"
+							spacing="full"
+							mobileSpacing="full"
+							required
+							control={
+								<MInput
+									name="title"
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
+									ref={titleRef}
+								/>
+							}
+							description="Enter title of the new topic."
+						/>
+						<MFormField
+							label="Description"
+							direction="column"
+							spacing="full"
+							mobileSpacing="full"
+							control={
+								<MInput
+									name="description"
+									value={description}
+									onChange={(e) => setDescription(e.target.value)}
+								/>
+							}
+						/>
 
-					<MButton
-						type="submit"
-						disabled={pending || !title}
-						before={pending && <MSpinner size="s" mode="primary" />}
-					>
-						{id ? "Update" : "Create"}
-					</MButton>
-				</MFlex>
-			</form>
+						<MButton
+							type="submit"
+							disabled={pending || !title}
+							before={pending && <MSpinner size="s" mode="primary" />}
+						>
+							{id ? "Update" : "Create"}
+						</MButton>
+					</MFlex>
+				</form>
+				{id && <TopicTranslationsPanel topicId={id} />}
+			</MFlex>
 			<MFlex direction="column" gap="xl" align="stretch" justify="start">
 				<MText mode="tertiary">Existing Topics</MText>
 				<MFlex direction="column" gap="xs" align="stretch" justify="start">
