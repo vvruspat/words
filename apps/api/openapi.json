@@ -963,6 +963,31 @@
         ]
       }
     },
+    "/topic-translation/translate-untranslated": {
+      "post": {
+        "operationId": "TopicTranslationController_translateUntranslated",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateUntranslatedTopicsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Translation job enqueued"
+          }
+        },
+        "summary": "Auto-translate all untranslated topics for a language",
+        "tags": [
+          "topic-translation"
+        ]
+      }
+    },
     "/training": {
       "get": {
         "operationId": "TrainingController_getAll",
@@ -3346,6 +3371,10 @@
         ]
       },
       "TranslateTopicsRequestDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "TranslateUntranslatedTopicsRequestDto": {
         "type": "object",
         "properties": {}
       },

@@ -15,6 +15,7 @@ import { addTopicAction } from "@/actions/addTopicAction";
 import { addTopicTranslationAction } from "@/actions/addTopicTranslationAction";
 import { fetchTopicTranslationsAction } from "@/actions/fetchTopicTranslationsAction";
 import { translateTopicsAction } from "@/actions/translateTopicsAction";
+import { translateUntranslatedTopicsAction } from "@/actions/translateUntranslatedTopicsAction";
 import { updateTopicAction } from "@/actions/updateTopicAction";
 import { updateTopicTranslationAction } from "@/actions/updateTopicTranslationAction";
 import { useWordsStore } from "@/stores/useWordsStore";
@@ -138,6 +139,7 @@ function TopicTranslationsPanel({ topicId }: { topicId: number }) {
 
 export const ManageTopicsForm = () => {
 	const { language, topics, addTopics, updateTopic } = useWordsStore();
+	const [translatingAll, setTranslatingAll] = useState(false);
 
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -267,7 +269,23 @@ export const ManageTopicsForm = () => {
 				{id && <TopicTranslationsPanel topicId={id} />}
 			</MFlex>
 			<MFlex direction="column" gap="xl" align="stretch" justify="start">
-				<MText mode="tertiary">Existing Topics</MText>
+				<MFlex direction="row" gap="s" align="center" justify="space-between">
+					<MText mode="tertiary">Existing Topics</MText>
+					<MButton
+						size="s"
+						mode="secondary"
+						disabled={translatingAll}
+						before={translatingAll && <MSpinner size="s" mode="primary" />}
+						onClick={() => {
+							setTranslatingAll(true);
+							translateUntranslatedTopicsAction(language).finally(() =>
+								setTranslatingAll(false),
+							);
+						}}
+					>
+						Translate untranslated
+					</MButton>
+				</MFlex>
 				<MFlex direction="column" gap="xs" align="stretch" justify="start">
 					<MList
 						options={topicsOptions}

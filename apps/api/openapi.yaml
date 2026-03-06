@@ -597,6 +597,21 @@ paths:
           description: Translation job enqueued
       summary: Auto-translate topics via OpenAI
       tags: *ref_3
+  /topic-translation/translate-untranslated:
+    post:
+      operationId: TopicTranslationController_translateUntranslated
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateUntranslatedTopicsRequestDto'
+      responses:
+        '201':
+          description: Translation job enqueued
+      summary: Auto-translate all untranslated topics for a language
+      tags: *ref_3
   /training:
     get:
       operationId: TrainingController_getAll
@@ -2135,6 +2150,9 @@ components:
         - translation
         - language
     TranslateTopicsRequestDto:
+      type: object
+      properties: {}
+    TranslateUntranslatedTopicsRequestDto:
       type: object
       properties: {}
     PutTopicTranslationRequestDto:

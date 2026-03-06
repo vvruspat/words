@@ -13,7 +13,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { IsArray, IsInt } from "class-validator";
+import { IsArray, IsInt, IsString } from "class-validator";
 import {
 	DeleteTopicTranslationResponseDto,
 	GetTopicTranslationRequestDto,
@@ -31,6 +31,11 @@ class TranslateTopicsRequestDto {
 	@IsArray()
 	@IsInt({ each: true })
 	topicIds!: number[];
+}
+
+class TranslateUntranslatedTopicsRequestDto {
+	@IsString()
+	language!: string;
 }
 
 @ApiTags("topic-translation")
@@ -125,6 +130,42 @@ export class TopicTranslationController {
 			await this.topicTranslationService.makeTranslations(validTopics);
 		}
 		return { queued: true };
+	}
+
+	@Post("translate-untranslated")
+	@ApiOperation({
+		summary: "Auto-translate all untranslated topics for a language",
+	})
+	@ApiBody({ type: TranslateUntranslatedTopicsRequestDto })
+	@ApiResponse({ status: 201, description: "Translation job enqueued" })
+	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
+	async translateUntranslated(
+		@Body() dto: TranslateUntranslatedTopicsRequestDto,
+	): Promise<{ queued: boolean }> {
+		const allTopics = await this.topicService.findAll({
+			language: dto.language,
+			limit: 10000,
+			offset: 0,
+		});
+
+		if (allTopics.length === 0) return { queued: false };
+
+		const topicIds = allTopics.map((t) => t.id);
+		const existingTranslations = await this.topicTranslationService.findAll({
+			topics: topicIds,
+		});
+		const translatedTopicIds = new Set(
+			existingTranslations.map((t) => t.topic),
+		);
+		const untranslatedTopics = allTopics.filter(
+			(t) => !translatedTopicIds.has(t.id),
+		);
+
+		if (untranslatedTopics.length > 0) {
+			await this.topicTranslationService.makeTranslations(untranslatedTopics);
+		}
+
+		return { queued: untranslatedTopics.length > 0 };
 	}
 
 	@Put()

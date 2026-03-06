@@ -201,6 +201,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/topic-translation/translate-untranslated": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Auto-translate all untranslated topics for a language */
+		post: operations["TopicTranslationController_translateUntranslated"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/training": {
 		parameters: {
 			query?: never;
@@ -922,6 +939,7 @@ export interface components {
 			language: string;
 		};
 		TranslateTopicsRequestDto: Record<string, never>;
+		TranslateUntranslatedTopicsRequestDto: Record<string, never>;
 		PutTopicTranslationRequestDto: {
 			id?: number;
 			/** Format: date-time */
@@ -1997,6 +2015,28 @@ export interface operations {
 		requestBody: {
 			content: {
 				"application/json": components["schemas"]["TranslateTopicsRequestDto"];
+			};
+		};
+		responses: {
+			/** @description Translation job enqueued */
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TopicTranslationController_translateUntranslated: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["TranslateUntranslatedTopicsRequestDto"];
 			};
 		};
 		responses: {
