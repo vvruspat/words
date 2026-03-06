@@ -147,6 +147,77 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/topic-translation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get topic translations */
+        get: operations["TopicTranslationController_get"];
+        /** Update topic translation */
+        put: operations["TopicTranslationController_update"];
+        /** Create topic translation */
+        post: operations["TopicTranslationController_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/topic-translation/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get topic translation by id */
+        get: operations["TopicTranslationController_getById"];
+        put?: never;
+        post?: never;
+        /** Delete topic translation */
+        delete: operations["TopicTranslationController_remove"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/topic-translation/translate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Auto-translate topics via OpenAI */
+        post: operations["TopicTranslationController_translate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/topic-translation/translate-untranslated": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Auto-translate all untranslated topics for a language */
+        post: operations["TopicTranslationController_translateUntranslated"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/training": {
         parameters: {
             query?: never;
@@ -822,6 +893,74 @@ export interface components {
             wordsCount?: number;
         };
         DeleteTopicResponseDto: {
+            id: number;
+        };
+        TopicTranslationDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            translation: string;
+            language: string;
+        };
+        GetTopicTranslationsResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of topic translations */
+            items: components["schemas"]["TopicTranslationDto"][];
+        };
+        GetTopicTranslationResponseDto: {
+            /** @example 100 */
+            total: number;
+            /** @example 0 */
+            offset: number;
+            /** @example 10 */
+            limit: number;
+            /** @description List of topic translations */
+            items: components["schemas"]["TopicTranslationDto"][];
+        };
+        PostTopicTranslationRequestDto: {
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            translation: string;
+            language: string;
+        };
+        PostTopicTranslationResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            translation: string;
+            language: string;
+        };
+        TranslateTopicsRequestDto: {
+            topicIds: number[];
+        };
+        TranslateUntranslatedTopicsRequestDto: {
+            language: string;
+        };
+        PutTopicTranslationRequestDto: {
+            id?: number;
+            /** Format: date-time */
+            created_at?: string;
+            topic?: number;
+            translation?: string;
+            language?: string;
+        };
+        PutTopicTranslationResponseDto: {
+            id: number;
+            /** Format: date-time */
+            created_at: string;
+            topic: number;
+            translation: string;
+            language: string;
+        };
+        DeleteTopicTranslationResponseDto: {
             id: number;
         };
         TrainingDto: {
@@ -1711,6 +1850,209 @@ export interface operations {
             };
         };
     };
+    TopicTranslationController_get: {
+        parameters: {
+            query: {
+                offset: number;
+                limit: number;
+                id?: number;
+                created_at?: string;
+                topic?: number;
+                translation?: string;
+                language?: string;
+                /** @description Topic ID or array of Topic IDs */
+                topics?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTopicTranslationsResponseDto"];
+                };
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicTranslationController_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PutTopicTranslationRequestDto"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PutTopicTranslationResponseDto"];
+                };
+            };
+            /** @description Topic translation not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicTranslationController_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTopicTranslationRequestDto"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTopicTranslationResponseDto"];
+                };
+            };
+        };
+    };
+    TopicTranslationController_getById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTopicTranslationResponseDto"];
+                };
+            };
+            /** @description Topic translation not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Server error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicTranslationController_remove: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteTopicTranslationResponseDto"];
+                };
+            };
+            /** @description Topic translation not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicTranslationController_translate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TranslateTopicsRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Translation job enqueued */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    TopicTranslationController_translateUntranslated: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TranslateUntranslatedTopicsRequestDto"];
+            };
+        };
+        responses: {
+            /** @description Translation job enqueued */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     TrainingController_getAll: {
         parameters: {
             query: {
@@ -2247,6 +2589,8 @@ export interface operations {
                 limit?: number;
                 offset?: number;
                 language?: string;
+                /** @description Trigram similarity threshold (0–1, default 0.9) */
+                similarityThreshold?: number;
             };
             header?: never;
             path?: never;
@@ -2282,6 +2626,8 @@ export interface operations {
                 sortBy?: string;
                 sortOrder?: string;
                 translation?: string;
+                /** @description Trigram similarity threshold for word search (0–1). Lower values return more results. */
+                similarityThreshold?: number;
             };
             header?: never;
             path?: never;

@@ -13,6 +13,15 @@ export class GetWordRequestDto extends IntersectionType(
 ) {
 	@ApiProperty({ type: String, required: false })
 	translation?: string;
+
+	@ApiProperty({
+		type: Number,
+		required: false,
+		default: 0.3,
+		description:
+			"Trigram similarity threshold for word search (0–1). Lower values return more results.",
+	})
+	similarityThreshold?: number;
 }
 
 export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {

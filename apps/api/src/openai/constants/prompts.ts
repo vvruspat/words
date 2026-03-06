@@ -7,3 +7,6 @@ export const GENERATE_WORDS_FOR_LEVEL_PROMPT_ID =
 
 export const TRANSLATE_WORDS_PROMPT_ID =
 	"pmpt_6911bbfd49e48193b9cfaf1652e2655302b2db2d8d65857e";
+
+export const TRANSLATE_TOPICS_PROMPT_ID =
+	"pmpt_69ab25049f5c8195afdbbceb4f8325880003ddec637dbe5c";

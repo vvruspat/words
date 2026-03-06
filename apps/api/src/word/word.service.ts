@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In, Like } from "typeorm";
+import { In } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	TRANSLATION_START,
@@ -17,6 +17,7 @@ import { WordTranslationService } from "~/wordstranslation/wordstranslation.serv
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
+import { DEFAULT_SIMILARITY_THRESHOLD } from "./word.constants";
 import type { WordEntity } from "./word.entity";
 import { WordEventService } from "./word-event.service";
 
@@ -48,23 +49,49 @@ export class WordService {
 			sortOrder,
 			word,
 			translation,
+			similarityThreshold,
 			...restQuery
 		} = query;
 
 		// Build the base where clause
 		const where: Record<string, unknown> = { ...restQuery };
 
+		const threshold =
+			Number(similarityThreshold) || DEFAULT_SIMILARITY_THRESHOLD;
+
+		let wordMatchIds: number[] | null = null;
+		let translationMatchIds: number[] | null = null;
+
+		// Use pg_trgm word_similarity to handle articles ("die Katze" ~ "Katze")
+		// and slash variants ("groß/klein" ~ "groß") as well as minor typos.
 		if (word) {
-			where.word = Like(`%${word}%`);
+			const matches = await this.wordRepository.manager.query<
+				Array<{ id: number }>
+			>(`SELECT id FROM word WHERE word_similarity($1, LOWER(word)) >= $2`, [
+				word.toLowerCase(),
+				threshold,
+			]);
+			wordMatchIds = matches.map((m) => m.id);
 		}
 
 		// If searching by translation, resolve matching word IDs first
 		if (translation) {
-			const wordIds =
+			translationMatchIds =
 				await this.wordTranslationService.findWordIdsByTranslationSearch(
 					translation,
 				);
-			where.id = wordIds.length > 0 ? In(wordIds) : In([-1]);
+		}
+
+		// Combine ID sets: if both filters are active, intersect them
+		if (wordMatchIds !== null && translationMatchIds !== null) {
+			const translationSet = new Set(translationMatchIds);
+			const intersection = wordMatchIds.filter((id) => translationSet.has(id));
+			where.id = intersection.length > 0 ? In(intersection) : In([-1]);
+		} else if (wordMatchIds !== null) {
+			where.id = wordMatchIds.length > 0 ? In(wordMatchIds) : In([-1]);
+		} else if (translationMatchIds !== null) {
+			where.id =
+				translationMatchIds.length > 0 ? In(translationMatchIds) : In([-1]);
 		}
 
 		const total = await this.wordRepository.count({ where });
@@ -146,44 +173,77 @@ export class WordService {
 		limit: number,
 		offset: number,
 		language?: string,
+		similarityThreshold = DEFAULT_SIMILARITY_THRESHOLD,
 	): Promise<{
 		groups: { word: string; language: string; items: WordEntity[] }[];
 		total: number;
 	}> {
-		const qb = this.wordRepository
-			.createQueryBuilder("w")
-			.select("LOWER(w.word)", "wordKey")
-			.addSelect("w.language", "lang")
-			.addSelect("COUNT(*)", "cnt")
-			.groupBy("LOWER(w.word), w.language")
-			.having("COUNT(*) > 1")
-			.orderBy("cnt", "DESC")
-			.addOrderBy("LOWER(w.word)", "ASC");
+		// Find all pairs of words within the same language that are similar
+		// enough to be considered near-duplicates (handles articles, slash
+		// variants, and minor spelling differences via pg_trgm).
+		const params: (string | number)[] = [similarityThreshold];
+		if (language) params.push(language);
 
-		if (language) {
-			qb.where("w.language = :language", { language });
+		const pairs = await this.wordRepository.manager.query<
+			Array<{ id1: number; id2: number; lang: string }>
+		>(
+			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
+			 FROM word w1
+			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
+			 WHERE GREATEST(
+			   word_similarity(LOWER(w1.word), LOWER(w2.word)),
+			   word_similarity(LOWER(w2.word), LOWER(w1.word))
+			 ) >= $1
+			 ${language ? "AND w1.language = $2" : ""}`,
+			params,
+		);
+
+		// Union-Find: cluster connected similar-word pairs into groups
+		const parent = new Map<number, number>();
+		const langMap = new Map<number, string>();
+
+		const find = (x: number): number => {
+			if (!parent.has(x)) parent.set(x, x);
+			const p = parent.get(x) ?? x;
+			if (p !== x) parent.set(x, find(p));
+			return parent.get(x) ?? x;
+		};
+
+		for (const { id1, id2, lang } of pairs) {
+			const r1 = find(id1);
+			const r2 = find(id2);
+			if (r1 !== r2) parent.set(r1, r2);
+			langMap.set(id1, lang);
+			langMap.set(id2, lang);
 		}
 
-		const allGroups = await qb.getRawMany<{
-			wordKey: string;
-			lang: string;
-			cnt: string;
-		}>();
+		// Collect each cluster's member IDs
+		const clusters = new Map<number, number[]>();
+		for (const id of langMap.keys()) {
+			const root = find(id);
+			const group = clusters.get(root) ?? [];
+			group.push(id);
+			clusters.set(root, group);
+		}
 
+		const allGroups = Array.from(clusters.values()).filter((g) => g.length > 1);
 		const total = allGroups.length;
-		const paginatedGroups = allGroups.slice(offset, offset + limit);
+		const paginatedGroupIds = allGroups.slice(offset, offset + limit);
 
 		const groups = await Promise.all(
-			paginatedGroups.map(async ({ wordKey, lang }) => {
+			paginatedGroupIds.map(async (ids) => {
 				const items = await this.wordRepository
 					.createQueryBuilder("w")
 					.leftJoinAndSelect("w.topicData", "topic")
 					.leftJoinAndSelect("w.catalogData", "catalog")
-					.where("LOWER(w.word) = :wordKey", { wordKey })
-					.andWhere("w.language = :lang", { lang })
+					.where("w.id IN (:...ids)", { ids })
 					.orderBy("w.created_at", "ASC")
 					.getMany();
-				return { word: wordKey, language: lang, items };
+				return {
+					word: items[0]?.word ?? "",
+					language: langMap.get(ids[0]) ?? "",
+					items,
+				};
 			}),
 		);
 
