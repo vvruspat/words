@@ -442,7 +442,7 @@ export class WordService {
 				created_at: new Date().toISOString(),
 				language: wordData.language,
 				audio: "",
-				transcribtion: wordData.transcription,
+				transcription: wordData.transcription,
 				score: wordData.score,
 				status: "processing",
 			});

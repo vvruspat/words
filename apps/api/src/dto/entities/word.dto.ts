@@ -36,7 +36,7 @@ export class WordDto implements Word {
 	audio!: string;
 
 	@ApiProperty({ type: "string" })
-	transcribtion!: string;
+	transcription!: string;
 
 	@ApiProperty({ type: String, required: false })
 	meaning?: string;

@@ -10,7 +10,7 @@ export function isWord(data: unknown): data is Word {
 		"catalog" in data &&
 		"language" in data &&
 		"audio" in data &&
-		"transcribtion" in data &&
+		"transcription" in data &&
 		"status" in data
 	);
 }

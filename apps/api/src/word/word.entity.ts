@@ -50,7 +50,7 @@ export class WordEntity implements Word {
 	audio: string;
 
 	@Column()
-	transcribtion: string;
+	transcription: string;
 
 	@Column({ type: "float", default: 0 })
 	score: number;

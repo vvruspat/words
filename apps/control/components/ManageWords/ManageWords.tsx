@@ -265,7 +265,7 @@ export default function ManageWords({
 			status: "processing",
 			word: "loading",
 			audio: "loading",
-			transcribtion: "loading",
+			transcription: "loading",
 			meaning: "loading",
 			catalog: "loading",
 			topic: "loading",
@@ -665,7 +665,7 @@ export default function ManageWords({
 									) : null,
 							},
 							{
-								field: "transcribtion",
+								field: "transcription",
 								label: "Transcription",
 								renderCell: (value, row) =>
 									isSkeletonRow(row)
