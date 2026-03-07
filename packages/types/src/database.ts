@@ -67,7 +67,7 @@ export interface Word {
 	catalog: number;
 	language: Language;
 	audio: string;
-	transcribtion: string;
+	transcription: string;
 	status: "processing" | "processed";
 	meaning?: string;
 }

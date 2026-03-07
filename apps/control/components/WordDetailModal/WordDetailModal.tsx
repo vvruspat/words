@@ -288,11 +288,11 @@ export function WordDetailModal({ wordId, onClose }: WordDetailModalProps) {
 										<MText mode="tertiary">No audio</MText>
 									),
 								},
-								...(word.transcribtion
+								...(word.transcription
 									? [
 											{
 												title: "Transcription",
-												description: word.transcribtion,
+												description: word.transcription,
 											},
 										]
 									: []),

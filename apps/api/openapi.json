@@ -1894,7 +1894,7 @@
             }
           },
           {
-            "name": "transcribtion",
+            "name": "transcription",
             "required": false,
             "in": "query",
             "schema": {
@@ -4168,7 +4168,7 @@
           "audio": {
             "type": "string"
           },
-          "transcribtion": {
+          "transcription": {
             "type": "string"
           },
           "meaning": {
@@ -4184,7 +4184,7 @@
           "catalog",
           "language",
           "audio",
-          "transcribtion"
+          "transcription"
         ]
       },
       "WordDuplicateGroupDto": {
@@ -4307,7 +4307,7 @@
           "audio": {
             "type": "string"
           },
-          "transcribtion": {
+          "transcription": {
             "type": "string"
           },
           "meaning": {
@@ -4357,7 +4357,7 @@
           "audio": {
             "type": "string"
           },
-          "transcribtion": {
+          "transcription": {
             "type": "string"
           },
           "meaning": {
@@ -4373,7 +4373,7 @@
           "catalog",
           "language",
           "audio",
-          "transcribtion"
+          "transcription"
         ]
       },
       "DeleteWordResponseDto": {

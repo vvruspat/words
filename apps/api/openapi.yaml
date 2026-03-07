@@ -1178,7 +1178,7 @@ paths:
           in: query
           schema:
             type: string
-        - name: transcribtion
+        - name: transcription
           required: false
           in: query
           schema:
@@ -2716,7 +2716,7 @@ components:
             - nl
         audio:
           type: string
-        transcribtion:
+        transcription:
           type: string
         meaning:
           type: string
@@ -2729,7 +2729,7 @@ components:
         - catalog
         - language
         - audio
-        - transcribtion
+        - transcription
     WordDuplicateGroupDto:
       type: object
       properties:
@@ -2807,7 +2807,7 @@ components:
           enum: *ref_13
         audio:
           type: string
-        transcribtion:
+        transcription:
           type: string
         meaning:
           type: string
@@ -2833,7 +2833,7 @@ components:
           enum: *ref_13
         audio:
           type: string
-        transcribtion:
+        transcription:
           type: string
         meaning:
           type: string
@@ -2846,7 +2846,7 @@ components:
         - catalog
         - language
         - audio
-        - transcribtion
+        - transcription
     DeleteWordResponseDto:
       type: object
       properties:
