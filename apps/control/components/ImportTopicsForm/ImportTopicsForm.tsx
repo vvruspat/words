@@ -141,7 +141,7 @@ export const ImportTopicsForm = () => {
 				}
 			/>
 
-			{parseError && <MText mode="negative">{parseError}</MText>}
+			{parseError && <MText mode="secondary">{parseError}</MText>}
 
 			{parsedTopics && (
 				<MText mode="secondary">
