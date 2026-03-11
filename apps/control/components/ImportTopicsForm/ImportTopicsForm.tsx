@@ -151,7 +151,7 @@ export const ImportTopicsForm = () => {
 
 			{result && (
 				<MFlex direction="column" gap="s">
-					<MText mode="positive">Import queued successfully.</MText>
+					<MText mode="primary">Import queued successfully.</MText>
 					<MText mode="secondary">
 						Topics created: {result.topicsCreated} | Found: {result.topicsFound}{" "}
 						| Word generation jobs queued: {result.jobsQueued}
@@ -159,7 +159,7 @@ export const ImportTopicsForm = () => {
 				</MFlex>
 			)}
 
-			{submitError && <MText mode="negative">{submitError}</MText>}
+			{submitError && <MText mode="secondary">{submitError}</MText>}
 
 			<MButton
 				mode="primary"
