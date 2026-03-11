@@ -6,6 +6,7 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { DatabaseModule } from "./database/database.module";
 import { GcsModule } from "./gcs/gcs.module";
+import { ImportModule } from "./import/import.module";
 import { LearningModule } from "./learning/learning.module";
 import { MailerModule } from "./mailer/mailer.module";
 import { OpenAIModule } from "./openai/openai.module";
@@ -24,6 +25,7 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 	imports: [
 		ConfigModule.forRoot(),
 		DatabaseModule,
+		ImportModule,
 		LearningModule,
 		ReportModule,
 		TopicModule,

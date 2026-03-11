@@ -1,0 +1,352 @@
+[
+  {
+    "topic": "Begroetingen en beleefdheid",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Persoonlijke informatie",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Vraagwoorden",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Getallen 0–20",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Getallen 20–100, leeftijd en telefoon",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Dagen van de week, maanden en data",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Tijd en delen van de dag",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Familie",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Mensen en relaties",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Landen en nationaliteiten",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Kleuren",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Basisbijvoeglijke naamwoorden",
+    "A1": 42,
+    "A2": 0
+  },
+  {
+    "topic": "Huis: kamers",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Huis: meubels en voorwerpen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Huishoudelijke handelingen",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Eten: basisproducten",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Eten: fruit en groenten",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Eten: dranken en in het café",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Winkelen",
+    "A1": 28,
+    "A2": 0
+  },
+  {
+    "topic": "Kleding",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Stad: plaatsen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Stad: richtingen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Vervoer",
+    "A1": 21,
+    "A2": 24
+  },
+  {
+    "topic": "Weer",
+    "A1": 21,
+    "A2": 16
+  },
+  {
+    "topic": "Lichaam",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Gezondheid",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Dagelijkse handelingen",
+    "A1": 42,
+    "A2": 0
+  },
+  {
+    "topic": "Studie en klas",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Werk en beroepen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Vrije tijd",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Hobby's en interesses",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Emoties",
+    "A1": 14,
+    "A2": 24
+  },
+  {
+    "topic": "Basiswerkwoorden met hoge frequentie",
+    "A1": 28,
+    "A2": 0
+  },
+  {
+    "topic": "Voorzetsels",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Verbindingswoorden en functiewoorden",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Feestdagen en sociale situaties",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Biografie en levensloop",
+    "A1": 0,
+    "A2": 32
+  },
+  {
+    "topic": "Uiterlijk",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Karakter",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Huis: details van de woning",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Reparatie en huishoudelijke problemen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Eten: koken",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Eten: restaurant en bestellen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Gezondheid: bij de dokter",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Gezondheid: welzijn en advies",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Werk: taken en verantwoordelijkheden",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Werk: werk zoeken",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Studie",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Stad: instellingen",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Diensten",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Geld en bank",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Documenten",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Reizen",
+    "A1": 0,
+    "A2": 40
+  },
+  {
+    "topic": "Natuur",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Technologie",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Telefoon en communicatie",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Winkelen: kwaliteit en retourneren",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Kleding: stijl en beschrijving",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Relaties en communicatie",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Sociale situaties",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Plannen en toekomst",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Tijd",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Mening en argumentatie",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Verbindingswoorden",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Vergelijken en beschrijven",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Problemen en conflicten",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Noodsituaties",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Cultuur en vrije tijd",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Feestdagen en tradities",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Samenleving en dagelijks leven",
+    "A1": 0,
+    "A2": 24
+  }
+]

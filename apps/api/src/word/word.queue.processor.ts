@@ -3,6 +3,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_DONE,
+	EMBEDDING_CREATION_DONE,
 	WORDS_GENERATION_DONE,
 } from "~/constants/queue-events.constants";
 import { WORDS_QUEUE } from "~/constants/queues.constants";
@@ -29,6 +30,8 @@ export class WordQueueProcessor extends WorkerHost {
 					job.data.topicId,
 					job.data.catalogId,
 				);
+			case EMBEDDING_CREATION_DONE:
+				return this.embeddingCreated(job.data.wordId, job.data.embedding);
 			case AUDIO_CREATION_DONE:
 				return this.audioMade(
 					job.data.filename,
@@ -38,6 +41,11 @@ export class WordQueueProcessor extends WorkerHost {
 			default:
 				throw new Error(`Unknown job name: ${job.name}`);
 		}
+	}
+
+	private async embeddingCreated(wordId: number, embedding: number[]) {
+		this.logger.log(`Embedding created for word ID ${wordId}`);
+		await this.wordService.embeddingCreated(wordId, embedding);
 	}
 
 	private async wordsGenerated(

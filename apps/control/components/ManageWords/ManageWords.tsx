@@ -528,6 +528,13 @@ export default function ManageWords({
 							Add Topics
 						</MButton>
 
+						<MButton
+							mode="tertiary"
+							onClick={() => showModal(MODALS.IMPORT_TOPICS)}
+						>
+							Import
+						</MButton>
+
 						{selectedRows.length > 0 && (
 							<MButton
 								mode="secondary"

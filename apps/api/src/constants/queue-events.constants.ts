@@ -6,3 +6,5 @@ export const AUDIO_CREATION_START = "audio-creation-start";
 export const AUDIO_CREATION_DONE = "audio-creation-done";
 export const TOPIC_TRANSLATION_START = "topic-translation-start";
 export const TOPIC_TRANSLATION_DONE = "topic-translation-done";
+export const EMBEDDING_CREATION_START = "embedding-creation-start";
+export const EMBEDDING_CREATION_DONE = "embedding-creation-done";

@@ -179,6 +179,18 @@ export class WordController {
 		return { message: "Word generation started" };
 	}
 
+	@Post("generate-embeddings")
+	@ApiOperation({
+		summary: "Queue embedding generation for words missing embeddings",
+	})
+	@ApiQuery({ name: "language", required: false, type: String })
+	@ApiResponse({ status: 200, description: "Embedding generation queued" })
+	async generateEmbeddings(
+		@Query("language") language?: string,
+	): Promise<{ queued: number }> {
+		return this.wordService.generateMissingEmbeddings(language);
+	}
+
 	@Delete(":id")
 	@ApiOperation({ summary: "Delete word" })
 	@ApiResponse({ status: 200, type: DeleteWordResponseDto })

@@ -58,6 +58,15 @@ export const databaseProviders = [
 			await initializedDataSource.query(
 				"CREATE INDEX IF NOT EXISTS idx_word_word_trgm ON word USING gin(LOWER(word) gin_trgm_ops)",
 			);
+			try {
+				await initializedDataSource.query(
+					"CREATE EXTENSION IF NOT EXISTS vector",
+				);
+			} catch {
+				console.warn(
+					"pgvector extension not available — vector duplicate search disabled. Install pgvector to enable it.",
+				);
+			}
 			return initializedDataSource;
 		},
 	},

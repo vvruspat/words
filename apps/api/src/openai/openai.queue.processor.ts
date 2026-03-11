@@ -4,6 +4,7 @@ import type { Language } from "@vvruspat/words-types";
 import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_START,
+	EMBEDDING_CREATION_START,
 	TOPIC_TRANSLATION_START,
 	TRANSLATION_START,
 	WORDS_GENERATION_START,
@@ -43,6 +44,8 @@ export class OpenAIQueueProcessor extends WorkerHost {
 					job.data.word,
 					job.data.wordId,
 				);
+			case EMBEDDING_CREATION_START:
+				return this.makeEmbedding(job.data.word, job.data.wordId);
 			case TOPIC_TRANSLATION_START:
 				return this.translateTopics(job.data.language, job.data.topics ?? []);
 			default:
@@ -85,6 +88,11 @@ export class OpenAIQueueProcessor extends WorkerHost {
 			topicId,
 			catalogId,
 		);
+	}
+
+	private async makeEmbedding(word: string, wordId: number) {
+		this.logger.log(`Making embedding for word ID ${wordId}: ${word}`);
+		await this.openAIService.makeEmbedding(word, wordId);
 	}
 
 	private async makeAudio(

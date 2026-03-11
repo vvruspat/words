@@ -20,80 +20,7 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
-	"/learning": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all learning records */
-		get: operations["LearningController_getAll"];
-		/** Update learning */
-		put: operations["LearningController_update"];
-		/** Create learning */
-		post: operations["LearningController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/learning/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get learning by id */
-		get: operations["LearningController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete learning */
-		delete: operations["LearningController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/report/stats": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get report statistics by status */
-		get: operations["ReportController_getStats"];
-		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/report": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all reports */
-		get: operations["ReportController_getAll"];
-		/** Update report status */
-		put: operations["ReportController_update"];
-		/** Create a report */
-		post: operations["ReportController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/report/{id}": {
+	"/import/topics": {
 		parameters: {
 			query?: never;
 			header?: never;
@@ -102,9 +29,9 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
-		post?: never;
-		/** Delete report */
-		delete: operations["ReportController_remove"];
+		/** Import topics with word generation */
+		post: operations["ImportController_importTopics"];
+		delete?: never;
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -213,97 +140,6 @@ export interface paths {
 		/** Auto-translate all untranslated topics for a language */
 		post: operations["TopicTranslationController_translateUntranslated"];
 		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/training": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all training records */
-		get: operations["TrainingController_getAll"];
-		/** Update training */
-		put: operations["TrainingController_update"];
-		/** Create training */
-		post: operations["TrainingController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/training/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get training by id */
-		get: operations["TrainingController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete training */
-		delete: operations["TrainingController_remove"];
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/user": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get all users */
-		get: operations["UserController_getAll"];
-		/** Update user */
-		put: operations["UserController_update"];
-		/** Create user */
-		post: operations["UserController_create"];
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/user/stats": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get user statistics */
-		get: operations["UserController_getStats"];
-		put?: never;
-		post?: never;
-		delete?: never;
-		options?: never;
-		head?: never;
-		patch?: never;
-		trace?: never;
-	};
-	"/user/{id}": {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		/** Get user by id */
-		get: operations["UserController_getById"];
-		put?: never;
-		post?: never;
-		/** Delete user */
-		delete: operations["UserController_remove"];
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -432,6 +268,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/word/generate-embeddings": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/** Queue embedding generation for words missing embeddings */
+		post: operations["WordController_generateEmbeddings"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/word/{id}": {
 		parameters: {
 			query?: never;
@@ -531,6 +384,187 @@ export interface paths {
 		put?: never;
 		post?: never;
 		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/learning": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get all learning records */
+		get: operations["LearningController_getAll"];
+		/** Update learning */
+		put: operations["LearningController_update"];
+		/** Create learning */
+		post: operations["LearningController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/learning/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get learning by id */
+		get: operations["LearningController_getById"];
+		put?: never;
+		post?: never;
+		/** Delete learning */
+		delete: operations["LearningController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/report/stats": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get report statistics by status */
+		get: operations["ReportController_getStats"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/report": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get all reports */
+		get: operations["ReportController_getAll"];
+		/** Update report status */
+		put: operations["ReportController_update"];
+		/** Create a report */
+		post: operations["ReportController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/report/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post?: never;
+		/** Delete report */
+		delete: operations["ReportController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/training": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get all training records */
+		get: operations["TrainingController_getAll"];
+		/** Update training */
+		put: operations["TrainingController_update"];
+		/** Create training */
+		post: operations["TrainingController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/training/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get training by id */
+		get: operations["TrainingController_getById"];
+		put?: never;
+		post?: never;
+		/** Delete training */
+		delete: operations["TrainingController_remove"];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/user": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get all users */
+		get: operations["UserController_getAll"];
+		/** Update user */
+		put: operations["UserController_update"];
+		/** Create user */
+		post: operations["UserController_create"];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/user/stats": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get user statistics */
+		get: operations["UserController_getStats"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	"/user/{id}": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get user by id */
+		get: operations["UserController_getById"];
+		put?: never;
+		post?: never;
+		/** Delete user */
+		delete: operations["UserController_remove"];
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -676,164 +710,21 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
 	schemas: {
-		LearningDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
+		PostImportTopicsRequestDto: {
+			/** @description Language code (e.g. nl, de, es) */
+			language: string;
+			/** @description Array of topics with level/word-count entries. Each item has a "topic" string key and optional level keys (e.g. A1, A2) with number values. */
+			topics: {
+				[key: string]: unknown;
+			}[];
 		};
-		GetLearningResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of learning items */
-			items: components["schemas"]["LearningDto"][];
-		};
-		PostLearningRequestDto: {
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		PostLearningResponseDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		PutLearningRequestDto: {
-			id?: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at?: string;
-			user?: number;
-			word?: number;
-			score?: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review?: string;
-			training?: number;
-			translation?: number;
-		};
-		PutLearningResponseDto: {
-			id: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp with time zone
-			 */
-			created_at: string;
-			user: number;
-			word: number;
-			score: number;
-			/**
-			 * Format: date-time
-			 * @description timestamp without time zone
-			 */
-			last_review: string;
-			training: number;
-			translation: number;
-		};
-		DeleteLearningResponseDto: {
-			id: number;
-		};
-		ReportDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			/** @enum {string} */
-			type: "word" | "translation" | "audio";
-			description?: string;
-			/** @enum {string} */
-			status: "new" | "reviewed" | "resolved";
-		};
-		GetReportResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of reports */
-			items: components["schemas"]["ReportDto"][];
-		};
-		PostReportRequestDto: {
-			word: number;
-			/** @enum {string} */
-			type: "word" | "translation" | "audio";
-			description?: string;
-		};
-		PostReportResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			/** @enum {string} */
-			type: "word" | "translation" | "audio";
-			description?: string;
-			/** @enum {string} */
-			status: "new" | "reviewed" | "resolved";
-		};
-		PutReportRequestDto: {
-			id: number;
-			/** @enum {string} */
-			status: "new" | "reviewed" | "resolved";
-		};
-		PutReportResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			word: number;
-			/** @enum {string} */
-			type: "word" | "translation" | "audio";
-			description?: string;
-			/** @enum {string} */
-			status: "new" | "reviewed" | "resolved";
-		};
-		DeleteReportResponseDto: {
-			id: number;
+		PostImportTopicsResponseDto: {
+			/** @description Number of newly created topics */
+			topicsCreated: number;
+			/** @description Number of already existing topics found */
+			topicsFound: number;
+			/** @description Number of word generation jobs queued */
+			jobsQueued: number;
 		};
 		TopicDto: {
 			id: number;
@@ -961,140 +852,6 @@ export interface components {
 			language: string;
 		};
 		DeleteTopicTranslationResponseDto: {
-			id: number;
-		};
-		TrainingDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		GetTrainingResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of training items */
-			items: components["schemas"]["TrainingDto"][];
-		};
-		PostTrainingRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		PostTrainingResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		PutTrainingRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			name?: string;
-			title?: string;
-			description?: string;
-			image?: string;
-			score?: number;
-		};
-		PutTrainingResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			name: string;
-			title: string;
-			description: string;
-			image: string;
-			score: number;
-		};
-		DeleteTrainingResponseDto: {
-			id: number;
-		};
-		UserDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		GetUserResponseDto: {
-			/** @example 100 */
-			total: number;
-			/** @example 0 */
-			offset: number;
-			/** @example 10 */
-			limit: number;
-			/** @description List of users */
-			items: components["schemas"]["UserDto"][];
-		};
-		PostUserRequestDto: {
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PostUserResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PutUserRequestDto: {
-			id?: number;
-			/** Format: date-time */
-			created_at?: string;
-			email?: string;
-			name?: string;
-			language_speak?: string;
-			language_learn?: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		PutUserResponseDto: {
-			id: number;
-			/** Format: date-time */
-			created_at: string;
-			email: string;
-			name: string;
-			language_speak: string;
-			language_learn: string;
-			/** @default false */
-			email_verified: boolean;
-			password?: string;
-		};
-		DeleteUserResponseDto: {
 			id: number;
 		};
 		VocabCatalogDto: {
@@ -1290,6 +1047,299 @@ export interface components {
 			translation: string;
 			language: string;
 		};
+		LearningDto: {
+			id: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp with time zone
+			 */
+			created_at: string;
+			user: number;
+			word: number;
+			score: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp without time zone
+			 */
+			last_review: string;
+			training: number;
+			translation: number;
+		};
+		GetLearningResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of learning items */
+			items: components["schemas"]["LearningDto"][];
+		};
+		PostLearningRequestDto: {
+			/**
+			 * Format: date-time
+			 * @description timestamp with time zone
+			 */
+			created_at: string;
+			user: number;
+			word: number;
+			score: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp without time zone
+			 */
+			last_review: string;
+			training: number;
+			translation: number;
+		};
+		PostLearningResponseDto: {
+			id: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp with time zone
+			 */
+			created_at: string;
+			user: number;
+			word: number;
+			score: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp without time zone
+			 */
+			last_review: string;
+			training: number;
+			translation: number;
+		};
+		PutLearningRequestDto: {
+			id?: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp with time zone
+			 */
+			created_at?: string;
+			user?: number;
+			word?: number;
+			score?: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp without time zone
+			 */
+			last_review?: string;
+			training?: number;
+			translation?: number;
+		};
+		PutLearningResponseDto: {
+			id: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp with time zone
+			 */
+			created_at: string;
+			user: number;
+			word: number;
+			score: number;
+			/**
+			 * Format: date-time
+			 * @description timestamp without time zone
+			 */
+			last_review: string;
+			training: number;
+			translation: number;
+		};
+		DeleteLearningResponseDto: {
+			id: number;
+		};
+		ReportDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		GetReportResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of reports */
+			items: components["schemas"]["ReportDto"][];
+		};
+		PostReportRequestDto: {
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+		};
+		PostReportResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		PutReportRequestDto: {
+			id: number;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		PutReportResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			word: number;
+			/** @enum {string} */
+			type: "word" | "translation" | "audio";
+			description?: string;
+			/** @enum {string} */
+			status: "new" | "reviewed" | "resolved";
+		};
+		DeleteReportResponseDto: {
+			id: number;
+		};
+		TrainingDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			name: string;
+			title: string;
+			description: string;
+			image: string;
+			score: number;
+		};
+		GetTrainingResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of training items */
+			items: components["schemas"]["TrainingDto"][];
+		};
+		PostTrainingRequestDto: {
+			/** Format: date-time */
+			created_at: string;
+			name: string;
+			title: string;
+			description: string;
+			image: string;
+			score: number;
+		};
+		PostTrainingResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			name: string;
+			title: string;
+			description: string;
+			image: string;
+			score: number;
+		};
+		PutTrainingRequestDto: {
+			id?: number;
+			/** Format: date-time */
+			created_at?: string;
+			name?: string;
+			title?: string;
+			description?: string;
+			image?: string;
+			score?: number;
+		};
+		PutTrainingResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			name: string;
+			title: string;
+			description: string;
+			image: string;
+			score: number;
+		};
+		DeleteTrainingResponseDto: {
+			id: number;
+		};
+		UserDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			email: string;
+			name: string;
+			language_speak: string;
+			language_learn: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+		};
+		GetUserResponseDto: {
+			/** @example 100 */
+			total: number;
+			/** @example 0 */
+			offset: number;
+			/** @example 10 */
+			limit: number;
+			/** @description List of users */
+			items: components["schemas"]["UserDto"][];
+		};
+		PostUserRequestDto: {
+			/** Format: date-time */
+			created_at: string;
+			email: string;
+			name: string;
+			language_speak: string;
+			language_learn: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+		};
+		PostUserResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			email: string;
+			name: string;
+			language_speak: string;
+			language_learn: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+		};
+		PutUserRequestDto: {
+			id?: number;
+			/** Format: date-time */
+			created_at?: string;
+			email?: string;
+			name?: string;
+			language_speak?: string;
+			language_learn?: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+		};
+		PutUserResponseDto: {
+			id: number;
+			/** Format: date-time */
+			created_at: string;
+			email: string;
+			name: string;
+			language_speak: string;
+			language_learn: string;
+			/** @default false */
+			email_verified: boolean;
+			password?: string;
+		};
+		DeleteUserResponseDto: {
+			id: number;
+		};
 		PostSignInRequestDto: {
 			email: string;
 			/**
@@ -1372,53 +1422,7 @@ export interface operations {
 			};
 		};
 	};
-	LearningController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				/** @description timestamp with time zone */
-				created_at?: string;
-				user?: number;
-				word?: number;
-				score?: number;
-				/** @description timestamp without time zone */
-				last_review?: string;
-				training?: number;
-				translation?: number;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetLearningResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_update: {
+	ImportController_importTopics: {
 		parameters: {
 			query?: never;
 			header?: never;
@@ -1427,51 +1431,7 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				"application/json": components["schemas"]["PutLearningRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutLearningResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Learning not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostLearningRequestDto"];
+				"application/json": components["schemas"]["PostImportTopicsRequestDto"];
 			};
 		};
 		responses: {
@@ -1480,209 +1440,8 @@ export interface operations {
 					[name: string]: unknown;
 				};
 				content: {
-					"application/json": components["schemas"]["PostLearningResponseDto"];
+					"application/json": components["schemas"]["PostImportTopicsResponseDto"];
 				};
-			};
-		};
-	};
-	LearningController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetLearningResponseDto"];
-				};
-			};
-			/** @description Learning not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	LearningController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteLearningResponseDto"];
-				};
-			};
-		};
-	};
-	ReportController_getStats: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	ReportController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				word?: number;
-				type?: "word" | "translation" | "audio";
-				description?: string;
-				status?: "new" | "reviewed" | "resolved";
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetReportResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	ReportController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutReportRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutReportResponseDto"];
-				};
-			};
-			/** @description Report not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	ReportController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostReportRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostReportResponseDto"];
-				};
-			};
-		};
-	};
-	ReportController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteReportResponseDto"];
-				};
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
 			};
 		};
 	};
@@ -2053,352 +1812,6 @@ export interface operations {
 			};
 		};
 	};
-	TrainingController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				name?: string;
-				title?: string;
-				description?: string;
-				image?: string;
-				score?: number;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTrainingResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutTrainingRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutTrainingResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Training not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostTrainingRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostTrainingResponseDto"];
-				};
-			};
-		};
-	};
-	TrainingController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetTrainingResponseDto"];
-				};
-			};
-			/** @description Training not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	TrainingController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteTrainingResponseDto"];
-				};
-			};
-		};
-	};
-	UserController_getAll: {
-		parameters: {
-			query: {
-				offset: number;
-				limit: number;
-				id?: number;
-				created_at?: string;
-				email?: string;
-				name?: string;
-				language_speak?: string;
-				language_learn?: string;
-				email_verified?: boolean;
-				password?: string;
-			};
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetUserResponseDto"];
-				};
-			};
-			/** @description Invalid param */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_update: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PutUserRequestDto"];
-			};
-		};
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PutUserResponseDto"];
-				};
-			};
-			/** @description Invalid data */
-			400: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description User not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_create: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody: {
-			content: {
-				"application/json": components["schemas"]["PostUserRequestDto"];
-			};
-		};
-		responses: {
-			201: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["PostUserResponseDto"];
-				};
-			};
-		};
-	};
-	UserController_getStats: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_getById: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path: {
-				id: number;
-			};
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["GetUserResponseDto"];
-				};
-			};
-			/** @description User not found */
-			404: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-			/** @description Server error */
-			500: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content?: never;
-			};
-		};
-	};
-	UserController_remove: {
-		parameters: {
-			query?: never;
-			header?: never;
-			path?: never;
-			cookie?: never;
-		};
-		requestBody?: never;
-		responses: {
-			200: {
-				headers: {
-					[name: string]: unknown;
-				};
-				content: {
-					"application/json": components["schemas"]["DeleteUserResponseDto"];
-				};
-			};
-		};
-	};
 	VocabCatalogController_getAll: {
 		parameters: {
 			query: {
@@ -2744,6 +2157,26 @@ export interface operations {
 			};
 		};
 	};
+	WordController_generateEmbeddings: {
+		parameters: {
+			query?: {
+				language?: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Embedding generation queued */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
 	WordController_remove: {
 		parameters: {
 			query?: never;
@@ -2963,6 +2396,666 @@ export interface operations {
 					[name: string]: unknown;
 				};
 				content?: never;
+			};
+		};
+	};
+	LearningController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				/** @description timestamp with time zone */
+				created_at?: string;
+				user?: number;
+				word?: number;
+				score?: number;
+				/** @description timestamp without time zone */
+				last_review?: string;
+				training?: number;
+				translation?: number;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetLearningResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	LearningController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutLearningRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutLearningResponseDto"];
+				};
+			};
+			/** @description Invalid data */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Learning not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	LearningController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostLearningRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostLearningResponseDto"];
+				};
+			};
+		};
+	};
+	LearningController_getById: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetLearningResponseDto"];
+				};
+			};
+			/** @description Learning not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	LearningController_remove: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["DeleteLearningResponseDto"];
+				};
+			};
+		};
+	};
+	ReportController_getStats: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				created_at?: string;
+				word?: number;
+				type?: "word" | "translation" | "audio";
+				description?: string;
+				status?: "new" | "reviewed" | "resolved";
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetReportResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutReportRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutReportResponseDto"];
+				};
+			};
+			/** @description Report not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	ReportController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostReportRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostReportResponseDto"];
+				};
+			};
+		};
+	};
+	ReportController_remove: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["DeleteReportResponseDto"];
+				};
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TrainingController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				created_at?: string;
+				name?: string;
+				title?: string;
+				description?: string;
+				image?: string;
+				score?: number;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetTrainingResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TrainingController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutTrainingRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutTrainingResponseDto"];
+				};
+			};
+			/** @description Invalid data */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Training not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TrainingController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostTrainingRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostTrainingResponseDto"];
+				};
+			};
+		};
+	};
+	TrainingController_getById: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetTrainingResponseDto"];
+				};
+			};
+			/** @description Training not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	TrainingController_remove: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["DeleteTrainingResponseDto"];
+				};
+			};
+		};
+	};
+	UserController_getAll: {
+		parameters: {
+			query: {
+				offset: number;
+				limit: number;
+				id?: number;
+				created_at?: string;
+				email?: string;
+				name?: string;
+				language_speak?: string;
+				language_learn?: string;
+				email_verified?: boolean;
+				password?: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetUserResponseDto"];
+				};
+			};
+			/** @description Invalid param */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	UserController_update: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PutUserRequestDto"];
+			};
+		};
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PutUserResponseDto"];
+				};
+			};
+			/** @description Invalid data */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description User not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	UserController_create: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostUserRequestDto"];
+			};
+		};
+		responses: {
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["PostUserResponseDto"];
+				};
+			};
+		};
+	};
+	UserController_getStats: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	UserController_getById: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path: {
+				id: number;
+			};
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["GetUserResponseDto"];
+				};
+			};
+			/** @description User not found */
+			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+			/** @description Server error */
+			500: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	UserController_remove: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					"application/json": components["schemas"]["DeleteUserResponseDto"];
+				};
 			};
 		};
 	};
