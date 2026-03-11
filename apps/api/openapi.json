@@ -15,129 +15,16 @@
         ]
       }
     },
-    "/learning": {
-      "get": {
-        "operationId": "LearningController_getAll",
-        "parameters": [
-          {
-            "name": "offset",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 0,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "created_at",
-            "required": false,
-            "in": "query",
-            "description": "timestamp with time zone",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "name": "user",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "word",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "score",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "last_review",
-            "required": false,
-            "in": "query",
-            "description": "timestamp without time zone",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "name": "training",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "translation",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetLearningResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid param"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get all learning records",
-        "tags": [
-          "learning"
-        ]
-      },
+    "/import/topics": {
       "post": {
-        "operationId": "LearningController_create",
+        "operationId": "ImportController_importTopics",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostLearningRequestDto"
+                "$ref": "#/components/schemas/PostImportTopicsRequestDto"
               }
             }
           }
@@ -148,332 +35,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostLearningResponseDto"
+                  "$ref": "#/components/schemas/PostImportTopicsResponseDto"
                 }
               }
             }
           }
         },
-        "summary": "Create learning",
+        "summary": "Import topics with word generation",
         "tags": [
-          "learning"
-        ]
-      },
-      "put": {
-        "operationId": "LearningController_update",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutLearningRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PutLearningResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid data"
-          },
-          "404": {
-            "description": "Learning not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Update learning",
-        "tags": [
-          "learning"
-        ]
-      }
-    },
-    "/learning/{id}": {
-      "get": {
-        "operationId": "LearningController_getById",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetLearningResponseDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Learning not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get learning by id",
-        "tags": [
-          "learning"
-        ]
-      },
-      "delete": {
-        "operationId": "LearningController_remove",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteLearningResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete learning",
-        "tags": [
-          "learning"
-        ]
-      }
-    },
-    "/report/stats": {
-      "get": {
-        "operationId": "ReportController_getStats",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "Get report statistics by status",
-        "tags": [
-          "report"
-        ]
-      }
-    },
-    "/report": {
-      "get": {
-        "operationId": "ReportController_getAll",
-        "parameters": [
-          {
-            "name": "offset",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 0,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "created_at",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "name": "word",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "type",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "word",
-                "translation",
-                "audio"
-              ]
-            }
-          },
-          {
-            "name": "description",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "status",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "new",
-                "reviewed",
-                "resolved"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetReportResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid param"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get all reports",
-        "tags": [
-          "report"
-        ]
-      },
-      "post": {
-        "operationId": "ReportController_create",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostReportRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostReportResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create a report",
-        "tags": [
-          "report"
-        ]
-      },
-      "put": {
-        "operationId": "ReportController_update",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutReportRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PutReportResponseDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Report not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Update report status",
-        "tags": [
-          "report"
-        ]
-      }
-    },
-    "/report/{id}": {
-      "delete": {
-        "operationId": "ReportController_remove",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteReportResponseDto"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Delete report",
-        "tags": [
-          "report"
+          "import"
         ]
       }
     },
@@ -985,490 +555,6 @@
         "summary": "Auto-translate all untranslated topics for a language",
         "tags": [
           "topic-translation"
-        ]
-      }
-    },
-    "/training": {
-      "get": {
-        "operationId": "TrainingController_getAll",
-        "parameters": [
-          {
-            "name": "offset",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 0,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "created_at",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "title",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "description",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "image",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "score",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTrainingResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid param"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get all training records",
-        "tags": [
-          "training"
-        ]
-      },
-      "post": {
-        "operationId": "TrainingController_create",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostTrainingRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostTrainingResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create training",
-        "tags": [
-          "training"
-        ]
-      },
-      "put": {
-        "operationId": "TrainingController_update",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutTrainingRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PutTrainingResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid data"
-          },
-          "404": {
-            "description": "Training not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Update training",
-        "tags": [
-          "training"
-        ]
-      }
-    },
-    "/training/{id}": {
-      "get": {
-        "operationId": "TrainingController_getById",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetTrainingResponseDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Training not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get training by id",
-        "tags": [
-          "training"
-        ]
-      },
-      "delete": {
-        "operationId": "TrainingController_remove",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteTrainingResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete training",
-        "tags": [
-          "training"
-        ]
-      }
-    },
-    "/user": {
-      "get": {
-        "operationId": "UserController_getAll",
-        "parameters": [
-          {
-            "name": "offset",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 0,
-              "type": "number"
-            }
-          },
-          {
-            "name": "limit",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "example": 10,
-              "type": "number"
-            }
-          },
-          {
-            "name": "id",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "created_at",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
-          },
-          {
-            "name": "email",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "name",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "language_speak",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "language_learn",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "email_verified",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "default": false,
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "password",
-            "required": false,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid param"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get all users",
-        "tags": [
-          "user"
-        ]
-      },
-      "post": {
-        "operationId": "UserController_create",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostUserRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PostUserResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create user",
-        "tags": [
-          "user"
-        ]
-      },
-      "put": {
-        "operationId": "UserController_update",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutUserRequestDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PutUserResponseDto"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid data"
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Update user",
-        "tags": [
-          "user"
-        ]
-      }
-    },
-    "/user/stats": {
-      "get": {
-        "operationId": "UserController_getStats",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "summary": "Get user statistics",
-        "tags": [
-          "user"
-        ]
-      }
-    },
-    "/user/{id}": {
-      "get": {
-        "operationId": "UserController_getById",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserResponseDto"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get user by id",
-        "tags": [
-          "user"
-        ]
-      },
-      "delete": {
-        "operationId": "UserController_remove",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteUserResponseDto"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Delete user",
-        "tags": [
-          "user"
         ]
       }
     },
@@ -2072,6 +1158,30 @@
         ]
       }
     },
+    "/word/generate-embeddings": {
+      "post": {
+        "operationId": "WordController_generateEmbeddings",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Embedding generation queued"
+          }
+        },
+        "summary": "Queue embedding generation for words missing embeddings",
+        "tags": [
+          "word"
+        ]
+      }
+    },
     "/word/{id}": {
       "delete": {
         "operationId": "WordController_remove",
@@ -2361,6 +1471,952 @@
         ]
       }
     },
+    "/learning": {
+      "get": {
+        "operationId": "LearningController_getAll",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "description": "timestamp with time zone",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "score",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "last_review",
+            "required": false,
+            "in": "query",
+            "description": "timestamp without time zone",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "training",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "translation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLearningResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid param"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all learning records",
+        "tags": [
+          "learning"
+        ]
+      },
+      "post": {
+        "operationId": "LearningController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostLearningRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostLearningResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create learning",
+        "tags": [
+          "learning"
+        ]
+      },
+      "put": {
+        "operationId": "LearningController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutLearningRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutLearningResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Learning not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update learning",
+        "tags": [
+          "learning"
+        ]
+      }
+    },
+    "/learning/{id}": {
+      "get": {
+        "operationId": "LearningController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLearningResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Learning not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get learning by id",
+        "tags": [
+          "learning"
+        ]
+      },
+      "delete": {
+        "operationId": "LearningController_remove",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteLearningResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete learning",
+        "tags": [
+          "learning"
+        ]
+      }
+    },
+    "/report/stats": {
+      "get": {
+        "operationId": "ReportController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get report statistics by status",
+        "tags": [
+          "report"
+        ]
+      }
+    },
+    "/report": {
+      "get": {
+        "operationId": "ReportController_getAll",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "word",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "word",
+                "translation",
+                "audio"
+              ]
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "new",
+                "reviewed",
+                "resolved"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetReportResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid param"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all reports",
+        "tags": [
+          "report"
+        ]
+      },
+      "post": {
+        "operationId": "ReportController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostReportResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a report",
+        "tags": [
+          "report"
+        ]
+      },
+      "put": {
+        "operationId": "ReportController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutReportRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutReportResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Report not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update report status",
+        "tags": [
+          "report"
+        ]
+      }
+    },
+    "/report/{id}": {
+      "delete": {
+        "operationId": "ReportController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteReportResponseDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Delete report",
+        "tags": [
+          "report"
+        ]
+      }
+    },
+    "/training": {
+      "get": {
+        "operationId": "TrainingController_getAll",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "score",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTrainingResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid param"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all training records",
+        "tags": [
+          "training"
+        ]
+      },
+      "post": {
+        "operationId": "TrainingController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTrainingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTrainingResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create training",
+        "tags": [
+          "training"
+        ]
+      },
+      "put": {
+        "operationId": "TrainingController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutTrainingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutTrainingResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Training not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update training",
+        "tags": [
+          "training"
+        ]
+      }
+    },
+    "/training/{id}": {
+      "get": {
+        "operationId": "TrainingController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTrainingResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Training not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get training by id",
+        "tags": [
+          "training"
+        ]
+      },
+      "delete": {
+        "operationId": "TrainingController_remove",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTrainingResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete training",
+        "tags": [
+          "training"
+        ]
+      }
+    },
+    "/user": {
+      "get": {
+        "operationId": "UserController_getAll",
+        "parameters": [
+          {
+            "name": "offset",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "created_at",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language_speak",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language_learn",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email_verified",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "password",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid param"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all users",
+        "tags": [
+          "user"
+        ]
+      },
+      "post": {
+        "operationId": "UserController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUserRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostUserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create user",
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "operationId": "UserController_update",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutUserRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PutUserResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Update user",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/user/stats": {
+      "get": {
+        "operationId": "UserController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get user statistics",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "operationId": "UserController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get user by id",
+        "tags": [
+          "user"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_remove",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete user",
+        "tags": [
+          "user"
+        ]
+      }
+    },
     "/auth/signin": {
       "post": {
         "operationId": "AuthController_signin",
@@ -2604,453 +2660,47 @@
   "servers": [],
   "components": {
     "schemas": {
-      "LearningDto": {
+      "PostImportTopicsRequestDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
+          "language": {
             "type": "string",
-            "format": "date-time",
-            "description": "timestamp with time zone"
+            "description": "Language code (e.g. nl, de, es)"
           },
-          "user": {
-            "type": "number"
-          },
-          "word": {
-            "type": "number"
-          },
-          "score": {
-            "type": "number"
-          },
-          "last_review": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp without time zone"
-          },
-          "training": {
-            "type": "number"
-          },
-          "translation": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "user",
-          "word",
-          "score",
-          "last_review",
-          "training",
-          "translation"
-        ]
-      },
-      "GetLearningResponseDto": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "type": "number",
-            "example": 100
-          },
-          "offset": {
-            "type": "number",
-            "example": 0
-          },
-          "limit": {
-            "type": "number",
-            "example": 10
-          },
-          "items": {
-            "description": "List of learning items",
+          "topics": {
             "type": "array",
+            "description": "Array of topics with level/word-count entries. Each item has a \"topic\" string key and optional level keys (e.g. A1, A2) with number values.",
             "items": {
-              "$ref": "#/components/schemas/LearningDto"
+              "type": "object",
+              "additionalProperties": true
             }
           }
         },
         "required": [
-          "total",
-          "offset",
-          "limit",
-          "items"
+          "language",
+          "topics"
         ]
       },
-      "PostLearningRequestDto": {
+      "PostImportTopicsResponseDto": {
         "type": "object",
         "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp with time zone"
-          },
-          "user": {
-            "type": "number"
-          },
-          "word": {
-            "type": "number"
-          },
-          "score": {
-            "type": "number"
-          },
-          "last_review": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp without time zone"
-          },
-          "training": {
-            "type": "number"
-          },
-          "translation": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "created_at",
-          "user",
-          "word",
-          "score",
-          "last_review",
-          "training",
-          "translation"
-        ]
-      },
-      "PostLearningResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp with time zone"
-          },
-          "user": {
-            "type": "number"
-          },
-          "word": {
-            "type": "number"
-          },
-          "score": {
-            "type": "number"
-          },
-          "last_review": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp without time zone"
-          },
-          "training": {
-            "type": "number"
-          },
-          "translation": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "user",
-          "word",
-          "score",
-          "last_review",
-          "training",
-          "translation"
-        ]
-      },
-      "PutLearningRequestDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp with time zone"
-          },
-          "user": {
-            "type": "number"
-          },
-          "word": {
-            "type": "number"
-          },
-          "score": {
-            "type": "number"
-          },
-          "last_review": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp without time zone"
-          },
-          "training": {
-            "type": "number"
-          },
-          "translation": {
-            "type": "number"
-          }
-        }
-      },
-      "PutLearningResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp with time zone"
-          },
-          "user": {
-            "type": "number"
-          },
-          "word": {
-            "type": "number"
-          },
-          "score": {
-            "type": "number"
-          },
-          "last_review": {
-            "type": "string",
-            "format": "date-time",
-            "description": "timestamp without time zone"
-          },
-          "training": {
-            "type": "number"
-          },
-          "translation": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "user",
-          "word",
-          "score",
-          "last_review",
-          "training",
-          "translation"
-        ]
-      },
-      "DeleteLearningResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "ReportDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "word": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "word",
-              "translation",
-              "audio"
-            ]
-          },
-          "description": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "new",
-              "reviewed",
-              "resolved"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "word",
-          "type",
-          "status"
-        ]
-      },
-      "GetReportResponseDto": {
-        "type": "object",
-        "properties": {
-          "total": {
+          "topicsCreated": {
             "type": "number",
-            "example": 100
+            "description": "Number of newly created topics"
           },
-          "offset": {
+          "topicsFound": {
             "type": "number",
-            "example": 0
+            "description": "Number of already existing topics found"
           },
-          "limit": {
+          "jobsQueued": {
             "type": "number",
-            "example": 10
-          },
-          "items": {
-            "description": "List of reports",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReportDto"
-            }
+            "description": "Number of word generation jobs queued"
           }
         },
         "required": [
-          "total",
-          "offset",
-          "limit",
-          "items"
-        ]
-      },
-      "PostReportRequestDto": {
-        "type": "object",
-        "properties": {
-          "word": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "word",
-              "translation",
-              "audio"
-            ]
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "word",
-          "type"
-        ]
-      },
-      "PostReportResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "word": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "word",
-              "translation",
-              "audio"
-            ]
-          },
-          "description": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "new",
-              "reviewed",
-              "resolved"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "word",
-          "type",
-          "status"
-        ]
-      },
-      "PutReportRequestDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "new",
-              "reviewed",
-              "resolved"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "status"
-        ]
-      },
-      "PutReportResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "word": {
-            "type": "number"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "word",
-              "translation",
-              "audio"
-            ]
-          },
-          "description": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "new",
-              "reviewed",
-              "resolved"
-            ]
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "word",
-          "type",
-          "status"
-        ]
-      },
-      "DeleteReportResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id"
+          "topicsCreated",
+          "topicsFound",
+          "jobsQueued"
         ]
       },
       "TopicDto": {
@@ -3464,438 +3114,6 @@
         ]
       },
       "DeleteTopicTranslationResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "TrainingDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "score": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "name",
-          "title",
-          "description",
-          "image",
-          "score"
-        ]
-      },
-      "GetTrainingResponseDto": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "type": "number",
-            "example": 100
-          },
-          "offset": {
-            "type": "number",
-            "example": 0
-          },
-          "limit": {
-            "type": "number",
-            "example": 10
-          },
-          "items": {
-            "description": "List of training items",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TrainingDto"
-            }
-          }
-        },
-        "required": [
-          "total",
-          "offset",
-          "limit",
-          "items"
-        ]
-      },
-      "PostTrainingRequestDto": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "score": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "created_at",
-          "name",
-          "title",
-          "description",
-          "image",
-          "score"
-        ]
-      },
-      "PostTrainingResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "score": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "name",
-          "title",
-          "description",
-          "image",
-          "score"
-        ]
-      },
-      "PutTrainingRequestDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "score": {
-            "type": "number"
-          }
-        }
-      },
-      "PutTrainingResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "score": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "name",
-          "title",
-          "description",
-          "image",
-          "score"
-        ]
-      },
-      "DeleteTrainingResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "UserDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "language_speak": {
-            "type": "string"
-          },
-          "language_learn": {
-            "type": "string"
-          },
-          "email_verified": {
-            "type": "boolean",
-            "default": false
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "email",
-          "name",
-          "language_speak",
-          "language_learn"
-        ]
-      },
-      "GetUserResponseDto": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "type": "number",
-            "example": 100
-          },
-          "offset": {
-            "type": "number",
-            "example": 0
-          },
-          "limit": {
-            "type": "number",
-            "example": 10
-          },
-          "items": {
-            "description": "List of users",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserDto"
-            }
-          }
-        },
-        "required": [
-          "total",
-          "offset",
-          "limit",
-          "items"
-        ]
-      },
-      "PostUserRequestDto": {
-        "type": "object",
-        "properties": {
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "language_speak": {
-            "type": "string"
-          },
-          "language_learn": {
-            "type": "string"
-          },
-          "email_verified": {
-            "type": "boolean",
-            "default": false
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "created_at",
-          "email",
-          "name",
-          "language_speak",
-          "language_learn"
-        ]
-      },
-      "PostUserResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "language_speak": {
-            "type": "string"
-          },
-          "language_learn": {
-            "type": "string"
-          },
-          "email_verified": {
-            "type": "boolean",
-            "default": false
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "email",
-          "name",
-          "language_speak",
-          "language_learn"
-        ]
-      },
-      "PutUserRequestDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "language_speak": {
-            "type": "string"
-          },
-          "language_learn": {
-            "type": "string"
-          },
-          "email_verified": {
-            "type": "boolean",
-            "default": false
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "PutUserResponseDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "language_speak": {
-            "type": "string"
-          },
-          "language_learn": {
-            "type": "string"
-          },
-          "email_verified": {
-            "type": "boolean",
-            "default": false
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "created_at",
-          "email",
-          "name",
-          "language_speak",
-          "language_learn"
-        ]
-      },
-      "DeleteUserResponseDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -4574,6 +3792,887 @@
           "word",
           "translation",
           "language"
+        ]
+      },
+      "LearningDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "user",
+          "word",
+          "score",
+          "last_review",
+          "training",
+          "translation"
+        ]
+      },
+      "GetLearningResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of learning items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearningDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
+        ]
+      },
+      "PostLearningRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "created_at",
+          "user",
+          "word",
+          "score",
+          "last_review",
+          "training",
+          "translation"
+        ]
+      },
+      "PostLearningResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "user",
+          "word",
+          "score",
+          "last_review",
+          "training",
+          "translation"
+        ]
+      },
+      "PutLearningRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        }
+      },
+      "PutLearningResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp with time zone"
+          },
+          "user": {
+            "type": "number"
+          },
+          "word": {
+            "type": "number"
+          },
+          "score": {
+            "type": "number"
+          },
+          "last_review": {
+            "type": "string",
+            "format": "date-time",
+            "description": "timestamp without time zone"
+          },
+          "training": {
+            "type": "number"
+          },
+          "translation": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "user",
+          "word",
+          "score",
+          "last_review",
+          "training",
+          "translation"
+        ]
+      },
+      "DeleteLearningResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ReportDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "GetReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of reports",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
+        ]
+      },
+      "PostReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "word",
+          "type"
+        ]
+      },
+      "PostReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "PutReportRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ]
+      },
+      "PutReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "word": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "word",
+              "translation",
+              "audio"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "reviewed",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "word",
+          "type",
+          "status"
+        ]
+      },
+      "DeleteReportResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "TrainingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "title",
+          "description",
+          "image",
+          "score"
+        ]
+      },
+      "GetTrainingResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of training items",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrainingDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
+        ]
+      },
+      "PostTrainingRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "created_at",
+          "name",
+          "title",
+          "description",
+          "image",
+          "score"
+        ]
+      },
+      "PostTrainingResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "title",
+          "description",
+          "image",
+          "score"
+        ]
+      },
+      "PutTrainingRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        }
+      },
+      "PutTrainingResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "title",
+          "description",
+          "image",
+          "score"
+        ]
+      },
+      "DeleteTrainingResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
+      "GetUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "items": {
+            "description": "List of users",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDto"
+            }
+          }
+        },
+        "required": [
+          "total",
+          "offset",
+          "limit",
+          "items"
+        ]
+      },
+      "PostUserRequestDto": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at",
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
+      "PostUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
+      "PutUserRequestDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "PutUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language_speak": {
+            "type": "string"
+          },
+          "language_learn": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "email",
+          "name",
+          "language_speak",
+          "language_learn"
+        ]
+      },
+      "DeleteUserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
         ]
       },
       "PostSignInRequestDto": {

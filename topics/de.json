@@ -1,0 +1,352 @@
+[
+  {
+    "topic": "Begrüßungen und Höflichkeit",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Persönliche Informationen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Fragewörter",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Zahlen 0–20",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Zahlen 20–100, Alter und Telefon",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Wochentage, Monate und Datumsangaben",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Uhrzeit und Tageszeiten",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Familie",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Menschen und Beziehungen",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Länder und Nationalitäten",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Farben",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Grundlegende Adjektive",
+    "A1": 42,
+    "A2": 0
+  },
+  {
+    "topic": "Zuhause: Räume",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Zuhause: Möbel und Gegenstände",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Haushaltstätigkeiten",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Essen: Grundnahrungsmittel",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Essen: Obst und Gemüse",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Essen: Getränke und im Café",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Einkaufen",
+    "A1": 28,
+    "A2": 0
+  },
+  {
+    "topic": "Kleidung",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Stadt: Orte",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Stadt: Richtungen",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Verkehrsmittel",
+    "A1": 21,
+    "A2": 24
+  },
+  {
+    "topic": "Wetter",
+    "A1": 21,
+    "A2": 16
+  },
+  {
+    "topic": "Körper",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Gesundheit",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Alltagsaktivitäten",
+    "A1": 42,
+    "A2": 0
+  },
+  {
+    "topic": "Lernen und Klassenraum",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Arbeit und Berufe",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Freizeit",
+    "A1": 21,
+    "A2": 0
+  },
+  {
+    "topic": "Hobbys und Interessen",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Gefühle",
+    "A1": 14,
+    "A2": 24
+  },
+  {
+    "topic": "Häufige Grundverben",
+    "A1": 28,
+    "A2": 0
+  },
+  {
+    "topic": "Präpositionen",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Verbindungswörter und Funktionswörter",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Feiertage und soziale Situationen",
+    "A1": 14,
+    "A2": 0
+  },
+  {
+    "topic": "Biografie und Lebensweg",
+    "A1": 0,
+    "A2": 32
+  },
+  {
+    "topic": "Aussehen",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Charakter",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Zuhause: Details der Wohnung",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Reparaturen und Haushaltsprobleme",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Essen: Kochen",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Essen: Restaurant und Bestellen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Gesundheit: beim Arzt",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Gesundheit: Wohlbefinden und Ratschläge",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Arbeit: Aufgaben und Verantwortlichkeiten",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Arbeit: Jobsuche",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Lernen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Stadt: Einrichtungen",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Dienstleistungen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Geld und Bank",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Dokumente",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Reisen",
+    "A1": 0,
+    "A2": 40
+  },
+  {
+    "topic": "Natur",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Technologie",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Telefon und Kommunikation",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Einkaufen: Qualität und Rückgabe",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Kleidung: Stil und Beschreibung",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Beziehungen und Kommunikation",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Soziale Situationen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Pläne und Zukunft",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Zeit",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Meinung und Argumentation",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Verbindungswörter",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Vergleichen und Beschreiben",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Probleme und Konflikte",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Notfälle",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Kultur und Freizeit",
+    "A1": 0,
+    "A2": 24
+  },
+  {
+    "topic": "Feiertage und Traditionen",
+    "A1": 0,
+    "A2": 16
+  },
+  {
+    "topic": "Gesellschaft und Alltag",
+    "A1": 0,
+    "A2": 24
+  }
+]

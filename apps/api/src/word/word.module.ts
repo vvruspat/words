@@ -25,6 +25,6 @@ import { WordEventService } from "./word-event.service";
 		WordEventService,
 	],
 	controllers: [WordController],
-	exports: [WordEventService],
+	exports: [WordEventService, WordService],
 })
 export class WordModule {}

@@ -64,4 +64,16 @@ export class WordEntity implements Word {
 
 	@Column({ type: "text", nullable: true })
 	meaning?: string;
+
+	@Column({
+		type: "text",
+		nullable: true,
+		transformer: {
+			to: (value: number[] | null): string | null =>
+				value ? `[${value.join(",")}]` : null,
+			from: (value: string | null): number[] | null =>
+				value ? (value.slice(1, -1).split(",").map(Number) as number[]) : null,
+		},
+	})
+	embedding?: number[] | null;
 }

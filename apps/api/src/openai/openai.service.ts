@@ -6,6 +6,7 @@ import type { Request, Response } from "express";
 import OpenAI, { type APIPromise } from "openai";
 import {
 	AUDIO_CREATION_DONE,
+	EMBEDDING_CREATION_DONE,
 	TOPIC_TRANSLATION_DONE,
 	TRANSLATION_DONE,
 	WORDS_GENERATION_DONE,
@@ -260,6 +261,15 @@ export class OpenAIService {
 			generatedTranslations: result.items ?? result,
 			topics,
 		});
+	}
+
+	async makeEmbedding(word: string, wordId: WordEntity["id"]) {
+		const response = await this.openai.embeddings.create({
+			model: "text-embedding-3-small",
+			input: word,
+		});
+		const embedding = response.data[0].embedding;
+		this.wordsQueue.add(EMBEDDING_CREATION_DONE, { wordId, embedding });
 	}
 
 	async makeAudio(language: Language, word: string, wordId: WordEntity["id"]) {

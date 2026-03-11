@@ -2,10 +2,12 @@ import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
+import type { Redis } from "ioredis";
 import type { Repository } from "typeorm";
 import { In } from "typeorm";
 import {
 	AUDIO_CREATION_START,
+	EMBEDDING_CREATION_START,
 	TRANSLATION_START,
 	WORDS_GENERATION_START,
 } from "~/constants/queue-events.constants";
@@ -17,7 +19,10 @@ import { WordTranslationService } from "~/wordstranslation/wordstranslation.serv
 import { WORD_REPOSITORY } from "../constants/database.constants";
 import { TopicService } from "../topic/topic.service";
 import type { GeneratedWord } from "./types/generated-word";
-import { DEFAULT_SIMILARITY_THRESHOLD } from "./word.constants";
+import {
+	DEFAULT_SIMILARITY_THRESHOLD,
+	DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
+} from "./word.constants";
 import type { WordEntity } from "./word.entity";
 import { WordEventService } from "./word-event.service";
 
@@ -37,6 +42,7 @@ export class WordService {
 		@InjectQueue(OPENAI_QUEUE) private openAIQueue: Queue,
 		private readonly wordEventService: WordEventService,
 		private readonly wordTranslationService: WordTranslationService,
+		@Inject("REDIS_CLIENT") private readonly redisClient: Redis,
 	) {}
 
 	async findAll(
@@ -141,19 +147,7 @@ export class WordService {
 			ORDER BY w.language ASC, vc.title ASC
 		`);
 
-		const dupRows = await this.wordRepository.manager.query<
-			Array<{ language: string; count: string }>
-		>(`
-			SELECT language, COUNT(*) AS count
-			FROM (
-				SELECT language, LOWER(word) AS word_key
-				FROM word
-				GROUP BY language, LOWER(word)
-				HAVING COUNT(*) > 1
-			) subq
-			GROUP BY language
-			ORDER BY language ASC
-		`);
+		const duplicatesByLanguage = await this.getDuplicateStatsByLanguage();
 
 		return {
 			wordsByLanguageCatalog: wordRows.map((r) => ({
@@ -162,25 +156,89 @@ export class WordService {
 				catalogTitle: r.catalogTitle,
 				count: Number(r.count),
 			})),
-			duplicatesByLanguage: dupRows.map((r) => ({
-				language: r.language,
-				count: Number(r.count),
-			})),
+			duplicatesByLanguage,
 		};
+	}
+
+	private static readonly DUPLICATE_STATS_CACHE_KEY = "word:duplicate-stats";
+	private static readonly DUPLICATE_STATS_CACHE_TTL = 300; // 5 minutes
+
+	async getDuplicateStatsByLanguage(): Promise<
+		Array<{ language: string; count: number }>
+	> {
+		const cached = await this.redisClient.get(
+			WordService.DUPLICATE_STATS_CACHE_KEY,
+		);
+		if (cached) {
+			return JSON.parse(cached) as Array<{ language: string; count: number }>;
+		}
+
+		const pairs = await this.wordRepository.manager.query<
+			Array<{ id1: number; id2: number; lang: string }>
+		>(
+			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
+			 FROM word w1
+			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
+			 WHERE w1.embedding IS NOT NULL
+			   AND w2.embedding IS NOT NULL
+			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $1`,
+			[DEFAULT_VECTOR_SIMILARITY_THRESHOLD],
+		);
+
+		// Union-Find: cluster transitive pairs into groups
+		const parent = new Map<number, number>();
+		const langMap = new Map<number, string>();
+		const find = (x: number): number => {
+			if (!parent.has(x)) parent.set(x, x);
+			const p = parent.get(x) ?? x;
+			if (p !== x) parent.set(x, find(p));
+			return parent.get(x) ?? x;
+		};
+		for (const { id1, id2, lang } of pairs) {
+			const r1 = find(id1);
+			const r2 = find(id2);
+			if (r1 !== r2) parent.set(r1, r2);
+			langMap.set(id1, lang);
+			langMap.set(id2, lang);
+		}
+
+		// Count distinct group roots per language
+		const groupsByLang = new Map<string, Set<number>>();
+		for (const id of langMap.keys()) {
+			const root = find(id);
+			const lang = langMap.get(id)!;
+			if (!groupsByLang.has(lang)) groupsByLang.set(lang, new Set());
+			groupsByLang.get(lang)?.add(root);
+		}
+
+		const result = Array.from(groupsByLang.entries()).map(
+			([language, roots]) => ({ language, count: roots.size }),
+		);
+
+		await this.redisClient.setex(
+			WordService.DUPLICATE_STATS_CACHE_KEY,
+			WordService.DUPLICATE_STATS_CACHE_TTL,
+			JSON.stringify(result),
+		);
+
+		return result;
+	}
+
+	async invalidateDuplicateStatsCache(): Promise<void> {
+		await this.redisClient.del(WordService.DUPLICATE_STATS_CACHE_KEY);
 	}
 
 	async findDuplicates(
 		limit: number,
 		offset: number,
 		language?: string,
-		similarityThreshold = DEFAULT_SIMILARITY_THRESHOLD,
+		similarityThreshold = DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
 	): Promise<{
 		groups: { word: string; language: string; items: WordEntity[] }[];
 		total: number;
 	}> {
-		// Find all pairs of words within the same language that are similar
-		// enough to be considered near-duplicates (handles articles, slash
-		// variants, and minor spelling differences via pg_trgm).
+		// Find all pairs of words that have very high embedding cosine similarity.
+		// Words without embeddings are excluded (run generate-embeddings to backfill).
 		const params: (string | number)[] = [similarityThreshold];
 		if (language) params.push(language);
 
@@ -190,10 +248,9 @@ export class WordService {
 			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
 			 FROM word w1
 			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
-			 WHERE GREATEST(
-			   word_similarity(LOWER(w1.word), LOWER(w2.word)),
-			   word_similarity(LOWER(w2.word), LOWER(w1.word))
-			 ) >= $1
+			 WHERE w1.embedding IS NOT NULL
+			   AND w2.embedding IS NOT NULL
+			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $1
 			 ${language ? "AND w1.language = $2" : ""}`,
 			params,
 		);
@@ -290,6 +347,7 @@ export class WordService {
 			this.wordEventService.emit({ type: "delete", word });
 		}
 		this.logger.log(`Deleted ${result.affected ?? 0} words: ${ids.join(", ")}`);
+		void this.invalidateDuplicateStatsCache();
 		return result.affected ?? 0;
 	}
 
@@ -357,6 +415,34 @@ export class WordService {
 			catalogId: catalogEntity?.id,
 			limit,
 		});
+	}
+
+	async makeEmbedding(wordId: WordEntity["id"], word: string): Promise<void> {
+		this.openAIQueue.add(EMBEDDING_CREATION_START, { wordId, word });
+	}
+
+	async embeddingCreated(
+		wordId: WordEntity["id"],
+		embedding: number[],
+	): Promise<void> {
+		await this.wordRepository.update({ id: wordId }, { embedding });
+		void this.invalidateDuplicateStatsCache();
+	}
+
+	async generateMissingEmbeddings(
+		language?: string,
+	): Promise<{ queued: number }> {
+		const where: Record<string, unknown> = { embedding: null };
+		if (language) where.language = language;
+		const words = await this.wordRepository.find({
+			where,
+			select: ["id", "word"],
+		});
+		for (const word of words) {
+			this.makeEmbedding(word.id, word.word);
+		}
+		this.logger.log(`Queued embedding generation for ${words.length} words`);
+		return { queued: words.length };
 	}
 
 	async makeAudio(
@@ -448,6 +534,7 @@ export class WordService {
 			});
 
 			this.makeAudio(wordData.language, wordData.word, word.id);
+			this.makeEmbedding(word.id, wordData.word);
 
 			return word;
 		});
