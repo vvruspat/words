@@ -159,7 +159,7 @@ export const ImportTopicsForm = () => {
 				</MFlex>
 			)}
 
-			{submitError && <MText mode="negative">{submitError}</MText>}
+			{submitError && <MText mode="secondary">{submitError}</MText>}
 
 			<MButton
 				mode="primary"
