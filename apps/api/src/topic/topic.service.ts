@@ -45,7 +45,7 @@ export class TopicService {
 		language: Language,
 	): Promise<TopicEntity[]> {
 		const existingTopics = await this.topicRepository.find({
-			where: topics.map((title) => ({ title })),
+			where: topics.map((title) => ({ title, language })),
 		});
 
 		const existingTitles = new Set(existingTopics.map((t) => t.title));

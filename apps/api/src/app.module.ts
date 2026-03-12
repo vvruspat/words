@@ -1,6 +1,7 @@
 import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { SentryModule } from "@sentry/nestjs/setup";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
@@ -23,6 +24,7 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 
 @Module({
 	imports: [
+		SentryModule.forRoot(),
 		ConfigModule.forRoot(),
 		DatabaseModule,
 		ImportModule,
