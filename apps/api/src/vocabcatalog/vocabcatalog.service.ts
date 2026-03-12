@@ -43,7 +43,7 @@ export class VocabCatalogService {
 		language: Language,
 	): Promise<VocabCatalogEntity[]> {
 		const existingCatalogs = await this.vocabCatalogRepository.find({
-			where: titles.map((title) => ({ title })),
+			where: titles.map((title) => ({ title, language })),
 		});
 
 		const existingTitles = new Set(existingCatalogs.map((c) => c.title));
