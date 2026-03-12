@@ -206,7 +206,8 @@ export class WordService {
 		const groupsByLang = new Map<string, Set<number>>();
 		for (const id of langMap.keys()) {
 			const root = find(id);
-			const lang = langMap.get(id)!;
+			const lang = langMap.get(id);
+			if (!lang) continue;
 			if (!groupsByLang.has(lang)) groupsByLang.set(lang, new Set());
 			groupsByLang.get(lang)?.add(root);
 		}
