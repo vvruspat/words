@@ -527,12 +527,6 @@ paths:
           in: query
           schema:
             type: string
-        - name: similarityThreshold
-          required: false
-          in: query
-          description: Trigram similarity threshold (0–1, default 0.9)
-          schema:
-            type: number
       responses:
         '200':
           description: ''

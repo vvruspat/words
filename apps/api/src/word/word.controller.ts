@@ -25,7 +25,6 @@ import {
 	PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
-import { DEFAULT_SIMILARITY_THRESHOLD } from "./word.constants";
 import { WordService } from "./word.service";
 import { WordEventService } from "./word-event.service";
 
@@ -51,30 +50,18 @@ export class WordController {
 	@ApiQuery({ name: "limit", required: false, type: Number })
 	@ApiQuery({ name: "offset", required: false, type: Number })
 	@ApiQuery({ name: "language", required: false, type: String })
-	@ApiQuery({
-		name: "similarityThreshold",
-		required: false,
-		type: Number,
-		description: "Trigram similarity threshold (0–1, default 0.9)",
-	})
 	@ApiResponse({ status: 200, type: GetWordDuplicatesResponseDto })
 	async getDuplicates(
 		@Query("limit") limit?: string,
 		@Query("offset") offset?: string,
 		@Query("language") language?: string,
-		@Query("similarityThreshold") similarityThreshold?: string,
 	): Promise<GetWordDuplicatesResponseDto> {
 		const parsedLimit = limit != null ? Number(limit) : 20;
 		const parsedOffset = offset != null ? Number(offset) : 0;
-		const parsedThreshold =
-			similarityThreshold != null
-				? Number(similarityThreshold)
-				: DEFAULT_SIMILARITY_THRESHOLD;
 		const { groups, total } = await this.wordService.findDuplicates(
 			parsedLimit,
 			parsedOffset,
 			language,
-			parsedThreshold,
 		);
 		return { groups, total, limit: parsedLimit, offset: parsedOffset };
 	}
