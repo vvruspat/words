@@ -8,6 +8,7 @@ import { WordController } from "./word.controller";
 import { wordProviders } from "./word.providers";
 import { WordQueueProcessor } from "./word.queue.processor";
 import { WordService } from "./word.service";
+import { WordDuplicateService } from "./word-duplicate.service";
 import { WordEventService } from "./word-event.service";
 
 @Module({
@@ -21,10 +22,11 @@ import { WordEventService } from "./word-event.service";
 	providers: [
 		...wordProviders,
 		WordService,
+		WordDuplicateService,
 		WordQueueProcessor,
 		WordEventService,
 	],
 	controllers: [WordController],
-	exports: [WordEventService, WordService],
+	exports: [WordEventService, WordService, WordDuplicateService],
 })
 export class WordModule {}

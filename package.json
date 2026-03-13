@@ -28,11 +28,11 @@
     "docker:dev": "docker compose -f docker-compose.dev.yml up"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.6",
+    "@biomejs/biome": "2.4.7",
     "@repo/typescript-config": "*",
     "husky": "^9.1.7",
     "ts-jest": "^29.4.6",
-    "turbo": "^2.8.16"
+    "turbo": "^2.8.17"
   },
   "overrides": {
     "esbuild": "0.27.4"
@@ -48,6 +48,7 @@
   "dependencies": {
     "@google-cloud/storage": "^7.19.0",
     "@nestjs/bullmq": "^11.0.4",
+    "@nestjs/schedule": "^6.1.1",
     "@svgr/webpack": "^8.1.0",
     "bullmq": "^5.71.0",
     "cross-env": "^10.1.0",

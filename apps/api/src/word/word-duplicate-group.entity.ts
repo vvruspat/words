@@ -1,0 +1,19 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity({ name: "word_duplicate_group" })
+export class WordDuplicateGroupEntity {
+	@PrimaryGeneratedColumn({ type: "int" })
+	id: number;
+
+	@Column({ type: "varchar" })
+	language: string;
+
+	@Column({ type: "int", array: true })
+	word_ids: number[];
+
+	@Column({
+		type: "timestamptz",
+		default: () => "CURRENT_TIMESTAMP",
+	})
+	calculated_at: string;
+}
