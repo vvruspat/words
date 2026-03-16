@@ -111,32 +111,24 @@ export class AuthService {
 		return { ...tokens, user };
 	}
 
-	async sendTmpPasswordToEmail(email: string) {
-		const user = await this.userService.findOneByEmail(email);
+	async sendTmpPasswordToEmail(
+		email: string,
+	): Promise<{ is_new_user: boolean }> {
+		let user = await this.userService.findOneByEmail(email);
+		let is_new_user = false;
 
 		if (!user) {
-			throw new UnauthorizedException();
+			user = await this.userService.create({
+				email,
+				email_verified: false,
+				onboarded: false,
+			});
+			is_new_user = true;
 		}
 
-		const tmpPassword = Math.random().toString(36).slice(-4);
+		await this.sendVerificationEmail(email);
 
-		const hashedPassword = await bcrypt.hash(tmpPassword, 10);
-
-		await this.redis.set(
-			`tmp-password:${email}`,
-			hashedPassword,
-			"EX",
-			60 * 60 * 1,
-		); // 1 hour expiration
-
-		await this.mailerService.sendMail({
-			to: [{ email: user.email }],
-			templateId: MailTemplate.TEMPORARY_PASSWORD,
-			params: {
-				name: user.name,
-				tmpPassword,
-			},
-		});
+		return { is_new_user };
 	}
 
 	async refreshToken(token: string): Promise<PostSignInResponseDto> {
@@ -170,7 +162,10 @@ export class AuthService {
 		};
 	}
 
-	async verifyEmail(email: string, code: string) {
+	async verifyEmail(
+		email: string,
+		code: string,
+	): Promise<PostSignInResponseDto> {
 		const storedCode = await this.redis.get(`verify-email:${email}`);
 
 		if (!storedCode || storedCode !== code.toUpperCase()) {
@@ -186,6 +181,10 @@ export class AuthService {
 		}
 
 		await this.userService.setEmailVerified(user.id);
+
+		const { access_token, refresh_token } = await this.getAccessToken(user);
+
+		return { access_token, refresh_token, user };
 	}
 
 	async sendVerificationEmail(email: string) {

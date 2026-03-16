@@ -2259,6 +2259,15 @@
             }
           },
           {
+            "name": "onboarded",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
             "name": "password",
             "required": false,
             "in": "query",
@@ -2549,15 +2558,29 @@
       "post": {
         "operationId": "AuthController_sendTmpPasswordToEmail",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Password successfully sent"
-          },
-          "401": {
-            "description": "User not found"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostVerifyEmailResendRequestDto"
+              }
+            }
           }
         },
-        "summary": "Send temp password to email",
+        "responses": {
+          "200": {
+            "description": "OTP sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTmpPasswordResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Send OTP to email; creates user if not found",
         "tags": [
           "auth"
         ]
@@ -2565,7 +2588,7 @@
     },
     "/auth/verify-email": {
       "post": {
-        "operationId": "AuthController_sendVerificationEmail",
+        "operationId": "AuthController_verifyEmail",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -2579,7 +2602,14 @@
         },
         "responses": {
           "200": {
-            "description": "Email successfully verified"
+            "description": "Email verified; tokens returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostSignInResponseDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "Invalid or expired verification code"
@@ -2588,7 +2618,7 @@
             "description": "User not found"
           }
         },
-        "summary": "Verify email with verification code",
+        "summary": "Verify OTP and return auth tokens",
         "tags": [
           "auth"
         ]
@@ -2598,6 +2628,16 @@
       "post": {
         "operationId": "AuthController_resendVerificationEmail",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostVerifyEmailResendRequestDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Verification email sent successfully"
@@ -4492,6 +4532,10 @@
             "type": "boolean",
             "default": false
           },
+          "onboarded": {
+            "type": "boolean",
+            "default": false
+          },
           "password": {
             "type": "string"
           }
@@ -4558,6 +4602,10 @@
             "type": "boolean",
             "default": false
           },
+          "onboarded": {
+            "type": "boolean",
+            "default": false
+          },
           "password": {
             "type": "string"
           }
@@ -4593,6 +4641,10 @@
             "type": "string"
           },
           "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "onboarded": {
             "type": "boolean",
             "default": false
           },
@@ -4635,6 +4687,10 @@
             "type": "boolean",
             "default": false
           },
+          "onboarded": {
+            "type": "boolean",
+            "default": false
+          },
           "password": {
             "type": "string"
           }
@@ -4663,6 +4719,10 @@
             "type": "string"
           },
           "email_verified": {
+            "type": "boolean",
+            "default": false
+          },
+          "onboarded": {
             "type": "boolean",
             "default": false
           },
@@ -4784,6 +4844,30 @@
           "access_token",
           "refresh_token",
           "user"
+        ]
+      },
+      "PostVerifyEmailResendRequestDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "PostTmpPasswordResponseDto": {
+        "type": "object",
+        "properties": {
+          "is_new_user": {
+            "type": "boolean",
+            "description": "Whether the user is new"
+          }
+        },
+        "required": [
+          "is_new_user"
         ]
       },
       "PostVerifyEmailRequestDto": {

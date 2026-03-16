@@ -9,3 +9,8 @@ export class PostVerifyEmailResendRequestDto {
 	@IsString()
 	email!: string;
 }
+
+export class PostTmpPasswordResponseDto {
+	@ApiProperty({ type: Boolean, description: "Whether the user is new" })
+	is_new_user: boolean;
+}
