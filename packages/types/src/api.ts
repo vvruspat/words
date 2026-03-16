@@ -336,6 +336,23 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	"/word/synonym-groups": {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/** Get synonym groups for client-side answer validation */
+		get: operations["WordController_getSynonymGroups"];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	"/word/events": {
 		parameters: {
 			query?: never;
@@ -2241,6 +2258,25 @@ export interface operations {
 			};
 			/** @description Word not found */
 			404: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content?: never;
+			};
+		};
+	};
+	WordController_getSynonymGroups: {
+		parameters: {
+			query?: {
+				language?: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			200: {
 				headers: {
 					[name: string]: unknown;
 				};

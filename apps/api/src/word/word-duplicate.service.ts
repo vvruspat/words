@@ -5,10 +5,15 @@ import { In } from "typeorm";
 import {
 	WORD_DUPLICATE_GROUP_REPOSITORY,
 	WORD_REPOSITORY,
+	WORD_SYNONYM_GROUP_REPOSITORY,
 } from "../constants/database.constants";
-import { DEFAULT_VECTOR_SIMILARITY_THRESHOLD } from "./word.constants";
+import {
+	DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
+	SYNONYM_SIMILARITY_THRESHOLD,
+} from "./word.constants";
 import type { WordEntity } from "./word.entity";
 import { WordDuplicateGroupEntity } from "./word-duplicate-group.entity";
+import { WordSynonymGroupEntity } from "./word-synonym-group.entity";
 
 @Injectable()
 export class WordDuplicateService {
@@ -17,6 +22,8 @@ export class WordDuplicateService {
 	constructor(
 		@Inject(WORD_DUPLICATE_GROUP_REPOSITORY)
 		private readonly groupRepository: Repository<WordDuplicateGroupEntity>,
+		@Inject(WORD_SYNONYM_GROUP_REPOSITORY)
+		private readonly synonymGroupRepository: Repository<WordSynonymGroupEntity>,
 		@Inject(WORD_REPOSITORY)
 		private readonly wordRepository: Repository<WordEntity>,
 	) {}
@@ -153,6 +160,90 @@ export class WordDuplicateService {
 		);
 
 		return { groups, total };
+	}
+
+	/**
+	 * Runs every hour to recompute synonym groups (threshold 0.90) for client-side validation.
+	 * Separate from duplicate groups (0.97) which are used for admin deduplication.
+	 */
+	@Cron(CronExpression.EVERY_HOUR)
+	async recalculateSynonymGroups(): Promise<void> {
+		this.logger.log("Starting synonym group recalculation...");
+
+		const pairs = await this.wordRepository.manager.query<
+			Array<{ id1: number; id2: number; lang: string }>
+		>(
+			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
+			 FROM word w1
+			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
+			 WHERE w1.embedding IS NOT NULL
+			   AND w2.embedding IS NOT NULL
+			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $1`,
+			[SYNONYM_SIMILARITY_THRESHOLD],
+		);
+
+		if (pairs.length === 0) {
+			await this.synonymGroupRepository.clear();
+			this.logger.log("No synonym pairs found, cleared all synonym groups.");
+			return;
+		}
+
+		const parent = new Map<number, number>();
+		const langMap = new Map<number, string>();
+
+		const find = (x: number): number => {
+			if (!parent.has(x)) parent.set(x, x);
+			const p = parent.get(x) ?? x;
+			if (p !== x) parent.set(x, find(p));
+			return parent.get(x) ?? x;
+		};
+
+		for (const { id1, id2, lang } of pairs) {
+			const r1 = find(id1);
+			const r2 = find(id2);
+			if (r1 !== r2) parent.set(r1, r2);
+			langMap.set(id1, lang);
+			langMap.set(id2, lang);
+		}
+
+		const clusters = new Map<number, { ids: number[]; lang: string }>();
+		for (const id of langMap.keys()) {
+			const root = find(id);
+			const lang = langMap.get(id) ?? "";
+			const entry = clusters.get(root) ?? { ids: [], lang };
+			entry.ids.push(id);
+			clusters.set(root, entry);
+		}
+
+		const newGroups = Array.from(clusters.values()).filter(
+			(c) => c.ids.length > 1,
+		);
+
+		await this.synonymGroupRepository.manager.transaction(async (manager) => {
+			await manager.clear(WordSynonymGroupEntity);
+			for (const { ids, lang } of newGroups) {
+				const group = manager.create(WordSynonymGroupEntity, {
+					language: lang,
+					word_ids: ids,
+				});
+				await manager.save(group);
+			}
+		});
+
+		this.logger.log(
+			`Synonym recalculation complete: ${newGroups.length} groups saved.`,
+		);
+	}
+
+	/**
+	 * Returns all synonym groups, optionally filtered by language.
+	 * Used by mobile client to validate training answers.
+	 */
+	async findSynonymGroups(
+		language?: string,
+	): Promise<WordSynonymGroupEntity[]> {
+		const where = language ? { language } : {};
+		return this.synonymGroupRepository.find({ where });
 	}
 
 	/**

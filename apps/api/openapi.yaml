@@ -775,6 +775,20 @@ paths:
           description: Word not found
       summary: Regenerate audio for word
       tags: *ref_3
+  /word/synonym-groups:
+    get:
+      operationId: WordController_getSynonymGroups
+      parameters:
+        - name: language
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      summary: Get synonym groups for client-side answer validation
+      tags: *ref_3
   /word/events:
     get:
       operationId: WordController_streamEvents

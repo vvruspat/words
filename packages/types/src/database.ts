@@ -93,6 +93,12 @@ export interface TopicTranslation {
 	language: string;
 }
 
+export interface WordSynonymGroup {
+	id: number;
+	language: string;
+	word_ids: number[];
+}
+
 export type ReportType = "word" | "translation" | "audio";
 export type ReportStatus = "new" | "reviewed" | "resolved";
 

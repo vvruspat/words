@@ -7,3 +7,4 @@ export * from "./get";
 export * from "./id";
 export * from "./put";
 export * from "./stats";
+export * from "./synonym-groups";
