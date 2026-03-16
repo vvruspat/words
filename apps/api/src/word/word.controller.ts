@@ -26,6 +26,7 @@ import {
 	PutWordResponseDto,
 } from "~/dto/api/word";
 import { WordService } from "./word.service";
+import { WordDuplicateService } from "./word-duplicate.service";
 import { WordEventService } from "./word-event.service";
 
 @ApiTags("word")
@@ -34,6 +35,7 @@ export class WordController {
 	constructor(
 		private readonly wordService: WordService,
 		private readonly wordEventService: WordEventService,
+		private readonly wordDuplicateService: WordDuplicateService,
 	) {}
 
 	@Get("stats")
@@ -216,6 +218,23 @@ export class WordController {
 			throw new NotFoundException("Word not found");
 		}
 		return { message: "Audio regeneration queued" };
+	}
+
+	@Get("synonym-groups")
+	@ApiOperation({
+		summary: "Get synonym groups for client-side answer validation",
+	})
+	@ApiQuery({ name: "language", required: false, type: String })
+	@ApiResponse({ status: 200 })
+	async getSynonymGroups(
+		@Query("language") language?: string,
+	): Promise<{ id: number; language: string; word_ids: number[] }[]> {
+		const groups = await this.wordDuplicateService.findSynonymGroups(language);
+		return groups.map(({ id, language: lang, word_ids }) => ({
+			id,
+			language: lang,
+			word_ids,
+		}));
 	}
 
 	@Get("events")

@@ -1249,6 +1249,30 @@
         ]
       }
     },
+    "/word/synonym-groups": {
+      "get": {
+        "operationId": "WordController_getSynonymGroups",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get synonym groups for client-side answer validation",
+        "tags": [
+          "word"
+        ]
+      }
+    },
     "/word/events": {
       "get": {
         "operationId": "WordController_streamEvents",

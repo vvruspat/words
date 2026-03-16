@@ -4,6 +4,7 @@ import {
 	type ExceptionFilter,
 	HttpException,
 	HttpStatus,
+	Logger,
 } from "@nestjs/common";
 import { SentryExceptionCaptured } from "@sentry/nestjs";
 import {
@@ -13,6 +14,8 @@ import {
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
+	private readonly logger = new Logger(GlobalExceptionFilter.name);
+
 	@SentryExceptionCaptured()
 	catch(exception: unknown, host: ArgumentsHost): void {
 		const ctx = host.switchToHttp();
@@ -21,6 +24,13 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 		let status = HttpStatus.INTERNAL_SERVER_ERROR;
 		let message = "Internal server error";
 		let details: Record<string, string> | undefined;
+
+		if (!(exception instanceof HttpException)) {
+			this.logger.error(
+				"Unhandled exception",
+				exception instanceof Error ? exception.stack : exception,
+			);
+		}
 
 		if (exception instanceof HttpException) {
 			status = exception.getStatus();
