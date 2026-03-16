@@ -648,7 +648,7 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
-		/** Send temp password to email */
+		/** Send OTP to email; creates user if not found */
 		post: operations["AuthController_sendTmpPasswordToEmail"];
 		delete?: never;
 		options?: never;
@@ -665,8 +665,8 @@ export interface paths {
 		};
 		get?: never;
 		put?: never;
-		/** Verify email with verification code */
-		post: operations["AuthController_sendVerificationEmail"];
+		/** Verify OTP and return auth tokens */
+		post: operations["AuthController_verifyEmail"];
 		delete?: never;
 		options?: never;
 		head?: never;
@@ -1295,6 +1295,8 @@ export interface components {
 			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
+			/** @default false */
+			onboarded: boolean;
 			password?: string;
 		};
 		GetUserResponseDto: {
@@ -1316,6 +1318,8 @@ export interface components {
 			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
+			/** @default false */
+			onboarded: boolean;
 			password?: string;
 		};
 		PostUserResponseDto: {
@@ -1328,6 +1332,8 @@ export interface components {
 			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
+			/** @default false */
+			onboarded: boolean;
 			password?: string;
 		};
 		PutUserRequestDto: {
@@ -1340,6 +1346,8 @@ export interface components {
 			language_learn?: string;
 			/** @default false */
 			email_verified: boolean;
+			/** @default false */
+			onboarded: boolean;
 			password?: string;
 		};
 		PutUserResponseDto: {
@@ -1352,6 +1360,8 @@ export interface components {
 			language_learn: string;
 			/** @default false */
 			email_verified: boolean;
+			/** @default false */
+			onboarded: boolean;
 			password?: string;
 		};
 		DeleteUserResponseDto: {
@@ -1394,6 +1404,14 @@ export interface components {
 			refresh_token: string;
 			/** @description User information without password */
 			user: components["schemas"]["UserDto"];
+		};
+		PostVerifyEmailResendRequestDto: {
+			/** @description User email */
+			email: string;
+		};
+		PostTmpPasswordResponseDto: {
+			/** @description Whether the user is new */
+			is_new_user: boolean;
 		};
 		PostVerifyEmailRequestDto: {
 			/** @description Email verification code */
@@ -2923,6 +2941,7 @@ export interface operations {
 				language_speak?: string;
 				language_learn?: string;
 				email_verified?: boolean;
+				onboarded?: boolean;
 				password?: string;
 			};
 			header?: never;
@@ -3233,25 +3252,24 @@ export interface operations {
 			path?: never;
 			cookie?: never;
 		};
-		requestBody?: never;
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
 		responses: {
-			/** @description Password successfully sent */
+			/** @description OTP sent successfully */
 			200: {
 				headers: {
 					[name: string]: unknown;
 				};
-				content?: never;
-			};
-			/** @description User not found */
-			401: {
-				headers: {
-					[name: string]: unknown;
+				content: {
+					"application/json": components["schemas"]["PostTmpPasswordResponseDto"];
 				};
-				content?: never;
 			};
 		};
 	};
-	AuthController_sendVerificationEmail: {
+	AuthController_verifyEmail: {
 		parameters: {
 			query?: never;
 			header?: never;
@@ -3264,12 +3282,14 @@ export interface operations {
 			};
 		};
 		responses: {
-			/** @description Email successfully verified */
+			/** @description Email verified; tokens returned */
 			200: {
 				headers: {
 					[name: string]: unknown;
 				};
-				content?: never;
+				content: {
+					"application/json": components["schemas"]["PostSignInResponseDto"];
+				};
 			};
 			/** @description Invalid or expired verification code */
 			400: {
@@ -3294,7 +3314,11 @@ export interface operations {
 			path?: never;
 			cookie?: never;
 		};
-		requestBody?: never;
+		requestBody: {
+			content: {
+				"application/json": components["schemas"]["PostVerifyEmailResendRequestDto"];
+			};
+		};
 		responses: {
 			/** @description Verification email sent successfully */
 			200: {

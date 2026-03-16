@@ -37,7 +37,11 @@ export class UserService {
 	}
 
 	async create(
-		user: Omit<UserEntity, "id" | "created_at">,
+		user: Omit<
+			UserEntity,
+			"id" | "created_at" | "name" | "language_speak" | "language_learn"
+		> &
+			Partial<Pick<UserEntity, "name" | "language_speak" | "language_learn">>,
 	): Promise<UserEntity> {
 		const newUser = this.userRepository.create(user);
 		return this.userRepository.save(newUser);
@@ -54,6 +58,10 @@ export class UserService {
 
 	async setEmailVerified(id: UserEntity["id"]): Promise<void> {
 		await this.userRepository.update(id, { email_verified: true });
+	}
+
+	async setOnboarded(id: UserEntity["id"]): Promise<void> {
+		await this.userRepository.update(id, { onboarded: true });
 	}
 
 	async findUserStats(): Promise<{

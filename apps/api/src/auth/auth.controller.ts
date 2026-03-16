@@ -8,7 +8,7 @@ import {
 	Put,
 	Query,
 } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import {
 	PostRefreshTokenRequestDto,
 	PostRefreshTokenResponseDto,
@@ -16,13 +16,14 @@ import {
 	PostSignInResponseDto,
 	PostSignUpRequestDto,
 	PostSignUpResponseDto,
+	PostTmpPasswordResponseDto,
 	PostVerifyEmailRequestDto,
 } from "~/dto";
 import type {
 	GetResetPasswordRequestDto,
 	PutResetPasswordRequestDto,
 } from "~/dto/api/reset-password";
-import type { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
+import { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
 import { AuthService } from "./auth.service";
 
 @ApiTags("auth")
@@ -117,27 +118,26 @@ export class AuthController {
 
 	@Post("tmp-password")
 	@HttpCode(HttpStatus.OK)
-	@ApiOperation({ summary: "Send temp password to email" })
+	@ApiOperation({ summary: "Send OTP to email; creates user if not found" })
+	@ApiBody({ type: PostVerifyEmailResendRequestDto })
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description: "Password successfully sent",
-	})
-	@ApiResponse({
-		status: HttpStatus.UNAUTHORIZED,
-		description: "User not found",
+		description: "OTP sent successfully",
+		type: PostTmpPasswordResponseDto,
 	})
 	async sendTmpPasswordToEmail(
 		@Body() dto: PostVerifyEmailResendRequestDto,
-	): Promise<void> {
+	): Promise<PostTmpPasswordResponseDto> {
 		return this.authService.sendTmpPasswordToEmail(dto.email);
 	}
 
 	@Post("verify-email")
 	@HttpCode(HttpStatus.OK)
-	@ApiOperation({ summary: "Verify email with verification code" })
+	@ApiOperation({ summary: "Verify OTP and return auth tokens" })
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description: "Email successfully verified",
+		description: "Email verified; tokens returned",
+		type: PostSignInResponseDto,
 	})
 	@ApiResponse({
 		status: HttpStatus.BAD_REQUEST,
@@ -147,9 +147,9 @@ export class AuthController {
 		status: HttpStatus.UNAUTHORIZED,
 		description: "User not found",
 	})
-	async sendVerificationEmail(
+	async verifyEmail(
 		@Body() dto: PostVerifyEmailRequestDto,
-	): Promise<void> {
+	): Promise<PostSignInResponseDto> {
 		return this.authService.verifyEmail(dto.email, dto.code);
 	}
 

@@ -43,9 +43,10 @@ export interface User {
 	email: string;
 	name?: string;
 	password?: string;
-	language_speak: string;
-	language_learn: string;
+	language_speak?: string;
+	language_learn?: string;
 	email_verified?: boolean;
+	onboarded?: boolean;
 }
 
 export interface VocabCatalog {
