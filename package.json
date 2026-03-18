@@ -25,7 +25,8 @@
     "prepare": "node -e \"if (!process.env.CI) { const {execSync} = require('child_process'); try { execSync('husky', {stdio: 'inherit', env: process.env}); } catch(e) { process.exit(0); } }\"",
     "kill": "lsof -ti :3000,3001 | xargs kill -9",
     "docker:build": "docker compose -f docker-compose.dev.yml build",
-    "docker:dev": "docker compose -f docker-compose.dev.yml up"
+    "docker:dev": "docker compose -f docker-compose.dev.yml up",
+    "db:sync": "./scripts/sync-db.sh"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.7",

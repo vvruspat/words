@@ -69,3 +69,6 @@ secrets/*.json
 
 apps/api/secrets
 apps/api/secrets/*.json
+
+# Production DB credentials (never commit)
+scripts/.env.production
