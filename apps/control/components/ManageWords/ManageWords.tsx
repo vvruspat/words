@@ -31,6 +31,7 @@ import { fetchCatalogsAction } from "@/actions/fetchCatalogsAction";
 import { fetchTopicsAction } from "@/actions/fetchTopicsAction";
 import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
 import { fetchWordsAction } from "@/actions/fetchWordsAction";
+import { generateEmbeddingsAction } from "@/actions/generateEmbeddingsAction";
 import { regenerateAudioAction } from "@/actions/regenerateAudioAction";
 import { retranslateWordAction } from "@/actions/retranslateWordAction";
 import { updateWordAction } from "@/actions/updateWordAction";
@@ -431,6 +432,20 @@ export default function ManageWords({
 		}
 	}, []);
 
+	const [generatingEmbeddings, setGeneratingEmbeddings] = useState(false);
+	const [embeddingsQueued, setEmbeddingsQueued] = useState<number | null>(null);
+
+	const handleGenerateEmbeddings = useCallback(async () => {
+		setGeneratingEmbeddings(true);
+		setEmbeddingsQueued(null);
+		try {
+			const result = await generateEmbeddingsAction(language);
+			setEmbeddingsQueued(result.queued);
+		} finally {
+			setGeneratingEmbeddings(false);
+		}
+	}, [language]);
+
 	const [pendingDelete, setPendingDelete] = useState<Set<number>>(new Set());
 
 	const [editingWordId, setEditingWordId] = useState<number | null>(null);
@@ -545,6 +560,29 @@ export default function ManageWords({
 								Delete ({selectedRows.length})
 							</MButton>
 						)}
+
+						<MButton
+							mode="tertiary"
+							onClick={() => void handleGenerateEmbeddings()}
+							disabled={generatingEmbeddings}
+							title={
+								embeddingsQueued !== null
+									? `Queued ${embeddingsQueued} embeddings`
+									: "Generate missing embeddings"
+							}
+						>
+							{generatingEmbeddings && (
+								<MIconArrowsClockwise
+									mode="regular"
+									width={16}
+									height={16}
+									className={styles.spin}
+								/>
+							)}
+							{embeddingsQueued !== null
+								? `Queued ${embeddingsQueued}`
+								: "Fix Embeddings"}
+						</MButton>
 
 						<MButton
 							mode="primary"
