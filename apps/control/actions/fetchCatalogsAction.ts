@@ -6,7 +6,7 @@ export async function fetchCatalogsAction(language?: string) {
 	return await $fetch("/vocabcatalog", "get", {
 		query: {
 			offset: 0,
-			limit: 100,
+			limit: 2000,
 			...(language ? { language } : {}),
 		},
 	});
