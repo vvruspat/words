@@ -1,5 +1,6 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
+import { AVAILABLE_LANGUAGES } from "@vvruspat/words-types";
 import type { Repository } from "typeorm";
 import { In } from "typeorm";
 import {
@@ -28,32 +29,28 @@ export class WordDuplicateService {
 		private readonly wordRepository: Repository<WordEntity>,
 	) {}
 
-	/**
-	 * Runs every hour to recompute all duplicate groups from scratch.
-	 */
-	@Cron(CronExpression.EVERY_HOUR)
-	async recalculateGroups(): Promise<void> {
-		this.logger.log("Starting duplicate group recalculation...");
-
-		const pairs = await this.wordRepository.manager.query<
+	private async findPairsForLanguage(
+		language: string,
+		threshold: number,
+	): Promise<Array<{ id1: number; id2: number; lang: string }>> {
+		return this.wordRepository.manager.query<
 			Array<{ id1: number; id2: number; lang: string }>
 		>(
 			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
 			 FROM word w1
-			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
-			 WHERE w1.embedding IS NOT NULL
+			 JOIN word w2 ON w1.id < w2.id
+			 WHERE w1.language = $1
+			   AND w2.language = $1
+			   AND w1.embedding IS NOT NULL
 			   AND w2.embedding IS NOT NULL
-			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $1`,
-			[DEFAULT_VECTOR_SIMILARITY_THRESHOLD],
+			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $2`,
+			[language, threshold],
 		);
+	}
 
-		if (pairs.length === 0) {
-			await this.groupRepository.clear();
-			this.logger.log("No duplicate pairs found, cleared all groups.");
-			return;
-		}
-
-		// Union-Find to cluster transitive pairs
+	private clusterPairs(
+		pairs: Array<{ id1: number; id2: number; lang: string }>,
+	): Array<{ ids: number[]; lang: string }> {
 		const parent = new Map<number, number>();
 		const langMap = new Map<number, string>();
 
@@ -72,7 +69,6 @@ export class WordDuplicateService {
 			langMap.set(id2, lang);
 		}
 
-		// Build clusters: root → member IDs
 		const clusters = new Map<number, { ids: number[]; lang: string }>();
 		for (const id of langMap.keys()) {
 			const root = find(id);
@@ -82,15 +78,33 @@ export class WordDuplicateService {
 			clusters.set(root, entry);
 		}
 
-		// Only keep groups with 2+ members
-		const newGroups = Array.from(clusters.values()).filter(
-			(c) => c.ids.length > 1,
-		);
+		return Array.from(clusters.values()).filter((c) => c.ids.length > 1);
+	}
 
-		// Replace all groups atomically
+	/**
+	 * Runs every hour to recompute all duplicate groups from scratch.
+	 * Processed per language to avoid statement timeouts on large datasets.
+	 */
+	@Cron(CronExpression.EVERY_HOUR)
+	async recalculateGroups(): Promise<void> {
+		this.logger.log("Starting duplicate group recalculation...");
+
+		const languages = Object.keys(AVAILABLE_LANGUAGES);
+		const allGroups: Array<{ ids: number[]; lang: string }> = [];
+
+		for (const language of languages) {
+			const pairs = await this.findPairsForLanguage(
+				language,
+				DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
+			);
+			if (pairs.length > 0) {
+				allGroups.push(...this.clusterPairs(pairs));
+			}
+		}
+
 		await this.groupRepository.manager.transaction(async (manager) => {
 			await manager.clear(WordDuplicateGroupEntity);
-			for (const { ids, lang } of newGroups) {
+			for (const { ids, lang } of allGroups) {
 				const group = manager.create(WordDuplicateGroupEntity, {
 					language: lang,
 					word_ids: ids,
@@ -100,7 +114,7 @@ export class WordDuplicateService {
 		});
 
 		this.logger.log(
-			`Duplicate recalculation complete: ${newGroups.length} groups saved.`,
+			`Duplicate recalculation complete: ${allGroups.length} groups saved.`,
 		);
 	}
 
@@ -165,63 +179,28 @@ export class WordDuplicateService {
 	/**
 	 * Runs every hour to recompute synonym groups (threshold 0.90) for client-side validation.
 	 * Separate from duplicate groups (0.97) which are used for admin deduplication.
+	 * Processed per language to avoid statement timeouts on large datasets.
 	 */
 	@Cron(CronExpression.EVERY_HOUR)
 	async recalculateSynonymGroups(): Promise<void> {
 		this.logger.log("Starting synonym group recalculation...");
 
-		const pairs = await this.wordRepository.manager.query<
-			Array<{ id1: number; id2: number; lang: string }>
-		>(
-			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
-			 FROM word w1
-			 JOIN word w2 ON w1.id < w2.id AND w1.language = w2.language
-			 WHERE w1.embedding IS NOT NULL
-			   AND w2.embedding IS NOT NULL
-			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $1`,
-			[SYNONYM_SIMILARITY_THRESHOLD],
-		);
+		const languages = Object.keys(AVAILABLE_LANGUAGES);
+		const allGroups: Array<{ ids: number[]; lang: string }> = [];
 
-		if (pairs.length === 0) {
-			await this.synonymGroupRepository.clear();
-			this.logger.log("No synonym pairs found, cleared all synonym groups.");
-			return;
+		for (const language of languages) {
+			const pairs = await this.findPairsForLanguage(
+				language,
+				SYNONYM_SIMILARITY_THRESHOLD,
+			);
+			if (pairs.length > 0) {
+				allGroups.push(...this.clusterPairs(pairs));
+			}
 		}
-
-		const parent = new Map<number, number>();
-		const langMap = new Map<number, string>();
-
-		const find = (x: number): number => {
-			if (!parent.has(x)) parent.set(x, x);
-			const p = parent.get(x) ?? x;
-			if (p !== x) parent.set(x, find(p));
-			return parent.get(x) ?? x;
-		};
-
-		for (const { id1, id2, lang } of pairs) {
-			const r1 = find(id1);
-			const r2 = find(id2);
-			if (r1 !== r2) parent.set(r1, r2);
-			langMap.set(id1, lang);
-			langMap.set(id2, lang);
-		}
-
-		const clusters = new Map<number, { ids: number[]; lang: string }>();
-		for (const id of langMap.keys()) {
-			const root = find(id);
-			const lang = langMap.get(id) ?? "";
-			const entry = clusters.get(root) ?? { ids: [], lang };
-			entry.ids.push(id);
-			clusters.set(root, entry);
-		}
-
-		const newGroups = Array.from(clusters.values()).filter(
-			(c) => c.ids.length > 1,
-		);
 
 		await this.synonymGroupRepository.manager.transaction(async (manager) => {
 			await manager.clear(WordSynonymGroupEntity);
-			for (const { ids, lang } of newGroups) {
+			for (const { ids, lang } of allGroups) {
 				const group = manager.create(WordSynonymGroupEntity, {
 					language: lang,
 					word_ids: ids,
@@ -231,7 +210,7 @@ export class WordDuplicateService {
 		});
 
 		this.logger.log(
-			`Synonym recalculation complete: ${newGroups.length} groups saved.`,
+			`Synonym recalculation complete: ${allGroups.length} groups saved.`,
 		);
 	}
 
