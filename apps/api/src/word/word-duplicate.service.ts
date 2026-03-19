@@ -1,6 +1,8 @@
+import { InjectQueue } from "@nestjs/bullmq";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { AVAILABLE_LANGUAGES } from "@vvruspat/words-types";
+import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
 import { In } from "typeorm";
 import {
@@ -8,6 +10,11 @@ import {
 	WORD_REPOSITORY,
 	WORD_SYNONYM_GROUP_REPOSITORY,
 } from "../constants/database.constants";
+import {
+	DUPLICATE_RECALCULATION_START,
+	SYNONYM_RECALCULATION_START,
+} from "../constants/queue-events.constants";
+import { WORDS_QUEUE } from "../constants/queues.constants";
 import {
 	DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
 	SYNONYM_SIMILARITY_THRESHOLD,
@@ -27,6 +34,8 @@ export class WordDuplicateService {
 		private readonly synonymGroupRepository: Repository<WordSynonymGroupEntity>,
 		@Inject(WORD_REPOSITORY)
 		private readonly wordRepository: Repository<WordEntity>,
+		@InjectQueue(WORDS_QUEUE)
+		private readonly wordsQueue: Queue,
 	) {}
 
 	private async findPairsForLanguage(
@@ -82,29 +91,38 @@ export class WordDuplicateService {
 	}
 
 	/**
-	 * Runs every hour to recompute all duplicate groups from scratch.
-	 * Processed per language to avoid statement timeouts on large datasets.
+	 * Runs every hour — enqueues one job per language so each runs independently.
 	 */
 	@Cron(CronExpression.EVERY_HOUR)
 	async recalculateGroups(): Promise<void> {
-		this.logger.log("Starting duplicate group recalculation...");
-
 		const languages = Object.keys(AVAILABLE_LANGUAGES);
-		const allGroups: Array<{ ids: number[]; lang: string }> = [];
+		await Promise.all(
+			languages.map((lang) =>
+				this.wordsQueue.add(DUPLICATE_RECALCULATION_START, { language: lang }),
+			),
+		);
+		this.logger.log(
+			`Enqueued duplicate recalculation for ${languages.length} languages.`,
+		);
+	}
 
-		for (const language of languages) {
-			const pairs = await this.findPairsForLanguage(
-				language,
-				DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
-			);
-			if (pairs.length > 0) {
-				allGroups.push(...this.clusterPairs(pairs));
-			}
-		}
+	async recalculateGroupsForLanguage(language: string): Promise<void> {
+		this.logger.log(`Recalculating duplicate groups for language: ${language}`);
+
+		const pairs = await this.findPairsForLanguage(
+			language,
+			DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
+		);
+		const newGroups = pairs.length > 0 ? this.clusterPairs(pairs) : [];
 
 		await this.groupRepository.manager.transaction(async (manager) => {
-			await manager.clear(WordDuplicateGroupEntity);
-			for (const { ids, lang } of allGroups) {
+			await manager
+				.createQueryBuilder()
+				.delete()
+				.from(WordDuplicateGroupEntity)
+				.where("language = :language", { language })
+				.execute();
+			for (const { ids, lang } of newGroups) {
 				const group = manager.create(WordDuplicateGroupEntity, {
 					language: lang,
 					word_ids: ids,
@@ -114,7 +132,7 @@ export class WordDuplicateService {
 		});
 
 		this.logger.log(
-			`Duplicate recalculation complete: ${allGroups.length} groups saved.`,
+			`Duplicate recalculation done for ${language}: ${newGroups.length} groups.`,
 		);
 	}
 
@@ -177,30 +195,38 @@ export class WordDuplicateService {
 	}
 
 	/**
-	 * Runs every hour to recompute synonym groups (threshold 0.90) for client-side validation.
-	 * Separate from duplicate groups (0.97) which are used for admin deduplication.
-	 * Processed per language to avoid statement timeouts on large datasets.
+	 * Runs every hour — enqueues one job per language so each runs independently.
 	 */
 	@Cron(CronExpression.EVERY_HOUR)
 	async recalculateSynonymGroups(): Promise<void> {
-		this.logger.log("Starting synonym group recalculation...");
-
 		const languages = Object.keys(AVAILABLE_LANGUAGES);
-		const allGroups: Array<{ ids: number[]; lang: string }> = [];
+		await Promise.all(
+			languages.map((lang) =>
+				this.wordsQueue.add(SYNONYM_RECALCULATION_START, { language: lang }),
+			),
+		);
+		this.logger.log(
+			`Enqueued synonym recalculation for ${languages.length} languages.`,
+		);
+	}
 
-		for (const language of languages) {
-			const pairs = await this.findPairsForLanguage(
-				language,
-				SYNONYM_SIMILARITY_THRESHOLD,
-			);
-			if (pairs.length > 0) {
-				allGroups.push(...this.clusterPairs(pairs));
-			}
-		}
+	async recalculateSynonymGroupsForLanguage(language: string): Promise<void> {
+		this.logger.log(`Recalculating synonym groups for language: ${language}`);
+
+		const pairs = await this.findPairsForLanguage(
+			language,
+			SYNONYM_SIMILARITY_THRESHOLD,
+		);
+		const newGroups = pairs.length > 0 ? this.clusterPairs(pairs) : [];
 
 		await this.synonymGroupRepository.manager.transaction(async (manager) => {
-			await manager.clear(WordSynonymGroupEntity);
-			for (const { ids, lang } of allGroups) {
+			await manager
+				.createQueryBuilder()
+				.delete()
+				.from(WordSynonymGroupEntity)
+				.where("language = :language", { language })
+				.execute();
+			for (const { ids, lang } of newGroups) {
 				const group = manager.create(WordSynonymGroupEntity, {
 					language: lang,
 					word_ids: ids,
@@ -210,7 +236,7 @@ export class WordDuplicateService {
 		});
 
 		this.logger.log(
-			`Synonym recalculation complete: ${allGroups.length} groups saved.`,
+			`Synonym recalculation done for ${language}: ${newGroups.length} groups.`,
 		);
 	}
 
