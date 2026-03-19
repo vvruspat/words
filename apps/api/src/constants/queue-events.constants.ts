@@ -8,3 +8,5 @@ export const TOPIC_TRANSLATION_START = "topic-translation-start";
 export const TOPIC_TRANSLATION_DONE = "topic-translation-done";
 export const EMBEDDING_CREATION_START = "embedding-creation-start";
 export const EMBEDDING_CREATION_DONE = "embedding-creation-done";
+export const DUPLICATE_RECALCULATION_START = "duplicate-recalculation-start";
+export const SYNONYM_RECALCULATION_START = "synonym-recalculation-start";

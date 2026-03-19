@@ -3,20 +3,26 @@ import { Injectable, Logger } from "@nestjs/common";
 import type { Job } from "bullmq";
 import {
 	AUDIO_CREATION_DONE,
+	DUPLICATE_RECALCULATION_START,
 	EMBEDDING_CREATION_DONE,
+	SYNONYM_RECALCULATION_START,
 	WORDS_GENERATION_DONE,
 } from "~/constants/queue-events.constants";
 import { WORDS_QUEUE } from "~/constants/queues.constants";
 import { isWordsArray } from "./types/generated-word";
 import type { WordEntity } from "./word.entity";
 import { WordService } from "./word.service";
+import { WordDuplicateService } from "./word-duplicate.service";
 
 @Processor(WORDS_QUEUE)
 @Injectable()
 export class WordQueueProcessor extends WorkerHost {
 	private readonly logger = new Logger(WordQueueProcessor.name);
 
-	constructor(private readonly wordService: WordService) {
+	constructor(
+		private readonly wordService: WordService,
+		private readonly wordDuplicateService: WordDuplicateService,
+	) {
 		super();
 	}
 
@@ -37,6 +43,14 @@ export class WordQueueProcessor extends WorkerHost {
 					job.data.filename,
 					job.data.audio,
 					job.data.wordId,
+				);
+			case DUPLICATE_RECALCULATION_START:
+				return this.wordDuplicateService.recalculateGroupsForLanguage(
+					job.data.language,
+				);
+			case SYNONYM_RECALCULATION_START:
+				return this.wordDuplicateService.recalculateSynonymGroupsForLanguage(
+					job.data.language,
 				);
 			default:
 				throw new Error(`Unknown job name: ${job.name}`);
