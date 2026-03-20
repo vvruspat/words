@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In } from "typeorm";
+import { In, IsNull } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	EMBEDDING_CREATION_START,
@@ -298,7 +298,7 @@ export class WordService {
 	async generateMissingEmbeddings(
 		language?: string,
 	): Promise<{ queued: number }> {
-		const where: Record<string, unknown> = { embedding: null };
+		const where: Record<string, unknown> = { embedding: IsNull() };
 		if (language) where.language = language;
 		const words = await this.wordRepository.find({
 			where,
