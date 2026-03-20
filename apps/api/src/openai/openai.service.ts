@@ -269,7 +269,7 @@ export class OpenAIService {
 			input: word,
 		});
 		const embedding = response.data[0].embedding;
-		this.wordsQueue.add(EMBEDDING_CREATION_DONE, { wordId, embedding });
+		await this.wordsQueue.add(EMBEDDING_CREATION_DONE, { wordId, embedding });
 	}
 
 	async makeAudio(language: Language, word: string, wordId: WordEntity["id"]) {

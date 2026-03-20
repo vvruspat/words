@@ -285,7 +285,7 @@ export class WordService {
 	}
 
 	async makeEmbedding(wordId: WordEntity["id"], word: string): Promise<void> {
-		this.openAIQueue.add(EMBEDDING_CREATION_START, { wordId, word });
+		await this.openAIQueue.add(EMBEDDING_CREATION_START, { wordId, word });
 	}
 
 	async embeddingCreated(
@@ -304,9 +304,9 @@ export class WordService {
 			where,
 			select: ["id", "word"],
 		});
-		for (const word of words) {
-			this.makeEmbedding(word.id, word.word);
-		}
+		await Promise.all(
+			words.map((word) => this.makeEmbedding(word.id, word.word)),
+		);
 		this.logger.log(`Queued embedding generation for ${words.length} words`);
 		return { queued: words.length };
 	}
