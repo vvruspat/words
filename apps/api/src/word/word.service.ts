@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { ApiPaginatedResponse, Language } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In } from "typeorm";
+import { In, IsNull } from "typeorm";
 import {
 	AUDIO_CREATION_START,
 	EMBEDDING_CREATION_START,
@@ -285,7 +285,7 @@ export class WordService {
 	}
 
 	async makeEmbedding(wordId: WordEntity["id"], word: string): Promise<void> {
-		this.openAIQueue.add(EMBEDDING_CREATION_START, { wordId, word });
+		await this.openAIQueue.add(EMBEDDING_CREATION_START, { wordId, word });
 	}
 
 	async embeddingCreated(
@@ -298,15 +298,15 @@ export class WordService {
 	async generateMissingEmbeddings(
 		language?: string,
 	): Promise<{ queued: number }> {
-		const where: Record<string, unknown> = { embedding: null };
+		const where: Record<string, unknown> = { embedding: IsNull() };
 		if (language) where.language = language;
 		const words = await this.wordRepository.find({
 			where,
 			select: ["id", "word"],
 		});
-		for (const word of words) {
-			this.makeEmbedding(word.id, word.word);
-		}
+		await Promise.all(
+			words.map((word) => this.makeEmbedding(word.id, word.word)),
+		);
 		this.logger.log(`Queued embedding generation for ${words.length} words`);
 		return { queued: words.length };
 	}
