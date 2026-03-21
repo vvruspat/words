@@ -730,6 +730,15 @@ paths:
           description: Embedding generation queued
       summary: Queue embedding generation for words missing embeddings
       tags: *ref_3
+  /word/recalculate-duplicates:
+    post:
+      operationId: WordController_recalculateDuplicates
+      parameters: []
+      responses:
+        '200':
+          description: Recalculation jobs enqueued
+      summary: Trigger duplicate and synonym recalculation for all languages
+      tags: *ref_3
   /word/{id}:
     delete:
       operationId: WordController_remove

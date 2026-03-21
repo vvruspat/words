@@ -32,6 +32,7 @@ import { fetchTopicsAction } from "@/actions/fetchTopicsAction";
 import { fetchTranslationsAction } from "@/actions/fetchTranslationsAction";
 import { fetchWordsAction } from "@/actions/fetchWordsAction";
 import { generateEmbeddingsAction } from "@/actions/generateEmbeddingsAction";
+import { recalculateDuplicatesAction } from "@/actions/recalculateDuplicatesAction";
 import { regenerateAudioAction } from "@/actions/regenerateAudioAction";
 import { retranslateWordAction } from "@/actions/retranslateWordAction";
 import { updateWordAction } from "@/actions/updateWordAction";
@@ -446,6 +447,20 @@ export default function ManageWords({
 		}
 	}, [language]);
 
+	const [recalculating, setRecalculating] = useState(false);
+	const [recalcQueued, setRecalcQueued] = useState<number | null>(null);
+
+	const handleRecalculateDuplicates = useCallback(async () => {
+		setRecalculating(true);
+		setRecalcQueued(null);
+		try {
+			const result = await recalculateDuplicatesAction();
+			setRecalcQueued(result.queued);
+		} finally {
+			setRecalculating(false);
+		}
+	}, []);
+
 	const [pendingDelete, setPendingDelete] = useState<Set<number>>(new Set());
 
 	const [editingWordId, setEditingWordId] = useState<number | null>(null);
@@ -582,6 +597,25 @@ export default function ManageWords({
 							{embeddingsQueued !== null
 								? `Queued ${embeddingsQueued}`
 								: "Fix Embeddings"}
+						</MButton>
+
+						<MButton
+							mode="tertiary"
+							onClick={() => void handleRecalculateDuplicates()}
+							disabled={recalculating}
+							title="Recalculate duplicate and synonym groups"
+						>
+							{recalculating && (
+								<MIconArrowsClockwise
+									mode="regular"
+									width={16}
+									height={16}
+									className={styles.spin}
+								/>
+							)}
+							{recalcQueued !== null
+								? `Queued ${recalcQueued} languages`
+								: "Recalculate Duplicates"}
 						</MButton>
 
 						<MButton
