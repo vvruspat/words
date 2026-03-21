@@ -45,14 +45,20 @@ export class WordDuplicateService {
 		return this.wordRepository.manager.query<
 			Array<{ id1: number; id2: number; lang: string }>
 		>(
-			`SELECT w1.id AS id1, w2.id AS id2, w1.language AS lang
+			`SELECT w1.id AS id1, candidates.id2 AS id2, w1.language AS lang
 			 FROM word w1
-			 JOIN word w2 ON w1.id < w2.id
+			 JOIN LATERAL (
+			     SELECT w2.id AS id2
+			     FROM word w2
+			     WHERE w2.language = $1
+			       AND w2.id > w1.id
+			       AND w2.embedding IS NOT NULL
+			       AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $2
+			     ORDER BY w1.embedding::vector(1536) <=> w2.embedding::vector(1536)
+			     LIMIT 100
+			 ) candidates ON true
 			 WHERE w1.language = $1
-			   AND w2.language = $1
-			   AND w1.embedding IS NOT NULL
-			   AND w2.embedding IS NOT NULL
-			   AND (1 - (w1.embedding::vector(1536) <=> w2.embedding::vector(1536))) >= $2`,
+			   AND w1.embedding IS NOT NULL`,
 			[language, threshold],
 		);
 	}
