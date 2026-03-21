@@ -14,7 +14,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
-import type { Language } from "@vvruspat/words-types";
+import { AVAILABLE_LANGUAGES, type Language } from "@vvruspat/words-types";
 import type { Response } from "express";
 import {
 	DeleteWordRequestDto,
@@ -178,6 +178,19 @@ export class WordController {
 		@Query("language") language?: string,
 	): Promise<{ queued: number }> {
 		return this.wordService.generateMissingEmbeddings(language);
+	}
+
+	@Post("recalculate-duplicates")
+	@ApiOperation({
+		summary: "Trigger duplicate and synonym recalculation for all languages",
+	})
+	@ApiResponse({ status: 200, description: "Recalculation jobs enqueued" })
+	async recalculateDuplicates(): Promise<{ queued: number }> {
+		await Promise.all([
+			this.wordDuplicateService.recalculateGroups(),
+			this.wordDuplicateService.recalculateSynonymGroups(),
+		]);
+		return { queued: Object.keys(AVAILABLE_LANGUAGES).length };
 	}
 
 	@Delete(":id")
