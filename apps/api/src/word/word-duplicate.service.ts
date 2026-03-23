@@ -40,8 +40,9 @@ export class WordDuplicateService {
 
 	private async findPairsForLanguage(
 		language: string,
-		threshold: number,
-	): Promise<Array<{ id1: number; id2: number; lang: string }>> {
+	): Promise<
+		Array<{ id1: number; id2: number; lang: string; similarity: number }>
+	> {
 		const wordIds = await this.wordRepository
 			.createQueryBuilder("w")
 			.select("w.id")
@@ -50,13 +51,21 @@ export class WordDuplicateService {
 			.orderBy("w.id", "ASC")
 			.getMany();
 
-		const pairs: Array<{ id1: number; id2: number; lang: string }> = [];
+		const pairs: Array<{
+			id1: number;
+			id2: number;
+			lang: string;
+			similarity: number;
+		}> = [];
 
 		for (const { id } of wordIds) {
 			const similar = await this.wordRepository.manager.query<
-				Array<{ id2: number }>
+				Array<{ id2: number; similarity: number }>
 			>(
-				`SELECT w2.id AS id2
+				`SELECT w2.id AS id2,
+				        (1 - (w2.embedding::vector(1536) <=> (
+				            SELECT embedding::vector(1536) FROM word WHERE id = $2
+				        ))) AS similarity
 				 FROM word w2
 				 WHERE w2.language = $1
 				   AND w2.id > $2
@@ -64,11 +73,11 @@ export class WordDuplicateService {
 				   AND (1 - (w2.embedding::vector(1536) <=> (
 				       SELECT embedding::vector(1536) FROM word WHERE id = $2
 				   ))) >= $3`,
-				[language, id, threshold],
+				[language, id, SYNONYM_SIMILARITY_THRESHOLD],
 			);
 
-			for (const { id2 } of similar) {
-				pairs.push({ id1: id, id2, lang: language });
+			for (const { id2, similarity } of similar) {
+				pairs.push({ id1: id, id2, lang: language, similarity });
 			}
 		}
 
@@ -109,9 +118,9 @@ export class WordDuplicateService {
 	}
 
 	/**
-	 * Runs every hour — enqueues one job per language so each runs independently.
+	 * Runs every day at noon — enqueues one job per language so each runs independently.
 	 */
-	@Cron(CronExpression.EVERY_HOUR)
+	@Cron(CronExpression.EVERY_DAY_AT_NOON)
 	async recalculateGroups(): Promise<void> {
 		const languages = Object.keys(AVAILABLE_LANGUAGES);
 		await Promise.all(
@@ -127,11 +136,12 @@ export class WordDuplicateService {
 	async recalculateGroupsForLanguage(language: string): Promise<void> {
 		this.logger.log(`Recalculating duplicate groups for language: ${language}`);
 
-		const pairs = await this.findPairsForLanguage(
-			language,
-			DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
+		const pairs = await this.findPairsForLanguage(language);
+		const duplicatePairs = pairs.filter(
+			(p) => p.similarity >= DEFAULT_VECTOR_SIMILARITY_THRESHOLD,
 		);
-		const newGroups = pairs.length > 0 ? this.clusterPairs(pairs) : [];
+		const newGroups =
+			duplicatePairs.length > 0 ? this.clusterPairs(duplicatePairs) : [];
 
 		await this.groupRepository.manager.transaction(async (manager) => {
 			await manager
@@ -231,10 +241,7 @@ export class WordDuplicateService {
 	async recalculateSynonymGroupsForLanguage(language: string): Promise<void> {
 		this.logger.log(`Recalculating synonym groups for language: ${language}`);
 
-		const pairs = await this.findPairsForLanguage(
-			language,
-			SYNONYM_SIMILARITY_THRESHOLD,
-		);
+		const pairs = await this.findPairsForLanguage(language);
 		const newGroups = pairs.length > 0 ? this.clusterPairs(pairs) : [];
 
 		await this.synonymGroupRepository.manager.transaction(async (manager) => {
