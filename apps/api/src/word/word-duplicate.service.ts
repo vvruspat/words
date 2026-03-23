@@ -4,7 +4,7 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { AVAILABLE_LANGUAGES } from "@vvruspat/words-types";
 import type { Queue } from "bullmq";
 import type { Repository } from "typeorm";
-import { In, IsNull, Not } from "typeorm";
+import { In } from "typeorm";
 import {
 	WORD_DUPLICATE_GROUP_REPOSITORY,
 	WORD_REPOSITORY,
@@ -38,43 +38,40 @@ export class WordDuplicateService {
 		private readonly wordsQueue: Queue,
 	) {}
 
-	private cosineSimilarity(a: number[], b: number[]): number {
-		let dot = 0;
-		let magA = 0;
-		let magB = 0;
-		for (let i = 0; i < a.length; i++) {
-			dot += a[i] * b[i];
-			magA += a[i] * a[i];
-			magB += b[i] * b[i];
-		}
-		const mag = Math.sqrt(magA) * Math.sqrt(magB);
-		return mag === 0 ? 0 : dot / mag;
-	}
-
 	private async findPairsForLanguage(
 		language: string,
 		threshold: number,
 	): Promise<Array<{ id1: number; id2: number; lang: string }>> {
-		const words = await this.wordRepository.find({
-			where: {
-				language: language as WordEntity["language"],
-				embedding: Not(IsNull()),
-			},
-			select: ["id", "embedding"],
-		});
+		const wordIds = await this.wordRepository
+			.createQueryBuilder("w")
+			.select("w.id")
+			.where("w.language = :language", { language })
+			.andWhere("w.embedding IS NOT NULL")
+			.orderBy("w.id", "ASC")
+			.getMany();
 
 		const pairs: Array<{ id1: number; id2: number; lang: string }> = [];
-		for (let i = 0; i < words.length; i++) {
-			for (let j = i + 1; j < words.length; j++) {
-				const sim = this.cosineSimilarity(
-					words[i].embedding as number[],
-					words[j].embedding as number[],
-				);
-				if (sim >= threshold) {
-					pairs.push({ id1: words[i].id, id2: words[j].id, lang: language });
-				}
+
+		for (const { id } of wordIds) {
+			const similar = await this.wordRepository.manager.query<
+				Array<{ id2: number }>
+			>(
+				`SELECT w2.id AS id2
+				 FROM word w2
+				 WHERE w2.language = $1
+				   AND w2.id > $2
+				   AND w2.embedding IS NOT NULL
+				   AND (1 - (w2.embedding::vector(1536) <=> (
+				       SELECT embedding::vector(1536) FROM word WHERE id = $2
+				   ))) >= $3`,
+				[language, id, threshold],
+			);
+
+			for (const { id2 } of similar) {
+				pairs.push({ id1: id, id2, lang: language });
 			}
 		}
+
 		return pairs;
 	}
 
