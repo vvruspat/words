@@ -277,6 +277,45 @@ export class WordDuplicateService {
 	}
 
 	/**
+	 * Returns paginated synonym groups with full word data.
+	 */
+	async findSynonymGroupsPaginated(
+		limit: number,
+		offset: number,
+		language?: string,
+	): Promise<{
+		groups: { word: string; language: string; items: WordEntity[] }[];
+		total: number;
+	}> {
+		const where = language ? { language } : {};
+		const [allGroups, total] = await this.synonymGroupRepository.findAndCount({
+			where,
+			order: { id: "ASC" },
+			skip: offset,
+			take: limit,
+		});
+
+		const groups = await Promise.all(
+			allGroups.map(async (group) => {
+				const items = await this.wordRepository
+					.createQueryBuilder("w")
+					.leftJoinAndSelect("w.topicData", "topic")
+					.leftJoinAndSelect("w.catalogData", "catalog")
+					.where("w.id IN (:...ids)", { ids: group.word_ids })
+					.orderBy("w.created_at", "ASC")
+					.getMany();
+				return {
+					word: items[0]?.word ?? "",
+					language: group.language,
+					items,
+				};
+			}),
+		);
+
+		return { groups, total };
+	}
+
+	/**
 	 * After word deletion: remove groups that no longer have ≥ 2 surviving words.
 	 */
 	async cleanupGroupsForRemovedWords(removedIds: number[]): Promise<void> {

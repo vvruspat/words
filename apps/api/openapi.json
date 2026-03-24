@@ -1288,6 +1288,46 @@
         ]
       }
     },
+    "/word/synonyms": {
+      "get": {
+        "operationId": "WordController_getSynonyms",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get paginated synonym groups with full word data",
+        "tags": [
+          "word"
+        ]
+      }
+    },
     "/word/events": {
       "get": {
         "operationId": "WordController_streamEvents",
