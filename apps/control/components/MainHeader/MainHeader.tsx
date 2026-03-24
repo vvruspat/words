@@ -33,6 +33,7 @@ export async function MainHeader() {
 					label="Duplicates"
 					badge={totalDuplicates}
 				/>
+				<MainHeaderNavLink href="/synonyms" label="Synonyms" />
 			</nav>
 		</header>
 	);

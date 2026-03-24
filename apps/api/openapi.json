@@ -1021,6 +1021,15 @@
               "default": 0.3,
               "type": "number"
             }
+          },
+          {
+            "name": "hasSymbols",
+            "required": false,
+            "in": "query",
+            "description": "Filter words that contain symbols other than letters or spaces",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -1283,6 +1292,46 @@
           }
         },
         "summary": "Get synonym groups for client-side answer validation",
+        "tags": [
+          "word"
+        ]
+      }
+    },
+    "/word/synonyms": {
+      "get": {
+        "operationId": "WordController_getSynonyms",
+        "parameters": [
+          {
+            "name": "language",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Get paginated synonym groups with full word data",
         "tags": [
           "word"
         ]

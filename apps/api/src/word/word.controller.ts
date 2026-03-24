@@ -250,6 +250,26 @@ export class WordController {
 		}));
 	}
 
+	@Get("synonyms")
+	@ApiOperation({ summary: "Get paginated synonym groups with full word data" })
+	@ApiQuery({ name: "limit", required: false, type: Number })
+	@ApiQuery({ name: "offset", required: false, type: Number })
+	@ApiQuery({ name: "language", required: false, type: String })
+	@ApiResponse({ status: 200 })
+	async getSynonyms(
+		@Query("limit") limit = 20,
+		@Query("offset") offset = 0,
+		@Query("language") language?: string,
+	) {
+		const { groups, total } =
+			await this.wordDuplicateService.findSynonymGroupsPaginated(
+				Number(limit),
+				Number(offset),
+				language,
+			);
+		return { groups, total, limit: Number(limit), offset: Number(offset) };
+	}
+
 	@Get("events")
 	@ApiOperation({ summary: "Stream word update events via Server-Sent Events" })
 	@ApiResponse({ status: 200, description: "SSE stream of word updates" })

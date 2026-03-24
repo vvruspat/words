@@ -3,6 +3,7 @@
 import {
 	MBadge,
 	MButton,
+	MCheckbox,
 	MDataGrid,
 	MFlex,
 	MFormField,
@@ -58,6 +59,7 @@ export default function ManageWords({
 		selectedStatus,
 		searchWord,
 		searchTranslation,
+		hasSymbols,
 		catalogs,
 		topics,
 		words,
@@ -69,6 +71,7 @@ export default function ManageWords({
 		setSelectedTopic,
 		setSearchWord,
 		setSearchTranslation,
+		setHasSymbols,
 		setCatalogs,
 		setTopics,
 		setWords,
@@ -113,6 +116,7 @@ export default function ManageWords({
 		selectedStatus,
 		debouncedSearchWord,
 		debouncedSearchTranslation,
+		hasSymbols,
 	});
 
 	const didSeedInitialRef = useRef(false);
@@ -297,7 +301,8 @@ export default function ManageWords({
 			prevFilters.selectedTopic !== selectedTopic ||
 			prevFilters.selectedStatus !== selectedStatus ||
 			prevFilters.debouncedSearchWord !== debouncedSearchWord ||
-			prevFilters.debouncedSearchTranslation !== debouncedSearchTranslation;
+			prevFilters.debouncedSearchTranslation !== debouncedSearchTranslation ||
+			prevFilters.hasSymbols !== hasSymbols;
 
 		// Reset to first page when filters change
 		if (filtersChanged) {
@@ -309,6 +314,7 @@ export default function ManageWords({
 				selectedStatus,
 				debouncedSearchWord,
 				debouncedSearchTranslation,
+				hasSymbols,
 			};
 		}
 
@@ -330,6 +336,7 @@ export default function ManageWords({
 				filters: selectedStatus === "all" ? {} : { status: selectedStatus },
 				word: debouncedSearchWord || undefined,
 				translation: debouncedSearchTranslation || undefined,
+				hasSymbols: hasSymbols || undefined,
 			});
 
 			setTotal(data.total);
@@ -343,6 +350,7 @@ export default function ManageWords({
 		selectedStatus,
 		debouncedSearchWord,
 		debouncedSearchTranslation,
+		hasSymbols,
 		offset,
 		limit,
 		setWords,
@@ -718,13 +726,20 @@ export default function ManageWords({
 									);
 								},
 								renderFilter: (props) => (
-									<MInput
-										{...props}
-										name="searchWord"
-										value={searchWord}
-										onChange={(e) => setSearchWord(e.target.value)}
-										placeholder="Word"
-									/>
+									<MFlex direction="column" gap="s">
+										<MInput
+											{...props}
+											name="searchWord"
+											value={searchWord}
+											onChange={(e) => setSearchWord(e.target.value)}
+											placeholder="Word"
+										/>
+										<MCheckbox
+											label="Has symbols"
+											checked={hasSymbols}
+											onChange={(e) => setHasSymbols(e.target.checked)}
+										/>
+									</MFlex>
 								),
 							},
 							{
