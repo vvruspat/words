@@ -641,6 +641,12 @@ paths:
           schema:
             default: 0.3
             type: number
+        - name: hasSymbols
+          required: false
+          in: query
+          description: Filter words that contain symbols other than letters or spaces
+          schema:
+            type: boolean
       responses:
         '200':
           description: ''

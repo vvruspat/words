@@ -22,6 +22,14 @@ export class GetWordRequestDto extends IntersectionType(
 			"Trigram similarity threshold for word search (0–1). Lower values return more results.",
 	})
 	similarityThreshold?: number;
+
+	@ApiProperty({
+		type: Boolean,
+		required: false,
+		description:
+			"Filter words that contain symbols other than letters or spaces",
+	})
+	hasSymbols?: boolean;
 }
 
 export class GetWordResponseDto extends ApiPaginatedResponseDto<WordDto> {

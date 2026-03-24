@@ -2108,6 +2108,8 @@ export interface operations {
 				translation?: string;
 				/** @description Trigram similarity threshold for word search (0–1). Lower values return more results. */
 				similarityThreshold?: number;
+				/** @description Filter words that contain symbols other than letters or spaces */
+				hasSymbols?: boolean;
 			};
 			header?: never;
 			path?: never;

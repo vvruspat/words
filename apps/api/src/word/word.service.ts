@@ -53,6 +53,7 @@ export class WordService {
 			word,
 			translation,
 			similarityThreshold,
+			hasSymbols,
 			...restQuery
 		} = query;
 
@@ -64,6 +65,18 @@ export class WordService {
 
 		let wordMatchIds: number[] | null = null;
 		let translationMatchIds: number[] | null = null;
+
+		// Filter words that contain non-letter/non-space symbols
+		if (hasSymbols === true || String(hasSymbols) === "true") {
+			const matches = await this.wordRepository.manager.query<
+				Array<{ id: number }>
+			>(`SELECT id FROM word WHERE word ~ '[^[:alpha:][:space:]]'`);
+			const symbolIds = matches.map((m) => m.id);
+			wordMatchIds =
+				wordMatchIds !== null
+					? wordMatchIds.filter((id) => symbolIds.includes(id))
+					: symbolIds;
+		}
 
 		// Use pg_trgm word_similarity to handle articles ("die Katze" ~ "Katze")
 		// and slash variants ("groß/klein" ~ "groß") as well as minor typos.

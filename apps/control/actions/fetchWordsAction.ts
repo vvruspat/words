@@ -14,14 +14,16 @@ export async function fetchWordsAction(props: {
 	sortOrder?: "asc" | "desc";
 	word?: string;
 	translation?: string;
+	hasSymbols?: boolean;
 }) {
-	const { filters, word, translation, ...restProps } = props;
+	const { filters, word, translation, hasSymbols, ...restProps } = props;
 	return await $fetch("/word", "get", {
 		query: {
 			...restProps,
 			...filters,
 			...(word ? { word } : {}),
 			...(translation ? { translation } : {}),
+			...(hasSymbols ? { hasSymbols: true } : {}),
 		},
 	});
 }

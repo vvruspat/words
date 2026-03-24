@@ -18,6 +18,7 @@ interface WordsStore {
 	selectedStatus: "all" | "processing" | "processed";
 	searchWord: string;
 	searchTranslation: string;
+	hasSymbols: boolean;
 	topics: Topic[];
 	catalogs: VocabCatalog[];
 	connected: boolean;
@@ -35,6 +36,7 @@ interface WordsStore {
 	setSelectedStatus: (status: "all" | "processing" | "processed") => void;
 	setSearchWord: (word: string) => void;
 	setSearchTranslation: (translation: string) => void;
+	setHasSymbols: (hasSymbols: boolean) => void;
 	setTopics: (topics: Topic[]) => void;
 	setCatalogs: (catalogs: VocabCatalog[]) => void;
 	addCatalogs: (catalog: VocabCatalog) => void;
@@ -68,6 +70,7 @@ export const useWordsStore = create<WordsStore>()(
 			selectedStatus: "all",
 			searchWord: "",
 			searchTranslation: "",
+			hasSymbols: false,
 			topics: [],
 			catalogs: [],
 			connected: false,
@@ -105,6 +108,7 @@ export const useWordsStore = create<WordsStore>()(
 			setSelectedStatus: (selectedStatus) => set({ selectedStatus }),
 			setSearchWord: (searchWord) => set({ searchWord }),
 			setSearchTranslation: (searchTranslation) => set({ searchTranslation }),
+			setHasSymbols: (hasSymbols) => set({ hasSymbols }),
 			setTopics: (topics: Topic[]) => set({ topics }),
 			addTopics: (topic: Topic) =>
 				set((state) => ({ topics: [...state.topics, topic] })),
