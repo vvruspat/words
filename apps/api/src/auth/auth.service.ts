@@ -2,6 +2,7 @@ import {
 	BadRequestException,
 	Inject,
 	Injectable,
+	Logger,
 	UnauthorizedException,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -20,6 +21,8 @@ import { UserService } from "../user/user.service";
 
 @Injectable()
 export class AuthService {
+	private readonly logger = new Logger(AuthService.name);
+
 	constructor(
 		private readonly userService: UserService,
 		private readonly configService: ConfigService,
@@ -168,7 +171,11 @@ export class AuthService {
 	): Promise<PostSignInResponseDto> {
 		const storedCode = await this.redis.get(`verify-email:${email}`);
 
-		if (!storedCode || storedCode !== code.toUpperCase()) {
+		this.logger.debug(
+			`verifyEmail: email=${email} submitted=${code} stored=${storedCode}`,
+		);
+
+		if (!storedCode || storedCode.toUpperCase() !== code.toUpperCase()) {
 			throw new BadRequestException("Invalid or expired verification code");
 		}
 
