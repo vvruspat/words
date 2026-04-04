@@ -1,11 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import type {
 	Learning,
-	Training,
 	WordData,
 	WordTranslation,
 } from "@vvruspat/words-types";
-import { TrainingDto } from "./training.dto";
 import { WordDataDto } from "./word.dto";
 import { WordTranslationDto } from "./words-translation.dto";
 
@@ -36,8 +34,8 @@ export class LearningDto implements Learning {
 	})
 	last_review!: string;
 
-	@ApiProperty({ type: Number })
-	training!: number;
+	@ApiProperty({ type: String })
+	training!: string;
 
 	@ApiProperty({ type: Number })
 	translation!: number;
@@ -46,9 +44,6 @@ export class LearningDto implements Learning {
 export class LearningDataDto extends LearningDto {
 	@ApiProperty({ type: WordDataDto })
 	wordData!: WordData;
-
-	@ApiProperty({ type: TrainingDto })
-	trainingData!: Training;
 
 	@ApiProperty({ type: WordTranslationDto })
 	translationData!: WordTranslation;

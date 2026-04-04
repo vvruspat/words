@@ -17,7 +17,7 @@ export class LearningService {
 
 		return this.learningRepository.find({
 			where: { ...rest },
-			relations: ["wordData", "trainingData", "translationData"],
+			relations: ["wordData", "translationData"],
 			take: limit || 10,
 			skip: offset || 0,
 		});
@@ -26,7 +26,7 @@ export class LearningService {
 	async findOne(id: Learning["id"]): Promise<LearningData | null> {
 		return this.learningRepository.findOne({
 			where: { id },
-			relations: ["wordData", "trainingData", "translationData"],
+			relations: ["wordData", "translationData"],
 		});
 	}
 
