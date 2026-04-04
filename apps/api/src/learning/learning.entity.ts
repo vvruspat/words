@@ -1,6 +1,5 @@
 import type {
 	LearningData,
-	Training,
 	WordData,
 	WordTranslation,
 } from "@vvruspat/words-types";
@@ -11,7 +10,6 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { TrainingEntity } from "../training/training.entity";
 import { WordEntity } from "../word/word.entity";
 import { WordTranslationEntity } from "../wordstranslation/wordstranslation.entity";
 
@@ -35,8 +33,8 @@ export class LearningEntity implements LearningData {
 	@Column({ type: "timestamp" })
 	last_review: string;
 
-	@Column({ type: "int" })
-	training: number;
+	@Column({ type: "varchar" })
+	training: string;
 
 	@Column({ type: "int" })
 	translation: number;
@@ -44,10 +42,6 @@ export class LearningEntity implements LearningData {
 	@ManyToOne(() => WordEntity)
 	@JoinColumn({ name: "word" })
 	wordData: WordData;
-
-	@ManyToOne(() => TrainingEntity)
-	@JoinColumn({ name: "training" })
-	trainingData: Training;
 
 	@ManyToOne(() => WordTranslationEntity)
 	@JoinColumn({ name: "translation" })

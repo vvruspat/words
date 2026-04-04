@@ -1014,7 +1014,7 @@ paths:
           required: false
           in: query
           schema:
-            type: number
+            type: string
         - name: translation
           required: false
           in: query
@@ -2533,7 +2533,7 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: number
+          type: string
         translation:
           type: number
       required:
@@ -2585,7 +2585,7 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: number
+          type: string
         translation:
           type: number
       required:
@@ -2616,7 +2616,7 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: number
+          type: string
         translation:
           type: number
       required:
@@ -2648,7 +2648,7 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: number
+          type: string
         translation:
           type: number
     PutLearningResponseDto:
@@ -2671,7 +2671,7 @@ components:
           format: date-time
           description: timestamp without time zone
         training:
-          type: number
+          type: string
         translation:
           type: number
       required:

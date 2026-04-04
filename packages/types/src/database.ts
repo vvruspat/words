@@ -7,13 +7,12 @@ export interface Learning {
 	word: number;
 	score: number;
 	last_review: string; // timestamp without time zone
-	training: number;
+	training: string;
 	translation: number;
 }
 
 export interface LearningData extends Learning {
 	wordData: WordData;
-	trainingData: Training;
 	translationData: WordTranslation;
 }
 
