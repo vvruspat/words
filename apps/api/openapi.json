@@ -2505,6 +2505,33 @@
         ]
       }
     },
+    "/mcp": {
+      "post": {
+        "operationId": "McpController_handlePost",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "MCP JSON-RPC response"
+          }
+        },
+        "summary": "Words MCP Streamable HTTP endpoint",
+        "tags": [
+          "mcp"
+        ]
+      },
+      "get": {
+        "operationId": "McpController_methodNotAllowed",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "mcp"
+        ]
+      }
+    },
     "/auth/signin": {
       "post": {
         "operationId": "AuthController_signin",
@@ -2535,6 +2562,43 @@
           }
         },
         "summary": "Sign in to an existing account",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/supabase/exchange": {
+      "post": {
+        "operationId": "AuthController_exchangeSupabaseToken",
+        "parameters": [
+          {
+            "name": "authorization",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Supabase admin successfully exchanged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostSignInResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid Supabase token"
+          },
+          "403": {
+            "description": "Supabase user is not an admin"
+          }
+        },
+        "summary": "Exchange Supabase admin session for Words API JWT",
         "tags": [
           "auth"
         ]
@@ -2751,6 +2815,488 @@
         "summary": "Refresh access token",
         "tags": [
           "auth"
+        ]
+      }
+    },
+    "/user-vocabulary": {
+      "get": {
+        "operationId": "UserVocabularyController_list",
+        "parameters": [
+          {
+            "name": "language",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the authenticated user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      },
+      "post": {
+        "operationId": "UserVocabularyController_add",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddVocabularyWordsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add resolved words to the user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      }
+    },
+    "/user-vocabulary/{id}": {
+      "delete": {
+        "operationId": "UserVocabularyController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove an item from the user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      }
+    },
+    "/chat": {
+      "post": {
+        "operationId": "ChatController_chat",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Assistant UI chat endpoint",
+        "tags": [
+          "chat"
+        ]
+      }
+    },
+    "/dialogues/recommendations": {
+      "get": {
+        "operationId": "DialogueController_recommendations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Generate dialogue scenarios for the learner",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/active": {
+      "get": {
+        "operationId": "DialogueController_active",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get the active dialogue for the language pair",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues": {
+      "get": {
+        "operationId": "DialogueController_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the learner's dialogue history",
+        "tags": [
+          "dialogues"
+        ]
+      },
+      "post": {
+        "operationId": "DialogueController_start",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartDialogueDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Start a dialogue and generate its opening line",
+        "tags": [
+          "dialogues"
+        ]
+      },
+      "delete": {
+        "operationId": "DialogueController_deleteAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete all dialogue history",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/corrections/{id}/branch": {
+      "post": {
+        "operationId": "DialogueController_openBranch",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Open or resume an explanation branch",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/threads/{id}/messages": {
+      "post": {
+        "operationId": "DialogueController_sendBranchMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendDialogueMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Continue an explanation branch",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/{id}": {
+      "get": {
+        "operationId": "DialogueController_detail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a dialogue with threads and messages",
+        "tags": [
+          "dialogues"
+        ]
+      },
+      "delete": {
+        "operationId": "DialogueController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete one dialogue",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/{id}/messages": {
+      "post": {
+        "operationId": "DialogueController_sendMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendDialogueMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Send the next main dialogue turn",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/{id}/words": {
+      "post": {
+        "operationId": "DialogueController_addWord",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddClickedWordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Resolve and add a clicked word",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/{id}/complete": {
+      "post": {
+        "operationId": "DialogueController_complete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Complete a dialogue and generate its summary",
+        "tags": [
+          "dialogues"
+        ]
+      }
+    },
+    "/dialogues/{id}/interactions": {
+      "post": {
+        "operationId": "DialogueController_interaction",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Record a hint or translation reveal",
+        "tags": [
+          "dialogues"
         ]
       }
     },
@@ -4988,6 +5534,26 @@
           "refresh_token",
           "user"
         ]
+      },
+      "AddVocabularyWordsDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "StartDialogueDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "SendDialogueMessageDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AddClickedWordDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "InteractionDto": {
+        "type": "object",
+        "properties": {}
       }
     }
   }

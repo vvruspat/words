@@ -17,7 +17,10 @@
     "format": "biome check src --write --unsafe"
   },
   "dependencies": {
+    "@ai-sdk/mcp": "^1.0.36",
+    "@ai-sdk/openai": "^3.0.53",
     "@getbrevo/brevo": "^5.0.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@nestjs/common": "^11.1.16",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.1.16",
@@ -26,16 +29,18 @@
     "@nestjs/swagger": "^11.2.6",
     "@sentry/nestjs": "^10.43.0",
     "@vvruspat/words-types": "*",
+    "ai": "^6.0.168",
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
-    "class-validator": "^0.15.1",
+    "class-validator": "^0.14.4",
     "ioredis": "^5.10.0",
     "js-yaml": "^4.1.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "swagger-ui-express": "^5.0.1",
-    "typeorm": "^0.3.28"
+    "typeorm": "^0.3.28",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@jest/globals": "^30.3.0",

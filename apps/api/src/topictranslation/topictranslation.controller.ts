@@ -20,6 +20,7 @@ import {
 	ApiTags,
 } from "@nestjs/swagger";
 import { IsArray, IsInt, IsString } from "class-validator";
+import { AdminOnly } from "~/auth/admin-only.decorator";
 import {
 	DeleteTopicTranslationResponseDto,
 	GetTopicTranslationRequestDto,
@@ -113,6 +114,7 @@ export class TopicTranslationController {
 	}
 
 	@Post()
+	@AdminOnly()
 	@ApiOperation({ summary: "Create topic translation" })
 	@ApiResponse({ status: 201, type: PostTopicTranslationResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
@@ -123,6 +125,7 @@ export class TopicTranslationController {
 	}
 
 	@Post("translate")
+	@AdminOnly()
 	@ApiOperation({ summary: "Auto-translate topics via OpenAI" })
 	@ApiBody({ type: TranslateTopicsRequestDto })
 	@ApiResponse({ status: 201, description: "Translation job enqueued" })
@@ -141,6 +144,7 @@ export class TopicTranslationController {
 	}
 
 	@Post("translate-untranslated")
+	@AdminOnly()
 	@ApiOperation({
 		summary: "Auto-translate all untranslated topics for a language",
 	})
@@ -177,6 +181,7 @@ export class TopicTranslationController {
 	}
 
 	@Put()
+	@AdminOnly()
 	@ApiOperation({ summary: "Update topic translation" })
 	@ApiBody({ type: PutTopicTranslationRequestDto })
 	@ApiResponse({ status: 200, type: PutTopicTranslationResponseDto })
@@ -199,6 +204,7 @@ export class TopicTranslationController {
 	}
 
 	@Delete(":id")
+	@AdminOnly()
 	@ApiOperation({ summary: "Delete topic translation" })
 	@ApiResponse({ status: 200, type: DeleteTopicTranslationResponseDto })
 	@ApiResponse({ status: 404, description: "Topic translation not found" })

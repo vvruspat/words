@@ -1,16 +1,21 @@
 import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { APP_GUARD } from "@nestjs/core";
 import { ScheduleModule } from "@nestjs/schedule";
 import { SentryModule } from "@sentry/nestjs/setup";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
+import { ChatModule } from "./chat/chat.module";
 import { DatabaseModule } from "./database/database.module";
+import { DialogueModule } from "./dialogue/dialogue.module";
 import { GcsModule } from "./gcs/gcs.module";
 import { ImportModule } from "./import/import.module";
 import { LearningModule } from "./learning/learning.module";
 import { MailerModule } from "./mailer/mailer.module";
+import { McpModule } from "./mcp/mcp.module";
 import { OpenAIModule } from "./openai/openai.module";
 import { QueuesModule } from "./queues/queues.module";
 import { RedisModule } from "./redis/redis.module";
@@ -19,6 +24,7 @@ import { TopicModule } from "./topic/topic.module";
 import { TopicTranslationModule } from "./topictranslation/topictranslation.module";
 import { TrainingModule } from "./training/training.module";
 import { UserModule } from "./user/user.module";
+import { UserVocabularyModule } from "./user-vocabulary/user-vocabulary.module";
 import { VocabCatalogModule } from "./vocabcatalog/vocabcatalog.module";
 import { WordModule } from "./word/word.module";
 import { WordTranslationModule } from "./wordstranslation/wordstranslation.module";
@@ -40,8 +46,12 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 		WordModule,
 		WordTranslationModule,
 		MailerModule,
+		McpModule,
 		RedisModule,
 		AuthModule,
+		ChatModule,
+		DialogueModule,
+		UserVocabularyModule,
 		OpenAIModule,
 		GcsModule,
 		// Skip BullMQ during Swagger generation (doesn't need connections)
@@ -62,6 +72,12 @@ import { WordTranslationModule } from "./wordstranslation/wordstranslation.modul
 			: []),
 	],
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [
+		AppService,
+		{
+			provide: APP_GUARD,
+			useClass: JwtAuthGuard,
+		},
+	],
 })
 export class AppModule {}

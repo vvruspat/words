@@ -1,6 +1,9 @@
 export * from "./auth";
+export * from "./chat";
+export * from "./dialogues";
 export * from "./import";
 export * from "./learning";
+export * from "./mcp";
 export * from "./openai";
 export * from "./report";
 export * from "./root";
@@ -8,6 +11,7 @@ export * from "./topic";
 export * from "./topic-translation";
 export * from "./training";
 export * from "./user";
+export * from "./user-vocabulary";
 export * from "./vocabcatalog";
 export * from "./word";
 export * from "./words-translation";

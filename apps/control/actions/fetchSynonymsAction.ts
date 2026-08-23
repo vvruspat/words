@@ -1,8 +1,7 @@
 "use server";
 
 import type { WordData } from "@vvruspat/words-types";
-
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export type SynonymGroup = {
 	word: string;
@@ -28,9 +27,13 @@ export async function fetchSynonymsAction(props: {
 	});
 	if (props.language) params.set("language", props.language);
 
-	const res = await fetch(`${apiBase}/word/synonyms?${params.toString()}`, {
+	const response = await fetchWordsApi(`/word/synonyms?${params.toString()}`, {
 		cache: "no-store",
 	});
-	if (!res.ok) throw new Error("Failed to fetch synonyms");
-	return res.json() as Promise<GetWordSynonymsResponse>;
+
+	if (!response.ok) {
+		throw new Error("Failed to fetch synonyms");
+	}
+
+	return response.json() as Promise<GetWordSynonymsResponse>;
 }

@@ -1,19 +1,22 @@
 "use server";
 
 import type { Language } from "@vvruspat/words-types";
-
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function generateEmbeddingsAction(
 	language?: Language,
 ): Promise<{ queued: number }> {
-	const url = new URL(`${apiBase}/word/generate-embeddings`);
-	if (language) {
-		url.searchParams.set("language", language);
+	const params = new URLSearchParams();
+	if (language) params.set("language", language);
+
+	const queryString = params.size > 0 ? `?${params.toString()}` : "";
+	const response = await fetchWordsApi(`/word/generate-embeddings${queryString}`, {
+		method: "POST",
+	});
+
+	if (!response.ok) {
+		throw new Error(response.statusText || "Failed to generate embeddings");
 	}
-	const res = await fetch(url.toString(), { method: "POST" });
-	if (!res.ok) {
-		throw new Error(res.statusText || "Failed to generate embeddings");
-	}
-	return res.json() as Promise<{ queued: number }>;
+
+	return response.json() as Promise<{ queued: number }>;
 }

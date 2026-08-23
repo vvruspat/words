@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Get,
+	Headers,
 	HttpCode,
 	HttpStatus,
 	Post,
@@ -25,8 +26,10 @@ import type {
 } from "~/dto/api/reset-password";
 import { PostVerifyEmailResendRequestDto } from "~/dto/api/verify-email/resend/post";
 import { AuthService } from "./auth.service";
+import { Public } from "./public.decorator";
 
 @ApiTags("auth")
+@Public()
 @Controller("auth")
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
@@ -47,6 +50,30 @@ export class AuthController {
 		@Body() dto: PostSignInRequestDto,
 	): Promise<PostSignInResponseDto> {
 		return this.authService.signIn(dto.email, dto.password);
+	}
+
+	@Post("supabase/exchange")
+	@HttpCode(HttpStatus.OK)
+	@ApiOperation({
+		summary: "Exchange Supabase admin session for Words API JWT",
+	})
+	@ApiResponse({
+		status: HttpStatus.OK,
+		description: "Supabase admin successfully exchanged",
+		type: PostSignInResponseDto,
+	})
+	@ApiResponse({
+		status: HttpStatus.UNAUTHORIZED,
+		description: "Invalid Supabase token",
+	})
+	@ApiResponse({
+		status: HttpStatus.FORBIDDEN,
+		description: "Supabase user is not an admin",
+	})
+	async exchangeSupabaseToken(
+		@Headers("authorization") authorization?: string,
+	): Promise<PostSignInResponseDto> {
+		return this.authService.exchangeSupabaseToken(authorization);
 	}
 
 	@Post("signup")

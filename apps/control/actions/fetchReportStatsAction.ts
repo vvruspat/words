@@ -1,6 +1,6 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { $fetch } from "@/lib/fetch";
 
 export type ReportStatsResponse = {
 	new: number;
@@ -10,7 +10,5 @@ export type ReportStatsResponse = {
 };
 
 export async function fetchReportStatsAction(): Promise<ReportStatsResponse> {
-	const res = await fetch(`${apiBase}/report/stats`, { cache: "no-store" });
-	if (!res.ok) throw new Error("Failed to fetch report stats");
-	return res.json() as Promise<ReportStatsResponse>;
+	return await $fetch("/report/stats", "get", {});
 }

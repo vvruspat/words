@@ -20,6 +20,16 @@ export class TopicEntity implements Topic {
 
 	@Column({ type: "varchar" })
 	language: string;
+
+	@Column({ type: "int", nullable: true })
+	owner?: number | null;
+
+	@Column({
+		type: "enum",
+		enum: ["global", "private"],
+		default: "global",
+	})
+	visibility?: "global" | "private";
 }
 
 export type { Topic };

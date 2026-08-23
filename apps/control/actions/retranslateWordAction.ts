@@ -1,13 +1,15 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function retranslateWordAction(wordId: number): Promise<boolean> {
-	const res = await fetch(`${apiBase}/word/${wordId}/retranslate`, {
+	const response = await fetchWordsApi(`/word/${wordId}/retranslate`, {
 		method: "POST",
 	});
-	if (!res.ok) {
-		throw new Error(res.statusText || "Failed to retranslate word");
+
+	if (!response.ok) {
+		throw new Error(response.statusText || "Failed to retranslate word");
 	}
+
 	return true;
 }

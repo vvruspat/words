@@ -8,5 +8,6 @@ import { LearningService } from "./learning.service";
 	imports: [DatabaseModule],
 	providers: [...learningProviders, LearningService],
 	controllers: [LearningController],
+	exports: [LearningService],
 })
 export class LearningModule {}

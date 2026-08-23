@@ -27,4 +27,11 @@ export class VocabCatalogEntity implements VocabCatalog {
 
 	@Column({ nullable: true })
 	image?: string | null;
+
+	@Column({
+		type: "enum",
+		enum: ["global", "private"],
+		default: "global",
+	})
+	visibility?: "global" | "private";
 }

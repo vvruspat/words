@@ -1,13 +1,15 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function deleteWordAction(wordId: number): Promise<boolean> {
-	const res = await fetch(`${apiBase}/word/${wordId}`, {
+	const response = await fetchWordsApi(`/word/${wordId}`, {
 		method: "DELETE",
 	});
-	if (!res.ok) {
-		throw new Error(res.statusText || "Failed to delete word");
+
+	if (!response.ok) {
+		throw new Error(response.statusText || "Failed to delete word");
 	}
+
 	return true;
 }

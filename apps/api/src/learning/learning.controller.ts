@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Delete,
+	ForbiddenException,
 	Get,
 	Param,
 	ParseIntPipe,
@@ -12,6 +13,7 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { CurrentUser } from "~/auth/current-user.decorator";
 import {
 	DeleteLearningRequestDto,
 	DeleteLearningResponseDto,
@@ -28,6 +30,7 @@ import {
 	PutLearningRequestDto,
 	PutLearningResponseDto,
 } from "~/dto/api/learning/put";
+import type { UserEntity } from "~/user/user.entity";
 import { LearningService } from "./learning.service";
 
 @ApiTags("learning")
@@ -42,8 +45,12 @@ export class LearningController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(
 		@Query() query: GetLearningRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetLearningResponseDto> {
-		const entities = await this.learningService.findAll(query);
+		const entities = await this.learningService.findAll({
+			...query,
+			user: user.id,
+		});
 		return {
 			items: entities,
 			total: entities.length,
@@ -60,8 +67,12 @@ export class LearningController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getById(
 		@Param("id", ParseIntPipe) id: number,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetLearningResponseDto> {
 		const entity = await this.learningService.findOne(id);
+		if (entity && entity.user !== user.id) {
+			throw new ForbiddenException("Learning record belongs to another user");
+		}
 		return {
 			items: entity ? [entity] : [],
 			total: entity ? 1 : 0,
@@ -76,8 +87,9 @@ export class LearningController {
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(
 		@Body() dto: PostLearningRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<PostLearningResponseDto> {
-		return await this.learningService.create(dto);
+		return await this.learningService.create({ ...dto, user: user.id });
 	}
 
 	@Put()
@@ -89,7 +101,12 @@ export class LearningController {
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async update(
 		@Body() dto: PutLearningRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<PutLearningResponseDto> {
+		const existing = await this.learningService.findOne(dto.id);
+		if (!existing || existing.user !== user.id) {
+			throw new ForbiddenException("Learning record belongs to another user");
+		}
 		return await this.learningService.update(dto);
 	}
 
@@ -98,7 +115,12 @@ export class LearningController {
 	@ApiResponse({ status: 200, type: DeleteLearningResponseDto })
 	async remove(
 		@Param("id", ParseIntPipe) id: DeleteLearningRequestDto["id"],
+		@CurrentUser() user: UserEntity,
 	): Promise<DeleteLearningResponseDto> {
+		const existing = await this.learningService.findOne(id);
+		if (!existing || existing.user !== user.id) {
+			throw new ForbiddenException("Learning record belongs to another user");
+		}
 		await this.learningService.remove(id);
 		return { id };
 	}

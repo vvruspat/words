@@ -1,5 +1,19 @@
 # Turborepo starter
 
+## Dialogue tutor configuration
+
+The authenticated dialogue tutor uses the internal `/mcp` endpoint and OpenAI.
+Configure the API with `OPENAI_API_KEY`. Optional settings are:
+
+- `OPENAI_CHAT_MODEL` — defaults to `gpt-4o-mini`.
+- `CHAT_MCP_URL` — defaults to the current API process at `/mcp`.
+- `DIALOGUE_FEATURE_ENABLED=false` — emergency/internal-release kill switch.
+- `DB_SYNCHRONIZE=false` — disables the repository's existing TypeORM schema synchronization.
+- `DB_LOGGING=true` — enables verbose TypeORM query logging for local diagnostics.
+
+The MCP endpoint derives the learner from the bearer token and exposes only
+read-only tools. Dialogue-created words are private to their owner.
+
 This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
 
 ## Using this example

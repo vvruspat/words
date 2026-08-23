@@ -52,6 +52,7 @@
     "@nestjs/schedule": "^6.1.1",
     "@svgr/webpack": "^8.1.0",
     "bullmq": "^5.71.0",
+    "class-validator": "^0.14.4",
     "cross-env": "^10.1.0",
     "openai": "^6.27.0",
     "pino": "^10.3.1"

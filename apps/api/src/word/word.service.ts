@@ -44,6 +44,7 @@ export class WordService {
 
 	async findAll(
 		query: GetWordRequestDto,
+		viewerUserId?: number,
 	): Promise<ApiPaginatedResponse<WordEntity>> {
 		const {
 			limit,
@@ -110,10 +111,21 @@ export class WordService {
 				translationMatchIds.length > 0 ? In(translationMatchIds) : In([-1]);
 		}
 
-		const total = await this.wordRepository.count({ where });
+		const scopedWhere = viewerUserId
+			? [
+					{ ...where, visibility: "global" as const },
+					{
+						...where,
+						visibility: "private" as const,
+						owner: viewerUserId,
+					},
+				]
+			: where;
+
+		const total = await this.wordRepository.count({ where: scopedWhere });
 
 		const words = await this.wordRepository.find({
-			where,
+			where: scopedWhere,
 			take: limit ?? 10,
 			skip: offset ?? 0,
 			order: {
@@ -127,6 +139,23 @@ export class WordService {
 			limit: limit ?? 10,
 			offset: offset ?? 0,
 		};
+	}
+
+	async findVisibleByText(
+		word: string,
+		language: string,
+		viewerUserId: number,
+	): Promise<WordEntity | null> {
+		return this.wordRepository
+			.createQueryBuilder("word")
+			.where("LOWER(word.word) = LOWER(:word)", { word: word.trim() })
+			.andWhere("word.language = :language", { language })
+			.andWhere(
+				"(word.visibility = 'global' OR (word.visibility = 'private' AND word.owner = :viewerUserId))",
+				{ viewerUserId },
+			)
+			.orderBy("CASE WHEN word.visibility = 'private' THEN 0 ELSE 1 END", "ASC")
+			.getOne();
 	}
 
 	async findOne(id: WordEntity["id"]): Promise<WordEntity | null> {
@@ -329,7 +358,11 @@ export class WordService {
 		word: string,
 		wordId: WordEntity["id"],
 	): Promise<void> {
-		this.openAIQueue.add(AUDIO_CREATION_START, { language, word, wordId });
+		await this.openAIQueue.add(AUDIO_CREATION_START, {
+			language,
+			word,
+			wordId,
+		});
 	}
 
 	async wordsGenerated(
@@ -412,8 +445,10 @@ export class WordService {
 				status: "processing",
 			});
 
-			this.makeAudio(wordData.language, wordData.word, word.id);
-			this.makeEmbedding(word.id, wordData.word);
+			await Promise.all([
+				this.makeAudio(wordData.language, wordData.word, word.id),
+				this.makeEmbedding(word.id, wordData.word),
+			]);
 
 			return word;
 		});
@@ -462,7 +497,7 @@ export class WordService {
 			this.wordEventService.emit({ type: "update", word: updatedWord });
 		}
 
-		this.makeAudio(word.language, word.word, wordId);
+		await this.makeAudio(word.language, word.word, wordId);
 		this.logger.log(
 			`Audio regeneration queued for word ${word.word} (id: ${wordId})`,
 		);
