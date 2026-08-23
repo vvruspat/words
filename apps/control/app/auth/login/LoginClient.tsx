@@ -18,9 +18,13 @@ export default function LoginClient() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const nextPath = searchParams.get("next") ?? "/";
+	const initialError =
+		searchParams.get("error") === "admin_required"
+			? "Your Supabase account is not allowed to access Words Control."
+			: null;
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string | null>(initialError);
 	const [loading, setLoading] = useState(false);
 
 	const supabase = useMemo(() => createSupabaseBrowserClient(), []);

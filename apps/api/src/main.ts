@@ -30,6 +30,11 @@ async function bootstrap() {
 		.setTitle("Words API")
 		.setDescription("API documentation for Words project")
 		.setVersion("1.0")
+		.addBearerAuth({
+			type: "http",
+			scheme: "bearer",
+			bearerFormat: "JWT",
+		})
 		.build();
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup("/docs", app, document);

@@ -1,13 +1,15 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function regenerateAudioAction(wordId: number): Promise<boolean> {
-	const res = await fetch(`${apiBase}/word/${wordId}/regenerate-audio`, {
+	const response = await fetchWordsApi(`/word/${wordId}/regenerate-audio`, {
 		method: "POST",
 	});
-	if (!res.ok) {
-		throw new Error(res.statusText || "Failed to regenerate audio");
+
+	if (!response.ok) {
+		throw new Error(response.statusText || "Failed to regenerate audio");
 	}
+
 	return true;
 }

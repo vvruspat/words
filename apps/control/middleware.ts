@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/proxy";
+import { isSupabaseAdmin } from "@/lib/supabase/admin";
 
 const isPublicPath = (pathname: string) => {
 	if (pathname.startsWith("/auth")) return true;
@@ -18,10 +19,13 @@ export async function middleware(request: NextRequest) {
 
 	const { response, claims } = await updateSession(request);
 
-	if (!claims) {
+	if (!claims || !isSupabaseAdmin(claims)) {
 		const redirectUrl = request.nextUrl.clone();
 		redirectUrl.pathname = "/auth/login";
 		redirectUrl.searchParams.set("next", `${pathname}${search}`);
+		if (claims) {
+			redirectUrl.searchParams.set("error", "admin_required");
+		}
 		const redirectResponse = NextResponse.redirect(redirectUrl);
 		response.cookies.getAll().forEach((cookie) => {
 			redirectResponse.cookies.set(cookie);

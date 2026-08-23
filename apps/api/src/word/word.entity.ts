@@ -65,6 +65,19 @@ export class WordEntity implements Word {
 	@Column({ type: "text", nullable: true })
 	meaning?: string;
 
+	@Column({ type: "int", nullable: true })
+	owner?: number | null;
+
+	@Column({
+		type: "enum",
+		enum: ["global", "private"],
+		default: "global",
+	})
+	visibility?: "global" | "private";
+
+	@Column({ type: "varchar", nullable: true })
+	source?: "curriculum" | "dialogue" | null;
+
 	@Column({
 		type: "text",
 		nullable: true,

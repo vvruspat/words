@@ -1,5 +1,6 @@
 import {
 	BadRequestException,
+	ForbiddenException,
 	Inject,
 	Injectable,
 	Logger,
@@ -19,6 +20,19 @@ import { MailerService, MailTemplate } from "~/mailer/mailer.service";
 import type { UserEntity } from "~/user/user.entity";
 import { UserService } from "../user/user.service";
 
+type SupabaseUser = {
+	id: string;
+	email?: string;
+	app_metadata?: Record<string, unknown>;
+	user_metadata?: Record<string, unknown>;
+	email_confirmed_at?: string | null;
+	confirmed_at?: string | null;
+};
+
+type SupabaseUserResponse = {
+	user?: SupabaseUser;
+};
+
 @Injectable()
 export class AuthService {
 	private readonly logger = new Logger(AuthService.name);
@@ -31,8 +45,11 @@ export class AuthService {
 		@Inject("REDIS_CLIENT") private readonly redis: Redis,
 	) {}
 
-	async getAccessToken(user: UserEntity) {
-		const payload = { sub: user.id, email: user.email };
+	async getAccessToken(
+		user: UserEntity,
+		extraClaims: Record<string, unknown> = {},
+	) {
+		const payload = { ...extraClaims, sub: user.id, email: user.email };
 		const accessExpiresIn = (this.configService.get<string | number>(
 			"JWT_EXPIRES_IN",
 		) || "14d") as SignOptions["expiresIn"];
@@ -54,6 +71,113 @@ export class AuthService {
 		};
 
 		return result;
+	}
+
+	getBearerToken(authorization?: string | string[]): string | null {
+		const value = Array.isArray(authorization)
+			? authorization[0]
+			: authorization;
+
+		if (!value) {
+			return null;
+		}
+
+		const [scheme, token] = value.split(" ");
+
+		if (scheme?.toLowerCase() !== "bearer" || !token) {
+			return null;
+		}
+
+		return token;
+	}
+
+	async getUserFromAuthorizationHeader(
+		authorization?: string | string[],
+	): Promise<UserEntity> {
+		const token = this.getBearerToken(authorization);
+
+		if (!token) {
+			throw new UnauthorizedException("Missing bearer token");
+		}
+
+		let decoded: { sub?: number | string };
+
+		try {
+			decoded = this.jwtService.verify(token, {
+				secret: this.configService.get<string>("JWT_SECRET"),
+			});
+		} catch {
+			throw new UnauthorizedException("Invalid bearer token");
+		}
+
+		if (!decoded?.sub) {
+			throw new UnauthorizedException();
+		}
+
+		const userId = Number(decoded.sub);
+
+		if (!Number.isFinite(userId)) {
+			throw new UnauthorizedException();
+		}
+
+		const user = await this.userService.findOne(userId);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		return user;
+	}
+
+	verifyAccessToken(token: string): Record<string, unknown> {
+		try {
+			return this.jwtService.verify<Record<string, unknown>>(token, {
+				secret: this.configService.get<string>("JWT_SECRET"),
+			});
+		} catch {
+			throw new UnauthorizedException("Invalid bearer token");
+		}
+	}
+
+	async getOptionalUserFromAuthorizationHeader(
+		authorization?: string | string[],
+	): Promise<UserEntity | null> {
+		const token = this.getBearerToken(authorization);
+
+		if (!token) {
+			return null;
+		}
+
+		return this.getUserFromAuthorizationHeader(authorization);
+	}
+
+	async exchangeSupabaseToken(
+		authorization?: string | string[],
+	): Promise<PostSignInResponseDto> {
+		const token = this.getBearerToken(authorization);
+
+		if (!token) {
+			throw new UnauthorizedException("Missing Supabase bearer token");
+		}
+
+		const supabaseUser = await this.getSupabaseUser(token);
+
+		if (!this.isSupabaseAdmin(supabaseUser)) {
+			throw new ForbiddenException("Supabase user is not an admin");
+		}
+
+		if (!supabaseUser.email) {
+			throw new UnauthorizedException("Supabase user email is missing");
+		}
+
+		const user = await this.findOrCreateSupabaseUser(supabaseUser);
+		const tokens = await this.getAccessToken(user, {
+			auth_provider: "supabase",
+			supabase_user_id: supabaseUser.id,
+			admin: true,
+		});
+
+		return { ...tokens, user };
 	}
 
 	async signIn(email: string, pass: string): Promise<PostSignInResponseDto> {
@@ -85,6 +209,120 @@ export class AuthService {
 		return result;
 	}
 
+	private async getSupabaseUser(accessToken: string): Promise<SupabaseUser> {
+		const supabaseUrl =
+			this.configService.get<string>("SUPABASE_URL") ||
+			this.configService.get<string>("NEXT_PUBLIC_SUPABASE_URL");
+		const supabaseKey =
+			this.configService.get<string>("SUPABASE_SERVICE_ROLE_KEY") ||
+			this.configService.get<string>("SUPABASE_ANON_KEY") ||
+			this.configService.get<string>("SUPABASE_PUBLISHABLE_KEY") ||
+			this.configService.get<string>("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
+
+		if (!supabaseUrl || !supabaseKey) {
+			throw new BadRequestException("Supabase auth is not configured");
+		}
+
+		const response = await fetch(
+			`${supabaseUrl.replace(/\/$/, "")}/auth/v1/user`,
+			{
+				headers: {
+					apikey: supabaseKey,
+					Authorization: `Bearer ${accessToken}`,
+				},
+			},
+		);
+
+		if (!response.ok) {
+			throw new UnauthorizedException("Invalid Supabase bearer token");
+		}
+
+		const data = (await response.json()) as SupabaseUser | SupabaseUserResponse;
+		const user = "user" in data && data.user ? data.user : data;
+
+		if (!("id" in user) || !user.id) {
+			throw new UnauthorizedException("Invalid Supabase user response");
+		}
+
+		return user;
+	}
+
+	private isSupabaseAdmin(user: SupabaseUser): boolean {
+		const adminEmails = this.configService
+			.get<string>("SUPABASE_ADMIN_EMAILS")
+			?.split(",")
+			.map((email) => email.trim().toLowerCase())
+			.filter(Boolean);
+		const email = user.email?.toLowerCase();
+
+		if (email && adminEmails?.includes(email)) {
+			return true;
+		}
+
+		const metadata = user.app_metadata ?? {};
+		const configuredRole =
+			this.configService.get<string>("SUPABASE_ADMIN_ROLE") || "admin";
+		const role = metadata.role;
+		const roles = metadata.roles;
+
+		if (role === configuredRole) {
+			return true;
+		}
+
+		if (Array.isArray(roles) && roles.includes(configuredRole)) {
+			return true;
+		}
+
+		if (
+			typeof roles === "string" &&
+			roles
+				.split(",")
+				.map((item) => item.trim())
+				.includes(configuredRole)
+		) {
+			return true;
+		}
+
+		return metadata.admin === true || metadata.is_admin === true;
+	}
+
+	private async findOrCreateSupabaseUser(
+		supabaseUser: SupabaseUser,
+	): Promise<UserEntity> {
+		const email = supabaseUser.email;
+
+		if (!email) {
+			throw new UnauthorizedException("Supabase user email is missing");
+		}
+
+		const existingUser = await this.userService.findOneByEmail(email);
+
+		if (existingUser) {
+			if (!existingUser.email_verified) {
+				await this.userService.setEmailVerified(existingUser.id);
+				return this.userService.findOne(existingUser.id);
+			}
+
+			return existingUser;
+		}
+
+		const name =
+			typeof supabaseUser.user_metadata?.name === "string"
+				? supabaseUser.user_metadata.name
+				: typeof supabaseUser.user_metadata?.full_name === "string"
+					? supabaseUser.user_metadata.full_name
+					: email;
+
+		return this.userService.create({
+			email,
+			name,
+			email_verified: Boolean(
+				supabaseUser.email_confirmed_at || supabaseUser.confirmed_at,
+			),
+			onboarded: true,
+		});
+	}
+
 	async signUp(
 		name: PostSignUpRequestDto["name"],
 		email: PostSignUpRequestDto["email"],
@@ -107,9 +345,6 @@ export class AuthService {
 		await this.sendVerificationEmail(email);
 
 		const tokens = await this.getAccessToken(user);
-
-		console.log(tokens);
-		console.log(user);
 
 		return { ...tokens, user };
 	}

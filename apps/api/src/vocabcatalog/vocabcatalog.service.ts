@@ -18,11 +18,10 @@ export class VocabCatalogService {
 		private wordRepository: Repository<WordEntity>,
 	) {}
 
-	async findAll({
-		limit,
-		offset,
-		...query
-	}: GetVocabCatalogRequestDto): Promise<VocabCatalogEntity[]> {
+	async findAll(
+		{ limit, offset, ...query }: GetVocabCatalogRequestDto,
+		viewerUserId?: number,
+	): Promise<VocabCatalogEntity[]> {
 		const where: Record<string, unknown> = {};
 
 		for (const [key, value] of Object.entries(query)) {
@@ -32,10 +31,38 @@ export class VocabCatalogService {
 		}
 
 		return this.vocabCatalogRepository.find({
-			where,
+			where: viewerUserId
+				? [
+						{ ...where, visibility: "global" },
+						{ ...where, visibility: "private", owner: viewerUserId },
+					]
+				: where,
 			skip: Number(offset ?? 0),
 			take: Number(limit ?? 10),
 		});
+	}
+
+	async findOrCreatePrivateCatalog(
+		owner: number,
+		language: string,
+	): Promise<VocabCatalogEntity> {
+		const existing = await this.vocabCatalogRepository.findOneBy({
+			owner,
+			language,
+			visibility: "private",
+			title: "My words",
+		});
+		if (existing) return existing;
+
+		return this.vocabCatalogRepository.save(
+			this.vocabCatalogRepository.create({
+				owner,
+				language,
+				title: "My words",
+				description: "Words collected from dialogues",
+				visibility: "private",
+			}),
+		);
 	}
 
 	async findAllAndCreateIfNotExist(
@@ -64,6 +91,17 @@ export class VocabCatalogService {
 		id: VocabCatalogEntity["id"],
 	): Promise<VocabCatalogEntity | null> {
 		return this.vocabCatalogRepository.findOneBy({ id });
+	}
+
+	async findVisibleById(id: VocabCatalogEntity["id"], viewerUserId: number) {
+		return this.vocabCatalogRepository
+			.createQueryBuilder("catalog")
+			.where("catalog.id = :id", { id })
+			.andWhere(
+				"(catalog.visibility = 'global' OR (catalog.visibility = 'private' AND catalog.owner = :viewerUserId))",
+				{ viewerUserId },
+			)
+			.getOne();
 	}
 
 	async getWordsCountByCatalogIds(

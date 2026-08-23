@@ -1,9 +1,9 @@
 import type { paths as Paths } from "@vvruspat/words-types";
+import { getWordsApiAuthorization } from "./api-auth";
 import { genericErrorMessage } from "./genericErrorMessage";
-// import { auth } from "~/auth";
 import logger from "./logger";
 
-const server = process.env.API_SERVER;
+const server = process.env.API_SERVER || "http://localhost:3000";
 
 type ValidUrl = keyof Paths;
 type ValidMethod<U extends ValidUrl> = keyof Paths[U];
@@ -103,15 +103,13 @@ export const $fetch = async <U extends ValidUrl, M extends ValidMethod<U>>(
 			contentTypeHeader["content-type"] = "application/json";
 		}
 
-		// if (isServer) {
-		// 	const session = await auth();
+		if (isServer && !options.noAuth) {
+			const authorization = await getWordsApiAuthorization();
 
-		// 	const token = session?.sessionToken;
-
-		// 	if (token && !options.noAuth) {
-		// 		authHeader.Authorization = `Bearer ${token}`;
-		// 	}
-		// }
+			if (authorization) {
+				authHeader.Authorization = authorization;
+			}
+		}
 
 		let urlWithParams: string = url;
 

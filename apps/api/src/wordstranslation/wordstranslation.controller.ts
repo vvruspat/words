@@ -12,6 +12,8 @@ import {
 	ValidationPipe,
 } from "@nestjs/common";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AdminOnly } from "~/auth/admin-only.decorator";
+import { CurrentUser } from "~/auth/current-user.decorator";
 import {
 	GetWordsTranslationsRequestDto,
 	GetWordsTranslationsResponseDto,
@@ -21,6 +23,7 @@ import {
 	PutWordTranslationRequestDto,
 	PutWordTranslationResponseDto,
 } from "~/dto";
+import type { UserEntity } from "~/user/user.entity";
 import { WordTranslationService } from "./wordstranslation.service";
 
 @ApiTags("words-translation")
@@ -36,6 +39,7 @@ export class WordTranslationController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async get(
 		@Query() query: GetWordsTranslationsRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetWordsTranslationsResponseDto> {
 		const { limit, offset, words, ...filters } = query;
 
@@ -45,14 +49,20 @@ export class WordTranslationController {
 					.map(Number)
 					.filter((id) => !Number.isNaN(id))
 			: undefined;
-		const items = await this.wordsTranslationService.findAll({
-			words: wordsArray,
-			...filters,
-		});
-		const total = await this.wordsTranslationService.count({
-			words: wordsArray,
-			...filters,
-		});
+		const items = await this.wordsTranslationService.findAllVisible(
+			{
+				words: wordsArray,
+				...filters,
+			},
+			user.id,
+		);
+		const total = await this.wordsTranslationService.countVisible(
+			{
+				words: wordsArray,
+				...filters,
+			},
+			user.id,
+		);
 
 		return {
 			items,
@@ -69,8 +79,12 @@ export class WordTranslationController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getById(
 		@Param("id", ParseIntPipe) id: number,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetWordTranslationResponseDto> {
-		const entity = await this.wordsTranslationService.findOne(id);
+		const entity = await this.wordsTranslationService.findOneVisible(
+			id,
+			user.id,
+		);
 
 		if (!entity) {
 			throw new NotFoundException({
@@ -89,6 +103,7 @@ export class WordTranslationController {
 	}
 
 	@Post()
+	@AdminOnly()
 	@ApiOperation({ summary: "Create words translation" })
 	@ApiResponse({ status: 201, type: PostWordTranslationResponseDto })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
@@ -99,6 +114,7 @@ export class WordTranslationController {
 	}
 
 	@Put()
+	@AdminOnly()
 	@ApiOperation({ summary: "Update words translation" })
 	@ApiBody({ type: PutWordTranslationRequestDto })
 	@ApiResponse({ status: 200, type: PutWordTranslationResponseDto })

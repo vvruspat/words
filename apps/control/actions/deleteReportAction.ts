@@ -1,13 +1,13 @@
 "use server";
 
-const server = process.env.API_SERVER;
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function deleteReportAction(id: number): Promise<void> {
-	const res = await fetch(`${server}/report/${id}`, {
+	const response = await fetchWordsApi(`/report/${id}`, {
 		method: "DELETE",
 	});
 
-	if (!res.ok) {
-		throw new Error(`Failed to delete report: ${res.status}`);
+	if (!response.ok) {
+		throw new Error(`Failed to delete report: ${response.status}`);
 	}
 }

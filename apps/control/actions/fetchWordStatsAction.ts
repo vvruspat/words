@@ -1,6 +1,6 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { $fetch } from "@/lib/fetch";
 
 export type WordStatEntry = {
 	language: string;
@@ -20,7 +20,5 @@ export type WordStatsResponse = {
 };
 
 export async function fetchWordStatsAction(): Promise<WordStatsResponse> {
-	const res = await fetch(`${apiBase}/word/stats`, { cache: "no-store" });
-	if (!res.ok) throw new Error("Failed to fetch word stats");
-	return res.json() as Promise<WordStatsResponse>;
+	return await $fetch("/word/stats", "get", {});
 }

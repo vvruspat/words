@@ -16,6 +16,8 @@ import {
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AVAILABLE_LANGUAGES, type Language } from "@vvruspat/words-types";
 import type { Response } from "express";
+import { AdminOnly } from "~/auth/admin-only.decorator";
+import { CurrentUser } from "~/auth/current-user.decorator";
 import {
 	DeleteWordRequestDto,
 	DeleteWordResponseDto,
@@ -25,6 +27,7 @@ import {
 	PutWordRequestDto,
 	PutWordResponseDto,
 } from "~/dto/api/word";
+import type { UserEntity } from "~/user/user.entity";
 import { WordService } from "./word.service";
 import { WordDuplicateService } from "./word-duplicate.service";
 import { WordEventService } from "./word-event.service";
@@ -73,8 +76,11 @@ export class WordController {
 	@ApiResponse({ status: 200, type: GetWordResponseDto })
 	@ApiResponse({ status: 400, description: "Invalid param" })
 	@ApiResponse({ status: 500, description: "Server error" })
-	async getAll(@Query() query: GetWordRequestDto): Promise<GetWordResponseDto> {
-		const entities = await this.wordService.findAll(query);
+	async getAll(
+		@Query() query: GetWordRequestDto,
+		@CurrentUser() user: UserEntity,
+	): Promise<GetWordResponseDto> {
+		const entities = await this.wordService.findAll(query, user.id);
 
 		return {
 			items: entities.items,
@@ -113,6 +119,7 @@ export class WordController {
 	// }
 
 	@Put()
+	@AdminOnly()
 	@ApiOperation({ summary: "Update word" })
 	@ApiResponse({ status: 200, type: PutWordResponseDto })
 	@ApiResponse({ status: 404, description: "Word not found" })
@@ -124,6 +131,7 @@ export class WordController {
 	}
 
 	@Post("bulk-delete")
+	@AdminOnly()
 	@ApiOperation({ summary: "Bulk delete words" })
 	@ApiResponse({ status: 200, description: "Words deleted" })
 	async bulkDelete(
@@ -138,6 +146,7 @@ export class WordController {
 	}
 
 	@Post("generate")
+	@AdminOnly()
 	@ApiOperation({ summary: "Generate words" })
 	@ApiQuery({ name: "language", required: true, type: String })
 	@ApiQuery({ name: "topicId", required: false, type: Number })
@@ -169,6 +178,7 @@ export class WordController {
 	}
 
 	@Post("generate-embeddings")
+	@AdminOnly()
 	@ApiOperation({
 		summary: "Queue embedding generation for words missing embeddings",
 	})
@@ -181,6 +191,7 @@ export class WordController {
 	}
 
 	@Post("recalculate-duplicates")
+	@AdminOnly()
 	@ApiOperation({
 		summary: "Trigger duplicate and synonym recalculation for all languages",
 	})
@@ -194,6 +205,7 @@ export class WordController {
 	}
 
 	@Delete(":id")
+	@AdminOnly()
 	@ApiOperation({ summary: "Delete word" })
 	@ApiResponse({ status: 200, type: DeleteWordResponseDto })
 	async remove(
@@ -204,6 +216,7 @@ export class WordController {
 	}
 
 	@Post(":id/retranslate")
+	@AdminOnly()
 	@ApiOperation({
 		summary: "Retranslate word - delete existing translations and regenerate",
 	})
@@ -220,6 +233,7 @@ export class WordController {
 	}
 
 	@Post(":id/regenerate-audio")
+	@AdminOnly()
 	@ApiOperation({ summary: "Regenerate audio for word" })
 	@ApiResponse({ status: 200, description: "Audio regeneration queued" })
 	@ApiResponse({ status: 404, description: "Word not found" })

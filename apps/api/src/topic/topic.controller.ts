@@ -18,7 +18,8 @@ import {
 	ApiResponse,
 	ApiTags,
 } from "@nestjs/swagger";
-
+import { AdminOnly } from "~/auth/admin-only.decorator";
+import { CurrentUser } from "~/auth/current-user.decorator";
 import {
 	type DeleteTopicRequestDto,
 	DeleteTopicResponseDto,
@@ -29,6 +30,7 @@ import {
 	PutTopicRequestDto,
 	PutTopicResponseDto,
 } from "~/dto";
+import type { UserEntity } from "~/user/user.entity";
 import { TopicService } from "./topic.service";
 
 @ApiTags("topic")
@@ -43,8 +45,9 @@ export class TopicController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(
 		@Query() query: GetTopicRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetTopicResponseDto> {
-		const entities = await this.topicService.findAll(query);
+		const entities = await this.topicService.findAll(query, user.id);
 		const counts = await this.topicService.getWordsCountByTopicIds(
 			entities.map((topic) => topic.id),
 			query.language,
@@ -69,8 +72,9 @@ export class TopicController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getById(
 		@Param("id", ParseIntPipe) id: number,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetTopicResponseDto> {
-		const entity = await this.topicService.findOne(id);
+		const entity = await this.topicService.findVisibleById(id, user.id);
 		const counts = await this.topicService.getWordsCountByTopicIds(
 			entity ? [entity.id] : [],
 		);
@@ -90,6 +94,7 @@ export class TopicController {
 	}
 
 	@Post()
+	@AdminOnly()
 	@ApiOperation({ summary: "Create topic" })
 	@ApiBody({ type: PostTopicRequestDto })
 	@ApiResponse({ status: 201, type: PostTopicResponseDto })
@@ -101,6 +106,7 @@ export class TopicController {
 	}
 
 	@Put()
+	@AdminOnly()
 	@ApiOperation({ summary: "Update topic" })
 	@ApiBody({ type: PutTopicRequestDto })
 	@ApiResponse({ status: 200, type: PutTopicResponseDto })
@@ -113,6 +119,7 @@ export class TopicController {
 	}
 
 	@Delete(":id")
+	@AdminOnly()
 	@ApiOperation({ summary: "Delete topic" })
 	@ApiResponse({ status: 200, type: DeleteTopicResponseDto })
 	async remove(

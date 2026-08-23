@@ -1,8 +1,7 @@
 "use server";
 
 import type { WordData } from "@vvruspat/words-types";
-
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export type DuplicateGroup = {
 	word: string;
@@ -28,9 +27,13 @@ export async function fetchDuplicatesAction(props: {
 	});
 	if (props.language) params.set("language", props.language);
 
-	const res = await fetch(`${apiBase}/word/duplicates?${params.toString()}`, {
+	const response = await fetchWordsApi(`/word/duplicates?${params.toString()}`, {
 		cache: "no-store",
 	});
-	if (!res.ok) throw new Error("Failed to fetch duplicates");
-	return res.json() as Promise<GetWordDuplicatesResponse>;
+
+	if (!response.ok) {
+		throw new Error("Failed to fetch duplicates");
+	}
+
+	return response.json() as Promise<GetWordDuplicatesResponse>;
 }

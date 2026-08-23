@@ -23,6 +23,7 @@ export class TopicService {
 
 	async findAll(
 		query: Partial<Topic> & ApiPaginationRequest,
+		viewerUserId?: number,
 	): Promise<TopicEntity[]> {
 		const { limit, offset, ...rest } = query;
 		const where: Record<string, unknown> = {};
@@ -34,10 +35,38 @@ export class TopicService {
 		}
 
 		return this.topicRepository.find({
-			where,
+			where: viewerUserId
+				? [
+						{ ...where, visibility: "global" },
+						{ ...where, visibility: "private", owner: viewerUserId },
+					]
+				: where,
 			take: limit || 10,
 			skip: offset || 0,
 		});
+	}
+
+	async findOrCreatePrivateTopic(
+		owner: number,
+		language: string,
+	): Promise<TopicEntity> {
+		const existing = await this.topicRepository.findOneBy({
+			owner,
+			language,
+			visibility: "private",
+			title: "My words",
+		});
+		if (existing) return existing;
+
+		return this.topicRepository.save(
+			this.topicRepository.create({
+				title: "My words",
+				description: "Words collected from dialogues",
+				language,
+				owner,
+				visibility: "private",
+			}),
+		);
 	}
 
 	async findAllAndCreateIfNotExist(
@@ -64,6 +93,17 @@ export class TopicService {
 
 	async findOne(id: TopicEntity["id"]): Promise<TopicEntity | null> {
 		return this.topicRepository.findOneBy({ id });
+	}
+
+	async findVisibleById(id: TopicEntity["id"], viewerUserId: number) {
+		return this.topicRepository
+			.createQueryBuilder("topic")
+			.where("topic.id = :id", { id })
+			.andWhere(
+				"(topic.visibility = 'global' OR (topic.visibility = 'private' AND topic.owner = :viewerUserId))",
+				{ viewerUserId },
+			)
+			.getOne();
 	}
 
 	async getWordsCountByTopicIds(

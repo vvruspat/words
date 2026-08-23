@@ -5,7 +5,7 @@ import type { FindOptionsWhere, Repository } from "typeorm";
 import { In, Like } from "typeorm";
 import { TRANSLATION_START } from "~/constants/queue-events.constants";
 import { OPENAI_QUEUE } from "~/constants/queues.constants";
-import type { WordEntity } from "~/word/word.entity";
+import { WordEntity } from "~/word/word.entity";
 import { WordEventService } from "~/word/word-event.service";
 import {
 	WORD_REPOSITORY,
@@ -95,6 +95,28 @@ export class WordTranslationService {
 		return this.wordsTranslationRepository.count({ where });
 	}
 
+	async findAllVisible(
+		filters: Partial<WordTranslationEntity> & {
+			words?: WordTranslationEntity["word"][] | string;
+		},
+		viewerUserId: number,
+	): Promise<WordTranslationEntity[]> {
+		return this.visibleQuery(filters, viewerUserId).getMany();
+	}
+
+	async countVisible(
+		filters: Partial<WordTranslationEntity> & {
+			words?: WordTranslationEntity["word"][] | string;
+		},
+		viewerUserId: number,
+	): Promise<number> {
+		return this.visibleQuery(filters, viewerUserId).getCount();
+	}
+
+	async findOneVisible(id: number, viewerUserId: number) {
+		return this.visibleQuery({ id }, viewerUserId).getOne();
+	}
+
 	async findOne(
 		id: WordTranslationEntity["id"],
 	): Promise<WordTranslationEntity | null> {
@@ -131,6 +153,38 @@ export class WordTranslationService {
 			select: ["word"],
 		});
 		return [...new Set(matches.map((t) => t.word))];
+	}
+
+	private visibleQuery(
+		filters: Partial<WordTranslationEntity> & {
+			words?: WordTranslationEntity["word"][] | string;
+		},
+		viewerUserId: number,
+	) {
+		const { words, ...fields } = filters;
+		const query = this.wordsTranslationRepository
+			.createQueryBuilder("translation")
+			.innerJoin(WordEntity, "sourceWord", "sourceWord.id = translation.word")
+			.where(
+				"(sourceWord.visibility = 'global' OR (sourceWord.visibility = 'private' AND sourceWord.owner = :viewerUserId))",
+				{ viewerUserId },
+			);
+		const wordIds = Array.isArray(words)
+			? words.map(Number).filter(Number.isFinite)
+			: typeof words === "string"
+				? words.split(",").map(Number).filter(Number.isFinite)
+				: words != null
+					? [Number(words)]
+					: [];
+		if (wordIds.length > 0) {
+			query.andWhere("translation.word IN (:...wordIds)", { wordIds });
+		}
+		for (const [key, value] of Object.entries(fields)) {
+			if (value !== undefined && value !== null && value !== "") {
+				query.andWhere(`translation.${key} = :${key}`, { [key]: value });
+			}
+		}
+		return query;
 	}
 
 	async makeTranslations(words: WordEntity[]): Promise<void> {

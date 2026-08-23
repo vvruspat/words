@@ -1,19 +1,23 @@
 "use server";
 
-const apiBase = process.env.API_SERVER || "http://localhost:3000";
+import { fetchWordsApi } from "@/lib/api-auth";
 
 export async function bulkDeleteWordsAction(
 	wordIds: number[],
 ): Promise<{ deleted: number }> {
 	if (wordIds.length === 0) return { deleted: 0 };
 
-	const res = await fetch(`${apiBase}/word/bulk-delete`, {
+	const response = await fetchWordsApi("/word/bulk-delete", {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
+		headers: {
+			"content-type": "application/json",
+		},
 		body: JSON.stringify({ ids: wordIds }),
 	});
-	if (!res.ok) {
-		throw new Error(res.statusText || "Failed to delete words");
+
+	if (!response.ok) {
+		throw new Error(response.statusText || "Failed to delete words");
 	}
-	return res.json();
+
+	return response.json() as Promise<{ deleted: number }>;
 }

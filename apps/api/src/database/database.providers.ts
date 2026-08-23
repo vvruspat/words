@@ -14,7 +14,7 @@ export const databaseProviders = [
 				// from decorators, not actual database connections.
 				const dataSourceOptions: DataSourceOptions = {
 					type: "postgres",
-					entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
+					entities: [`${__dirname}/../**/*.entit{y,ies}{.ts,.js}`],
 				};
 				const dataSource = new DataSource(dataSourceOptions);
 				// Don't call initialize() - just return the uninitialized DataSource
@@ -24,9 +24,9 @@ export const databaseProviders = [
 			let connectionOptions = {};
 			const dataSourceOptions: DataSourceOptions = {
 				type: "postgres",
-				entities: [`${__dirname}/../**/*.entity{.ts,.js}`],
-				synchronize: true,
-				logging: true,
+				entities: [`${__dirname}/../**/*.entit{y,ies}{.ts,.js}`],
+				synchronize: process.env.DB_SYNCHRONIZE !== "false",
+				logging: process.env.DB_LOGGING === "true",
 				logger: "advanced-console",
 
 				subscribers: [WordSubscriber, TranslationSubscriber],

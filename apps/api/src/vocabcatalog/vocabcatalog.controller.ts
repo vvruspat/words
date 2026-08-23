@@ -18,6 +18,8 @@ import {
 	ApiResponse,
 	ApiTags,
 } from "@nestjs/swagger";
+import { AdminOnly } from "~/auth/admin-only.decorator";
+import { CurrentUser } from "~/auth/current-user.decorator";
 import { DeleteVocabCatalogResponseDto } from "~/dto/api/vocabcatalog/delete";
 import {
 	GetVocabCatalogRequestDto,
@@ -31,6 +33,7 @@ import {
 	PutVocabCatalogRequestDto,
 	PutVocabCatalogResponseDto,
 } from "~/dto/api/vocabcatalog/put";
+import type { UserEntity } from "~/user/user.entity";
 import { VocabCatalogService } from "./vocabcatalog.service";
 
 @ApiTags("vocabcatalog")
@@ -45,8 +48,9 @@ export class VocabCatalogController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getAll(
 		@Query() query: GetVocabCatalogRequestDto,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetVocabCatalogResponseDto> {
-		const entities = await this.vocabCatalogService.findAll(query);
+		const entities = await this.vocabCatalogService.findAll(query, user.id);
 		const counts = await this.vocabCatalogService.getWordsCountByCatalogIds(
 			entities.map((catalog) => catalog.id),
 			query.language,
@@ -71,8 +75,9 @@ export class VocabCatalogController {
 	@ApiResponse({ status: 500, description: "Server error" })
 	async getById(
 		@Param("id", ParseIntPipe) id: number,
+		@CurrentUser() user: UserEntity,
 	): Promise<GetVocabCatalogResponseDto> {
-		const entity = await this.vocabCatalogService.findOne(id);
+		const entity = await this.vocabCatalogService.findVisibleById(id, user.id);
 		const counts = await this.vocabCatalogService.getWordsCountByCatalogIds(
 			entity ? [entity.id] : [],
 		);
@@ -92,6 +97,7 @@ export class VocabCatalogController {
 	}
 
 	@Post()
+	@AdminOnly()
 	@ApiOperation({ summary: "Create vocab catalog" })
 	@ApiBody({ type: PostVocabCatalogRequestDto })
 	@ApiResponse({ status: 201, type: PostVocabCatalogResponseDto })
@@ -103,6 +109,7 @@ export class VocabCatalogController {
 	}
 
 	@Put()
+	@AdminOnly()
 	@ApiOperation({ summary: "Update vocab catalog" })
 	@ApiBody({ type: PutVocabCatalogRequestDto })
 	@ApiResponse({ status: 200, type: PutVocabCatalogResponseDto })
@@ -117,6 +124,7 @@ export class VocabCatalogController {
 	}
 
 	@Delete(":id")
+	@AdminOnly()
 	@ApiOperation({ summary: "Delete vocab catalog" })
 	@ApiResponse({ status: 200, type: DeleteVocabCatalogResponseDto })
 	async remove(
