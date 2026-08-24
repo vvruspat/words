@@ -11,6 +11,7 @@ import {
 } from "ai";
 import type { Response } from "express";
 import * as z from "zod/v4";
+import { CHAT_ASSISTANT_SYSTEM_PROMPT } from "~/prompts";
 import type { UserEntity } from "~/user/user.entity";
 
 export type AssistantChatRequest = {
@@ -110,7 +111,10 @@ export class ChatService {
 
 			const result = streamText({
 				model: openai(this.getModel()),
-				system: this.getSystemPrompt(user, body.system),
+				providerOptions: {
+					openai: { reasoningEffort: "medium" },
+				},
+				system: CHAT_ASSISTANT_SYSTEM_PROMPT(user, body.system),
 				messages,
 				tools,
 				stopWhen: stepCountIs(this.getMaxSteps()),
@@ -167,7 +171,7 @@ export class ChatService {
 	}
 
 	private getModel(): string {
-		return this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-4o-mini";
+		return this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-5-nano";
 	}
 
 	private getMaxSteps(): number {
@@ -181,30 +185,5 @@ export class ChatService {
 			Number(this.configService.get<string>("OPENAI_CHAT_MAX_OUTPUT_TOKENS")) ||
 			15000
 		);
-	}
-
-	private getSystemPrompt(user: UserEntity, frontendSystem?: string): string {
-		const userContext = {
-			id: user.id,
-			name: user.name,
-			language_learn: user.language_learn,
-			language_speak: user.language_speak,
-			onboarded: user.onboarded,
-		};
-
-		return [
-			`You are the Words App language-learning assistant.
-
-Help the authenticated user train vocabulary through short conversational tasks, corrections, examples, and follow-up exercises.
-Use the Words MCP tools when you need topics, vocabulary, or progress data. The authenticated user context is ${JSON.stringify(userContext)}.
-For user progress, call get_user_progress without asking the user for an id. Never reveal or request another user's id.
-Prefer the user's learning language when selecting or adding vocabulary. Add words only when they are useful for future vocabulary training or when the user explicitly asks to save them.
-Do not claim that you changed data unless a tool call succeeded.`,
-			typeof frontendSystem === "string" && frontendSystem.trim().length > 0
-				? frontendSystem.trim()
-				: undefined,
-		]
-			.filter(Boolean)
-			.join("\n\n");
 	}
 }

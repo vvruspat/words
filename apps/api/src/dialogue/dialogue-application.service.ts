@@ -132,21 +132,18 @@ export class DialogueApplicationService {
 			user.language_speak,
 			user.language_learn,
 		);
-		const [generated, correctionReview] = await Promise.all([
-			this.ai.generateTurn({
-				user,
-				session,
-				messages: history,
-				authorization,
-				detectedNativeTerms,
-			}),
-			this.ai.reviewLearnerAnswer({
-				user,
-				content,
-				detectedNativeTerms,
-				messages: history,
-			}),
-		]);
+		const generated = await this.ai.generateTurn({
+			user,
+			session,
+			messages: history,
+			authorization,
+			detectedNativeTerms,
+		});
+		const correctedAnswer = generated.data.correctedAnswer?.trim() || content;
+		const correctionExplanation =
+			generated.data.correctionExplanation?.trim() ||
+			generated.data.corrections[0]?.shortExplanation ||
+			"";
 		let resolverResult: Awaited<
 			ReturnType<DialogueAiService["resolveNativeInsertions"]>
 		> | null = null;
@@ -154,15 +151,12 @@ export class DialogueApplicationService {
 			user,
 			turn: {
 				...generated.data,
-				corrections: this.buildReviewedCorrections({
+				corrections: this.buildTurnCorrections({
 					content,
-					correctedAnswer: correctionReview.data.correctedAnswer,
-					overallExplanation: correctionReview.data.overallExplanation,
+					correctedAnswer,
+					overallExplanation: correctionExplanation,
 					detectedNativeTerms,
-					evidence: [
-						...correctionReview.data.corrections,
-						...generated.data.corrections,
-					],
+					evidence: generated.data.corrections,
 				}),
 			},
 			detectedNativeTerms,
@@ -195,6 +189,8 @@ export class DialogueApplicationService {
 				shouldWrapUp: turn.shouldWrapUp,
 				shouldComplete: turn.shouldComplete,
 				respondingTo: userMessage.id,
+				correctedAnswer,
+				correctionExplanation,
 			},
 		});
 		const corrections = await this.dialogue.saveCorrections({
@@ -208,18 +204,13 @@ export class DialogueApplicationService {
 			sessionId,
 			messageId: assistantMessage.id,
 			turn,
-			context: correctionReview.data.correctedAnswer,
+			context: correctedAnswer,
 		});
 		const updatedSession = await this.dialogue.incrementTurn(sessionId, {
 			corrections: corrections.length,
 			nativeInsertions: turn.nativeInsertions.length,
 		});
 		await this.saveUsage(user.id, generated, {
-			sessionId,
-			threadId: thread.id,
-			messageId: assistantMessage.id,
-		});
-		await this.saveUsage(user.id, correctionReview, {
 			sessionId,
 			threadId: thread.id,
 			messageId: assistantMessage.id,
@@ -674,7 +665,7 @@ export class DialogueApplicationService {
 			.map(({ correction }) => correction);
 	}
 
-	private buildReviewedCorrections({
+	private buildTurnCorrections({
 		content,
 		correctedAnswer,
 		overallExplanation,

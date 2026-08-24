@@ -1,8 +1,6 @@
 import { describe, expect, it } from "@jest/globals";
-import {
-	prepareDialogueStep,
-	vocabularyDescriptionRules,
-} from "./dialogue-ai.service";
+import { VOCABULARY_DESCRIPTION_RULES_PROMPT } from "~/prompts";
+import { prepareDialogueStep } from "./dialogue-ai.service";
 
 describe("prepareDialogueStep", () => {
 	it("forces a final answer after three MCP rounds", () => {
@@ -13,7 +11,7 @@ describe("prepareDialogueStep", () => {
 	});
 
 	it("keeps vocabulary hints in the target language and translations separate", () => {
-		const rules = vocabularyDescriptionRules("nl", "ru");
+		const rules = VOCABULARY_DESCRIPTION_RULES_PROMPT("nl", "ru");
 
 		expect(rules).toContain(
 			"description must be a short monolingual hint in Dutch",
