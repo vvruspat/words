@@ -16,16 +16,17 @@ import {
 	TRANSLATIONS_QUEUE,
 	WORDS_QUEUE,
 } from "~/constants/queues.constants";
-import type { TopicEntity } from "~/topic/topic.entity";
-import type { WordEntity } from "~/word/word.entity";
 import {
+	AUDIO_INSTRUCTIONS_PROMPT,
 	GENERATE_WORDS_FOR_LEVEL_PROMPT_ID,
 	GENERATE_WORDS_FOR_TOPIC_PROMPT_ID,
 	GENERATE_WORDS_PROMPT_ID,
+	RETURN_JSON_PROMPT,
 	TRANSLATE_TOPICS_PROMPT_ID,
 	TRANSLATE_WORDS_PROMPT_ID,
-} from "./constants/prompts";
-import { audioInstructions } from "./utlis/audioInstructions";
+} from "~/prompts";
+import type { TopicEntity } from "~/topic/topic.entity";
+import type { WordEntity } from "~/word/word.entity";
 import { chooseVoice } from "./utlis/chooseVoice";
 
 const WORDS_LIMIT = 100;
@@ -98,7 +99,7 @@ export class OpenAIService {
 			input: [
 				{
 					role: "user",
-					content: "Return the result as JSON.",
+					content: RETURN_JSON_PROMPT,
 				},
 			],
 			text: {
@@ -277,7 +278,7 @@ export class OpenAIService {
 			model: "gpt-4o-mini-tts",
 			voice: chooseVoice(language),
 			input: word,
-			instructions: audioInstructions(language),
+			instructions: AUDIO_INSTRUCTIONS_PROMPT(language),
 		});
 
 		const buffer = Buffer.from(await mp3.arrayBuffer());
