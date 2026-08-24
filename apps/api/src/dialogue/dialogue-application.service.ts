@@ -195,6 +195,8 @@ export class DialogueApplicationService {
 				shouldWrapUp: turn.shouldWrapUp,
 				shouldComplete: turn.shouldComplete,
 				respondingTo: userMessage.id,
+				correctedAnswer: correctionReview.data.correctedAnswer,
+				correctionExplanation: correctionReview.data.overallExplanation,
 			},
 		});
 		const corrections = await this.dialogue.saveCorrections({

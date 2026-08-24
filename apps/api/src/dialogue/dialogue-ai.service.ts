@@ -100,7 +100,12 @@ const nativeInsertionResolutionSchema = z.object({
 });
 
 const correctionReviewSchema = z.object({
-	correctedAnswer: z.string().min(1),
+	correctedAnswer: z
+		.string()
+		.min(1)
+		.describe(
+			"The complete answer a native teacher would recommend: grammatically correct and natural, not merely a spelling-fixed version.",
+		),
 	overallExplanation: z.string().min(1).max(500),
 	corrections: z.array(correctionSchema).max(8),
 });
@@ -289,7 +294,10 @@ ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 		messages: DialogueMessageEntity[];
 	}) {
 		const result = await generateText({
-			model: openai(this.model),
+			model: openai(this.correctionModel),
+			providerOptions: {
+				openai: { reasoningEffort: "low" },
+			},
 			output: Output.object({ schema: correctionReviewSchema }),
 			system: this.teacherSystem(user),
 			prompt: `Perform a strict, independent language correction audit of the learner's latest answer.
@@ -302,9 +310,16 @@ ${messages
 	.map((message) => `${message.role.toUpperCase()}: ${message.content}`)
 	.join("\n")}
 
-First produce correctedAnswer: a complete, natural ${user.language_learn} version that preserves the learner's intended meaning and level.
+First infer the learner's most likely intended meaning from the entire answer and recent conversation. If the wording is ambiguous, choose the interpretation that best answers the teacher's last question and mention that assumption briefly in overallExplanation.
+Then produce correctedAnswer: the complete ${user.language_learn} sentence a native teacher would recommend for that meaning. Preserve the learner's appropriate level, but never preserve the original word order or construction merely because it is understandable. correctedAnswer must fix both grammatical correctness and natural phrasing; it is not a minimally spell-checked copy.
 Return overallExplanation as a concise explanation in ${user.language_speak} of the main changes in the full answer.
 Then compare the entire original answer against correctedAnswer and return a complete set of corrections. Do not stop after the first obvious error.
+
+Audit in two explicit passes:
+1. Word-level accuracy: spelling, native-language insertions, vocabulary and inflection.
+2. Whole-sentence quality: ask whether a careful native speaker would naturally say the exact sentence in this context. If not, rewrite the affected phrase in correctedAnswer and include a grammar or vocabulary correction for it even when every individual word is valid.
+
+One word-level correction never proves the rest of the sentence is correct. After fixing such an error, audit the entire resulting sentence again for articles, agreement, word order and construction.
 
 Check every clause for:
 - articles and determiners;
@@ -319,6 +334,7 @@ Correction requirements:
 - corrected must replace exactly that span and must differ from original;
 - corrections must not overlap; use a short phrase when grammar or word order cannot be fixed word-by-word;
 - applying the replacements must produce correctedAnswer apart from punctuation or capitalization that does not affect meaning;
+- do not describe phrase-level repairs as optional style suggestions when the original construction is unnatural for a native speaker;
 - correction explanations and translations must be in ${user.language_speak};
 ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 - use type typo only for spelling mistakes, grammar for grammatical structure, and vocabulary for word choice or native-language replacement;
@@ -326,7 +342,7 @@ ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 - return an empty corrections array only when the full answer is already natural and grammatically correct.
 
 Do not comment on the answer and do not continue the role-play. Return only the structured audit.`,
-			maxOutputTokens: 1800,
+			maxOutputTokens: 2500,
 		});
 		return this.result(result);
 	}
@@ -442,6 +458,10 @@ ${corrections.map((item) => `${item.original} -> ${item.corrected}: ${item.short
 
 	get model() {
 		return this.config.get<string>("OPENAI_CHAT_MODEL") || "gpt-4o-mini";
+	}
+
+	get correctionModel() {
+		return this.config.get<string>("OPENAI_CORRECTION_MODEL") || "gpt-5.2";
 	}
 
 	private teacherSystem(user: UserEntity) {

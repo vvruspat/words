@@ -304,6 +304,15 @@ describe("DialogueApplicationService", () => {
 			detectedNativeTerms: [],
 			messages: [],
 		});
+		expect(dialogue.appendMessage).toHaveBeenNthCalledWith(
+			2,
+			expect.objectContaining({
+				metadata: expect.objectContaining({
+					correctedAnswer: "Alleen één GitLab-pipeline uitvoeren.",
+					correctionExplanation: "Исправлено построение предложения.",
+				}),
+			}),
+		);
 	});
 
 	it("turns an overlapping full-answer audit into non-overlapping phrase ranges", () => {
