@@ -42,7 +42,7 @@ describe("DialogueApplicationService", () => {
 			listCorrections: jest.fn().mockResolvedValue([]),
 		};
 		ai = {
-			model: "gpt-4o-mini",
+			model: "gpt-5-nano",
 			resolveNativeInsertions: jest.fn(),
 			resolveWord: jest
 				.fn()
@@ -74,23 +74,14 @@ describe("DialogueApplicationService", () => {
 									],
 					},
 					usage: { inputTokens: 4, outputTokens: 3, totalTokens: 7 },
-					modelId: "gpt-4o-mini",
-				})),
-			reviewLearnerAnswer: jest
-				.fn()
-				.mockImplementation(async ({ content }: { content: string }) => ({
-					data: {
-						correctedAnswer: content,
-						overallExplanation: "Фраза уже корректна.",
-						corrections: [],
-					},
-					usage: { inputTokens: 8, outputTokens: 4, totalTokens: 12 },
-					modelId: "gpt-4o-mini",
+					modelId: "gpt-5-nano",
 				})),
 			generateTurn: jest.fn().mockResolvedValue({
 				data: {
 					reply: "Good try!",
 					translation: "Хорошая попытка!",
+					correctedAnswer: "I went with ticket",
+					correctionExplanation: "Исправлен неправильный глагол.",
 					corrections: [
 						{
 							type: "grammar",
@@ -115,7 +106,7 @@ describe("DialogueApplicationService", () => {
 					shouldComplete: false,
 				},
 				usage: { inputTokens: 10, outputTokens: 5, totalTokens: 15 },
-				modelId: "gpt-4o-mini",
+				modelId: "gpt-5-nano",
 			}),
 		};
 		vocabulary = {
@@ -179,6 +170,8 @@ describe("DialogueApplicationService", () => {
 			...generated,
 			data: {
 				...generated.data,
+				correctedAnswer: "Het nieuwe project is interessant.",
+				correctionExplanation: "Исправлено написание.",
 				corrections: [
 					{
 						type: "typo",
@@ -197,15 +190,6 @@ describe("DialogueApplicationService", () => {
 				],
 				nativeInsertions: [],
 			},
-		});
-		ai.reviewLearnerAnswer.mockResolvedValue({
-			data: {
-				correctedAnswer: "Het nieuwe project is interessant.",
-				overallExplanation: "Исправлено написание.",
-				corrections: [],
-			},
-			usage: { inputTokens: 8, outputTokens: 4, totalTokens: 12 },
-			modelId: "gpt-4o-mini",
 		});
 
 		await service.sendMainMessage({
@@ -234,28 +218,14 @@ describe("DialogueApplicationService", () => {
 		});
 	});
 
-	it("adds grammar corrections found by the independent full-answer audit", async () => {
+	it("adds phrase-level grammar corrections from the main turn", async () => {
 		const generated = await ai.generateTurn();
 		ai.generateTurn.mockResolvedValue({
 			...generated,
 			data: {
 				...generated.data,
-				corrections: [
-					{
-						type: "typo",
-						original: "ranen",
-						corrected: "runnen",
-						shortExplanation: "Исправлено написание.",
-						affectedWords: [],
-					},
-				],
-				nativeInsertions: [],
-			},
-		});
-		ai.reviewLearnerAnswer.mockResolvedValue({
-			data: {
 				correctedAnswer: "Alleen één GitLab-pipeline uitvoeren.",
-				overallExplanation: "Исправлено построение предложения.",
+				correctionExplanation: "Исправлено построение предложения.",
 				corrections: [
 					{
 						type: "grammar",
@@ -273,10 +243,10 @@ describe("DialogueApplicationService", () => {
 						affectedWords: [],
 					},
 				],
+				nativeInsertions: [],
 			},
-			usage: { inputTokens: 8, outputTokens: 4, totalTokens: 12 },
-			modelId: "gpt-4o-mini",
 		});
+		ai.generateTurn.mockClear();
 		vocabulary.addWords.mockResolvedValue([]);
 
 		await service.sendMainMessage({
@@ -298,12 +268,7 @@ describe("DialogueApplicationService", () => {
 				],
 			}),
 		);
-		expect(ai.reviewLearnerAnswer).toHaveBeenCalledWith({
-			user,
-			content: "Slecht enkel de gitlab pipeline ranen.",
-			detectedNativeTerms: [],
-			messages: [],
-		});
+		expect(ai.generateTurn).toHaveBeenCalledTimes(1);
 		expect(dialogue.appendMessage).toHaveBeenNthCalledWith(
 			2,
 			expect.objectContaining({
@@ -315,12 +280,12 @@ describe("DialogueApplicationService", () => {
 		);
 	});
 
-	it("turns an overlapping full-answer audit into non-overlapping phrase ranges", () => {
+	it("turns a full corrected answer into non-overlapping phrase ranges", () => {
 		const content =
 			"Slecht enkel de gitlab pipeline ranen. Alleen een command release";
-		const buildReviewedCorrections = (
+		const buildTurnCorrections = (
 			service as unknown as {
-				buildReviewedCorrections: (input: {
+				buildTurnCorrections: (input: {
 					content: string;
 					correctedAnswer: string;
 					overallExplanation: string;
@@ -328,9 +293,9 @@ describe("DialogueApplicationService", () => {
 					evidence: DialogueTurn["corrections"];
 				}) => DialogueTurn["corrections"];
 			}
-		).buildReviewedCorrections.bind(service);
+		).buildTurnCorrections.bind(service);
 
-		const corrections = buildReviewedCorrections({
+		const corrections = buildTurnCorrections({
 			content,
 			correctedAnswer:
 				"Slecht, alleen de GitLab-pipeline draait. Alleen één commando: release.",
@@ -394,7 +359,7 @@ describe("DialogueApplicationService", () => {
 				shouldComplete: false,
 			},
 			usage: { inputTokens: 10, outputTokens: 5, totalTokens: 15 },
-			modelId: "gpt-4o-mini",
+			modelId: "gpt-5-nano",
 		});
 		ai.resolveNativeInsertions.mockResolvedValue({
 			data: {
@@ -412,7 +377,7 @@ describe("DialogueApplicationService", () => {
 				],
 			},
 			usage: { inputTokens: 4, outputTokens: 3, totalTokens: 7 },
-			modelId: "gpt-4o-mini",
+			modelId: "gpt-5-nano",
 		});
 		vocabulary.addWords.mockResolvedValue([
 			{

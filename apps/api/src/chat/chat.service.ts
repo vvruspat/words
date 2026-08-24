@@ -110,6 +110,9 @@ export class ChatService {
 
 			const result = streamText({
 				model: openai(this.getModel()),
+				providerOptions: {
+					openai: { reasoningEffort: "medium" },
+				},
 				system: this.getSystemPrompt(user, body.system),
 				messages,
 				tools,
@@ -167,7 +170,7 @@ export class ChatService {
 	}
 
 	private getModel(): string {
-		return this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-4o-mini";
+		return this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-5-nano";
 	}
 
 	private getMaxSteps(): number {

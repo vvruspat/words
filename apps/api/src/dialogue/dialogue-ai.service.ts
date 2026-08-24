@@ -82,7 +82,22 @@ const correctionSchema = z.object({
 const turnSchema = z.object({
 	reply: z.string().min(1),
 	translation: z.string().min(1),
-	corrections: z.array(correctionSchema).max(5),
+	correctedAnswer: z
+		.string()
+		.min(1)
+		.nullable()
+		.describe(
+			"The learner's complete answer rewritten as grammatically correct, natural target-language speech. Null only for the opening turn.",
+		),
+	correctionExplanation: z
+		.string()
+		.min(1)
+		.max(500)
+		.nullable()
+		.describe(
+			"A concise native-language explanation of the full correction. Null only for the opening turn.",
+		),
+	corrections: z.array(correctionSchema).max(8),
 	nativeInsertions: z.array(resolvedWordSchema).max(4),
 	hints: z.array(z.string()).max(3),
 	shouldWrapUp: z.boolean(),
@@ -97,17 +112,6 @@ const nativeInsertionResolutionSchema = z.object({
 			shortExplanation: z.string().min(1).max(500),
 		}),
 	),
-});
-
-const correctionReviewSchema = z.object({
-	correctedAnswer: z
-		.string()
-		.min(1)
-		.describe(
-			"The complete answer a native teacher would recommend: grammatically correct and natural, not merely a spelling-fixed version.",
-		),
-	overallExplanation: z.string().min(1).max(500),
-	corrections: z.array(correctionSchema).max(8),
 });
 
 const recommendationSchema = z.object({
@@ -135,6 +139,10 @@ export type ResolvedWord = z.infer<typeof resolvedWordSchema>;
 export type NativeInsertionResolution = z.infer<
 	typeof nativeInsertionResolutionSchema
 >["items"][number];
+
+const OPENAI_PROVIDER_OPTIONS = {
+	openai: { reasoningEffort: "medium" as const },
+};
 
 export const prepareDialogueStep = ({ stepNumber }: { stepNumber: number }) =>
 	stepNumber >= 3 ? ({ toolChoice: "none" } as const) : {};
@@ -182,6 +190,7 @@ export class DialogueAiService {
 		return this.withMcp(authorization, async (tools) => {
 			const result = await generateText({
 				model: openai(this.model),
+				providerOptions: OPENAI_PROVIDER_OPTIONS,
 				tools,
 				stopWhen: stepCountIs(8),
 				prepareStep: prepareDialogueStep,
@@ -191,7 +200,7 @@ export class DialogueAiService {
 Return 3 to 5 distinct, all-ages role-play scenarios appropriate for the learner's current level.
 The scenario title and description must be in ${user.language_speak}; openingLine must be in ${user.language_learn}.
 Prefer scenarios that exercise weak or recently introduced vocabulary without repeating the same context.`,
-				maxOutputTokens: 1800,
+				maxOutputTokens: 3000,
 			});
 			return this.result(result);
 		});
@@ -238,6 +247,7 @@ Prefer scenarios that exercise weak or recently introduced vocabulary without re
 				.join("\n");
 			const result = await generateText({
 				model: openai(this.model),
+				providerOptions: OPENAI_PROVIDER_OPTIONS,
 				tools,
 				stopWhen: stepCountIs(8),
 				prepareStep: prepareDialogueStep,
@@ -247,7 +257,7 @@ Prefer scenarios that exercise weak or recently introduced vocabulary without re
 Description: ${session.scenario_description ?? session.custom_topic ?? "Role play naturally"}
 Level: ${session.difficulty_level}
 Turn: ${session.turn_count}/${session.target_turns}, hard maximum ${session.max_turns}
-${opening ? "Start the role play with a short natural greeting and question. There is no learner answer to correct." : "Reply to the learner and advance the role play."}
+${opening ? "Start the role play with a short natural greeting and question. There is no learner answer to correct, so set correctedAnswer and correctionExplanation to null and return no corrections." : `Reply to the learner and advance the role play. Set correctedAnswer to the learner's complete answer rewritten as correct, natural ${user.language_learn}. Set correctionExplanation to a concise ${user.language_speak} explanation of the material changes, or say briefly that the answer is already correct. Neither field may be null for a learner turn.`}
 ${approachingEnd ? "Guide the conversation naturally toward a conclusion." : "Keep the role play active."}
 ${mustEnd ? "This is the final turn. Conclude the scene and set shouldComplete=true." : "Set shouldComplete only when the scene has naturally concluded."}
 Before replying, call get_user_progress once and get_user_vocabulary once. You may inspect at most one small list_words batch if needed, then immediately return the final structured answer.
@@ -263,11 +273,13 @@ For every detected term, nativeInsertions MUST contain a target-language entry w
 }
 
 Correction rules:
-- Before replying, silently reconstruct the learner's entire latest answer as correct, natural ${user.language_learn}, preserving its meaning. Compare every clause with that reconstruction and return every material difference in corrections.
+- Before replying, reconstruct the learner's entire latest answer as correct, natural ${user.language_learn}, preserving its intended meaning, and return that full phrase in correctedAnswer. Compare every clause with it and return every material difference in corrections.
 - Audit grammar exhaustively: articles and determiners, agreement, verb form and conjugation, word order, prepositions, singular/plural and sentence construction. Do not stop after finding a native-language insertion or spelling mistake.
 - Correct vocabulary and meaning errors too. Mark spelling mistakes as typo. If wording is understandable but unnatural in ${user.language_learn}, correct it as grammar or vocabulary.
 - correction.original must be an exact, case-preserving substring of the learner's latest answer. Keep separate corrections non-overlapping so they can be highlighted inside the full phrase.
 - correction.corrected must be the replacement for exactly that original span, not a rewrite of unrelated text.
+- Applying all corrections to the learner's answer must reproduce correctedAnswer apart from immaterial punctuation or capitalization.
+- correctionExplanation must summarize the important changes in ${user.language_speak}; do not omit sentence-structure changes.
 - Correction explanations and the reply translation must be in ${user.language_speak}.
 ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 - For a typo, affectedWords contains only the correct target-language form.
@@ -276,75 +288,10 @@ ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 - Do not correct punctuation unless it changes meaning.
 - Reply itself must be concise and entirely in ${user.language_learn}.
 - Hints are 2-3 short possible starts for the learner's next answer in ${user.language_learn}.`,
-				maxOutputTokens: 2500,
+				maxOutputTokens: 3500,
 			});
 			return this.result(result);
 		});
-	}
-
-	async reviewLearnerAnswer({
-		user,
-		content,
-		detectedNativeTerms,
-		messages,
-	}: {
-		user: UserEntity;
-		content: string;
-		detectedNativeTerms: string[];
-		messages: DialogueMessageEntity[];
-	}) {
-		const result = await generateText({
-			model: openai(this.correctionModel),
-			providerOptions: {
-				openai: { reasoningEffort: "low" },
-			},
-			output: Output.object({ schema: correctionReviewSchema }),
-			system: this.teacherSystem(user),
-			prompt: `Perform a strict, independent language correction audit of the learner's latest answer.
-The learner speaks ${user.language_speak} and studies ${user.language_learn}.
-Latest answer: ${JSON.stringify(content)}
-Detected native-language terms: ${JSON.stringify(detectedNativeTerms)}
-Recent conversation context:
-${messages
-	.slice(-6)
-	.map((message) => `${message.role.toUpperCase()}: ${message.content}`)
-	.join("\n")}
-
-First infer the learner's most likely intended meaning from the entire answer and recent conversation. If the wording is ambiguous, choose the interpretation that best answers the teacher's last question and mention that assumption briefly in overallExplanation.
-Then produce correctedAnswer: the complete ${user.language_learn} sentence a native teacher would recommend for that meaning. Preserve the learner's appropriate level, but never preserve the original word order or construction merely because it is understandable. correctedAnswer must fix both grammatical correctness and natural phrasing; it is not a minimally spell-checked copy.
-Return overallExplanation as a concise explanation in ${user.language_speak} of the main changes in the full answer.
-Then compare the entire original answer against correctedAnswer and return a complete set of corrections. Do not stop after the first obvious error.
-
-Audit in two explicit passes:
-1. Word-level accuracy: spelling, native-language insertions, vocabulary and inflection.
-2. Whole-sentence quality: ask whether a careful native speaker would naturally say the exact sentence in this context. If not, rewrite the affected phrase in correctedAnswer and include a grammar or vocabulary correction for it even when every individual word is valid.
-
-One word-level correction never proves the rest of the sentence is correct. After fixing such an error, audit the entire resulting sentence again for articles, agreement, word order and construction.
-
-Check every clause for:
-- articles and determiners;
-- subject/verb agreement, verb form and conjugation;
-- word order and sentence construction;
-- prepositions, singular/plural and agreement;
-- unnatural vocabulary or phrasing;
-- spelling mistakes and native-language insertions.
-
-Correction requirements:
-- original must be an exact, case-preserving, non-empty substring of the latest answer;
-- corrected must replace exactly that span and must differ from original;
-- corrections must not overlap; use a short phrase when grammar or word order cannot be fixed word-by-word;
-- applying the replacements must produce correctedAnswer apart from punctuation or capitalization that does not affect meaning;
-- do not describe phrase-level repairs as optional style suggestions when the original construction is unnatural for a native speaker;
-- correction explanations and translations must be in ${user.language_speak};
-${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
-- use type typo only for spelling mistakes, grammar for grammatical structure, and vocabulary for word choice or native-language replacement;
-- affectedWords contains only valid ${user.language_learn} words: for a typo include the corrected form; for an inflection or vocabulary change include the relevant valid surface and base forms with grammatical descriptions;
-- return an empty corrections array only when the full answer is already natural and grammatically correct.
-
-Do not comment on the answer and do not continue the role-play. Return only the structured audit.`,
-			maxOutputTokens: 2500,
-		});
-		return this.result(result);
 	}
 
 	async resolveNativeInsertions({
@@ -358,6 +305,7 @@ Do not comment on the answer and do not continue the role-play. Return only the 
 	}) {
 		const result = await generateText({
 			model: openai(this.model),
+			providerOptions: OPENAI_PROVIDER_OPTIONS,
 			output: Output.object({ schema: nativeInsertionResolutionSchema }),
 			system: this.teacherSystem(user),
 			prompt: `Resolve every native-language insertion in the learner's answer.
@@ -371,7 +319,7 @@ Return exactly one item for every detected term:
 ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 - shortExplanation must be a concise explanation in ${user.language_speak}.
 - target.transcription may be an empty string when unavailable.`,
-			maxOutputTokens: 1200,
+			maxOutputTokens: 2000,
 		});
 		return this.result(result);
 	}
@@ -388,6 +336,7 @@ ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 		const schema = z.object({ reply: z.string().min(1) });
 		const result = await generateText({
 			model: openai(this.model),
+			providerOptions: OPENAI_PROVIDER_OPTIONS,
 			output: Output.object({ schema }),
 			system: this.teacherSystem(user),
 			prompt: `Explain this correction in ${user.language_speak} with a compact rule and two examples in ${user.language_learn}.
@@ -396,7 +345,7 @@ Corrected: ${correction.corrected}
 Reason: ${correction.short_explanation}
 Explanation branch so far:
 ${messages.map((message) => `${message.role}: ${message.content}`).join("\n")}`,
-			maxOutputTokens: 1200,
+			maxOutputTokens: 1800,
 		});
 		return this.result(result);
 	}
@@ -415,6 +364,7 @@ ${messages.map((message) => `${message.role}: ${message.content}`).join("\n")}`,
 		});
 		const result = await generateText({
 			model: openai(this.model),
+			providerOptions: OPENAI_PROVIDER_OPTIONS,
 			output: Output.object({ schema }),
 			system: this.teacherSystem(user),
 			prompt: `Resolve the selected ${user.language_learn} word in context.
@@ -424,7 +374,7 @@ Return the selected valid form. If its common dictionary/base form differs, also
 ${vocabularyDescriptionRules(user.language_learn, user.language_speak)}
 Mention the grammatical form in the selected form's description when relevant.
 Never return punctuation or a misspelled invalid form.`,
-			maxOutputTokens: 900,
+			maxOutputTokens: 1800,
 		});
 		return this.result(result);
 	}
@@ -442,6 +392,7 @@ Never return punctuation or a misspelled invalid form.`,
 	}) {
 		const result = await generateText({
 			model: openai(this.model),
+			providerOptions: OPENAI_PROVIDER_OPTIONS,
 			output: Output.object({ schema: summarySchema }),
 			system: this.teacherSystem(user),
 			prompt: `Summarize this completed ${user.language_learn} exercise in ${user.language_speak}.
@@ -451,17 +402,13 @@ Transcript:
 ${messages.map((message) => `${message.role}: ${message.content}`).join("\n")}
 Corrections:
 ${corrections.map((item) => `${item.original} -> ${item.corrected}: ${item.short_explanation}`).join("\n")}`,
-			maxOutputTokens: 1000,
+			maxOutputTokens: 1800,
 		});
 		return this.result(result);
 	}
 
 	get model() {
-		return this.config.get<string>("OPENAI_CHAT_MODEL") || "gpt-4o-mini";
-	}
-
-	get correctionModel() {
-		return this.config.get<string>("OPENAI_CORRECTION_MODEL") || "gpt-5.2";
+		return this.config.get<string>("OPENAI_CHAT_MODEL") || "gpt-5-nano";
 	}
 
 	private teacherSystem(user: UserEntity) {

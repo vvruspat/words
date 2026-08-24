@@ -5,7 +5,7 @@
 The authenticated dialogue tutor uses the internal `/mcp` endpoint and OpenAI.
 Configure the API with `OPENAI_API_KEY`. Optional settings are:
 
-- `OPENAI_CHAT_MODEL` — defaults to `gpt-4o-mini`.
+- `OPENAI_CHAT_MODEL` — defaults to `gpt-5-nano` with medium reasoning effort.
 - `CHAT_MCP_URL` — defaults to the current API process at `/mcp`.
 - `DIALOGUE_FEATURE_ENABLED=false` — emergency/internal-release kill switch.
 - `DB_SYNCHRONIZE=false` — disables the repository's existing TypeORM schema synchronization.
