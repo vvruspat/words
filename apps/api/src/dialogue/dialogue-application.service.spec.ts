@@ -80,6 +80,7 @@ describe("DialogueApplicationService", () => {
 				data: {
 					reply: "Good try!",
 					translation: "Хорошая попытка!",
+					focusWords: ["try"],
 					correctedAnswer: "I went with ticket",
 					correctionExplanation: "Исправлен неправильный глагол.",
 					corrections: [
@@ -161,6 +162,12 @@ describe("DialogueApplicationService", () => {
 		expect(dialogue.recordWordEvent).toHaveBeenCalledTimes(2);
 		expect(ai.resolveWord).toHaveBeenCalledWith(
 			expect.objectContaining({ user, word: "went" }),
+		);
+		expect(dialogue.appendMessage).toHaveBeenNthCalledWith(
+			2,
+			expect.objectContaining({
+				metadata: expect.objectContaining({ focusWords: ["try"] }),
+			}),
 		);
 	});
 
@@ -352,6 +359,7 @@ describe("DialogueApplicationService", () => {
 			data: {
 				reply: "I understand.",
 				translation: "Я понимаю.",
+				focusWords: [],
 				corrections: [],
 				nativeInsertions: [],
 				hints: [],

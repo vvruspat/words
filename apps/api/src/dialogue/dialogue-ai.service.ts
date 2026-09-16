@@ -94,8 +94,24 @@ const correctionSchema = z.object({
 });
 
 const turnSchema = z.object({
-	reply: z.string().min(1),
-	translation: z.string().min(1),
+	reply: z
+		.string()
+		.min(1)
+		.describe(
+			"The teacher's role-play line in the language being learned, spoken only from the teacher's assigned scene role.",
+		),
+	translation: z
+		.string()
+		.min(1)
+		.describe(
+			"A faithful, natural translation of reply in the learner's native language, preserving speaker, person, intent, and questions.",
+		),
+	focusWords: z
+		.array(z.string().trim().min(1).max(100))
+		.max(4)
+		.describe(
+			"Up to four useful target-language words or short expressions that occur verbatim in reply and are likely new to this learner.",
+		),
 	correctedAnswer: z
 		.string()
 		.min(1)

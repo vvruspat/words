@@ -61,6 +61,8 @@ export const DIALOGUE_RECOMMENDATIONS_PROMPT = (user: UserEntity) =>
 	`Call get_user_progress once and list_topics once. You may call get_user_vocabulary once if needed. Inspect at most one small list_words batch, then immediately produce the final structured answer.
 Return 3 to 5 distinct, all-ages role-play scenarios appropriate for the learner's current level.
 The scenario title and description must be in ${user.language_speak}; openingLine must be in ${user.language_learn}.
+Every description must explicitly assign both roles: what the learner plays and what the teacher plays. The teacher must be the learner's scene partner, not a second copy of the learner. For example, when ordering at a cafe the learner is the customer and the teacher is the barista/server.
+openingLine must be something the teacher's assigned character would naturally say to the learner's character. Never give the teacher a line that belongs to the learner's role.
 Prefer scenarios that exercise weak or recently introduced vocabulary without repeating the same context.`;
 
 export const DIALOGUE_TURN_PROMPT = ({
@@ -82,7 +84,7 @@ export const DIALOGUE_TURN_PROMPT = ({
 		.map((message) => `${message.role.toUpperCase()}: ${message.content}`)
 		.join("\n");
 	const turnInstruction = opening
-		? "Start the role play with a short natural greeting and question. There is no learner answer to correct, so set correctedAnswer and correctionExplanation to null and return no corrections."
+		? "Start the role play with a short natural greeting and question spoken by the teacher's assigned scene character. There is no learner answer to correct, so set correctedAnswer and correctionExplanation to null and return no corrections."
 		: `Reply to the learner and advance the role play. Set correctedAnswer to the learner's complete answer rewritten as correct, natural ${user.language_learn}. Set correctionExplanation to a concise ${user.language_speak} explanation of the material changes, or say briefly that the answer is already correct. Neither field may be null for a learner turn.`;
 	const nativeTermsInstruction =
 		detectedNativeTerms.length > 0
@@ -98,6 +100,15 @@ ${turnInstruction}
 ${approachingEnd ? "Guide the conversation naturally toward a conclusion." : "Keep the role play active."}
 ${mustEnd ? "This is the final turn. Conclude the scene and set shouldComplete=true." : "Set shouldComplete only when the scene has naturally concluded."}
 Before replying, call get_user_progress once and get_user_vocabulary once. You may inspect at most one small list_words batch if needed, then immediately return the final structured answer.
+
+Role and reply rules:
+- Infer the two roles from the scenario title and description before writing. The learner always speaks for the learner's role; you speak only for the counterpart teacher role.
+- Never say what the learner should say as your own reply, never perform the learner's action, and never switch roles mid-dialogue. In a cafe-order scenario, for example, the learner is normally the customer and you are the barista/server unless the description explicitly says otherwise.
+- reply must be one concise, natural utterance in ${user.language_learn} that your scene character would genuinely say next.
+- translation must translate reply faithfully and naturally into ${user.language_speak}. Preserve the same speaker, grammatical person, meaning, modality, and every question. Do not paraphrase into the learner's role and do not add information absent from reply.
+- Before returning, compare reply and translation once sentence by sentence and fix any mismatch.
+- focusWords must contain only 0-4 pedagogically useful ${user.language_learn} words or short expressions that occur verbatim in reply and are likely new for this learner according to the progress and vocabulary tools.
+- Do not put the whole reply in focusWords. Exclude names, punctuation, greetings and basic/function words the learner already knows. Return an empty array when the reply introduces nothing useful and new.
 
 Transcript:
 ${transcript || "(empty)"}

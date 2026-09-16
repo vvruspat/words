@@ -64,6 +64,7 @@ export class DialogueApplicationService {
 				modelId: generated.modelId,
 				metadata: {
 					hints: turn.hints,
+					focusWords: turn.focusWords,
 					shouldWrapUp: false,
 					shouldComplete: false,
 				},
@@ -186,6 +187,7 @@ export class DialogueApplicationService {
 			modelId: generated.modelId,
 			metadata: {
 				hints: turn.hints,
+				focusWords: turn.focusWords,
 				shouldWrapUp: turn.shouldWrapUp,
 				shouldComplete: turn.shouldComplete,
 				respondingTo: userMessage.id,

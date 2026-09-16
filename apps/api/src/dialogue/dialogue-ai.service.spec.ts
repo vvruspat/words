@@ -1,5 +1,9 @@
 import { describe, expect, it } from "@jest/globals";
-import { VOCABULARY_DESCRIPTION_RULES_PROMPT } from "~/prompts";
+import {
+	DIALOGUE_RECOMMENDATIONS_PROMPT,
+	DIALOGUE_TURN_PROMPT,
+	VOCABULARY_DESCRIPTION_RULES_PROMPT,
+} from "~/prompts";
 import {
 	prepareDialogueStep,
 	resolveDialogueMaxOutputTokens,
@@ -23,6 +27,36 @@ describe("prepareDialogueStep", () => {
 			"translation must be a direct translation in Russian",
 		);
 		expect(rules).toContain("description must never be written in Russian");
+	});
+
+	it("keeps the teacher in the counterpart role and requires a faithful translation", () => {
+		const user = {
+			language_learn: "nl",
+			language_speak: "ru",
+		} as never;
+		const recommendations = DIALOGUE_RECOMMENDATIONS_PROMPT(user);
+		const turn = DIALOGUE_TURN_PROMPT({
+			user,
+			session: {
+				scenario_title: "Заказ кофе в кафе",
+				scenario_description: "Ученик — клиент, преподаватель — бариста.",
+				difficulty_level: "A1",
+				turn_count: 0,
+				target_turns: 8,
+				max_turns: 12,
+			} as never,
+			messages: [],
+			opening: true,
+			detectedNativeTerms: [],
+		});
+
+		expect(recommendations).toContain("explicitly assign both roles");
+		expect(recommendations).toContain("learner is the customer");
+		expect(turn).toContain("you speak only for the counterpart teacher role");
+		expect(turn).toContain(
+			"compare reply and translation once sentence by sentence",
+		);
+		expect(turn).toContain("focusWords must contain only 0-4");
 	});
 });
 
