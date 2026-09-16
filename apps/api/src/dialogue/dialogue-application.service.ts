@@ -3,16 +3,7 @@ import type { LanguageModelUsage } from "ai";
 import type { UserEntity } from "~/user/user.entity";
 import { UserVocabularyService } from "~/user-vocabulary/user-vocabulary.service";
 import { DialogueService } from "./dialogue.service";
-import {
-	DialogueAiService,
-	type DialogueTurn,
-	type NativeInsertionResolution,
-	type ResolvedWord,
-} from "./dialogue-ai.service";
-import {
-	containsLanguageScript,
-	detectNativeLanguageTerms,
-} from "./dialogue-language.utils";
+import { DialogueAiService, type DialogueTurn } from "./dialogue-ai.service";
 
 @Injectable()
 export class DialogueApplicationService {
@@ -63,6 +54,9 @@ export class DialogueApplicationService {
 				translation: turn.translation,
 				modelId: generated.modelId,
 				metadata: {
+					teacherNote: turn.teacherNote,
+					modelMessages: generated.modelMessages,
+					addedWords: generated.addedWords,
 					hints: turn.hints,
 					focusWords: turn.focusWords,
 					shouldWrapUp: false,
@@ -114,7 +108,7 @@ export class DialogueApplicationService {
 					userMessage: existingUserMessage,
 					assistantMessage: existingAssistant,
 					corrections: await this.dialogue.listCorrections(sessionId),
-					addedWords: [],
+					addedWords: existingAssistant.metadata?.addedWords ?? [],
 				};
 			}
 		}
@@ -128,57 +122,26 @@ export class DialogueApplicationService {
 				clientMessageId,
 			}));
 		const history = await this.dialogue.listMessages(thread.id);
-		const detectedNativeTerms = detectNativeLanguageTerms(
-			content,
-			user.language_speak,
-			user.language_learn,
-		);
 		const generated = await this.ai.generateTurn({
 			user,
 			session,
 			messages: history,
 			authorization,
-			detectedNativeTerms,
+			messageId: userMessage.id,
 		});
-		const correctedAnswer = generated.data.correctedAnswer?.trim() || content;
+		const correctedAnswer = generated.data.correctedAnswer?.trim();
 		const correctionExplanation =
-			generated.data.correctionExplanation?.trim() ||
-			generated.data.corrections[0]?.shortExplanation ||
-			"";
-		let resolverResult: Awaited<
-			ReturnType<DialogueAiService["resolveNativeInsertions"]>
-		> | null = null;
-		let turn = this.normalizeNativeInsertions({
-			user,
-			turn: {
-				...generated.data,
-				corrections: this.buildTurnCorrections({
-					content,
+			generated.data.correctionExplanation?.trim() || "";
+		const turn = generated.data;
+		const correctionsToSave = correctedAnswer
+			? this.buildTurnCorrections({
+					content: userMessage.content,
 					correctedAnswer,
 					overallExplanation: correctionExplanation,
-					detectedNativeTerms,
-					evidence: generated.data.corrections,
-				}),
-			},
-			detectedNativeTerms,
-			resolutions: [],
-		});
-		const missingNativeTerms = detectedNativeTerms.filter(
-			(term) => !this.findNativeWord(turn.nativeInsertions, term),
-		);
-		if (missingNativeTerms.length > 0) {
-			resolverResult = await this.ai.resolveNativeInsertions({
-				user,
-				terms: missingNativeTerms,
-				context: content,
-			});
-			turn = this.normalizeNativeInsertions({
-				user,
-				turn,
-				detectedNativeTerms,
-				resolutions: resolverResult.data.items,
-			});
-		}
+					evidence: turn.corrections,
+				})
+			: [];
+		const addedWords = generated.addedWords;
 		const assistantMessage = await this.dialogue.appendMessage({
 			threadId: thread.id,
 			role: "assistant",
@@ -186,6 +149,9 @@ export class DialogueApplicationService {
 			translation: turn.translation,
 			modelId: generated.modelId,
 			metadata: {
+				teacherNote: turn.teacherNote,
+				modelMessages: generated.modelMessages,
+				addedWords,
 				hints: turn.hints,
 				focusWords: turn.focusWords,
 				shouldWrapUp: turn.shouldWrapUp,
@@ -199,31 +165,19 @@ export class DialogueApplicationService {
 			sessionId,
 			userMessageId: userMessage.id,
 			assistantMessageId: assistantMessage.id,
-			items: turn.corrections,
-		});
-		const addedWords = await this.applyAutomaticVocabulary({
-			user,
-			sessionId,
-			messageId: assistantMessage.id,
-			turn,
-			context: correctedAnswer,
+			items: correctionsToSave,
 		});
 		const updatedSession = await this.dialogue.incrementTurn(sessionId, {
 			corrections: corrections.length,
-			nativeInsertions: turn.nativeInsertions.length,
+			nativeInsertions: addedWords.filter(
+				(word) => word.source === "native_insert",
+			).length,
 		});
 		await this.saveUsage(user.id, generated, {
 			sessionId,
 			threadId: thread.id,
 			messageId: assistantMessage.id,
 		});
-		if (resolverResult) {
-			await this.saveUsage(user.id, resolverResult, {
-				sessionId,
-				threadId: thread.id,
-				messageId: assistantMessage.id,
-			});
-		}
 
 		let finalSession = updatedSession;
 		if (
@@ -245,9 +199,11 @@ export class DialogueApplicationService {
 	async openCorrectionBranch({
 		user,
 		correctionId,
+		authorization,
 	}: {
 		user: UserEntity;
 		correctionId: string;
+		authorization: string;
 	}) {
 		const correction = await this.dialogue.getCorrection(correctionId, user.id);
 		const { thread, created } =
@@ -260,13 +216,18 @@ export class DialogueApplicationService {
 				user,
 				correction,
 				messages: [],
+				authorization,
 			});
 			const message = await this.dialogue.appendMessage({
 				threadId: thread.id,
 				role: "assistant",
 				content: generated.data.reply,
 				modelId: generated.modelId,
-				metadata: { correctionId: correction.id },
+				metadata: {
+					correctionId: correction.id,
+					modelMessages: generated.modelMessages,
+					addedWords: generated.addedWords,
+				},
 			});
 			await this.saveUsage(user.id, generated, {
 				sessionId: correction.session_id,
@@ -284,11 +245,13 @@ export class DialogueApplicationService {
 
 	async sendExplanationMessage({
 		user,
+		authorization,
 		threadId,
 		content,
 		clientMessageId,
 	}: {
 		user: UserEntity;
+		authorization: string;
 		threadId: string;
 		content: string;
 		clientMessageId: string;
@@ -318,20 +281,31 @@ export class DialogueApplicationService {
 				thread.id,
 				existing.id,
 			);
-			if (answer) return { userMessage, assistantMessage: answer };
+			if (answer)
+				return {
+					userMessage,
+					assistantMessage: answer,
+					addedWords: answer.metadata?.addedWords ?? [],
+				};
 		}
 		const history = await this.dialogue.listMessages(thread.id);
 		const generated = await this.ai.explainCorrection({
 			user,
 			correction,
 			messages: history,
+			authorization,
+			messageId: userMessage.id,
 		});
 		const assistantMessage = await this.dialogue.appendMessage({
 			threadId: thread.id,
 			role: "assistant",
 			content: generated.data.reply,
 			modelId: generated.modelId,
-			metadata: { respondingTo: userMessage.id },
+			metadata: {
+				respondingTo: userMessage.id,
+				modelMessages: generated.modelMessages,
+				addedWords: generated.addedWords,
+			},
 		});
 		await this.saveUsage(user.id, generated, {
 			sessionId: correction.session_id,
@@ -339,7 +313,7 @@ export class DialogueApplicationService {
 			messageId: assistantMessage.id,
 		});
 		await this.dialogue.touchSession(correction.session_id);
-		return { userMessage, assistantMessage };
+		return { userMessage, assistantMessage, addedWords: generated.addedWords };
 	}
 
 	async addClickedWord({
@@ -425,201 +399,6 @@ export class DialogueApplicationService {
 		return completed;
 	}
 
-	private async applyAutomaticVocabulary({
-		user,
-		sessionId,
-		messageId,
-		turn,
-		context,
-	}: {
-		user: UserEntity;
-		sessionId: string;
-		messageId: string;
-		turn: DialogueTurn;
-		context: string;
-	}) {
-		const nativeWords = turn.nativeInsertions.map((word) => ({
-			...word,
-			source: "native_insert" as const,
-			resetWriting: true,
-		}));
-		const nativeWordKeys = new Set(
-			nativeWords.map((word) => this.lexicalKey(word.word)),
-		);
-		const correctionSurfaces = this.dedupeStrings(
-			turn.corrections.flatMap((correction) =>
-				this.correctedVocabularySurfaces(user, correction),
-			),
-		).filter((word) => !nativeWordKeys.has(this.lexicalKey(word)));
-		const correctionWords = (
-			await Promise.all(
-				correctionSurfaces.map(async (surface) => {
-					const generated = await this.ai.resolveWord({
-						user,
-						word: surface,
-						context,
-					});
-					await this.saveUsage(user.id, generated, { sessionId, messageId });
-					const resolved = generated.data.items
-						.map((word) => this.normalizeNativeWord(user, word))
-						.find(
-							(word) => this.lexicalKey(word.word) === this.lexicalKey(surface),
-						);
-					return resolved
-						? {
-								...resolved,
-								word: surface,
-								source: "correction" as const,
-								resetWriting: true,
-							}
-						: null;
-				}),
-			)
-		).filter((word): word is NonNullable<typeof word> => word !== null);
-		const items = await this.vocabulary.addWords({
-			user,
-			sessionId,
-			words: this.dedupeResolvedWords([...nativeWords, ...correctionWords]),
-		});
-		for (const result of items) {
-			await this.dialogue.recordWordEvent({
-				sessionId,
-				vocabularyId: result.item.id,
-				messageId,
-				source:
-					result.source === "native_insert" ? "native_insert" : "correction",
-				isNew: result.isNew,
-			});
-		}
-		return items;
-	}
-
-	private correctedVocabularySurfaces(
-		user: UserEntity,
-		correction: DialogueTurn["corrections"][number],
-	) {
-		const modelWords = correction.affectedWords.map((word) =>
-			this.normalizeNativeWord(user, word),
-		);
-		const wordsFromCorrectedText = modelWords.flatMap((word) => {
-			const correctedSurface = this.findLexicalSurface(
-				correction.corrected,
-				word.word,
-			);
-			return correctedSurface ? [correctedSurface] : [];
-		});
-		if (wordsFromCorrectedText.length > 0) {
-			return this.dedupeStrings(wordsFromCorrectedText);
-		}
-
-		const changedWords = this.changedCorrectedWords(
-			correction.original,
-			correction.corrected,
-		);
-		if (changedWords.length !== 1 || modelWords.length === 0) return [];
-
-		return changedWords;
-	}
-
-	private findLexicalSurface(text: string, candidate: string) {
-		const textTokens = this.positionedTokens(text).filter((token) =>
-			/[\p{L}\p{N}]/u.test(token.value),
-		);
-		const candidateTokens = this.positionedTokens(candidate).filter((token) =>
-			/[\p{L}\p{N}]/u.test(token.value),
-		);
-		if (candidateTokens.length === 0) return null;
-
-		for (
-			let start = 0;
-			start <= textTokens.length - candidateTokens.length;
-			start += 1
-		) {
-			const matches = candidateTokens.every(
-				(token, offset) =>
-					textTokens[start + offset].normalized === token.normalized,
-			);
-			if (!matches) continue;
-			return text.slice(
-				textTokens[start].start,
-				textTokens[start + candidateTokens.length - 1].end,
-			);
-		}
-		return null;
-	}
-
-	private changedCorrectedWords(original: string, corrected: string) {
-		const originalTokens = this.positionedTokens(original).filter((token) =>
-			/[\p{L}\p{N}]/u.test(token.value),
-		);
-		const correctedTokens = this.positionedTokens(corrected).filter((token) =>
-			/[\p{L}\p{N}]/u.test(token.value),
-		);
-		const unchangedCorrectedIndexes = new Set(
-			this.longestCommonTokenAnchors(originalTokens, correctedTokens)
-				.filter(
-					(anchor) =>
-						anchor.original >= 0 && anchor.original < originalTokens.length,
-				)
-				.map((anchor) => anchor.corrected),
-		);
-		return correctedTokens
-			.filter((_, index) => !unchangedCorrectedIndexes.has(index))
-			.map((token) => token.value);
-	}
-
-	private normalizeNativeInsertions({
-		user,
-		turn,
-		detectedNativeTerms,
-		resolutions,
-	}: {
-		user: UserEntity;
-		turn: DialogueTurn;
-		detectedNativeTerms: string[];
-		resolutions: NativeInsertionResolution[];
-	}): DialogueTurn {
-		const normalizedModelWords = turn.nativeInsertions.map((word) =>
-			this.normalizeNativeWord(user, word),
-		);
-		const resolutionByTerm = new Map(
-			resolutions.map((resolution) => [
-				resolution.original.toLocaleLowerCase(),
-				resolution,
-			]),
-		);
-		const nativeInsertions = this.dedupeResolvedWords([
-			...normalizedModelWords,
-			...resolutions.map((resolution) =>
-				this.normalizeNativeWord(user, {
-					...resolution.target,
-					translation: resolution.original,
-				}),
-			),
-		]);
-		const corrections = [...turn.corrections];
-		for (const term of detectedNativeTerms) {
-			const replacement = this.findNativeWord(nativeInsertions, term);
-			if (!replacement) continue;
-			const alreadyCorrected = corrections.some(
-				(correction) =>
-					correction.original.toLocaleLowerCase().includes(term) &&
-					!correction.corrected.toLocaleLowerCase().includes(term),
-			);
-			if (alreadyCorrected) continue;
-			const resolution = resolutionByTerm.get(term);
-			corrections.push({
-				type: "vocabulary",
-				original: term,
-				corrected: replacement.word,
-				shortExplanation:
-					resolution?.shortExplanation ?? `«${term}» → «${replacement.word}»`,
-				affectedWords: [replacement],
-			});
-		}
-		return { ...turn, nativeInsertions, corrections };
-	}
-
 	private mergeCorrections(
 		content: string,
 		candidates: DialogueTurn["corrections"],
@@ -671,13 +450,11 @@ export class DialogueApplicationService {
 		content,
 		correctedAnswer,
 		overallExplanation,
-		detectedNativeTerms,
 		evidence,
 	}: {
 		content: string;
 		correctedAnswer: string;
 		overallExplanation: string;
-		detectedNativeTerms: string[];
 		evidence: DialogueTurn["corrections"];
 	}): DialogueTurn["corrections"] {
 		const originalTokens = this.positionedTokens(content);
@@ -753,19 +530,14 @@ export class DialogueApplicationService {
 					start >= 0 && end > originalRange.start && start < originalRange.end
 				);
 			});
-			const nativeInsertion = detectedNativeTerms.some((term) =>
-				originalRange.text.toLocaleLowerCase().includes(term),
-			);
 			const types = new Set(supporting.map((item) => item.type));
-			const type = nativeInsertion
-				? "vocabulary"
-				: types.has("grammar")
-					? "grammar"
-					: types.has("vocabulary")
-						? "vocabulary"
-						: types.has("typo")
-							? "typo"
-							: "grammar";
+			const type = types.has("grammar")
+				? "grammar"
+				: types.has("vocabulary")
+					? "vocabulary"
+					: types.has("typo")
+						? "typo"
+						: "grammar";
 			const explanations = [
 				...new Set(
 					supporting
@@ -778,9 +550,6 @@ export class DialogueApplicationService {
 				original: originalRange.text,
 				corrected: correctedRange.text,
 				shortExplanation: explanations.join(" ") || overallExplanation,
-				affectedWords: this.dedupeResolvedWords(
-					supporting.flatMap((item) => item.affectedWords),
-				),
 			});
 		}
 
@@ -852,52 +621,6 @@ export class DialogueApplicationService {
 			start: rangeStart,
 			end: rangeEnd,
 		};
-	}
-
-	private normalizeNativeWord(user: UserEntity, word: ResolvedWord) {
-		const reversed =
-			containsLanguageScript(word.word, user.language_speak) &&
-			containsLanguageScript(word.translation, user.language_learn);
-		return reversed
-			? { ...word, word: word.translation, translation: word.word }
-			: word;
-	}
-
-	private findNativeWord(words: ResolvedWord[], nativeTerm: string) {
-		return words.find((word) => {
-			const translationTerms: string[] =
-				word.translation
-					.toLocaleLowerCase()
-					.match(/\p{L}+(?:[-'’]\p{L}+)*/gu) ?? [];
-			return translationTerms.includes(nativeTerm);
-		});
-	}
-
-	private dedupeResolvedWords(words: ResolvedWord[]) {
-		const seen = new Set<string>();
-		return words.filter((word) => {
-			const key = word.word.trim().toLocaleLowerCase();
-			if (!key || seen.has(key)) return false;
-			seen.add(key);
-			return true;
-		});
-	}
-
-	private dedupeStrings(words: string[]) {
-		const seen = new Set<string>();
-		return words.filter((word) => {
-			const key = this.lexicalKey(word);
-			if (!key || seen.has(key)) return false;
-			seen.add(key);
-			return true;
-		});
-	}
-
-	private lexicalKey(word: string) {
-		return this.positionedTokens(word)
-			.filter((token) => /[\p{L}\p{N}]/u.test(token.value))
-			.map((token) => token.normalized)
-			.join("\u0000");
 	}
 
 	private async saveUsage(

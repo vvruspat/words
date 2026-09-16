@@ -1,14 +1,15 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import type { Language, Word } from "@vvruspat/words-types";
-import * as z from "zod/v4";
+import { DialogueService } from "~/dialogue/dialogue.service";
 import { LearningService } from "~/learning/learning.service";
 import { TopicService } from "~/topic/topic.service";
 import type { UserEntity } from "~/user/user.entity";
 import { UserVocabularyService } from "~/user-vocabulary/user-vocabulary.service";
 import { WordService } from "~/word/word.service";
 import { WordTranslationService } from "~/wordstranslation/wordstranslation.service";
+import { MCP_TOOL_SCHEMAS } from "./mcp-tool.schemas";
 
 type WordFilters = {
 	language?: string;
@@ -24,6 +25,8 @@ type WordFilters = {
 
 export type McpRequestContext = {
 	user: UserEntity;
+	dialogueSessionId?: string;
+	dialogueMessageId?: string;
 };
 
 @Injectable()
@@ -34,6 +37,7 @@ export class McpToolsService {
 		private readonly userVocabularyService: UserVocabularyService,
 		private readonly wordService: WordService,
 		private readonly wordTranslationService: WordTranslationService,
+		private readonly dialogueService: DialogueService,
 	) {}
 
 	createServer(context: McpRequestContext): McpServer {
@@ -41,6 +45,7 @@ export class McpToolsService {
 		this.registerTopicTools(server, context);
 		this.registerWordTools(server, context);
 		this.registerProgressTools(server, context);
+		this.registerVocabularyTools(server, context);
 		return server;
 	}
 
@@ -54,11 +59,8 @@ export class McpToolsService {
 				title: "List relevant topics",
 				description:
 					"List curriculum and private topics visible to the authenticated learner.",
-				inputSchema: {
-					language: z.string().optional(),
-					limit: z.number().int().min(1).max(20).default(12),
-					offset: z.number().int().min(0).default(0),
-				},
+				inputSchema: MCP_TOOL_SCHEMAS.list_topics.inputSchema,
+				annotations: { readOnlyHint: true },
 			},
 			async ({ language, limit, offset }) => {
 				const topics = await this.topicService.findAll(
@@ -89,17 +91,8 @@ export class McpToolsService {
 				title: "List visible words",
 				description:
 					"Search curriculum and private words visible to the authenticated learner.",
-				inputSchema: {
-					language: z.string().optional(),
-					topicId: z.number().int().positive().optional(),
-					catalogId: z.number().int().positive().optional(),
-					search: z.string().trim().optional(),
-					translation: z.string().trim().optional(),
-					status: z.enum(["processing", "processed"]).optional(),
-					limit: z.number().int().min(1).max(25).default(12),
-					offset: z.number().int().min(0).default(0),
-					includeTranslations: z.boolean().default(true),
-				},
+				inputSchema: MCP_TOOL_SCHEMAS.list_words.inputSchema,
+				annotations: { readOnlyHint: true },
 			},
 			async (filters) => this.listWords(filters, context),
 		);
@@ -115,11 +108,8 @@ export class McpToolsService {
 				title: "Get learner progress",
 				description:
 					"Return the authenticated learner's progress and aggregate skill signals.",
-				inputSchema: {
-					language: z.string().optional(),
-					limit: z.number().int().min(1).max(25).default(12),
-					offset: z.number().int().min(0).default(0),
-				},
+				inputSchema: MCP_TOOL_SCHEMAS.get_user_progress.inputSchema,
+				annotations: { readOnlyHint: true },
 			},
 			async ({ language, limit, offset }) => {
 				const progress = await this.learningService.findUserProgress({
@@ -130,11 +120,11 @@ export class McpToolsService {
 				});
 				return this.ok({
 					user: {
-						id: context.user.id,
 						name: context.user.name,
 						language_speak: context.user.language_speak,
 						language_learn: context.user.language_learn,
 					},
+					profile: await this.dialogueService.getSkillProfile(context.user),
 					total: progress.total,
 					limit: progress.limit,
 					offset: progress.offset,
@@ -163,12 +153,9 @@ export class McpToolsService {
 			{
 				title: "Get learner vocabulary",
 				description:
-					"Return words explicitly collected by the authenticated learner.",
-				inputSchema: {
-					language: z.string().optional(),
-					limit: z.number().int().min(1).max(50).default(20),
-					offset: z.number().int().min(0).default(0),
-				},
+					"Return words collected by the authenticated learner. Saved does not mean mastered; use get_user_progress for knowledge and training scores.",
+				inputSchema: MCP_TOOL_SCHEMAS.get_user_vocabulary.inputSchema,
+				annotations: { readOnlyHint: true },
 			},
 			async ({ language, limit, offset }) => {
 				const vocabulary = await this.userVocabularyService.list(
@@ -193,6 +180,59 @@ export class McpToolsService {
 								: null,
 						})),
 				});
+			},
+		);
+	}
+
+	private registerVocabularyTools(
+		server: McpServer,
+		context: McpRequestContext,
+	) {
+		server.registerTool(
+			"add_words_to_vocabulary",
+			{
+				title: "Add words to the learner's personal vocabulary",
+				description:
+					"Save useful words for this authenticated learner's training when they ask to save a word or reveal a vocabulary gap. Provide valid target-language forms and native-language translations. Existing words are reused. This can reset writing practice when requested; it never edits global curriculum words. Saving is an explicit tool action, not a side effect of correcting an answer.",
+				inputSchema: MCP_TOOL_SCHEMAS.add_words_to_vocabulary.inputSchema,
+				annotations: { readOnlyHint: false, destructiveHint: false },
+			},
+			async ({ words }) => {
+				if (context.dialogueSessionId) {
+					const session = await this.dialogueService.getOwnedSession(
+						context.dialogueSessionId,
+						context.user.id,
+					);
+					if (
+						session.language_learn !== context.user.language_learn ||
+						session.language_speak !== context.user.language_speak
+					) {
+						throw new BadRequestException("Dialogue language pair has changed");
+					}
+					if (context.dialogueMessageId) {
+						await this.dialogueService.assertMessageInSession(
+							context.dialogueMessageId,
+							session.id,
+						);
+					}
+				}
+				const items = await this.userVocabularyService.addWords({
+					user: context.user,
+					sessionId: context.dialogueSessionId,
+					words,
+				});
+				if (context.dialogueSessionId) {
+					for (const result of items) {
+						await this.dialogueService.recordWordEvent({
+							sessionId: context.dialogueSessionId,
+							messageId: context.dialogueMessageId,
+							vocabularyId: result.item.id,
+							source: result.source === "manual" ? "click" : result.source,
+							isNew: result.isNew,
+						});
+					}
+				}
+				return this.ok({ items });
 			},
 		);
 	}

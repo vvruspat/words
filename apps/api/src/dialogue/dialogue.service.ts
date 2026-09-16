@@ -208,6 +208,27 @@ export class DialogueService {
 		});
 	}
 
+	async assertMessageInSession(messageId: string, sessionId: string) {
+		const message = await this.messages.findOneBy({ id: messageId });
+		const thread =
+			message &&
+			(await this.threads.findOneBy({
+				id: message.thread_id,
+				session_id: sessionId,
+			}));
+		if (!thread)
+			throw new NotFoundException("Dialogue message not found in this session");
+	}
+
+	async getSkillProfile(user: UserEntity) {
+		const profile = await this.skillProfiles.findOneBy({
+			user: user.id,
+			language_learn: user.language_learn,
+			language_speak: user.language_speak,
+		});
+		return profile ? { level: profile.level, metrics: profile.metrics } : null;
+	}
+
 	async findMessageByClientId(threadId: string, clientMessageId: string) {
 		return this.messages.findOneBy({
 			thread_id: threadId,

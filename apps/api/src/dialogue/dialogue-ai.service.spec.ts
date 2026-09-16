@@ -1,18 +1,16 @@
 import { describe, expect, it } from "@jest/globals";
+import { VOCABULARY_DESCRIPTION_RULES_PROMPT } from "~/prompts";
 import {
-	DIALOGUE_RECOMMENDATIONS_PROMPT,
-	DIALOGUE_TURN_PROMPT,
-	VOCABULARY_DESCRIPTION_RULES_PROMPT,
-} from "~/prompts";
-import {
+	dialogueAddedWords,
+	dialogueModelMessages,
 	prepareDialogueStep,
 	resolveDialogueMaxOutputTokens,
 } from "./dialogue-ai.service";
 
 describe("prepareDialogueStep", () => {
-	it("forces a final answer after three MCP rounds", () => {
-		expect(prepareDialogueStep({ stepNumber: 2 })).toEqual({});
-		expect(prepareDialogueStep({ stepNumber: 3 })).toEqual({
+	it("leaves tool selection to the model with a final-answer safety limit", () => {
+		expect(prepareDialogueStep({ stepNumber: 6 })).toEqual({});
+		expect(prepareDialogueStep({ stepNumber: 7 })).toEqual({
 			toolChoice: "none",
 		});
 	});
@@ -29,34 +27,81 @@ describe("prepareDialogueStep", () => {
 		expect(rules).toContain("description must never be written in Russian");
 	});
 
-	it("keeps the teacher in the counterpart role and requires a faithful translation", () => {
-		const user = {
-			language_learn: "nl",
-			language_speak: "ru",
-		} as never;
-		const recommendations = DIALOGUE_RECOMMENDATIONS_PROMPT(user);
-		const turn = DIALOGUE_TURN_PROMPT({
-			user,
-			session: {
-				scenario_title: "Заказ кофе в кафе",
-				scenario_description: "Ученик — клиент, преподаватель — бариста.",
-				difficulty_level: "A1",
-				turn_count: 0,
-				target_turns: 8,
-				max_turns: 12,
-			} as never,
-			messages: [],
-			opening: true,
-			detectedNativeTerms: [],
-		});
+	it("replays actual assistant and tool messages instead of flattening the transcript", () => {
+		const history = [
+			{
+				role: "assistant",
+				content: [
+					{
+						type: "tool-call",
+						toolCallId: "c1",
+						toolName: "get_user_vocabulary",
+						input: {},
+					},
+				],
+			},
+			{
+				role: "tool",
+				content: [
+					{
+						type: "tool-result",
+						toolCallId: "c1",
+						toolName: "get_user_vocabulary",
+						output: { type: "json", value: { items: [] } },
+					},
+				],
+			},
+			{ role: "assistant", content: "Teacher feedback" },
+		];
+		expect(
+			dialogueModelMessages([
+				{
+					role: "assistant",
+					content: "Scene line",
+					metadata: { modelMessages: history },
+				},
+				{ role: "user", content: "Ja", metadata: {} },
+			] as never),
+		).toEqual([...history, { role: "user", content: "Ja" }]);
+	});
 
-		expect(recommendations).toContain("explicitly assign both roles");
-		expect(recommendations).toContain("learner is the customer");
-		expect(turn).toContain("you speak only for the counterpart teacher role");
-		expect(turn).toContain(
-			"compare reply and translation once sentence by sentence",
-		);
-		expect(turn).toContain("focusWords must contain only 0-4");
+	it("only reports successfully executed vocabulary writes", () => {
+		const word = {
+			item: { id: "v1" },
+			word: { id: 9, word: "soep" },
+			isNew: true,
+		};
+		expect(
+			dialogueAddedWords([
+				{
+					toolName: "get_user_vocabulary",
+					output: { structuredContent: { items: [word] } },
+				},
+				{
+					toolName: "add_words_to_vocabulary",
+					output: {
+						isError: true,
+						content: [{ type: "text", text: "failed" }],
+					},
+				},
+			]),
+		).toEqual([]);
+		expect(
+			dialogueAddedWords([
+				{
+					toolName: "add_words_to_vocabulary",
+					output: { structuredContent: { items: [word] } },
+				},
+				{
+					toolName: "add_words_to_vocabulary",
+					output: {
+						content: [
+							{ type: "text", text: JSON.stringify({ items: [word] }) },
+						],
+					},
+				},
+			]),
+		).toEqual([word]);
 	});
 });
 

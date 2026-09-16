@@ -10,46 +10,13 @@ import {
 	type UIMessage,
 } from "ai";
 import type { Response } from "express";
-import * as z from "zod/v4";
+import { MCP_TOOL_SCHEMAS } from "~/mcp/mcp-tool.schemas";
 import { CHAT_ASSISTANT_SYSTEM_PROMPT } from "~/prompts";
 import type { UserEntity } from "~/user/user.entity";
 
 export type AssistantChatRequest = {
 	messages?: UIMessage[];
 	system?: string;
-};
-
-const CHAT_MCP_TOOL_SCHEMAS = {
-	list_topics: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			limit: z.number().int().min(1).max(100).default(50),
-			offset: z.number().int().min(0).default(0),
-		}),
-	},
-	list_words: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			topicId: z.number().int().positive().optional(),
-			catalogId: z.number().int().positive().optional(),
-			search: z.string().trim().optional(),
-			translation: z.string().trim().optional(),
-			status: z.enum(["processing", "processed"]).optional(),
-			limit: z.number().int().min(1).max(100).default(50),
-			offset: z.number().int().min(0).default(0),
-			includeTranslations: z.boolean().default(true),
-		}),
-	},
-	get_user_progress: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			limit: z.number().int().min(1).max(100).default(50),
-			offset: z.number().int().min(0).default(0),
-		}),
-	},
-	get_user_vocabulary: {
-		inputSchema: z.object({ language: z.string().optional() }),
-	},
 };
 
 @Injectable()
@@ -102,7 +69,7 @@ export class ChatService {
 			});
 
 			const tools = await mcpClient.tools({
-				schemas: CHAT_MCP_TOOL_SCHEMAS,
+				schemas: MCP_TOOL_SCHEMAS,
 			});
 			const messages = pruneMessages({
 				messages: await convertToModelMessages(body.messages),
@@ -112,7 +79,7 @@ export class ChatService {
 			const result = streamText({
 				model: openai(this.getModel()),
 				providerOptions: {
-					openai: { reasoningEffort: "medium" },
+					openai: { reasoningEffort: "medium", parallelToolCalls: false },
 				},
 				system: CHAT_ASSISTANT_SYSTEM_PROMPT(user, body.system),
 				messages,
