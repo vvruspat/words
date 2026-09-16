@@ -139,19 +139,29 @@ export class DialogueController {
 
 	@Post("corrections/:id/branch")
 	@ApiOperation({ summary: "Open or resume an explanation branch" })
-	openBranch(@CurrentUser() user: UserEntity, @Param("id") id: string) {
-		return this.application.openCorrectionBranch({ user, correctionId: id });
+	openBranch(
+		@CurrentUser() user: UserEntity,
+		@Param("id") id: string,
+		@BearerAuthorization() authorization: string,
+	) {
+		return this.application.openCorrectionBranch({
+			user,
+			correctionId: id,
+			authorization,
+		});
 	}
 
 	@Post("threads/:id/messages")
 	@ApiOperation({ summary: "Continue an explanation branch" })
 	sendBranchMessage(
 		@CurrentUser() user: UserEntity,
+		@BearerAuthorization() authorization: string,
 		@Param("id") threadId: string,
 		@Body() body: SendDialogueMessageDto,
 	) {
 		return this.application.sendExplanationMessage({
 			user,
+			authorization,
 			threadId,
 			content: body.content.trim(),
 			clientMessageId: body.clientMessageId,

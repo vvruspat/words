@@ -1,5 +1,6 @@
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import {
+	BadRequestException,
 	Controller,
 	Delete,
 	Get,
@@ -11,6 +12,7 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import type { Request, Response } from "express";
+import * as z from "zod/v4";
 import { CurrentUser } from "~/auth/current-user.decorator";
 import type { UserEntity } from "~/user/user.entity";
 import { McpToolsService } from "./mcp-tools.service";
@@ -32,7 +34,27 @@ export class McpController {
 		let transport: StreamableHTTPServerTransport | null = null;
 
 		try {
-			server = this.mcpToolsService.createServer({ user });
+			const context = z
+				.object({
+					dialogueSessionId: z.uuid().optional(),
+					dialogueMessageId: z.uuid().optional(),
+				})
+				.safeParse({
+					dialogueSessionId: req.get("X-Dialogue-Session-Id"),
+					dialogueMessageId: req.get("X-Dialogue-Message-Id"),
+				});
+			if (!context.success)
+				throw new BadRequestException("Invalid dialogue context");
+			const { dialogueSessionId, dialogueMessageId } = context.data;
+			if (dialogueMessageId && !dialogueSessionId)
+				throw new BadRequestException(
+					"A message context requires its dialogue session",
+				);
+			server = this.mcpToolsService.createServer({
+				user,
+				dialogueSessionId,
+				dialogueMessageId,
+			});
 			transport = new StreamableHTTPServerTransport({
 				sessionIdGenerator: undefined,
 				enableJsonResponse: true,

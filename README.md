@@ -11,8 +11,31 @@ Configure the API with `OPENAI_API_KEY`. Optional settings are:
 - `DB_SYNCHRONIZE=false` — disables the repository's existing TypeORM schema synchronization.
 - `DB_LOGGING=true` — enables verbose TypeORM query logging for local diagnostics.
 
-The MCP endpoint derives the learner from the bearer token and exposes only
-read-only tools. Dialogue-created words are private to their owner.
+The MCP endpoint derives the learner from the bearer token. It exposes topic,
+word, vocabulary and progress reads, plus `add_words_to_vocabulary` for personal
+training. The model chooses tools with `toolChoice: "auto"`; the application does
+not prefetch vocabulary, detect native-language insertions, or save words as a
+side effect of corrections. The write tool reuses the existing personal-word,
+translation, audio and training pipeline, never editing global curriculum.
+
+Main dialogue and explanation branches preserve actual assistant/tool messages
+between turns. Session/message headers bind MCP writes to an owned dialogue and
+its summary. Successful tool results are returned to the mobile app for local
+dictionary sync. Explicit word taps still use the existing direct save action.
+
+The UI renders native-language teacher feedback, the complete corrected phrase
+with highlighted changes, and then the next scene line. Questions to the teacher
+can pause the scene without completing the exercise. Existing messages remain
+readable; no database migration is required. Update the mobile app along with the
+API to display teacher feedback (`metadata.teacherNote`).
+
+To check the real model and HTTP MCP protocol against an isolated in-memory
+learner (uses the OpenAI API key; does not connect to a user database):
+
+```bash
+cd apps/api
+node --env-file=.env -r ts-node/register/transpile-only -r tsconfig-paths/register scripts/check-dialogue-teacher.ts
+```
 
 This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
 

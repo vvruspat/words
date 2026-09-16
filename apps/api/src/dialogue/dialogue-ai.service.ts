@@ -4,6 +4,7 @@ import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {
 	generateText,
+	type ModelMessage,
 	NoOutputGeneratedError,
 	Output,
 	stepCountIs,
@@ -11,58 +12,23 @@ import {
 } from "ai";
 import OpenAI from "openai";
 import * as z from "zod/v4";
+import { MCP_TOOL_SCHEMAS } from "~/mcp/mcp-tool.schemas";
 import {
 	CORRECTION_EXPLANATION_PROMPT,
+	DIALOGUE_OPENING_REQUEST_PROMPT,
 	DIALOGUE_RECOMMENDATIONS_PROMPT,
 	DIALOGUE_SUMMARY_PROMPT,
 	DIALOGUE_TEACHER_SYSTEM_PROMPT,
 	DIALOGUE_TURN_PROMPT,
-	NATIVE_INSERTION_RESOLUTION_PROMPT,
 	WORD_RESOLUTION_PROMPT,
 } from "~/prompts";
 import type { UserEntity } from "~/user/user.entity";
+import type { UserVocabularyService } from "~/user-vocabulary/user-vocabulary.service";
 import type {
 	DialogueCorrectionEntity,
 	DialogueMessageEntity,
 	DialogueSessionEntity,
 } from "./dialogue.entities";
-
-const MCP_SCHEMAS = {
-	list_topics: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			limit: z.number().int().min(1).max(20).default(12),
-			offset: z.number().int().min(0).default(0),
-		}),
-	},
-	list_words: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			topicId: z.number().int().positive().optional(),
-			catalogId: z.number().int().positive().optional(),
-			search: z.string().optional(),
-			translation: z.string().optional(),
-			status: z.enum(["processing", "processed"]).optional(),
-			limit: z.number().int().min(1).max(25).default(12),
-			offset: z.number().int().min(0).default(0),
-			includeTranslations: z.boolean().default(true),
-		}),
-	},
-	get_user_progress: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			limit: z.number().int().min(1).max(25).default(12),
-			offset: z.number().int().min(0).default(0),
-		}),
-	},
-	get_user_vocabulary: {
-		inputSchema: z.object({
-			language: z.string().optional(),
-			limit: z.number().int().min(1).max(50).default(20),
-			offset: z.number().int().min(0).default(0),
-		}),
-	},
-};
 
 const resolvedWordSchema = z.object({
 	word: z
@@ -90,18 +56,37 @@ const correctionSchema = z.object({
 	original: z.string(),
 	corrected: z.string(),
 	shortExplanation: z.string(),
-	affectedWords: z.array(resolvedWordSchema).max(4),
 });
 
 const turnSchema = z.object({
-	reply: z.string().min(1),
-	translation: z.string().min(1),
+	teacherNote: z
+		.string()
+		.max(1500)
+		.describe(
+			"A short message addressed directly to the learner in their native language. I = teacher, you = learner. Set up roles, answer their question or give feedback. Never an internal note or instructions to another teacher. May be empty.",
+		),
+	reply: z
+		.string()
+		.describe(
+			"The next scene line in the language being learned, from the teacher's assigned role. Empty when pausing to explain something.",
+		),
+	translation: z
+		.string()
+		.describe(
+			"A faithful, natural translation of reply in the learner's native language, preserving speaker, person, intent, and questions.",
+		),
+	focusWords: z
+		.array(z.string().trim().min(1).max(100))
+		.max(4)
+		.describe(
+			"Up to four useful target-language words or short expressions that occur verbatim in reply and are likely new to this learner.",
+		),
 	correctedAnswer: z
 		.string()
 		.min(1)
 		.nullable()
 		.describe(
-			"The learner's complete answer rewritten as grammatically correct, natural target-language speech. Null only for the opening turn.",
+			"The learner's complete answer rewritten as grammatically correct, natural target-language speech. Null for the opening, a natural answer or a question addressed to the teacher.",
 		),
 	correctionExplanation: z
 		.string()
@@ -109,23 +94,20 @@ const turnSchema = z.object({
 		.max(500)
 		.nullable()
 		.describe(
-			"A concise native-language explanation of the full correction. Null only for the opening turn.",
+			"A concise native-language explanation of the full correction, or null if there is no correction.",
 		),
 	corrections: z.array(correctionSchema).max(8),
-	nativeInsertions: z.array(resolvedWordSchema).max(4),
 	hints: z.array(z.string()).max(3),
-	shouldWrapUp: z.boolean(),
-	shouldComplete: z.boolean(),
-});
-
-const nativeInsertionResolutionSchema = z.object({
-	items: z.array(
-		z.object({
-			original: z.string().min(1).max(100),
-			target: resolvedWordSchema,
-			shortExplanation: z.string().min(1).max(500),
-		}),
-	),
+	shouldWrapUp: z
+		.boolean()
+		.describe(
+			"True only when beginning the scene's conclusion. False when pausing for a teacher question or vocabulary action.",
+		),
+	shouldComplete: z
+		.boolean()
+		.describe(
+			"True only for an explicit request to finish the exercise, a natural end to the scene, or the hard turn limit. Pausing to explain a rule or save a word is NOT completion.",
+		),
 });
 
 const recommendationSchema = z.object({
@@ -150,12 +132,9 @@ const summarySchema = z.object({
 
 export type DialogueTurn = z.infer<typeof turnSchema>;
 export type ResolvedWord = z.infer<typeof resolvedWordSchema>;
-export type NativeInsertionResolution = z.infer<
-	typeof nativeInsertionResolutionSchema
->["items"][number];
 
 const OPENAI_PROVIDER_OPTIONS = {
-	openai: { reasoningEffort: "medium" as const },
+	openai: { reasoningEffort: "medium" as const, parallelToolCalls: false },
 };
 
 const DEFAULT_MAX_OUTPUT_TOKENS = 15_000;
@@ -168,7 +147,62 @@ export const resolveDialogueMaxOutputTokens = (configured?: string) => {
 };
 
 export const prepareDialogueStep = ({ stepNumber }: { stepNumber: number }) =>
-	stepNumber >= 3 ? ({ toolChoice: "none" } as const) : {};
+	stepNumber >= 7 ? ({ toolChoice: "none" } as const) : {};
+
+export const dialogueModelMessages = (
+	messages: DialogueMessageEntity[],
+): ModelMessage[] =>
+	messages.flatMap((message): ModelMessage[] => {
+		// Replay the actual conversation, including calls the model chose itself.
+		// This avoids re-fetching vocabulary and preserves teacher explanations.
+		if (
+			message.role === "assistant" &&
+			Array.isArray(message.metadata?.modelMessages)
+		) {
+			return message.metadata.modelMessages as ModelMessage[];
+		}
+		return [{ role: message.role, content: message.content }];
+	});
+
+type VocabularyResult = Awaited<
+	ReturnType<UserVocabularyService["addWords"]>
+>[number];
+
+export const dialogueAddedWords = (
+	results: Array<{ toolName: string; output: unknown }>,
+): VocabularyResult[] => {
+	const words = new Map<string, VocabularyResult>();
+	for (const result of results) {
+		if (result.toolName !== "add_words_to_vocabulary") continue;
+		const output = result.output as {
+			isError?: boolean;
+			structuredContent?: { items?: VocabularyResult[] };
+			content?: Array<{ type: string; text?: string }>;
+		};
+		if (!output || output.isError) continue;
+		const data =
+			output.structuredContent ??
+			(() => {
+				const text = output.content?.find((part) => part.type === "text")?.text;
+				if (!text) return null;
+				try {
+					return JSON.parse(text) as { items?: VocabularyResult[] };
+				} catch {
+					return null;
+				}
+			})();
+		for (const item of data?.items ?? []) {
+			if (item.item?.id && item.word?.id) {
+				const previous = words.get(item.item.id);
+				words.set(item.item.id, {
+					...item,
+					isNew: item.isNew || previous?.isNew || false,
+				});
+			}
+		}
+	}
+	return [...words.values()];
+};
 
 @Injectable()
 export class DialogueAiService {
@@ -201,6 +235,7 @@ export class DialogueAiService {
 				tools,
 				stopWhen: stepCountIs(8),
 				prepareStep: prepareDialogueStep,
+				toolChoice: "auto",
 				output: Output.object({ schema: recommendationSchema }),
 				system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
 				prompt: DIALOGUE_RECOMMENDATIONS_PROMPT(user),
@@ -234,76 +269,93 @@ export class DialogueAiService {
 		messages,
 		authorization,
 		opening = false,
-		detectedNativeTerms = [],
+		messageId,
 	}: {
 		user: UserEntity;
 		session: DialogueSessionEntity;
 		messages: DialogueMessageEntity[];
 		authorization: string;
 		opening?: boolean;
-		detectedNativeTerms?: string[];
+		messageId?: string;
 	}) {
-		return this.withMcp(authorization, async (tools) => {
-			const result = await generateText({
-				model: openai(this.model),
-				providerOptions: OPENAI_PROVIDER_OPTIONS,
-				tools,
-				stopWhen: stepCountIs(8),
-				prepareStep: prepareDialogueStep,
-				output: Output.object({ schema: turnSchema }),
-				system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
-				prompt: DIALOGUE_TURN_PROMPT({
-					user,
-					session,
-					messages,
-					opening,
-					detectedNativeTerms,
-				}),
-				maxOutputTokens: this.maxOutputTokens,
-			});
-			return this.result(result);
-		});
-	}
-
-	async resolveNativeInsertions({
-		user,
-		terms,
-		context,
-	}: {
-		user: UserEntity;
-		terms: string[];
-		context: string;
-	}) {
-		const result = await generateText({
-			model: openai(this.model),
-			providerOptions: OPENAI_PROVIDER_OPTIONS,
-			output: Output.object({ schema: nativeInsertionResolutionSchema }),
-			system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
-			prompt: NATIVE_INSERTION_RESOLUTION_PROMPT({ user, terms, context }),
-			maxOutputTokens: this.maxOutputTokens,
-		});
-		return this.result(result);
+		return this.withMcp(
+			authorization,
+			async (tools) => {
+				const result = await generateText({
+					model: openai(this.model),
+					providerOptions: OPENAI_PROVIDER_OPTIONS,
+					tools,
+					toolChoice: "auto",
+					stopWhen: stepCountIs(8),
+					prepareStep: prepareDialogueStep,
+					output: Output.object({ schema: turnSchema }),
+					system:
+						DIALOGUE_TEACHER_SYSTEM_PROMPT(user) +
+						"\n\n" +
+						DIALOGUE_TURN_PROMPT({ user, session, opening }),
+					messages: messages.length
+						? dialogueModelMessages(messages)
+						: [{ role: "user", content: DIALOGUE_OPENING_REQUEST_PROMPT }],
+					maxOutputTokens: this.maxOutputTokens,
+				});
+				return {
+					...this.result(result),
+					modelMessages: result.response.messages,
+					addedWords: dialogueAddedWords(
+						result.steps.flatMap((step) => step.toolResults),
+					),
+				};
+			},
+			{ sessionId: session.id, messageId },
+		);
 	}
 
 	async explainCorrection({
 		user,
 		correction,
 		messages,
+		authorization,
+		messageId,
 	}: {
 		user: UserEntity;
 		correction: DialogueCorrectionEntity;
 		messages: DialogueMessageEntity[];
+		authorization: string;
+		messageId?: string;
 	}) {
-		const schema = z.object({ reply: z.string().min(1) });
-		const result = await generateText({
-			model: openai(this.model),
-			providerOptions: OPENAI_PROVIDER_OPTIONS,
-			output: Output.object({ schema }),
-			system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
-			prompt: CORRECTION_EXPLANATION_PROMPT({ user, correction, messages }),
-			maxOutputTokens: this.maxOutputTokens,
-		});
-		return this.result(result);
+		return this.withMcp(
+			authorization,
+			async (tools) => {
+				const result = await generateText({
+					model: openai(this.model),
+					providerOptions: OPENAI_PROVIDER_OPTIONS,
+					tools,
+					toolChoice: "auto",
+					stopWhen: stepCountIs(8),
+					prepareStep: prepareDialogueStep,
+					output: Output.object({
+						schema: z.object({ reply: z.string().min(1) }),
+					}),
+					system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
+					messages: [
+						{
+							role: "user",
+							content: CORRECTION_EXPLANATION_PROMPT({ user, correction }),
+						},
+						...dialogueModelMessages(messages),
+					],
+					maxOutputTokens: this.maxOutputTokens,
+				});
+				return {
+					...this.result(result),
+					modelMessages: result.response.messages,
+					addedWords: dialogueAddedWords(
+						result.steps.flatMap((step) => step.toolResults),
+					),
+				};
+			},
+			{ sessionId: correction.session_id, messageId },
+		);
 	}
 
 	async resolveWord({
@@ -369,6 +421,7 @@ export class DialogueAiService {
 	private async withMcp<T>(
 		authorization: string,
 		callback: (tools: ToolSet) => Promise<T>,
+		context: { sessionId?: string; messageId?: string } = {},
 	): Promise<T> {
 		let client: MCPClient | null = null;
 		try {
@@ -376,7 +429,15 @@ export class DialogueAiService {
 				transport: {
 					type: "http",
 					url: this.mcpUrl,
-					headers: { Authorization: authorization },
+					headers: {
+						Authorization: authorization,
+						...(context.sessionId
+							? { "X-Dialogue-Session-Id": context.sessionId }
+							: {}),
+						...(context.messageId
+							? { "X-Dialogue-Message-Id": context.messageId }
+							: {}),
+					},
 					redirect: "error",
 				},
 				name: "paranoun-dialogue-api",
@@ -384,7 +445,7 @@ export class DialogueAiService {
 				onUncaughtError: (error) =>
 					this.logger.error("Dialogue MCP error", error),
 			});
-			const tools: ToolSet = await client.tools({ schemas: MCP_SCHEMAS });
+			const tools: ToolSet = await client.tools({ schemas: MCP_TOOL_SCHEMAS });
 			return await callback(tools);
 		} finally {
 			await client?.close();

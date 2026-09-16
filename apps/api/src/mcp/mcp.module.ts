@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { AuthModule } from "~/auth/auth.module";
+import { DialogueModule } from "~/dialogue/dialogue.module";
 import { LearningModule } from "~/learning/learning.module";
 import { TopicModule } from "~/topic/topic.module";
 import { UserModule } from "~/user/user.module";
@@ -13,6 +14,7 @@ import { McpToolsService } from "./mcp-tools.service";
 @Module({
 	imports: [
 		AuthModule,
+		DialogueModule,
 		LearningModule,
 		TopicModule,
 		UserModule,

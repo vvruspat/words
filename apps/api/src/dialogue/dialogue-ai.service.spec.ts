@@ -1,14 +1,16 @@
 import { describe, expect, it } from "@jest/globals";
 import { VOCABULARY_DESCRIPTION_RULES_PROMPT } from "~/prompts";
 import {
+	dialogueAddedWords,
+	dialogueModelMessages,
 	prepareDialogueStep,
 	resolveDialogueMaxOutputTokens,
 } from "./dialogue-ai.service";
 
 describe("prepareDialogueStep", () => {
-	it("forces a final answer after three MCP rounds", () => {
-		expect(prepareDialogueStep({ stepNumber: 2 })).toEqual({});
-		expect(prepareDialogueStep({ stepNumber: 3 })).toEqual({
+	it("leaves tool selection to the model with a final-answer safety limit", () => {
+		expect(prepareDialogueStep({ stepNumber: 6 })).toEqual({});
+		expect(prepareDialogueStep({ stepNumber: 7 })).toEqual({
 			toolChoice: "none",
 		});
 	});
@@ -23,6 +25,83 @@ describe("prepareDialogueStep", () => {
 			"translation must be a direct translation in Russian",
 		);
 		expect(rules).toContain("description must never be written in Russian");
+	});
+
+	it("replays actual assistant and tool messages instead of flattening the transcript", () => {
+		const history = [
+			{
+				role: "assistant",
+				content: [
+					{
+						type: "tool-call",
+						toolCallId: "c1",
+						toolName: "get_user_vocabulary",
+						input: {},
+					},
+				],
+			},
+			{
+				role: "tool",
+				content: [
+					{
+						type: "tool-result",
+						toolCallId: "c1",
+						toolName: "get_user_vocabulary",
+						output: { type: "json", value: { items: [] } },
+					},
+				],
+			},
+			{ role: "assistant", content: "Teacher feedback" },
+		];
+		expect(
+			dialogueModelMessages([
+				{
+					role: "assistant",
+					content: "Scene line",
+					metadata: { modelMessages: history },
+				},
+				{ role: "user", content: "Ja", metadata: {} },
+			] as never),
+		).toEqual([...history, { role: "user", content: "Ja" }]);
+	});
+
+	it("only reports successfully executed vocabulary writes", () => {
+		const word = {
+			item: { id: "v1" },
+			word: { id: 9, word: "soep" },
+			isNew: true,
+		};
+		expect(
+			dialogueAddedWords([
+				{
+					toolName: "get_user_vocabulary",
+					output: { structuredContent: { items: [word] } },
+				},
+				{
+					toolName: "add_words_to_vocabulary",
+					output: {
+						isError: true,
+						content: [{ type: "text", text: "failed" }],
+					},
+				},
+			]),
+		).toEqual([]);
+		expect(
+			dialogueAddedWords([
+				{
+					toolName: "add_words_to_vocabulary",
+					output: { structuredContent: { items: [word] } },
+				},
+				{
+					toolName: "add_words_to_vocabulary",
+					output: {
+						content: [
+							{ type: "text", text: JSON.stringify({ items: [word] }) },
+						],
+					},
+				},
+			]),
+		).toEqual([word]);
 	});
 });
 
