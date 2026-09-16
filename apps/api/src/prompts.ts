@@ -67,6 +67,12 @@ Titles and descriptions are in ${user.language_speak}; openingLine is in ${user.
 In each description explicitly assign both roles and a small, concrete goal for the learner. The teacher is the scene partner: for ordering coffee, the learner is the customer and the teacher is the barista.
 openingLine must belong to the teacher's character. Keep scenarios approachable and varied. Do not save vocabulary while suggesting topics.`;
 
+export const DIALOGUE_RECOMMENDATIONS_SYSTEM_PROMPT = (user: UserEntity) =>
+	`You select short language-learning role-play situations.
+The learner speaks ${user.language_speak} and studies ${user.language_learn}.
+You may use the available read-only MCP tools when learner progress or vocabulary would materially improve the suggestions. Tool use is optional; do not repeatedly fetch the same information.
+Return concise, practical situations suitable for the learner's current level. Keep all content suitable for all ages.`;
+
 export const DIALOGUE_OPENING_REQUEST_PROMPT =
 	"Let's practise the selected situation. Explain our roles, then begin.";
 

@@ -1,22 +1,123 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import { ConflictException, Inject, Injectable } from "@nestjs/common";
 import type { LanguageModelUsage } from "ai";
+import type Redis from "ioredis";
 import type { UserEntity } from "~/user/user.entity";
 import { UserVocabularyService } from "~/user-vocabulary/user-vocabulary.service";
 import { DialogueService } from "./dialogue.service";
 import { DialogueAiService, type DialogueTurn } from "./dialogue-ai.service";
 
+type RecommendationData = Awaited<
+	ReturnType<DialogueAiService["recommendScenarios"]>
+>["data"];
+
+const RECOMMENDATION_CACHE_TTL_SECONDS = 60 * 60;
+const RECOMMENDATION_CACHE_WAIT_MS = 250;
+
+const isRecommendationData = (value: unknown): value is RecommendationData => {
+	if (!value || typeof value !== "object") return false;
+	const scenarios = (value as { scenarios?: unknown }).scenarios;
+	return (
+		Array.isArray(scenarios) &&
+		scenarios.length >= 3 &&
+		scenarios.length <= 5 &&
+		scenarios.every(
+			(item) =>
+				item &&
+				typeof item === "object" &&
+				typeof item.title === "string" &&
+				typeof item.description === "string" &&
+				typeof item.openingLine === "string" &&
+				typeof item.estimatedMinutes === "number",
+		)
+	);
+};
+
 @Injectable()
 export class DialogueApplicationService {
+	private readonly recommendationRequests = new Map<
+		string,
+		Promise<RecommendationData>
+	>();
+
 	constructor(
 		private readonly dialogue: DialogueService,
 		private readonly ai: DialogueAiService,
 		private readonly vocabulary: UserVocabularyService,
+		@Inject("REDIS_CLIENT") private readonly redis: Redis,
 	) {}
 
 	async recommendations(user: UserEntity, authorization: string) {
+		const cacheKey = this.recommendationCacheKey(user);
+		const cached = await this.readRecommendations(cacheKey);
+		if (cached) return cached;
+
+		const pending = this.recommendationRequests.get(cacheKey);
+		if (pending) return pending;
+
+		const request = this.generateRecommendations(
+			user,
+			authorization,
+			cacheKey,
+		).finally(() => this.recommendationRequests.delete(cacheKey));
+		this.recommendationRequests.set(cacheKey, request);
+		return request;
+	}
+
+	private async generateRecommendations(
+		user: UserEntity,
+		authorization: string,
+		cacheKey: string,
+	) {
 		const result = await this.ai.recommendScenarios(user, authorization);
 		await this.saveUsage(user.id, result);
+		await this.withCacheDeadline(
+			this.redis.set(
+				cacheKey,
+				JSON.stringify(result.data),
+				"EX",
+				RECOMMENDATION_CACHE_TTL_SECONDS,
+			),
+		);
 		return result.data;
+	}
+
+	private async readRecommendations(cacheKey: string) {
+		const value = await this.withCacheDeadline(this.redis.get(cacheKey));
+		if (!value) return null;
+		try {
+			const parsed: unknown = JSON.parse(value);
+			return isRecommendationData(parsed) ? parsed : null;
+		} catch {
+			return null;
+		}
+	}
+
+	private recommendationCacheKey(user: UserEntity) {
+		return [
+			"dialogue-recommendations-v2",
+			user.id,
+			user.language_learn,
+			user.language_speak,
+		].join(":");
+	}
+
+	private withCacheDeadline<T>(operation: Promise<T>): Promise<T | undefined> {
+		return new Promise((resolve) => {
+			const timer = setTimeout(
+				() => resolve(undefined),
+				RECOMMENDATION_CACHE_WAIT_MS,
+			);
+			operation.then(
+				(value) => {
+					clearTimeout(timer);
+					resolve(value);
+				},
+				() => {
+					clearTimeout(timer);
+					resolve(undefined);
+				},
+			);
+		});
 	}
 
 	async start({
