@@ -2,7 +2,13 @@ import { createMCPClient, type MCPClient } from "@ai-sdk/mcp";
 import { openai } from "@ai-sdk/openai";
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { generateText, Output, stepCountIs, type ToolSet } from "ai";
+import {
+	generateText,
+	NoOutputGeneratedError,
+	Output,
+	stepCountIs,
+	type ToolSet,
+} from "ai";
 import OpenAI from "openai";
 import * as z from "zod/v4";
 import {
@@ -152,6 +158,15 @@ const OPENAI_PROVIDER_OPTIONS = {
 	openai: { reasoningEffort: "medium" as const },
 };
 
+const DEFAULT_MAX_OUTPUT_TOKENS = 15_000;
+
+export const resolveDialogueMaxOutputTokens = (configured?: string) => {
+	const parsed = Number(configured);
+	return Number.isInteger(parsed) && parsed > 0
+		? parsed
+		: DEFAULT_MAX_OUTPUT_TOKENS;
+};
+
 export const prepareDialogueStep = ({ stepNumber }: { stepNumber: number }) =>
 	stepNumber >= 3 ? ({ toolChoice: "none" } as const) : {};
 
@@ -189,7 +204,7 @@ export class DialogueAiService {
 				output: Output.object({ schema: recommendationSchema }),
 				system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
 				prompt: DIALOGUE_RECOMMENDATIONS_PROMPT(user),
-				maxOutputTokens: 3000,
+				maxOutputTokens: this.maxOutputTokens,
 			});
 			return this.result(result);
 		});
@@ -244,7 +259,7 @@ export class DialogueAiService {
 					opening,
 					detectedNativeTerms,
 				}),
-				maxOutputTokens: 3500,
+				maxOutputTokens: this.maxOutputTokens,
 			});
 			return this.result(result);
 		});
@@ -265,7 +280,7 @@ export class DialogueAiService {
 			output: Output.object({ schema: nativeInsertionResolutionSchema }),
 			system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
 			prompt: NATIVE_INSERTION_RESOLUTION_PROMPT({ user, terms, context }),
-			maxOutputTokens: 2000,
+			maxOutputTokens: this.maxOutputTokens,
 		});
 		return this.result(result);
 	}
@@ -286,7 +301,7 @@ export class DialogueAiService {
 			output: Output.object({ schema }),
 			system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
 			prompt: CORRECTION_EXPLANATION_PROMPT({ user, correction, messages }),
-			maxOutputTokens: 1800,
+			maxOutputTokens: this.maxOutputTokens,
 		});
 		return this.result(result);
 	}
@@ -309,7 +324,7 @@ export class DialogueAiService {
 			output: Output.object({ schema }),
 			system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
 			prompt: WORD_RESOLUTION_PROMPT({ user, word, context }),
-			maxOutputTokens: 1800,
+			maxOutputTokens: this.maxOutputTokens,
 		});
 		return this.result(result);
 	}
@@ -336,13 +351,19 @@ export class DialogueAiService {
 				messages,
 				corrections,
 			}),
-			maxOutputTokens: 1800,
+			maxOutputTokens: this.maxOutputTokens,
 		});
 		return this.result(result);
 	}
 
 	get model() {
 		return this.config.get<string>("OPENAI_CHAT_MODEL") || "gpt-5-nano";
+	}
+
+	private get maxOutputTokens() {
+		return resolveDialogueMaxOutputTokens(
+			this.config.get<string>("OPENAI_CHAT_MAX_OUTPUT_TOKENS"),
+		);
 	}
 
 	private async withMcp<T>(
@@ -378,14 +399,31 @@ export class DialogueAiService {
 	}
 
 	private result<TOutput>(result: {
-		output: TOutput | undefined;
+		output: TOutput;
+		finishReason: string;
+		rawFinishReason?: string;
 		totalUsage: unknown;
 		response: { modelId: string };
 	}) {
-		if (!result.output)
-			throw new Error("The language model returned no output");
+		let output: TOutput;
+		try {
+			output = result.output;
+		} catch (error) {
+			if (NoOutputGeneratedError.isInstance(error)) {
+				this.logger.error(
+					`Dialogue model returned no structured output: ${JSON.stringify({
+						modelId: result.response.modelId,
+						finishReason: result.finishReason,
+						rawFinishReason: result.rawFinishReason,
+						usage: result.totalUsage,
+					})}`,
+				);
+			}
+			throw error;
+		}
+
 		return {
-			data: result.output,
+			data: output,
 			usage: result.totalUsage,
 			modelId: result.response.modelId,
 		};
