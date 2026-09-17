@@ -18,6 +18,7 @@ describe("DialogueApplicationService", () => {
 	let dialogue: Record<string, jest.Mock>;
 	let ai: Record<string, jest.Mock>;
 	let vocabulary: Record<string, jest.Mock>;
+	let redis: Record<string, jest.Mock>;
 	let service: DialogueApplicationService;
 
 	beforeEach(() => {
@@ -55,6 +56,32 @@ describe("DialogueApplicationService", () => {
 		};
 		ai = {
 			model: "gpt-5-nano",
+			recommendScenarios: jest.fn().mockResolvedValue({
+				data: {
+					scenarios: [
+						{
+							title: "Кафе",
+							description: "Ученик заказывает кофе",
+							openingLine: "Goedemiddag!",
+							estimatedMinutes: 5,
+						},
+						{
+							title: "Магазин",
+							description: "Ученик спрашивает цену",
+							openingLine: "Kan ik u helpen?",
+							estimatedMinutes: 5,
+						},
+						{
+							title: "Вокзал",
+							description: "Ученик покупает билет",
+							openingLine: "Waar wilt u naartoe?",
+							estimatedMinutes: 7,
+						},
+					],
+				},
+				usage: { inputTokens: 10, outputTokens: 5, totalTokens: 15 },
+				modelId: "gpt-5-nano",
+			}),
 			generateTurn: jest.fn().mockResolvedValue({
 				data: {
 					teacherNote: "После wil нужен инфинитив.",
@@ -83,10 +110,42 @@ describe("DialogueApplicationService", () => {
 			}),
 		};
 		vocabulary = { addWords: jest.fn() };
+		redis = {
+			get: jest.fn().mockResolvedValue(null),
+			set: jest.fn().mockResolvedValue("OK"),
+		};
 		service = new DialogueApplicationService(
 			dialogue as never,
 			ai as never,
 			vocabulary as never,
+			redis as never,
+		);
+	});
+
+	it("returns cached recommendations without another model request", async () => {
+		const cached = (await ai.recommendScenarios()).data;
+		redis.get.mockResolvedValue(JSON.stringify(cached));
+
+		await expect(
+			service.recommendations(user, "Bearer token"),
+		).resolves.toEqual(cached);
+		expect(ai.recommendScenarios).toHaveBeenCalledTimes(1);
+		expect(dialogue.saveUsage).not.toHaveBeenCalled();
+	});
+
+	it("caches newly generated recommendations for the language pair", async () => {
+		const generated = await ai.recommendScenarios();
+		ai.recommendScenarios.mockClear();
+
+		await expect(
+			service.recommendations(user, "Bearer token"),
+		).resolves.toEqual(generated.data);
+		expect(ai.recommendScenarios).toHaveBeenCalledWith(user, "Bearer token");
+		expect(redis.set).toHaveBeenCalledWith(
+			"dialogue-recommendations-v2:7:nl:ru",
+			JSON.stringify(generated.data),
+			"EX",
+			3600,
 		);
 	});
 

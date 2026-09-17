@@ -17,6 +17,7 @@ import {
 	CORRECTION_EXPLANATION_PROMPT,
 	DIALOGUE_OPENING_REQUEST_PROMPT,
 	DIALOGUE_RECOMMENDATIONS_PROMPT,
+	DIALOGUE_RECOMMENDATIONS_SYSTEM_PROMPT,
 	DIALOGUE_SUMMARY_PROMPT,
 	DIALOGUE_TEACHER_SYSTEM_PROMPT,
 	DIALOGUE_TURN_PROMPT,
@@ -137,6 +138,10 @@ const OPENAI_PROVIDER_OPTIONS = {
 	openai: { reasoningEffort: "medium" as const, parallelToolCalls: false },
 };
 
+const RECOMMENDATION_PROVIDER_OPTIONS = {
+	openai: { reasoningEffort: "low" as const, parallelToolCalls: false },
+};
+
 const DEFAULT_MAX_OUTPUT_TOKENS = 15_000;
 
 export const resolveDialogueMaxOutputTokens = (configured?: string) => {
@@ -229,17 +234,23 @@ export class DialogueAiService {
 
 	async recommendScenarios(user: UserEntity, authorization: string) {
 		return this.withMcp(authorization, async (tools) => {
+			const readTools = Object.fromEntries(
+				Object.entries(tools).filter(
+					([name]) => name !== "add_words_to_vocabulary",
+				),
+			) as ToolSet;
 			const result = await generateText({
 				model: openai(this.model),
-				providerOptions: OPENAI_PROVIDER_OPTIONS,
-				tools,
-				stopWhen: stepCountIs(8),
-				prepareStep: prepareDialogueStep,
+				providerOptions: RECOMMENDATION_PROVIDER_OPTIONS,
+				tools: readTools,
+				stopWhen: stepCountIs(5),
+				prepareStep: ({ stepNumber }) =>
+					stepNumber >= 4 ? { toolChoice: "none" as const } : {},
 				toolChoice: "auto",
 				output: Output.object({ schema: recommendationSchema }),
-				system: DIALOGUE_TEACHER_SYSTEM_PROMPT(user),
+				system: DIALOGUE_RECOMMENDATIONS_SYSTEM_PROMPT(user),
 				prompt: DIALOGUE_RECOMMENDATIONS_PROMPT(user),
-				maxOutputTokens: this.maxOutputTokens,
+				maxOutputTokens: Math.min(this.maxOutputTokens, 5_000),
 			});
 			return this.result(result);
 		});
