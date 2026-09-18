@@ -5,6 +5,8 @@ import {
 	dialogueModelMessages,
 	prepareDialogueStep,
 	resolveDialogueMaxOutputTokens,
+	resolveDialogueModel,
+	withoutDialogueReasoning,
 } from "./dialogue-ai.service";
 
 describe("prepareDialogueStep", () => {
@@ -32,6 +34,13 @@ describe("prepareDialogueStep", () => {
 			{
 				role: "assistant",
 				content: [
+					{
+						type: "reasoning",
+						text: "",
+						providerOptions: {
+							openai: { reasoningEncryptedContent: "old-reasoning" },
+						},
+					},
 					{
 						type: "tool-call",
 						toolCallId: "c1",
@@ -62,7 +71,26 @@ describe("prepareDialogueStep", () => {
 				},
 				{ role: "user", content: "Ja", metadata: {} },
 			] as never),
-		).toEqual([...history, { role: "user", content: "Ja" }]);
+		).toEqual([
+			{
+				role: "assistant",
+				content: [history[0].content[1]],
+			},
+			history[1],
+			history[2],
+			{ role: "user", content: "Ja" },
+		]);
+	});
+
+	it("drops reasoning-only messages from persisted model history", () => {
+		expect(
+			withoutDialogueReasoning([
+				{
+					role: "assistant",
+					content: [{ type: "reasoning", text: "hidden" }],
+				},
+			] as never),
+		).toEqual([]);
 	});
 
 	it("only reports successfully executed vocabulary writes", () => {
@@ -106,8 +134,8 @@ describe("prepareDialogueStep", () => {
 });
 
 describe("resolveDialogueMaxOutputTokens", () => {
-	it("uses the shared chat limit by default", () => {
-		expect(resolveDialogueMaxOutputTokens()).toBe(15_000);
+	it("uses a concise dialogue limit by default", () => {
+		expect(resolveDialogueMaxOutputTokens()).toBe(2_500);
 	});
 
 	it("allows a positive integer override", () => {
@@ -121,6 +149,16 @@ describe("resolveDialogueMaxOutputTokens", () => {
 		"invalid",
 		"1.5",
 	])("falls back for an invalid override (%s)", (value) => {
-		expect(resolveDialogueMaxOutputTokens(value)).toBe(15_000);
+		expect(resolveDialogueMaxOutputTokens(value)).toBe(2_500);
+	});
+});
+
+describe("resolveDialogueModel", () => {
+	it("uses Luna by default", () => {
+		expect(resolveDialogueModel()).toBe("gpt-5.6-luna");
+	});
+
+	it("preserves an explicit model override", () => {
+		expect(resolveDialogueModel("gpt-5.6-terra")).toBe("gpt-5.6-terra");
 	});
 });

@@ -118,7 +118,7 @@ async function main() {
 	const ai = new DialogueAiService(
 		new ConfigService({
 			OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-			OPENAI_CHAT_MODEL: "gpt-5-nano",
+			OPENAI_CHAT_MODEL: "gpt-5.6-luna",
 			CHAT_MCP_URL: `http://127.0.0.1:${address.port}/mcp`,
 		}),
 	);
