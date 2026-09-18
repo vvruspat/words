@@ -135,14 +135,26 @@ export type DialogueTurn = z.infer<typeof turnSchema>;
 export type ResolvedWord = z.infer<typeof resolvedWordSchema>;
 
 const OPENAI_PROVIDER_OPTIONS = {
-	openai: { reasoningEffort: "medium" as const, parallelToolCalls: false },
+	openai: {
+		reasoningEffort: "none" as const,
+		textVerbosity: "low" as const,
+		parallelToolCalls: false,
+	},
 };
 
 const RECOMMENDATION_PROVIDER_OPTIONS = {
-	openai: { reasoningEffort: "low" as const, parallelToolCalls: false },
+	openai: {
+		reasoningEffort: "none" as const,
+		textVerbosity: "low" as const,
+		parallelToolCalls: false,
+	},
 };
 
-const DEFAULT_MAX_OUTPUT_TOKENS = 15_000;
+const DEFAULT_DIALOGUE_MODEL = "gpt-5.6-luna";
+const DEFAULT_MAX_OUTPUT_TOKENS = 2_500;
+
+export const resolveDialogueModel = (configured?: string) =>
+	configured?.trim() || DEFAULT_DIALOGUE_MODEL;
 
 export const resolveDialogueMaxOutputTokens = (configured?: string) => {
 	const parsed = Number(configured);
@@ -154,6 +166,18 @@ export const resolveDialogueMaxOutputTokens = (configured?: string) => {
 export const prepareDialogueStep = ({ stepNumber }: { stepNumber: number }) =>
 	stepNumber >= 7 ? ({ toolChoice: "none" } as const) : {};
 
+export const withoutDialogueReasoning = (
+	messages: ModelMessage[],
+): ModelMessage[] =>
+	messages.flatMap((message): ModelMessage[] => {
+		if (message.role !== "assistant" || typeof message.content === "string") {
+			return [message];
+		}
+
+		const content = message.content.filter((part) => part.type !== "reasoning");
+		return content.length ? [{ ...message, content }] : [];
+	});
+
 export const dialogueModelMessages = (
 	messages: DialogueMessageEntity[],
 ): ModelMessage[] =>
@@ -164,7 +188,9 @@ export const dialogueModelMessages = (
 			message.role === "assistant" &&
 			Array.isArray(message.metadata?.modelMessages)
 		) {
-			return message.metadata.modelMessages as ModelMessage[];
+			return withoutDialogueReasoning(
+				message.metadata.modelMessages as ModelMessage[],
+			);
 		}
 		return [{ role: message.role, content: message.content }];
 	});
@@ -311,7 +337,7 @@ export class DialogueAiService {
 				});
 				return {
 					...this.result(result),
-					modelMessages: result.response.messages,
+					modelMessages: withoutDialogueReasoning(result.response.messages),
 					addedWords: dialogueAddedWords(
 						result.steps.flatMap((step) => step.toolResults),
 					),
@@ -359,7 +385,7 @@ export class DialogueAiService {
 				});
 				return {
 					...this.result(result),
-					modelMessages: result.response.messages,
+					modelMessages: withoutDialogueReasoning(result.response.messages),
 					addedWords: dialogueAddedWords(
 						result.steps.flatMap((step) => step.toolResults),
 					),
@@ -420,7 +446,7 @@ export class DialogueAiService {
 	}
 
 	get model() {
-		return this.config.get<string>("OPENAI_CHAT_MODEL") || "gpt-5-nano";
+		return resolveDialogueModel(this.config.get<string>("OPENAI_CHAT_MODEL"));
 	}
 
 	private get maxOutputTokens() {
