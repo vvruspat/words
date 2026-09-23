@@ -142,9 +142,7 @@ export class ChatService {
 	}
 
 	private getModel(): string {
-		return (
-			this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-5.6-luna"
-		);
+		return this.configService.get<string>("OPENAI_CHAT_MODEL") || "gpt-6-luna";
 	}
 
 	private getMaxSteps(): number {

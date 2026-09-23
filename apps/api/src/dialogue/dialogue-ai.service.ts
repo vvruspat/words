@@ -150,7 +150,7 @@ const RECOMMENDATION_PROVIDER_OPTIONS = {
 	},
 };
 
-const DEFAULT_DIALOGUE_MODEL = "gpt-5.6-luna";
+const DEFAULT_DIALOGUE_MODEL = "gpt-6-luna";
 const DEFAULT_MAX_OUTPUT_TOKENS = 2_500;
 
 export const resolveDialogueModel = (configured?: string) =>
