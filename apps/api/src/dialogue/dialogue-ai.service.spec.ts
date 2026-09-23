@@ -154,8 +154,8 @@ describe("resolveDialogueMaxOutputTokens", () => {
 });
 
 describe("resolveDialogueModel", () => {
-	it("uses Luna by default", () => {
-		expect(resolveDialogueModel()).toBe("gpt-5.6-luna");
+	it("uses GPT-6 Luna by default", () => {
+		expect(resolveDialogueModel()).toBe("gpt-6-luna");
 	});
 
 	it("preserves an explicit model override", () => {
