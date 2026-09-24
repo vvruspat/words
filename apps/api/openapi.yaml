@@ -1744,6 +1744,65 @@ paths:
           description: Invalid or expired refresh token
       summary: Refresh access token
       tags: *ref_10
+  /user-vocabulary:
+    get:
+      operationId: UserVocabularyController_list
+      parameters:
+        - name: language
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      security: &ref_11
+        - bearer: []
+      summary: List the authenticated user's vocabulary
+      tags: &ref_12
+        - user-vocabulary
+    post:
+      operationId: UserVocabularyController_add
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddVocabularyWordsDto'
+      responses:
+        '201':
+          description: ''
+      security: *ref_11
+      summary: Add resolved words to the user's vocabulary
+      tags: *ref_12
+  /user-vocabulary/{id}:
+    delete:
+      operationId: UserVocabularyController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      security: *ref_11
+      summary: Remove an item from the user's vocabulary
+      tags: *ref_12
+  /chat:
+    post:
+      operationId: ChatController_chat
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      security:
+        - bearer: []
+      summary: Assistant UI chat endpoint
+      tags:
+        - chat
   /dialogues/recommendations:
     get:
       operationId: DialogueController_recommendations
@@ -1751,10 +1810,10 @@ paths:
       responses:
         '200':
           description: ''
-      security: &ref_11
+      security: &ref_13
         - bearer: []
       summary: Generate dialogue scenarios for the learner
-      tags: &ref_12
+      tags: &ref_14
         - dialogues
   /dialogues/active:
     get:
@@ -1763,9 +1822,9 @@ paths:
       responses:
         '200':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Get the active dialogue for the language pair
-      tags: *ref_12
+      tags: *ref_14
   /dialogues:
     get:
       operationId: DialogueController_list
@@ -1773,9 +1832,9 @@ paths:
       responses:
         '200':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: List the learner's dialogue history
-      tags: *ref_12
+      tags: *ref_14
     post:
       operationId: DialogueController_start
       parameters: []
@@ -1788,18 +1847,18 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Start a dialogue and generate its opening line
-      tags: *ref_12
+      tags: *ref_14
     delete:
       operationId: DialogueController_deleteAll
       parameters: []
       responses:
         '200':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Delete all dialogue history
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/corrections/{id}/branch:
     post:
       operationId: DialogueController_openBranch
@@ -1812,9 +1871,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Open or resume an explanation branch
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/threads/{id}/messages:
     post:
       operationId: DialogueController_sendBranchMessage
@@ -1833,9 +1892,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Continue an explanation branch
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/{id}:
     get:
       operationId: DialogueController_detail
@@ -1848,9 +1907,9 @@ paths:
       responses:
         '200':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Get a dialogue with threads and messages
-      tags: *ref_12
+      tags: *ref_14
     delete:
       operationId: DialogueController_delete
       parameters:
@@ -1862,9 +1921,9 @@ paths:
       responses:
         '200':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Delete one dialogue
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/{id}/messages:
     post:
       operationId: DialogueController_sendMessage
@@ -1883,9 +1942,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Send the next main dialogue turn
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/{id}/words:
     post:
       operationId: DialogueController_addWord
@@ -1904,9 +1963,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Resolve and add a clicked word
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/{id}/complete:
     post:
       operationId: DialogueController_complete
@@ -1919,9 +1978,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Complete a dialogue and generate its summary
-      tags: *ref_12
+      tags: *ref_14
   /dialogues/{id}/interactions:
     post:
       operationId: DialogueController_interaction
@@ -1940,68 +1999,9 @@ paths:
       responses:
         '201':
           description: ''
-      security: *ref_11
+      security: *ref_13
       summary: Record a hint or translation reveal
-      tags: *ref_12
-  /user-vocabulary:
-    get:
-      operationId: UserVocabularyController_list
-      parameters:
-        - name: language
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-      security: &ref_13
-        - bearer: []
-      summary: List the authenticated user's vocabulary
-      tags: &ref_14
-        - user-vocabulary
-    post:
-      operationId: UserVocabularyController_add
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddVocabularyWordsDto'
-      responses:
-        '201':
-          description: ''
-      security: *ref_13
-      summary: Add resolved words to the user's vocabulary
       tags: *ref_14
-  /user-vocabulary/{id}:
-    delete:
-      operationId: UserVocabularyController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-      security: *ref_13
-      summary: Remove an item from the user's vocabulary
-      tags: *ref_14
-  /chat:
-    post:
-      operationId: ChatController_chat
-      parameters: []
-      responses:
-        '201':
-          description: ''
-      security:
-        - bearer: []
-      summary: Assistant UI chat endpoint
-      tags:
-        - chat
   /openai/webhook:
     post:
       operationId: OpenAIController_handleWebhook
@@ -3559,6 +3559,9 @@ components:
         - access_token
         - refresh_token
         - user
+    AddVocabularyWordsDto:
+      type: object
+      properties: {}
     StartDialogueDto:
       type: object
       properties: {}
@@ -3569,8 +3572,5 @@ components:
       type: object
       properties: {}
     InteractionDto:
-      type: object
-      properties: {}
-    AddVocabularyWordsDto:
       type: object
       properties: {}

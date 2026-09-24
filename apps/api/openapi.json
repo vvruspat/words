@@ -2818,6 +2818,112 @@
         ]
       }
     },
+    "/user-vocabulary": {
+      "get": {
+        "operationId": "UserVocabularyController_list",
+        "parameters": [
+          {
+            "name": "language",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List the authenticated user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      },
+      "post": {
+        "operationId": "UserVocabularyController_add",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddVocabularyWordsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add resolved words to the user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      }
+    },
+    "/user-vocabulary/{id}": {
+      "delete": {
+        "operationId": "UserVocabularyController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove an item from the user's vocabulary",
+        "tags": [
+          "user-vocabulary"
+        ]
+      }
+    },
+    "/chat": {
+      "post": {
+        "operationId": "ChatController_chat",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Assistant UI chat endpoint",
+        "tags": [
+          "chat"
+        ]
+      }
+    },
     "/dialogues/recommendations": {
       "get": {
         "operationId": "DialogueController_recommendations",
@@ -3191,112 +3297,6 @@
         "summary": "Record a hint or translation reveal",
         "tags": [
           "dialogues"
-        ]
-      }
-    },
-    "/user-vocabulary": {
-      "get": {
-        "operationId": "UserVocabularyController_list",
-        "parameters": [
-          {
-            "name": "language",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "List the authenticated user's vocabulary",
-        "tags": [
-          "user-vocabulary"
-        ]
-      },
-      "post": {
-        "operationId": "UserVocabularyController_add",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddVocabularyWordsDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Add resolved words to the user's vocabulary",
-        "tags": [
-          "user-vocabulary"
-        ]
-      }
-    },
-    "/user-vocabulary/{id}": {
-      "delete": {
-        "operationId": "UserVocabularyController_remove",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Remove an item from the user's vocabulary",
-        "tags": [
-          "user-vocabulary"
-        ]
-      }
-    },
-    "/chat": {
-      "post": {
-        "operationId": "ChatController_chat",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
-        "summary": "Assistant UI chat endpoint",
-        "tags": [
-          "chat"
         ]
       }
     },
@@ -5535,6 +5535,10 @@
           "user"
         ]
       },
+      "AddVocabularyWordsDto": {
+        "type": "object",
+        "properties": {}
+      },
       "StartDialogueDto": {
         "type": "object",
         "properties": {}
@@ -5548,10 +5552,6 @@
         "properties": {}
       },
       "InteractionDto": {
-        "type": "object",
-        "properties": {}
-      },
-      "AddVocabularyWordsDto": {
         "type": "object",
         "properties": {}
       }
