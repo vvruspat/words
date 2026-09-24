@@ -136,7 +136,6 @@ export type ResolvedWord = z.infer<typeof resolvedWordSchema>;
 
 const OPENAI_PROVIDER_OPTIONS = {
 	openai: {
-		reasoningEffort: "none" as const,
 		textVerbosity: "low" as const,
 		parallelToolCalls: false,
 	},
@@ -144,7 +143,6 @@ const OPENAI_PROVIDER_OPTIONS = {
 
 const RECOMMENDATION_PROVIDER_OPTIONS = {
 	openai: {
-		reasoningEffort: "none" as const,
 		textVerbosity: "low" as const,
 		parallelToolCalls: false,
 	},
@@ -166,17 +164,42 @@ export const resolveDialogueMaxOutputTokens = (configured?: string) => {
 export const prepareDialogueStep = ({ stepNumber }: { stepNumber: number }) =>
 	stepNumber >= 7 ? ({ toolChoice: "none" } as const) : {};
 
-export const withoutDialogueReasoning = (
-	messages: ModelMessage[],
-): ModelMessage[] =>
-	messages.flatMap((message): ModelMessage[] => {
-		if (message.role !== "assistant" || typeof message.content === "string") {
-			return [message];
-		}
+export const dialogueResponseMessages = (messages: ModelMessage[]) => messages;
 
-		const content = message.content.filter((part) => part.type !== "reasoning");
-		return content.length ? [{ ...message, content }] : [];
-	});
+const hasOpenAiItemId = (messages: ModelMessage[]) =>
+	messages.some(
+		(message) =>
+			Array.isArray(message.content) &&
+			message.content.some((part) => {
+				if (!("providerOptions" in part)) return false;
+				const openai = part.providerOptions?.openai as
+					| { itemId?: unknown }
+					| undefined;
+				return typeof openai?.itemId === "string";
+			}),
+	);
+
+const hasReasoningItem = (messages: ModelMessage[]) =>
+	messages.some(
+		(message) =>
+			message.role === "assistant" &&
+			Array.isArray(message.content) &&
+			message.content.some((part) => part.type === "reasoning"),
+	);
+
+const legacyAssistantMessage = (
+	message: DialogueMessageEntity,
+): ModelMessage => {
+	const teacherNote =
+		typeof message.metadata?.teacherNote === "string"
+			? message.metadata.teacherNote.trim()
+			: "";
+	const reply = message.content.trim();
+	return {
+		role: "assistant",
+		content: [teacherNote, reply].filter(Boolean).join("\n") || "Continue.",
+	};
+};
 
 export const dialogueModelMessages = (
 	messages: DialogueMessageEntity[],
@@ -188,9 +211,14 @@ export const dialogueModelMessages = (
 			message.role === "assistant" &&
 			Array.isArray(message.metadata?.modelMessages)
 		) {
-			return withoutDialogueReasoning(
-				message.metadata.modelMessages as ModelMessage[],
-			);
+			const stored = message.metadata.modelMessages as ModelMessage[];
+			// GPT-6 Responses messages reference their preceding encrypted reasoning
+			// item by id. Builds before this fix removed that item, so replay those
+			// already-saved turns as ordinary assistant text instead of sending an
+			// invalid partial Responses history back to OpenAI.
+			return hasOpenAiItemId(stored) && !hasReasoningItem(stored)
+				? [legacyAssistantMessage(message)]
+				: stored;
 		}
 		return [{ role: message.role, content: message.content }];
 	});
@@ -337,7 +365,7 @@ export class DialogueAiService {
 				});
 				return {
 					...this.result(result),
-					modelMessages: withoutDialogueReasoning(result.response.messages),
+					modelMessages: dialogueResponseMessages(result.response.messages),
 					addedWords: dialogueAddedWords(
 						result.steps.flatMap((step) => step.toolResults),
 					),
@@ -385,7 +413,7 @@ export class DialogueAiService {
 				});
 				return {
 					...this.result(result),
-					modelMessages: withoutDialogueReasoning(result.response.messages),
+					modelMessages: dialogueResponseMessages(result.response.messages),
 					addedWords: dialogueAddedWords(
 						result.steps.flatMap((step) => step.toolResults),
 					),

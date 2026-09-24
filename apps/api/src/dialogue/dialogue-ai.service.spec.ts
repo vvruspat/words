@@ -3,10 +3,10 @@ import { VOCABULARY_DESCRIPTION_RULES_PROMPT } from "~/prompts";
 import {
 	dialogueAddedWords,
 	dialogueModelMessages,
+	dialogueResponseMessages,
 	prepareDialogueStep,
 	resolveDialogueMaxOutputTokens,
 	resolveDialogueModel,
-	withoutDialogueReasoning,
 } from "./dialogue-ai.service";
 
 describe("prepareDialogueStep", () => {
@@ -29,7 +29,7 @@ describe("prepareDialogueStep", () => {
 		expect(rules).toContain("description must never be written in Russian");
 	});
 
-	it("replays actual assistant and tool messages instead of flattening the transcript", () => {
+	it("replays complete assistant and tool messages including required reasoning items", () => {
 		const history = [
 			{
 				role: "assistant",
@@ -71,26 +71,61 @@ describe("prepareDialogueStep", () => {
 				},
 				{ role: "user", content: "Ja", metadata: {} },
 			] as never),
+		).toEqual([...history, { role: "user", content: "Ja" }]);
+	});
+
+	it("preserves encrypted reasoning required to continue a Responses conversation", () => {
+		const messages = [
+			{
+				role: "assistant",
+				content: [
+					{
+						type: "reasoning",
+						text: "",
+						providerOptions: {
+							openai: {
+								itemId: "rs_1",
+								reasoningEncryptedContent: "encrypted",
+							},
+						},
+					},
+				],
+			},
+		] as never;
+		expect(dialogueResponseMessages(messages)).toEqual(messages);
+	});
+
+	it("flattens legacy GPT-6 history whose required reasoning item was removed", () => {
+		expect(
+			dialogueModelMessages([
+				{
+					role: "assistant",
+					content: "Voor hoeveel personen?",
+					metadata: {
+						teacherNote: "Продолжаем сцену.",
+						modelMessages: [
+							{
+								role: "assistant",
+								content: [
+									{
+										type: "text",
+										text: '{"reply":"Voor hoeveel personen?"}',
+										providerOptions: {
+											openai: { itemId: "msg_1" },
+										},
+									},
+								],
+							},
+						],
+					},
+				},
+			] as never),
 		).toEqual([
 			{
 				role: "assistant",
-				content: [history[0].content[1]],
+				content: "Продолжаем сцену.\nVoor hoeveel personen?",
 			},
-			history[1],
-			history[2],
-			{ role: "user", content: "Ja" },
 		]);
-	});
-
-	it("drops reasoning-only messages from persisted model history", () => {
-		expect(
-			withoutDialogueReasoning([
-				{
-					role: "assistant",
-					content: [{ type: "reasoning", text: "hidden" }],
-				},
-			] as never),
-		).toEqual([]);
 	});
 
 	it("only reports successfully executed vocabulary writes", () => {
