@@ -1,10 +1,10 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import type {
 	ApiPaginationRequest,
 	Report,
 	ReportStatus,
 } from "@vvruspat/words-types";
-import type { Repository } from "typeorm";
+import { QueryFailedError, type Repository } from "typeorm";
 import { REPORT_REPOSITORY } from "../constants/database.constants";
 import type { ReportEntity } from "./report.entity";
 
@@ -60,7 +60,30 @@ export class ReportService {
 		report: Pick<Report, "word" | "type" | "description">,
 	): Promise<ReportEntity> {
 		const newReport = this.reportRepository.create(report);
-		return this.reportRepository.save(newReport);
+		try {
+			return await this.reportRepository.save(newReport);
+		} catch (error) {
+			if (error instanceof QueryFailedError) {
+				const { code, constraint } = error.driverError as {
+					code?: string;
+					constraint?: string;
+				};
+				// The word may have been deleted since the client's last sync.
+				// Handle the FK failure at save time so concurrent deletions are covered.
+				const isMissingWord =
+					code === "23503" &&
+					this.reportRepository.metadata.foreignKeys.some(
+						(foreignKey) =>
+							foreignKey.name === constraint &&
+							foreignKey.columns.length === 1 &&
+							foreignKey.columns[0].propertyName === "word",
+					);
+				if (isMissingWord) {
+					throw new NotFoundException("Word not found");
+				}
+			}
+			throw error;
+		}
 	}
 
 	async update(id: number, status: ReportStatus): Promise<ReportEntity | null> {

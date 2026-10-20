@@ -1204,6 +1204,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostReportResponseDto'
+        '404':
+          description: Word not found
       summary: Create a report
       tags: *ref_6
     put:

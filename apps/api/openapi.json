@@ -1934,6 +1934,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Word not found"
           }
         },
         "summary": "Create a report",
