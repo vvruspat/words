@@ -63,6 +63,7 @@ export class ReportController {
 	@ApiOperation({ summary: "Create a report" })
 	@ApiBody({ type: PostReportRequestDto })
 	@ApiResponse({ status: 201, type: PostReportResponseDto })
+	@ApiResponse({ status: 404, description: "Word not found" })
 	@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
 	async create(
 		@Body() dto: PostReportRequestDto,
