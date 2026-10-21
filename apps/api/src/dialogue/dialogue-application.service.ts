@@ -190,9 +190,6 @@ export class DialogueApplicationService {
 		clientMessageId: string;
 	}) {
 		const session = await this.dialogue.getOwnedSession(sessionId, user.id);
-		if (session.status !== "active") {
-			throw new ConflictException("This dialogue is already complete");
-		}
 		const thread = await this.dialogue.getMainThread(sessionId);
 		const existingUserMessage = await this.dialogue.findMessageByClientId(
 			thread.id,
@@ -212,6 +209,12 @@ export class DialogueApplicationService {
 					addedWords: existingAssistant.metadata?.addedWords ?? [],
 				};
 			}
+		}
+
+		// A final reply can complete the session before the client receives it.
+		// Replay saved replies above, but never generate new ones after completion.
+		if (session.status !== "active") {
+			throw new ConflictException("This dialogue is already complete");
 		}
 
 		const userMessage =
