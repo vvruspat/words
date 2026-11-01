@@ -6,5 +6,8 @@ export default {
 	transform: { "^.+\\.(t|j)s$": "ts-jest" },
 	collectCoverage: false,
 	testEnvironment: "node",
-	moduleNameMapper: { "^~/(.*)$": "<rootDir>/$1" },
+	moduleNameMapper: {
+		"^~/(.*)$": "<rootDir>/$1",
+		"^src/(.*)$": "<rootDir>/$1",
+	},
 } satisfies Config;
