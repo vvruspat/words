@@ -51,8 +51,11 @@ Configure API environment variables before enabling the buttons in a client:
 
 ```dotenv
 APPLE_CLIENT_IDS=digital.whitesquirrel.wordsapp
-GOOGLE_WEB_CLIENT_IDS=YOUR_WEB_CLIENT_ID.apps.googleusercontent.com
+GOOGLE_WEB_CLIENT_IDS=702357136848-1kh65sr1dj4ci1lrj0mij2fg03bpcfor.apps.googleusercontent.com
 ```
+
+The Google Web client above is ParaNoun API in Google Cloud project
+`words-482321`; use this audience when deploying the API.
 
 Both settings accept comma-separated audiences for multiple explicitly trusted
 builds. Missing configuration disables only that provider (503). Native Apple
