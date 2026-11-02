@@ -253,15 +253,56 @@ describe("DialogueApplicationService", () => {
 		expect(vocabulary.addWords).not.toHaveBeenCalled();
 	});
 
-	it("replays an existing response and its vocabulary results without running tools twice", async () => {
+	it.each([
+		"active",
+		"completed",
+	])("replays an existing response in a %s dialogue without repeating side effects", async (status) => {
+		const session = { id: "session", status, turn_count: 5 };
+		const userMessage = { id: "existing-user" };
 		const addedWords = [{ item: { id: "v1" }, word: { id: 9 } }];
-		dialogue.findMessageByClientId.mockResolvedValue({ id: "existing-user" });
-		dialogue.findAssistantResponse.mockResolvedValue({
+		const assistantMessage = {
 			id: "existing-answer",
 			metadata: { addedWords },
-		});
+		};
+		dialogue.getOwnedSession.mockResolvedValue(session);
+		dialogue.findMessageByClientId.mockResolvedValue(userMessage);
+		dialogue.findAssistantResponse.mockResolvedValue(assistantMessage);
 		const result = await service.sendMainMessage(request);
+		expect(result).toEqual({
+			session,
+			userMessage,
+			assistantMessage,
+			corrections: [],
+			addedWords,
+		});
+		expect(dialogue.getOwnedSession).toHaveBeenCalledWith("session", user.id);
+		expect(dialogue.findMessageByClientId).toHaveBeenCalledWith(
+			"main",
+			request.clientMessageId,
+		);
 		expect(ai.generateTurn).not.toHaveBeenCalled();
-		expect(result.addedWords).toEqual(addedWords);
+		expect(dialogue.appendMessage).not.toHaveBeenCalled();
+		expect(dialogue.incrementTurn).not.toHaveBeenCalled();
+		expect(dialogue.saveCorrections).not.toHaveBeenCalled();
+		expect(dialogue.saveUsage).not.toHaveBeenCalled();
+	});
+
+	it.each([
+		null,
+		{ id: "unanswered-user" },
+	])("rejects messages without a saved answer in a completed dialogue: %p", async (existingUserMessage) => {
+		dialogue.getOwnedSession.mockResolvedValue({
+			id: "session",
+			status: "completed",
+		});
+		dialogue.findMessageByClientId.mockResolvedValue(existingUserMessage);
+
+		await expect(service.sendMainMessage(request)).rejects.toMatchObject({
+			status: 409,
+			message: "This dialogue is already complete",
+		});
+		expect(ai.generateTurn).not.toHaveBeenCalled();
+		expect(dialogue.appendMessage).not.toHaveBeenCalled();
+		expect(dialogue.incrementTurn).not.toHaveBeenCalled();
 	});
 });
